@@ -3,3 +3,4 @@ Allow: /
 Disallow: /README.md
 
 Sitemap: https://claimtract.app/sitemap.xml
+Disallow: /welcome/
