@@ -56,12 +56,33 @@ a{color:#F5A524}a:hover{color:#FFC35C}
 .ob-codein{letter-spacing:.5em;text-align:center}
 .ob-codein:focus{outline:none;border-color:#F5A524;box-shadow:0 0 0 3px rgba(245,165,36,.25)}
 @media (max-width:520px){.ob-col{border-left:0 !important;border-right:0 !important}}
+.ob-col.ob-land{max-width:880px !important;height:420px !important;min-height:0 !important;margin:60px auto !important;border:10px solid #2A2E36 !important;border-radius:36px !important;overflow:hidden}
+.ob-land header{display:none !important}
+.ob-land .ob-ph-img{top:0 !important;bottom:0 !important;right:92px !important;width:calc(100% - 92px) !important;height:100% !important;object-position:center center !important}
+.ob-land .ob-ph-top{right:106px !important}
+.ob-land .ob-ph-hints{top:40px !important;right:106px !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+.ob-land .ob-ph-hints > div{padding:6px 9px !important}
+.ob-land .ob-ph-peek{top:40px !important;left:calc(50% - 46px) !important}
+.ob-land .ob-ph-rec,.ob-land .ob-ph-say{left:14px !important;right:106px !important;bottom:12px !important;max-height:110px !important}
+.ob-land .ob-ph-ctrl{left:auto !important;top:0 !important;width:92px !important;height:auto !important;flex-direction:column !important;justify-content:space-around !important;padding:14px 0 !important;background:linear-gradient(90deg,transparent,rgba(0,0,0,.85) 30%) !important}
+.ob-land .ob-ph-ctrl > div > div:first-child{display:none !important}
+@media (orientation:landscape) and (max-height:520px){.ob-col.ob-p-on{max-width:none !important;height:100vh !important;min-height:0 !important;margin:0 !important;border:0 !important;border-radius:0 !important}
+.ob-p-on header{display:none !important}
+.ob-p-on .ob-ph-img{top:0 !important;bottom:0 !important;right:92px !important;width:calc(100% - 92px) !important;height:100% !important;object-position:center center !important}
+.ob-p-on .ob-ph-top{right:106px !important}
+.ob-p-on .ob-ph-hints{top:40px !important;right:106px !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+.ob-p-on .ob-ph-hints > div{padding:6px 9px !important}
+.ob-p-on .ob-ph-peek{top:40px !important;left:calc(50% - 46px) !important}
+.ob-p-on .ob-ph-rec,.ob-p-on .ob-ph-say{left:14px !important;right:106px !important;bottom:12px !important;max-height:110px !important}
+.ob-p-on .ob-ph-ctrl{left:auto !important;top:0 !important;width:92px !important;height:auto !important;flex-direction:column !important;justify-content:space-around !important;padding:14px 0 !important;background:linear-gradient(90deg,transparent,rgba(0,0,0,.85) 30%) !important}
+.ob-p-on .ob-ph-ctrl > div > div:first-child{display:none !important}
+}
 </style>
 </helmet>
 <div style="min-height: 100vh; background: radial-gradient(1000px 700px at 75% 20%, rgba(245,165,36,.08), transparent 60%), radial-gradient(800px 600px at 10% 90%, rgba(124,58,237,.07), transparent 60%), #07080A">
 <button type="button" class="ob-side" onClick="{{prev}}" disabled="{{atStart}}" aria-label="Previous screen" style="left: 20px">‹</button>
 <button type="button" class="ob-side" onClick="{{next}}" disabled="{{atEnd}}" aria-label="Next screen" style="right: 20px">›</button>
-<div class="ob-col" style="position: relative; max-width: 480px; margin: 0 auto; height: 100vh; min-height: 640px; display: flex; flex-direction: column; background: #0A0B0D; border-left: 1px solid #16181C; border-right: 1px solid #16181C">
+<div class="ob-col {{colCls}}" style="position: relative; max-width: 480px; margin: 0 auto; height: 100vh; min-height: 640px; display: flex; flex-direction: column; background: #0A0B0D; border-left: 1px solid #16181C; border-right: 1px solid #16181C">
 <header style="flex: none; padding: 14px 18px 10px; background: #0A0B0D">
 <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 32px">
 <sc-if value="{{inApp}}" hint-placeholder-val="{{ false }}"><div style="display: flex; align-items: center; gap: 8px"><img src="./assets/a4ce03d79b4f773036beb5a74a2a0ca3.jpg" alt="" width="28" height="28" style="width: 28px; height: 28px; border-radius: 50%; box-shadow: 0 0 0 1.5px #F5A524"><div><b style="display: flex; align-items: center; gap: 6px; font-size: 15px">Sophia <i style="width: 7px; height: 7px; border-radius: 50%; background: #22C55E"></i></b><span style="font-size: 10.5px; color: #A9AEB7">FL PA Edition v1.4</span></div></div></sc-if>
@@ -363,20 +384,20 @@ a{color:#F5A524}a:hover{color:#FFC35C}
 
 <sc-if value="{{on.p}}" hint-placeholder-val="{{ false }}">
 <div style="position: absolute; inset: 0; background: #000">
-<img src="{{ph.src}}" alt="{{ph.alt}}" style="position: absolute; left: 0; right: 0; top: 0; bottom: 82px; width: 100%; height: calc(100% - 82px); object-fit: contain">
-<div style="position: absolute; top: 14px; left: 14px; right: 14px; z-index: 12; display: flex; justify-content: space-between; align-items: center"><span style="padding: 4px 9px; border-radius: 999px; background: rgba(0,0,0,.65); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #F5A524">PRACTICE · PHOTO {{phN}} OF {{phCount}}</span><button type="button" onClick="{{skipPractice}}" style="padding: 4px 9px; border-radius: 999px; border: 0; background: rgba(0,0,0,.65); color: #A9AEB7; font: inherit; font-size: 11px; cursor: pointer">Skip practice</button></div>
-<div class="ob-hint" style="{{hintBox}}">
-<div style="padding: 9px 11px; border-radius: 12px; background: rgba(14,15,18,.82); border: 1px solid rgba(255,255,255,.12)"><span style="display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700"><img src="./assets/a4ce03d79b4f773036beb5a74a2a0ca3.jpg" alt="" width="18" height="18" style="width: 18px; height: 18px; border-radius: 50%; box-shadow: 0 0 0 1.5px #F5A524">Sophia</span><span style="display: block; margin-top: 4px; font-size: 12.5px; line-height: 1.4">{{ph.see}}</span></div>
+<img class="ob-ph-img" src="{{ph.src}}" alt="{{ph.alt}}" style="position: absolute; left: 0; right: 0; top: 44px; bottom: 82px; width: 100%; height: calc(100% - 126px); object-fit: contain; object-position: center top">
+<div class="ob-ph-top" style="position: absolute; top: 10px; left: 14px; right: 14px; z-index: 12; display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="padding: 4px 9px; border-radius: 999px; background: rgba(0,0,0,.65); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #F5A524">PRACTICE · PHOTO {{phN}} OF {{phCount}}</span><span style="display: flex; gap: 6px"><sc-if value="{{demo}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{toggleLand}}" style="padding: 4px 9px; border-radius: 999px; border: 1px solid #3A3F48; background: rgba(0,0,0,.65); color: #E4E6EA; font: inherit; font-size: 11px; cursor: pointer">{{landLbl}}</button></sc-if><button type="button" onClick="{{skipPractice}}" style="padding: 4px 9px; border-radius: 999px; border: 0; background: rgba(0,0,0,.65); color: #A9AEB7; font: inherit; font-size: 11px; cursor: pointer">Skip practice</button></span></div>
+<div class="ob-hint ob-ph-hints" style="{{hintBox}}">
 <div style="padding: 8px 11px; border-radius: 12px; background: rgba(14,15,18,.82); border: 1px solid rgba(255,255,255,.12)"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .1em; color: #7DD3FC">BUILDING CODE HINT</span><span style="display: block; margin-top: 3px; font-size: 12px; line-height: 1.4">{{ph.code}}</span></div>
 <div style="padding: 8px 11px; border-radius: 12px; background: rgba(14,15,18,.82); border: 1px solid rgba(255,255,255,.12)"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .1em; color: #F5A524">FLORIDA STATUTE HINT</span><span style="display: block; margin-top: 3px; font-size: 12px; line-height: 1.4">{{ph.law}}</span></div>
 <sc-if value="{{ph.wet}}" hint-placeholder-val="{{ false }}"><div style="padding: 8px 11px; border-radius: 12px; background: rgba(14,15,18,.82); border: 1px solid rgba(255,255,255,.12)"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .1em; color: #86EFAC">MICROBIAL GROWTH HINT · EPA</span><span style="display: block; margin-top: 3px; font-size: 12px; line-height: 1.4">{{ph.epa}}</span></div></sc-if>
 </div>
-<sc-if value="{{pullOn}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{pullHints}}" style="position: absolute; top: 48px; left: 50%; transform: translateX(-50%); z-index: 12; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; border: 0; background: rgba(0,0,0,.6); color: #E4E6EA; font: inherit; font-size: 11.5px; cursor: pointer"><span style="width: 26px; height: 4px; border-radius: 2px; background: #8A8F98"></span>Pull down for hints</button></sc-if>
-<sc-if value="{{askOn}}" hint-placeholder-val="{{ false }}"><div class="ob-scr" style="position: absolute; left: 14px; right: 14px; bottom: 150px; z-index: 13; padding: 11px 13px; border-radius: 14px; background: rgba(245,165,36,.95); color: #1B1405"><span style="display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 800"><img src="./assets/a4ce03d79b4f773036beb5a74a2a0ca3.jpg" alt="" width="18" height="18" style="width: 18px; height: 18px; border-radius: 50%; box-shadow: 0 0 0 1.5px #1B1405">Sophia</span><span style="display: block; margin-top: 4px; font-size: 13.5px; font-weight: 600; line-height: 1.4">{{askText}}</span></div></sc-if>
-<sc-if value="{{recOn}}" hint-placeholder-val="{{ false }}"><div style="position: absolute; left: 14px; right: 14px; bottom: 90px; z-index: 13; max-height: 170px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.94); color: #15171B; font-size: 13px; line-height: 1.45">{{liveText}}<span class="ob-blink" style="color: #EF4444">▍</span></div></sc-if>
-<sc-if value="{{warnOn}}" hint-placeholder-val="{{ false }}"><div class="ob-scr" style="position: absolute; left: 50%; bottom: 90px; transform: translateX(-50%); z-index: 15; width: 300px; padding: 9px 12px; border-radius: 12px; background: #3B2A08; border: 1px solid #F5A524; color: #FCD58A; font-size: 12.5px; line-height: 1.4; text-align: center">Under 30 seconds. Homeowners need the full explanation.</div></sc-if>
+<sc-if value="{{pullOn}}" hint-placeholder-val="{{ false }}"><button type="button" class="ob-ph-peek" onPointerDown="{{peekOn}}" onPointerUp="{{peekOff}}" onPointerLeave="{{peekOff}}" onPointerCancel="{{peekOff}}" style="position: absolute; top: 44px; left: 50%; transform: translateX(-50%); z-index: 12; display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.6); color: #E4E6EA; font: inherit; font-size: 12px; cursor: pointer; touch-action: none; user-select: none; -webkit-user-select: none"><span style="width: 26px; height: 4px; border-radius: 2px; background: #8A8F98"></span>Hold to see the hints</button></sc-if>
+<sc-if value="{{askOn}}" hint-placeholder-val="{{ false }}"><div class="ob-scr ob-ph-say" style="position: absolute; left: 14px; right: 14px; bottom: 96px; z-index: 13; display: flex; gap: 10px; align-items: flex-start; padding: 11px 13px; border-radius: 14px; background: rgba(245,165,36,.95); color: #1B1405"><span aria-hidden="true" style="flex: none; display: flex; align-items: center; gap: 2px; height: 18px; margin-top: 2px"><sc-for list="{{sayBars}}" as="w" hint-placeholder-count="5"><i style="{{w.s}}"></i></sc-for></span><span style="font-size: 13.5px; font-weight: 600; line-height: 1.4"><b style="display: block; font-size: 10.5px; letter-spacing: .08em; font-weight: 800">SOPHIA SAYS</b>{{askText}}</span></div></sc-if>
+<sc-if value="{{recOn}}" hint-placeholder-val="{{ false }}"><div class="ob-ph-rec" style="position: absolute; left: 14px; right: 14px; bottom: 90px; z-index: 13; max-height: 170px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.94); color: #15171B; font-size: 13px; line-height: 1.45">{{liveText}}<span class="ob-blink" style="color: #EF4444">▍</span></div></sc-if>
+<sc-if value="{{warnOn}}" hint-placeholder-val="{{ false }}"><div class="ob-scr" style="position: absolute; left: 0; right: 0; margin: 0 auto; bottom: 90px; z-index: 15; width: min(300px, 90%); padding: 9px 12px; border-radius: 12px; background: #3B2A08; border: 1px solid #F5A524; color: #FCD58A; font-size: 12.5px; line-height: 1.4; text-align: center">Under 30 seconds. Homeowners need the full explanation.</div></sc-if>
+<sc-if value="{{keptOn}}" hint-placeholder-val="{{ false }}"><div style="position: absolute; left: 0; right: 0; bottom: 150px; z-index: 16; display: flex; justify-content: center"><div class="ob-scr" style="padding: 8px 14px; border-radius: 999px; background: rgba(6,40,20,.96); border: 1px solid #22C55E; color: #86EFAC; font-size: 13px; font-weight: 700; white-space: nowrap">✓ Kept with your voice note</div></div></sc-if>
 <sc-if value="{{dropOn}}" hint-placeholder-val="{{ false }}"><div style="position: absolute; left: 0; right: 0; bottom: 96px; z-index: 16; display: flex; justify-content: center"><div class="ob-scr" style="display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 14px; border-radius: 999px; background: rgba(20,22,26,.96); border: 1px solid #3A3F48; font-size: 13px; white-space: nowrap">Photo dropped<button type="button" onClick="{{undoDrop}}" style="min-height: 34px; padding: 6px 12px; border-radius: 999px; border: 0; background: #F5A524; color: #0A0B0D; font: inherit; font-size: 12.5px; font-weight: 800; cursor: pointer">Bring it back</button></div></div></sc-if>
-<div style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 14; height: 82px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; background: linear-gradient(180deg, transparent, rgba(0,0,0,.85) 35%)">
+<div class="ob-ph-ctrl" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 14; height: 82px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; background: linear-gradient(180deg, transparent, rgba(0,0,0,.85) 35%)">
 <button type="button" class="ob-btn" onClick="{{dropPhoto}}" aria-label="Swipe left to drop" style="width: 50px; height: 50px; border-radius: 50%; border: 1px solid #3A3F48; background: rgba(20,22,26,.9); color: #E4E6EA; font-size: 20px; cursor: pointer">✕</button>
 <div style="display: flex; flex-direction: column; align-items: center; gap: 5px">
 <div style="display: flex; align-items: center; gap: 2px; height: 26px"><sc-for list="{{wave}}" as="w" hint-placeholder-count="20"><i style="{{w.s}}"></i></sc-for></div>
@@ -462,7 +483,7 @@ a{color:#F5A524}a:hover{color:#FFC35C}
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .16em; color: #F5A524">WHAT HAPPENS NEXT</span>
 <h2 style="margin: 14px 0 28px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -.03em">Three things, in order.</h2>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
-<div style="padding: 24px; border-radius: 20px; background: #101216; border: 1px solid #23262C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #F5A524">TODAY</span><b style="display: block; margin: 10px 0 8px; font-size: 20px">Save it and practice.</b><span style="font-size: 15px; line-height: 1.55; color: #A9AEB7">Put ClaimTract on your home screen and run the three-photo practice claim with Sophia.</span></div>
+<div style="padding: 24px; border-radius: 20px; background: #101216; border: 1px solid #23262C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #F5A524">TODAY</span><b style="display: block; margin: 10px 0 8px; font-size: 20px">Save it and practice.</b><span style="font-size: 15px; line-height: 1.55; color: #A9AEB7">Put ClaimTract on your home screen and run the practice claim with Sophia.</span></div>
 <div style="padding: 24px; border-radius: 20px; background: #101216; border: 1px solid #23262C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #F5A524">{{nx.t2}}</span><b style="display: block; margin: 10px 0 8px; font-size: 20px">{{nx.h2}}</b><span style="font-size: 15px; line-height: 1.55; color: #A9AEB7">{{nx.p2}}</span></div>
 <div style="padding: 24px; border-radius: 20px; background: #101216; border: 1px solid #23262C"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #F5A524">{{nx.t3}}</span><b style="display: block; margin: 10px 0 8px; font-size: 20px">{{nx.h3}}</b><span style="font-size: 15px; line-height: 1.55; color: #A9AEB7">{{nx.p3}}</span></div>
 </div>
@@ -531,6 +552,8 @@ class Component extends DCLogic {
       if (s.rec) { u.recT = s.recT + 1; u.segT = s.segT + 1; }
       if (s.warnT > 0) u.warnT = s.warnT - 1;
       if (s.dropT > 0) u.dropT = s.dropT - 1;
+      if (s.keptT > 0) u.keptT = s.keptT - 1;
+      if (!s.rec && !s.autoMic && s.phT + 1 >= 40) { u.rec = true; u.autoMic = true; }
       self.setState(u);
     }, 100);
   }
@@ -557,7 +580,7 @@ class Component extends DCLogic {
     var first = (live ? (api.first || '') : (this.props.firstName || '')).trim();
     var idx = function (id) { return OB_IDS.indexOf(id); };
     var go = function (i) {
-      self.setState({ step: i, micAsk: false, copied: false, dec: false, rec: OB_IDS[i] === 'p' ? s.rec : false, recT: 0, segT: 0, ph: 0, phT: 0, pulled: false, warnT: 0, dmT: 0 });
+      self.setState({ step: i, micAsk: false, copied: false, dec: false, rec: OB_IDS[i] === 'p' ? s.rec : false, autoMic: OB_IDS[i] === 'p' ? s.autoMic : false, keptT: 0, dropT: 0, recT: 0, segT: 0, ph: 0, phT: 0, pulled: false, warnT: 0, dmT: 0 });
     };
     var next = function () {
       var n = step + 1;
@@ -588,7 +611,7 @@ class Component extends DCLogic {
         t: "Water is coming through the ceiling right now. First thing, keep everybody away from that light. Put a bucket down, take photos exactly like this one, and call me before anyone starts tearing out that ceiling." }
     ];
     var ph = PH[s.ph];
-    var hintsUp = s.pulled || s.phT < 32;
+    var hintsUp = s.pulled || s.phT < 40;
     var segSec = s.segT / 10;
     var liveText = ph.t.slice(0, Math.floor(s.segT * 1.7)) || 'Listening…';
     var wave = [];
@@ -688,18 +711,23 @@ class Component extends DCLogic {
       hintBox: 'position: absolute; top: 48px; left: 14px; right: 14px; z-index: 11; display: grid; gap: 6px; ' + (hintsUp ? 'transform: none; opacity: 1' : 'transform: translateY(-130%); opacity: 0; pointer-events: none'),
       pullOn: !hintsUp,
       pullHints: function () { self.setState({ pulled: true }); },
-      askOn: (s.ph === 0 && !s.rec && !hintsUp) || (ph.dup && !hintsUp && !(s.dropT > 0)),
-      askText: ph.dup ? 'Would you tell the homeowner anything new about this one? If it\u2019s the same thing you just said, swipe it away.' : 'Tap the mic and tell the homeowner what you see. Swipe right to keep. The mic stays on.',
+      askOn: (s.ph === 0 && !s.autoMic) || (ph.dup && !hintsUp && !(s.dropT > 0)),
+      sayBars: [0, 1, 2, 3, 4].map(function (k) { return { s: 'display: block; width: 3px; border-radius: 2px; background: #1B1405; height: ' + (5 + Math.abs(Math.sin((s.phT || 0) * 0.6 + k * 1.4)) * 12).toFixed(1) + 'px' }; }),
+      askText: ph.dup ? 'Would you tell the homeowner anything new about this one? If it\u2019s the same thing you just said, swipe it away.' : 'Describe each photo as if you\u2019re talking directly to the homeowner. That\u2019s what lets me build your articles and your social posts the best. Your mic is on. Swipe right to keep a photo and keep talking.',
       phCount: PH.length,
       dropOn: s.dropT > 0,
       undoDrop: function () { self.setState({ ph: s.dropFrom, phT: 32, segT: 0, dropT: 0, warnT: 0 }); },
-      recOn: s.rec && !hintsUp, liveText: liveText,
+      recOn: s.rec && !hintsUp && !(ph.dup && !(s.dropT > 0)), liveText: liveText,
+      keptOn: s.keptT > 0,
+      peekOn: function () { self.setState({ pulled: true }); }, peekOff: function () { self.setState({ pulled: false }); },
+      toggleLand: function () { self.setState({ land: !s.land }); }, landLbl: s.land ? '\u21BB Upright' : '\u21BB Sideways',
+      colCls: cur === 'p' ? ('ob-p-on' + (s.land ? ' ob-land' : '')) : '',
       warnOn: s.warnT > 0,
       wave: wave,
       micBtn: 'width: 58px; height: 58px; border-radius: 50%; border: 0; display: grid; place-items: center; cursor: pointer; ' + (s.rec ? 'background: #EF4444; box-shadow: 0 0 0 6px rgba(239,68,68,.25)' : 'background: #DC2626; box-shadow: 0 6px 20px rgba(220,38,38,.45)'),
       recLbl: s.rec ? 'REC ' + Math.floor(segSec / 60) + ':' + ('0' + Math.floor(segSec % 60)).slice(-2) : 'TAP TO TALK',
-      toggleMic: function () { self.setState({ rec: !s.rec, pulled: false, phT: Math.max(s.phT, 32) }); },
-      keepPhoto: advPhoto, dropPhoto: function () { var f = s.ph; advPhoto(); if (f < PH.length - 1) self.setState({ dropT: 28, dropFrom: f }); },
+      toggleMic: function () { self.setState({ rec: !s.rec, autoMic: true, pulled: false, phT: Math.max(s.phT, 40) }); },
+      keepPhoto: function () { var f = s.ph; advPhoto(); if (f < PH.length - 1) self.setState({ keptT: 18 }); }, dropPhoto: function () { var f = s.ph; advPhoto(); if (f < PH.length - 1) self.setState({ dropT: 28, dropFrom: f }); },
       copyAddr: function () { self.setState({ copied: true }); },
       copyLbl: s.copied ? '✓ Copied' : 'Copy address',
       copyBtn: 'width: 100%; padding: 12px; border-radius: 11px; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; ' + (s.copied ? 'border: 1px solid #22C55E; background: rgba(34,197,94,.12); color: #86EFAC' : 'border: 0; background: #F5A524; color: #0A0B0D'),
