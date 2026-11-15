@@ -547,9 +547,14 @@ class Component extends DCLogic {
     this.timer = setInterval(function () {
       var s = self.state, id = self.ids()[self.curStep()];
       if (id === 's3') { self.setState({ dmT: (s.dmT || 0) + 1 }); return; }
-      if (id !== 'p') { if (s.warnT > 0) self.setState({ warnT: s.warnT - 1 }); return; }
+      if (id !== 'p') { if (self._pa && !self._pa.paused) self._pa.pause(); if (s.warnT > 0) self.setState({ warnT: s.warnT - 1 }); return; }
       var u = { phT: s.phT + 1 };
-      if (s.rec) { u.recT = s.recT + 1; u.segT = s.segT + 1; }
+      if (s.rec) { u.recT = s.recT + 1; if (s.phT >= 40 || s.pulled) u.segT = s.segT + 1; }
+      try { var DUR = [117, 41, 109, 115], AUD = ['/_blob/c79e3e89bff4130092fb7ee458a228fb', '/_blob/619e9703ad01a60cf5ba09a6884e4290', '/_blob/e7f9debbf1c1d2351c130ad20470c038', '/_blob/cc32d67381885abc9b5decac8fd571ff'];
+        var want = (s.rec && s.segT < DUR[s.ph]) ? AUD[s.ph] : null, a = self._pa;
+        if (!want) { if (a && !a.paused) a.pause(); }
+        else { if (!a || a._src !== want) { if (a) a.pause(); a = new Audio(want); a._src = want; a.preload = 'auto'; self._pa = a; } var pos = s.segT / 10; if (Math.abs(a.currentTime - pos) > 0.7) { try { a.currentTime = pos; } catch (e2) {} } if (a.paused) { var pp = a.play(); if (pp && pp.catch) pp.catch(function () {}); } }
+      } catch (e3) {}
       if (s.warnT > 0) u.warnT = s.warnT - 1;
       if (s.dropT > 0) u.dropT = s.dropT - 1;
       if (s.keptT > 0) u.keptT = s.keptT - 1;
@@ -613,14 +618,14 @@ class Component extends DCLogic {
     var ph = PH[s.ph];
     var hintsUp = s.pulled || s.phT < 40;
     var segSec = s.segT / 10;
-    var liveText = ph.t.slice(0, Math.floor(s.segT * 1.7)) || 'Listening…';
+    var liveText = ph.t.slice(0, Math.ceil(s.segT / ([117, 41, 109, 115][s.ph] || 110) * ph.t.length)) || 'Listening…';
     var wave = [];
     for (var i = 0; i < 20; i++) {
       var h = s.rec ? 5 + Math.abs(Math.sin(s.recT * 0.55 + i * 1.3)) * 18 * (0.55 + 0.45 * Math.sin(i * 0.8 + s.recT * 0.21)) : 4;
       wave.push({ s: 'display: block; width: 3px; border-radius: 2px; height: ' + h.toFixed(1) + 'px; background: ' + (s.rec ? '#EF4444' : '#4A4F58') });
     }
     var advPhoto = function () {
-      if (s.ph < PH.length - 1) self.setState({ ph: s.ph + 1, phT: 0, segT: 0, pulled: false, warnT: (s.rec && segSec < 30 && !ph.dup) ? 26 : 0 });
+      if (s.ph < PH.length - 1) self.setState({ ph: s.ph + 1, phT: 0, segT: 0, pulled: false, warnT: 0 });
       else go(idx('pe'));
     };
     var APPS = [
@@ -711,13 +716,13 @@ class Component extends DCLogic {
       hintBox: 'position: absolute; top: 48px; left: 14px; right: 14px; z-index: 11; display: grid; gap: 6px; ' + (hintsUp ? 'transform: none; opacity: 1' : 'transform: translateY(-130%); opacity: 0; pointer-events: none'),
       pullOn: !hintsUp,
       pullHints: function () { self.setState({ pulled: true }); },
-      askOn: (s.ph === 0 && !s.autoMic) || (ph.dup && !hintsUp && !(s.dropT > 0)),
+      askOn: (s.ph === 0 && !s.autoMic) || (ph.dup && s.segT >= 41 && !(s.dropT > 0)),
       sayBars: [0, 1, 2, 3, 4].map(function (k) { return { s: 'display: block; width: 3px; border-radius: 2px; background: #1B1405; height: ' + (5 + Math.abs(Math.sin((s.phT || 0) * 0.6 + k * 1.4)) * 12).toFixed(1) + 'px' }; }),
       askText: ph.dup ? 'Would you tell the homeowner anything new about this one? If it\u2019s the same thing you just said, swipe it away.' : 'Describe each photo as if you\u2019re talking directly to the homeowner. That\u2019s what lets me build your articles and your social posts the best. Your mic is on. Swipe right to keep a photo and keep talking.',
       phCount: PH.length,
       dropOn: s.dropT > 0,
       undoDrop: function () { self.setState({ ph: s.dropFrom, phT: 32, segT: 0, dropT: 0, warnT: 0 }); },
-      recOn: s.rec && !hintsUp && !(ph.dup && !(s.dropT > 0)), liveText: liveText,
+      recOn: s.rec && !hintsUp && !(ph.dup && s.segT >= 41), liveText: liveText,
       keptOn: s.keptT > 0,
       peekOn: function () { self.setState({ pulled: true }); }, peekOff: function () { self.setState({ pulled: false }); },
       toggleLand: function () { self.setState({ land: !s.land }); }, landLbl: s.land ? '\u21BB Upright' : '\u21BB Sideways',
