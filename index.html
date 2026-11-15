@@ -264,47 +264,16 @@ a{color:#F5A524}a:hover{color:#FFC35C}
 })();
 </script>
 <style>.ct-pers-bar{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);z-index:2000;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);padding:10px 12px 10px 16px;border-radius:999px;background:#F5A524;color:#1B1C1F;font:700 14px/1.3 Inter,system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.45)}.ct-pers-bar button{border:0;background:rgba(0,0,0,.12);color:#1B1C1F;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1}@media (max-width:760px){.ct-pers-bar{bottom:74px;font-size:12px;padding:7px 8px 7px 12px;border-radius:14px;gap:8px}.ct-pers-bar button{width:20px;height:20px;font-size:13px}}</style>
-<!-- HumanBot chat: sales bot on the page; demo bot shown while a demo pop-up is open -->
+<!-- Lexi chat (AI Employeez) -->
 <script>
-(function () {
-  if (window.__hbLoaded) return; window.__hbLoaded = true;
-  var SRC = 'https://humanchat.net/build/js/hb_1.5.28.js';
-  var SRI = 'sha384-f2GqKZr4plfDCjELPiZqzEfj9LuWzE2xPGL+wCEf/coynRhH0TnbNy9jGVAwFEeU';
-  var SALES = '2EqNgcu5ZtpT', DEMO = 'chsZ4fUXDyGq';
-  var inst = {}; // id -> { nodes: [] }
-  function log(m) { try { console.log('[HB] ' + m); } catch (e) {} }
-  function track(id) {
-    var rec = inst[id] = { nodes: [] };
-    var mo = new MutationObserver(function (ms) { ms.forEach(function (m) { [].slice.call(m.addedNodes).forEach(function (n) {
-      if (n.nodeType === 1 && n.parentNode === document.body && n.tagName !== 'SCRIPT' && n.tagName !== 'X-DC' && rec.nodes.indexOf(n) < 0) rec.nodes.push(n); }); }); });
-    mo.observe(document.body, { childList: true });
-    setTimeout(function () { mo.disconnect(); log(id + ' tracked ' + rec.nodes.length + ' node(s)'); }, 8000);
-  }
-  function start(id) {
-    if (inst[id]) return;
-    track(id);
-    try { var b = new AiBot({ embedId: id, remoteBaseUrl: 'https://humanchat.net/', version: '1.5.28' }); if (id === SALES) window.aiBot = b; else window.aiBotDemo = b; log('started ' + id); }
-    catch (e) { log('init failed ' + id + ': ' + e); }
-  }
-  function show(id, on) { var r = inst[id]; if (!r) return; r.nodes.forEach(function (n) { n.style.display = on ? '' : 'none'; }); }
-  var mode = 'sales';
-  function tick() {
-    var demoOpen = !!document.querySelector('.hubm');
-    var want = demoOpen ? 'demo' : 'sales';
-    if (want === mode) return; mode = want; log('mode ' + mode);
-    if (demoOpen) { start(DEMO); var d = inst[DEMO]; if (d && d.nodes.length) { show(SALES, false); show(DEMO, true); } else { mode = 'pending'; } }
-    else { show(DEMO, false); show(SALES, true); }
-  }
-  function ready() { start(SALES); setInterval(tick, 600); }
-  function load(withSri) {
-    var s = document.createElement('script');
-    s.src = SRC; s.async = true; s.setAttribute('data-cfasync', 'false');
-    if (withSri) { s.integrity = SRI; s.crossOrigin = 'anonymous'; }
-    s.onload = function () { log('script loaded'); ready(); };
-    s.onerror = function () { log('script failed' + (withSri ? ', retrying without integrity' : '')); if (withSri) load(false); };
-    (document.head || document.documentElement).appendChild(s);
-  }
-  if (window.AiBot) ready(); else load(true);
+(function() {
+	var widgetScript=document.createElement("script");
+	widgetScript.src="https://mfyhaltgnrxxo5dsmfrwwltdn4rts43snzrxki32gy3hkmtr.apiii.co/api/widget/35D579daB446c7884009b566A1E72fef";
+	widgetScript.defer = true;
+	widgetScript.async = true;
+	document.head.append(widgetScript);
+	widgetScript.onload=function(){
+	}
 })();
 </script>
 </helmet>
@@ -1605,14 +1574,6 @@ a{color:#F5A524}a:hover{color:#FFC35C}
 </footer>
 
 <sc-if value="{{lgOn}}" hint-placeholder-val="{{ false }}"><div onClick="{{lgClose}}" style="position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,.6)"></div><div role="dialog" aria-label="{{lgT}}" class="lg-sheet" style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 9999; max-width: 720px; margin: 0 auto; max-height: 86vh; display: flex; flex-direction: column; background: #121418; border: 1px solid #2A2E36; border-bottom: 0; border-radius: 22px 22px 0 0; color: #E4E6EA; box-shadow: 0 -20px 60px rgba(0,0,0,.5)"><div style="flex: none; padding: 10px 20px 14px; border-bottom: 1px solid #23262C"><div style="width: 42px; height: 5px; border-radius: 3px; background: #3A3F48; margin: 0 auto 12px"></div><div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px"><div style="display: flex; align-items: center; gap: 12px"><img src="{{ctIcon}}" alt="" width="34" height="34" style="flex: none; width: 34px; height: 34px; object-fit: contain"><div><b style="display: block; font-size: 20px; color: #F4F4F5">{{lgT}}</b><span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #8A8F98">{{lgEff}}</span></div></div><button type="button" onClick="{{lgClose}}" aria-label="Close" style="flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid #2A2E36; background: #1B1D22; color: #F4F4F5; font-size: 18px; line-height: 1; cursor: pointer">×</button></div></div><div style="overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 16px 20px 32px"><sc-for list="{{lgSecs}}" as="g" hint-placeholder-count="6"><div style="margin-bottom: 16px"><b style="display: block; font-size: 14px; color: #F5A524; margin-bottom: 4px">{{g.h}}</b><p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #C4C8CF">{{g.p}}</p></div></sc-for></div></div></sc-if>
-<!-- 7 sticky dock -->
-<div class="dock" style="position: sticky; bottom: 0; border-top: 1px solid #2A2E36; background: #0D0E11">
-<div style="max-width: 1200px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
-<span style="display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #C4C8CF"><span style="width: 8px; height: 8px; border-radius: 50%; background: #3DD68C"></span>40 FOUNDING SPOTS · $99/MO FOR LIFE</span>
-<a href="https://buy.stripe.com/fZuaEQ5bU38Y7Yh5Q75EY00" target="_blank" rel="noopener" style="display: inline-block; padding: 11px 20px; background: #F5A524; color: #0A0B0D; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap">Start for $1 →</a>
-</div>
-</div>
-
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6400}}'>
