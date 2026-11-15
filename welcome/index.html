@@ -140,7 +140,7 @@ a{color:#F5A524}a:hover{color:#FFC35C}
 <sc-if value="{{isFounder}}" hint-placeholder-val="{{ true }}">
 <span style="display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 8px 14px; border-radius: 999px; background: rgba(245,165,36,.14); border: 1px solid rgba(245,165,36,.45); font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: #F5A524">FOUNDERS CLUB · ONE OF 40</span>
 <div class="ob-scr" style="margin-top: 22px; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(8px); text-align: left; animation-delay: .4s"><img src="./assets/a4ce03d79b4f773036beb5a74a2a0ca3.jpg" alt="" width="30" height="30" style="flex: none; width: 30px; height: 30px; border-radius: 50%; box-shadow: 0 0 0 1.5px #F5A524"><span style="font-size: 15px; line-height: 1.4; color: #F4F4F5"><b style="display: block; font-size: 11px; color: #F5A524">Sophia</b>Ezekiel will call you personally.</span></div>
-<p style="margin: 8px 0 0; font-size: 13.5px; line-height: 1.5; color: #8A8F98">$99 a month for life after your 30 days.</p>
+<p style="margin: 8px 0 0; font-size: 13.5px; line-height: 1.5; color: #8A8F98">$99 a month for life after your 14 days.</p>
 </sc-if>
 <sc-if value="{{isStandard}}" hint-placeholder-val="{{ false }}">
 <p style="margin: 22px 0 0; font-size: 17px; line-height: 1.5; color: #E4E6EA">Your 14 days start now.</p>
@@ -679,7 +679,7 @@ class Component extends DCLogic {
       ['Can I use it on my computer?', 'It’s built for your phone, because that’s where your photos and your voice are. Open this page on your phone and save it there.', 'Isn’t your phone already in your hand on every inspection?'],
       ['I lost my code. Now what?', 'Tap "Email me a sign-in link instead" when the app asks for your code. The link signs you in on that phone.', 'Why get stuck on six digits?'],
       ['What if I delete the icon?', 'Nothing is lost. Your claims and articles live in your account. Open your welcome email again and save it back in ten seconds.', 'What’s ten seconds against a claim’s worth of articles?'],
-      ['When does my card get charged?', fd ? 'Today you paid $1. Your $99 founder plan starts after 30 days, locked for life while your plan stays active.' : 'Today you paid $1. Your $299 plan starts after 14 days.', 'How many articles can you approve before then?'],
+      ['When does my card get charged?', fd ? 'Today you paid $1. Your $99 founder plan starts after 14 days, locked for life while your plan stays active.' : 'Today you paid $1. Your $299 plan starts after 14 days.', 'How many articles can you approve before then?'],
       ['How do I cancel?', 'Anytime, from More (•••) in the app, before your trial ends. No phone tag, no hoops.', 'Wouldn’t you rather find out it works first?']
     ];
     var faqs = FAQ.map(function (f, k) { var o = s.faq === k; return { q: f[0], a: f[1], close: f[2], open: o, sign: o ? '−' : '+', toggle: function () { self.setState({ faq: o ? -1 : k }); } }; });
