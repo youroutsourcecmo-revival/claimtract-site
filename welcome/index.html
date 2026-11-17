@@ -687,7 +687,7 @@ class Component extends DCLogic {
     return {
       on: on, dm: dm, demo: !live && this.props.demo !== false,
       codeOk: code.length === 6, codeLoading: live && api.status === 'loading', codeErr: live && api.status === 'error',
-      qrSrc: live && s.link && typeof window !== 'undefined' && window.qrcode ? (function () { var q = window.qrcode(0, 'M'); q.addData(s.link); q.make(); return q.createDataURL(6, 2); })() : '/_blob/7df1f9326c9252de5dc5115e9721b804',
+      qrSrc: live && s.link && typeof window !== 'undefined' && window.qrcode ? (function () { var q = window.qrcode(0, 'M'); q.addData(s.link); q.make(); return q.createDataURL(6, 2); })() : 'data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27190%27 height=%27190%27 viewBox=%270 0 190 190%27%3E%3Crect width=%27190%27 height=%27190%27 fill=%27%23fff%27/%3E%3Ctext x=%2795%27 y=%2784%27 font-family=%27Arial%27 font-size=%2715%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27%23333%27%3EYour phone code%3C/text%3E%3Ctext x=%2795%27 y=%27108%27 font-family=%27Arial%27 font-size=%2713%27 text-anchor=%27middle%27 fill=%27%23666%27%3Eshows here after%3C/text%3E%3Ctext x=%2795%27 y=%27126%27 font-family=%27Arial%27 font-size=%2713%27 text-anchor=%27middle%27 fill=%27%23666%27%3Eyour payment%3C/text%3E%3C/svg%3E',
       inTitle: fd ? (first ? 'Welcome to the Founders Club, ' + first + '.' : 'Welcome to the Founders Club.') : (first ? 'You’re in, ' + first + '.' : 'You’re in.'),
       inStyle: 'margin: 0; line-height: 1.04; letter-spacing: -.03em; font-size: ' + (fd ? '36px' : '44px'),
       backTitle: first ? 'Welcome back, ' + first + '.' : 'Welcome back.',
