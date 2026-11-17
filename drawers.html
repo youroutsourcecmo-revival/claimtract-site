@@ -1835,28 +1835,24 @@ class Component extends DCLogic {
     "See the real articles it writes."
   ];
   var showAll=/[?&]all\b/.test(location.search);
-  var chapters=[],bars=[],P=null,tries=0;
+  var chapters=[],bars=[],P=null,tries=0,cur=-1;
   function build(){
     var h=document.querySelector('header.tn-head');
     if(!h||!h.parentElement){return false}
     P=h.parentElement;
-    var kids=[].slice.call(P.children);
     var list=[];
-    kids.forEach(function(k,i){
+    [].slice.call(P.children).forEach(function(k,i){
       if(i>=3 && k.tagName==='SECTION' && getComputedStyle(k).display!=='none') list.push(k);
     });
     if(list.length<6) return false;
     chapters=list;
-    chapters.forEach(function(c,i){
-      c.setAttribute('data-ct-chapter',String(i));
-      if(!showAll) c.setAttribute('data-ct-closed','1');
-    });
+    chapters.forEach(function(c,i){ c.setAttribute('data-ct-chapter',String(i)); });
     chapters.forEach(function(c,i){
       var bar=document.createElement('div');
       bar.className='ct-drawer'; bar.setAttribute('data-ct-bar',String(i));
-      bar.innerHTML='<button type="button" aria-expanded="false"><span class="ct-txt"><span class="ct-eyebrow">Keep going</span><span class="ct-hint"></span></span><span class="ct-chev" aria-hidden="true">&#9662;</span></button>';
+      bar.innerHTML='<button type="button" aria-expanded="false"><span class="ct-txt"><span class="ct-eyebrow"></span><span class="ct-hint"></span></span><span class="ct-chev" aria-hidden="true"></span></button>';
       bar.querySelector('.ct-hint').textContent=HINTS[i]||"What comes next?";
-      bar.querySelector('button').addEventListener('click',function(){openTo(i,true)});
+      bar.querySelector('button').addEventListener('click',function(){ openTo(i,true) });
       c.parentNode.insertBefore(bar,c);
       bars.push(bar);
     });
@@ -1864,19 +1860,31 @@ class Component extends DCLogic {
     return true;
   }
   function refresh(){
-    var f=-1;
-    for(var i=0;i<chapters.length;i++){ if(chapters[i].hasAttribute('data-ct-closed')){f=i;break} }
-    bars.forEach(function(bar,i){ bar.style.display=(i===f)?'':'none'; var b=bar.querySelector('button'); if(b) b.setAttribute('aria-expanded','false'); });
+    chapters.forEach(function(c,i){
+      if(showAll){ c.removeAttribute('data-ct-closed'); return }
+      if(i===cur) c.removeAttribute('data-ct-closed'); else c.setAttribute('data-ct-closed','1');
+    });
+    bars.forEach(function(bar,i){
+      var role=null;
+      if(!showAll){ if(i===cur+1) role='next'; else if(i===cur-1) role='back'; }
+      if(!role){ bar.style.display='none'; return }
+      bar.style.display='';
+      bar.setAttribute('data-ct-role',role);
+      bar.querySelector('.ct-eyebrow').textContent=(role==='next')?'Keep going':'Go back';
+      bar.querySelector('.ct-chev').innerHTML=(role==='next')?'&#9662;':'&#9652;';
+      var bt=bar.querySelector('button'); bt.setAttribute('aria-expanded','false');
+    });
   }
   function openTo(n,scroll){
-    for(var i=0;i<=n&&i<chapters.length;i++){
-      var c=chapters[i];
-      if(c.hasAttribute('data-ct-closed')){c.removeAttribute('data-ct-closed');c.setAttribute('data-ct-reveal','1')}
-    }
+    if(n<0||n>=chapters.length) return;
+    cur=n;
+    chapters[n].removeAttribute('data-ct-reveal');
     refresh();
+    void chapters[n].offsetWidth;
+    chapters[n].setAttribute('data-ct-reveal','1');
     try{window.dispatchEvent(new Event('resize'))}catch(e){}
     if(scroll){
-      var t=chapters[n]; setTimeout(function(){var y=t.getBoundingClientRect().top+window.pageYOffset-16;window.scrollTo({top:y,behavior:'smooth'})},60);
+      setTimeout(function(){var y=chapters[n].getBoundingClientRect().top+window.pageYOffset-16;window.scrollTo({top:y,behavior:'smooth'})},60);
     }
   }
   function chapterOf(el){
@@ -1885,18 +1893,15 @@ class Component extends DCLogic {
   }
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('a[href^="#"]');
-    if(!a) return;
+    if(!a||showAll) return;
     var id=a.getAttribute('href').slice(1); if(!id) return;
     var t=document.getElementById(id); if(!t) return;
     var n=chapterOf(t);
-    if(n>=0&&chapters[n].hasAttribute('data-ct-closed')){ e.preventDefault(); openTo(n,false); setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'})},120) }
+    if(n>=0&&n!==cur){ e.preventDefault(); openTo(n,false); setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'})},140) }
   },true);
   function guard(){
     if(!P||!chapters.length) return;
-    bars.forEach(function(bar,i){
-      if(!bar.isConnected && chapters[i].isConnected) chapters[i].parentNode.insertBefore(bar,chapters[i]);
-    });
-    chapters.forEach(function(c,i){ if(!showAll && !c.hasAttribute('data-ct-closed') && !c.hasAttribute('data-ct-reveal') && false){} });
+    bars.forEach(function(bar,i){ if(!bar.isConnected && chapters[i].isConnected) chapters[i].parentNode.insertBefore(bar,chapters[i]); });
     refresh();
   }
   function start(){
