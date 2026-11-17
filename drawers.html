@@ -1806,7 +1806,9 @@ class Component extends DCLogic {
 </script>
 
 <style>
-[data-ct-closed]{display:none!important}
+header.tn-head ~ section:not([data-ct-show]){display:none!important}
+[data-ct-show]{display:flex!important}
+html.ct-all header.tn-head ~ section:not([data-ct-off]){display:flex!important}
 [data-ct-reveal]{animation:ctReveal .55s cubic-bezier(.2,.8,.2,1) both}
 @keyframes ctReveal{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .ct-drawer{width:80%;max-width:1100px;margin:32px auto;position:relative;z-index:5}
@@ -1835,6 +1837,7 @@ class Component extends DCLogic {
     "See the real articles it writes."
   ];
   var showAll=/[?&]all\b/.test(location.search);
+  if(showAll) document.documentElement.classList.add('ct-all');
   var chapters=[],bars=[],P=null,tries=0,cur=-1;
   function build(){
     var h=document.querySelector('header.tn-head');
@@ -1842,11 +1845,13 @@ class Component extends DCLogic {
     P=h.parentElement;
     var list=[];
     [].slice.call(P.children).forEach(function(k,i){
-      if(i>=3 && k.tagName==='SECTION' && getComputedStyle(k).display!=='none') list.push(k);
+      if(i>=3 && k.tagName==='SECTION' && k.style.display!=='none' && !k.hidden) list.push(k);
+      else if(k.tagName==='SECTION'){ k.setAttribute('data-ct-off','1'); }
     });
     if(list.length<6) return false;
     chapters=list;
     chapters.forEach(function(c,i){ c.setAttribute('data-ct-chapter',String(i)); });
+    chapters.forEach(function(c){ holdVideos(c); });
     chapters.forEach(function(c,i){
       var bar=document.createElement('div');
       bar.className='ct-drawer'; bar.setAttribute('data-ct-bar',String(i));
@@ -1859,10 +1864,30 @@ class Component extends DCLogic {
     refresh();
     return true;
   }
+  function holdVideos(c){
+    if(showAll) return;
+    [].slice.call(c.querySelectorAll('video')).forEach(function(v){
+      if(v.hasAttribute('data-ct-held')) return;
+      var main=v.getAttribute('src'); var srcs=[].slice.call(v.querySelectorAll('source'));
+      if(main){ v.setAttribute('data-ct-src',main); v.removeAttribute('src'); }
+      srcs.forEach(function(el){ var u=el.getAttribute('src'); if(u){ el.setAttribute('data-ct-src',u); el.removeAttribute('src'); } });
+      v.setAttribute('data-ct-held','1'); v.setAttribute('preload','none');
+      try{ v.pause(); v.load(); }catch(e){}
+    });
+  }
+  function releaseVideos(c){
+    [].slice.call(c.querySelectorAll('video[data-ct-held]')).forEach(function(v){
+      var main=v.getAttribute('data-ct-src'); if(main) v.setAttribute('src',main);
+      [].slice.call(v.querySelectorAll('source')).forEach(function(el){ var u=el.getAttribute('data-ct-src'); if(u) el.setAttribute('src',u); });
+      v.removeAttribute('data-ct-held'); v.setAttribute('preload','metadata');
+      try{ v.load(); if(v.autoplay||v.hasAttribute('autoplay')){ var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); } }catch(e){}
+    });
+  }
   function refresh(){
     chapters.forEach(function(c,i){
-      if(showAll){ c.removeAttribute('data-ct-closed'); return }
-      if(i===cur) c.removeAttribute('data-ct-closed'); else c.setAttribute('data-ct-closed','1');
+      if(showAll){ c.setAttribute('data-ct-show','1'); return }
+      if(i===cur) c.setAttribute('data-ct-show','1'); else c.removeAttribute('data-ct-show');
+      if(i!==cur){ [].slice.call(c.querySelectorAll('video')).forEach(function(v){ try{v.pause()}catch(e){} }); }
     });
     bars.forEach(function(bar,i){
       var role=null;
@@ -1878,6 +1903,7 @@ class Component extends DCLogic {
   function openTo(n,scroll){
     if(n<0||n>=chapters.length) return;
     cur=n;
+    releaseVideos(chapters[n]);
     chapters[n].removeAttribute('data-ct-reveal');
     refresh();
     void chapters[n].offsetWidth;
