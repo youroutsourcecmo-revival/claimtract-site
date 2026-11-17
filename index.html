@@ -270,16 +270,21 @@ a{color:#F5A524}a:hover{color:#FFC35C}
 })();
 </script>
 <style>.ct-pers-bar{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);z-index:2000;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);padding:10px 12px 10px 16px;border-radius:999px;background:#F5A524;color:#1B1C1F;font:700 14px/1.3 Inter,system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.45)}.ct-pers-bar button{border:0;background:rgba(0,0,0,.12);color:#1B1C1F;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1}@media (max-width:760px){.ct-pers-bar{bottom:74px;font-size:12px;padding:7px 8px 7px 12px;border-radius:14px;gap:8px}.ct-pers-bar button{width:20px;height:20px;font-size:13px}}</style>
-<!-- Lexi chat (AI Employeez) -->
+<!-- Lexi chat (AI Employeez): load once, after the page has finished drawing -->
 <script>
 (function() {
-	var widgetScript=document.createElement("script");
-	widgetScript.src="https://mfyhaltgnrxxo5dsmfrwwltdn4rts43snzrxki32gy3hkmtr.apiii.co/api/widget/35D579daB446c7884009b566A1E72fef";
-	widgetScript.defer = true;
-	widgetScript.async = true;
-	document.head.append(widgetScript);
-	widgetScript.onload=function(){
+	if (window.__lexiLoaded) return;
+	window.__lexiLoaded = true;
+	function addLexi() {
+		if (document.getElementById("lexi-widget-script")) return;
+		var widgetScript = document.createElement("script");
+		widgetScript.id = "lexi-widget-script";
+		widgetScript.src = "https://mfyhaltgnrxxo5dsmfrwwltdn4rts43snzrxki32gy3hkmtr.apiii.co/api/widget/35D579daB446c7884009b566A1E72fef";
+		widgetScript.async = true;
+		document.body.appendChild(widgetScript);
 	}
+	if (document.readyState === "complete") { setTimeout(addLexi, 1500); }
+	else { window.addEventListener("load", function() { setTimeout(addLexi, 1500); }); }
 })();
 </script>
 </helmet>
