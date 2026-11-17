@@ -1984,9 +1984,9 @@ body.ct-buyon{padding-bottom:52px}
 </script>
 <script>
 (function(){
-  var OFF=[0,10,19.4,29.4], FILES=['./ez-hero-1-letter.mp3','./ez-hero-2-phone.mp3','./ez-hero-3-search.mp3','./ez-hero-4-door.mp3'];
-  var CUES=[[0.4,'Somewhere right now, a homeowner is holding a letter she doesn\u2019t understand.'],[5.4,'The adjuster who promised to take care of her is gone.'],[10.4,'The check barely clears her deductible.'],[13.0,'The contractor wants tens of thousands.'],[15.4,'She calls the carrier. They say\u2026'],[18.2,''],[19.9,'She\u2019s confused. And when she\u2019s confused, she Googles.'],[23.6,'She doesn\u2019t land on a stranger. She lands on you.'],[29.8,'No ads. No lead brokers.'],[32.0,'Every claim and every voice note becomes pages Google indexes,'],[36.0,'so you get found over and over again.'],[38.6,'Click below, and I\u2019ll show you how.']];
-  var BIG=[17.6,19.3,'We paid you.'];
+  var OFF=[0.4,10.2,19.8,29.8], FILES=['./ez-hero-1-letter.mp3','./ez-hero-2-phone.mp3','./ez-hero-3-search.mp3','./ez-hero-4-door.mp3'];
+  var CUES=[[0.4,'Somewhere right now, a homeowner is holding a letter she doesn\u2019t understand.'],[5.0,'The adjuster who promised to take care of her is gone.'],[10.2,'The check barely clears her deductible.'],[13.0,'The contractor wants tens of thousands.'],[16.4,'She calls the carrier. They say\u2026'],[17.8,''],[19.8,'She\u2019s confused. And when she\u2019s confused, she Googles.'],[23.5,'She doesn\u2019t land on a stranger. She lands on you.'],[29.8,'No ads. No lead brokers.'],[32.9,'Every claim and every voice note becomes pages Google indexes,'],[35.0,'so you get found over and over again.'],[37.4,'Click below, and I\u2019ll show you how.']];
+  var BIG=[18.0,19.4,'We paid you.'];
   var hero,vid,auds=[],fired=[0,0,0,0],last=0,running=false,raf=0,pulsed=false;
   function mk(){
     var h=document.querySelector('header.tn-head'); if(!h||!h.parentElement) return false;
@@ -2027,7 +2027,7 @@ body.ct-buyon{padding-bottom:52px}
     var cap='',i; for(i=0;i<CUES.length;i++){ if(t>=CUES[i][0]) cap=CUES[i][1] }
     var c=hero.querySelector('.ct-cap'); if(c.textContent!==cap){c.textContent=cap} c.className='ct-cap'+(cap?' on':'');
     var b=hero.querySelector('.ct-big'); b.textContent=BIG[2]; b.className='ct-big'+((t>=BIG[0]&&t<BIG[1])?' on':'');
-    if(!pulsed&&t>=38.6){ pulsed=true; var bar=document.querySelector('.ct-drawer[data-ct-bar="0"]'); if(bar){bar.setAttribute('data-ct-pulse','1'); setTimeout(function(){bar.removeAttribute('data-ct-pulse')},6500)} }
+    if(!pulsed&&t>=37.4){ pulsed=true; var bar=document.querySelector('.ct-drawer[data-ct-bar="0"]'); if(bar){bar.setAttribute('data-ct-pulse','1'); setTimeout(function(){bar.removeAttribute('data-ct-pulse')},6500)} }
     raf=requestAnimationFrame(tick);
   }
   function toggleMute(){
