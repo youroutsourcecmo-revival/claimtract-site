@@ -1824,7 +1824,8 @@ header.tn-head ~ section:not([data-ct-show]){display:none!important}
 html.ct-all header.tn-head ~ section:not([data-ct-off]){display:flex!important}
 .hero-vid-wrap{display:none!important}
 .ct-hero{position:relative;overflow:hidden;background:#0A0B0D;color:#fff;min-height:520px;height:calc(100svh - 104px - 96px);max-height:860px;display:flex;align-items:flex-end;isolation:isolate}
-.ct-hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;z-index:-1;-webkit-mask-image:radial-gradient(ellipse 78% 74% at 50% 42%,#000 52%,transparent 100%);mask-image:radial-gradient(ellipse 78% 74% at 50% 42%,#000 52%,transparent 100%)}
+.ct-hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;z-index:-1;}
+.ct-vig{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 74% at 50% 42%,rgba(10,11,13,0) 50%,#0A0B0D 100%)}
 .ct-hshade{position:absolute;left:0;right:0;bottom:0;height:62%;z-index:0;background:linear-gradient(to top,#0A0B0D 8%,rgba(10,11,13,.82) 45%,rgba(10,11,13,0) 100%);pointer-events:none}
 .ct-htxt{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:0 22px 26px;display:flex;flex-direction:column;gap:12px;transition:opacity .5s}
 .ct-eb{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:#F5A524}
@@ -1847,7 +1848,7 @@ html.ct-all header.tn-head ~ section:not([data-ct-off]){display:flex!important}
 .ct-buy{position:fixed;z-index:60;left:0;right:0;bottom:0;display:none;align-items:center;justify-content:center;gap:10px;padding:14px 18px calc(14px + env(safe-area-inset-bottom));background:#F5A524;color:#0A0B0D;font:700 17px Inter,sans-serif;text-decoration:none;box-shadow:0 -8px 30px rgba(0,0,0,.5)}
 .ct-buy.on{display:flex}
 body.ct-buyon{padding-bottom:58px}body.ct-buyon .ct-hero{height:calc(100svh - 104px - 96px - 58px)}
-@media(min-width:900px){.ct-hero{align-items:center;height:calc(100vh - 104px - 96px)}.ct-hv{left:auto;right:1%;width:56%;object-position:50% 12%;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 30%),linear-gradient(to left,transparent 0,#000 16%),linear-gradient(to top,transparent 0,#000 16%),linear-gradient(to bottom,transparent 0,#000 12%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0,#000 30%),linear-gradient(to left,transparent 0,#000 16%),linear-gradient(to top,transparent 0,#000 16%),linear-gradient(to bottom,transparent 0,#000 12%);mask-composite:intersect}.ct-hero[data-st="play"] .ct-htxt{opacity:1}.ct-play{top:68%}.ct-big{top:70%}.ct-hshade{display:none}.ct-htxt{padding:0 40px;width:46%;margin:0 auto 0 max(0px,calc(50% - 720px))}.ct-play{left:78%}.ct-cap{left:auto;right:0;width:56%}.ct-big{left:auto;right:0;width:56%}}
+@media(min-width:900px){.ct-vig{left:auto;right:1%;width:56%;background:linear-gradient(to right,#0A0B0D 0,rgba(10,11,13,0) 30%),linear-gradient(to left,#0A0B0D 0,rgba(10,11,13,0) 16%),linear-gradient(to top,#0A0B0D 0,rgba(10,11,13,0) 18%),linear-gradient(to bottom,#0A0B0D 0,rgba(10,11,13,0) 14%)}.ct-hero{align-items:center;height:calc(100vh - 104px - 96px)}.ct-hv{left:auto;right:1%;width:56%;object-position:50% 12%}.ct-hero[data-st="play"] .ct-htxt{opacity:1}.ct-play{top:68%}.ct-big{top:70%}.ct-hshade{display:none}.ct-htxt{padding:0 40px;width:46%;margin:0 auto 0 max(0px,calc(50% - 720px))}.ct-play{left:78%}.ct-cap{left:auto;right:0;width:56%}.ct-big{left:auto;right:0;width:56%}}
 
 [data-ct-reveal]{animation:ctReveal .55s cubic-bezier(.2,.8,.2,1) both}
 @keyframes ctReveal{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
@@ -1992,7 +1993,7 @@ body.ct-buyon{padding-bottom:58px}body.ct-buyon .ct-hero{height:calc(100svh - 10
     if(document.querySelector('.ct-hero')) return true;
     var wrap=h.parentElement.querySelector('.hero-vid-wrap'); if(!wrap) return false;
     hero=document.createElement('div'); hero.className='ct-hero'; hero.setAttribute('data-st','idle');
-    hero.innerHTML='<video class="ct-hv" muted loop playsinline autoplay preload="auto" poster="./assets/hero-story.jpg" src="./assets/hero-story.mp4" aria-hidden="true"></video><div class="ct-hshade"></div>'
+    hero.innerHTML='<video class="ct-hv" muted loop playsinline autoplay preload="auto" poster="./assets/hero-story.jpg" src="./assets/hero-story.mp4" aria-hidden="true"></video><div class="ct-vig"></div><div class="ct-hshade"></div>'
      +'<div class="ct-htxt"><div class="ct-eb">FOR PUBLIC ADJUSTERS</div><h1 class="ct-h1">She’s confused. So she Googles.</h1><p class="ct-sub">Make sure she finds you.</p><p class="ct-sup">ClaimTract turns the photos you already take into pages that get found, claim after claim.</p></div>'
      +'<button type="button" class="ct-play" aria-label="Play with sound"><i></i><span>Tap to hear it · 30 sec</span></button>'
      +'<button type="button" class="ct-mute" aria-label="Mute">🔊</button><div class="ct-big"></div><div class="ct-cap" aria-live="polite"></div>';
