@@ -1846,7 +1846,7 @@ html.ct-all header.tn-head ~ section:not([data-ct-off]){display:flex!important}
 @keyframes ctPulse{0%,100%{box-shadow:0 0 0 0 rgba(245,165,36,.0)}50%{box-shadow:0 0 0 10px rgba(245,165,36,.45)}}
 .ct-drawer[data-ct-pulse] button{animation:ctPulse 1s ease-in-out 6}
 .ct-buy{position:fixed;z-index:60;left:0;right:0;bottom:0;display:none;align-items:center;justify-content:center;gap:10px;padding:12px 18px calc(12px + env(safe-area-inset-bottom));background:#F5A524;color:#0A0B0D;font:700 16px Inter,sans-serif;text-decoration:none;box-shadow:0 -8px 30px rgba(0,0,0,.5)}
-.ct-buy.on{display:flex}
+.ct-buy{transition:transform .28s ease}.ct-buy.on{display:flex}.ct-buy.hide{transform:translateY(115%)}
 body.ct-buyon{padding-bottom:52px}
 @media(min-width:900px){.ct-vig{left:auto;right:1%;width:56%;background:linear-gradient(to right,#0A0B0D 0,rgba(10,11,13,0) 30%),linear-gradient(to left,#0A0B0D 0,rgba(10,11,13,0) 16%),linear-gradient(to top,#0A0B0D 0,rgba(10,11,13,0) 18%),linear-gradient(to bottom,#0A0B0D 0,rgba(10,11,13,0) 14%)}.ct-hero{align-items:center;height:calc(100vh - 104px - 96px)}.ct-hv{left:auto;right:1%;width:56%;object-position:50% 12%}.ct-hero[data-st="play"] .ct-htxt{opacity:1}.ct-big{top:70%}.ct-hshade{display:none}.ct-htxt{padding:0 40px;width:46%;margin:0 auto 0 max(0px,calc(50% - 720px))}.ct-play{left:auto;right:7%;top:70%}.ct-cap{left:auto;right:0;width:56%}.ct-big{left:auto;right:0;width:56%}}
 
@@ -2008,6 +2008,7 @@ body.ct-buyon{padding-bottom:52px}
     try{ [0,1,2,3].forEach(function(i){var a=A(i); a.pause(); a.currentTime=0}) }catch(e){}
     fired=[0,0,0,0]; last=0; pulsed=false; running=true;
     hero.setAttribute('data-st','play');
+    if(!window.__ctBuyT){ window.__ctBuyT=setTimeout(buy,20000) }
     vid.currentTime=0; var p=vid.play(); if(p&&p.catch)p.catch(function(){});
     cancelAnimationFrame(raf); raf=requestAnimationFrame(tick);
   }
@@ -2033,15 +2034,14 @@ body.ct-buyon{padding-bottom:52px}
     window.__ctMuted=!window.__ctMuted; auds.forEach(function(a){a.muted=window.__ctMuted});
     hero.querySelector('.ct-mute').textContent=window.__ctMuted?'🔇':'🔊';
   }
-  /* timed buy bar: appears after 20s or on first drawer tap, then stays */
+  /* buy bar: appears 20 s after the visitor presses Play, then stays */
   function buy(){
     if(document.querySelector('.ct-buy')) return;
     var a=document.createElement('a'); a.className='ct-buy on'; a.href='https://buy.stripe.com/fZuaEQ5bU38Y7Yh5Q75EY00';
     a.innerHTML='Start your $1 trial · 14 days →'; document.body.appendChild(a); document.body.classList.add('ct-buyon');
+    var st=0; window.addEventListener('scroll',function(){ a.classList.add('hide'); clearTimeout(st); st=setTimeout(function(){ a.classList.remove('hide') },700) },{passive:true});
   }
   var iv=setInterval(function(){ if(mk()){ clearInterval(iv); new MutationObserver(function(){ if(!document.querySelector('.ct-hero')) mk() }).observe(document.querySelector('header.tn-head').parentElement,{childList:true}) } },60);
-  setTimeout(buy,20000);
-  document.addEventListener('click',function(e){ if(e.target.closest&&e.target.closest('.ct-drawer')) buy() },true);
 })();
 </script>
 <script src="./ct-track.js" defer></script>
