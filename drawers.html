@@ -1823,7 +1823,7 @@ header.tn-head ~ section:not([data-ct-show]){display:none!important}
 [data-ct-show]{display:flex!important}
 html.ct-all header.tn-head ~ section:not([data-ct-off]){display:flex!important}
 .hero-vid-wrap{display:none!important}
-.ct-hero{position:relative;overflow:hidden;background:#0A0B0D;color:#fff;min-height:520px;height:calc(100svh - 104px - 96px - 64px);max-height:860px;display:flex;align-items:flex-end;isolation:isolate}
+.ct-hero{position:relative;overflow:hidden;background:#0A0B0D;color:#fff;min-height:520px;height:calc(100svh - var(--ct-hh,74px));display:flex;align-items:flex-end;isolation:isolate}
 .ct-hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;z-index:-1;}
 .ct-vig{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 74% at 50% 42%,rgba(10,11,13,0) 50%,#0A0B0D 100%)}
 .ct-hshade{position:absolute;left:0;right:0;bottom:0;height:62%;z-index:0;background:linear-gradient(to top,#0A0B0D 8%,rgba(10,11,13,.82) 45%,rgba(10,11,13,0) 100%);pointer-events:none}
@@ -1848,7 +1848,7 @@ html.ct-all header.tn-head ~ section:not([data-ct-off]){display:flex!important}
 .ct-buy{position:fixed;z-index:60;left:0;right:0;bottom:0;display:none;align-items:center;justify-content:center;gap:10px;padding:12px 18px calc(12px + env(safe-area-inset-bottom));background:#F5A524;color:#0A0B0D;font:700 16px Inter,sans-serif;text-decoration:none;box-shadow:0 -8px 30px rgba(0,0,0,.5)}
 .ct-buy{transition:transform .28s ease}.ct-buy.on{display:flex}.ct-buy.hide{transform:translateY(115%)}
 body.ct-buyon{padding-bottom:52px}
-@media(min-width:900px){.ct-vig{left:auto;right:1%;width:56%;background:linear-gradient(to right,#0A0B0D 0,rgba(10,11,13,0) 30%),linear-gradient(to left,#0A0B0D 0,rgba(10,11,13,0) 16%),linear-gradient(to top,#0A0B0D 0,rgba(10,11,13,0) 18%),linear-gradient(to bottom,#0A0B0D 0,rgba(10,11,13,0) 14%)}.ct-hero{align-items:center;height:calc(100vh - 104px - 96px)}.ct-hv{left:auto;right:1%;width:56%;object-position:50% 12%}.ct-hero[data-st="play"] .ct-htxt{opacity:1}.ct-big{top:70%}.ct-hshade{display:none}.ct-htxt{padding:0 40px;width:46%;margin:0 auto 0 max(0px,calc(50% - 720px))}.ct-play{left:auto;right:7%;top:70%}.ct-cap{left:auto;right:0;width:56%}.ct-big{left:auto;right:0;width:56%}}
+@media(min-width:900px){.ct-vig{left:auto;right:1%;width:56%;background:linear-gradient(to right,#0A0B0D 0,rgba(10,11,13,0) 30%),linear-gradient(to left,#0A0B0D 0,rgba(10,11,13,0) 16%),linear-gradient(to top,#0A0B0D 0,rgba(10,11,13,0) 18%),linear-gradient(to bottom,#0A0B0D 0,rgba(10,11,13,0) 14%)}.ct-hero{align-items:center}.ct-hv{left:auto;right:1%;width:56%;object-position:50% 12%}.ct-hero[data-st="play"] .ct-htxt{opacity:1}.ct-big{top:70%}.ct-hshade{display:none}.ct-htxt{padding:0 40px;width:46%;margin:0 auto 0 max(0px,calc(50% - 720px))}.ct-play{left:auto;right:7%;top:70%}.ct-cap{left:auto;right:0;width:56%}.ct-big{left:auto;right:0;width:56%}}
 
 [data-ct-reveal]{animation:ctReveal .55s cubic-bezier(.2,.8,.2,1) both}
 @keyframes ctReveal{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
@@ -1984,6 +1984,7 @@ body.ct-buyon{padding-bottom:52px}
 </script>
 <script>
 (function(){
+  (function(){function hh(){var h=document.querySelector('header.tn-head');if(h)document.documentElement.style.setProperty('--ct-hh',h.offsetHeight+'px')}hh();addEventListener('resize',hh);addEventListener('load',hh);setTimeout(hh,600)})();
   var OFF=[0.4,10.2,19.8,29.8], FILES=['./ez-hero-1-letter.mp3','./ez-hero-2-phone.mp3','./ez-hero-3-search.mp3','./ez-hero-4-door.mp3'];
   var CUES=[[0.4,'Somewhere right now, a homeowner is holding a letter she doesn\u2019t understand.'],[5.0,'The adjuster who promised to take care of her is gone.'],[10.2,'The check barely clears her deductible.'],[13.0,'The contractor wants tens of thousands.'],[16.4,'She calls the carrier. They say\u2026'],[17.8,''],[19.8,'She\u2019s confused. And when she\u2019s confused, she Googles.'],[23.5,'She doesn\u2019t land on a stranger. She lands on you.'],[29.8,'No ads. No lead brokers.'],[32.9,'Every claim and every voice note becomes pages Google indexes,'],[35.0,'so you get found over and over again.'],[37.4,'Click below, and I\u2019ll show you how.']];
   var BIG=[18.0,19.4,'We paid you.'];
