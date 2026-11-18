@@ -1989,13 +1989,15 @@ body.ct-buyon{padding-bottom:52px}
   var CUES=[[0.4,'Somewhere right now, a homeowner is holding a letter she doesn\u2019t understand.'],[5.0,'The adjuster who promised to take care of her is gone.'],[10.2,'The check barely clears her deductible.'],[13.0,'The contractor wants tens of thousands.'],[16.4,'She calls the carrier. They say\u2026'],[17.8,''],[19.8,'She\u2019s confused. And when she\u2019s confused, she Googles.'],[23.5,'She doesn\u2019t land on a stranger. She lands on you.'],[29.8,'No ads. No lead brokers.'],[32.9,'Every claim and every voice note becomes pages Google indexes,'],[35.0,'so you get found over and over again.'],[37.4,'Click below, and I\u2019ll show you how.']];
   var BIG=[18.0,19.4,'We paid you.'];
   var hero,vid,auds=[],fired=[0,0,0,0],last=0,running=false,raf=0,pulsed=false;
-  function mk(){
+  var CTP=(function(){try{var q=new URLSearchParams(location.search);function clean(v,max,st){v=(v||'').trim().replace(/\s+/g,' ');if(!v||v.length>max||/[^A-Za-z\u00C0-\u017F'\- .]/.test(v))return '';if(st&&v.length===2)return v.toUpperCase();if(v!==v.toUpperCase()&&v!==v.toLowerCase())return v;return v.split(' ').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()}).join(' ')}
+var n=clean((q.get('fn')||q.get('n')||'').trim().split(' ')[0],20);var c=clean(q.get('city')||q.get('c'),30);var st=clean(q.get('st')||q.get('state')||q.get('s'),20,1);var loc=c&&st?c+', '+st:(c||st||'');return {n:n,loc:loc}}catch(e){return {n:'',loc:''}}})();
+function mk(){
     var h=document.querySelector('header.tn-head'); if(!h||!h.parentElement) return false;
     if(document.querySelector('.ct-hero')) return true;
     var wrap=h.parentElement.querySelector('.hero-vid-wrap'); if(!wrap) return false;
     hero=document.createElement('div'); hero.className='ct-hero'; hero.setAttribute('data-st','idle');
     hero.innerHTML='<video class="ct-hv" muted loop playsinline autoplay preload="auto" poster="./assets/hero-story.jpg" src="./assets/hero-story.mp4" aria-hidden="true"></video><div class="ct-vig"></div><div class="ct-hshade"></div>'
-     +'<div class="ct-htxt"><div class="ct-eb">FOR PUBLIC ADJUSTERS</div><h1 class="ct-h1">She’s confused. So she Googles.</h1><p class="ct-sub">Make sure she finds you.</p><p class="ct-sup">ClaimTract turns the photos you already take into pages that get found, claim after claim.</p></div>'
+     +'<div class="ct-htxt"><div class="ct-eb">FOR PUBLIC ADJUSTERS</div><h1 class="ct-h1">'+(CTP.n?CTP.n+', s':'S')+'he’s confused. So she Googles.</h1><p class="ct-sub">Make sure she finds you'+(CTP.loc?' in '+CTP.loc:'')+'.</p><p class="ct-sup">ClaimTract turns the photos you already take into pages that get found, claim after claim.</p></div>'
      +'<button type="button" class="ct-play" aria-label="Play with sound"><i></i></button>'
      +'<button type="button" class="ct-mute" aria-label="Mute">🔊</button><div class="ct-big"></div><div class="ct-cap" aria-live="polite"></div>';
     wrap.parentNode.insertBefore(hero,wrap);
