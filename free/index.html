@@ -139,6 +139,16 @@ textarea{min-height:190px;resize:vertical;line-height:1.55}
 .pv .share button{background:var(--p-ac);color:var(--p-acx);border:0;border-radius:var(--p-r);padding:10px 14px;font:700 13px Inter,sans-serif;cursor:pointer}
 .pv.heritage .share button{color:#fff}
 .lkrow{display:grid;grid-template-columns:1fr 1.6fr;gap:10px;margin-bottom:10px}@media(max-width:560px){.lkrow{grid-template-columns:1fr}}
+.pv .rdy{list-style:none;padding:0;margin:0;display:grid;gap:10px;max-width:640px}
+.pv .rdy li{padding:12px 16px 12px 44px;position:relative;background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:var(--p-r);color:var(--p-tx)}
+.pv .rdy li::before{content:"\2713";position:absolute;left:16px;color:var(--p-ac);font-weight:800}
+.tk{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;text-align:left;margin:30px 0}
+.tkc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.tkc h3{margin:0;font-size:16px}.tkc p{margin:0;color:var(--mut);font-size:14px}
+.tkc textarea{min-height:110px;font-size:14px;line-height:1.5;padding:10px 12px}
+.trial{background:#1d1608;border:1px solid #5a4210;border-radius:16px;padding:26px;text-align:left;margin:10px 0 24px}
+.trial h3{margin:0 0 8px;font-size:24px}.trial p{color:#d9c08a;margin:0 0 16px}.trial small{display:block;margin-top:12px;color:#a88a4a}
+a.btn{display:inline-block;text-decoration:none}
 .done-box{text-align:center;padding:50px 10px}.done-box h2{font-size:34px}
 .fine{color:var(--dim);font-size:13px;margin-top:30px}
 .hp{position:absolute;left:-9999px}
@@ -179,6 +189,7 @@ textarea{min-height:190px;resize:vertical;line-height:1.55}
       <div class="f"><label for="lsy">Licensed since (year)</label><input type="text" id="lsy" inputmode="numeric" maxlength="4" placeholder="2009"><small>Optional. Shows as a badge. It must match your state record.</small></div>
     </div>
     <div class="f"><label>What do you specialize in?</label><div class="chips" id="spec"></div></div>
+    <div class="f"><label for="ar">Areas you serve</label><input type="text" id="ar" placeholder="Osceola County, Kissimmee, St. Cloud"><small>Cities or counties, separated by commas. Up to 10.</small></div>
     <div class="f">
       <div class="row2"><label for="ab" style="margin:0">About you (about 250 words)</label><button type="button" class="btn ghost sm" id="mic">Talk instead</button></div>
       <textarea id="ab" maxlength="2600" placeholder="How long you've done this. What kind of claims you take. Why you do it. What a homeowner can expect when they call you."></textarea>
@@ -216,6 +227,11 @@ textarea{min-height:190px;resize:vertical;line-height:1.55}
     <div class="done-box" id="done" style="display:none">
       <h2>Approved. Your page is on its way.</h2>
       <p class="sub" id="doneMsg"></p>
+      <h2 style="font-size:24px;margin-top:34px">Your free toolkit</h2>
+      <p class="sub">Everything below is yours. Copy it, print it, send it before your next appointment.</p>
+      <div class="tk" id="tk"></div>
+      <div class="trial"><h3>Want your page to fill itself?</h3><p>The ClaimTract engine turns your photos and notes into articles and posts that homeowners find on Google. Try it for $1 for 14 days, and whatever it writes stays on your page.</p><a class="btn" href="https://buy.stripe.com/fZuaEQ5bU38Y7Yh5Q75EY00" target="_blank" rel="noopener">Start for $1</a><small>$1 today. Founding members pay $99 a month after 14 days. Cancel anytime.</small></div>
+      <button class="btn ghost" id="backPage" type="button">Back to my page</button>
     </div>
     <p class="fine">ClaimTract is a blogging and syndication app for public adjusters. The free page is your page, and the engine that writes and publishes articles to it is optional.</p>
   </section>
@@ -261,6 +277,33 @@ function linkList(){var out=[],bad=false;for(var i=0;i<5;i++){var l=$('ll'+i).va
 function qrCanvas(url){var q=qrcode(0,'M');q.addData(url);q.make();var n=q.getModuleCount(),m=4,s=8,c=document.createElement('canvas');c.width=c.height=(n+2*m)*s;var x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.fillStyle='#000';for(var r=0;r<n;r++)for(var k=0;k<n;k++)if(q.isDark(r,k))x.fillRect((k+m)*s,(r+m)*s,s,s);return c}
 function ve(s){return String(s).replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\;')}
 function dl(blob,name){var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
+/* toolkit */
+function cp(txt,btn,done){var ok=function(){var o=btn.dataset.o||btn.textContent;btn.dataset.o=o;btn.textContent=done||'Copied';setTimeout(function(){btn.textContent=o},1600)};
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,function(){fb()})}else fb();
+ function fb(){var t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');ok()}catch(e){}t.remove()}}
+function vals(){var fp0=$('ph').value.replace(/\D/g,'').slice(-10),yr=$('lsy').value.trim();return{fn:$('fn').value.trim(),ln:$('ln').value.trim(),city:$('ci').value.trim(),st:$('st').value.trim().toUpperCase(),lt:$('lt').value.toLowerCase(),lic:$('lic').value.trim(),yr:yr,fp:fp0.length===10?'('+fp0.slice(0,3)+') '+fp0.slice(3,6)+'-'+fp0.slice(6):$('ph').value.trim(),url:'https://claimtract.app/'+slug(),specs:S.spec.map(function(x){return x.toLowerCase()})}}
+function toolkit(){var v=vals(),nm=v.fn+' '+v.ln,sp=v.specs.length?(v.specs.length>1?v.specs.slice(0,-1).join(', ')+' and '+v.specs[v.specs.length-1]:v.specs[0])+' claims':'property damage claims',yrs=v.yr?'Licensed since '+v.yr+'. ':'';
+ var items=[
+ ['Text to send before a meeting','Hi, this is '+nm+', a public adjuster. Here is a short page that explains what I do and answers the questions most people have before we meet: '+v.url],
+ ['Email to send before a meeting','Subject: Before we meet\n\nHi,\n\nThis is '+nm+'. Before we meet, here is a short page that explains what a public adjuster does and answers the questions most people ask: '+v.url+'\n\nIt will also help if you have these ready: your policy, any letters from your insurance company, photos of the damage, and any repair estimates.\n\nTalk soon,\n'+nm+'\n'+v.fp],
+ ['Email signature',nm+'\nPublic adjuster'+(v.yr?' | Licensed since '+v.yr:'')+' | License '+v.lic+'\n'+v.fp+'\n'+v.url],
+ ['Short bio for Facebook and Instagram',cap(v.lt)+' serving '+v.city+', '+v.st+'. I work for you, not the insurance company. '+yrs+'Call '+v.fp+'. '+v.url],
+ ['Google Business Profile description','I am '+nm+', a '+v.lt+' serving '+v.city+', '+v.st+'. I help property owners with '+sp+'. I read your policy, document the damage, and negotiate with your insurance company on your behalf. I work for you, not the insurance company. '+yrs+'Call '+v.fp+' to talk through your claim. License '+v.lic+'.']
+ ];
+ var tk=$('tk');tk.innerHTML='';
+ items.forEach(function(it){var c=document.createElement('div');c.className='tkc';var h3=document.createElement('h3');h3.textContent=it[0];var ta=document.createElement('textarea');ta.readOnly=true;ta.value=it[1];var b=document.createElement('button');b.type='button';b.className='btn sm';b.textContent='Copy';b.onclick=function(){cp(it[1],b)};c.appendChild(h3);c.appendChild(ta);c.appendChild(b);tk.appendChild(c)});
+ var ac=document.createElement('div');ac.className='tkc';ac.innerHTML='<h3>Print and carry</h3><p>A one-page handout with your QR code, your phone number, and what to have ready. Leave it at appointments.</p>';
+ var pb=document.createElement('button');pb.type='button';pb.className='btn sm';pb.textContent='Print my one-pager';pb.onclick=function(){printSheet(v)};
+ var qb=document.createElement('button');qb.type='button';qb.className='btn ghost sm';qb.textContent='Download my QR code';qb.onclick=function(){qrCanvas(v.url).toBlob(function(b){dl(b,slug()+'-qr.png')},'image/png')};
+ ac.appendChild(pb);ac.appendChild(qb);tk.appendChild(ac)}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function printSheet(v){var q=qrCanvas(v.url).toDataURL('image/png'),nm=esc(v.fn+' '+v.ln),w=window.open('','_blank');if(!w){alert('Please allow pop-ups for this page to print.');return}
+ w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>'+nm+'</title><style>@page{margin:.6in}body{font:16px/1.5 Arial,sans-serif;color:#111;max-width:7.2in;margin:0 auto}h1{font-size:40px;margin:0 0 4px}.s{color:#555;margin:0 0 22px}.ph{font-size:34px;font-weight:700;margin:6px 0 22px}.row{display:flex;gap:28px;align-items:flex-start}img{width:2.1in;height:2.1in}h2{font-size:16px;text-transform:uppercase;letter-spacing:.06em;margin:22px 0 6px}ul{margin:0;padding-left:20px}li{margin:3px 0}.f{margin-top:26px;font-size:12px;color:#777;border-top:1px solid #ccc;padding-top:8px}</style></head><body>'
+ +'<h1>'+nm+'</h1><p class="s">'+esc(cap(v.lt))+' &middot; License '+esc(v.lic)+(v.yr?' &middot; Licensed since '+esc(v.yr):'')+' &middot; '+esc(v.city)+', '+esc(v.st)+'</p><div class="ph">'+esc(v.fp)+'</div>'
+ +'<div class="row"><div><img src="'+q+'" alt=""><div style="font-size:12px;color:#555;margin-top:4px">Scan for my page</div></div><div><h2 style="margin-top:0">What I do for you</h2><ul><li>Read your policy</li><li>Document the damage</li><li>Negotiate your claim with the insurance company</li></ul><p style="margin:12px 0 0">I work for you, not the insurance company.</p></div></div>'
+ +'<h2>What to have ready</h2><ul><li>Your insurance policy, or the declarations page</li><li>Letters and emails from your insurance company</li><li>Photos and videos of the damage</li><li>Repair estimates, invoices and receipts</li><li>A list of damaged belongings</li></ul><div class="f">'+esc(v.url)+' &middot; General information, not legal or insurance advice. Page by ClaimTract.</div></body></html>');
+ w.document.close();w.focus();setTimeout(function(){w.print()},400)}
+$('backPage').onclick=function(){$('done').style.display='none';$('review').style.display='block';window.scrollTo({top:0})};
 /* word count */
 function words(){var t=$('ab').value.trim();return t?t.split(/\s+/).length:0}
 $('ab').addEventListener('input',function(){var n=words(),c=$('cnt');c.textContent=n+' words';c.textContent=n+' of about 250 words';c.className='cnt'+(n>=150&&n<=350?' ok':'')});
@@ -304,8 +347,9 @@ function render(){
  var head=S.head?'<div class="hs" style="background-image:url('+S.head.url+')" role="img" aria-label="'+name+'"></div>':'<div class="hs" aria-hidden="true"></div>';
  var gal=S.gal.length?'<div class="sec"><h2>Photos</h2><div class="pg">'+S.gal.map(function(g){return '<img src="'+g.url+'" alt="">'}).join('')+'</div></div>':'';
  var sc=socials(),soc=sc.list.length?'<div class="soc">'+sc.list.map(function(x){return '<a href="'+esc(x.u)+'" target="_blank" rel="noopener nofollow" aria-label="'+esc(x.s.n)+'" title="'+esc(x.s.n)+'">'+x.s.ic+'</a>'}).join('')+'</div>':'';
- var ll=linkList().list,lks=ll.length?'<div class="sec" style="padding-bottom:0"><div class="links">'+ll.map(function(x){return '<a class="lk" href="'+esc(x.u)+'" target="_blank" rel="noopener nofollow">'+esc(x.l)+'</a>'}).join('')+'</div></div>':'',share='<div class="share"><div id="qrslot"></div><div class="sb"><button type="button" id="vcfBtn">Save my contact</button><button type="button" id="qrBtn">Download QR</button></div></div>',yr2=$('lsy').value.trim(),badge=yr2?'<div class="badge"><img src="/assets/ct-shield.png" alt="">Licensed since '+esc(yr2)+'</div>':'';
- var tel='tel:+1'+d.slice(-10),wpa='<div class="sec wpa"><h2>What is a public adjuster?</h2><p class="big">A public adjuster is a licensed insurance professional you hire to handle your insurance claim. I\'m '+fn+', and I work for you, the property owner, not for the insurance company.</p>'
+ var ll=linkList().list,lks=ll.length?'<div class="sec" style="padding-bottom:0"><div class="links">'+ll.map(function(x){return '<a class="lk" href="'+esc(x.u)+'" target="_blank" rel="noopener nofollow">'+esc(x.l)+'</a>'}).join('')+'</div></div>':'',share='<div class="share"><div id="qrslot"></div><div class="sb"><button type="button" id="vcfBtn">Save my contact</button><button type="button" id="qrBtn">Download QR</button><button type="button" id="shBtn">Share my page</button></div></div>',yr2=$('lsy').value.trim(),badge=yr2?'<div class="badge"><img src="/assets/ct-shield.png" alt="">Licensed since '+esc(yr2)+'</div>':'';
+ var ar=$('ar').value.split(',').map(function(x){return x.trim().slice(0,40)}).filter(Boolean).slice(0,10),areas=ar.length?'<div class="sec"><h2>Areas I serve</h2><div class="tags" style="margin-top:0">'+ar.map(function(a){return '<span>'+esc(a)+'</span>'}).join('')+'</div></div>':'',ready='<div class="sec"><h2>Before we meet</h2><p class="pay" style="margin-bottom:14px">If you have these handy, our first conversation goes faster:</p><ul class="rdy"><li>Your insurance policy, or at least the declarations page</li><li>Letters and emails from your insurance company</li><li>Photos and videos of the damage</li><li>Repair estimates, invoices and receipts</li><li>A list of damaged belongings</li></ul></div>',ver=(st==='FL'?' &middot; <a href="https://licenseesearch.fldfs.com/" target="_blank" rel="noopener" style="color:var(--p-ac)">Check my license</a>':''),
+ tel='tel:+1'+d.slice(-10),wpa='<div class="sec wpa"><h2>What is a public adjuster?</h2><p class="big">A public adjuster is a licensed insurance professional you hire to handle your insurance claim. I\'m '+fn+', and I work for you, the property owner, not for the insurance company.</p>'
  +'<div class="tri"><div><b>01</b><h3>Read your policy</h3><p>I go through your coverage, endorsements and exclusions so you know what to ask for.</p></div><div><b>02</b><h3>Document the damage</h3><p>I inspect the property, photograph and measure the loss, list what was damaged, and build the repair estimate.</p></div><div><b>03</b><h3>Negotiate your claim</h3><p>I present your claim to the insurance company, answer what it asks for, and work toward a fair settlement for you.</p></div></div>'
  +'<h4>How a public adjuster is paid</h4><p class="pay">Most public adjusters charge a percentage of what the claim recovers, and some charge a flat or hourly fee. Fees vary by state and by adjuster, and the fee comes out of the settlement. Ask any adjuster to put the fee in writing before you sign anything.</p>'
  +'<h4>Who is who on your claim</h4><div class="who"><div><b>Insurance company adjuster</b><span>Works for the insurer and values the claim for the insurer.</span></div><div><b>Contractor</b><span>Repairs or rebuilds the damage. Usually cannot negotiate your claim for you.</span></div><div><b>Insurance attorney</b><span>Handles legal disputes and lawsuits.</span></div><div class="me"><b>Public adjuster</b><span>Works only for you on your claim. That\'s me.</span></div></div>'
@@ -327,10 +371,11 @@ var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(functio
  pv.innerHTML='<div class="nv"><div class="nm">'+name+'</div><a class="call" href="tel:+1'+d.slice(-10)+'">Call '+esc(fp)+'</a></div>'
  +'<div class="hero2" '+cover+'>'+badge+'<h1>Storm damage?<br><em>Get someone in your corner.</em></h1><p class="lead">'+lt+' serving '+city+', '+st+'. I work for you, not the insurance company.</p><div class="cta"><a href="tel:+1'+d.slice(-10)+'">Call me</a><a href="sms:+1'+d.slice(-10)+'">Text me</a></div></div>'
  +lks+wpa+'<div class="sec"><div class="abt"><div>'+head+soc+share+'</div><div><h2>About '+fn+'</h2><p>'+about+'</p>'+tags+'</div></div></div>'+gal
- +faq+'<footer><span>'+name+' · '+lt+' · License '+lic+'</span><span style="display:flex;align-items:center;gap:8px"><img src="/assets/ct-shield.png" alt="" style="width:16px;height:auto">Page by ClaimTract</span></footer>';
+ +areas+ready+faq+'<footer><span>'+name+' · '+lt+' · License '+lic+ver+'</span><span style="display:flex;align-items:center;gap:8px"><img src="/assets/ct-shield.png" alt="" style="width:16px;height:auto">Page by ClaimTract</span></footer>';
  var pageUrl='https://claimtract.app/'+slug(),qc=qrCanvas(pageUrl);$('qrslot').appendChild(qc);
  $('qrBtn').onclick=function(){qc.toBlob(function(b){dl(b,slug()+'-qr.png')},'image/png')};
  $('vcfBtn').onclick=function(){var f=$('fn').value.trim(),l=$('ln').value.trim(),v=['BEGIN:VCARD','VERSION:3.0','N:'+ve(l)+';'+ve(f)+';;;','FN:'+ve(f+' '+l),'TITLE:Public Adjuster','TEL;TYPE=WORK,VOICE:'+$('ph').value.trim(),'ADR;TYPE=WORK:;;;'+ve($('ci').value.trim())+';'+ve($('st').value.trim().toUpperCase())+';;US','URL:'+pageUrl,'NOTE:'+ve('License '+$('lic').value.trim()),'END:VCARD'].join('\r\n');dl(new Blob([v],{type:'text/vcard'}),slug()+'.vcf')};
+ $('shBtn').onclick=function(){var b=this,t=$('fn').value.trim()+' '+$('ln').value.trim()+', public adjuster';if(navigator.share){navigator.share({title:t,text:'A short page that explains what I do and answers the questions most people ask.',url:pageUrl}).catch(function(){})}else{cp(pageUrl,b,'Link copied')}};
  pv.querySelectorAll('.faq details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)pv.querySelectorAll('.faq details').forEach(function(o){if(o!==d)o.open=false})})});
  $('url').textContent='claimtract.app/'+slug()+'  (private preview)';
  var sw=$('swap');sw.innerHTML='';[['storm','Storm'],['coastal','Coastal'],['heritage','Heritage']].forEach(function(t){var b=document.createElement('button');b.type='button';b.textContent=t[1];b.setAttribute('aria-pressed',String(S.tpl===t[0]));b.onclick=function(){S.tpl=t[0];render();track('free_swap',t[0])};sw.appendChild(b)});
@@ -349,7 +394,7 @@ $('approve').onclick=function(){
  fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()})
  .catch(function(){}).then(function(){
   track('free_approve');
-  $('review').style.display='none';$('done').style.display='block';
+  $('review').style.display='none';$('done').style.display='block';toolkit();
   $('doneMsg').textContent='We\'re setting up claimtract.app/'+slug()+' with the '+S.tpl.charAt(0).toUpperCase()+S.tpl.slice(1)+' look. We\'ll text you the moment it\'s live. Questions before then? Just reply to that text.';
   window.scrollTo({top:0,behavior:'smooth'})})};
 })();
