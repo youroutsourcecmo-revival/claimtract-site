@@ -40,6 +40,8 @@ h2{font-size:26px;margin:0 0 6px;letter-spacing:-.01em}
 .mini .row{position:absolute;left:12px;right:12px;bottom:10px;display:flex;gap:6px}.mini .row b{flex:1;height:28px;border-radius:5px;display:block}
 .m-storm{background:#0F1115}.m-storm .bar{background:#16181d}.m-storm .bar i{background:#555}.m-storm .bar u{background:#F5A524}.m-storm s{background:#fff}.m-storm s+s{background:#F5A524;width:60%}.m-storm .btns b:first-child{background:#F5A524}.m-storm .btns b+b{background:#333}.m-storm .row b{background:#1f2228}
 .m-coastal{background:#EAF6F8}.m-coastal .bar{background:#fff}.m-coastal .bar i{background:#b9dde2}.m-coastal .bar u{background:#0E7C86}.m-coastal s{background:#16465c}.m-coastal s+s{background:#0E7C86;width:60%}.m-coastal .btns b{border-radius:99px}.m-coastal .btns b:first-child{background:#0E7C86}.m-coastal .btns b+b{background:#bfe3e8}.m-coastal .row b{background:#fff;border-radius:10px}
+.m-paper{background:#F4F4F1}.m-paper .bar{background:#fff}.m-paper .bar i{background:#d8d8d2}.m-paper .bar u{background:#F5A524}.m-paper s{background:#111}.m-paper s+s{background:#F5A524;width:60%}.m-paper .btns b:first-child{background:#F5A524}.m-paper .btns b{background:#fff;border:1px solid #d8d8d2}.m-paper .row b{background:#fff;border:1px solid #e1e1dc}
+.sw{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}.sw button{width:44px;height:44px;border-radius:50%;border:3px solid var(--line);cursor:pointer;padding:0}.sw button[aria-pressed=true]{border-color:#fff;box-shadow:0 0 0 3px var(--or)}
 .m-heritage{background:#FAF6EE}.m-heritage .bar{background:#1F2A44}.m-heritage .bar i{background:#6d789a}.m-heritage .bar u{background:#B8913F}.m-heritage s{background:#1F2A44}.m-heritage s+s{background:#B8913F;width:60%}.m-heritage .btns b:first-child{background:#1F2A44}.m-heritage .btns b+b{background:#d8cfbb}.m-heritage .row b{background:#efe7d6}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:640px){.grid{grid-template-columns:1fr}}
 label{display:block;font-weight:600;font-size:14px;margin:0 0 6px}
@@ -79,8 +81,11 @@ textarea{min-height:190px;resize:vertical;line-height:1.55}
 .pvbar span{background:#0A0B0D;border-radius:99px;padding:5px 12px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pvbar i{width:9px;height:9px;border-radius:50%;background:#444;display:block}
 .pv{--p-bg:#0F1115;--p-tx:#fff;--p-mut:#b6bbc4;--p-ac:#F5A524;--p-acx:#111;--p-card:#181b21;--p-r:10px;--p-f:Inter,sans-serif;--p-h:800;--p-ht:uppercase;background:var(--p-bg);color:var(--p-tx);font-family:var(--p-f)}
-.pv.coastal{--p-bg:#F1F9FB;--p-tx:#16384a;--p-mut:#4d6b78;--p-ac:#0E7C86;--p-acx:#fff;--p-card:#fff;--p-r:18px;--p-h:700;--p-ht:none}
-.pv.heritage{--p-bg:#FAF6EE;--p-tx:#1F2A44;--p-mut:#5b6177;--p-ac:#B8913F;--p-acx:#1F2A44;--p-card:#fff;--p-r:4px;--p-f:'Source Serif 4',Georgia,serif;--p-h:700;--p-ht:none}
+.pv.paper{--p-bg:#F4F4F1;--p-tx:#111;--p-mut:#55585F;--p-ac:#F5A524;--p-acx:#111;--p-card:#fff;--p-r:16px;--p-h:800;--p-ht:none;--p-act:#8F5400}
+.pv.paper .hero2{--hs:rgba(244,244,241,.94)}
+.pv.paper .hero2::before{background:linear-gradient(180deg,rgba(244,244,241,.35),var(--hs))}
+.pv.coastal{--p-act:#0B6670;--p-bg:#F1F9FB;--p-tx:#16384a;--p-mut:#4d6b78;--p-ac:#0E7C86;--p-acx:#fff;--p-card:#fff;--p-r:18px;--p-h:700;--p-ht:none}
+.pv.heritage{--p-act:#7A5C1A;--p-bg:#FAF6EE;--p-tx:#1F2A44;--p-mut:#5b6177;--p-ac:#B8913F;--p-acx:#1F2A44;--p-card:#fff;--p-r:4px;--p-f:'Source Serif 4',Georgia,serif;--p-h:700;--p-ht:none}
 .pv .nv{display:flex;justify-content:space-between;align-items:center;padding:16px 26px;gap:10px;flex-wrap:wrap}
 .pv.heritage .nv{background:#1F2A44;color:#fff}
 .pv .nm{font-weight:var(--p-h);font-size:18px;letter-spacing:.01em}
@@ -91,7 +96,7 @@ textarea{min-height:190px;resize:vertical;line-height:1.55}
 .pv.coastal .hero2{--hs:rgba(241,249,251,.92)}.pv.heritage .hero2{--hs:rgba(250,246,238,.94)}
 .pv .hero2>*{position:relative}
 .pv h1{font-size:clamp(30px,5.4vw,50px);line-height:1.05;margin:0 0 12px;text-transform:var(--p-ht);font-weight:var(--p-h);letter-spacing:-.01em}
-.pv h1 em{font-style:normal;color:var(--p-ac)}
+.pv h1 em{font-style:normal;color:var(--p-act,var(--p-ac))}
 .pv .lead{color:var(--p-mut);font-size:18px;margin:0 0 22px;max-width:560px}
 .pv .cta{display:flex;gap:12px;flex-wrap:wrap}
 .pv .cta a{padding:14px 24px;border-radius:var(--p-r);font:700 16px Inter,sans-serif;text-decoration:none;background:var(--p-ac);color:var(--p-acx)}
@@ -108,7 +113,7 @@ textarea{min-height:190px;resize:vertical;line-height:1.55}
 .pv .pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.pv .pg img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--p-r)}
 .pv footer{padding:26px;border-top:1px solid rgba(128,128,128,.25);font:14px Inter,sans-serif;color:var(--p-mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .soc{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.soc a{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--p-ac);color:var(--p-ac);text-decoration:none;background:transparent;transition:.15s}
+.soc a{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--p-ac);color:var(--p-act,var(--p-ac));text-decoration:none;background:transparent;transition:.15s}
 .soc a:hover{background:var(--p-ac);color:var(--p-acx)}
 .soc svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .soc svg text{fill:currentColor;stroke:none;font:800 15px Inter,sans-serif}
@@ -118,19 +123,19 @@ textarea{min-height:190px;resize:vertical;line-height:1.55}
 .pv .wpa .big{font-size:20px;line-height:1.55;color:var(--p-tx);margin:0 0 26px;max-width:680px}
 .pv .tri{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:30px}
 .pv .tri div{background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:var(--p-r);padding:18px}
-.pv .tri b{display:block;font:800 13px 'JetBrains Mono',monospace;color:var(--p-ac);letter-spacing:.08em;margin-bottom:6px}
+.pv .tri b{display:block;font:800 13px 'JetBrains Mono',monospace;color:var(--p-act,var(--p-ac));letter-spacing:.08em;margin-bottom:6px}
 .pv .tri h3{margin:0 0 6px;font-size:18px}.pv .tri p{margin:0;color:var(--p-mut);font-size:15px;line-height:1.55}
-.pv .wpa h4{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--p-ac);margin:0 0 8px;font-family:Inter,sans-serif}
+.pv .wpa h4{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--p-act,var(--p-ac));margin:0 0 8px;font-family:Inter,sans-serif}
 .pv .wpa .pay{color:var(--p-mut);margin:0 0 28px;max-width:680px;font-size:16px;line-height:1.6}
 .pv .who{border-top:1px solid rgba(128,128,128,.25)}.pv .who div{display:grid;grid-template-columns:190px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid rgba(128,128,128,.25);font-size:15px}
 @media(max-width:560px){.pv .who div{grid-template-columns:1fr;gap:2px}}
-.pv .who b{color:var(--p-tx)}.pv .who span{color:var(--p-mut)}.pv .who .me b,.pv .who .me span{color:var(--p-ac);font-weight:700}
+.pv .who b{color:var(--p-tx)}.pv .who span{color:var(--p-mut)}.pv .who .me b,.pv .who .me span{color:var(--p-act,var(--p-ac));font-weight:700}
 .pv .wcta{margin-top:30px;padding:24px;border-radius:var(--p-r);background:var(--p-card);border:1px solid rgba(128,128,128,.25)}
 .pv .wcta p{margin:0 0 14px;font-size:18px;color:var(--p-tx)}.pv .wcta small{display:block;margin-top:12px;color:var(--p-mut);font-size:12.5px}
 .pv .faq details{border-bottom:1px solid rgba(128,128,128,.28)}.pv .faq details:first-of-type{border-top:1px solid rgba(128,128,128,.28)}
 .pv .faq summary{list-style:none;cursor:pointer;padding:17px 4px;font:700 17px Inter,sans-serif;display:flex;justify-content:space-between;gap:14px;align-items:center;color:var(--p-tx)}
 .pv .faq summary::-webkit-details-marker{display:none}
-.pv .faq summary::after{content:"+";color:var(--p-ac);font-size:24px;line-height:1;flex:none}
+.pv .faq summary::after{content:"+";color:var(--p-act,var(--p-ac));font-size:24px;line-height:1;flex:none}
 .pv .faq details[open] summary::after{content:"\2013"}
 .pv .faq .ans{padding:0 4px 20px;color:var(--p-mut);font-size:16px;line-height:1.65;max-width:680px}
 .pv .faq .ans p{margin:0 0 12px}.pv .faq .ans .sc{color:var(--p-tx);font-weight:600}
@@ -149,7 +154,7 @@ textarea{min-height:190px;resize:vertical;line-height:1.55}
 .lkrow{display:grid;grid-template-columns:1fr 1.6fr;gap:10px;margin-bottom:10px}@media(max-width:560px){.lkrow{grid-template-columns:1fr}}
 .pv .rdy{list-style:none;padding:0;margin:0;display:grid;gap:10px;max-width:640px}
 .pv .rdy li{padding:12px 16px 12px 44px;position:relative;background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:var(--p-r);color:var(--p-tx)}
-.pv .rdy li::before{content:"\2713";position:absolute;left:16px;color:var(--p-ac);font-weight:800}
+.pv .rdy li::before{content:"\2713";position:absolute;left:16px;color:var(--p-act,var(--p-ac));font-weight:800}
 .tk{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;text-align:left;margin:30px 0}
 .tkc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
 .tkc h3{margin:0;font-size:16px}.tkc p{margin:0;color:var(--mut);font-size:14px}
@@ -282,10 +287,12 @@ a.btn{display:inline-block;text-decoration:none}
     <h2>Pick your look</h2>
     <p class="sub">You can change it any time. Same content in all three.</p>
     <div class="tpls" id="tpls">
-      <button class="tpl" data-t="storm" aria-pressed="true"><div class="mini m-storm"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Storm</h3><p>Dark and bold. Built for storm-damage urgency.</p></button>
+      <button class="tpl" data-t="paper" aria-pressed="true"><div class="mini m-paper"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Paper</h3><p>Clean and light. Easy to read on any phone.</p></button>
+      <button class="tpl" data-t="storm" aria-pressed="false"><div class="mini m-storm"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Storm</h3><p>Dark and bold. Built for storm-damage urgency.</p></button>
       <button class="tpl" data-t="coastal" aria-pressed="false"><div class="mini m-coastal"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Coastal</h3><p>Bright and friendly. Easy to trust at a glance.</p></button>
       <button class="tpl" data-t="heritage" aria-pressed="false"><div class="mini m-heritage"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Heritage</h3><p>Classic and established. Says "I've done this for years."</p></button>
     </div>
+    <div class="f" style="margin-top:22px"><label>Your color</label><div class="sw" id="sw"></div><small>It colors your buttons and highlights. Pick the one that feels like you.</small></div>
     <div class="nav"><span></span><button class="btn" data-go="2">Continue</button></div>
   </section>
 
@@ -360,7 +367,7 @@ a.btn{display:inline-block;text-decoration:none}
 (function(){
 var ENDPOINT='https://app.closegpt.ai/api/input/9u02pn';
 var $=function(i){return document.getElementById(i)};
-var S={tpl:'storm',spec:[],head:null,cover:null,gal:[]};
+var S={tpl:'paper',acc:null,spec:[],head:null,cover:null,gal:[]};
 var SPECS=['Roof','Wind and hurricane','Water','Fire','Hail','Mold','Theft and vandalism','Commercial'];
 function track(e,s){try{window.__ctT&&window.__ctT(e,s)}catch(x){}}
 /* prefill from the link we text them */
@@ -371,6 +378,8 @@ try{var q=new URLSearchParams(location.search);
 var sp=$('spec');SPECS.forEach(function(n){var b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-pressed','false');b.onclick=function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);var i=S.spec.indexOf(n);if(on&&i<0)S.spec.push(n);if(!on&&i>=0)S.spec.splice(i,1)};sp.appendChild(b)});
 /* template cards */
 var tp=$('tpls');tp.querySelectorAll('.tpl').forEach(function(b){b.onclick=function(){tp.querySelectorAll('.tpl').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');S.tpl=b.dataset.t}});
+var ACC=[['Look default',null],['Amber','#F5A524'],['Teal','#0E7C86'],['Navy','#1F3A6E'],['Crimson','#B3261E'],['Forest','#2E6B3F'],['Violet','#6B3FA0']];
+var swe=$('sw');ACC.forEach(function(a){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',a[0]);b.title=a[0];b.setAttribute('aria-pressed',String(a[1]===S.acc));b.style.background=a[1]||'conic-gradient(#F5A524,#0E7C86,#1F3A6E,#B3261E,#F5A524)';b.onclick=function(){S.acc=a[1];swe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true')};swe.appendChild(b)});
 /* social links */
 var G=function(t){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+t+'</svg>'};
 var SOC=[
@@ -486,7 +495,8 @@ function render(){
  ['Can my contractor handle my insurance claim?','Contractors are good at repairs, but handling the insurance claim is a separate role. In many places, negotiating a claim for someone requires a public adjuster or attorney license. A contractor and a public adjuster can work well together when each stays in their own lane.','Want me to coordinate with your contractor so you get both done right?']
 ];
 var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(function(q){return '<details><summary>'+esc(q[0])+'</summary><div class="ans"><p>'+esc(q[1])+'</p><p class="sc">'+esc(q[2])+'</p><a href="'+tel+'">Call '+esc(fp)+'</a></div></details>'}).join('')+'<p style="margin:18px 4px 0;font-size:13px;color:var(--p-mut)">Learn more from the National Association of Public Insurance Adjusters at <a href="https://www.napia.com/what-is-a-public-adjuster" target="_blank" rel="noopener nofollow" style="color:var(--p-ac)">napia.com</a>. General information, not legal or insurance advice.</p></div>';
- var pv=$('pv');pv.className='pv '+S.tpl;
+ var pv=$('pv');pv.className='pv '+S.tpl;pv.style.removeProperty('--p-ac');pv.style.removeProperty('--p-acx');pv.style.removeProperty('--p-act');
+ if(S.acc){var hx=S.acc,r=parseInt(hx.slice(1,3),16),g=parseInt(hx.slice(3,5),16),bl=parseInt(hx.slice(5,7),16),lum=(0.299*r+0.587*g+0.114*bl)/255;pv.style.setProperty('--p-ac',hx);pv.style.setProperty('--p-acx',lum>.6?'#111':'#fff');pv.style.setProperty('--p-act','rgb('+Math.round(r*.6)+','+Math.round(g*.6)+','+Math.round(bl*.6)+')')}
  pv.innerHTML='<div class="own" id="own"><span>Send my page</span><button type="button" data-s="share">Share</button><button type="button" data-s="sms">Text</button><button type="button" data-s="mail">Email</button><button type="button" data-s="wa">WhatsApp</button><button type="button" data-s="copy">Copy link</button></div><div class="nv"><div class="nm">'+name+'</div><a class="call" href="tel:+1'+d.slice(-10)+'">Call '+esc(fp)+'</a></div>'
  +'<div class="hero2" '+cover+'>'+badge+'<h1>Storm damage?<br><em>Get someone in your corner.</em></h1><p class="lead">'+lt+' serving '+city+', '+st+'. I work for you, not the insurance company.</p><div class="cta"><a href="tel:+1'+d.slice(-10)+'">Call me</a><a href="sms:+1'+d.slice(-10)+'">Text me</a></div></div>'
  +lks+wpa+'<div class="sec"><div class="abt"><div>'+head+soc+share+'</div><div><h2>About '+fn+'</h2><p>'+about+'</p>'+tags+'</div></div></div>'+gal
@@ -507,7 +517,7 @@ var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(functio
  $('shBtn').onclick=function(){var b=this,t=$('fn').value.trim()+' '+$('ln').value.trim()+', public adjuster';if(navigator.share){navigator.share({title:t,text:'A short page that explains what I do and answers the questions most people ask.',url:pageUrl}).catch(function(){})}else{cp(pageUrl,b,'Link copied')}};
  pv.querySelectorAll('.faq details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)pv.querySelectorAll('.faq details').forEach(function(o){if(o!==d)o.open=false})})});
  $('url').textContent='claimtract.app/'+slug()+'  (private preview)';
- var sw=$('swap');sw.innerHTML='';[['storm','Storm'],['coastal','Coastal'],['heritage','Heritage']].forEach(function(t){var b=document.createElement('button');b.type='button';b.textContent=t[1];b.setAttribute('aria-pressed',String(S.tpl===t[0]));b.onclick=function(){S.tpl=t[0];render();track('free_swap',t[0])};sw.appendChild(b)});
+ var sw=$('swap');sw.innerHTML='';[['paper','Paper'],['storm','Storm'],['coastal','Coastal'],['heritage','Heritage']].forEach(function(t){var b=document.createElement('button');b.type='button';b.textContent=t[1];b.setAttribute('aria-pressed',String(S.tpl===t[0]));b.onclick=function(){S.tpl=t[0];render();track('free_swap',t[0])};sw.appendChild(b)});
  track('free_preview')}
 /* approve */
 $('approve').onclick=function(){
