@@ -250,7 +250,7 @@ document.getElementById('tf').onsubmit=function(){var m=document.getElementById(
  p.set('consent_time',new Date().toISOString());p.set('clicked','no');p.set('consent_version','2026-11-19-lander-v1');p.set('consent_text',document.getElementById('tc').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);p.set('link','https://claimtract.app/free');if(Q.get('lid'))p.set('call_id',Q.get('lid'));try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(x){}
  m.textContent='Sending...';fetch('https://app.closegpt.ai/api/input/9u02pn',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()}).catch(function(){}).then(function(){T('free_lander_text');document.querySelector('.txt .box').innerHTML='<div><h3>Got it, '+n.replace(/[<>&"]/g,'')+'.</h3><p>I&#39;ll text the link to your phone. You can also keep going right here.</p></div>'});return false};
 
-if(Q.get('back')==='1'){try{localStorage.setItem('ct_seen_sample','1')}catch(e){}}check();setLinks();T('free_landing_view',back()?'back':'first');
+if(Q.get('reset')==='1'){try{localStorage.removeItem('ct_seen_sample')}catch(e){}}if(Q.get('back')==='1'){try{localStorage.setItem('ct_seen_sample','1')}catch(e){}}check();setLinks();T('free_landing_view',back()?'back':'first');
 })();
 </script>
 <script src="/ct-track.js"></script>
