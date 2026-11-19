@@ -66,6 +66,14 @@ textarea{min-height:190px;resize:vertical;line-height:1.55}
 .consent .box{margin-top:12px;background:#111317;border-left:3px solid var(--or);padding:10px 14px;font-size:13.5px;color:var(--tx);border-radius:0 8px 8px 0}
 .err{color:var(--bad);font-size:14px;margin:8px 0 0;min-height:20px}
 .banner{background:#1d1608;border:1px solid #5a4210;color:#f3c776;border-radius:12px;padding:12px 16px;font-size:14px;margin-bottom:16px;display:flex;gap:10px;align-items:center}
+.pv .dg{position:sticky;bottom:14px;height:0;z-index:5;pointer-events:none}
+.pv .dg .dgi{position:absolute;right:14px;bottom:0;pointer-events:auto;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.pv .dg .dgb{width:76px;height:76px;border-radius:50%;border:3px solid var(--p-ac);background:#222 center/cover;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.45);padding:0;color:#fff;font-size:26px}
+.pv .dg .dgl{background:var(--p-ac);color:var(--p-acx);font:700 12px Inter,sans-serif;padding:6px 10px;border-radius:99px;cursor:pointer;border:0}
+.pv .dg .dgp{display:none;width:min(300px,78vw);background:#000;border-radius:14px;overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.55);border:1px solid #333}
+.pv .dg .dgp video{width:100%;display:block}
+.pv .dg .dgp button{width:100%;background:#15171b;color:#fff;border:0;padding:9px;font:600 13px Inter,sans-serif;cursor:pointer}
+.pv .dg.open .dgp{display:block}.pv .dg.open .dgb,.pv .dg.open .dgl{display:none}
 .pvwrap{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#000}
 .pvbar{background:#15171b;padding:9px 14px;font:500 12px 'JetBrains Mono',monospace;color:var(--mut);display:flex;gap:8px;align-items:center}
 .pvbar span{background:#0A0B0D;border-radius:99px;padding:5px 12px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -374,7 +382,9 @@ var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(functio
  pv.innerHTML='<div class="nv"><div class="nm">'+name+'</div><a class="call" href="tel:+1'+d.slice(-10)+'">Call '+esc(fp)+'</a></div>'
  +'<div class="hero2" '+cover+'>'+badge+'<h1>Storm damage?<br><em>Get someone in your corner.</em></h1><p class="lead">'+lt+' serving '+city+', '+st+'. I work for you, not the insurance company.</p><div class="cta"><a href="tel:+1'+d.slice(-10)+'">Call me</a><a href="sms:+1'+d.slice(-10)+'">Text me</a></div></div>'
  +lks+wpa+'<div class="sec"><div class="abt"><div>'+head+soc+share+'</div><div><h2>About '+fn+'</h2><p>'+about+'</p>'+tags+'</div></div></div>'+gal
- +areas+ready+faq+'<footer><span>'+name+' · '+lt+' · License '+lic+ver+'</span><span style="display:flex;align-items:center;gap:8px"><img src="/assets/ct-shield.png" alt="" style="width:16px;height:auto">Page by ClaimTract</span></footer>';
+ +areas+ready+faq+'<footer><span>'+name+' · '+lt+' · License '+lic+ver+'</span><span style="display:flex;align-items:center;gap:8px"><img src="/assets/ct-shield.png" alt="" style="width:16px;height:auto">Page by ClaimTract</span></footer>'
+ +'<div class="dg" id="dg"><div class="dgi"><div class="dgp"><video id="dgv" preload="none" playsinline controls poster="/assets/pa-dog.jpg"><source src="/assets/pa-explainer.mp4" type="video/mp4"></video><button type="button" id="dgx">Close</button></div><button type="button" class="dgl" id="dgl">What is a public adjuster?</button><button type="button" class="dgb" id="dgb" aria-label="Play video" style="background-image:url(/assets/pa-dog.jpg)">&#9654;</button></div></div>';
+ var dg=$('dg');if(dg){var dv=$('dgv');var op=function(){dg.classList.add('open');try{dv.play()}catch(e){};track('free_dog_play')};$('dgb').onclick=op;$('dgl').onclick=op;$('dgx').onclick=function(){dv.pause();dg.classList.remove('open')};fetch('/assets/pa-explainer.mp4',{method:'HEAD'}).then(function(r){if(!r.ok)dg.remove()}).catch(function(){dg.remove()})}
  var pageUrl='https://claimtract.app/'+slug(),qc=qrCanvas(pageUrl);$('qrslot').appendChild(qc);
  $('qrBtn').onclick=function(){qc.toBlob(function(b){dl(b,slug()+'-qr.png')},'image/png')};
  $('vcfBtn').onclick=function(){var f=$('fn').value.trim(),l=$('ln').value.trim(),v=['BEGIN:VCARD','VERSION:3.0','N:'+ve(l)+';'+ve(f)+';;;','FN:'+ve(f+' '+l),'TITLE:Public Adjuster','TEL;TYPE=WORK,VOICE:'+$('ph').value.trim(),'ADR;TYPE=WORK:;;;'+ve($('ci').value.trim())+';'+ve($('st').value.trim().toUpperCase())+';;US','URL:'+pageUrl,'NOTE:'+ve('License '+$('lic').value.trim()),'END:VCARD'].join('\r\n');dl(new Blob([v],{type:'text/vcard'}),slug()+'.vcf')};
