@@ -84,6 +84,23 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 @media(max-width:900px){.hg .phone{justify-self:center;margin:0 0 40px;width:260px;height:520px}.sos{grid-template-columns:1fr}.sos .sp{justify-self:center}}
 .sp[hidden],.phone[hidden],.sos[hidden]{display:none!important}.sp-hero{justify-self:end;margin:70px 0 50px}@media(max-width:900px){.sp-hero{justify-self:center;margin:0 0 40px}}
 .pitch{background:var(--card);border:1px solid var(--ln);border-radius:22px;padding:30px;margin:0 0 46px}.pitch p{color:var(--mu)}.skip{text-align:center;margin:-20px 0 40px;font-size:14px}.skip a{color:var(--mu)}[hidden]{display:none!important}
+.hg .ws{background:#F4F4F1;overflow:hidden;position:relative}
+.ws-s{animation:wsScroll 18s ease-in-out 2s infinite alternate}
+@keyframes wsScroll{0%,12%{transform:translateY(0)}88%,100%{transform:translateY(-330px)}}
+.ws-top{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#F4F4F1;font-size:13px}.ws-top span{background:#F5A524;color:#111;font:800 11px Inter,sans-serif;padding:6px 10px;border-radius:9px}
+.ws-hero{position:relative;height:250px;overflow:hidden;color:#fff}.ws-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ws-hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(10,12,16,.92),rgba(10,12,16,.35))}
+.ws-hin{position:absolute;left:14px;right:14px;bottom:16px;z-index:2}.ws-b{display:inline-block;font:700 9px Inter,sans-serif;font-style:normal;border:1px solid rgba(255,255,255,.4);border-radius:99px;padding:3px 8px;margin-bottom:6px;background:rgba(0,0,0,.35)}
+.ws-hin h4{margin:0 0 6px;font:800 19px/1.08 Inter,sans-serif}.ws-hin h4 em{font-style:normal;color:#F5A524}.ws-hin p{margin:0 0 9px;font-size:10.5px;line-height:1.4;color:rgba(255,255,255,.88)}
+.ws-cta{display:flex;gap:6px}.ws-cta span{font:800 11px Inter,sans-serif;padding:7px 11px;border-radius:9px;background:#F5A524;color:#111}.ws-cta span+span{background:rgba(0,0,0,.3);color:#fff;border:1px solid rgba(255,255,255,.6)}
+.ws-av{position:relative;z-index:3;width:74px;height:74px;margin:-37px 14px 0 auto;border-radius:50%;border:4px solid #F4F4F1;background:linear-gradient(135deg,#F5A524,#FCE3B4);color:#fff;display:flex;align-items:center;justify-content:center;font:800 24px Inter,sans-serif;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.ws-body{padding:0 14px 20px;margin-top:-22px}.ws-l{font:700 8.5px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0E9F6E;margin:0 0 4px}
+.ws-body h5{margin:0;font:800 17px Inter,sans-serif;color:#111}.ws-by{font-size:9.5px;color:#55585F;margin:2px 0 8px}.ws-t{font-size:11px;line-height:1.5;color:#55585F;margin:0 0 10px}
+.ws-card{background:#09090B;color:#fff;border-radius:10px;padding:10px;margin-bottom:10px}.ws-card b{font:800 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#F5A524}.ws-card div{display:flex;gap:14px;margin:6px 0}.ws-card span{display:flex;flex-direction:column;font:800 13px Inter,sans-serif}.ws-card i{font:500 7.5px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8B9099;font-style:normal}.ws-card em{font-style:normal}.ws-card u{text-decoration:none;color:#F5A524;font:700 10px Inter,sans-serif}
+.ws-team{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}.ws-team span{background:#fff;border:1px solid #E1E1DC;border-radius:8px;padding:8px;font:700 10.5px Inter,sans-serif;color:#111}
+.ws-yours{background:#F5A524;color:#111;border-radius:10px;padding:10px;font:800 12px/1.3 Inter,sans-serif}
+.ws-rel{display:flex;gap:6px;overflow:hidden}.ws-rel span{flex:0 0 70%;background:#fff;border:1px solid #E1E1DC;border-radius:8px;padding:9px;font:700 10.5px/1.3 Inter,sans-serif;color:#111}
+@media(prefers-reduced-motion:reduce){.ws-s{animation:none}}
 .pick{position:fixed;right:14px;bottom:14px;z-index:50;background:#111;color:#fff;border-radius:16px;padding:12px;box-shadow:0 12px 30px rgba(0,0,0,.35);font:600 12px Inter,sans-serif;display:grid;gap:8px}
 .pick b{font:700 10px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#F5A524}
 .pick .seg{display:flex;background:#2a2a2a;border-radius:10px;padding:3px}.pick .seg button{flex:1;border:0;background:transparent;color:#ccc;padding:8px 12px;border-radius:8px;font:700 12px Inter,sans-serif;cursor:pointer}.pick .seg button[aria-pressed=true]{background:#F5A524;color:#111}
@@ -106,12 +123,20 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
       <button type="button" id="snd2" class="snd">&#128264; Tap to hear Sophia</button></div>
     <div class="sp-c"><p>You've seen your page. It's yours, free. Those articles on it? We wrote them for you. For $1 for 14 days, I'll show you how to create unlimited articles like them from your own claims, connected to what homeowners are searching for.</p><a href="/engine.html" target="_blank" rel="noopener">See what Sophia does &rarr;</a></div>
   </div>
-  <div class="phone" id="pgPhone" aria-hidden="true">
-    <div class="ph-cv"></div><div class="ph-av">CM</div>
-    <div class="ph-b"><h3>Cedric Moore</h3><div class="s">Public Adjuster &middot; Orlando, FL</div><span class="ph-badge">Licensed since 2012</span>
-      <div class="ph-h">Damage to your home? <em>Get someone in your corner.</em></div>
-      <div class="ph-l p"><span>&#10003; Verify my license</span><span>&rarr;</span></div><div class="ph-l"><span>Book a time with me</span><span>&rarr;</span></div><div class="ph-l"><span>Save my contact</span><span>&rarr;</span></div></div>
-    <div class="ph-bar"><span><i></i>Photo</span><span><i></i>Voice</span><span><i></i>Tools</span><span class="on"><i></i>Share</span><span><i></i>More</span></div>
+  <div class="phone ws" id="pgPhone" aria-hidden="true"><div class="ws-s">
+    <div class="ws-top"><b id="wsN">Cedric Moore</b><span>Call</span></div>
+    <div class="ws-hero"><video autoplay muted loop playsinline poster="/assets/bg/bg-roof-table.jpg"><source src="/assets/bg/bg-roof-table.mp4" type="video/mp4"></video>
+      <div class="ws-hin"><i class="ws-b">Licensed public adjuster</i><h4>Damage to your home?<br><em>Get someone in your corner.</em></h4><p id="wsC">Public adjuster serving Orlando, FL. I work for you, not the insurance company.</p><div class="ws-cta"><span>Call me</span><span>Text me</span></div></div></div>
+    <div class="ws-av" id="wsI">CM</div>
+    <div class="ws-body">
+      <p class="ws-l">PILLAR ARTICLE &middot; HOMEOWNER GUIDE</p><h5>Who Works For You</h5><p class="ws-by" id="wsB">Approved by Cedric Moore, Licensed Public Adjuster</p>
+      <p class="ws-t">When damage hits your home, your insurance company puts a team to work right away. Most homeowners only ever meet one of them...</p>
+      <div class="ws-card"><b id="wsK">CEDRIC MOORE</b><div><span><i>LICENSE #</i>W000000</span><span><i>AREA</i><em id="wsA">Orlando</em></span></div><u>Verify on the state's site &rarr;</u></div>
+      <div class="ws-team"><span>1 Field adjuster</span><span>2 Desk adjuster</span><span>3 Supervisor</span><span>4 Legal</span></div>
+      <div class="ws-yours">Four people work for your insurance company. Who works for you?</div>
+      <p class="ws-l" style="margin-top:14px">RELATED ARTICLES</p>
+      <div class="ws-rel"><span>Why is my first check smaller than my estimate?</span><span>Should I cash my insurance check?</span></div>
+    </div></div></div>
   </div></div>
 </section>
 
@@ -238,6 +263,10 @@ var Q=new URLSearchParams(location.search),P=new URLSearchParams();['fn','ln','l
 function T(e,x){try{window.__ctT&&window.__ctT(e,x)}catch(_){}}
 var fn=(Q.get('fn')||'').replace(/[<>&"]/g,'');
 if(fn){document.querySelector('.hero .k').textContent='Made for '+fn+(Q.get('ln')?' '+Q.get('ln').replace(/[<>&"]/g,''):'');document.getElementById('lead').textContent=fn+', your page is already started from your state license record. See what it looks like, then make it yours. It works as a website and as an app on your phone.'}
+try{if(fn){var ln2=(Q.get('ln')||'').replace(/[<>&"]/g,''),ct=(Q.get('city')||'').replace(/[<>&"]/g,''),stt=(Q.get('st')||'FL').replace(/[<>&"]/g,'').slice(0,2).toUpperCase(),full=(fn+' '+ln2).trim();
+ document.getElementById('wsN').textContent=full;document.getElementById('wsB').textContent='Approved by '+full+', Licensed Public Adjuster';document.getElementById('wsK').textContent=full.toUpperCase();
+ document.getElementById('wsI').textContent=(fn.charAt(0)+(ln2.charAt(0)||'')).toUpperCase();if(ct){document.getElementById('wsC').textContent='Public adjuster serving '+ct+', '+stt+'. I work for you, not the insurance company.';document.getElementById('wsA').textContent=ct}
+ if(Q.get('lic'))document.querySelector('.ws-card span').lastChild.textContent=Q.get('lic').replace(/[<>&"]/g,'').slice(0,12)}}catch(e){}
 function back(){return Q.get('back')==='1'||flag()}
 function setLinks(){var b=back();document.querySelectorAll('[data-cta]').forEach(function(a){a.href=b?'/free/build/'+(PS?'?'+PS:''):'/free/build/?view=preview'+(PS?'&'+PS:'');a.innerHTML=b?'Build my free page &rarr;':'See my page &rarr;';a.onclick=function(){T(b?'free_build_click':'free_sample_click')}});
  document.querySelectorAll('[data-again]').forEach(function(a){a.hidden=!b;a.href='/free/build/?view=preview'+(PS?'&'+PS:'')});
