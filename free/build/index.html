@@ -577,13 +577,13 @@ $('approve').onclick=function(){
 
 try{var qv=new URLSearchParams(location.search);if(qv.get('view')==='preview'){S.pvmode=1;
  var dflt={fn:'Cedric',ln:'Moore',ci:'Orlando',st:'FL',lic:'W000000',ph:'4075550142',lsy:''};
- if(!qv.get('fn')){dflt.lsy='2012'}
+ if(!qv.get('fn')){dflt.lsy='2012';S.head={url:'/assets/cedric-headshot.jpg'}}
  Object.keys(dflt).forEach(function(k){if(!$(k).value&&dflt[k])$(k).value=dflt[k]});
  if(qv.get('city'))$('ci').value=qv.get('city').slice(0,80);
  document.body.classList.add('pvmode');render();
  var pv=$('pv'),bar=document.createElement('div');bar.className='pvbar';
  var who=$('fn').value.replace(/[<>&"]/g,'');
- bar.innerHTML='<span>'+(qv.get('fn')?'This is your page, '+who+'. It\'s free.':'This is what your free page looks like.')+'</span><a href="'+'/free/?back=1'+(location.search.replace(/^\?/,'&').replace(/&?view=preview/,''))+'">Make it mine &rarr;</a>';
+ bar.innerHTML='<span>'+(qv.get('fn')?'This is your page, '+who+'. It\'s free.':'This is what your free page looks like, shown with a sample adjuster.')+'</span><a href="'+'/free/?back=1'+(location.search.replace(/^\?/,'&').replace(/&?view=preview/,''))+'">Make it mine &rarr;</a>';
  document.body.insertBefore(bar,document.body.firstChild);document.body.insertBefore(pv,bar.nextSibling);
  try{sessionStorage.setItem('ct_seen_sample','1')}catch(e){}
  track('free_sample_view',qv.get('fn')?'personal':'generic');
