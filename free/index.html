@@ -1,627 +1,258 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your free website | ClaimTract</title>
-<meta name="robots" content="noindex,nofollow">
-<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+<title>A free website for Florida public adjusters | ClaimTract</title><meta name="robots" content="noindex"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0A0B0D;--card:#1B1C1F;--line:#2A2E36;--tx:#F4F4F5;--mut:#A9AEB7;--dim:#6B6F78;--or:#F5A524;--bad:#ff6b6b}
+:root{--bg:#F4F4F1;--card:#fff;--tx:#111;--mu:#55585F;--ln:#E1E1DC;--ac:#F5A524;--act:#8F5400;--soft:#FFF3DC;--softl:#F0D49A}
+body.dark{--bg:#0F1115;--card:#1A1C21;--tx:#F4F4F5;--mu:#A9AEB7;--ln:#2A2E36;--act:#F5A524;--soft:#2A2110;--softl:#5A4512}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 Inter,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--or)}
-.wrap{max-width:880px;margin:0 auto;padding:0 20px}
-header.top{padding:22px 0;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:800;letter-spacing:.02em}.logo b{color:var(--or)}
-.free-tag{font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--or);border:1px solid var(--or);border-radius:99px;padding:7px 12px}
-.hero{padding:34px 0 18px}
-.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.04;margin:0 0 16px;letter-spacing:-.02em;font-weight:800}
-.hero h1 em{font-style:normal;color:var(--or)}
-.hero p{color:var(--mut);font-size:18px;max-width:640px;margin:0}
-.steps{display:flex;gap:8px;margin:34px 0 26px;flex-wrap:wrap}
-.steps div{flex:1;min-width:120px;padding:10px 12px;border-top:3px solid var(--line);font:600 11px/1.3 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
-.steps div.on{border-color:var(--or);color:var(--tx)}.steps div.done{border-color:#3d8f5f;color:var(--mut)}
-section.step{display:none;padding-bottom:70px}section.step.on{display:block}
-h2{font-size:26px;margin:0 0 6px;letter-spacing:-.01em}
-.sub{color:var(--mut);margin:0 0 22px}
-.tpls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.tpl{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;text-align:left;color:var(--tx);font:inherit;transition:.15s}
-.tpl:hover{border-color:#444a55}.tpl[aria-pressed=true]{border-color:var(--or);box-shadow:0 0 0 4px rgba(245,165,36,.15)}
-.tpl .mini{height:170px;border-radius:10px;overflow:hidden;position:relative;margin-bottom:12px}
-.tpl h3{margin:0;font-size:18px}.tpl p{margin:2px 0 0;color:var(--mut);font-size:14px}
-.mini .bar{position:absolute;left:0;right:0;top:0;height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 10px}
-.mini .bar i{width:46px;height:7px;border-radius:4px;display:block}.mini .bar u{width:30px;height:12px;border-radius:99px;display:block}
-.mini .hl{position:absolute;left:12px;top:42px;right:12px}.mini .hl s{display:block;height:11px;border-radius:3px;margin-bottom:7px;text-decoration:none}
-.mini .btns{position:absolute;left:12px;bottom:46px;display:flex;gap:6px}.mini .btns b{width:46px;height:16px;border-radius:5px;display:block}
-.mini .row{position:absolute;left:12px;right:12px;bottom:10px;display:flex;gap:6px}.mini .row b{flex:1;height:28px;border-radius:5px;display:block}
-.m-storm{background:#0F1115}.m-storm .bar{background:#16181d}.m-storm .bar i{background:#555}.m-storm .bar u{background:#F5A524}.m-storm s{background:#fff}.m-storm s+s{background:#F5A524;width:60%}.m-storm .btns b:first-child{background:#F5A524}.m-storm .btns b+b{background:#333}.m-storm .row b{background:#1f2228}
-.m-coastal{background:#EAF6F8}.m-coastal .bar{background:#fff}.m-coastal .bar i{background:#b9dde2}.m-coastal .bar u{background:#0E7C86}.m-coastal s{background:#16465c}.m-coastal s+s{background:#0E7C86;width:60%}.m-coastal .btns b{border-radius:99px}.m-coastal .btns b:first-child{background:#0E7C86}.m-coastal .btns b+b{background:#bfe3e8}.m-coastal .row b{background:#fff;border-radius:10px}
-.m-paper{background:#F4F4F1}.m-paper .bar{background:#fff}.m-paper .bar i{background:#d8d8d2}.m-paper .bar u{background:#F5A524}.m-paper s{background:#111}.m-paper s+s{background:#F5A524;width:60%}.m-paper .btns b:first-child{background:#F5A524}.m-paper .btns b{background:#fff;border:1px solid #d8d8d2}.m-paper .row b{background:#fff;border:1px solid #e1e1dc}
-.sw{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}.sw button{width:44px;height:44px;border-radius:50%;border:3px solid var(--line);cursor:pointer;padding:0}.sw button[aria-pressed=true]{border-color:#fff;box-shadow:0 0 0 3px var(--or)}
-.m-heritage{background:#FAF6EE}.m-heritage .bar{background:#1F2A44}.m-heritage .bar i{background:#6d789a}.m-heritage .bar u{background:#B8913F}.m-heritage s{background:#1F2A44}.m-heritage s+s{background:#B8913F;width:60%}.m-heritage .btns b:first-child{background:#1F2A44}.m-heritage .btns b+b{background:#d8cfbb}.m-heritage .row b{background:#efe7d6}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:640px){.grid{grid-template-columns:1fr}}
-label{display:block;font-weight:600;font-size:14px;margin:0 0 6px}
-.f{margin-bottom:16px}.f small{display:block;color:var(--dim);margin-top:5px;font-size:13px}
-input[type=text],input[type=tel],input[type=email],select,textarea{width:100%;background:#111317;border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:13px 14px;font:inherit}
-input:focus,select:focus,textarea:focus{outline:2px solid var(--or);outline-offset:1px;border-color:transparent}
-textarea{min-height:190px;resize:vertical;line-height:1.55}
-.chips{display:flex;flex-wrap:wrap;gap:8px}.chips button{background:#111317;border:1px solid var(--line);color:var(--mut);padding:9px 14px;border-radius:99px;font:600 14px Inter,sans-serif;cursor:pointer}.chips button[aria-pressed=true]{background:var(--or);color:#111;border-color:var(--or)}
-.drop{border:2px dashed var(--line);border-radius:12px;padding:16px;text-align:center;color:var(--mut);cursor:pointer;position:relative;min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#111317}
-.drop:hover{border-color:var(--or)}.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop img{max-width:100%;max-height:150px;border-radius:8px;display:block}.drop b{color:var(--tx)}
-.gal{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}.gal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}
-@media(max-width:560px){.gal{grid-template-columns:repeat(3,1fr)}}
-.row2{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.cnt{font:500 12px 'JetBrains Mono',monospace;color:var(--dim)}.cnt.ok{color:#5ec08a}
-.btn{background:var(--or);color:#111;border:0;border-radius:12px;padding:15px 26px;font:700 16px Inter,sans-serif;cursor:pointer}
-.btn:hover{filter:brightness(1.08)}.btn.ghost{background:transparent;color:var(--tx);border:1px solid var(--line)}
-.btn[disabled]{opacity:.45;cursor:not-allowed}
-.btn.sm{padding:10px 16px;font-size:14px;border-radius:10px}
-.nav{display:flex;gap:12px;justify-content:space-between;margin-top:26px;flex-wrap:wrap}
-.consent{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
-.consent label{display:flex;gap:12px;font-weight:400;font-size:14.5px;color:var(--mut);margin:0;cursor:pointer;line-height:1.5}
-.consent input{width:22px;height:22px;flex:none;accent-color:var(--or);margin-top:2px}
-.consent .box{margin-top:12px;background:#111317;border-left:3px solid var(--or);padding:10px 14px;font-size:13.5px;color:var(--tx);border-radius:0 8px 8px 0}
-.err{color:var(--bad);font-size:14px;margin:8px 0 0;min-height:20px}
-.banner{background:#1d1608;border:1px solid #5a4210;color:#f3c776;border-radius:12px;padding:12px 16px;font-size:14px;margin-bottom:16px;display:flex;gap:10px;align-items:center}
-.pv .dg{position:sticky;bottom:14px;height:0;z-index:5;pointer-events:none}
-.pv .dg .dgi{position:absolute;left:14px;bottom:0;pointer-events:auto;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
-.pv .dg .dgb{width:76px;height:76px;border-radius:50%;border:3px solid var(--p-ac);background:#222 center/cover;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.45);padding:0;color:#fff;font-size:26px}
-.pv .dg .dgl{background:var(--p-ac);color:var(--p-acx);font:700 12px Inter,sans-serif;padding:6px 10px;border-radius:99px;cursor:pointer;border:0}
-.pv .dg .dgp{display:none;width:min(300px,78vw);background:#000;border-radius:14px;overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.55);border:1px solid #333}
-.pv .dg .dgp video{width:100%;display:block}
-.pv .dg .dgp button{width:100%;background:#15171b;color:#fff;border:0;padding:9px;font:600 13px Inter,sans-serif;cursor:pointer}
-.pv .dg.open .dgp{display:block}.pv .dg.open .dgb,.pv .dg.open .dgl{display:none}
-.pvwrap{border:1px solid var(--line);border-radius:16px;overflow:clip;background:#000}
-.pvbar{background:#15171b;padding:9px 14px;font:500 12px 'JetBrains Mono',monospace;color:var(--mut);display:flex;gap:8px;align-items:center}
-.pvbar span{background:#0A0B0D;border-radius:99px;padding:5px 12px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pvbar i{width:9px;height:9px;border-radius:50%;background:#444;display:block}
-.pv{--p-bg:#0F1115;--p-tx:#fff;--p-mut:#b6bbc4;--p-ac:#F5A524;--p-acx:#111;--p-card:#181b21;--p-r:10px;--p-f:Inter,sans-serif;--p-h:800;--p-ht:uppercase;background:var(--p-bg);color:var(--p-tx);font-family:var(--p-f)}
-.pv.paper{--p-bg:#F4F4F1;--p-tx:#111;--p-mut:#55585F;--p-ac:#F5A524;--p-acx:#111;--p-card:#fff;--p-r:16px;--p-h:800;--p-ht:none;--p-act:#8F5400}
-.pv.paper .hero2{--hs:rgba(244,244,241,.94)}
-.pv.paper .hero2::before{background:linear-gradient(180deg,rgba(244,244,241,.35),var(--hs))}
-.pv.coastal{--p-act:#0B6670;--p-bg:#F1F9FB;--p-tx:#16384a;--p-mut:#4d6b78;--p-ac:#0E7C86;--p-acx:#fff;--p-card:#fff;--p-r:18px;--p-h:700;--p-ht:none}
-.pv.heritage{--p-act:#7A5C1A;--p-bg:#FAF6EE;--p-tx:#1F2A44;--p-mut:#5b6177;--p-ac:#B8913F;--p-acx:#1F2A44;--p-card:#fff;--p-r:4px;--p-f:'Source Serif 4',Georgia,serif;--p-h:700;--p-ht:none}
-.pv .nv{display:flex;justify-content:space-between;align-items:center;padding:16px 26px;gap:10px;flex-wrap:wrap}
-.pv.heritage .nv{background:#1F2A44;color:#fff}
-.pv .nm{font-weight:var(--p-h);font-size:18px;letter-spacing:.01em}
-.pv .call{background:var(--p-ac);color:var(--p-acx);padding:11px 18px;border-radius:99px;font-weight:700;text-decoration:none;font:700 15px Inter,sans-serif;display:inline-block}
-.pv.heritage .call{border-radius:3px;color:#fff;background:#B8913F}
-.pv .hero2{position:relative;padding:60px 26px 54px;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;background-size:cover;background-position:center}
-.pv .hero2::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),var(--hs,rgba(15,17,21,.9)))}
-.pv.coastal .hero2{--hs:rgba(241,249,251,.92)}.pv.heritage .hero2{--hs:rgba(250,246,238,.94)}
-.pv .hero2>*{position:relative}
-.pv h1{font-size:clamp(30px,5.4vw,50px);line-height:1.05;margin:0 0 12px;text-transform:var(--p-ht);font-weight:var(--p-h);letter-spacing:-.01em}
-.pv h1 em{font-style:normal;color:var(--p-act,var(--p-ac))}
-.pv .lead{color:var(--p-mut);font-size:18px;margin:0 0 22px;max-width:560px}
-.pv .cta{display:flex;gap:12px;flex-wrap:wrap}
-.pv .cta a{padding:14px 24px;border-radius:var(--p-r);font:700 16px Inter,sans-serif;text-decoration:none;background:var(--p-ac);color:var(--p-acx)}
-.pv.heritage .cta a:first-child{color:#fff}
-.pv .cta a+a{background:transparent;color:var(--p-tx);border:2px solid var(--p-ac)}
-.pv .sec{padding:44px 26px}
-.pv .abt{display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:start}
-@media(max-width:640px){.pv .abt{grid-template-columns:1fr}}
-.pv .hs{width:100%;aspect-ratio:4/5;border-radius:var(--p-r);background:var(--p-card);background-size:cover;background-position:center;border:1px solid rgba(128,128,128,.25)}
-.pv h2{font-size:26px;text-transform:var(--p-ht);font-weight:var(--p-h);margin:0 0 14px}
-.pv .abt p{white-space:pre-wrap;color:var(--p-mut);margin:0;font-size:17px;line-height:1.65}
-.pv .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pv .tags span{background:var(--p-card);border:1px solid rgba(128,128,128,.3);border-radius:99px;padding:7px 14px;font:600 13px Inter,sans-serif;color:var(--p-tx)}
-.pv.heritage .tags span{border-radius:3px}
-.pv .pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.pv .pg img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--p-r)}
-.pv footer{padding:26px;border-top:1px solid rgba(128,128,128,.25);font:14px Inter,sans-serif;color:var(--p-mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.soc{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.soc a{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--p-ac);color:var(--p-act,var(--p-ac));text-decoration:none;background:transparent;transition:.15s}
-.soc a:hover{background:var(--p-ac);color:var(--p-acx)}
-.soc svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.soc svg text{fill:currentColor;stroke:none;font:800 15px Inter,sans-serif}
-.pv.heritage .soc a{border-radius:4px}
-.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:640px){.sgrid{grid-template-columns:1fr}}
-.pv .wpa h2{margin-bottom:10px}
-.pv .wpa .big{font-size:20px;line-height:1.55;color:var(--p-tx);margin:0 0 26px;max-width:680px}
-.pv .tri{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:30px}
-.pv .tri div{background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:var(--p-r);padding:18px}
-.pv .tri b{display:block;font:800 13px 'JetBrains Mono',monospace;color:var(--p-act,var(--p-ac));letter-spacing:.08em;margin-bottom:6px}
-.pv .tri h3{margin:0 0 6px;font-size:18px}.pv .tri p{margin:0;color:var(--p-mut);font-size:15px;line-height:1.55}
-.pv .wpa h4{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--p-act,var(--p-ac));margin:0 0 8px;font-family:Inter,sans-serif}
-.pv .wpa .pay{color:var(--p-mut);margin:0 0 28px;max-width:680px;font-size:16px;line-height:1.6}
-.pv .who{border-top:1px solid rgba(128,128,128,.25)}.pv .who div{display:grid;grid-template-columns:190px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid rgba(128,128,128,.25);font-size:15px}
-@media(max-width:560px){.pv .who div{grid-template-columns:1fr;gap:2px}}
-.pv .who b{color:var(--p-tx)}.pv .who span{color:var(--p-mut)}.pv .who .me b,.pv .who .me span{color:var(--p-act,var(--p-ac));font-weight:700}
-.pv .wcta{margin-top:30px;padding:24px;border-radius:var(--p-r);background:var(--p-card);border:1px solid rgba(128,128,128,.25)}
-.pv .wcta p{margin:0 0 14px;font-size:18px;color:var(--p-tx)}.pv .wcta small{display:block;margin-top:12px;color:var(--p-mut);font-size:12.5px}
-.pv .faq details{border-bottom:1px solid rgba(128,128,128,.28)}.pv .faq details:first-of-type{border-top:1px solid rgba(128,128,128,.28)}
-.pv .faq summary{list-style:none;cursor:pointer;padding:17px 4px;font:700 17px Inter,sans-serif;display:flex;justify-content:space-between;gap:14px;align-items:center;color:var(--p-tx)}
-.pv .faq summary::-webkit-details-marker{display:none}
-.pv .faq summary::after{content:"+";color:var(--p-act,var(--p-ac));font-size:24px;line-height:1;flex:none}
-.pv .faq details[open] summary::after{content:"\2013"}
-.pv .faq .ans{padding:0 4px 20px;color:var(--p-mut);font-size:16px;line-height:1.65;max-width:680px}
-.pv .faq .ans p{margin:0 0 12px}.pv .faq .ans .sc{color:var(--p-tx);font-weight:600}
-.pv .faq .ans a{display:inline-block;background:var(--p-ac);color:var(--p-acx);padding:11px 18px;border-radius:var(--p-r);font:700 15px Inter,sans-serif;text-decoration:none}
-.pv.heritage .faq .ans a{color:#fff}
-.pv .badge{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:var(--p-card);border:1px solid var(--p-ac);color:var(--p-tx);border-radius:99px;padding:7px 14px 7px 10px;font:700 13px Inter,sans-serif;margin-bottom:16px}
-.pv .badge img{width:22px;height:auto;flex:none;display:block}
-.pv.heritage .badge{border-radius:3px}
-.links{display:grid;gap:12px;max-width:520px}
-.pv .lk{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-radius:var(--p-r);background:var(--p-card);border:1px solid rgba(128,128,128,.3);color:var(--p-tx);font:700 16px Inter,sans-serif;text-decoration:none;transition:.15s}
-.pv .lk:hover{border-color:var(--p-ac)}.pv .lk::after{content:"\2192";color:var(--p-ac)}
-.pv .share{margin-top:18px}.pv .share canvas{width:132px;height:132px;display:block;border-radius:var(--p-r);background:#fff}
-.pv .share .sb{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.pv .share button{background:var(--p-ac);color:var(--p-acx);border:0;border-radius:var(--p-r);padding:10px 14px;font:700 13px Inter,sans-serif;cursor:pointer}
-.pv.heritage .share button{color:#fff}
-.lkrow{display:grid;grid-template-columns:1fr 1.6fr;gap:10px;margin-bottom:10px}@media(max-width:560px){.lkrow{grid-template-columns:1fr}}
-.pv .rdy{list-style:none;padding:0;margin:0;display:grid;gap:10px;max-width:640px}
-.pv .rdy li{padding:12px 16px 12px 44px;position:relative;background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:var(--p-r);color:var(--p-tx)}
-.pv .rdy li::before{content:"\2713";position:absolute;left:16px;color:var(--p-act,var(--p-ac));font-weight:800}
-.tk{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;text-align:left;margin:30px 0}
-.tkc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
-.tkc h3{margin:0;font-size:16px}.tkc p{margin:0;color:var(--mut);font-size:14px}
-.tkc textarea{min-height:110px;font-size:14px;line-height:1.5;padding:10px 12px}
-.trial{background:#1d1608;border:1px solid #5a4210;border-radius:16px;padding:26px;text-align:left;margin:10px 0 24px}
-.trial h3{margin:0 0 8px;font-size:24px}.trial p{color:#d9c08a;margin:0 0 16px}.trial small{display:block;margin-top:12px;color:#a88a4a}
-a.btn{display:inline-block;text-decoration:none}
-.done-box{text-align:center;padding:50px 10px}.done-box h2{font-size:34px}
-.fine{color:var(--dim);font-size:13px;margin-top:30px}
-.hp{position:absolute;left:-9999px}
-
-.lp{padding:10px 0 10px}
-.lp-hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:30px 0 20px}
-@media(max-width:820px){.lp-hero{grid-template-columns:1fr;gap:28px}}
-.lp-kick{font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--or);margin:0 0 16px}
-.lp h1{font-size:clamp(38px,6.4vw,66px);line-height:1.02;margin:0 0 18px;letter-spacing:-.025em;font-weight:800}
-.lp h1 em{font-style:normal;color:var(--or)}
-.lp-sub{color:var(--mut);font-size:19px;max-width:560px;margin:0 0 24px}
-.lp-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.lp-cta .btn{font-size:17px;padding:17px 30px;box-shadow:0 10px 30px rgba(245,165,36,.25)}
-.lp-trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;color:var(--dim);font:500 13px 'JetBrains Mono',monospace}
-.lp-trust span::before{content:"\2713 ";color:#5ec08a}
-.ph{position:relative;margin:0 auto;width:min(320px,86vw);background:#0F1115;border:1px solid #2f3440;border-radius:34px;padding:12px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 6px #14161b,0 0 90px rgba(245,165,36,.12);transform:rotate(2deg)}
-.ph-in{background:#0F1115;border-radius:24px;overflow:hidden;border:1px solid #20242c}
-.ph-nv{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#16181d;font-weight:800;font-size:14px}
-.ph-nv i{font:700 11px Inter,sans-serif;font-style:normal;background:var(--or);color:#111;border-radius:99px;padding:7px 11px}
-.ph-hero{padding:26px 16px 22px;background:linear-gradient(180deg,#1a1710,#0F1115)}
-.ph-bdg{display:inline-flex;align-items:center;gap:6px;font:600 10px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--or);border:1px solid rgba(245,165,36,.5);border-radius:99px;padding:5px 9px;margin-bottom:12px}
-.ph-bdg img{width:12px;height:auto}
-.ph h3{margin:0 0 8px;font-size:23px;line-height:1.06;text-transform:uppercase;font-weight:800}.ph h3 em{font-style:normal;color:var(--or)}
-.ph p{margin:0 0 14px;font-size:12px;color:#b6bbc4}
-.ph-b{display:grid;gap:8px}
-.ph-b b{display:block;text-align:center;padding:11px;border-radius:10px;font-size:12px;font-weight:700;background:#181b21;border:1px solid #2a2e36}
-.ph-b b.p{background:var(--or);color:#111;border-color:var(--or)}
-.ph-q{padding:14px 16px 18px}.ph-q div{padding:10px 0;border-top:1px solid #20242c;font-size:12px;color:#d6d9df;display:flex;justify-content:space-between}
-.ph-q div::after{content:"+";color:var(--or);font-weight:800}
-.ph-tag{position:absolute;right:-6px;top:-14px;background:var(--or);color:#111;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.08em;padding:7px 12px;border-radius:99px;transform:rotate(6deg)}
-.lp-txt{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:34px 0 10px}
-.lp-txt h3{margin:0 0 4px;font-size:20px}.lp-txt p.s{margin:0 0 14px;color:var(--mut);font-size:15px}
-.lp-txt .g{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
-@media(max-width:700px){.lp-txt .g{grid-template-columns:1fr}}
-.lp-txt .cb{display:flex;gap:11px;margin:14px 0 0;font-weight:400;font-size:13.5px;color:var(--mut);line-height:1.5;cursor:pointer}
-.lp-txt .cb input{width:20px;height:20px;flex:none;accent-color:var(--or);margin-top:1px}
-.lp-sec{padding:54px 0 8px}
-.lp-sec h2{font-size:clamp(28px,4.4vw,40px);line-height:1.08;letter-spacing:-.02em;margin:0 0 10px}
-.lp-sec .sub{font-size:17px;max-width:620px}
-.lp-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:22px}
-.lp-c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;transition:.15s}
-.lp-c:hover{border-color:#4a4f5a;transform:translateY(-2px)}
-.lp-c .ic{width:42px;height:42px;border-radius:12px;background:rgba(245,165,36,.12);color:var(--or);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
-.lp-c h3{margin:0 0 5px;font-size:17px}.lp-c p{margin:0;color:var(--mut);font-size:14.5px}
-.lp-how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-@media(max-width:700px){.lp-how{grid-template-columns:1fr}}
-.lp-how div{border-top:3px solid var(--or);padding:14px 4px 0}
-.lp-how b{font:700 12px 'JetBrains Mono',monospace;color:var(--or);letter-spacing:.14em}
-.lp-how h3{margin:6px 0 4px;font-size:19px}.lp-how p{margin:0;color:var(--mut);font-size:15px}
-.lp-note{display:flex;gap:18px;align-items:center;background:linear-gradient(135deg,#1d1608,#15120a);border:1px solid #5a4210;border-radius:18px;padding:24px;margin:40px 0 0}
-.lp-note img{width:56px;height:auto;flex:none}
-.lp-note p{margin:0;color:#e6d3a6;font-family:'Source Serif 4',serif;font-size:19px;line-height:1.5}
-.lp-note small{display:block;margin-top:8px;color:#a88a4a;font:500 13px Inter,sans-serif}
-.lp-end{text-align:center;padding:50px 0 10px}.lp-end h2{font-size:clamp(28px,4.6vw,42px);margin:0 0 16px}
-.pv .own{position:sticky;top:0;z-index:8;display:flex;gap:6px;align-items:center;padding:8px 12px;background:var(--p-ac);color:var(--p-acx);font:700 12px Inter,sans-serif;overflow-x:auto;white-space:nowrap}
-.pv .own span{margin-right:4px;text-transform:uppercase;letter-spacing:.06em}
-.pv .own button{background:var(--p-acx);color:var(--p-ac);border:0;border-radius:99px;padding:8px 13px;font:700 12px Inter,sans-serif;cursor:pointer}
-@media (display-mode:browser){.pv .own.ol{display:none}}
-.inst{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:left;margin:0 0 24px}.inst h3{margin:0 0 6px;font-size:18px}.inst p{margin:0;color:var(--mut);font-size:14.5px}
-.ytv{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#111;margin-top:10px}.ytv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.lgs{display:flex;flex-wrap:wrap;gap:8px 16px}.lgs label{display:flex;align-items:center;gap:6px;font-weight:600;margin:0}
-.pv .meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;width:100%;align-self:stretch}.pv .meta span{background:var(--p-card);border:1px solid rgba(128,128,128,.3);border-radius:99px;padding:6px 12px;font:600 12.5px Inter,sans-serif;color:var(--p-tx)}.pv .meta .rp::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#2DBE60;margin-right:7px;vertical-align:1px}
-.pv details.gd{border-top:1px solid rgba(128,128,128,.25);padding:16px 0}.pv details.gd summary{font-weight:700;cursor:pointer}.pv details.gd .ans{margin-top:12px}
-.bgs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.bgs button{display:flex;flex-direction:column;gap:6px;padding:6px;border:2px solid rgba(128,128,128,.3);border-radius:12px;background:transparent;color:inherit;font:600 12px/1.3 Inter,sans-serif;cursor:pointer;text-align:left}
-.bgs button[aria-pressed=true]{border-color:#F5A524}.bgs img,.bgs i{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;display:block;background:rgba(128,128,128,.18)}
-.pv .hero2.hasv{min-height:520px;overflow:hidden;background:#111}
-.pv .hero2.hasv .hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.pv .hero2.hasv::before{z-index:1;background:linear-gradient(90deg,rgba(10,12,16,.86) 0%,rgba(10,12,16,.62) 42%,rgba(10,12,16,.12) 78%,rgba(10,12,16,0) 100%)}
-.pv .hero2.hasv>*:not(.hv){z-index:2;max-width:560px}
-.pv .hero2.hasv h1{color:#fff}.pv .hero2.hasv h1 em{color:var(--p-ac)}.pv .hero2.hasv .lead{color:rgba(255,255,255,.9)}
-.pv .hero2.hasv .badge,.pv .hero2.hasv .meta span{background:rgba(0,0,0,.4);color:#fff;border-color:rgba(255,255,255,.35)}
-.pv .hero2.hasv .cta a:nth-child(2){color:#fff;border-color:rgba(255,255,255,.7);background:rgba(0,0,0,.25)}
-@media(max-width:640px){.pv .hero2.hasv{min-height:600px}.pv .hero2.hasv::before{background:linear-gradient(0deg,rgba(10,12,16,.92) 0%,rgba(10,12,16,.7) 45%,rgba(10,12,16,.15) 80%)}}
-@media(prefers-reduced-motion:reduce){.pv .hero2.hasv .hv{display:none}.pv .hero2.hasv{background:#111 center/cover}}
-.pv .nv,.pv .sec,.pv footer,.pv .hero2{padding-left:max(26px,calc((100% - 1040px)/2));padding-right:max(26px,calc((100% - 1040px)/2))}
-.pv .hsi{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--p-ac),rgba(128,128,128,.12))}.pv .hsi span{font:800 64px Inter,sans-serif;color:#fff;letter-spacing:.02em;text-shadow:0 2px 12px rgba(0,0,0,.2)}
-.pv .faq>*,.pv .gds>*,.pv .rdyw>*{max-width:800px;margin-left:auto!important;margin-right:auto!important}.pv .rdyw .rdy,.pv .gds .rdy{max-width:800px}.pv .faq .ans{max-width:none}
-.pv .team .tk{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--p-act,var(--p-ac));margin:0 0 10px}
-.pv .team h2{max-width:720px}.pv .team .ti{color:var(--p-mut);font-size:17px;line-height:1.6;max-width:680px;margin:0 0 24px}
-.pv .chain{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:c}
-.pv .tc{position:relative;background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:var(--p-r);padding:20px 18px}
-.pv .tc b{display:flex;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;background:rgba(128,128,128,.16);color:var(--p-tx);font:800 14px Inter,sans-serif;margin-bottom:12px}
-.pv .tc h3{margin:0;font-size:18px;color:var(--p-tx)}.pv .tc .r{margin:2px 0 10px;font:600 13px Inter,sans-serif;color:var(--p-act,var(--p-ac))}.pv .tc p{margin:0;color:var(--p-mut);font-size:15px;line-height:1.55}.pv .tc .r{color:var(--p-act,var(--p-ac))}
-.pv .tc:not(:last-child)::after{content:"\2192";position:absolute;right:-12px;top:22px;width:12px;text-align:center;color:var(--p-mut);font-weight:800}
-.pv .yours{display:flex;gap:22px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:16px;padding:24px;border-radius:var(--p-r);background:var(--p-ac);color:var(--p-acx)}
-.pv .yours h3{margin:0 0 8px;font-size:22px;line-height:1.2;color:var(--p-acx)}.pv .yours p{margin:0;max-width:620px;font-size:16px;line-height:1.55;color:var(--p-acx)}.pv .yours .tk{color:var(--p-acx)!important;opacity:.8}
-.pv .yours a{flex:none;background:#111;color:#fff;text-decoration:none;font:800 16px Inter,sans-serif;padding:15px 22px;border-radius:var(--p-r)}
-.pv .team .tn{font-size:13px;color:var(--p-mut);margin:12px 0 0}
-@media(max-width:820px){.pv .chain{grid-template-columns:1fr 1fr}.pv .tc::after{display:none}}
-@media(max-width:520px){.pv .chain{grid-template-columns:1fr}}
-.pv footer .gfp{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--p-tx);font:700 14px Inter,sans-serif}.pv footer .gfp span{border-bottom:2px solid var(--p-ac)}.pv footer .gfp small{font-weight:500;font-size:12px;color:var(--p-mut)}
-.pv .team .by{color:var(--p-mut);font-size:14px;margin:-4px 0 18px}
-.pv .pq{margin:22px 0;padding:22px 24px;border-left:4px solid var(--p-ac);background:var(--p-card);border-radius:0 var(--p-r) var(--p-r) 0}.pv .pq blockquote{margin:0 0 14px;font:700 21px/1.35 Inter,sans-serif;color:var(--p-tx)}
-.pv .pq .cta a{font-size:15px;padding:11px 18px}
-.pv .chain{grid-template-columns:1fr 1fr!important}.pv .tc::after{display:none!important}
-.pv .stp .sg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.pv .stp .sg div{background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:var(--p-r);padding:20px}.pv .stp b{font:800 13px 'JetBrains Mono',monospace;color:var(--p-act,var(--p-ac))}.pv .stp h3{margin:6px 0;font-size:18px;color:var(--p-tx)}.pv .stp p{margin:0;color:var(--p-mut);font-size:15px;line-height:1.55}
-.pv .rel .tk{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#0E9F6E;margin:0 0 8px}
-.pv .rg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.pv .rc{display:flex;flex-direction:column;gap:8px;background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:var(--p-r);padding:18px;text-decoration:none;color:var(--p-tx)}
-.pv .rc .rl{font:600 10px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0E9F6E}.pv .rc h3{margin:0;font-size:16.5px;line-height:1.3}.pv .rc p{margin:0;font-size:13.5px;color:var(--p-mut);flex:1}.pv .rc .rr{font:700 14px Inter,sans-serif;color:var(--p-act,var(--p-ac))}
-@media(max-width:900px){.pv .rg{grid-template-columns:1fr 1fr}.pv .stp .sg{grid-template-columns:1fr}}
-@media(max-width:520px){.pv .rg,.pv .chain{grid-template-columns:1fr!important}}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 Inter,sans-serif;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+.w{max-width:1040px;margin:0 auto;padding:0 22px}
+.k{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--act);margin:0 0 12px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ac);color:#111;text-decoration:none;font-weight:800;font-size:17px;padding:16px 26px;border-radius:14px;box-shadow:0 8px 20px rgba(245,165,36,.35);border:0;cursor:pointer;font-family:inherit}
+h2{font-size:clamp(28px,4.4vw,42px);line-height:1.08;letter-spacing:-.02em;margin:0 0 14px}
+.hero{position:relative;min-height:640px;display:flex;align-items:center;overflow:hidden;background:#111;color:#fff}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(10,12,16,.88) 0%,rgba(10,12,16,.66) 42%,rgba(10,12,16,.15) 78%,rgba(10,12,16,0) 100%)}
+.hero .w{position:relative;z-index:2;width:100%}
+.hero .in{max-width:560px;padding:90px 0 70px}
+.top{position:absolute;top:0;left:0;right:0;z-index:3}.top .w{display:flex;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:18px}
+.top b{font-weight:800}.top span{font:600 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.hero .k{color:var(--ac)}
+h1{font-size:clamp(40px,6.4vw,66px);line-height:1;letter-spacing:-.025em;margin:0 0 16px;font-weight:800}
+h1 em{font-style:normal;color:var(--ac)}
+.lead{font-size:19px;color:rgba(255,255,255,.9);margin:0 0 26px}
+.cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.ghost{color:#fff;font-weight:700;text-decoration:none;border-bottom:2px solid var(--ac);padding:4px 0}
+.trust{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.trust span{font:600 13px Inter,sans-serif;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:6px 12px}
+@media(max-width:700px){.hero{min-height:720px;align-items:flex-end}.hero::before{background:linear-gradient(0deg,rgba(10,12,16,.94) 0%,rgba(10,12,16,.72) 50%,rgba(10,12,16,.15) 85%)}.hero .in{padding:110px 0 40px}}
+.txt{margin:-40px auto 0;position:relative;z-index:4;max-width:1040px;padding:0 22px}
+.txt .box{background:var(--card);border:1px solid var(--ln);border-radius:20px;padding:22px 24px;box-shadow:0 16px 40px rgba(0,0,0,.12);display:grid;grid-template-columns:1fr 1.4fr;gap:20px;align-items:center}
+.txt h3{margin:0 0 4px;font-size:20px}.txt p{margin:0;color:var(--mu);font-size:15px}
+.txt form{display:grid;grid-template-columns:1fr 1fr auto;gap:8px}
+.txt input[type=text],.txt input[type=tel]{width:100%;padding:13px 14px;border:1px solid var(--ln);border-radius:12px;background:var(--bg);color:var(--tx);font:600 15px Inter,sans-serif}
+.txt .btn{padding:13px 18px;font-size:15px;box-shadow:none}
+.txt label.c{grid-column:1/-1;display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--mu);line-height:1.45;margin-top:4px}.txt label.c input{margin-top:2px;flex:none;accent-color:var(--ac)}
+.txt .msg{grid-column:1/-1;font:700 13px Inter,sans-serif;color:var(--act)}
+@media(max-width:820px){.txt .box{grid-template-columns:1fr}.txt form{grid-template-columns:1fr}}
+.pts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:46px 0}
+.pt{background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:22px 20px}
+.pt .n{width:40px;height:40px;border-radius:12px;background:var(--soft);color:var(--act);display:flex;align-items:center;justify-content:center;font:800 18px Inter,sans-serif;margin-bottom:14px}
+.pt h3{margin:0 0 6px;font-size:18px;line-height:1.2}.pt p{margin:0;font-size:15px;color:var(--mu)}
+.ben{padding:10px 0 46px}
+.bg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bc{background:var(--card);border:1px solid var(--ln);border-radius:20px;padding:24px 24px 18px}
+.bc h3{margin:0 0 12px;font-size:19px}.bc ul{list-style:none;margin:0;padding:0}
+.bc li{position:relative;padding:9px 0 9px 30px;border-top:1px solid var(--ln);font-size:15px;color:var(--mu)}.bc li:first-child{border-top:0}
+.bc li::before{content:"\2713";position:absolute;left:4px;top:9px;color:var(--act);font-weight:800}.bc li b{color:var(--tx)}
+.bcta{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:18px;background:var(--soft);border:1px solid var(--softl);border-radius:18px;padding:18px 22px}.bcta p{margin:0;font-weight:700}
+.how{padding:10px 0 46px}.st{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.st div{background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:22px}.st b{font:800 13px 'JetBrains Mono',monospace;color:var(--act)}.st h3{margin:8px 0 6px;font-size:19px}.st p{margin:0;color:var(--mu);font-size:15px}
+.me{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;background:#111;color:#fff;border-radius:22px;padding:28px 30px;margin-bottom:46px;border:1px solid #2A2E36}
+.me .q{font-size:46px;line-height:1;color:var(--ac);font-weight:800}.me p{margin:0;font-size:18px;line-height:1.5}.me p b{color:var(--ac)}.me small{display:block;margin-top:8px;color:#aaa;font-size:14px}
+.drw{max-width:760px;margin:0 auto 30px}.drw h2{text-align:center;font-size:28px}
+.dq{border-top:1px solid var(--ln)}
+.dq>button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 4px;border:0;background:transparent;font:700 16px Inter,sans-serif;color:var(--tx);cursor:pointer;text-align:left}
+.dq>button::after{content:"+";color:var(--act);font-size:22px;font-weight:800;transition:transform .2s}.dq.open>button::after{transform:rotate(45deg)}
+.da{max-height:0;overflow:hidden;transition:max-height .3s ease}.da div{padding:0 4px 18px;color:var(--mu);font-size:15.5px}.da a{display:inline-block;margin-top:10px;color:var(--act);font-weight:800;text-decoration:none}
+.closeall{display:none;margin:6px auto 0;border:0;background:transparent;color:var(--mu);font:600 14px Inter,sans-serif;cursor:pointer}.closeall.on{display:block}
+.end{text-align:center;padding:30px 0 70px}.end p{color:var(--mu);margin:0 0 22px}
+footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:var(--mu);text-align:center}
+@media(max-width:900px){.pts{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.bg,.st{grid-template-columns:1fr}.me{grid-template-columns:1fr;padding:24px}.me .q{display:none}}
+@media(max-width:520px){.pts{grid-template-columns:1fr}body{font-size:16px}}
+.hg{display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:center}
+.sp{background:#0B0C0F;border:2px solid #2a2d33;border-radius:34px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);width:300px;justify-self:end;margin:70px 0 50px}
+.sp-top{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid #22252b;font-size:13px}.sp-top i{width:8px;height:8px;border-radius:50%;background:#2DBE60}.sp-top span{margin-left:auto;font:600 10px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#F5A524;text-transform:uppercase}
+.sp-v{position:relative;aspect-ratio:9/13;background:#000}.sp-v video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.snd{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);border:0;border-radius:99px;background:rgba(0,0,0,.65);color:#fff;font:700 13px Inter,sans-serif;padding:10px 16px;cursor:pointer;white-space:nowrap;backdrop-filter:blur(6px)}
+.sp-c{padding:14px 16px 16px}.sp-c p{margin:0 0 10px;font-size:13.5px;line-height:1.5;color:#d9dce2}.sp-c a{color:#F5A524;font:700 13.5px Inter,sans-serif;text-decoration:none}
+@media(max-width:900px){.hg{grid-template-columns:1fr}.sp{justify-self:center;margin:0 0 40px;width:280px}.hero{align-items:flex-start}}
+.hg .phone{justify-self:end;margin:70px 0 50px;width:280px;height:560px;background:#F4F4F1;color:#111;border:2px solid #cfcfc9;border-radius:36px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.4);position:relative}
+.ph-cv{height:86px;background:linear-gradient(135deg,#F5A524,#FCE3B4)}.ph-av{width:70px;height:70px;border-radius:50%;background:#fff;border:4px solid #F4F4F1;margin:-35px auto 0;display:flex;align-items:center;justify-content:center;font:800 23px Inter,sans-serif;color:#8F5400}
+.ph-b{padding:6px 16px;text-align:center}.ph-b h3{margin:6px 0 0;font-size:19px}.ph-b .s{font-size:12px;color:#55585F;font-weight:600}
+.ph-badge{display:inline-block;margin:8px 0;font:600 9px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8F5400;border:1px solid #F5A524;border-radius:99px;padding:4px 8px}
+.ph-h{font-weight:800;font-size:16px;line-height:1.15;margin:2px 0 10px}.ph-h em{font-style:normal;color:#8F5400}
+.ph-l{display:flex;justify-content:space-between;height:40px;align-items:center;padding:0 14px;margin-top:7px;border:1px solid #E1E1DC;border-radius:12px;background:#fff;font-weight:700;font-size:12.5px}.ph-l.p{background:#F5A524;border-color:#F5A524}
+.ph-bar{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-around;padding:10px 6px 14px;background:#fff;border-top:1px solid #E1E1DC;font:600 9px Inter,sans-serif;color:#55585F}.ph-bar i{display:block;width:22px;height:22px;margin:0 auto 3px;border-radius:7px;background:#E9E9E4}.ph-bar .on i{background:#F5A524}
+.sos{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:center;padding:10px 0 50px}.sos .sp{margin:0;justify-self:start}
+.sos-t p{color:var(--mu);margin:0 0 14px}.sos-t ul{margin:0 0 18px;padding-left:20px;color:var(--mu)}.sos-t li{margin:5px 0}
+.ghost2{color:var(--act);font-weight:800;text-decoration:none;border-bottom:2px solid var(--ac);padding:3px 0}
+@media(max-width:900px){.hg .phone{justify-self:center;margin:0 0 40px;width:260px;height:520px}.sos{grid-template-columns:1fr}.sos .sp{justify-self:center}}
+.sp[hidden],.phone[hidden],.sos[hidden]{display:none!important}.sp-hero{justify-self:end;margin:70px 0 50px}@media(max-width:900px){.sp-hero{justify-self:center;margin:0 0 40px}}
+.pitch{background:var(--card);border:1px solid var(--ln);border-radius:22px;padding:30px;margin:0 0 46px}.pitch p{color:var(--mu)}.skip{text-align:center;margin:-20px 0 40px;font-size:14px}.skip a{color:var(--mu)}[hidden]{display:none!important}
+.pick{position:fixed;right:14px;bottom:14px;z-index:50;background:#111;color:#fff;border-radius:16px;padding:12px;box-shadow:0 12px 30px rgba(0,0,0,.35);font:600 12px Inter,sans-serif;display:grid;gap:8px}
+.pick b{font:700 10px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#F5A524}
+.pick .seg{display:flex;background:#2a2a2a;border-radius:10px;padding:3px}.pick .seg button{flex:1;border:0;background:transparent;color:#ccc;padding:8px 12px;border-radius:8px;font:700 12px Inter,sans-serif;cursor:pointer}.pick .seg button[aria-pressed=true]{background:#F5A524;color:#111}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top"><div class="logo">CLAIM<b>tract</b></div><span class="free-tag">Free for adjusters</span></header>
-  <div class="lp">
-    <div class="lp-hero">
-      <div>
-        <p class="lp-kick">A gift for licensed public adjusters</p>
-        <h1>A beautiful website of your own. <em>On me.</em></h1>
-        <p class="lp-sub">Most adjusters I know never had a website. Pick a look, tell us about you, and see your page before anyone else does. Like it? One button and it's live. Send it to a homeowner before you meet, and they'll already know what you do.</p>
-        <div class="lp-cta"><a class="btn" href="#build" id="lpGo">Build my free page</a><span style="color:var(--dim);font-size:14px">About 5 minutes</span></div>
-        <div class="lp-trust"><span>Free</span><span>No credit card</span><span>You approve it first</span></div>
-      </div>
-      <div class="ph" aria-hidden="true">
-        <span class="ph-tag">SAMPLE</span>
-        <div class="ph-in">
-          <div class="ph-nv"><span>Maria Alvarez</span><i>Call now</i></div>
-          <div class="ph-hero"><span class="ph-bdg"><img src="/assets/ct-shield.png" alt="">Licensed since 2012</span><h3>Storm damage?<br><em>Get someone in your corner.</em></h3><p>Public adjuster serving Orlando, FL. I work for you, not the insurance company.</p><div class="ph-b"><b class="p">Verify my license</b><b>Save my contact</b></div></div>
-          <div class="ph-q"><div>What is a public adjuster?</div><div>What does it cost me?</div><div>Do I still need my roofer?</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="lp-txt" id="lpTxt">
-      <h3>Want the link on your phone?</h3>
-      <p class="s">Put in your mobile number and I'll text it to you, so you can build your page from there.</p>
-      <div class="g"><div><label for="lpn">First name</label><input type="text" id="lpn" autocomplete="given-name"></div><div><label for="lpp">Mobile number</label><input type="tel" id="lpp" autocomplete="tel" inputmode="tel"></div><button class="btn" type="button" id="lpb">Text me the link</button></div>
-      <label class="cb"><input type="checkbox" id="lpc"><span>Yes, text me this link, tips for using my page, and offers from ClaimTract. Texts may be sent with automated technology, including AI-assisted messaging. Consent is not required to build your page. Message and data rates may apply. Reply STOP to cancel.</span></label>
-      <input class="hp" id="lph" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <p class="err" id="lpe" role="alert"></p>
-    </div>
-
-    <div class="lp-sec">
-      <h2>Everything on your page, ready on day one.</h2>
-      <p class="sub">You write a little. We do the rest. Nothing to install and nothing to design.</p>
-      <div class="lp-g">
-        <div class="lp-c"><div class="ic">&#10003;</div><h3>Verify my license button</h3><p>Homeowners check your license while you talk. One tap takes them to your record on the state's own site.</p></div>
-        <div class="lp-c"><div class="ic">&#9737;</div><h3>Explains what you do</h3><p>A plain section on what a public adjuster is, so you spend less of the appointment explaining and more helping.</p></div>
-        <div class="lp-c"><div class="ic">?</div><h3>Ten answers homeowners ask</h3><p>Cost, timing, roofers, denials. Each one ends with a way to call you.</p></div>
-        <div class="lp-c"><div class="ic">&#9635;</div><h3>QR code and share button</h3><p>Print it on a card, text it before you knock. Your link, your code.</p></div>
-        <div class="lp-c"><div class="ic">&#9742;</div><h3>Save my contact</h3><p>One tap puts you in their phone, so you're the number they call when the claim gets hard.</p></div>
-        <div class="lp-c"><div class="ic">&#9733;</div><h3>Your story and your areas</h3><p>Your photo, your about, your counties, your social links. All in one place, all yours.</p></div>
-      </div>
-    </div>
-
-    <div class="lp-sec">
-      <h2>Three steps. Then it's live.</h2>
-      <div class="lp-how">
-        <div><b>01</b><h3>Pick a look</h3><p>Storm is bold, Coastal is friendly, Heritage is classic. Switch any time.</p></div>
-        <div><b>02</b><h3>Tell us about you</h3><p>Name, license, a few lines about you, and your photo. Talk it out if you'd rather not type.</p></div>
-        <div><b>03</b><h3>See it, then approve</h3><p>You get a private preview first. Nothing goes live until you press the button.</p></div>
-      </div>
-    </div>
-
-    <div class="lp-note"><img src="/assets/ct-shield.png" alt=""><div><p>I spent most of my career as a public adjuster, fighting for homeowners. I'm out of the industry now, but I built this for the people still doing the work. I'm giving it away because you deserve to look as good as you are.<small>Ezekiel, ClaimTract</small></p></div></div>
-
-    <div class="lp-end"><h2>Ready to see your page?</h2><a class="btn" href="#build" style="font-size:17px;padding:17px 30px">Build my free page</a></div>
+<section class="hero">
+  <video id="hv" autoplay muted loop playsinline poster="/assets/bg/bg-roof-table.jpg"><source src="/assets/bg/bg-roof-table.mp4" type="video/mp4"></video>
+  <div class="top"><div class="w"><b>Free page for public adjusters</b><span>Florida</span></div></div>
+  <div class="w hg"><div class="in">
+    <p class="k">Free for licensed public adjusters</p>
+    <h1>No website? <em>Here's one. Free.</em></h1>
+    <p class="lead" id="lead">A page with your name on it that explains what you do, so you stop explaining it on every call. It works as a website and as an app on your phone. Want to see what yours looks like?</p>
+    <div class="cta"><a class="btn" data-cta href="/free/build/?view=preview">See what you get &rarr;</a><a class="ghost" data-again href="/free/build/?view=preview" hidden>See my page again</a></div>
+    <div class="trust"><span>Free</span><span>No credit card</span><span>You approve it first</span></div>
   </div>
-  <span id="build"></span>
-  <div class="steps" id="steps"><div class="on">1 Pick a look</div><div>2 Your details</div><div>3 Consent</div><div>4 Preview and approve</div></div>
+  <div class="sp sp-hero" id="spHero" hidden aria-label="Sophia from ClaimTract">
+    <div class="sp-top"><i></i><b>Sophia</b><span>ClaimTract</span></div>
+    <div class="sp-v"><video id="sv2" muted loop playsinline preload="none" poster="/assets/7102df40772f1ed99a0c3d6c47072c85.jpg"><source src="/assets/f2808189dcf99ac3f118d638752b9ffa.mp4" type="video/mp4"></video>
+      <button type="button" id="snd2" class="snd">&#128264; Tap to hear Sophia</button></div>
+    <div class="sp-c"><p>You've seen your page. It's yours, free. Those articles on it? We wrote them for you. For $1 for 14 days, I'll show you how to create unlimited articles like them from your own claims, connected to what homeowners are searching for.</p><a href="/engine.html" target="_blank" rel="noopener">See what Sophia does &rarr;</a></div>
+  </div>
+  <div class="phone" id="pgPhone" aria-hidden="true">
+    <div class="ph-cv"></div><div class="ph-av">CM</div>
+    <div class="ph-b"><h3>Cedric Moore</h3><div class="s">Public Adjuster &middot; Orlando, FL</div><span class="ph-badge">Licensed since 2012</span>
+      <div class="ph-h">Storm damage? <em>Get someone in your corner.</em></div>
+      <div class="ph-l p"><span>&#10003; Verify my license</span><span>&rarr;</span></div><div class="ph-l"><span>Book a time with me</span><span>&rarr;</span></div><div class="ph-l"><span>Save my contact</span><span>&rarr;</span></div></div>
+    <div class="ph-bar"><span><i></i>Photo</span><span><i></i>Voice</span><span><i></i>Tools</span><span class="on"><i></i>Share</span><span><i></i>More</span></div>
+  </div></div>
+</section>
 
-  <section class="step on" id="s1">
-    <h2>Pick your look</h2>
-    <p class="sub">You can change it any time. Same content in all three.</p>
-    <div class="tpls" id="tpls">
-      <button class="tpl" data-t="paper" aria-pressed="true"><div class="mini m-paper"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Light</h3><p>Clean and bright. Easy to read on any phone.</p></button>
-      <button class="tpl" data-t="storm" aria-pressed="false"><div class="mini m-storm"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Dark</h3><p>Dark and bold. Built for storm-damage urgency.</p></button>
-    </div>
-    <div class="f" style="margin-top:22px"><label>Your color</label><div class="sw" id="sw"></div><small>It colors your buttons and highlights. Pick the one that feels like you.</small></div>
-    <div class="f"><label>Background video</label><div class="bgs" id="bgs"><button type="button" data-b="roof-table" aria-pressed="true"><img src="/assets/bg/bg-roof-table.jpg" alt=""><span>Kitchen table</span></button><button type="button" data-b="roof-yard" aria-pressed="false"><img src="/assets/bg/bg-roof-yard.jpg" alt=""><span>In the yard</span></button></div><small>Plays quietly behind your headline. Your words sit on a dark band on the left so they're easy to read.</small></div>
-    <div class="nav"><span></span><button class="btn" data-go="2">Continue</button></div>
+<div class="txt"><div class="box">
+  <div><h3>Want the link on your phone?</h3><p>Put in your mobile number and I'll text it to you, so you can build your page from there.</p></div>
+  <form id="tf" onsubmit="return false">
+    <input type="text" id="tn" placeholder="First name" autocomplete="given-name">
+    <input type="tel" id="tp" placeholder="Mobile number" autocomplete="tel">
+    <button class="btn" type="submit">Text me the link</button>
+    <label class="c"><input type="checkbox" id="tc"><span>Yes, text me this link, tips for using my page, and offers from ClaimTract. Texts may be sent with automated technology, including AI-assisted messaging. Consent is not required to build your page. Message and data rates may apply. Reply STOP to cancel.</span></label>
+    <div class="msg" id="tm"></div>
+  </form>
+</div></div>
+
+<div class="w">
+  <section class="pts">
+    <div class="pt"><div class="n">1</div><h3>A website with your name on it</h3><p>Your photo, your story, your service areas, and a button that shows homeowners your license on the state's site.</p></div>
+    <div class="pt"><div class="n">2</div><h3>It explains you for you</h3><p>Text it to a homeowner before you show up. They learn what a public adjuster is and who you are before you knock.</p></div>
+    <div class="pt"><div class="n">3</div><h3>It's an app on your phone</h3><p>Put it on your home screen. Send it to anyone in two taps, by text, email, or social media.</p></div>
+    <div class="pt"><div class="n">4</div><h3>Free. Really.</h3><p>No card, no trial clock. Build it tonight and send it tomorrow.</p></div>
   </section>
 
-  <section class="step" id="s2">
-    <h2>Tell us about you</h2>
-    <p class="sub">This is what goes on your page. Homeowners see it, so make it yours.</p>
-    <div class="grid">
-      <div class="f"><label for="fn">First name</label><input type="text" id="fn" autocomplete="given-name"></div>
-      <div class="f"><label for="ln">Last name</label><input type="text" id="ln" autocomplete="family-name"></div>
-      <div class="f"><label for="ph">Phone homeowners should call</label><input type="tel" id="ph" autocomplete="tel" placeholder="(555) 555-5555"></div>
-      <div class="f"><label for="em">Email</label><input type="email" id="em" autocomplete="email"></div>
-      <div class="f"><label for="ci">City or county you serve</label><input type="text" id="ci"></div>
-      <div class="f"><label for="st">State</label><input type="text" id="st" maxlength="2" placeholder="FL" style="text-transform:uppercase"></div>
-      <div class="f"><label for="lt">License type</label><select id="lt"><option>Public adjuster</option><option>Public adjuster apprentice</option><option>Other</option></select></div>
-      <div class="f"><label for="lic">License number</label><input type="text" id="lic"><small>Shown on your page. Homeowners trust a number they can check.</small></div>
-      <div class="f"><label for="lsy">Licensed since (year)</label><input type="text" id="lsy" inputmode="numeric" maxlength="4" placeholder="2009"><small>Optional. Shows as a badge. It must match your state record.</small></div>
-      <div class="f"><label for="dfs">Your license record link (Florida, optional)</label><input type="text" id="dfs" inputmode="url" autocapitalize="off" autocomplete="off" placeholder="https://licenseesearch.fldfs.com/Licensee/..."><small>Step 1: open the <a href="https://licenseesearch.fldfs.com/" target="_blank" rel="noopener">Florida licensee search</a> and pull up your own license. Step 2: copy the full web address from the top of your browser and paste it here. It becomes a "Verify my license" button on your page.</small></div>
+  <section class="ben">
+    <p class="k">Everything that comes with your free page</p>
+    <h2>A website that works while you're on the roof</h2>
+    <div class="bg">
+      <div class="bc"><h3>Homeowners trust you faster</h3><ul>
+        <li><b>Verify my license</b> button that opens your record on the state's site</li>
+        <li><b>Your own video</b> so they meet you before you knock</li>
+        <li><b>Licensed since</b> badge, your photo and your story</li>
+        <li><b>Languages you speak</b>, hours, and how fast you reply</li>
+        <li><b>Areas you serve</b>, city by city</li>
+      </ul></div>
+      <div class="bc"><h3>You stop explaining yourself</h3><ul>
+        <li><b>Who works on your claim:</b> the insurance company's team, and who works for the homeowner</li>
+        <li><b>What is a public adjuster?</b> Written out in plain words</li>
+        <li><b>How public adjusters get paid</b>, explained honestly</li>
+        <li><b>The questions homeowners ask</b>, already answered</li>
+        <li><b>Before we meet</b> checklist so they have their papers ready</li>
+      </ul></div>
+      <div class="bc"><h3>Homeowners get real help</h3><ul>
+        <li><b>The first 48 hours after damage</b> guide</li>
+        <li><b>Hurricane season checklist</b> they keep coming back to</li>
+        <li><b>Call me</b> and <b>Text me</b> buttons on every screen</li>
+        <li><b>Book a time with me</b> from your Google Calendar or Calendly</li>
+        <li><b>Directions to my office</b> in Google Maps</li>
+      </ul></div>
+      <div class="bc"><h3>It's yours, on your phone</h3><ul>
+        <li><b>An app on your home screen</b>, no app store</li>
+        <li><b>Share in two taps</b> by text, email, WhatsApp or social media</li>
+        <li><b>Your QR code</b> for business cards and door hangers</li>
+        <li><b>Save my contact</b> puts you in their phone in one tap</li>
+        <li><b>Light or dark</b>, your color, and a background video behind your name</li>
+      </ul></div>
     </div>
-    <div class="f"><label>What do you specialize in?</label><div class="chips" id="spec"></div></div>
-    <div class="f"><label for="ar">Areas you serve</label><input type="text" id="ar" placeholder="Osceola County, Kissimmee, St. Cloud"><small>Cities or counties, separated by commas. Up to 10.</small></div>
-    <div class="f">
-      <div class="row2"><label for="ab" style="margin:0">About you (about 250 words)</label><button type="button" class="btn ghost sm" id="mic">Talk instead</button></div>
-      <textarea id="ab" maxlength="2600" placeholder="How long you've done this. What kind of claims you take. Why you do it. What a homeowner can expect when they call you."></textarea>
-      <div class="row2" style="margin-top:6px"><small style="color:var(--dim)">Tip: write it the way you'd explain yourself to a homeowner at her kitchen table.</small><span class="cnt" id="cnt">0 words</span></div>
-    </div>
-    <div class="f"><label for="yt">Your video (YouTube link, optional)</label><input type="text" id="yt" inputmode="url" autocapitalize="off" autocomplete="off" placeholder="https://youtu.be/..."><small>Get on camera for a minute: who you are and what you do. Put it on YouTube, tap Share, copy the link, and paste it here. It plays at the top of your page, so homeowners see who they're dealing with. We don't host it. It plays from YouTube.</small><small id="yte" style="color:#C0392B"></small></div>
-    <div class="f"><label for="bk">Your booking link (optional)</label><input type="text" id="bk" inputmode="url" autocapitalize="off" autocomplete="off" placeholder="https://calendar.app.google/..."><small>Use Google Calendar? Make an appointment schedule in Google Calendar, open its booking page, and copy that link. Calendly works too. It becomes a "Book a time with me" button, and homeowners pick a time right on your calendar.</small></div>
-    <div class="f"><label>Languages you speak</label><div class="lgs" id="lgs"><label><input type="checkbox" value="English" checked> English</label><label><input type="checkbox" value="Spanish"> Spanish</label><label><input type="checkbox" value="Haitian Creole"> Haitian Creole</label><label><input type="checkbox" value="Portuguese"> Portuguese</label></div></div>
-    <div class="grid">
-      <div class="f"><label for="hrs">Office hours (optional)</label><input type="text" id="hrs" maxlength="60" placeholder="Mon to Sat, 8 AM to 7 PM"></div>
-      <div class="f"><label for="rpl">How fast you reply</label><select id="rpl"><option value="">Don't show</option><option>Usually replies within an hour</option><option>Usually replies the same day</option><option>Answers 24/7 after a storm</option></select></div>
-    </div>
-    <div class="f"><label for="oad">Office address (optional)</label><input type="text" id="oad" maxlength="120" placeholder="123 Main St, Orlando, FL 32801"><small>Becomes a "Directions to my office" button that opens Google Maps. Leave it blank if you work from home.</small></div>
-    <div class="grid">
-      <div class="f"><label>Your headshot</label><div class="drop" id="dHead"><span><b>Tap to add</b><br>A clear photo of you</span><input type="file" accept="image/*" id="fHead"></div></div>
-      <div class="f"><label>Cover photo</label><div class="drop" id="dCover"><span><b>Tap to add</b><br>You, your truck, your team, or a storm skyline</span><input type="file" accept="image/*" id="fCover"></div></div>
-    </div>
-    <div class="f"><label>More photos (up to 5)</label><div class="drop"><span><b>Tap to add up to 5</b><br>Photos of you and your work. Please don't include homeowners, their faces or their addresses.</span><input type="file" accept="image/*" multiple id="fGal"></div><div class="gal" id="gal"></div></div>
-    <div class="f"><label>Your social links (optional)</label><small style="margin:0 0 12px">Paste the web address of each page you use. They show as small icons on your page. Leave blank any you don't have.</small><div class="sgrid" id="socf"></div></div>
-    <div class="f"><label>Your links (optional, up to 5)</label><small style="margin:0 0 12px">Add a button for anything you want people to tap: your reviews page, a guide, a booking page, a video. Give each one a short name.</small><div id="lkf"></div></div>
-    <div class="err" id="e2"></div>
-    <div class="nav"><button class="btn ghost" data-go="1">Back</button><button class="btn" data-go="3">Continue</button></div>
+    <div class="bcta"><p>That's a lot of website for free. Why not see how yours looks?</p><a class="btn" data-cta href="/free/build/?view=preview">See what you get &rarr;</a></div>
   </section>
 
-  <section class="step" id="s3">
-    <h2>Two quick agreements</h2>
-    <p class="sub">Both are required. Neither is ticked for you.</p>
-    <div class="consent"><label><input type="checkbox" id="c1"><span>I agree to receive texts and calls from ClaimTract at the number I gave, about my free page and about ClaimTract. Messages and calls may be automated or AI-assisted. Message and data rates may apply. Reply STOP to opt out at any time. Agreeing is not required to buy anything.</span></label></div>
-    <div class="consent"><label><input type="checkbox" id="c2"><span>I agree to the <a href="/terms/" target="_blank" rel="noopener">terms of use</a>.</span></label></div>
-    <div class="err" id="e3"></div>
-    <div class="nav"><button class="btn ghost" data-go="2">Back</button><button class="btn" data-go="4">See my page</button></div>
+  <section class="how">
+    <p class="k">How it works</p>
+    <h2>Three steps. Then it's live.</h2>
+    <div class="st">
+      <div><b>01</b><h3>Pick your look</h3><p>Light or dark, your color, and one of two background videos. Change it any time.</p></div>
+      <div><b>02</b><h3>Tell us about you</h3><p>Name, license, a few lines about you, and your photo. Talk it out if you'd rather not type.</p></div>
+      <div><b>03</b><h3>See it, then approve</h3><p>You get a private preview first. Nothing goes live until you press the button.</p></div>
+    </div>
   </section>
 
-  <section class="step" id="s4">
-    <div id="review">
-      <h2>Here's your page</h2>
-      <div class="banner">This is a private preview. It's hidden from Google and nobody can see it but you, until you approve it.</div>
-      <div class="row2" style="margin-bottom:12px"><div class="chips" id="swap"></div></div>
-      <div class="pvwrap"><div class="pvbar"><i></i><i></i><i></i><span id="url"></span></div><div class="pv" id="pv"></div></div>
-      <div class="err" id="e4"></div>
-      <div class="nav"><button class="btn ghost" data-go="2">Make changes</button><button class="btn" id="approve">Approve and go live</button></div>
-    </div>
-    <div class="done-box" id="done" style="display:none">
-      <h2>Approved. Your page is on its way.</h2>
-      <p class="sub" id="doneMsg"></p>
-      <div class="inst"><h3>Put your page on your phone</h3><p>When your page is live, we'll text you the link. Open it on your phone, tap Share, then Add to Home Screen (on Android, tap the menu, then Install app). It opens like an app, with a Send my page bar so you can text it, email it, or show the QR code in seconds.</p></div>
-      <h2 style="font-size:24px;margin-top:34px">Your free toolkit</h2>
-      <p class="sub">Everything below is yours. Copy it, print it, send it before your next appointment.</p>
-      <div class="tk" id="tk"></div>
-      <div class="trial"><h3>Want your page to fill itself?</h3><p>The ClaimTract engine turns your photos and notes into articles and posts that homeowners find on Google. Try it for $1 for 14 days, and whatever it writes stays on your page.</p><a class="btn" href="https://buy.stripe.com/fZuaEQ5bU38Y7Yh5Q75EY00" target="_blank" rel="noopener">Start for $1</a><small>$1 today. Founding members pay $99 a month after 14 days. Cancel anytime.</small></div>
-      <button class="btn ghost" id="backPage" type="button">Back to my page</button>
-    </div>
-    <p class="fine">ClaimTract is a blogging and syndication app for public adjusters. The free page is your page, and the engine that writes and publishes articles to it is optional.</p>
+  <section class="pitch" id="pitch" hidden>
+    <p class="k">Now that you've seen it</p>
+    <h2>Those pages are ours. Imagine them written from your claims.</h2>
+    <p>We designed and wrote the pillar article and the related articles on your page, and they're yours free. But homeowners search for their own problems, and every claim you work answers one. For just $1 for 14 days, Sophia shows you how to turn your claim photos and voice notes into unlimited articles, built and connected just like these, around the exact questions homeowners type into Google. Why let your best stories sit in your phone?</p>
+    <div class="cta"><a class="btn" data-cta href="/free/build/">Build my free page first &rarr;</a><a class="ghost2" href="/engine.html">See the $1 trial &rarr;</a></div>
   </section>
-  <input class="hp" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <p class="skip" id="skip"><a href="/free/build/" data-skip>Rather skip ahead and build your page now?</a></p>
+
+  <section class="me">
+    <div class="q">&ldquo;</div>
+    <div><p>I was a public adjuster for almost two decades. I'm out of the industry now, but I know how much time you spend explaining what you do. <b>So I built this, and I'm giving it away.</b> Why not see what yours looks like?</p><small>Ezekiel, founder</small></div>
+  </section>
+
+  <section class="drw">
+    <h2>Questions</h2>
+    <div class="dq"><button type="button">What's the catch?</button><div class="da"><div>There isn't one for the page. It's yours, free. Later we'll offer paid tools inside the app for adjusters who want more, and you can ignore them. Why not take the free page and decide later?<br><a data-cta href="/free/build/?view=preview">See what you get &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">I'm not good with tech. Can I still do this?</button><div class="da"><div>If you can fill in a form on your phone, you can do this. You pick a look, type your details, and see your page before anything goes live. Five minutes, start to finish. Ready to try?<br><a data-cta href="/free/build/?view=preview">See what you get &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">I already have a website. Do I need this?</button><div class="da"><div>Keep your website. This is the short page you text a homeowner before an appointment. It loads fast on a phone and links to your website too. Want both working for you?<br><a data-cta href="/free/build/?view=preview">See what you get &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">Who sees my page?</button><div class="da"><div>Only the people you send it to, until you share it more widely. You see a private preview first, and nothing goes live until you approve it. Want to see your preview?<br><a data-cta href="/free/build/?view=preview">See what you get &rarr;</a></div></div></div>
+    <button class="closeall" type="button" id="ca">&uarr; Close questions</button>
+  </section>
+
+  <section class="end">
+    <h2>Build yours tonight.<br>Send it tomorrow.</h2>
+    <p>Free for licensed public adjusters. About 5 minutes.</p>
+    <a class="btn" data-cta href="/free/build/?view=preview">See what you get &rarr;</a>
+  </section>
 </div>
-<script src="/ct-track.js"></script>
-<script src="/vendor/qrcode.js"></script>
-<script>
-(function(){
-document.addEventListener('input',function(e){if(e.target&&e.target.id==='yt'){var v=e.target.value.trim();document.getElementById('yte').textContent=v&&!ytId()?'That doesn\'t look like a YouTube link. On YouTube, tap Share, then Copy link.':''}});
-document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#bgs button');if(!b)return;document.querySelectorAll('#bgs button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});S.bgv=b.dataset.b;try{track('free_bg',S.bgv||'none')}catch(_){}});
-var ENDPOINT='https://app.closegpt.ai/api/input/9u02pn';
-var $=function(i){return document.getElementById(i)};
-var S={tpl:'paper',bgv:'roof-table',acc:null,spec:[],head:null,cover:null,gal:[]};
-var SPECS=['Roof','Wind and hurricane','Water','Fire','Hail','Mold','Theft and vandalism','Commercial'];
-function track(e,s){try{window.__ctT&&window.__ctT(e,s)}catch(x){}}
-/* prefill from the link we text them */
-try{var q=new URLSearchParams(location.search);
- [['fn','fn'],['ln','ln'],['city','ci'],['st','st'],['lic','lic'],['dfs','dfs']].forEach(function(p){var v=q.get(p[0]);if(v)$(p[1]).value=v.slice(0,80)});
- S.lid=q.get('lid')||'';S.ref=(q.get('ref')||'').slice(0,80);}catch(e){}
-/* chips */
-var sp=$('spec');SPECS.forEach(function(n){var b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-pressed','false');b.onclick=function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);var i=S.spec.indexOf(n);if(on&&i<0)S.spec.push(n);if(!on&&i>=0)S.spec.splice(i,1)};sp.appendChild(b)});
-/* template cards */
-var tp=$('tpls');tp.querySelectorAll('.tpl').forEach(function(b){b.onclick=function(){tp.querySelectorAll('.tpl').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');S.tpl=b.dataset.t}});
-var ACC=[['Look default',null],['Amber','#F5A524'],['Teal','#0E7C86'],['Navy','#1F3A6E'],['Crimson','#B3261E'],['Forest','#2E6B3F'],['Violet','#6B3FA0']];
-var swe=$('sw');ACC.forEach(function(a){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',a[0]);b.title=a[0];b.setAttribute('aria-pressed',String(a[1]===S.acc));b.style.background=a[1]||'conic-gradient(#F5A524,#0E7C86,#1F3A6E,#B3261E,#F5A524)';b.onclick=function(){S.acc=a[1];swe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true')};swe.appendChild(b)});
-/* social links */
-var G=function(t){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+t+'</svg>'};
-var SOC=[
- {k:'facebook',n:'Facebook',host:['facebook.com','fb.com','fb.me'],hint:'Open your Facebook page in a browser and copy the address from the top bar.',ic:G('<text x="12" y="18" text-anchor="middle">f</text>')},
- {k:'instagram',n:'Instagram',host:['instagram.com'],hint:'Open your profile on instagram.com in a browser and copy the address.',ic:G('<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".8"/>')},
- {k:'youtube',n:'YouTube',host:['youtube.com','youtu.be'],hint:'Open your channel in a browser and copy the address.',ic:G('<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z"/>')},
- {k:'linkedin',n:'LinkedIn',host:['linkedin.com'],hint:'Open your profile, tap your photo, then copy the address at the top.',ic:G('<text x="12" y="17" text-anchor="middle">in</text>')},
- {k:'tiktok',n:'TikTok',host:['tiktok.com'],hint:'Open your profile on tiktok.com in a browser and copy the address.',ic:G('<path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 4c.4 2.4 1.9 3.9 4.5 4.2"/>')},
- {k:'x',n:'X (Twitter)',host:['x.com','twitter.com'],hint:'Open your profile in a browser and copy the address.',ic:G('<path d="M5 5l14 14M19 5L5 19"/>')},
- {k:'google',n:'Google Business Profile',host:['google.com','g.page','goo.gl','maps.app.goo.gl'],hint:'Search your business on Google, tap Share, and paste the link.',ic:G('<text x="12" y="18" text-anchor="middle">G</text>')},
- {k:'web',n:'Another website',host:[],hint:'Any other site you want to show.',ic:G('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>')}
-];
-var sf=$('socf');SOC.forEach(function(s){var d=document.createElement('div');d.innerHTML='<label for="so_'+s.k+'">'+s.n+'</label><input type="text" id="so_'+s.k+'" inputmode="url" autocapitalize="off" autocomplete="off" placeholder="https://"><small>'+s.hint+'</small>';sf.appendChild(d)});
-function cleanUrl(v,s){v=(v||'').trim();if(!v)return '';if(!/^[a-z][a-z0-9+.-]*:/i.test(v))v='https://'+v;var u;try{u=new URL(v)}catch(e){return null}
- if(u.protocol!=='https:'&&u.protocol!=='http:')return null;var hn=u.hostname.replace(/^www\./,'').replace(/^m\./,'');
- if(s.host.length&&!s.host.some(function(x){return hn===x||hn.endsWith('.'+x)}))return null;return u.href}
-function socials(){var out=[],bad=null;SOC.forEach(function(s){var raw=$('so_'+s.k).value,c=cleanUrl(raw,s);if(c===null){if(!bad)bad=s}else if(c)out.push({s:s,u:c})});return{list:out,bad:bad}}
-/* link buttons */
-var lf=$('lkf');for(var li=0;li<5;li++){var rw=document.createElement('div');rw.className='lkrow';rw.innerHTML='<input type="text" id="ll'+li+'" maxlength="40" placeholder="Button name, like Read my reviews"><input type="text" id="lu'+li+'" inputmode="url" autocapitalize="off" autocomplete="off" placeholder="https://">';lf.appendChild(rw)}
-function dfsId(){var v=$('dfs').value.trim();if(!v)return '';var m=v.match(/^https?:\/\/licenseesearch\.fldfs\.com\/Licensee\/(\d{3,9})\/?$/i)||v.match(/^(\d{3,9})$/);return m?m[1]:null}
-function linkList(){var out=[],bad=false;for(var i=0;i<5;i++){var l=$('ll'+i).value.trim(),u=$('lu'+i).value.trim();if(!l&&!u)continue;var c=l&&u?cleanUrl(u,{host:[]}):null;if(!c)bad=true;else out.push({l:l,u:c})}return{list:out,bad:bad}}
-function qrCanvas(url){var q=qrcode(0,'M');q.addData(url);q.make();var n=q.getModuleCount(),m=4,s=8,c=document.createElement('canvas');c.width=c.height=(n+2*m)*s;var x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.fillStyle='#000';for(var r=0;r<n;r++)for(var k=0;k<n;k++)if(q.isDark(r,k))x.fillRect((k+m)*s,(r+m)*s,s,s);return c}
-function ve(s){return String(s).replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\;')}
-function dl(blob,name){var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
-/* toolkit */
-function cp(txt,btn,done){var ok=function(){var o=btn.dataset.o||btn.textContent;btn.dataset.o=o;btn.textContent=done||'Copied';setTimeout(function(){btn.textContent=o},1600)};
- if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,function(){fb()})}else fb();
- function fb(){var t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');ok()}catch(e){}t.remove()}}
-function vals(){var fp0=$('ph').value.replace(/\D/g,'').slice(-10),yr=$('lsy').value.trim();return{fn:$('fn').value.trim(),ln:$('ln').value.trim(),city:$('ci').value.trim(),st:$('st').value.trim().toUpperCase(),lt:$('lt').value.toLowerCase(),lic:$('lic').value.trim(),yr:yr,fp:fp0.length===10?'('+fp0.slice(0,3)+') '+fp0.slice(3,6)+'-'+fp0.slice(6):$('ph').value.trim(),url:'https://claimtract.app/'+slug(),specs:S.spec.map(function(x){return x.toLowerCase()})}}
-function toolkit(){var v=vals(),nm=v.fn+' '+v.ln,sp=v.specs.length?(v.specs.length>1?v.specs.slice(0,-1).join(', ')+' and '+v.specs[v.specs.length-1]:v.specs[0])+' claims':'property damage claims',yrs=v.yr?'Licensed since '+v.yr+'. ':'';
- var items=[
- ['Text to send before a meeting','Hi, this is '+nm+', a public adjuster. Here is a short page that explains what I do and answers the questions most people have before we meet: '+v.url],
- ['Email to send before a meeting','Subject: Before we meet\n\nHi,\n\nThis is '+nm+'. Before we meet, here is a short page that explains what a public adjuster does and answers the questions most people ask: '+v.url+'\n\nIt will also help if you have these ready: your policy, any letters from your insurance company, photos of the damage, and any repair estimates.\n\nTalk soon,\n'+nm+'\n'+v.fp],
- ['Email signature',nm+'\nPublic adjuster'+(v.yr?' | Licensed since '+v.yr:'')+' | License '+v.lic+'\n'+v.fp+'\n'+v.url],
- ['Short bio for Facebook and Instagram',cap(v.lt)+' serving '+v.city+', '+v.st+'. I work for you, not the insurance company. '+yrs+'Call '+v.fp+'. '+v.url],
- ['Google Business Profile description','I am '+nm+', a '+v.lt+' serving '+v.city+', '+v.st+'. I help property owners with '+sp+'. I read your policy, document the damage, and negotiate with your insurance company on your behalf. I work for you, not the insurance company. '+yrs+'Call '+v.fp+' to talk through your claim. License '+v.lic+'.']
- ];
- var tk=$('tk');tk.innerHTML='';
- items.forEach(function(it){var c=document.createElement('div');c.className='tkc';var h3=document.createElement('h3');h3.textContent=it[0];var ta=document.createElement('textarea');ta.readOnly=true;ta.value=it[1];var b=document.createElement('button');b.type='button';b.className='btn sm';b.textContent='Copy';b.onclick=function(){cp(it[1],b)};c.appendChild(h3);c.appendChild(ta);c.appendChild(b);tk.appendChild(c)});
- var ac=document.createElement('div');ac.className='tkc';ac.innerHTML='<h3>Print and carry</h3><p>A one-page handout with your QR code, your phone number, and what to have ready. Leave it at appointments.</p>';
- var pb=document.createElement('button');pb.type='button';pb.className='btn sm';pb.textContent='Print my one-pager';pb.onclick=function(){printSheet(v)};
- var qb=document.createElement('button');qb.type='button';qb.className='btn ghost sm';qb.textContent='Download my QR code';qb.onclick=function(){qrCanvas(v.url).toBlob(function(b){dl(b,slug()+'-qr.png')},'image/png')};
- ac.appendChild(pb);ac.appendChild(qb);tk.appendChild(ac)}
-function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
-function printSheet(v){var q=qrCanvas(v.url).toDataURL('image/png'),nm=esc(v.fn+' '+v.ln),w=window.open('','_blank');if(!w){alert('Please allow pop-ups for this page to print.');return}
- w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>'+nm+'</title><style>@page{margin:.6in}body{font:16px/1.5 Arial,sans-serif;color:#111;max-width:7.2in;margin:0 auto}h1{font-size:40px;margin:0 0 4px}.s{color:#555;margin:0 0 22px}.ph{font-size:34px;font-weight:700;margin:6px 0 22px}.row{display:flex;gap:28px;align-items:flex-start}img{width:2.1in;height:2.1in}h2{font-size:16px;text-transform:uppercase;letter-spacing:.06em;margin:22px 0 6px}ul{margin:0;padding-left:20px}li{margin:3px 0}.f{margin-top:26px;font-size:12px;color:#777;border-top:1px solid #ccc;padding-top:8px}</style></head><body>'
- +'<h1>'+nm+'</h1><p class="s">'+esc(cap(v.lt))+' &middot; License '+esc(v.lic)+(v.yr?' &middot; Licensed since '+esc(v.yr):'')+' &middot; '+esc(v.city)+', '+esc(v.st)+'</p><div class="ph">'+esc(v.fp)+'</div>'
- +'<div class="row"><div><img src="'+q+'" alt=""><div style="font-size:12px;color:#555;margin-top:4px">Scan for my page</div></div><div><h2 style="margin-top:0">What I do for you</h2><ul><li>Read your policy</li><li>Document the damage</li><li>Negotiate your claim with the insurance company</li></ul><p style="margin:12px 0 0">I work for you, not the insurance company.</p></div></div>'
- +'<h2>What to have ready</h2><ul><li>Your insurance policy, or the declarations page</li><li>Letters and emails from your insurance company</li><li>Photos and videos of the damage</li><li>Repair estimates, invoices and receipts</li><li>A list of damaged belongings</li></ul><div class="f">'+esc(v.url)+' &middot; General information, not legal or insurance advice. Page by ClaimTract.</div></body></html>');
- w.document.close();w.focus();setTimeout(function(){w.print()},400)}
-$('backPage').onclick=function(){$('done').style.display='none';$('review').style.display='block';window.scrollTo({top:0})};
-/* word count */
-function words(){var t=$('ab').value.trim();return t?t.split(/\s+/).length:0}
-$('ab').addEventListener('input',function(){var n=words(),c=$('cnt');c.textContent=n+' words';c.textContent=n+' of about 250 words';c.className='cnt'+(n>=150&&n<=350?' ok':'')});
-/* talk instead */
-var SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=null,live=false;
-if(!SR){$('mic').style.display='none'}else{$('mic').onclick=function(){
- if(live){rec.stop();return}
- rec=new SR();rec.continuous=true;rec.interimResults=false;rec.lang='en-US';
- rec.onresult=function(e){var t='';for(var i=e.resultIndex;i<e.results.length;i++)if(e.results[i].isFinal)t+=e.results[i][0].transcript+' ';var a=$('ab');a.value=(a.value+(a.value&&!/\s$/.test(a.value)?' ':'')+t).slice(0,6000);a.dispatchEvent(new Event('input'))};
- rec.onend=function(){live=false;$('mic').textContent='Talk instead'};
- rec.start();live=true;$('mic').textContent='Stop listening'}}
-/* photos stay in this browser until the page is published */
-function pic(file,cb){if(!file)return;if(file.size>12*1024*1024){alert('That photo is over 12 MB. Please choose a smaller one.');return}cb(URL.createObjectURL(file),file)}
-function drop(d,f,key){$(f).onchange=function(){pic(this.files[0],function(u,file){S[key]={url:u,file:file};d.querySelectorAll('img').forEach(function(i){i.remove()});d.querySelector('span').style.display='none';var im=new Image();im.src=u;im.alt='';d.appendChild(im)})}}
-drop($('dHead'),'fHead','head');drop($('dCover'),'fCover','cover');
-$('fGal').onchange=function(){S.gal=[];var g=$('gal');g.innerHTML='';Array.prototype.slice.call(this.files,0,5).forEach(function(f){pic(f,function(u,file){S.gal.push({url:u,file:file});var im=new Image();im.src=u;im.alt='';g.appendChild(im)})})};
-/* steps */
-var labels=document.querySelectorAll('#steps div');
-function go(n){n=+n;[1,2,3,4].forEach(function(i){$('s'+i).classList.toggle('on',i===n)});labels.forEach(function(l,i){l.className=i+1<n?'done':(i+1===n?'on':'')});window.scrollTo({top:0,behavior:'smooth'});track('free_step',String(n));if(n===4)render()}
-function val2(){var m=[];['fn','ln','ph','em','ci','st','lic'].forEach(function(k){if(!$(k).value.trim())m.push(k)});
- var e=$('e2');if(m.length){e.textContent='Please fill in your name, phone, email, city, state and license number.';return false}
- if(($('ph').value.replace(/\D/g,'')).length<10){e.textContent='That phone number looks short. Please include the area code.';return false}
- if(!/^\S+@\S+\.\S+$/.test($('em').value)){e.textContent='That email address does not look right.';return false}
- if(words()<40){e.textContent='Add a bit more about you, even 40 words, or use Talk instead. You can polish it later.';return false}
- var yr=$('lsy').value.trim();if(yr&&(!/^\d{4}$/.test(yr)||+yr<1950||+yr>new Date().getFullYear())){e.textContent='"Licensed since" should be a four-digit year, like 2009, or leave it blank.';return false}
- var di=dfsId();if(di===null){e.textContent='That license link does not look right. Paste the address of your record from licenseesearch.fldfs.com, or clear the box.';return false}
- var lk=linkList();if(lk.bad){e.textContent='Each link needs a short name and a web address that starts with https. Fix or clear the row.';return false}
- var sc=socials();if(sc.bad){e.textContent='That '+sc.bad.n+' link does not look right. Paste the full web address from your browser, or clear the box.';return false}
- e.textContent='';return true}
-function val3(){var e=$('e3');if(!$('c1').checked||!$('c2').checked){e.textContent='Please tick both boxes to continue.';return false}e.textContent='';return true}
-document.querySelectorAll('[data-go]').forEach(function(b){b.onclick=function(){var n=+b.dataset.go,cur=document.querySelector('section.step.on').id.slice(1);
- if(n>+cur){if(+cur===2&&!val2())return;if(+cur===3&&!val3())return}
- go(n)}});
-/* preview */
-function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function slug(){return(($('fn').value+'-'+$('ln').value).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''))||'your-name'}
-function meta(){var L=[].slice.call(document.querySelectorAll('#lgs input:checked')).map(function(x){return x.value}),h=$('hrs').value.trim(),r=$('rpl').value,o='';
- if(L.length>1||(L.length===1&&L[0]!=='English'))o+='<span>'+esc('Speaks '+L.join(', '))+'</span>';if(h)o+='<span>'+esc(h)+'</span>';if(r)o+='<span class="rp">'+esc(r)+'</span>';return o?'<div class="meta">'+o+'</div>':''}
-function bkUrl(){var u=$('bk').value.trim();if(!u)return '';if(!/^https?:\/\//i.test(u))u='https://'+u;return /^https:\/\/[^\s"'<>]+$/i.test(u)?u:''}
-function ytId(){var u=$('yt').value.trim();if(!u)return '';var m=u.match(/(?:youtu\.be\/|[?&]v=|shorts\/|embed\/|live\/)([A-Za-z0-9_-]{11})/);return m?m[1]:''}
-var CT={"pillar": {"label": "PILLAR ARTICLE · HOMEOWNER GUIDE", "title": "Who Works For You", "intro": ["When a storm hits your home in {{CITY}}, your insurance company opens a file and puts a team of professionals to work right away. Most homeowners assume the person who shows up with a ladder is there to make sure they get paid fairly, but that person works for the carrier, and you have the legal right to bring in your own licensed representative. Do you know who is actually looking out for your side of the claim before you sign anything?", "Filing a claim feels like a simple paperwork process until the first repair estimate comes back way lower than what a local contractor charges. You want to trust that your policy will cover the damage you paid premiums to protect, but insurance contracts are written in dense language that makes it easy to miss money you are owed unless someone reads every page for you. Have you had a chance to look at your policy's actual replacement rules, or would you like me to walk through them with you?"], "quote": "Your insurance company has a full team protecting their bottom line, and you deserve someone protecting yours.", "lead": "The moment you call in a loss and get a claim number, your insurance company puts four different layers of people on your file. You only ever see one of them in person, but knowing how the other three operate behind the scenes helps you understand why claims get delayed or underpaid. Would you like to know what happens to your file after the inspection truck leaves your driveway?", "team": [["The field adjuster", "The one you meet", "They are often an independent contractor hired for the day who may work for several different insurance companies at once. They are usually friendly and polite while measuring and taking photos, but they do not have the authority to decide what you get paid. Have you already had someone walk your property, or are you still waiting for that first visit?"], ["The desk adjuster", "The one you never meet", "They read your claim notes first, tell the field adjuster what to look at, often just the roof, so nobody checks your ceilings or walls, and review the final report line by line. But you can submit your own complete proof of all interior and exterior damage so nothing gets left off the table. Did the person who inspected your home check inside your attic and ceilings?"], ["The supervisor", "Watches the numbers", "The manager who watches the claim numbers and keeps total payouts in line. A desk adjuster's authority can stop at a certain dollar limit, but a documented, line-by-line estimate backed by your policy language can push your claim to a proper review. Are you worried your claim is stuck waiting on someone higher up?"], ["The legal department", "Waiting in the background", "As long as a homeowner accepts the first check and nobody pushes back on a low estimate or a partial denial, the lawyers never have to get involved. But you do not have to accept an unfair settlement just to avoid a fight when a licensed advocate can negotiate the numbers for you."]], "close_h": "Four people work for your insurance company. Who works for you?", "close": "That's my job. I work only for you. I inspect the whole house, inside and out, build my own estimate, and handle the back-and-forth with your insurance company. Are you ready to talk about getting someone in your corner?", "why": "I became a licensed public adjuster in {{LICENSED_SINCE}} because I saw too many good families in {{CITY}} accept low payouts simply because they did not know how the claim system works. Insurance policies are complicated, but when someone explains your rights in plain English and documents every inch of damage, the playing field evens out. Ready to tell me what happened to your home?", "steps": [["Free claim review", "We talk about what happened to your home, look at your policy and any letters you already got from the insurer, and I give you an honest look at where your claim stands, at no cost."], ["Full property inspection", "I come out to your home, inspect the roof, walls, ceilings and hidden areas, and document every bit of damage the carrier may have missed."], ["Estimate and negotiation", "I put together a detailed repair estimate and handle the calls, emails and paperwork with your insurance company so you don't have to."]]}, "faq": [["Why is my first insurance check way smaller than my roofer's estimate?", "Insurance companies usually pay claims in two parts, starting with the depreciated value of your damaged property rather than the full replacement cost. They can also leave out local building code upgrades, labor rates, or hidden water damage that a contractor sees right away. But you may be able to recover the held-back money and add missed items once the full scope of repairs is properly documented and submitted.", "I review your insurer's payout sheet side by side with real local repair costs to find what they left out.", "Want to send over your insurance estimate so we can see why the numbers are so far apart?"], ["The adjuster only spent ten minutes on my roof and never came inside. Is that normal?", "Field adjusters often carry heavy caseloads after a Florida storm and may only have instructions from the desk adjuster to look at one specific area. When they rush through a roof check and skip the attic or ceilings, water intrusion and lifted shingles easily go unrecorded. But an incomplete inspection does not close the door on your claim when you bring in thorough photo and moisture documentation.", "I walk your whole home, inside and out, and document what the first inspection missed.", "Would you like me to come out and do a full top-to-bottom check?"], ["Should I cash the first check the insurance company sent me?", "Many homeowners freeze when a check arrives because they worry that depositing it means the claim is finished forever. In many cases, cashing an initial undisputed payment does not stop you from asking for the rest of what you are owed, but always check the memo line and the letter that came with it to make sure it does not say \"full and final settlement.\"", "I look at the paperwork that came with your check before you endorse it, so you know what rights you keep.", "Did a letter come with that check, and would you like me to look it over with you?"], ["My claim was denied for \"wear and tear.\" Can I still fight it?", "Insurers frequently blame roof leaks and missing shingles on old age or normal wear and tear, especially on Florida roofs over ten years old. A denial letter feels like the final word, but storm wind and hail leave damage patterns that differ from simple aging when documented correctly.", "I inspect denied roofs for storm damage and build a factual response for your carrier.", "When did you get your denial letter, and can we talk about what the roof actually looks like?"], ["How much does it cost to hire a public adjuster in Florida?", "Public adjusters usually work on a contingency fee, which means you pay nothing upfront and pay a percentage of the claim money recovered. Fees vary by claim and by whether the state has declared an emergency, but Florida law caps what we can charge and requires that you get the fee in writing before signing any contract.", "I go over my written fee agreement line by line with you first so there are no surprises.", "Would you like to talk through how the fee works on a claim like yours before you decide?"], ["Will my insurance company drop me or raise my rates if I hire a public adjuster?", "Florida homeowners worry about losing coverage in a tough insurance market, and carriers do adjust rates after major storms. Rate and renewal decisions depend on your insurer and your policy, but hiring a licensed public adjuster is your right, and your agent can tell you how a claim affects your policy.", "I handle the claim professionally and keep your repair timeline on track.", "Are you holding back on getting help because you're worried how your carrier will react?"], ["Should I make repairs before the insurance adjuster comes to look at my house?", "You have a duty under your policy to protect your home from further damage, like tarping a leaking roof or extracting standing water. Tearing out drywall or replacing a roof before the insurer sees it can hurt your claim, but clear photos and videos taken before emergency dry-out protect both your house and your claim.", "I tell you what temporary steps to take right now and how to document everything before permanent work starts.", "Have you already started emergency repairs, or are you figuring out what to do first?"], ["What is \"recoverable depreciation\" and how do I get it back?", "When an insurer calculates your loss, it subtracts a percentage for the age and condition of your roof or flooring and holds that money back until the work is done. That held-back amount is called recoverable depreciation, but if you have a Replacement Cost Value policy, you can claim it once you show proof that repairs are underway or done.", "I track your depreciation holdbacks and submit the right invoices so the carrier releases the rest.", "Do you see a depreciation line on your claim summary that hasn't been paid yet?"], ["Can't my roofer or general contractor just handle the insurance claim for me?", "Good contractors know how to rebuild your house and can give you a fair price for their trade. Under Florida law, a contractor cannot negotiate your insurance settlement unless they also hold a public adjuster license, but working alongside a public adjuster lets your contractor focus on building while I handle the policy and pricing.", "I coordinate directly with your contractor so the approved scope matches what it takes to fix your home.", "Has a contractor already given you a quote your insurance company is pushing back on?"], ["How long do I have to file or reopen a storm claim in Florida?", "Florida has strict deadlines for reporting a new claim and shorter windows for a supplemental claim when hidden damage shows up later. Waiting too long can bar you from collecting money you are owed, but acting quickly preserves your right to reopen an underpaid file.", "I check your date of loss against current Florida deadlines right away.", "When did the damage happen, and would you like to check how much time you have left?"]], "articles": [{"slug": "first-check-smaller", "title": "Why Is My First Insurance Check Smaller Than My Estimate?", "captures": "Why is my insurance payout so low compared to my contractor estimate?", "short": "Your first insurance check is usually smaller because the carrier subtracts depreciation for the age of your home and can leave out hidden repairs or local code upgrades. Under a replacement cost policy, this first check is rarely the final amount owed, but you have to document the missing items and request the rest properly. Have you looked at the line-by-line breakdown that came with your payment yet?", "body": ["Opening an envelope from your insurance company and seeing a check for half of what your contractor quoted is a sinking feeling. Most homeowners assume the insurer simply refused to pay for their roof or interior repairs, but the gap usually comes down to how insurance math works and what the first inspector left off the list. Would you like to know the reasons that check came up short?", "The biggest reason is called depreciation, which is how insurers reduce the value of your shingles, drywall or flooring based on how old they are. If your roof is twelve years old, the company may hold back thousands of dollars from the first check until you prove the repairs are being made, but if you have a Replacement Cost Value policy, that held-back money still belongs to you once the proper paperwork is filed. Do you know whether your policy pays Replacement Cost or Actual Cash Value?", "The second reason is that the first scope of work often misses real construction steps. An estimate may only pay to replace a small patch of shingles or paint one wall, ignoring that brittle shingles break when lifted or paint won't match across an open room, but showing why a partial repair won't work makes the carrier look at the full repair area. Did your insurer's estimate only pay to patch a small section?", "The third reason is hidden damage that nobody looked for during a quick walkthrough. Water travels behind baseboards, under laminate flooring and through attic insulation long before a brown stain shows on your ceiling, but a thorough moisture check and full inspection can bring those unseen repairs into your claim. Has anyone checked behind your walls or inside your attic since the storm?", "Many people also forget the hurricane or all-peril deductible when they look at the bottom line. In Florida, hurricane deductibles are often two to five percent of your home's insured value, which takes a big bite out of the first payout, but when the total damage is undercounted, your deductible can eat almost the whole check. Is your deductible taking up most of the money they sent you?", "Finally, estimating software can use pricing that doesn't reflect what licensed tradespeople in {{CITY}} actually charge after a major storm. Labor and material costs jump when everyone in town needs a roof at the same time, but accurate local repair bids and code requirements help bring the numbers closer to reality. Have you compared the prices on your insurance sheet against a real local bid?"], "quote": "The first check is an opening offer based on a quick look, not the final word on your home.", "next": ["Print the full Statement of Loss and repair estimate, not just the cover letter with the check.", "Ask a licensed local contractor for a detailed, room-by-room estimate to compare against the insurer's list.", "Find the column labeled \"Depreciation\" to see how much money is being held back.", "Photograph any cracked tiles, lifted shingles or interior water spots that aren't on the adjuster's report.", "Call a licensed public adjuster to review both estimates side by side before you sign repair contracts."], "close": "You should not have to drain your savings to cover repairs your insurance policy was supposed to pay for. Many homeowners accept the first check and move on without asking questions, but a careful review of your estimate can uncover repairs and held-back funds that were left out. Want to call or text me, {{FIRST}}, at {{PHONE}} so we can go over your payout sheet together?"}, {"slug": "cash-the-check", "title": "Should I Cash My Insurance Check If It Is Too Low?", "captures": "Should I cash the first check from my insurance company?", "short": "In many cases, cashing a first check for undisputed damages does not stop you from asking for the rest of your claim money. Read the check and any letter with it first to make sure it doesn't say \"full and final settlement,\" but a second set of eyes on the paperwork protects your right to supplement the claim. Have you already deposited the check, or is it still sitting on your kitchen counter?", "body": ["When a check shows up for a fraction of your repair bill, it's smart to pause before walking into the bank. Homeowners hear stories about people signing away their rights by endorsing a low settlement check, but knowing what to look for removes the guesswork so you can get repairs started safely. Would you like to know which words on a check should make you stop?", "Insurance companies generally pay the undisputed amount they agree they owe. Cashing that check gives you money to tarp, dry out or order materials while the rest of the claim is negotiated, but if the memo line or letter says cashing it settles the entire claim, depositing it can lock you out of future payments. Have you checked the front and back of the check for release language?", "Another wrinkle comes when you still have a mortgage on your home in {{CITY}}. Your mortgage company's name will almost always be on the check next to yours, so you can't cash it without their endorsement, but knowing their inspection and draw rules ahead of time keeps your money from getting stuck in red tape. Is your mortgage lender listed on the check?", "Some homeowners hold onto a low check for months, thinking it sends a message. Leaving a check in a drawer doesn't make the carrier raise its offer, and checks can expire after ninety or one hundred eighty days, but depositing an undisputed payment while telling the carrier in writing that you dispute the balance keeps your money working for you. Are you worried that cashing it tells the insurer you agree with their number?", "If your check came without a detailed breakdown, don't rush to spend it before seeing the math. You have the right to see every room, measurement and price the desk adjuster used, but once you have the full estimate, you can deposit the undisputed portion and submit a supplemental claim for everything they missed. Did the insurance company send you the full line-by-line estimate?"], "quote": "Cashing an undisputed check starts your recovery. Signing a final release ends your claim.", "next": ["Read the memo line, the back of the check, and every page of the letter in the envelope.", "Look for phrases like \"full and final payment,\" \"release of all claims\" or \"accord and satisfaction\" before signing.", "Keep the check stub and take a clear photo of the check for your claim folder.", "If your mortgage company is on the check, call its loss draft department to learn the endorsement steps.", "Have a licensed public adjuster review the Statement of Loss so you can file a supplement for the unpaid balance."], "close": "A small first check doesn't mean your claim is over, as long as you handle the paperwork carefully from day one. Insurance companies issue partial payments every day, and many homeowners are too nervous or confused to ask for the rest, but you can use that first check to protect your home while I work for the full amount owed under your policy. Ready to call or text {{FIRST}} at {{PHONE}} so we can check that letter together before you go to the bank?"}, {"slug": "adjuster-only-roof", "title": "What To Do When the Adjuster Only Looked at My Roof", "captures": "The insurance adjuster only checked my roof and ignored the inside damage. What do I do?", "short": "When an adjuster only inspects your roof and skips the inside of your home, your estimate can miss hidden water damage, wet insulation and stained ceilings. Field adjusters often follow narrow instructions from a desk adjuster, but you can request a re-inspection and submit full interior documentation to get every damaged room included. Did the adjuster who visited ever ask to step inside?", "body": ["It happens after almost every windstorm in {{CITY}}: a ladder goes up, someone walks the shingles for ten minutes, and they drive away without knocking on your front door. Homeowners feel brushed off when an inspector ignores the inside of the house, but understanding why they skip the interior shows you how to get those rooms added to your claim. Would you like to know why the field adjuster stayed outside?", "Many field adjusters are independent contractors given instructions from the desk adjuster before they arrive. If your first phone report only mentioned roof damage, the inspection may have been set up for the roof only, but wind-driven rain and lifted shingles often push water into your attic and down into your drywall. Have you noticed musty smells, bubbled paint or faint yellow rings on your ceilings since the storm?", "Even when water hasn't soaked through to your living room ceiling yet, wet attic insulation and roof decking cause serious problems in Florida's heat and humidity. Wet insulation trapped above your drywall invites mold and wood rot, but documenting moisture in the attic shows the storm damage goes deeper than a few missing shingles. Has anyone climbed into your attic with a flashlight since the storm?", "Water also travels sideways along rafters and wires, so a leak over the garage can show up as warped flooring or swollen baseboards two rooms away. A ten-minute roof walk will never connect those dots, but a complete room-by-room inspection ties your interior damage back to the storm opening on your roof. Are you seeing water spots or warped trim in rooms that aren't right under the roof damage?", "If you already got an estimate that only lists roof items, your claim file is incomplete. Insurance companies won't pay to paint ceilings, replace wet insulation or dry out drywall unless someone puts those measurements and photos in front of the desk adjuster, but a complete interior and exterior scope gives them what they need to reopen the file and account for the whole house. Would you like help documenting the inside of your home before the damage gets worse?"], "quote": "A storm rarely stops at the shingles, and your inspection shouldn't stop there either.", "next": ["Walk through every room in daylight and look closely at ceilings, crown molding, window frames and closets.", "Take clear, well-lit photos and videos of every stain, crack or swollen baseboard you find.", "If it's safe, check your attic hatch for damp insulation or dark water trails on the rafters.", "Write down the date you first noticed each spot so your file has a clear timeline.", "Call a licensed public adjuster for a full top-to-bottom inspection."], "close": "You pay for coverage on your entire home, not just the shingles on top of it. Letting an incomplete inspection stand can leave you paying out of pocket for drywall, paint and insulation months from now, but a thorough interior inspection puts the full truth of your loss on the record. Want to call or text {{FIRST}} at {{PHONE}} to schedule a complete walkthrough of your home?"}, {"slug": "wear-and-tear-denial", "title": "My Roof Claim Was Denied for Wear and Tear. Now What?", "captures": "How do I fight a homeowners insurance denial for wear and tear?", "short": "A denial letter blaming \"wear and tear\" is one of the most common responses Florida homeowners get, especially on roofs over ten years old. Insurance companies sometimes blame age when wind damage is subtle, but a denial letter is not the final word if a proper inspection shows a recent storm damaged your roof. Did your denial letter say your roof simply died of old age?", "body": ["Getting a denial letter after years of paying premiums on time feels like a slap in the face. The letter usually quotes policy exclusions and says your leaks or missing shingles are normal aging, but subtle wind creases and lifted seals can be mistaken for ordinary wear and tear. Would you like to know the difference between an old roof and a storm-damaged roof?", "Every roof in {{CITY}} takes a beating from the Florida sun, and older shingles lose granules over time. High winds leave specific damage: shingles lift, bend back, crease across the top and lose their seal so rain blows underneath, but a quick look from the ground or a rushed photo report can miss broken seals until someone checks the shingles by hand. Did the adjuster actually check whether your shingles were unsealed or creased?", "Another reason insurers deny older roofs is that brittle shingles crack when a roofer lifts them to slide in a replacement. When a repair attempt breaks the surrounding shingles, building rules can require replacing more than a patch, but carriers sometimes call that brittleness wear and tear. Has a local roofer told you your roof is too brittle to patch?", "Many homeowners put the denial letter in a drawer and start looking at loans to pay for a new roof themselves. Walking away without a second opinion means paying for it all yourself, but having a licensed public adjuster re-inspect the roof and respond with clear photo evidence can give the carrier a reason to take a second look. Are you about to pay out of pocket just because the first letter said no?", "Time matters once you get a denial, because your roof is still exposed to the next afternoon storm and Florida sets deadlines for disputing a claim decision. Leaving damaged shingles alone can lead to new leaks the insurer may blame on neglect, but acting quickly lets you protect your home and dispute the decision while the storm evidence is still fresh. When did you get your denial letter, and have you kept the water out since?"], "quote": "An old roof can still be damaged by a storm, and a denial letter is not the final word.", "next": ["Save the denial letter and its envelope, and write down the date you received it.", "Ask your insurance company for the field adjuster's photos and inspection report.", "Tarp any active leaks right away and keep the receipt for the tarp and labor.", "Don't let anyone tear off the roof before you get a second inspection.", "Have a licensed public adjuster inspect the roof for wind creases, unsealed tabs and storm patterns."], "close": "Many homeowners give up the moment they read a denial letter. You don't have to take one adjuster's opinion as the final truth when your own eyes tell you the roof was fine before the storm hit {{CITY}}, but you need clear, documented proof to make the carrier take a second look. Ready to call or text {{FIRST}} at {{PHONE}} so we can review your denial letter and look at your roof together?"}]};
-function render(){
- var fn=esc($('fn').value.trim()),ln=esc($('ln').value.trim()),ph=$('ph').value.trim(),d=ph.replace(/\D/g,''),city=esc($('ci').value.trim()),st=esc($('st').value.trim().toUpperCase()),lic=esc($('lic').value.trim()),lt=esc($('lt').value);
- var fp=d.length>=10?'('+d.slice(-10,-7)+') '+d.slice(-7,-4)+'-'+d.slice(-4):ph;var name=fn+' '+ln,about=esc($('ab').value.trim());
- var cover=S.cover?'style="background-image:url('+S.cover.url+')"':'';
- var tags=S.spec.length?'<div class="tags">'+S.spec.map(function(t){return '<span>'+esc(t)+' claims</span>'}).join('')+'</div>':'';
- var head=S.head?'<div class="hs" style="background-image:url('+S.head.url+')" role="img" aria-label="'+name+'"></div>':'<div class="hs hsi" aria-hidden="true"><span>'+esc((fn.charAt(0)+ln.charAt(0)).toUpperCase())+'</span></div>';
- var gal=S.gal.length?'<div class="sec"><h2>Photos</h2><div class="pg">'+S.gal.map(function(g){return '<img src="'+g.url+'" alt="">'}).join('')+'</div></div>':'';
- var sc=socials(),soc=sc.list.length?'<div class="soc">'+sc.list.map(function(x){return '<a href="'+esc(x.u)+'" target="_blank" rel="noopener nofollow" aria-label="'+esc(x.s.n)+'" title="'+esc(x.s.n)+'">'+x.s.ic+'</a>'}).join('')+'</div>':'';
- var dfsU=dfsId()?'https://licenseesearch.fldfs.com/Licensee/'+dfsId():'',ll=(dfsU?[{l:'Verify my license',u:dfsU,v:1}]:[]).concat(bkUrl()?[{l:'Book a time with me',u:bkUrl()}]:[]).concat($('oad').value.trim()?[{l:'Directions to my office',u:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent($('oad').value.trim())}]:[]).concat(linkList().list),lks=ll.length?'<div class="sec" style="padding-bottom:0"><div class="links">'+ll.map(function(x){return '<a class="lk" href="'+esc(x.u)+'" target="_blank" rel="noopener'+(x.v?'':' nofollow')+'">'+(x.v?'<span style="display:flex;align-items:center;gap:10px"><img src="/assets/ct-shield.png" alt="" style="width:20px;height:auto">'+esc(x.l)+'</span>':esc(x.l))+'</a>'}).join('')+'</div></div>':'',share='<div class="share"><div id="qrslot"></div><div class="sb"><button type="button" id="vcfBtn">Save my contact</button><button type="button" id="qrBtn">Download QR</button><button type="button" id="shBtn">Share my page</button></div></div>',yr2=$('lsy').value.trim(),badge=yr2?'<div class="badge"><img src="/assets/ct-shield.png" alt="">Licensed since '+esc(yr2)+'</div>':'';
- var ar=$('ar').value.split(',').map(function(x){return x.trim().slice(0,40)}).filter(Boolean).slice(0,10),areas=ar.length?'<div class="sec"><h2>Areas I serve</h2><div class="tags" style="margin-top:0">'+ar.map(function(a){return '<span>'+esc(a)+'</span>'}).join('')+'</div></div>':'',ready='<div class="sec rdyw"><h2>Before we meet</h2><p class="pay" style="margin-bottom:14px">If you have these handy, our first conversation goes faster:</p><ul class="rdy"><li>Your insurance policy, or at least the declarations page</li><li>Letters and emails from your insurance company</li><li>Photos and videos of the damage</li><li>Repair estimates, invoices and receipts</li><li>A list of damaged belongings</li></ul></div>',ver=(st==='FL'||dfsU?' &middot; <a href="'+(dfsU||'https://licenseesearch.fldfs.com/')+'" target="_blank" rel="noopener" style="color:var(--p-ac)">Check my license</a>':''),
- tel='tel:+1'+d.slice(-10),wpa='<div class="sec wpa"><h2>What is a public adjuster?</h2><p class="big">A public adjuster is a licensed insurance professional you hire to handle your insurance claim. I\'m '+fn+', and I work for you, the property owner, not for the insurance company.</p>'
- +'<div class="tri"><div><b>01</b><h3>Read your policy</h3><p>I go through your coverage, endorsements and exclusions so you know what to ask for.</p></div><div><b>02</b><h3>Document the damage</h3><p>I inspect the property, photograph and measure the loss, list what was damaged, and build the repair estimate.</p></div><div><b>03</b><h3>Negotiate your claim</h3><p>I present your claim to the insurance company, answer what it asks for, and work toward a fair settlement for you.</p></div></div>'
- +'<h4>How a public adjuster is paid</h4><p class="pay">Most public adjusters charge a percentage of what the claim recovers, and some charge a flat or hourly fee. Fees vary by state and by adjuster, and the fee comes out of the settlement. Ask any adjuster to put the fee in writing before you sign anything.</p>'
- +'<h4>Who is who on your claim</h4><div class="who"><div><b>Insurance company adjuster</b><span>Works for the insurer and values the claim for the insurer.</span></div><div><b>Contractor</b><span>Repairs or rebuilds the damage. Usually cannot negotiate your claim for you.</span></div><div><b>Insurance attorney</b><span>Handles legal disputes and lawsuits.</span></div><div class="me"><b>Public adjuster</b><span>Works only for you on your claim. That\'s me.</span></div></div>'
- +'<div class="wcta"><p>Not sure your claim is big enough to need one? Call me, '+fn+', and we\'ll talk it through.</p><div class="cta"><a href="'+tel+'">Call '+esc(fp)+'</a><a href="sms:+1'+d.slice(-10)+'">Text me</a></div><small>General information, not legal or insurance advice.</small></div></div>';
- var GUIDES=[["The first 48 hours after damage", ["Get everyone safe. If the house isn’t safe, leave it.", "Stop more damage if you can do it safely: tarp the roof, shut off the water, dry what you can.", "Take photos and video of everything before you clean up. Wide shots first, then close-ups.", "Keep damaged materials if you can. Don’t throw them out until the damage is documented.", "Save every receipt: tarps, fans, water removal, a hotel, meals.", "Report the claim to your insurance company and write down your claim number.", "Don’t sign anything you don’t understand."], "Not sure what to photograph? Call me and I’ll walk you through it."], ["Hurricane season checklist", ["Find your policy and save a copy on your phone and in your email.", "Know your hurricane deductible. It’s often a percentage of your home’s value, not a flat amount.", "Walk through your house and record a video of every room, opening closets and drawers.", "Photograph your roof, windows and the outside of the house from every side.", "Keep receipts for big purchases in one folder.", "Save my number in your phone now, before the storm."], "Want me to look at your policy before the season starts?"]];
-var guides='<div class="sec gds"><h2>Guides for homeowners</h2>'+GUIDES.map(function(g){return '<details class="gd"><summary>'+g[0]+'</summary><div class="ans"><ul class="rdy">'+g[1].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul><p class="sc">'+g[2]+'</p><a href="'+tel+'">Call '+esc(fp)+'</a></div></details>'}).join('')+'</div>';
-var TK=function(x){return esc(x).replace(/\{\{FIRST\}\}/g,fn).replace(/\{\{FULL_NAME\}\}/g,name).replace(/\{\{CITY\}\}/g,city||'your area').replace(/\{\{STATE\}\}/g,st).replace(/\{\{PHONE\}\}/g,esc(fp)).replace(/\{\{LICENSED_SINCE\}\}/g,esc($('lsy').value.trim()||'Florida'))};
- var P=CT.pillar,slugv=slug();
- var team='<div class="sec team"><p class="tk" style="color:#0E9F6E">'+P.label+'</p><h2>'+TK(P.title)+'</h2><p class="by">'+city+', '+st+' &middot; By '+name+', Licensed Public Adjuster</p>'+P.intro.map(function(x){return '<p class="ti">'+TK(x)+'</p>'}).join('')
- +'<figure class="pq"><blockquote>&ldquo;'+TK(P.quote)+'&rdquo;</blockquote><div class="cta"><a href="'+tel+'">Call '+fn+'</a><a href="sms:+1'+d.slice(-10)+'">Text '+fn+'</a></div></figure>'
- +'<p class="ti">'+TK(P.lead)+'</p><div class="chain">'+P.team.map(function(t,i){return '<div class="tc"><b>'+(i+1)+'</b><h3>'+t[0]+'</h3><p class="r">'+t[1]+'</p><p>'+TK(t[2])+'</p></div>'}).join('')+'</div>'
- +'<div class="yours"><div><p class="tk" style="margin:0 0 6px">Your side of your claim</p><h3>'+TK(P.close_h)+'</h3><p>'+TK(P.close)+'</p></div><a href="'+tel+'">Call '+fn+' &middot; '+esc(fp)+'</a></div>'
- +'<p class="tn">General information. Every insurance company handles claims its own way.</p></div>';
- var steps='<div class="sec stp"><h2>What happens when you call '+fn+'</h2><div class="sg">'+P.steps.map(function(t,i){return '<div><b>0'+(i+1)+'</b><h3>'+t[0]+'</h3><p>'+TK(t[1])+'</p></div>'}).join('')+'</div></div>';
- var rel='<div class="sec rel"><p class="tk">Related articles</p><h2>More answers for homeowners</h2><div class="rg">'+CT.articles.map(function(a){return '<a class="rc" href="/'+slugv+'/'+a.slug+'/"><span class="rl">RELATED ARTICLE</span><h3>'+TK(a.title)+'</h3><p>Answers: &ldquo;'+TK(a.captures)+'&rdquo;</p><span class="rr">Read it &rarr;</span></a>'}).join('')+'</div></div>';
- var FAQ=CT.faq;
-var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(function(q){return '<details><summary>'+TK(q[0])+'</summary><div class="ans"><p>'+TK(q[1])+'</p><p>'+TK(q[2])+'</p><p class="sc">'+TK(q[3])+'</p><a href="'+tel+'">Call '+esc(fp)+'</a></div></details>'}).join('')+'<p style="margin:18px 4px 0;font-size:13px;color:var(--p-mut)">Learn more from the National Association of Public Insurance Adjusters at <a href="https://www.napia.com/what-is-a-public-adjuster" target="_blank" rel="noopener nofollow" style="color:var(--p-ac)">napia.com</a>. General information, not legal or insurance advice.</p></div>';
- var pv=$('pv');pv.className='pv '+S.tpl;pv.style.removeProperty('--p-ac');pv.style.removeProperty('--p-acx');pv.style.removeProperty('--p-act');
- if(S.acc){var hx=S.acc,r=parseInt(hx.slice(1,3),16),g=parseInt(hx.slice(3,5),16),bl=parseInt(hx.slice(5,7),16),lum=(0.299*r+0.587*g+0.114*bl)/255;pv.style.setProperty('--p-ac',hx);pv.style.setProperty('--p-acx',lum>.6?'#111':'#fff');pv.style.setProperty('--p-act','rgb('+Math.round(r*.6)+','+Math.round(g*.6)+','+Math.round(bl*.6)+')')}
- pv.innerHTML='<div class="own" id="own"><span>Send my page</span><button type="button" data-s="share">Share</button><button type="button" data-s="sms">Text</button><button type="button" data-s="mail">Email</button><button type="button" data-s="wa">WhatsApp</button><button type="button" data-s="copy">Copy link</button></div><div class="nv"><div class="nm">'+name+'</div><a class="call" href="tel:+1'+d.slice(-10)+'">Call '+esc(fp)+'</a></div>'
- +'<div class="hero2'+(S.bgv?' hasv':'')+'" '+(S.bgv?'':cover)+'>'+(S.bgv?'<video class="hv" autoplay muted loop playsinline preload="auto" poster="/assets/bg/bg-'+S.bgv+'.jpg"><source src="/assets/bg/bg-'+S.bgv+'.mp4" type="video/mp4"></video>':'')+badge+meta()+'<h1>Storm damage?<br><em>Get someone in your corner.</em></h1><p class="lead">'+lt+' serving '+city+', '+st+'. I work for you, not the insurance company.</p><div class="cta"><a href="tel:+1'+d.slice(-10)+'">Call me</a><a href="sms:+1'+d.slice(-10)+'">Text me</a></div></div>'
- +(ytId()?'<div class="sec" style="padding-bottom:0"><h2>Meet '+fn+'</h2><div class="ytv"><iframe src="https://www.youtube-nocookie.com/embed/'+ytId()+'?rel=0" title="Meet '+fn+'" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div></div>':'')+lks+team+wpa+'<div class="sec"><div class="abt"><div>'+head+soc+share+'</div><div><h2>About '+fn+'</h2><p>'+(about||TK(P.why))+'</p>'+tags+'</div></div></div>'+steps+gal
- +areas+ready+guides+faq+rel+'<footer><span>'+name+' · '+lt+' · License '+lic+ver+'</span><a class="gfp" href="https://claimtract.app/free/?ref='+slug()+'&src=page" target="_blank" rel="noopener"><img src="/assets/ct-shield.png" alt="" style="width:16px;height:auto"><span>Get a free page like this</span><small>Page by ClaimTract</small></a></footer>'
- +'<div class="dg" id="dg"><div class="dgi"><div class="dgp"><video id="dgv" preload="none" playsinline controls poster="/assets/pa-dog.jpg"><source src="/assets/pa-explainer.mp4" type="video/mp4"></video><button type="button" id="dgx">Close</button></div><button type="button" class="dgl" id="dgl">What is a public adjuster?</button><button type="button" class="dgb" id="dgb" aria-label="Play video" style="background-image:url(/assets/pa-dog.jpg)">&#9654;</button></div></div>';
- var dg=$('dg');if(dg){var dv=$('dgv');var op=function(){dg.classList.add('open');try{dv.play()}catch(e){};track('free_dog_play')};$('dgb').onclick=op;$('dgl').onclick=op;$('dgx').onclick=function(){dv.pause();dg.classList.remove('open')};fetch('/assets/pa-explainer.mp4',{method:'HEAD'}).then(function(r){if(!r.ok)dg.remove()}).catch(function(){dg.remove()})}
- var pageUrl='https://claimtract.app/'+slug(),qc=qrCanvas(pageUrl);$('qrslot').appendChild(qc);
- var sMsg='Hi, this is '+$('fn').value.trim()+' '+$('ln').value.trim()+', a public adjuster. This short page explains what I do and answers what homeowners ask after property damage: '+pageUrl;
- pv.querySelectorAll('.own button').forEach(function(bt){bt.onclick=function(){var k=bt.getAttribute('data-s');
-  if(k==='share'&&navigator.share){navigator.share({title:$('fn').value.trim()+' '+$('ln').value.trim()+', public adjuster',text:sMsg,url:pageUrl}).catch(function(){})}
-  else if(k==='share'||k==='copy'){try{navigator.clipboard.writeText(pageUrl);bt.textContent='Copied'}catch(e){bt.textContent='Copy it from the address bar'}setTimeout(function(){bt.textContent=k==='copy'?'Copy link':'Share'},1600)}
-  else if(k==='sms'){location.href='sms:?&body='+encodeURIComponent(sMsg)}
-  else if(k==='mail'){location.href='mailto:?subject='+encodeURIComponent('A short page about what I do')+'&body='+encodeURIComponent(sMsg)}
-  else if(k==='wa'){window.open('https://wa.me/?text='+encodeURIComponent(sMsg),'_blank','noopener')}
-  track('free_send',k)}});
- $('qrBtn').onclick=function(){qc.toBlob(function(b){dl(b,slug()+'-qr.png')},'image/png')};
- $('vcfBtn').onclick=function(){var f=$('fn').value.trim(),l=$('ln').value.trim(),v=['BEGIN:VCARD','VERSION:3.0','N:'+ve(l)+';'+ve(f)+';;;','FN:'+ve(f+' '+l),'TITLE:Public Adjuster','TEL;TYPE=WORK,VOICE:'+$('ph').value.trim(),'ADR;TYPE=WORK:;;;'+ve($('ci').value.trim())+';'+ve($('st').value.trim().toUpperCase())+';;US','URL:'+pageUrl,'NOTE:'+ve('License '+$('lic').value.trim()),'END:VCARD'].join('\r\n');dl(new Blob([v],{type:'text/vcard'}),slug()+'.vcf')};
- $('shBtn').onclick=function(){var b=this,t=$('fn').value.trim()+' '+$('ln').value.trim()+', public adjuster';if(navigator.share){navigator.share({title:t,text:'A short page that explains what I do and answers the questions most people ask.',url:pageUrl}).catch(function(){})}else{cp(pageUrl,b,'Link copied')}};
- pv.querySelectorAll('.faq details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)pv.querySelectorAll('.faq details').forEach(function(o){if(o!==d)o.open=false})})});
- $('url').textContent='claimtract.app/'+slug()+'  (private preview)';
- var sw=$('swap');sw.innerHTML='';[['paper','Light'],['storm','Dark']].forEach(function(t){var b=document.createElement('button');b.type='button';b.textContent=t[1];b.setAttribute('aria-pressed',String(S.tpl===t[0]));b.onclick=function(){S.tpl=t[0];render();track('free_swap',t[0])};sw.appendChild(b)});
- track('free_preview')}
-/* approve */
-$('approve').onclick=function(){
- if($('hp').value)return;var b=this;b.disabled=true;b.textContent='Sending...';
- var p=new URLSearchParams();
- p.set('firstName',$('fn').value.trim());p.set('lastName',$('ln').value.trim());p.set('phone',$('ph').value.trim());p.set('email',$('em').value.trim());
- p.set('textField',$('ci').value.trim());p.set('textField1',$('st').value.trim().toUpperCase());
- p.set('license',$('lic').value.trim());p.set('type',$('lt').value);p.set('source','free-page');p.set('channel','text');
- p.set('consent_time',new Date().toISOString());p.set('clicked','no');
- p.set('consent_version','2026-11-19-page-v1');p.set('consent_text',$('c1').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);
- p.set('link','https://claimtract.app/'+slug());p.set('background',S.bgv||'none');if(bkUrl())p.set('booking',bkUrl());if(ytId())p.set('video','https://youtu.be/'+ytId());
- if(S.lid)p.set('call_id',S.lid);if(S.ref)p.set('referred_by',S.ref);
- try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(e){}
- fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()})
- .catch(function(){}).then(function(){
-  track('free_approve');
-  $('review').style.display='none';$('done').style.display='block';toolkit();
-  $('doneMsg').textContent='We\'re setting up claimtract.app/'+slug()+' with the '+S.tpl.charAt(0).toUpperCase()+S.tpl.slice(1)+' look. We\'ll text you the moment it\'s live. Questions before then? Just reply to that text.';
-  window.scrollTo({top:0,behavior:'smooth'})})};
-})();
-</script>
+<footer>Page by ClaimTract</footer>
 
 <script>
 (function(){
-var EP='https://app.closegpt.ai/api/input/9u02pn',$=function(i){return document.getElementById(i)};
-function digits(v){return v.replace(/\D/g,'')}
-if($('lpb'))$('lpb').onclick=function(){
- var e=$('lpe');e.textContent='';
- if($('lph').value)return;
- var n=$('lpn').value.trim(),ph=$('lpp').value.trim();
- if(!n){e.textContent='Please add your first name.';return}
- if(digits(ph).length<10){e.textContent='Please add a 10-digit mobile number.';return}
- if(!$('lpc').checked){e.textContent='Please tick the box so I can text you the link.';return}
- var b=this;b.disabled=true;b.textContent='Sending...';
- var q;try{q=new URLSearchParams(location.search)}catch(x){q=new URLSearchParams('')}
- var p=new URLSearchParams();
- p.set('firstName',n);p.set('phone',ph);p.set('source','free-lander');if(q.get('ref'))p.set('referred_by',q.get('ref').slice(0,80));p.set('channel','text');
- p.set('consent_time',new Date().toISOString());p.set('clicked','no');
- p.set('consent_version','2026-11-19-lander-v1');p.set('consent_text',$('lpc').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);
- p.set('link','https://claimtract.app/free');
- if(q.get('lid'))p.set('call_id',q.get('lid'));
- try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(x){}
- fetch(EP,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()}).catch(function(){}).then(function(){
-  try{window.__ctT&&window.__ctT('free_lander_text')}catch(x){}
-  $('lpTxt').innerHTML='<h3>Got it, '+n.replace(/[<>&"]/g,'')+'.</h3><p class="s" style="margin:0">I\'ll text the link to your phone. You can also start right now with the button above.</p>';
- });
-};
+var qs=document.querySelectorAll('.dq'),ca=document.getElementById('ca');
+function shut(q){q.classList.remove('open');q.querySelector('.da').style.maxHeight='0'}
+qs.forEach(function(q){q.querySelector('button').onclick=function(){var o=q.classList.contains('open');qs.forEach(shut);if(!o){q.classList.add('open');var a=q.querySelector('.da');a.style.maxHeight=a.scrollHeight+'px'}ca.classList.toggle('on',!o)}});
+ca.onclick=function(){qs.forEach(shut);ca.classList.remove('on')};
+function seg(id,fn){var el=document.getElementById(id);el.querySelectorAll('button').forEach(function(b){b.onclick=function(){el.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});fn(b.dataset.v)}})}
+var hv=document.getElementById('hv');
+
+
+
+function wire(v,b){b.onclick=function(){if(v.muted){v.muted=false;v.loop=false;v.currentTime=0;var p=v.play();if(p&&p.catch)p.catch(function(){});b.innerHTML='&#128263; Mute'}else{v.muted=true;b.innerHTML='&#128264; Tap to hear Sophia'}};v.addEventListener('ended',function(){v.muted=true;v.loop=true;v.play();b.innerHTML='&#128264; Tap to hear Sophia again'})}
+var sv2=document.getElementById('sv2');wire(sv2,document.getElementById('snd2'));
+function seen(on){document.getElementById('spHero').hidden=!on;document.getElementById('pgPhone').hidden=on;if(on){var p=sv2.play();if(p&&p.catch)p.catch(function(){})}else{sv2.pause()}
+ }
+function flag(){try{return localStorage.getItem('ct_seen_sample')==='1'}catch(e){return false}}
+document.querySelectorAll('[data-sample]').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('ct_seen_sample','1')}catch(e){}})});
+function check(){if(flag())seen(true)}
+window.addEventListener('focus',check);document.addEventListener('visibilitychange',function(){if(!document.hidden)check()});check();
+
+
+
+
+
+var Q=new URLSearchParams(location.search),P=new URLSearchParams();['fn','ln','lic','city','st','dfs','ph','lsy','lid','ref'].forEach(function(k){if(Q.get(k))P.set(k,Q.get(k).slice(0,80))});var PS=P.toString();
+function T(e,x){try{window.__ctT&&window.__ctT(e,x)}catch(_){}}
+var fn=(Q.get('fn')||'').replace(/[<>&"]/g,'');
+if(fn){document.querySelector('.hero .k').textContent='Made for '+fn+(Q.get('ln')?' '+Q.get('ln').replace(/[<>&"]/g,''):'');document.getElementById('lead').textContent=fn+', your page is already started from your state license record. See what it looks like, then make it yours. It works as a website and as an app on your phone.'}
+function back(){return Q.get('back')==='1'||flag()}
+function setLinks(){var b=back();document.querySelectorAll('[data-cta]').forEach(function(a){a.href=b?'/free/build/'+(PS?'?'+PS:''):'/free/build/?view=preview'+(PS?'&'+PS:'');a.innerHTML=b?'Build my free page &rarr;':'See what you get &rarr;';a.onclick=function(){T(b?'free_build_click':'free_sample_click')}});
+ document.querySelectorAll('[data-again]').forEach(function(a){a.hidden=!b;a.href='/free/build/?view=preview'+(PS?'&'+PS:'')});
+ document.getElementById('pitch').hidden=!b;document.getElementById('skip').hidden=b;document.querySelector('[data-skip]').href='/free/build/'+(PS?'?'+PS:'');}
+var _seen=seen;seen=function(on){_seen(on);setLinks()};
+document.getElementById('tf').onsubmit=function(){var m=document.getElementById('tm'),n=document.getElementById('tn').value.trim(),ph=document.getElementById('tp').value.trim();
+ if(!n||ph.replace(/\D/g,'').length<10){m.textContent='Put in your first name and a 10-digit mobile number.';return false}
+ if(!document.getElementById('tc').checked){m.textContent='Tick the box so I can text you the link.';return false}
+ var p=new URLSearchParams();p.set('firstName',n);p.set('phone',ph);p.set('source','free-lander');if(Q.get('ref'))p.set('referred_by',Q.get('ref').slice(0,80));p.set('channel','text');
+ p.set('consent_time',new Date().toISOString());p.set('clicked','no');p.set('consent_version','2026-11-19-lander-v1');p.set('consent_text',document.getElementById('tc').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);p.set('link','https://claimtract.app/free');if(Q.get('lid'))p.set('call_id',Q.get('lid'));try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(x){}
+ m.textContent='Sending...';fetch('https://app.closegpt.ai/api/input/9u02pn',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()}).catch(function(){}).then(function(){T('free_lander_text');document.querySelector('.txt .box').innerHTML='<div><h3>Got it, '+n.replace(/[<>&"]/g,'')+'.</h3><p>I&#39;ll text the link to your phone. You can also keep going right here.</p></div>'});return false};
+
+if(Q.get('back')==='1'){try{localStorage.setItem('ct_seen_sample','1')}catch(e){}}check();setLinks();T('free_landing_view',back()?'back':'first');
 })();
 </script>
+<script src="/ct-track.js"></script>
 </body>
 </html>
