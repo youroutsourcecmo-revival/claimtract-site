@@ -236,6 +236,8 @@ a.btn{display:inline-block;text-decoration:none}
 .pv .hero2.hasv .cta a:nth-child(2){color:#fff;border-color:rgba(255,255,255,.7);background:rgba(0,0,0,.25)}
 @media(max-width:640px){.pv .hero2.hasv{min-height:600px}.pv .hero2.hasv::before{background:linear-gradient(0deg,rgba(10,12,16,.92) 0%,rgba(10,12,16,.7) 45%,rgba(10,12,16,.15) 80%)}}
 @media(prefers-reduced-motion:reduce){.pv .hero2.hasv .hv{display:none}.pv .hero2.hasv{background:#111 center/cover}}
+.pv .nv,.pv .sec,.pv footer,.pv .hero2{padding-left:max(26px,calc((100% - 1040px)/2));padding-right:max(26px,calc((100% - 1040px)/2))}
+.pv .hsi{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--p-ac),rgba(128,128,128,.12))}.pv .hsi span{font:800 64px Inter,sans-serif;color:#fff;letter-spacing:.02em;text-shadow:0 2px 12px rgba(0,0,0,.2)}
 </style>
 </head>
 <body>
@@ -500,7 +502,7 @@ function render(){
  var fp=d.length>=10?'('+d.slice(-10,-7)+') '+d.slice(-7,-4)+'-'+d.slice(-4):ph;var name=fn+' '+ln,about=esc($('ab').value.trim());
  var cover=S.cover?'style="background-image:url('+S.cover.url+')"':'';
  var tags=S.spec.length?'<div class="tags">'+S.spec.map(function(t){return '<span>'+esc(t)+' claims</span>'}).join('')+'</div>':'';
- var head=S.head?'<div class="hs" style="background-image:url('+S.head.url+')" role="img" aria-label="'+name+'"></div>':'<div class="hs" aria-hidden="true"></div>';
+ var head=S.head?'<div class="hs" style="background-image:url('+S.head.url+')" role="img" aria-label="'+name+'"></div>':'<div class="hs hsi" aria-hidden="true"><span>'+esc((fn.charAt(0)+ln.charAt(0)).toUpperCase())+'</span></div>';
  var gal=S.gal.length?'<div class="sec"><h2>Photos</h2><div class="pg">'+S.gal.map(function(g){return '<img src="'+g.url+'" alt="">'}).join('')+'</div></div>':'';
  var sc=socials(),soc=sc.list.length?'<div class="soc">'+sc.list.map(function(x){return '<a href="'+esc(x.u)+'" target="_blank" rel="noopener nofollow" aria-label="'+esc(x.s.n)+'" title="'+esc(x.s.n)+'">'+x.s.ic+'</a>'}).join('')+'</div>':'';
  var dfsU=dfsId()?'https://licenseesearch.fldfs.com/Licensee/'+dfsId():'',ll=(dfsU?[{l:'Verify my license',u:dfsU,v:1}]:[]).concat(bkUrl()?[{l:'Book a time with me',u:bkUrl()}]:[]).concat($('oad').value.trim()?[{l:'Directions to my office',u:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent($('oad').value.trim())}]:[]).concat(linkList().list),lks=ll.length?'<div class="sec" style="padding-bottom:0"><div class="links">'+ll.map(function(x){return '<a class="lk" href="'+esc(x.u)+'" target="_blank" rel="noopener'+(x.v?'':' nofollow')+'">'+(x.v?'<span style="display:flex;align-items:center;gap:10px"><img src="/assets/ct-shield.png" alt="" style="width:20px;height:auto">'+esc(x.l)+'</span>':esc(x.l))+'</a>'}).join('')+'</div></div>':'',share='<div class="share"><div id="qrslot"></div><div class="sb"><button type="button" id="vcfBtn">Save my contact</button><button type="button" id="qrBtn">Download QR</button><button type="button" id="shBtn">Share my page</button></div></div>',yr2=$('lsy').value.trim(),badge=yr2?'<div class="badge"><img src="/assets/ct-shield.png" alt="">Licensed since '+esc(yr2)+'</div>':'';
