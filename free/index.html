@@ -503,6 +503,7 @@ $('approve').onclick=function(){
  p.set('textField',$('ci').value.trim());p.set('textField1',$('st').value.trim().toUpperCase());
  p.set('license',$('lic').value.trim());p.set('type',$('lt').value);p.set('source','free-page');p.set('channel','text');
  p.set('consent_time',new Date().toISOString());p.set('clicked','no');
+ p.set('consent_version','2026-11-19-page-v1');p.set('consent_text',$('c1').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);
  p.set('link','https://claimtract.app/'+slug());
  if(S.lid)p.set('call_id',S.lid);
  try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(e){}
@@ -531,6 +532,7 @@ if($('lpb'))$('lpb').onclick=function(){
  var p=new URLSearchParams();
  p.set('firstName',n);p.set('phone',ph);p.set('source','free-lander');p.set('channel','text');
  p.set('consent_time',new Date().toISOString());p.set('clicked','no');
+ p.set('consent_version','2026-11-19-lander-v1');p.set('consent_text',$('lpc').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);
  p.set('link','https://claimtract.app/free');
  if(q.get('lid'))p.set('call_id',q.get('lid'));
  try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(x){}
