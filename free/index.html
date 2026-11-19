@@ -46,7 +46,7 @@ label{display:block;font-weight:600;font-size:14px;margin:0 0 6px}
 .f{margin-bottom:16px}.f small{display:block;color:var(--dim);margin-top:5px;font-size:13px}
 input[type=text],input[type=tel],input[type=email],select,textarea{width:100%;background:#111317;border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:13px 14px;font:inherit}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--or);outline-offset:1px;border-color:transparent}
-textarea{min-height:230px;resize:vertical;line-height:1.55}
+textarea{min-height:190px;resize:vertical;line-height:1.55}
 .chips{display:flex;flex-wrap:wrap;gap:8px}.chips button{background:#111317;border:1px solid var(--line);color:var(--mut);padding:9px 14px;border-radius:99px;font:600 14px Inter,sans-serif;cursor:pointer}.chips button[aria-pressed=true]{background:var(--or);color:#111;border-color:var(--or)}
 .drop{border:2px dashed var(--line);border-radius:12px;padding:16px;text-align:center;color:var(--mut);cursor:pointer;position:relative;min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#111317}
 .drop:hover{border-color:var(--or)}.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
@@ -99,6 +99,35 @@ textarea{min-height:230px;resize:vertical;line-height:1.55}
 .pv.heritage .tags span{border-radius:3px}
 .pv .pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.pv .pg img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--p-r)}
 .pv footer{padding:26px;border-top:1px solid rgba(128,128,128,.25);font:14px Inter,sans-serif;color:var(--p-mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.soc{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.soc a{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--p-ac);color:var(--p-ac);text-decoration:none;background:transparent;transition:.15s}
+.soc a:hover{background:var(--p-ac);color:var(--p-acx)}
+.soc svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.soc svg text{fill:currentColor;stroke:none;font:800 15px Inter,sans-serif}
+.pv.heritage .soc a{border-radius:4px}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:640px){.sgrid{grid-template-columns:1fr}}
+.pv .wpa h2{margin-bottom:10px}
+.pv .wpa .big{font-size:20px;line-height:1.55;color:var(--p-tx);margin:0 0 26px;max-width:680px}
+.pv .tri{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:30px}
+.pv .tri div{background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:var(--p-r);padding:18px}
+.pv .tri b{display:block;font:800 13px 'JetBrains Mono',monospace;color:var(--p-ac);letter-spacing:.08em;margin-bottom:6px}
+.pv .tri h3{margin:0 0 6px;font-size:18px}.pv .tri p{margin:0;color:var(--p-mut);font-size:15px;line-height:1.55}
+.pv .wpa h4{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--p-ac);margin:0 0 8px;font-family:Inter,sans-serif}
+.pv .wpa .pay{color:var(--p-mut);margin:0 0 28px;max-width:680px;font-size:16px;line-height:1.6}
+.pv .who{border-top:1px solid rgba(128,128,128,.25)}.pv .who div{display:grid;grid-template-columns:190px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid rgba(128,128,128,.25);font-size:15px}
+@media(max-width:560px){.pv .who div{grid-template-columns:1fr;gap:2px}}
+.pv .who b{color:var(--p-tx)}.pv .who span{color:var(--p-mut)}.pv .who .me b,.pv .who .me span{color:var(--p-ac);font-weight:700}
+.pv .wcta{margin-top:30px;padding:24px;border-radius:var(--p-r);background:var(--p-card);border:1px solid rgba(128,128,128,.25)}
+.pv .wcta p{margin:0 0 14px;font-size:18px;color:var(--p-tx)}.pv .wcta small{display:block;margin-top:12px;color:var(--p-mut);font-size:12.5px}
+.pv .faq details{border-bottom:1px solid rgba(128,128,128,.28)}.pv .faq details:first-of-type{border-top:1px solid rgba(128,128,128,.28)}
+.pv .faq summary{list-style:none;cursor:pointer;padding:17px 4px;font:700 17px Inter,sans-serif;display:flex;justify-content:space-between;gap:14px;align-items:center;color:var(--p-tx)}
+.pv .faq summary::-webkit-details-marker{display:none}
+.pv .faq summary::after{content:"+";color:var(--p-ac);font-size:24px;line-height:1;flex:none}
+.pv .faq details[open] summary::after{content:"\2013"}
+.pv .faq .ans{padding:0 4px 20px;color:var(--p-mut);font-size:16px;line-height:1.65;max-width:680px}
+.pv .faq .ans p{margin:0 0 12px}.pv .faq .ans .sc{color:var(--p-tx);font-weight:600}
+.pv .faq .ans a{display:inline-block;background:var(--p-ac);color:var(--p-acx);padding:11px 18px;border-radius:var(--p-r);font:700 15px Inter,sans-serif;text-decoration:none}
+.pv.heritage .faq .ans a{color:#fff}
 .done-box{text-align:center;padding:50px 10px}.done-box h2{font-size:34px}
 .fine{color:var(--dim);font-size:13px;margin-top:30px}
 .hp{position:absolute;left:-9999px}
@@ -139,8 +168,8 @@ textarea{min-height:230px;resize:vertical;line-height:1.55}
     </div>
     <div class="f"><label>What do you specialize in?</label><div class="chips" id="spec"></div></div>
     <div class="f">
-      <div class="row2"><label for="ab" style="margin:0">About you (about 500 words)</label><button type="button" class="btn ghost sm" id="mic">Talk instead</button></div>
-      <textarea id="ab" placeholder="How long you've done this. What kind of claims you take. Why you do it. What a homeowner can expect when they call you."></textarea>
+      <div class="row2"><label for="ab" style="margin:0">About you (about 250 words)</label><button type="button" class="btn ghost sm" id="mic">Talk instead</button></div>
+      <textarea id="ab" maxlength="2600" placeholder="How long you've done this. What kind of claims you take. Why you do it. What a homeowner can expect when they call you."></textarea>
       <div class="row2" style="margin-top:6px"><small style="color:var(--dim)">Tip: write it the way you'd explain yourself to a homeowner at her kitchen table.</small><span class="cnt" id="cnt">0 words</span></div>
     </div>
     <div class="grid">
@@ -148,6 +177,7 @@ textarea{min-height:230px;resize:vertical;line-height:1.55}
       <div class="f"><label>Cover photo</label><div class="drop" id="dCover"><span><b>Tap to add</b><br>You, your truck, your team, or a storm skyline</span><input type="file" accept="image/*" id="fCover"></div></div>
     </div>
     <div class="f"><label>More photos (up to 5)</label><div class="drop"><span><b>Tap to add up to 5</b><br>Photos of you and your work. Please don't include homeowners, their faces or their addresses.</span><input type="file" accept="image/*" multiple id="fGal"></div><div class="gal" id="gal"></div></div>
+    <div class="f"><label>Your social links (optional)</label><small style="margin:0 0 12px">Paste the web address of each page you use. They show as small icons on your page. Leave blank any you don't have.</small><div class="sgrid" id="socf"></div></div>
     <div class="err" id="e2"></div>
     <div class="nav"><button class="btn ghost" data-go="1">Back</button><button class="btn" data-go="3">Continue</button></div>
   </section>
@@ -194,9 +224,26 @@ try{var q=new URLSearchParams(location.search);
 var sp=$('spec');SPECS.forEach(function(n){var b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-pressed','false');b.onclick=function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);var i=S.spec.indexOf(n);if(on&&i<0)S.spec.push(n);if(!on&&i>=0)S.spec.splice(i,1)};sp.appendChild(b)});
 /* template cards */
 var tp=$('tpls');tp.querySelectorAll('.tpl').forEach(function(b){b.onclick=function(){tp.querySelectorAll('.tpl').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');S.tpl=b.dataset.t}});
+/* social links */
+var G=function(t){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+t+'</svg>'};
+var SOC=[
+ {k:'facebook',n:'Facebook',host:['facebook.com','fb.com','fb.me'],hint:'Open your Facebook page in a browser and copy the address from the top bar.',ic:G('<text x="12" y="18" text-anchor="middle">f</text>')},
+ {k:'instagram',n:'Instagram',host:['instagram.com'],hint:'Open your profile on instagram.com in a browser and copy the address.',ic:G('<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".8"/>')},
+ {k:'youtube',n:'YouTube',host:['youtube.com','youtu.be'],hint:'Open your channel in a browser and copy the address.',ic:G('<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z"/>')},
+ {k:'linkedin',n:'LinkedIn',host:['linkedin.com'],hint:'Open your profile, tap your photo, then copy the address at the top.',ic:G('<text x="12" y="17" text-anchor="middle">in</text>')},
+ {k:'tiktok',n:'TikTok',host:['tiktok.com'],hint:'Open your profile on tiktok.com in a browser and copy the address.',ic:G('<path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 4c.4 2.4 1.9 3.9 4.5 4.2"/>')},
+ {k:'x',n:'X (Twitter)',host:['x.com','twitter.com'],hint:'Open your profile in a browser and copy the address.',ic:G('<path d="M5 5l14 14M19 5L5 19"/>')},
+ {k:'google',n:'Google Business Profile',host:['google.com','g.page','goo.gl','maps.app.goo.gl'],hint:'Search your business on Google, tap Share, and paste the link.',ic:G('<text x="12" y="18" text-anchor="middle">G</text>')},
+ {k:'web',n:'Another website',host:[],hint:'Any other site you want to show.',ic:G('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>')}
+];
+var sf=$('socf');SOC.forEach(function(s){var d=document.createElement('div');d.innerHTML='<label for="so_'+s.k+'">'+s.n+'</label><input type="text" id="so_'+s.k+'" inputmode="url" autocapitalize="off" autocomplete="off" placeholder="https://"><small>'+s.hint+'</small>';sf.appendChild(d)});
+function cleanUrl(v,s){v=(v||'').trim();if(!v)return '';if(!/^[a-z][a-z0-9+.-]*:/i.test(v))v='https://'+v;var u;try{u=new URL(v)}catch(e){return null}
+ if(u.protocol!=='https:'&&u.protocol!=='http:')return null;var hn=u.hostname.replace(/^www\./,'').replace(/^m\./,'');
+ if(s.host.length&&!s.host.some(function(x){return hn===x||hn.endsWith('.'+x)}))return null;return u.href}
+function socials(){var out=[],bad=null;SOC.forEach(function(s){var raw=$('so_'+s.k).value,c=cleanUrl(raw,s);if(c===null){if(!bad)bad=s}else if(c)out.push({s:s,u:c})});return{list:out,bad:bad}}
 /* word count */
 function words(){var t=$('ab').value.trim();return t?t.split(/\s+/).length:0}
-$('ab').addEventListener('input',function(){var n=words(),c=$('cnt');c.textContent=n+' words';c.className='cnt'+(n>=250&&n<=700?' ok':'')});
+$('ab').addEventListener('input',function(){var n=words(),c=$('cnt');c.textContent=n+' words';c.textContent=n+' of about 250 words';c.className='cnt'+(n>=150&&n<=350?' ok':'')});
 /* talk instead */
 var SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=null,live=false;
 if(!SR){$('mic').style.display='none'}else{$('mic').onclick=function(){
@@ -218,6 +265,7 @@ function val2(){var m=[];['fn','ln','ph','em','ci','st','lic'].forEach(function(
  if(($('ph').value.replace(/\D/g,'')).length<10){e.textContent='That phone number looks short. Please include the area code.';return false}
  if(!/^\S+@\S+\.\S+$/.test($('em').value)){e.textContent='That email address does not look right.';return false}
  if(words()<40){e.textContent='Add a bit more about you, even 40 words, or use Talk instead. You can polish it later.';return false}
+ var sc=socials();if(sc.bad){e.textContent='That '+sc.bad.n+' link does not look right. Paste the full web address from your browser, or clear the box.';return false}
  e.textContent='';return true}
 function val3(){var e=$('e3');if(!$('c1').checked||!$('c2').checked){e.textContent='Please tick both boxes to continue.';return false}e.textContent='';return true}
 document.querySelectorAll('[data-go]').forEach(function(b){b.onclick=function(){var n=+b.dataset.go,cur=document.querySelector('section.step.on').id.slice(1);
@@ -233,11 +281,31 @@ function render(){
  var tags=S.spec.length?'<div class="tags">'+S.spec.map(function(t){return '<span>'+esc(t)+' claims</span>'}).join('')+'</div>':'';
  var head=S.head?'<div class="hs" style="background-image:url('+S.head.url+')" role="img" aria-label="'+name+'"></div>':'<div class="hs" aria-hidden="true"></div>';
  var gal=S.gal.length?'<div class="sec"><h2>Photos</h2><div class="pg">'+S.gal.map(function(g){return '<img src="'+g.url+'" alt="">'}).join('')+'</div></div>':'';
+ var sc=socials(),soc=sc.list.length?'<div class="soc">'+sc.list.map(function(x){return '<a href="'+esc(x.u)+'" target="_blank" rel="noopener nofollow" aria-label="'+esc(x.s.n)+'" title="'+esc(x.s.n)+'">'+x.s.ic+'</a>'}).join('')+'</div>':'';
+ var tel='tel:+1'+d.slice(-10),wpa='<div class="sec wpa"><h2>What is a public adjuster?</h2><p class="big">A public adjuster is a licensed insurance professional you hire to handle your insurance claim. I\'m '+fn+', and I work for you, the property owner, not for the insurance company.</p>'
+ +'<div class="tri"><div><b>01</b><h3>Read your policy</h3><p>I go through your coverage, endorsements and exclusions so you know what to ask for.</p></div><div><b>02</b><h3>Document the damage</h3><p>I inspect the property, photograph and measure the loss, list what was damaged, and build the repair estimate.</p></div><div><b>03</b><h3>Negotiate your claim</h3><p>I present your claim to the insurance company, answer what it asks for, and work toward a fair settlement for you.</p></div></div>'
+ +'<h4>How a public adjuster is paid</h4><p class="pay">Most public adjusters charge a percentage of what the claim recovers, and some charge a flat or hourly fee. Fees vary by state and by adjuster, and the fee comes out of the settlement. Ask any adjuster to put the fee in writing before you sign anything.</p>'
+ +'<h4>Who is who on your claim</h4><div class="who"><div><b>Insurance company adjuster</b><span>Works for the insurer and values the claim for the insurer.</span></div><div><b>Contractor</b><span>Repairs or rebuilds the damage. Usually cannot negotiate your claim for you.</span></div><div><b>Insurance attorney</b><span>Handles legal disputes and lawsuits.</span></div><div class="me"><b>Public adjuster</b><span>Works only for you on your claim. That\'s me.</span></div></div>'
+ +'<div class="wcta"><p>Not sure your claim is big enough to need one? Call me, '+fn+', and we\'ll talk it through.</p><div class="cta"><a href="'+tel+'">Call '+esc(fp)+'</a><a href="sms:+1'+d.slice(-10)+'">Text me</a></div><small>General information, not legal or insurance advice.</small></div></div>';
+ var FAQ=[
+ ['Is it good to have a public adjuster?','It can be, especially when a claim is large, complicated, or the insurance company\'s numbers do not match the damage you see. A public adjuster reads your policy, documents the loss, and deals with the insurance company so you do not have to. It is not right for every claim, and the fee comes out of the settlement, so ask any adjuster for a plain answer on whether your claim is worth it.','Is your claim one you would rather handle alone, or with someone who does this every day?'],
+ ['What should you not say to a claims adjuster?','Stick to facts. Do not guess at the cause or the age of the damage, do not say it is probably nothing, and do not agree to anything you do not understand. You can say you will answer in writing after you have reviewed your policy. Keep every email and letter, and note the date and time of every call. This is general information, not legal advice.','Would it help to have someone with you on that first call?'],
+ ['Why is my first check smaller than the estimate?','Many policies pay actual cash value first, which is the repair cost minus depreciation and your deductible, and pay the rest after repairs are done. Terms and deadlines vary by policy, so read the letter that came with the check.','Want me to look at your letter with you?'],
+ ['The insurance estimate is too low and no contractor will take the job. What now?','That is common. Estimates and real repair costs can differ for many reasons, such as missed items, labor, and materials. A public adjuster builds a line-by-line estimate of the true cost to repair and presents the difference to the insurance company in writing.','Do you have the insurance estimate and your contractor\'s number in front of you?'],
+ ['Should I repair anything before the insurance adjuster comes out?','Protect your home from further damage first, such as tarping a roof or drying out water. Take photos and keep receipts, and keep damaged materials if you can. Do not start permanent repairs until the damage is documented.','Not sure what to document before the inspection?'],
+ ['If I cash the insurance check, is the claim over?','Not always, but read the check, the letter and anything you are asked to sign first. A partial payment is often not the final one. When in doubt, ask before you cash it.','Want a second set of eyes on that letter before you do anything?'],
+ ['Will filing a claim raise my rates or get my policy cancelled?','It can affect renewal or rates in some cases, but not in every case, and rules vary by state and insurer. Your insurance agent is the right person to ask about your own policy. A public adjuster can explain how the claim process works.','Are you holding off on a claim because of that worry?'],
+ ['What does a public adjuster cost?','Most charge a percentage of what the claim recovers. Some charge a flat or hourly fee. It varies by state and adjuster, so get the fee in writing before you sign anything.','Want me to explain how it would work on your claim?'],
+ ['Who does a public adjuster work for?','A public adjuster represents you, the policyholder, not the insurance company, and not your roofer or contractor. Public adjusters are licensed by the state and are generally held to a duty to act in good faith for the person they represent.','Do you want someone on your side of the table?'],
+ ['Can my contractor handle my insurance claim?','Contractors are good at repairs, but handling the insurance claim is a separate role. In many places, negotiating a claim for someone requires a public adjuster or attorney license. A contractor and a public adjuster can work well together when each stays in their own lane.','Want me to coordinate with your contractor so you get both done right?']
+];
+var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(function(q){return '<details><summary>'+esc(q[0])+'</summary><div class="ans"><p>'+esc(q[1])+'</p><p class="sc">'+esc(q[2])+'</p><a href="'+tel+'">Call '+esc(fp)+'</a></div></details>'}).join('')+'<p style="margin:18px 4px 0;font-size:13px;color:var(--p-mut)">Learn more from the National Association of Public Insurance Adjusters at <a href="https://www.napia.com/what-is-a-public-adjuster" target="_blank" rel="noopener nofollow" style="color:var(--p-ac)">napia.com</a>. General information, not legal or insurance advice.</p></div>';
  var pv=$('pv');pv.className='pv '+S.tpl;
  pv.innerHTML='<div class="nv"><div class="nm">'+name+'</div><a class="call" href="tel:+1'+d.slice(-10)+'">Call '+esc(fp)+'</a></div>'
  +'<div class="hero2" '+cover+'><h1>Storm damage?<br><em>Get someone in your corner.</em></h1><p class="lead">'+lt+' serving '+city+', '+st+'. I work for you, not the insurance company.</p><div class="cta"><a href="tel:+1'+d.slice(-10)+'">Call me</a><a href="sms:+1'+d.slice(-10)+'">Text me</a></div></div>'
- +'<div class="sec"><div class="abt">'+head+'<div><h2>About '+fn+'</h2><p>'+about+'</p>'+tags+'</div></div></div>'+gal
- +'<footer><span>'+name+' · '+lt+' · License '+lic+'</span><span>'+city+', '+st+'</span></footer>';
+ +wpa+'<div class="sec"><div class="abt"><div>'+head+soc+'</div><div><h2>About '+fn+'</h2><p>'+about+'</p>'+tags+'</div></div></div>'+gal
+ +faq+'<footer><span>'+name+' · '+lt+' · License '+lic+'</span><span>'+city+', '+st+'</span></footer>';
+ pv.querySelectorAll('.faq details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)pv.querySelectorAll('.faq details').forEach(function(o){if(o!==d)o.open=false})})});
  $('url').textContent='claimtract.app/'+slug()+'  (private preview)';
  var sw=$('swap');sw.innerHTML='';[['storm','Storm'],['coastal','Coastal'],['heritage','Heritage']].forEach(function(t){var b=document.createElement('button');b.type='button';b.textContent=t[1];b.setAttribute('aria-pressed',String(S.tpl===t[0]));b.onclick=function(){S.tpl=t[0];render();track('free_swap',t[0])};sw.appendChild(b)});
  track('free_preview')}
