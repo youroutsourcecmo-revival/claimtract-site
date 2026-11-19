@@ -129,7 +129,7 @@ textarea{min-height:190px;resize:vertical;line-height:1.55}
 .pv .faq .ans a{display:inline-block;background:var(--p-ac);color:var(--p-acx);padding:11px 18px;border-radius:var(--p-r);font:700 15px Inter,sans-serif;text-decoration:none}
 .pv.heritage .faq .ans a{color:#fff}
 .pv .badge{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:var(--p-card);border:1px solid var(--p-ac);color:var(--p-tx);border-radius:99px;padding:7px 14px 7px 10px;font:700 13px Inter,sans-serif;margin-bottom:16px}
-.pv .badge svg{width:18px;height:18px;fill:none;stroke:var(--p-ac);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.pv .badge img{width:22px;height:auto;flex:none;display:block}
 .pv.heritage .badge{border-radius:3px}
 .done-box{text-align:center;padding:50px 10px}.done-box h2{font-size:34px}
 .fine{color:var(--dim);font-size:13px;margin-top:30px}
@@ -287,7 +287,7 @@ function render(){
  var head=S.head?'<div class="hs" style="background-image:url('+S.head.url+')" role="img" aria-label="'+name+'"></div>':'<div class="hs" aria-hidden="true"></div>';
  var gal=S.gal.length?'<div class="sec"><h2>Photos</h2><div class="pg">'+S.gal.map(function(g){return '<img src="'+g.url+'" alt="">'}).join('')+'</div></div>':'';
  var sc=socials(),soc=sc.list.length?'<div class="soc">'+sc.list.map(function(x){return '<a href="'+esc(x.u)+'" target="_blank" rel="noopener nofollow" aria-label="'+esc(x.s.n)+'" title="'+esc(x.s.n)+'">'+x.s.ic+'</a>'}).join('')+'</div>':'';
- var yr2=$('lsy').value.trim(),badge=yr2?'<div class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Licensed since '+esc(yr2)+'</div>':'';
+ var yr2=$('lsy').value.trim(),badge=yr2?'<div class="badge"><img src="/assets/ct-shield.png" alt="">Licensed since '+esc(yr2)+'</div>':'';
  var tel='tel:+1'+d.slice(-10),wpa='<div class="sec wpa"><h2>What is a public adjuster?</h2><p class="big">A public adjuster is a licensed insurance professional you hire to handle your insurance claim. I\'m '+fn+', and I work for you, the property owner, not for the insurance company.</p>'
  +'<div class="tri"><div><b>01</b><h3>Read your policy</h3><p>I go through your coverage, endorsements and exclusions so you know what to ask for.</p></div><div><b>02</b><h3>Document the damage</h3><p>I inspect the property, photograph and measure the loss, list what was damaged, and build the repair estimate.</p></div><div><b>03</b><h3>Negotiate your claim</h3><p>I present your claim to the insurance company, answer what it asks for, and work toward a fair settlement for you.</p></div></div>'
  +'<h4>How a public adjuster is paid</h4><p class="pay">Most public adjusters charge a percentage of what the claim recovers, and some charge a flat or hourly fee. Fees vary by state and by adjuster, and the fee comes out of the settlement. Ask any adjuster to put the fee in writing before you sign anything.</p>'
@@ -310,7 +310,7 @@ var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(functio
  pv.innerHTML='<div class="nv"><div class="nm">'+name+'</div><a class="call" href="tel:+1'+d.slice(-10)+'">Call '+esc(fp)+'</a></div>'
  +'<div class="hero2" '+cover+'>'+badge+'<h1>Storm damage?<br><em>Get someone in your corner.</em></h1><p class="lead">'+lt+' serving '+city+', '+st+'. I work for you, not the insurance company.</p><div class="cta"><a href="tel:+1'+d.slice(-10)+'">Call me</a><a href="sms:+1'+d.slice(-10)+'">Text me</a></div></div>'
  +wpa+'<div class="sec"><div class="abt"><div>'+head+soc+'</div><div><h2>About '+fn+'</h2><p>'+about+'</p>'+tags+'</div></div></div>'+gal
- +faq+'<footer><span>'+name+' · '+lt+' · License '+lic+'</span><span>'+city+', '+st+'</span></footer>';
+ +faq+'<footer><span>'+name+' · '+lt+' · License '+lic+'</span><span style="display:flex;align-items:center;gap:8px"><img src="/assets/ct-shield.png" alt="" style="width:16px;height:auto">Page by ClaimTract</span></footer>';
  pv.querySelectorAll('.faq details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)pv.querySelectorAll('.faq details').forEach(function(o){if(o!==d)o.open=false})})});
  $('url').textContent='claimtract.app/'+slug()+'  (private preview)';
  var sw=$('swap');sw.innerHTML='';[['storm','Storm'],['coastal','Coastal'],['heritage','Heritage']].forEach(function(t){var b=document.createElement('button');b.type='button';b.textContent=t[1];b.setAttribute('aria-pressed',String(S.tpl===t[0]));b.onclick=function(){S.tpl=t[0];render();track('free_swap',t[0])};sw.appendChild(b)});
