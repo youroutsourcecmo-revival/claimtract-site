@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your free website | ClaimTract</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0B0D;--card:#1B1C1F;--line:#2A2E36;--tx:#F4F4F5;--mut:#A9AEB7;--dim:#6B6F78;--or:#F5A524;--bad:#ff6b6b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 Inter,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--or)}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header.top{padding:22px 0;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;letter-spacing:.02em}.logo b{color:var(--or)}
+.free-tag{font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--or);border:1px solid var(--or);border-radius:99px;padding:7px 12px}
+.hero{padding:34px 0 18px}
+.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.04;margin:0 0 16px;letter-spacing:-.02em;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--or)}
+.hero p{color:var(--mut);font-size:18px;max-width:640px;margin:0}
+.steps{display:flex;gap:8px;margin:34px 0 26px;flex-wrap:wrap}
+.steps div{flex:1;min-width:120px;padding:10px 12px;border-top:3px solid var(--line);font:600 11px/1.3 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.steps div.on{border-color:var(--or);color:var(--tx)}.steps div.done{border-color:#3d8f5f;color:var(--mut)}
+section.step{display:none;padding-bottom:70px}section.step.on{display:block}
+h2{font-size:26px;margin:0 0 6px;letter-spacing:-.01em}
+.sub{color:var(--mut);margin:0 0 22px}
+.tpls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.tpl{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;text-align:left;color:var(--tx);font:inherit;transition:.15s}
+.tpl:hover{border-color:#444a55}.tpl[aria-pressed=true]{border-color:var(--or);box-shadow:0 0 0 4px rgba(245,165,36,.15)}
+.tpl .mini{height:170px;border-radius:10px;overflow:hidden;position:relative;margin-bottom:12px}
+.tpl h3{margin:0;font-size:18px}.tpl p{margin:2px 0 0;color:var(--mut);font-size:14px}
+.mini .bar{position:absolute;left:0;right:0;top:0;height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 10px}
+.mini .bar i{width:46px;height:7px;border-radius:4px;display:block}.mini .bar u{width:30px;height:12px;border-radius:99px;display:block}
+.mini .hl{position:absolute;left:12px;top:42px;right:12px}.mini .hl s{display:block;height:11px;border-radius:3px;margin-bottom:7px;text-decoration:none}
+.mini .btns{position:absolute;left:12px;bottom:46px;display:flex;gap:6px}.mini .btns b{width:46px;height:16px;border-radius:5px;display:block}
+.mini .row{position:absolute;left:12px;right:12px;bottom:10px;display:flex;gap:6px}.mini .row b{flex:1;height:28px;border-radius:5px;display:block}
+.m-storm{background:#0F1115}.m-storm .bar{background:#16181d}.m-storm .bar i{background:#555}.m-storm .bar u{background:#F5A524}.m-storm s{background:#fff}.m-storm s+s{background:#F5A524;width:60%}.m-storm .btns b:first-child{background:#F5A524}.m-storm .btns b+b{background:#333}.m-storm .row b{background:#1f2228}
+.m-coastal{background:#EAF6F8}.m-coastal .bar{background:#fff}.m-coastal .bar i{background:#b9dde2}.m-coastal .bar u{background:#0E7C86}.m-coastal s{background:#16465c}.m-coastal s+s{background:#0E7C86;width:60%}.m-coastal .btns b{border-radius:99px}.m-coastal .btns b:first-child{background:#0E7C86}.m-coastal .btns b+b{background:#bfe3e8}.m-coastal .row b{background:#fff;border-radius:10px}
+.m-heritage{background:#FAF6EE}.m-heritage .bar{background:#1F2A44}.m-heritage .bar i{background:#6d789a}.m-heritage .bar u{background:#B8913F}.m-heritage s{background:#1F2A44}.m-heritage s+s{background:#B8913F;width:60%}.m-heritage .btns b:first-child{background:#1F2A44}.m-heritage .btns b+b{background:#d8cfbb}.m-heritage .row b{background:#efe7d6}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:640px){.grid{grid-template-columns:1fr}}
+label{display:block;font-weight:600;font-size:14px;margin:0 0 6px}
+.f{margin-bottom:16px}.f small{display:block;color:var(--dim);margin-top:5px;font-size:13px}
+input[type=text],input[type=tel],input[type=email],select,textarea{width:100%;background:#111317;border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:13px 14px;font:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--or);outline-offset:1px;border-color:transparent}
+textarea{min-height:230px;resize:vertical;line-height:1.55}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips button{background:#111317;border:1px solid var(--line);color:var(--mut);padding:9px 14px;border-radius:99px;font:600 14px Inter,sans-serif;cursor:pointer}.chips button[aria-pressed=true]{background:var(--or);color:#111;border-color:var(--or)}
+.drop{border:2px dashed var(--line);border-radius:12px;padding:16px;text-align:center;color:var(--mut);cursor:pointer;position:relative;min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#111317}
+.drop:hover{border-color:var(--or)}.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop img{max-width:100%;max-height:150px;border-radius:8px;display:block}.drop b{color:var(--tx)}
+.gal{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}.gal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}
+@media(max-width:560px){.gal{grid-template-columns:repeat(3,1fr)}}
+.row2{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.cnt{font:500 12px 'JetBrains Mono',monospace;color:var(--dim)}.cnt.ok{color:#5ec08a}
+.btn{background:var(--or);color:#111;border:0;border-radius:12px;padding:15px 26px;font:700 16px Inter,sans-serif;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}.btn.ghost{background:transparent;color:var(--tx);border:1px solid var(--line)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.sm{padding:10px 16px;font-size:14px;border-radius:10px}
+.nav{display:flex;gap:12px;justify-content:space-between;margin-top:26px;flex-wrap:wrap}
+.consent{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.consent label{display:flex;gap:12px;font-weight:400;font-size:14.5px;color:var(--mut);margin:0;cursor:pointer;line-height:1.5}
+.consent input{width:22px;height:22px;flex:none;accent-color:var(--or);margin-top:2px}
+.consent .box{margin-top:12px;background:#111317;border-left:3px solid var(--or);padding:10px 14px;font-size:13.5px;color:var(--tx);border-radius:0 8px 8px 0}
+.err{color:var(--bad);font-size:14px;margin:8px 0 0;min-height:20px}
+.banner{background:#1d1608;border:1px solid #5a4210;color:#f3c776;border-radius:12px;padding:12px 16px;font-size:14px;margin-bottom:16px;display:flex;gap:10px;align-items:center}
+.pvwrap{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#000}
+.pvbar{background:#15171b;padding:9px 14px;font:500 12px 'JetBrains Mono',monospace;color:var(--mut);display:flex;gap:8px;align-items:center}
+.pvbar span{background:#0A0B0D;border-radius:99px;padding:5px 12px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pvbar i{width:9px;height:9px;border-radius:50%;background:#444;display:block}
+.pv{--p-bg:#0F1115;--p-tx:#fff;--p-mut:#b6bbc4;--p-ac:#F5A524;--p-acx:#111;--p-card:#181b21;--p-r:10px;--p-f:Inter,sans-serif;--p-h:800;--p-ht:uppercase;background:var(--p-bg);color:var(--p-tx);font-family:var(--p-f)}
+.pv.coastal{--p-bg:#F1F9FB;--p-tx:#16384a;--p-mut:#4d6b78;--p-ac:#0E7C86;--p-acx:#fff;--p-card:#fff;--p-r:18px;--p-h:700;--p-ht:none}
+.pv.heritage{--p-bg:#FAF6EE;--p-tx:#1F2A44;--p-mut:#5b6177;--p-ac:#B8913F;--p-acx:#1F2A44;--p-card:#fff;--p-r:4px;--p-f:'Source Serif 4',Georgia,serif;--p-h:700;--p-ht:none}
+.pv .nv{display:flex;justify-content:space-between;align-items:center;padding:16px 26px;gap:10px;flex-wrap:wrap}
+.pv.heritage .nv{background:#1F2A44;color:#fff}
+.pv .nm{font-weight:var(--p-h);font-size:18px;letter-spacing:.01em}
+.pv .call{background:var(--p-ac);color:var(--p-acx);padding:11px 18px;border-radius:99px;font-weight:700;text-decoration:none;font:700 15px Inter,sans-serif;display:inline-block}
+.pv.heritage .call{border-radius:3px;color:#fff;background:#B8913F}
+.pv .hero2{position:relative;padding:60px 26px 54px;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;background-size:cover;background-position:center}
+.pv .hero2::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),var(--hs,rgba(15,17,21,.9)))}
+.pv.coastal .hero2{--hs:rgba(241,249,251,.92)}.pv.heritage .hero2{--hs:rgba(250,246,238,.94)}
+.pv .hero2>*{position:relative}
+.pv h1{font-size:clamp(30px,5.4vw,50px);line-height:1.05;margin:0 0 12px;text-transform:var(--p-ht);font-weight:var(--p-h);letter-spacing:-.01em}
+.pv h1 em{font-style:normal;color:var(--p-ac)}
+.pv .lead{color:var(--p-mut);font-size:18px;margin:0 0 22px;max-width:560px}
+.pv .cta{display:flex;gap:12px;flex-wrap:wrap}
+.pv .cta a{padding:14px 24px;border-radius:var(--p-r);font:700 16px Inter,sans-serif;text-decoration:none;background:var(--p-ac);color:var(--p-acx)}
+.pv.heritage .cta a:first-child{color:#fff}
+.pv .cta a+a{background:transparent;color:var(--p-tx);border:2px solid var(--p-ac)}
+.pv .sec{padding:44px 26px}
+.pv .abt{display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:start}
+@media(max-width:640px){.pv .abt{grid-template-columns:1fr}}
+.pv .hs{width:100%;aspect-ratio:4/5;border-radius:var(--p-r);background:var(--p-card);background-size:cover;background-position:center;border:1px solid rgba(128,128,128,.25)}
+.pv h2{font-size:26px;text-transform:var(--p-ht);font-weight:var(--p-h);margin:0 0 14px}
+.pv .abt p{white-space:pre-wrap;color:var(--p-mut);margin:0;font-size:17px;line-height:1.65}
+.pv .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pv .tags span{background:var(--p-card);border:1px solid rgba(128,128,128,.3);border-radius:99px;padding:7px 14px;font:600 13px Inter,sans-serif;color:var(--p-tx)}
+.pv.heritage .tags span{border-radius:3px}
+.pv .pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.pv .pg img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--p-r)}
+.pv footer{padding:26px;border-top:1px solid rgba(128,128,128,.25);font:14px Inter,sans-serif;color:var(--p-mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.done-box{text-align:center;padding:50px 10px}.done-box h2{font-size:34px}
+.fine{color:var(--dim);font-size:13px;margin-top:30px}
+.hp{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div class="logo">CLAIM<b>tract</b></div><span class="free-tag">Free for adjusters</span></header>
+  <div class="hero">
+    <h1>Your own website.<br><em>Free.</em> Live today.</h1>
+    <p>No website? Now you have one. Pick a look, tell us about yourself, and see your page before anyone else does. When you love it, press one button and it goes live. It's yours.</p>
+  </div>
+  <div class="steps" id="steps"><div class="on">1 Pick a look</div><div>2 Your details</div><div>3 Consent</div><div>4 Preview and approve</div></div>
+
+  <section class="step on" id="s1">
+    <h2>Pick your look</h2>
+    <p class="sub">You can change it any time. Same content in all three.</p>
+    <div class="tpls" id="tpls">
+      <button class="tpl" data-t="storm" aria-pressed="true"><div class="mini m-storm"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Storm</h3><p>Dark and bold. Built for storm-damage urgency.</p></button>
+      <button class="tpl" data-t="coastal" aria-pressed="false"><div class="mini m-coastal"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Coastal</h3><p>Bright and friendly. Easy to trust at a glance.</p></button>
+      <button class="tpl" data-t="heritage" aria-pressed="false"><div class="mini m-heritage"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Heritage</h3><p>Classic and established. Says "I've done this for years."</p></button>
+    </div>
+    <div class="nav"><span></span><button class="btn" data-go="2">Continue</button></div>
+  </section>
+
+  <section class="step" id="s2">
+    <h2>Tell us about you</h2>
+    <p class="sub">This is what goes on your page. Homeowners see it, so make it yours.</p>
+    <div class="grid">
+      <div class="f"><label for="fn">First name</label><input type="text" id="fn" autocomplete="given-name"></div>
+      <div class="f"><label for="ln">Last name</label><input type="text" id="ln" autocomplete="family-name"></div>
+      <div class="f"><label for="ph">Phone homeowners should call</label><input type="tel" id="ph" autocomplete="tel" placeholder="(555) 555-5555"></div>
+      <div class="f"><label for="em">Email</label><input type="email" id="em" autocomplete="email"></div>
+      <div class="f"><label for="ci">City or county you serve</label><input type="text" id="ci"></div>
+      <div class="f"><label for="st">State</label><input type="text" id="st" maxlength="2" placeholder="FL" style="text-transform:uppercase"></div>
+      <div class="f"><label for="lt">License type</label><select id="lt"><option>Public adjuster</option><option>Public adjuster apprentice</option><option>Other</option></select></div>
+      <div class="f"><label for="lic">License number</label><input type="text" id="lic"><small>Shown on your page. Homeowners trust a number they can check.</small></div>
+    </div>
+    <div class="f"><label>What do you specialize in?</label><div class="chips" id="spec"></div></div>
+    <div class="f">
+      <div class="row2"><label for="ab" style="margin:0">About you (about 500 words)</label><button type="button" class="btn ghost sm" id="mic">Talk instead</button></div>
+      <textarea id="ab" placeholder="How long you've done this. What kind of claims you take. Why you do it. What a homeowner can expect when they call you."></textarea>
+      <div class="row2" style="margin-top:6px"><small style="color:var(--dim)">Tip: write it the way you'd explain yourself to a homeowner at her kitchen table.</small><span class="cnt" id="cnt">0 words</span></div>
+    </div>
+    <div class="grid">
+      <div class="f"><label>Your headshot</label><div class="drop" id="dHead"><span><b>Tap to add</b><br>A clear photo of you</span><input type="file" accept="image/*" id="fHead"></div></div>
+      <div class="f"><label>Cover photo</label><div class="drop" id="dCover"><span><b>Tap to add</b><br>You, your truck, your team, or a storm skyline</span><input type="file" accept="image/*" id="fCover"></div></div>
+    </div>
+    <div class="f"><label>More photos (up to 5)</label><div class="drop"><span><b>Tap to add up to 5</b><br>Photos of you and your work. Please don't include homeowners, their faces or their addresses.</span><input type="file" accept="image/*" multiple id="fGal"></div><div class="gal" id="gal"></div></div>
+    <div class="err" id="e2"></div>
+    <div class="nav"><button class="btn ghost" data-go="1">Back</button><button class="btn" data-go="3">Continue</button></div>
+  </section>
+
+  <section class="step" id="s3">
+    <h2>Two quick agreements</h2>
+    <p class="sub">Both are required. Neither is ticked for you.</p>
+    <div class="consent"><label><input type="checkbox" id="c1"><span>I agree to receive texts and calls from ClaimTract at the number I gave, about my free page and about ClaimTract. Messages and calls may be automated or AI-assisted. Message and data rates may apply. Reply STOP to opt out at any time. Agreeing is not required to buy anything.</span></label></div>
+    <div class="consent"><label><input type="checkbox" id="c2"><span>I agree to the <a href="/terms" target="_blank" rel="noopener">terms of use</a>, including the license below.</span></label>
+      <div class="box">I keep ownership of what I upload. I give ClaimTract a license to host and display my page and to keep the articles created for it. If I cancel, my name, photo and contact details come down. Articles may stay as general content with no name or contact information on them.</div></div>
+    <div class="err" id="e3"></div>
+    <div class="nav"><button class="btn ghost" data-go="2">Back</button><button class="btn" data-go="4">See my page</button></div>
+  </section>
+
+  <section class="step" id="s4">
+    <div id="review">
+      <h2>Here's your page</h2>
+      <div class="banner">This is a private preview. It's hidden from Google and nobody can see it but you, until you approve it.</div>
+      <div class="row2" style="margin-bottom:12px"><div class="chips" id="swap"></div></div>
+      <div class="pvwrap"><div class="pvbar"><i></i><i></i><i></i><span id="url"></span></div><div class="pv" id="pv"></div></div>
+      <div class="err" id="e4"></div>
+      <div class="nav"><button class="btn ghost" data-go="2">Make changes</button><button class="btn" id="approve">Approve and go live</button></div>
+    </div>
+    <div class="done-box" id="done" style="display:none">
+      <h2>Approved. Your page is on its way.</h2>
+      <p class="sub" id="doneMsg"></p>
+    </div>
+    <p class="fine">ClaimTract is a blogging and syndication app for public adjusters. The free page is your page, and the engine that writes and publishes articles to it is optional.</p>
+  </section>
+  <input class="hp" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+</div>
+<script src="/ct-track.js"></script>
+<script>
+(function(){
+var ENDPOINT='https://app.closegpt.ai/api/input/9u02pn';
+var $=function(i){return document.getElementById(i)};
+var S={tpl:'storm',spec:[],head:null,cover:null,gal:[]};
+var SPECS=['Roof','Wind and hurricane','Water','Fire','Hail','Mold','Theft and vandalism','Commercial'];
+function track(e,s){try{window.__ctT&&window.__ctT(e,s)}catch(x){}}
+/* prefill from the link we text them */
+try{var q=new URLSearchParams(location.search);
+ [['fn','fn'],['ln','ln'],['city','ci'],['st','st'],['lic','lic']].forEach(function(p){var v=q.get(p[0]);if(v)$(p[1]).value=v.slice(0,80)});
+ S.lid=q.get('lid')||'';}catch(e){}
+/* chips */
+var sp=$('spec');SPECS.forEach(function(n){var b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-pressed','false');b.onclick=function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);var i=S.spec.indexOf(n);if(on&&i<0)S.spec.push(n);if(!on&&i>=0)S.spec.splice(i,1)};sp.appendChild(b)});
+/* template cards */
+var tp=$('tpls');tp.querySelectorAll('.tpl').forEach(function(b){b.onclick=function(){tp.querySelectorAll('.tpl').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');S.tpl=b.dataset.t}});
+/* word count */
+function words(){var t=$('ab').value.trim();return t?t.split(/\s+/).length:0}
+$('ab').addEventListener('input',function(){var n=words(),c=$('cnt');c.textContent=n+' words';c.className='cnt'+(n>=250&&n<=700?' ok':'')});
+/* talk instead */
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=null,live=false;
+if(!SR){$('mic').style.display='none'}else{$('mic').onclick=function(){
+ if(live){rec.stop();return}
+ rec=new SR();rec.continuous=true;rec.interimResults=false;rec.lang='en-US';
+ rec.onresult=function(e){var t='';for(var i=e.resultIndex;i<e.results.length;i++)if(e.results[i].isFinal)t+=e.results[i][0].transcript+' ';var a=$('ab');a.value=(a.value+(a.value&&!/\s$/.test(a.value)?' ':'')+t).slice(0,6000);a.dispatchEvent(new Event('input'))};
+ rec.onend=function(){live=false;$('mic').textContent='Talk instead'};
+ rec.start();live=true;$('mic').textContent='Stop listening'}}
+/* photos stay in this browser until the page is published */
+function pic(file,cb){if(!file)return;if(file.size>12*1024*1024){alert('That photo is over 12 MB. Please choose a smaller one.');return}cb(URL.createObjectURL(file),file)}
+function drop(d,f,key){$(f).onchange=function(){pic(this.files[0],function(u,file){S[key]={url:u,file:file};d.querySelectorAll('img').forEach(function(i){i.remove()});d.querySelector('span').style.display='none';var im=new Image();im.src=u;im.alt='';d.appendChild(im)})}}
+drop($('dHead'),'fHead','head');drop($('dCover'),'fCover','cover');
+$('fGal').onchange=function(){S.gal=[];var g=$('gal');g.innerHTML='';Array.prototype.slice.call(this.files,0,5).forEach(function(f){pic(f,function(u,file){S.gal.push({url:u,file:file});var im=new Image();im.src=u;im.alt='';g.appendChild(im)})})};
+/* steps */
+var labels=document.querySelectorAll('#steps div');
+function go(n){n=+n;[1,2,3,4].forEach(function(i){$('s'+i).classList.toggle('on',i===n)});labels.forEach(function(l,i){l.className=i+1<n?'done':(i+1===n?'on':'')});window.scrollTo({top:0,behavior:'smooth'});track('free_step',String(n));if(n===4)render()}
+function val2(){var m=[];['fn','ln','ph','em','ci','st','lic'].forEach(function(k){if(!$(k).value.trim())m.push(k)});
+ var e=$('e2');if(m.length){e.textContent='Please fill in your name, phone, email, city, state and license number.';return false}
+ if(($('ph').value.replace(/\D/g,'')).length<10){e.textContent='That phone number looks short. Please include the area code.';return false}
+ if(!/^\S+@\S+\.\S+$/.test($('em').value)){e.textContent='That email address does not look right.';return false}
+ if(words()<40){e.textContent='Add a bit more about you, even 40 words, or use Talk instead. You can polish it later.';return false}
+ e.textContent='';return true}
+function val3(){var e=$('e3');if(!$('c1').checked||!$('c2').checked){e.textContent='Please tick both boxes to continue.';return false}e.textContent='';return true}
+document.querySelectorAll('[data-go]').forEach(function(b){b.onclick=function(){var n=+b.dataset.go,cur=document.querySelector('section.step.on').id.slice(1);
+ if(n>+cur){if(+cur===2&&!val2())return;if(+cur===3&&!val3())return}
+ go(n)}});
+/* preview */
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function slug(){return(($('fn').value+'-'+$('ln').value).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''))||'your-name'}
+function render(){
+ var fn=esc($('fn').value.trim()),ln=esc($('ln').value.trim()),ph=$('ph').value.trim(),d=ph.replace(/\D/g,''),city=esc($('ci').value.trim()),st=esc($('st').value.trim().toUpperCase()),lic=esc($('lic').value.trim()),lt=esc($('lt').value);
+ var fp=d.length>=10?'('+d.slice(-10,-7)+') '+d.slice(-7,-4)+'-'+d.slice(-4):ph;var name=fn+' '+ln,about=esc($('ab').value.trim());
+ var cover=S.cover?'style="background-image:url('+S.cover.url+')"':'';
+ var tags=S.spec.length?'<div class="tags">'+S.spec.map(function(t){return '<span>'+esc(t)+' claims</span>'}).join('')+'</div>':'';
+ var head=S.head?'<div class="hs" style="background-image:url('+S.head.url+')" role="img" aria-label="'+name+'"></div>':'<div class="hs" aria-hidden="true"></div>';
+ var gal=S.gal.length?'<div class="sec"><h2>Photos</h2><div class="pg">'+S.gal.map(function(g){return '<img src="'+g.url+'" alt="">'}).join('')+'</div></div>':'';
+ var pv=$('pv');pv.className='pv '+S.tpl;
+ pv.innerHTML='<div class="nv"><div class="nm">'+name+'</div><a class="call" href="tel:+1'+d.slice(-10)+'">Call '+esc(fp)+'</a></div>'
+ +'<div class="hero2" '+cover+'><h1>Storm damage?<br><em>Get someone in your corner.</em></h1><p class="lead">'+lt+' serving '+city+', '+st+'. I work for you, not the insurance company.</p><div class="cta"><a href="tel:+1'+d.slice(-10)+'">Call me</a><a href="sms:+1'+d.slice(-10)+'">Text me</a></div></div>'
+ +'<div class="sec"><div class="abt">'+head+'<div><h2>About '+fn+'</h2><p>'+about+'</p>'+tags+'</div></div></div>'+gal
+ +'<footer><span>'+name+' · '+lt+' · License '+lic+'</span><span>'+city+', '+st+'</span></footer>';
+ $('url').textContent='claimtract.app/'+slug()+'  (private preview)';
+ var sw=$('swap');sw.innerHTML='';[['storm','Storm'],['coastal','Coastal'],['heritage','Heritage']].forEach(function(t){var b=document.createElement('button');b.type='button';b.textContent=t[1];b.setAttribute('aria-pressed',String(S.tpl===t[0]));b.onclick=function(){S.tpl=t[0];render();track('free_swap',t[0])};sw.appendChild(b)});
+ track('free_preview')}
+/* approve */
+$('approve').onclick=function(){
+ if($('hp').value)return;var b=this;b.disabled=true;b.textContent='Sending...';
+ var p=new URLSearchParams();
+ p.set('firstName',$('fn').value.trim());p.set('lastName',$('ln').value.trim());p.set('phone',$('ph').value.trim());p.set('email',$('em').value.trim());
+ p.set('textField',$('ci').value.trim());p.set('textField1',$('st').value.trim().toUpperCase());
+ p.set('license',$('lic').value.trim());p.set('type',$('lt').value);p.set('source','free-page');p.set('channel','text');
+ p.set('consent_time',new Date().toISOString());p.set('clicked','no');
+ p.set('link','https://claimtract.app/'+slug());
+ if(S.lid)p.set('call_id',S.lid);
+ try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(e){}
+ fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()})
+ .catch(function(){}).then(function(){
+  track('free_approve');
+  $('review').style.display='none';$('done').style.display='block';
+  $('doneMsg').textContent='We\'re setting up claimtract.app/'+slug()+' with the '+S.tpl.charAt(0).toUpperCase()+S.tpl.slice(1)+' look. We\'ll text you the moment it\'s live. Questions before then? Just reply to that text.';
+  window.scrollTo({top:0,behavior:'smooth'})})};
+})();
+</script>
+</body>
+</html>
