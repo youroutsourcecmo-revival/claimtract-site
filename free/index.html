@@ -252,6 +252,7 @@ a.btn{display:inline-block;text-decoration:none}
 .pv .team .tn{font-size:13px;color:var(--p-mut);margin:12px 0 0}
 @media(max-width:820px){.pv .chain{grid-template-columns:1fr 1fr}.pv .tc::after{display:none}}
 @media(max-width:520px){.pv .chain{grid-template-columns:1fr}}
+.pv footer .gfp{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--p-tx);font:700 14px Inter,sans-serif}.pv footer .gfp span{border-bottom:2px solid var(--p-ac)}.pv footer .gfp small{font-weight:500;font-size:12px;color:var(--p-mut)}
 </style>
 </head>
 <body>
@@ -413,7 +414,7 @@ function track(e,s){try{window.__ctT&&window.__ctT(e,s)}catch(x){}}
 /* prefill from the link we text them */
 try{var q=new URLSearchParams(location.search);
  [['fn','fn'],['ln','ln'],['city','ci'],['st','st'],['lic','lic'],['dfs','dfs']].forEach(function(p){var v=q.get(p[0]);if(v)$(p[1]).value=v.slice(0,80)});
- S.lid=q.get('lid')||'';}catch(e){}
+ S.lid=q.get('lid')||'';S.ref=(q.get('ref')||'').slice(0,80);}catch(e){}
 /* chips */
 var sp=$('spec');SPECS.forEach(function(n){var b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-pressed','false');b.onclick=function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);var i=S.spec.indexOf(n);if(on&&i<0)S.spec.push(n);if(!on&&i>=0)S.spec.splice(i,1)};sp.appendChild(b)});
 /* template cards */
@@ -555,7 +556,7 @@ var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(functio
  pv.innerHTML='<div class="own" id="own"><span>Send my page</span><button type="button" data-s="share">Share</button><button type="button" data-s="sms">Text</button><button type="button" data-s="mail">Email</button><button type="button" data-s="wa">WhatsApp</button><button type="button" data-s="copy">Copy link</button></div><div class="nv"><div class="nm">'+name+'</div><a class="call" href="tel:+1'+d.slice(-10)+'">Call '+esc(fp)+'</a></div>'
  +'<div class="hero2'+(S.bgv?' hasv':'')+'" '+(S.bgv?'':cover)+'>'+(S.bgv?'<video class="hv" autoplay muted loop playsinline preload="auto" poster="/assets/bg/bg-'+S.bgv+'.jpg"><source src="/assets/bg/bg-'+S.bgv+'.mp4" type="video/mp4"></video>':'')+badge+meta()+'<h1>Storm damage?<br><em>Get someone in your corner.</em></h1><p class="lead">'+lt+' serving '+city+', '+st+'. I work for you, not the insurance company.</p><div class="cta"><a href="tel:+1'+d.slice(-10)+'">Call me</a><a href="sms:+1'+d.slice(-10)+'">Text me</a></div></div>'
  +(ytId()?'<div class="sec" style="padding-bottom:0"><h2>Meet '+fn+'</h2><div class="ytv"><iframe src="https://www.youtube-nocookie.com/embed/'+ytId()+'?rel=0" title="Meet '+fn+'" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div></div>':'')+lks+team+wpa+'<div class="sec"><div class="abt"><div>'+head+soc+share+'</div><div><h2>About '+fn+'</h2><p>'+about+'</p>'+tags+'</div></div></div>'+gal
- +areas+ready+guides+faq+'<footer><span>'+name+' · '+lt+' · License '+lic+ver+'</span><span style="display:flex;align-items:center;gap:8px"><img src="/assets/ct-shield.png" alt="" style="width:16px;height:auto">Page by ClaimTract</span></footer>'
+ +areas+ready+guides+faq+'<footer><span>'+name+' · '+lt+' · License '+lic+ver+'</span><a class="gfp" href="https://claimtract.app/free/?ref='+slug()+'&src=page" target="_blank" rel="noopener"><img src="/assets/ct-shield.png" alt="" style="width:16px;height:auto"><span>Get a free page like this</span><small>Page by ClaimTract</small></a></footer>'
  +'<div class="dg" id="dg"><div class="dgi"><div class="dgp"><video id="dgv" preload="none" playsinline controls poster="/assets/pa-dog.jpg"><source src="/assets/pa-explainer.mp4" type="video/mp4"></video><button type="button" id="dgx">Close</button></div><button type="button" class="dgl" id="dgl">What is a public adjuster?</button><button type="button" class="dgb" id="dgb" aria-label="Play video" style="background-image:url(/assets/pa-dog.jpg)">&#9654;</button></div></div>';
  var dg=$('dg');if(dg){var dv=$('dgv');var op=function(){dg.classList.add('open');try{dv.play()}catch(e){};track('free_dog_play')};$('dgb').onclick=op;$('dgl').onclick=op;$('dgx').onclick=function(){dv.pause();dg.classList.remove('open')};fetch('/assets/pa-explainer.mp4',{method:'HEAD'}).then(function(r){if(!r.ok)dg.remove()}).catch(function(){dg.remove()})}
  var pageUrl='https://claimtract.app/'+slug(),qc=qrCanvas(pageUrl);$('qrslot').appendChild(qc);
@@ -584,7 +585,7 @@ $('approve').onclick=function(){
  p.set('consent_time',new Date().toISOString());p.set('clicked','no');
  p.set('consent_version','2026-11-19-page-v1');p.set('consent_text',$('c1').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);
  p.set('link','https://claimtract.app/'+slug());p.set('background',S.bgv||'none');if(bkUrl())p.set('booking',bkUrl());if(ytId())p.set('video','https://youtu.be/'+ytId());
- if(S.lid)p.set('call_id',S.lid);
+ if(S.lid)p.set('call_id',S.lid);if(S.ref)p.set('referred_by',S.ref);
  try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(e){}
  fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()})
  .catch(function(){}).then(function(){
@@ -609,7 +610,7 @@ if($('lpb'))$('lpb').onclick=function(){
  var b=this;b.disabled=true;b.textContent='Sending...';
  var q;try{q=new URLSearchParams(location.search)}catch(x){q=new URLSearchParams('')}
  var p=new URLSearchParams();
- p.set('firstName',n);p.set('phone',ph);p.set('source','free-lander');p.set('channel','text');
+ p.set('firstName',n);p.set('phone',ph);p.set('source','free-lander');if(q.get('ref'))p.set('referred_by',q.get('ref').slice(0,80));p.set('channel','text');
  p.set('consent_time',new Date().toISOString());p.set('clicked','no');
  p.set('consent_version','2026-11-19-lander-v1');p.set('consent_text',$('lpc').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);
  p.set('link','https://claimtract.app/free');
