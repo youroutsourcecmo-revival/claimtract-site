@@ -97,7 +97,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
     <p class="k">Free for licensed public adjusters</p>
     <h1>No website? <em>Here's one. Free.</em></h1>
     <p class="lead" id="lead">A page with your name on it that explains what you do, so you stop explaining it on every call. It works as a website and as an app on your phone. Want to see what yours looks like?</p>
-    <div class="cta"><a class="btn" data-cta href="/free/build/?view=preview">See what you get &rarr;</a><a class="ghost" data-again href="/free/build/?view=preview" hidden>See my page again</a></div>
+    <div class="cta"><a class="btn" data-cta href="/free/build/?view=preview">See my page &rarr;</a><a class="ghost" data-again href="/free/build/?view=preview" hidden>See my page again</a></div>
     <div class="trust"><span>Free</span><span>No credit card</span><span>You approve it first</span></div>
   </div>
   <div class="sp sp-hero" id="spHero" hidden aria-label="Sophia from ClaimTract">
@@ -167,7 +167,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
         <li><b>Light or dark</b>, your color, and a background video behind your name</li>
       </ul></div>
     </div>
-    <div class="bcta"><p>That's a lot of website for free. Why not see how yours looks?</p><a class="btn" data-cta href="/free/build/?view=preview">See what you get &rarr;</a></div>
+    <div class="bcta"><p>That's a lot of website for free. Why not see how yours looks?</p><a class="btn" data-cta href="/free/build/?view=preview">See my page &rarr;</a></div>
   </section>
 
   <section class="how">
@@ -195,17 +195,17 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 
   <section class="drw">
     <h2>Questions</h2>
-    <div class="dq"><button type="button">What's the catch?</button><div class="da"><div>There isn't one for the page. It's yours, free. Later we'll offer paid tools inside the app for adjusters who want more, and you can ignore them. Why not take the free page and decide later?<br><a data-cta href="/free/build/?view=preview">See what you get &rarr;</a></div></div></div>
-    <div class="dq"><button type="button">I'm not good with tech. Can I still do this?</button><div class="da"><div>If you can fill in a form on your phone, you can do this. You pick a look, type your details, and see your page before anything goes live. Five minutes, start to finish. Ready to try?<br><a data-cta href="/free/build/?view=preview">See what you get &rarr;</a></div></div></div>
-    <div class="dq"><button type="button">I already have a website. Do I need this?</button><div class="da"><div>Keep your website. This is the short page you text a homeowner before an appointment. It loads fast on a phone and links to your website too. Want both working for you?<br><a data-cta href="/free/build/?view=preview">See what you get &rarr;</a></div></div></div>
-    <div class="dq"><button type="button">Who sees my page?</button><div class="da"><div>Only the people you send it to, until you share it more widely. You see a private preview first, and nothing goes live until you approve it. Want to see your preview?<br><a data-cta href="/free/build/?view=preview">See what you get &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">What's the catch?</button><div class="da"><div>There isn't one for the page. It's yours, free. Later we'll offer paid tools inside the app for adjusters who want more, and you can ignore them. Why not take the free page and decide later?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">I'm not good with tech. Can I still do this?</button><div class="da"><div>If you can fill in a form on your phone, you can do this. You pick a look, type your details, and see your page before anything goes live. Five minutes, start to finish. Ready to try?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">I already have a website. Do I need this?</button><div class="da"><div>Keep your website. This is the short page you text a homeowner before an appointment. It loads fast on a phone and links to your website too. Want both working for you?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">Who sees my page?</button><div class="da"><div>Only the people you send it to, until you share it more widely. You see a private preview first, and nothing goes live until you approve it. Want to see your preview?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
     <button class="closeall" type="button" id="ca">&uarr; Close questions</button>
   </section>
 
   <section class="end">
     <h2>Build yours tonight.<br>Send it tomorrow.</h2>
     <p>Free for licensed public adjusters. About 5 minutes.</p>
-    <a class="btn" data-cta href="/free/build/?view=preview">See what you get &rarr;</a>
+    <a class="btn" data-cta href="/free/build/?view=preview">See my page &rarr;</a>
   </section>
 </div>
 <footer>Page by ClaimTract</footer>
@@ -225,8 +225,8 @@ function wire(v,b){b.onclick=function(){if(v.muted){v.muted=false;v.loop=false;v
 var sv2=document.getElementById('sv2');wire(sv2,document.getElementById('snd2'));
 function seen(on){document.getElementById('spHero').hidden=!on;document.getElementById('pgPhone').hidden=on;if(on){var p=sv2.play();if(p&&p.catch)p.catch(function(){})}else{sv2.pause()}
  }
-function flag(){try{return localStorage.getItem('ct_seen_sample')==='1'}catch(e){return false}}
-document.querySelectorAll('[data-sample]').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('ct_seen_sample','1')}catch(e){}})});
+function flag(){try{return sessionStorage.getItem('ct_seen_sample')==='1'}catch(e){return false}}
+document.querySelectorAll('[data-sample]').forEach(function(a){a.addEventListener('click',function(){try{sessionStorage.setItem('ct_seen_sample','1')}catch(e){}})});
 function check(){if(flag())seen(true)}
 window.addEventListener('focus',check);document.addEventListener('visibilitychange',function(){if(!document.hidden)check()});check();
 
@@ -239,7 +239,7 @@ function T(e,x){try{window.__ctT&&window.__ctT(e,x)}catch(_){}}
 var fn=(Q.get('fn')||'').replace(/[<>&"]/g,'');
 if(fn){document.querySelector('.hero .k').textContent='Made for '+fn+(Q.get('ln')?' '+Q.get('ln').replace(/[<>&"]/g,''):'');document.getElementById('lead').textContent=fn+', your page is already started from your state license record. See what it looks like, then make it yours. It works as a website and as an app on your phone.'}
 function back(){return Q.get('back')==='1'||flag()}
-function setLinks(){var b=back();document.querySelectorAll('[data-cta]').forEach(function(a){a.href=b?'/free/build/'+(PS?'?'+PS:''):'/free/build/?view=preview'+(PS?'&'+PS:'');a.innerHTML=b?'Build my free page &rarr;':'See what you get &rarr;';a.onclick=function(){T(b?'free_build_click':'free_sample_click')}});
+function setLinks(){var b=back();document.querySelectorAll('[data-cta]').forEach(function(a){a.href=b?'/free/build/'+(PS?'?'+PS:''):'/free/build/?view=preview'+(PS?'&'+PS:'');a.innerHTML=b?'Build my free page &rarr;':'See my page &rarr;';a.onclick=function(){T(b?'free_build_click':'free_sample_click')}});
  document.querySelectorAll('[data-again]').forEach(function(a){a.hidden=!b;a.href='/free/build/?view=preview'+(PS?'&'+PS:'')});
  document.getElementById('pitch').hidden=!b;document.getElementById('skip').hidden=b;document.querySelector('[data-skip]').href='/free/build/'+(PS?'?'+PS:'');}
 var _seen=seen;seen=function(on){_seen(on);setLinks()};
@@ -250,7 +250,7 @@ document.getElementById('tf').onsubmit=function(){var m=document.getElementById(
  p.set('consent_time',new Date().toISOString());p.set('clicked','no');p.set('consent_version','2026-11-19-lander-v1');p.set('consent_text',document.getElementById('tc').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);p.set('link','https://claimtract.app/free');if(Q.get('lid'))p.set('call_id',Q.get('lid'));try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(x){}
  m.textContent='Sending...';fetch('https://app.closegpt.ai/api/input/9u02pn',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()}).catch(function(){}).then(function(){T('free_lander_text');document.querySelector('.txt .box').innerHTML='<div><h3>Got it, '+n.replace(/[<>&"]/g,'')+'.</h3><p>I&#39;ll text the link to your phone. You can also keep going right here.</p></div>'});return false};
 
-if(Q.get('reset')==='1'){try{localStorage.removeItem('ct_seen_sample')}catch(e){}}if(Q.get('back')==='1'){try{localStorage.setItem('ct_seen_sample','1')}catch(e){}}check();setLinks();T('free_landing_view',back()?'back':'first');
+if(Q.get('reset')==='1'){try{sessionStorage.removeItem('ct_seen_sample')}catch(e){}}if(Q.get('back')==='1'){try{sessionStorage.setItem('ct_seen_sample','1')}catch(e){}}check();setLinks();T('free_landing_view',back()?'back':'first');
 })();
 </script>
 <script src="/ct-track.js"></script>

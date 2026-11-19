@@ -583,7 +583,7 @@ try{var qv=new URLSearchParams(location.search);if(qv.get('view')==='preview'){S
  var who=$('fn').value.replace(/[<>&"]/g,'');
  bar.innerHTML='<span>'+(qv.get('fn')?'This is your page, '+who+'. It\'s free.':'This is what your free page looks like.')+'</span><a href="'+'/free/?back=1'+(location.search.replace(/^\?/,'&').replace(/&?view=preview/,''))+'">Make it mine &rarr;</a>';
  document.body.insertBefore(bar,document.body.firstChild);document.body.insertBefore(pv,bar.nextSibling);
- try{localStorage.setItem('ct_seen_sample','1')}catch(e){}
+ try{sessionStorage.setItem('ct_seen_sample','1')}catch(e){}
  track('free_sample_view',qv.get('fn')?'personal':'generic');
 }}catch(e){}
 })();
