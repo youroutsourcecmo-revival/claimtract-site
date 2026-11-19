@@ -147,6 +147,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 <body>
 <section class="hero">
   <video id="hv" autoplay muted loop playsinline poster="/assets/bg/bg-roof-table.jpg"><source src="/assets/bg/bg-roof-table.mp4" type="video/mp4"></video>
+  <script>(function(){if(!matchMedia('(max-width:700px)').matches)return;var v=document.getElementById('hv');v.poster='/assets/bg/hero-portrait.jpg';v.querySelector('source').src='/assets/bg/hero-portrait.mp4';v.style.objectPosition='center top';v.load();v.play&&v.play().catch(function(){})})()</script>
   <div class="top"><div class="w"><b>Free page for public adjusters</b><span>Florida</span></div></div>
   <div class="w hg"><div class="in">
     <p class="k">Built for Florida public adjusters</p>
