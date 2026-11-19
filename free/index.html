@@ -106,6 +106,20 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 .hg .phone:hover,.hg .sp-hero:hover{transform:rotateY(-8deg) rotateX(2deg) rotateZ(0)}
 @media(max-width:900px){.hg .phone,.hg .sp-hero{transform:rotateY(-14deg) rotateX(10deg) rotateZ(2deg)}}
 @media(prefers-reduced-motion:reduce){.hg .phone,.hg .sp-hero{transition:none}}
+.tsub{margin:10px 0 0;font-size:13.5px;color:rgba(255,255,255,.75)}
+.why,.bkx{max-width:780px;padding:10px 0 46px}.why p,.bkx p{color:var(--mu);margin:0 0 16px}.why .btn{margin-top:6px}
+.who{display:grid;grid-template-columns:1fr 240px;gap:40px;align-items:center;padding:10px 0 30px}.who p{color:var(--mu);margin:0 0 16px}
+.book{display:block;text-decoration:none;transform:rotate(3deg);transition:transform .3s}.book:hover{transform:rotate(0)}
+.bk-c{aspect-ratio:2/3;background:linear-gradient(180deg,#2a2d33,#0d0e11);border-radius:6px 12px 12px 6px;box-shadow:-8px 14px 30px rgba(0,0,0,.35),inset 6px 0 0 rgba(255,255,255,.06);padding:26px 18px;display:flex;flex-direction:column;color:#fff;text-align:center}
+.bk-c b{font:900 26px/1.02 Inter,sans-serif;letter-spacing:.01em}.bk-c small{margin:10px 0 0;font-size:11px;line-height:1.35;color:#d6d8dc}.bk-c i{margin-top:auto;font-style:normal;font:700 12px Inter,sans-serif;color:#cfd2d8;text-align:right}
+.bk-l a{color:var(--act);font-weight:800;text-decoration:none;border-bottom:2px solid var(--ac)}.bk-l span{margin-left:14px;font-size:14px}
+@media(max-width:760px){.who{grid-template-columns:1fr}.book{max-width:200px;margin:0 auto}}
+.bks{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}.bkx{max-width:none!important}.bkx>p{max-width:780px}
+.bki{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:start;background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:18px;text-decoration:none;color:var(--tx)}
+.bki .bk-c{padding:14px 10px}.bki .bk-c b{font-size:15px}.bki .bk-c small{font-size:8px}.bki .bk-c i{font-size:9px}
+.bk-s{background:linear-gradient(180deg,#0b1416,#000)}.bk-s b{color:#3FD5E0}
+.bk-t h3{margin:0 0 6px;font-size:19px}.bk-t p{margin:0 0 10px;font-size:14.5px;color:var(--mu)}.bk-t span{color:var(--act);font-weight:800;font-size:14.5px}
+@media(max-width:760px){.bks{grid-template-columns:1fr}}
 .pick{position:fixed;right:14px;bottom:14px;z-index:50;background:#111;color:#fff;border-radius:16px;padding:12px;box-shadow:0 12px 30px rgba(0,0,0,.35);font:600 12px Inter,sans-serif;display:grid;gap:8px}
 .pick b{font:700 10px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#F5A524}
 .pick .seg{display:flex;background:#2a2a2a;border-radius:10px;padding:3px}.pick .seg button{flex:1;border:0;background:transparent;color:#ccc;padding:8px 12px;border-radius:8px;font:700 12px Inter,sans-serif;cursor:pointer}.pick .seg button[aria-pressed=true]{background:#F5A524;color:#111}
@@ -116,11 +130,12 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
   <video id="hv" autoplay muted loop playsinline poster="/assets/bg/bg-roof-table.jpg"><source src="/assets/bg/bg-roof-table.mp4" type="video/mp4"></video>
   <div class="top"><div class="w"><b>Free page for public adjusters</b><span>Florida</span></div></div>
   <div class="w hg"><div class="in">
-    <p class="k">Free for licensed public adjusters</p>
+    <p class="k">Built for Florida public adjusters</p>
     <h1>No website? <em>Here's one. Free.</em></h1>
-    <p class="lead" id="lead">A page with your name on it that explains what you do, so you stop explaining it on every call. It works as a website and as an app on your phone. Want to see what yours looks like?</p>
+    <p class="lead" id="lead">Many homeowners look you up before they let you in the door, and if nothing comes up, they start wondering if you're real. A clean, verified page puts your credentials in front of them before you ever shake their hand, so why walk into another appointment without one?</p>
     <div class="cta"><a class="btn" data-cta href="/free/build/?view=preview">See my page &rarr;</a><a class="ghost" data-again href="/free/build/?view=preview" hidden>See my page again</a></div>
     <div class="trust"><span>Free</span><span>No clock</span><span>No credit card</span><span>No pitch</span></div>
+    <p class="tsub">No trial timer counting down, no card required to look, and nothing for sale on this page.</p>
   </div>
   <div class="sp sp-hero" id="spHero" hidden aria-label="Sophia from ClaimTract">
     <div class="sp-top"><i></i><b>Sophia</b><span>ClaimTract</span></div>
@@ -158,44 +173,51 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 
 <div class="w">
   <section class="pts">
-    <div class="pt"><div class="n">1</div><h3>A website with your name on it</h3><p>Your photo, your story, your service areas, and a button that shows homeowners your license on the state's site.</p></div>
-    <div class="pt"><div class="n">2</div><h3>It explains you for you</h3><p>Text it to a homeowner before you show up. They learn what a public adjuster is and who you are before you knock.</p></div>
-    <div class="pt"><div class="n">3</div><h3>It's an app on your phone</h3><p>Put it on your home screen. Send it to anyone in two taps, by text, email, or social media.</p></div>
-    <div class="pt"><div class="n">4</div><h3>Free. Really.</h3><p>No card, no trial clock. Build it tonight and send it tomorrow.</p></div>
+    <div class="pt"><div class="n">1</div><h3>Built for the kitchen table</h3><p>Homeowners judge your credibility before you even knock, but a clean page with your name and photo settles their doubts before you arrive. Ready to see how you look to a homeowner?</p></div>
+    <div class="pt"><div class="n">2</div><h3>Let the state record speak for you</h3><p>Skeptical homeowners worry about who they can trust, but one tap on your Verify My License button opens your official record on the state's site. Wouldn't you rather let the record do the talking?</p></div>
+    <div class="pt"><div class="n">3</div><h3>Explains who works for them</h3><p>Most policyholders have no idea how the claim team is stacked against them, but your pillar article lays out who works for the carrier and who works for the homeowner. How much easier is the meeting when they already understand your role?</p></div>
+    <div class="pt"><div class="n">4</div><h3>Private until you say go</h3><p>Nothing goes live without your eyes on it first, so you review your private preview and approve every word before anyone else sees it. Want to check your preview right now?</p></div>
+  </section>
+
+  <section class="why">
+    <p class="k">Why this is free</p>
+    <h2>You shouldn't have to beg for somebody else's business.</h2>
+    <p>In my years as a public adjuster, I saw firsthand that we are the most overlooked people in the claim, looked down on by insurance companies and left out when referrals get handed out. Nobody sends you leads. The only thing we got to eat was what we caught, but a page with your own name on it gives homeowners a place to find and verify you without you begging anyone for work. Wouldn't it feel better to stand on your own name than to wait for someone else to hand you a phone number?</p>
+    <p>When you don't have your own presence online, you end up depending on roofers, plumbers and HVAC contractors for scraps, and the person handing over the scrap usually wants to tell you how to run the claim. A roofing contractor once gave me a few leads and then told me I worked for him, but I told him to keep his leads. Have you ever had to bite your tongue just to keep a referral source happy?</p>
+    <p>So here is the honest truth about the catch: there isn't one. You don't pay for this page, there's no countdown clock, and I'm not pitching you anything here, because giving you a solid starting point is how I earn your trust. What do you have to lose by looking at a private preview with your name already on it?</p>
+    <a class="btn" data-cta href="/free/build/?view=preview">See my page &rarr;</a>
+  </section>
+
+  <section class="who">
+    <div class="who-t">
+      <p class="k">Who built this</p>
+      <h2>I'm Ezekiel. I've been where you are.</h2>
+      <p>I spent 17 years as a public adjuster in Florida, fighting for homeowners against big insurance companies. Before that, I spent five years with a Florida roofing contractor handling insurance claims. At my busiest, I was writing 30 to 50 houses a month. I know the work, the pressure, and what it takes to keep moving from one claim to the next. Wouldn't you rather have something built by somebody who has actually done the work?</p>
+      <p>I've also been building automated business systems since 1988. I'm out of the adjusting industry now, but I haven't forgotten what it was like to build a business in it, so I put that experience together to give other adjusters a place to start. Would you like to see what I put together?</p>
+    </div>
+    <a class="book" href="https://a.co/d/0exnVJpZ" target="_blank" rel="noopener">
+      <div class="bk-c"><b>CRACKING<br>THE MATRIX</b><small>You can't beat the system that decides who gets found. You can make it choose you.</small><i>Ezekiel Guichard</i></div>
+    </a>
+  </section>
+
+  <section class="bkx">
+    <p class="k">The books behind it</p>
+    <h2>Why getting found matters</h2>
+    <p>A homeowner can't pick you if they can't verify you exist, but when the system shows your name, your license link and clear answers to their questions, they walk into the meeting already trusting you. I've written two books about exactly that, from seventeen years of standing in flooded living rooms as a public adjuster. No purchase necessary to get your page. But if you want to know how I think before you put your name on something I built, why not start here?</p>
+    <div class="bks">
+      <a class="bki" href="https://amzn.asia/d/0friLOjP" target="_blank" rel="noopener"><div class="bk-c bk-s"><b>Sick of<br>Winning</b><small>The local business owner's guide to getting found on Google</small><i>Ezekiel Guichard</i></div><div class="bk-t"><h3>Sick of Winning</h3><p>You're the best at what you do, but nobody on Google knows it. This is the doctrine of how the man in the truck finally changes that: become the answer Google is hunting for, build real authority, and make your phone ring without ads.</p><span>Get it on Amazon &rarr;</span></div></a>
+      <a class="bki" href="https://a.co/d/0exnVJpZ" target="_blank" rel="noopener"><div class="bk-c"><b>CRACKING<br>THE MATRIX</b><small>You can't beat the system that decides who gets found. You can make it choose you.</small><i>Ezekiel Guichard</i></div><div class="bk-t"><h3>Cracking the Matrix</h3><p>Why a five-star shop sits at number seven while a three-and-a-half-star shop takes the whole town's calls. It drags Google's hidden rules into the light and hands them to you, in plain talk.</p><span>Get it on Amazon &rarr;</span></div></a>
+    </div>
   </section>
 
   <section class="ben">
     <p class="k">Everything that comes with your free page</p>
     <h2>A website that works while you're on the roof</h2>
     <div class="bg">
-      <div class="bc"><h3>Homeowners trust you faster</h3><ul>
-        <li><b>Verify my license</b> button that opens your record on the state's site</li>
-        <li><b>Your own video</b> so they meet you before you knock</li>
-        <li><b>Licensed since</b> badge, your photo and your story</li>
-        <li><b>Languages you speak</b>, hours, and how fast you reply</li>
-        <li><b>Areas you serve</b>, city by city</li>
-      </ul></div>
-      <div class="bc"><h3>You stop explaining yourself</h3><ul>
-        <li><b>Who works on your claim:</b> the insurance company's team, and who works for the homeowner</li>
-        <li><b>What is a public adjuster?</b> Written out in plain words</li>
-        <li><b>How public adjusters get paid</b>, explained honestly</li>
-        <li><b>The questions homeowners ask</b>, already answered</li>
-        <li><b>Before we meet</b> checklist so they have their papers ready</li>
-      </ul></div>
-      <div class="bc"><h3>Homeowners get real help</h3><ul>
-        <li><b>The first 48 hours after damage</b> guide</li>
-        <li><b>Hurricane season checklist</b> they keep coming back to</li>
-        <li><b>Call me</b> and <b>Text me</b> buttons on every screen</li>
-        <li><b>Book a time with me</b> from your Google Calendar or Calendly</li>
-        <li><b>Directions to my office</b> in Google Maps</li>
-      </ul></div>
-      <div class="bc"><h3>It's yours, on your phone</h3><ul>
-        <li><b>An app on your home screen</b>, no app store</li>
-        <li><b>Share in two taps</b> by text, email, WhatsApp or social media</li>
-        <li><b>Your QR code</b> for business cards and door hangers</li>
-        <li><b>Save my contact</b> puts you in their phone in one tap</li>
-        <li><b>Light or dark</b>, your color, and a background video behind your name</li>
-      </ul></div>
+      <div class="bc"><h3>Your identity and proof</h3><ul><li><b>Video hero</b> paired with your headline</li><li><b>Your photo</b> front and center</li><li><b>Black license card</b> showing your credentials</li><li><b>Verify My License</b> button linking straight to your state record</li><li><b>Clean one-page layout</b> built around your name</li></ul></div>
+      <div class="bc"><h3>Homeowner education</h3><ul><li><b>"Who Works For You"</b> pillar article: the carrier's team versus yours</li><li><b>Ten plain-English FAQs</b> answering common claim doubts</li><li><b>Four related articles</b> that build trust before you arrive</li><li><b>How a public adjuster protects</b> the policyholder, explained</li><li><b>Written for a stressed homeowner</b> to read in minutes</li></ul></div>
+      <div class="bc"><h3>Booking and sharing</h3><ul><li><b>Booking button</b> so homeowners can schedule with you</li><li><b>Save My Contact</b> in one tap</li><li><b>Your own QR code</b> to show on the spot</li><li><b>Share by text, email</b> and social media</li><li><b>Built to turn a referral</b> into a real conversation</li></ul></div>
+      <div class="bc"><h3>Phone ready and private</h3><ul><li><b>Works like an app</b> right on your phone</li><li><b>Private preview</b> only you can see at first</li><li><b>Nothing goes public</b> until you approve it</li><li><b>Add your own photo</b> and story</li><li><b>Loads fast</b> between appointments</li></ul></div>
     </div>
     <div class="bcta"><p>That's a lot of website for free. Why not see how yours looks?</p><a class="btn" data-cta href="/free/build/?view=preview">See my page &rarr;</a></div>
   </section>
@@ -204,9 +226,9 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
     <p class="k">How it works</p>
     <h2>Three steps. Then it's live.</h2>
     <div class="st">
-      <div><b>01</b><h3>Pick your look</h3><p>Light or dark, your color, and one of two background videos. Change it any time.</p></div>
-      <div><b>02</b><h3>Tell us about you</h3><p>Name, license, a few lines about you, and your photo. Talk it out if you'd rather not type.</p></div>
-      <div><b>03</b><h3>See it, then approve</h3><p>You get a private preview first. Nothing goes live until you press the button.</p></div>
+      <div><b>01</b><h3>See your page</h3><p>Open your private preview to see a working page already set up with your name and license details. Want to take a look at yours?</p></div>
+      <div><b>02</b><h3>Add your photo and story</h3><p>Drop in your headshot and a few lines about your background so the page sounds like you, not a template. Isn't it easier to edit something that's already built?</p></div>
+      <div><b>03</b><h3>Approve it</h3><p>Nothing goes live while you're still deciding. Your page goes public only when you give the green light. Ready to check your private preview first?</p></div>
     </div>
   </section>
 
@@ -218,23 +240,20 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
   </section>
   <p class="skip" id="skip"><a href="/free/build/" data-skip>Rather skip ahead and build your page now?</a></p>
 
-  <section class="me">
-    <div class="q">&ldquo;</div>
-    <div><p>I was a public adjuster for almost two decades. I'm out of the industry now, but I know how much time you spend explaining what you do. <b>So I built this, and I'm giving it away.</b> Why not see what yours looks like?</p><small>Ezekiel, founder</small></div>
-  </section>
-
   <section class="drw">
     <h2>Questions</h2>
-    <div class="dq"><button type="button">What's the catch?</button><div class="da"><div>There isn't one for the page. It's yours, free. Later we'll offer paid tools inside the app for adjusters who want more, and you can ignore them. Why not take the free page and decide later?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
-    <div class="dq"><button type="button">I'm not good with tech. Can I still do this?</button><div class="da"><div>If you can fill in a form on your phone, you can do this. You pick a look, type your details, and see your page before anything goes live. Five minutes, start to finish. Ready to try?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
-    <div class="dq"><button type="button">I already have a website. Do I need this?</button><div class="da"><div>Keep your website. This is the short page you text a homeowner before an appointment. It loads fast on a phone and links to your website too. Want both working for you?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
-    <div class="dq"><button type="button">Who sees my page?</button><div class="da"><div>Only the people you send it to, until you share it more widely. You see a private preview first, and nothing goes live until you approve it. Want to see your preview?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">What's the catch?</button><div class="da"><div>There's no hidden fee, no trial timer, and no credit card asked for anywhere on this page. You get a real working website with your name on it for free, because showing you real value up front beats a sales pitch. Would you feel better seeing the preview for yourself, no strings attached?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">Why are you giving this away?</button><div class="da"><div>In my 17 years as a Florida public adjuster, I saw too many good adjusters forced to beg contractors for scraps because they had nothing of their own. A solid page of your own is the first step toward standing on your own name instead of depending on someone else for work. Wouldn't it be worth two minutes to see what yours looks like?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">Who owns the page once it's live?</button><div class="da"><div>Your name, photo, story and license details are yours. We host the page for free and keep it running, and homeowners connect directly with you, not a lead middleman. Doesn't it make sense to have your own front door online?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">Can I take it down if I change my mind?</button><div class="da"><div>Yes. Nothing goes live until you approve it, and if you ever want it taken down after that, tell us and it comes down, no questions asked. You're never locked into a contract. Knowing you hold the off switch, why not take a look at your preview?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">Do you sell my information?</button><div class="da"><div>Never. I will never sell, rent or hand over an adjuster's information to anyone. It's used only inside the company to run and improve the service. Wouldn't you rather deal with a former adjuster who respects your privacy than another lead broker?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">What happens after I approve my page?</button><div class="da"><div>Your page goes live, so you can text the link, show the QR code, or send homeowners there before an appointment. You can use it on your phone like an app right away, with no surprise bill later. Ready to see what your page looks like before you decide?<br><a data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></div></div>
     <button class="closeall" type="button" id="ca">&uarr; Close questions</button>
   </section>
 
   <section class="end">
-    <h2>Build yours tonight.<br>Send it tomorrow.</h2>
-    <p>Free for licensed public adjusters. About 5 minutes.</p>
+    <h2>See your page before you decide.</h2>
+    <p>You don't need a credit card or a sales call to look at a private preview with your name on it. Why not check it out right now?</p>
     <a class="btn" data-cta href="/free/build/?view=preview">See my page &rarr;</a>
   </section>
 </div>
