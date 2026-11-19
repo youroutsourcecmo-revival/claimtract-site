@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cedric Moore, Public Adjuster (sample page)</title><meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0B0D;--card:#1B1C1F;--line:#2A2E36;--tx:#F4F4F5;--mut:#A9AEB7;--dim:#6B6F78;--or:#F5A524;--bad:#ff6b6b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 Inter,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--or)}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header.top{padding:22px 0;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;letter-spacing:.02em}.logo b{color:var(--or)}
+.free-tag{font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--or);border:1px solid var(--or);border-radius:99px;padding:7px 12px}
+.hero{padding:34px 0 18px}
+.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.04;margin:0 0 16px;letter-spacing:-.02em;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--or)}
+.hero p{color:var(--mut);font-size:18px;max-width:640px;margin:0}
+.steps{display:flex;gap:8px;margin:34px 0 26px;flex-wrap:wrap}
+.steps div{flex:1;min-width:120px;padding:10px 12px;border-top:3px solid var(--line);font:600 11px/1.3 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.steps div.on{border-color:var(--or);color:var(--tx)}.steps div.done{border-color:#3d8f5f;color:var(--mut)}
+section.step{display:none;padding-bottom:70px}section.step.on{display:block}
+h2{font-size:26px;margin:0 0 6px;letter-spacing:-.01em}
+.sub{color:var(--mut);margin:0 0 22px}
+.tpls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.tpl{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;text-align:left;color:var(--tx);font:inherit;transition:.15s}
+.tpl:hover{border-color:#444a55}.tpl[aria-pressed=true]{border-color:var(--or);box-shadow:0 0 0 4px rgba(245,165,36,.15)}
+.tpl .mini{height:170px;border-radius:10px;overflow:hidden;position:relative;margin-bottom:12px}
+.tpl h3{margin:0;font-size:18px}.tpl p{margin:2px 0 0;color:var(--mut);font-size:14px}
+.mini .bar{position:absolute;left:0;right:0;top:0;height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 10px}
+.mini .bar i{width:46px;height:7px;border-radius:4px;display:block}.mini .bar u{width:30px;height:12px;border-radius:99px;display:block}
+.mini .hl{position:absolute;left:12px;top:42px;right:12px}.mini .hl s{display:block;height:11px;border-radius:3px;margin-bottom:7px;text-decoration:none}
+.mini .btns{position:absolute;left:12px;bottom:46px;display:flex;gap:6px}.mini .btns b{width:46px;height:16px;border-radius:5px;display:block}
+.mini .row{position:absolute;left:12px;right:12px;bottom:10px;display:flex;gap:6px}.mini .row b{flex:1;height:28px;border-radius:5px;display:block}
+.m-storm{background:#0F1115}.m-storm .bar{background:#16181d}.m-storm .bar i{background:#555}.m-storm .bar u{background:#F5A524}.m-storm s{background:#fff}.m-storm s+s{background:#F5A524;width:60%}.m-storm .btns b:first-child{background:#F5A524}.m-storm .btns b+b{background:#333}.m-storm .row b{background:#1f2228}
+.m-coastal{background:#EAF6F8}.m-coastal .bar{background:#fff}.m-coastal .bar i{background:#b9dde2}.m-coastal .bar u{background:#0E7C86}.m-coastal s{background:#16465c}.m-coastal s+s{background:#0E7C86;width:60%}.m-coastal .btns b{border-radius:99px}.m-coastal .btns b:first-child{background:#0E7C86}.m-coastal .btns b+b{background:#bfe3e8}.m-coastal .row b{background:#fff;border-radius:10px}
+.m-paper{background:#F4F4F1}.m-paper .bar{background:#fff}.m-paper .bar i{background:#d8d8d2}.m-paper .bar u{background:#F5A524}.m-paper s{background:#111}.m-paper s+s{background:#F5A524;width:60%}.m-paper .btns b:first-child{background:#F5A524}.m-paper .btns b{background:#fff;border:1px solid #d8d8d2}.m-paper .row b{background:#fff;border:1px solid #e1e1dc}
+.sw{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}.sw button{width:44px;height:44px;border-radius:50%;border:3px solid var(--line);cursor:pointer;padding:0}.sw button[aria-pressed=true]{border-color:#fff;box-shadow:0 0 0 3px var(--or)}
+.m-heritage{background:#FAF6EE}.m-heritage .bar{background:#1F2A44}.m-heritage .bar i{background:#6d789a}.m-heritage .bar u{background:#B8913F}.m-heritage s{background:#1F2A44}.m-heritage s+s{background:#B8913F;width:60%}.m-heritage .btns b:first-child{background:#1F2A44}.m-heritage .btns b+b{background:#d8cfbb}.m-heritage .row b{background:#efe7d6}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:640px){.grid{grid-template-columns:1fr}}
+label{display:block;font-weight:600;font-size:14px;margin:0 0 6px}
+.f{margin-bottom:16px}.f small{display:block;color:var(--dim);margin-top:5px;font-size:13px}
+input[type=text],input[type=tel],input[type=email],select,textarea{width:100%;background:#111317;border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:13px 14px;font:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--or);outline-offset:1px;border-color:transparent}
+textarea{min-height:190px;resize:vertical;line-height:1.55}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips button{background:#111317;border:1px solid var(--line);color:var(--mut);padding:9px 14px;border-radius:99px;font:600 14px Inter,sans-serif;cursor:pointer}.chips button[aria-pressed=true]{background:var(--or);color:#111;border-color:var(--or)}
+.drop{border:2px dashed var(--line);border-radius:12px;padding:16px;text-align:center;color:var(--mut);cursor:pointer;position:relative;min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#111317}
+.drop:hover{border-color:var(--or)}.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop img{max-width:100%;max-height:150px;border-radius:8px;display:block}.drop b{color:var(--tx)}
+.gal{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}.gal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}
+@media(max-width:560px){.gal{grid-template-columns:repeat(3,1fr)}}
+.row2{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.cnt{font:500 12px 'JetBrains Mono',monospace;color:var(--dim)}.cnt.ok{color:#5ec08a}
+.btn{background:var(--or);color:#111;border:0;border-radius:12px;padding:15px 26px;font:700 16px Inter,sans-serif;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}.btn.ghost{background:transparent;color:var(--tx);border:1px solid var(--line)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.sm{padding:10px 16px;font-size:14px;border-radius:10px}
+.nav{display:flex;gap:12px;justify-content:space-between;margin-top:26px;flex-wrap:wrap}
+.consent{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.consent label{display:flex;gap:12px;font-weight:400;font-size:14.5px;color:var(--mut);margin:0;cursor:pointer;line-height:1.5}
+.consent input{width:22px;height:22px;flex:none;accent-color:var(--or);margin-top:2px}
+.consent .box{margin-top:12px;background:#111317;border-left:3px solid var(--or);padding:10px 14px;font-size:13.5px;color:var(--tx);border-radius:0 8px 8px 0}
+.err{color:var(--bad);font-size:14px;margin:8px 0 0;min-height:20px}
+.banner{background:#1d1608;border:1px solid #5a4210;color:#f3c776;border-radius:12px;padding:12px 16px;font-size:14px;margin-bottom:16px;display:flex;gap:10px;align-items:center}
+.pv .dg{position:sticky;bottom:14px;height:0;z-index:5;pointer-events:none}
+.pv .dg .dgi{position:absolute;left:14px;bottom:0;pointer-events:auto;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.pv .dg .dgb{width:76px;height:76px;border-radius:50%;border:3px solid var(--p-ac);background:#222 center/cover;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.45);padding:0;color:#fff;font-size:26px}
+.pv .dg .dgl{background:var(--p-ac);color:var(--p-acx);font:700 12px Inter,sans-serif;padding:6px 10px;border-radius:99px;cursor:pointer;border:0}
+.pv .dg .dgp{display:none;width:min(300px,78vw);background:#000;border-radius:14px;overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.55);border:1px solid #333}
+.pv .dg .dgp video{width:100%;display:block}
+.pv .dg .dgp button{width:100%;background:#15171b;color:#fff;border:0;padding:9px;font:600 13px Inter,sans-serif;cursor:pointer}
+.pv .dg.open .dgp{display:block}.pv .dg.open .dgb,.pv .dg.open .dgl{display:none}
+.pvwrap{border:1px solid var(--line);border-radius:16px;overflow:clip;background:#000}
+.pvbar{background:#15171b;padding:9px 14px;font:500 12px 'JetBrains Mono',monospace;color:var(--mut);display:flex;gap:8px;align-items:center}
+.pvbar span{background:#0A0B0D;border-radius:99px;padding:5px 12px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pvbar i{width:9px;height:9px;border-radius:50%;background:#444;display:block}
+.pv{--p-bg:#0F1115;--p-tx:#fff;--p-mut:#b6bbc4;--p-ac:#F5A524;--p-acx:#111;--p-card:#181b21;--p-r:10px;--p-f:Inter,sans-serif;--p-h:800;--p-ht:uppercase;background:var(--p-bg);color:var(--p-tx);font-family:var(--p-f)}
+.pv.paper{--p-bg:#F4F4F1;--p-tx:#111;--p-mut:#55585F;--p-ac:#F5A524;--p-acx:#111;--p-card:#fff;--p-r:16px;--p-h:800;--p-ht:none;--p-act:#8F5400}
+.pv.paper .hero2{--hs:rgba(244,244,241,.94)}
+.pv.paper .hero2::before{background:linear-gradient(180deg,rgba(244,244,241,.35),var(--hs))}
+.pv.coastal{--p-act:#0B6670;--p-bg:#F1F9FB;--p-tx:#16384a;--p-mut:#4d6b78;--p-ac:#0E7C86;--p-acx:#fff;--p-card:#fff;--p-r:18px;--p-h:700;--p-ht:none}
+.pv.heritage{--p-act:#7A5C1A;--p-bg:#FAF6EE;--p-tx:#1F2A44;--p-mut:#5b6177;--p-ac:#B8913F;--p-acx:#1F2A44;--p-card:#fff;--p-r:4px;--p-f:'Source Serif 4',Georgia,serif;--p-h:700;--p-ht:none}
+.pv .nv{display:flex;justify-content:space-between;align-items:center;padding:16px 26px;gap:10px;flex-wrap:wrap}
+.pv.heritage .nv{background:#1F2A44;color:#fff}
+.pv .nm{font-weight:var(--p-h);font-size:18px;letter-spacing:.01em}
+.pv .call{background:var(--p-ac);color:var(--p-acx);padding:11px 18px;border-radius:99px;font-weight:700;text-decoration:none;font:700 15px Inter,sans-serif;display:inline-block}
+.pv.heritage .call{border-radius:3px;color:#fff;background:#B8913F}
+.pv .hero2{position:relative;padding:60px 26px 54px;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;background-size:cover;background-position:center}
+.pv .hero2::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),var(--hs,rgba(15,17,21,.9)))}
+.pv.coastal .hero2{--hs:rgba(241,249,251,.92)}.pv.heritage .hero2{--hs:rgba(250,246,238,.94)}
+.pv .hero2>*{position:relative}
+.pv h1{font-size:clamp(30px,5.4vw,50px);line-height:1.05;margin:0 0 12px;text-transform:var(--p-ht);font-weight:var(--p-h);letter-spacing:-.01em}
+.pv h1 em{font-style:normal;color:var(--p-act,var(--p-ac))}
+.pv .lead{color:var(--p-mut);font-size:18px;margin:0 0 22px;max-width:560px}
+.pv .cta{display:flex;gap:12px;flex-wrap:wrap}
+.pv .cta a{padding:14px 24px;border-radius:var(--p-r);font:700 16px Inter,sans-serif;text-decoration:none;background:var(--p-ac);color:var(--p-acx)}
+.pv.heritage .cta a:first-child{color:#fff}
+.pv .cta a+a{background:transparent;color:var(--p-tx);border:2px solid var(--p-ac)}
+.pv .sec{padding:44px 26px}
+.pv .abt{display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:start}
+@media(max-width:640px){.pv .abt{grid-template-columns:1fr}}
+.pv .hs{width:100%;aspect-ratio:4/5;border-radius:var(--p-r);background:var(--p-card);background-size:cover;background-position:center;border:1px solid rgba(128,128,128,.25)}
+.pv h2{font-size:26px;text-transform:var(--p-ht);font-weight:var(--p-h);margin:0 0 14px}
+.pv .abt p{white-space:pre-wrap;color:var(--p-mut);margin:0;font-size:17px;line-height:1.65}
+.pv .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pv .tags span{background:var(--p-card);border:1px solid rgba(128,128,128,.3);border-radius:99px;padding:7px 14px;font:600 13px Inter,sans-serif;color:var(--p-tx)}
+.pv.heritage .tags span{border-radius:3px}
+.pv .pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.pv .pg img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--p-r)}
+.pv footer{padding:26px;border-top:1px solid rgba(128,128,128,.25);font:14px Inter,sans-serif;color:var(--p-mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.soc{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.soc a{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--p-ac);color:var(--p-act,var(--p-ac));text-decoration:none;background:transparent;transition:.15s}
+.soc a:hover{background:var(--p-ac);color:var(--p-acx)}
+.soc svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.soc svg text{fill:currentColor;stroke:none;font:800 15px Inter,sans-serif}
+.pv.heritage .soc a{border-radius:4px}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:640px){.sgrid{grid-template-columns:1fr}}
+.pv .wpa h2{margin-bottom:10px}
+.pv .wpa .big{font-size:20px;line-height:1.55;color:var(--p-tx);margin:0 0 26px;max-width:680px}
+.pv .tri{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:30px}
+.pv .tri div{background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:var(--p-r);padding:18px}
+.pv .tri b{display:block;font:800 13px 'JetBrains Mono',monospace;color:var(--p-act,var(--p-ac));letter-spacing:.08em;margin-bottom:6px}
+.pv .tri h3{margin:0 0 6px;font-size:18px}.pv .tri p{margin:0;color:var(--p-mut);font-size:15px;line-height:1.55}
+.pv .wpa h4{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--p-act,var(--p-ac));margin:0 0 8px;font-family:Inter,sans-serif}
+.pv .wpa .pay{color:var(--p-mut);margin:0 0 28px;max-width:680px;font-size:16px;line-height:1.6}
+.pv .who{border-top:1px solid rgba(128,128,128,.25)}.pv .who div{display:grid;grid-template-columns:190px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid rgba(128,128,128,.25);font-size:15px}
+@media(max-width:560px){.pv .who div{grid-template-columns:1fr;gap:2px}}
+.pv .who b{color:var(--p-tx)}.pv .who span{color:var(--p-mut)}.pv .who .me b,.pv .who .me span{color:var(--p-act,var(--p-ac));font-weight:700}
+.pv .wcta{margin-top:30px;padding:24px;border-radius:var(--p-r);background:var(--p-card);border:1px solid rgba(128,128,128,.25)}
+.pv .wcta p{margin:0 0 14px;font-size:18px;color:var(--p-tx)}.pv .wcta small{display:block;margin-top:12px;color:var(--p-mut);font-size:12.5px}
+.pv .faq details{border-bottom:1px solid rgba(128,128,128,.28)}.pv .faq details:first-of-type{border-top:1px solid rgba(128,128,128,.28)}
+.pv .faq summary{list-style:none;cursor:pointer;padding:17px 4px;font:700 17px Inter,sans-serif;display:flex;justify-content:space-between;gap:14px;align-items:center;color:var(--p-tx)}
+.pv .faq summary::-webkit-details-marker{display:none}
+.pv .faq summary::after{content:"+";color:var(--p-act,var(--p-ac));font-size:24px;line-height:1;flex:none}
+.pv .faq details[open] summary::after{content:"\2013"}
+.pv .faq .ans{padding:0 4px 20px;color:var(--p-mut);font-size:16px;line-height:1.65;max-width:680px}
+.pv .faq .ans p{margin:0 0 12px}.pv .faq .ans .sc{color:var(--p-tx);font-weight:600}
+.pv .faq .ans a{display:inline-block;background:var(--p-ac);color:var(--p-acx);padding:11px 18px;border-radius:var(--p-r);font:700 15px Inter,sans-serif;text-decoration:none}
+.pv.heritage .faq .ans a{color:#fff}
+.pv .badge{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:var(--p-card);border:1px solid var(--p-ac);color:var(--p-tx);border-radius:99px;padding:7px 14px 7px 10px;font:700 13px Inter,sans-serif;margin-bottom:16px}
+.pv .badge img{width:22px;height:auto;flex:none;display:block}
+.pv.heritage .badge{border-radius:3px}
+.links{display:grid;gap:12px;max-width:520px}
+.pv .lk{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-radius:var(--p-r);background:var(--p-card);border:1px solid rgba(128,128,128,.3);color:var(--p-tx);font:700 16px Inter,sans-serif;text-decoration:none;transition:.15s}
+.pv .lk:hover{border-color:var(--p-ac)}.pv .lk::after{content:"\2192";color:var(--p-ac)}
+.pv .share{margin-top:18px}.pv .share canvas{width:132px;height:132px;display:block;border-radius:var(--p-r);background:#fff}
+.pv .share .sb{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pv .share button{background:var(--p-ac);color:var(--p-acx);border:0;border-radius:var(--p-r);padding:10px 14px;font:700 13px Inter,sans-serif;cursor:pointer}
+.pv.heritage .share button{color:#fff}
+.lkrow{display:grid;grid-template-columns:1fr 1.6fr;gap:10px;margin-bottom:10px}@media(max-width:560px){.lkrow{grid-template-columns:1fr}}
+.pv .rdy{list-style:none;padding:0;margin:0;display:grid;gap:10px;max-width:640px}
+.pv .rdy li{padding:12px 16px 12px 44px;position:relative;background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:var(--p-r);color:var(--p-tx)}
+.pv .rdy li::before{content:"\2713";position:absolute;left:16px;color:var(--p-act,var(--p-ac));font-weight:800}
+.tk{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;text-align:left;margin:30px 0}
+.tkc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.tkc h3{margin:0;font-size:16px}.tkc p{margin:0;color:var(--mut);font-size:14px}
+.tkc textarea{min-height:110px;font-size:14px;line-height:1.5;padding:10px 12px}
+.trial{background:#1d1608;border:1px solid #5a4210;border-radius:16px;padding:26px;text-align:left;margin:10px 0 24px}
+.trial h3{margin:0 0 8px;font-size:24px}.trial p{color:#d9c08a;margin:0 0 16px}.trial small{display:block;margin-top:12px;color:#a88a4a}
+a.btn{display:inline-block;text-decoration:none}
+.done-box{text-align:center;padding:50px 10px}.done-box h2{font-size:34px}
+.fine{color:var(--dim);font-size:13px;margin-top:30px}
+.hp{position:absolute;left:-9999px}
+
+.lp{padding:10px 0 10px}
+.lp-hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:30px 0 20px}
+@media(max-width:820px){.lp-hero{grid-template-columns:1fr;gap:28px}}
+.lp-kick{font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--or);margin:0 0 16px}
+.lp h1{font-size:clamp(38px,6.4vw,66px);line-height:1.02;margin:0 0 18px;letter-spacing:-.025em;font-weight:800}
+.lp h1 em{font-style:normal;color:var(--or)}
+.lp-sub{color:var(--mut);font-size:19px;max-width:560px;margin:0 0 24px}
+.lp-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.lp-cta .btn{font-size:17px;padding:17px 30px;box-shadow:0 10px 30px rgba(245,165,36,.25)}
+.lp-trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;color:var(--dim);font:500 13px 'JetBrains Mono',monospace}
+.lp-trust span::before{content:"\2713 ";color:#5ec08a}
+.ph{position:relative;margin:0 auto;width:min(320px,86vw);background:#0F1115;border:1px solid #2f3440;border-radius:34px;padding:12px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 6px #14161b,0 0 90px rgba(245,165,36,.12);transform:rotate(2deg)}
+.ph-in{background:#0F1115;border-radius:24px;overflow:hidden;border:1px solid #20242c}
+.ph-nv{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#16181d;font-weight:800;font-size:14px}
+.ph-nv i{font:700 11px Inter,sans-serif;font-style:normal;background:var(--or);color:#111;border-radius:99px;padding:7px 11px}
+.ph-hero{padding:26px 16px 22px;background:linear-gradient(180deg,#1a1710,#0F1115)}
+.ph-bdg{display:inline-flex;align-items:center;gap:6px;font:600 10px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--or);border:1px solid rgba(245,165,36,.5);border-radius:99px;padding:5px 9px;margin-bottom:12px}
+.ph-bdg img{width:12px;height:auto}
+.ph h3{margin:0 0 8px;font-size:23px;line-height:1.06;text-transform:uppercase;font-weight:800}.ph h3 em{font-style:normal;color:var(--or)}
+.ph p{margin:0 0 14px;font-size:12px;color:#b6bbc4}
+.ph-b{display:grid;gap:8px}
+.ph-b b{display:block;text-align:center;padding:11px;border-radius:10px;font-size:12px;font-weight:700;background:#181b21;border:1px solid #2a2e36}
+.ph-b b.p{background:var(--or);color:#111;border-color:var(--or)}
+.ph-q{padding:14px 16px 18px}.ph-q div{padding:10px 0;border-top:1px solid #20242c;font-size:12px;color:#d6d9df;display:flex;justify-content:space-between}
+.ph-q div::after{content:"+";color:var(--or);font-weight:800}
+.ph-tag{position:absolute;right:-6px;top:-14px;background:var(--or);color:#111;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.08em;padding:7px 12px;border-radius:99px;transform:rotate(6deg)}
+.lp-txt{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:34px 0 10px}
+.lp-txt h3{margin:0 0 4px;font-size:20px}.lp-txt p.s{margin:0 0 14px;color:var(--mut);font-size:15px}
+.lp-txt .g{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
+@media(max-width:700px){.lp-txt .g{grid-template-columns:1fr}}
+.lp-txt .cb{display:flex;gap:11px;margin:14px 0 0;font-weight:400;font-size:13.5px;color:var(--mut);line-height:1.5;cursor:pointer}
+.lp-txt .cb input{width:20px;height:20px;flex:none;accent-color:var(--or);margin-top:1px}
+.lp-sec{padding:54px 0 8px}
+.lp-sec h2{font-size:clamp(28px,4.4vw,40px);line-height:1.08;letter-spacing:-.02em;margin:0 0 10px}
+.lp-sec .sub{font-size:17px;max-width:620px}
+.lp-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:22px}
+.lp-c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;transition:.15s}
+.lp-c:hover{border-color:#4a4f5a;transform:translateY(-2px)}
+.lp-c .ic{width:42px;height:42px;border-radius:12px;background:rgba(245,165,36,.12);color:var(--or);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+.lp-c h3{margin:0 0 5px;font-size:17px}.lp-c p{margin:0;color:var(--mut);font-size:14.5px}
+.lp-how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+@media(max-width:700px){.lp-how{grid-template-columns:1fr}}
+.lp-how div{border-top:3px solid var(--or);padding:14px 4px 0}
+.lp-how b{font:700 12px 'JetBrains Mono',monospace;color:var(--or);letter-spacing:.14em}
+.lp-how h3{margin:6px 0 4px;font-size:19px}.lp-how p{margin:0;color:var(--mut);font-size:15px}
+.lp-note{display:flex;gap:18px;align-items:center;background:linear-gradient(135deg,#1d1608,#15120a);border:1px solid #5a4210;border-radius:18px;padding:24px;margin:40px 0 0}
+.lp-note img{width:56px;height:auto;flex:none}
+.lp-note p{margin:0;color:#e6d3a6;font-family:'Source Serif 4',serif;font-size:19px;line-height:1.5}
+.lp-note small{display:block;margin-top:8px;color:#a88a4a;font:500 13px Inter,sans-serif}
+.lp-end{text-align:center;padding:50px 0 10px}.lp-end h2{font-size:clamp(28px,4.6vw,42px);margin:0 0 16px}
+.pv .own{position:sticky;top:0;z-index:8;display:flex;gap:6px;align-items:center;padding:8px 12px;background:var(--p-ac);color:var(--p-acx);font:700 12px Inter,sans-serif;overflow-x:auto;white-space:nowrap}
+.pv .own span{margin-right:4px;text-transform:uppercase;letter-spacing:.06em}
+.pv .own button{background:var(--p-acx);color:var(--p-ac);border:0;border-radius:99px;padding:8px 13px;font:700 12px Inter,sans-serif;cursor:pointer}
+@media (display-mode:browser){.pv .own.ol{display:none}}
+.inst{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:left;margin:0 0 24px}.inst h3{margin:0 0 6px;font-size:18px}.inst p{margin:0;color:var(--mut);font-size:14.5px}
+.ytv{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#111;margin-top:10px}.ytv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lgs{display:flex;flex-wrap:wrap;gap:8px 16px}.lgs label{display:flex;align-items:center;gap:6px;font-weight:600;margin:0}
+.pv .meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;width:100%;align-self:stretch}.pv .meta span{background:var(--p-card);border:1px solid rgba(128,128,128,.3);border-radius:99px;padding:6px 12px;font:600 12.5px Inter,sans-serif;color:var(--p-tx)}.pv .meta .rp::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#2DBE60;margin-right:7px;vertical-align:1px}
+.pv details.gd{border-top:1px solid rgba(128,128,128,.25);padding:16px 0}.pv details.gd summary{font-weight:700;cursor:pointer}.pv details.gd .ans{margin-top:12px}
+
+html,body{margin:0;padding:0;background:#F4F4F1}
+.smp{background:#111;color:#fff;text-align:center;font:600 13px/1.4 Inter,sans-serif;padding:9px 14px}.smp a{color:#F5A524}
+#pv{border:0!important;border-radius:0!important;margin:0!important;max-width:none!important;box-shadow:none!important}
+</style></head><body>
+<div class="smp">Sample page. Cedric Moore is not a real adjuster. <a href="/free/">Get a free page like this</a></div>
+<div class="pv paper" id="pv"><div class="nv"><div class="nm">Cedric Moore</div><a class="call" href="tel:+14075550142">Call (407) 555-0142</a></div><div class="hero2"><div class="badge"><img src="/assets/ct-shield.png" alt="">Licensed since 2012</div><div class="meta"><span>Speaks English, Spanish</span><span>Mon to Sat, 8 AM to 7 PM</span><span class="rp">Usually replies within an hour</span></div><h1>Storm damage?<br><em>Get someone in your corner.</em></h1><p class="lead">Public adjuster serving Orlando, FL. I work for you, not the insurance company.</p><div class="cta"><a href="tel:+14075550142">Call me</a><a href="sms:+14075550142">Text me</a></div></div><div class="sec wpa"><h2>What is a public adjuster?</h2><p class="big">A public adjuster is a licensed insurance professional you hire to handle your insurance claim. I'm Cedric, and I work for you, the property owner, not for the insurance company.</p><div class="tri"><div><b>01</b><h3>Read your policy</h3><p>I go through your coverage, endorsements and exclusions so you know what to ask for.</p></div><div><b>02</b><h3>Document the damage</h3><p>I inspect the property, photograph and measure the loss, list what was damaged, and build the repair estimate.</p></div><div><b>03</b><h3>Negotiate your claim</h3><p>I present your claim to the insurance company, answer what it asks for, and work toward a fair settlement for you.</p></div></div><h4>How a public adjuster is paid</h4><p class="pay">Most public adjusters charge a percentage of what the claim recovers, and some charge a flat or hourly fee. Fees vary by state and by adjuster, and the fee comes out of the settlement. Ask any adjuster to put the fee in writing before you sign anything.</p><h4>Who is who on your claim</h4><div class="who"><div><b>Insurance company adjuster</b><span>Works for the insurer and values the claim for the insurer.</span></div><div><b>Contractor</b><span>Repairs or rebuilds the damage. Usually cannot negotiate your claim for you.</span></div><div><b>Insurance attorney</b><span>Handles legal disputes and lawsuits.</span></div><div class="me"><b>Public adjuster</b><span>Works only for you on your claim. That's me.</span></div></div><div class="wcta"><p>Not sure your claim is big enough to need one? Call me, Cedric, and we'll talk it through.</p><div class="cta"><a href="tel:+14075550142">Call (407) 555-0142</a><a href="sms:+14075550142">Text me</a></div><small>General information, not legal or insurance advice.</small></div></div><div class="sec"><div class="abt"><div><div class="hs" aria-hidden="true"></div></div><div><h2>About Cedric</h2><p>I've been a public adjuster in Central Florida since 2012. Before that I spent years on roofs, so I know what storm damage looks like up close, and I know what insurance companies tend to miss. I handle wind, hail, water and fire claims for homeowners and small businesses. When you call me, I come out, walk the property with you, read your policy, and tell you straight whether I can help. If I can't, I'll tell you that too. My job is to document every bit of the damage, build the estimate, and deal with your insurance company so you don't have to. Most of my clients come from neighbors I've already helped. I'd like you to be next.</p><div class="tags"><span>Roof claims</span><span>Wind and hurricane claims</span><span>Water claims</span></div></div></div></div><div class="sec"><h2>Areas I serve</h2><div class="tags" style="margin-top:0"><span>Orlando</span><span>Kissimmee</span><span>Winter Park</span><span>St. Cloud</span><span>Sanford</span></div></div><div class="sec"><h2>Before we meet</h2><p class="pay" style="margin-bottom:14px">If you have these handy, our first conversation goes faster:</p><ul class="rdy"><li>Your insurance policy, or at least the declarations page</li><li>Letters and emails from your insurance company</li><li>Photos and videos of the damage</li><li>Repair estimates, invoices and receipts</li><li>A list of damaged belongings</li></ul></div><div class="sec"><h2>Guides for homeowners</h2><details class="gd"><summary>The first 48 hours after damage</summary><div class="ans"><ul class="rdy"><li>Get everyone safe. If the house isn’t safe, leave it.</li><li>Stop more damage if you can do it safely: tarp the roof, shut off the water, dry what you can.</li><li>Take photos and video of everything before you clean up. Wide shots first, then close-ups.</li><li>Keep damaged materials if you can. Don’t throw them out until the damage is documented.</li><li>Save every receipt: tarps, fans, water removal, a hotel, meals.</li><li>Report the claim to your insurance company and write down your claim number.</li><li>Don’t sign anything you don’t understand.</li></ul><p class="sc">Not sure what to photograph? Call me and I’ll walk you through it.</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details><details class="gd"><summary>Hurricane season checklist</summary><div class="ans"><ul class="rdy"><li>Find your policy and save a copy on your phone and in your email.</li><li>Know your hurricane deductible. It’s often a percentage of your home’s value, not a flat amount.</li><li>Walk through your house and record a video of every room, opening closets and drawers.</li><li>Photograph your roof, windows and the outside of the house from every side.</li><li>Keep receipts for big purchases in one folder.</li><li>Save my number in your phone now, before the storm.</li></ul><p class="sc">Want me to look at your policy before the season starts?</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details></div><div class="sec faq"><h2>Questions homeowners ask</h2><details><summary>Is it good to have a public adjuster?</summary><div class="ans"><p>It can be, especially when a claim is large, complicated, or the insurance company's numbers do not match the damage you see. A public adjuster reads your policy, documents the loss, and deals with the insurance company so you do not have to. It is not right for every claim, and the fee comes out of the settlement, so ask any adjuster for a plain answer on whether your claim is worth it.</p><p class="sc">Is your claim one you would rather handle alone, or with someone who does this every day?</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details><details><summary>What should you not say to a claims adjuster?</summary><div class="ans"><p>Stick to facts. Do not guess at the cause or the age of the damage, do not say it is probably nothing, and do not agree to anything you do not understand. You can say you will answer in writing after you have reviewed your policy. Keep every email and letter, and note the date and time of every call. This is general information, not legal advice.</p><p class="sc">Would it help to have someone with you on that first call?</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details><details><summary>Why is my first check smaller than the estimate?</summary><div class="ans"><p>Many policies pay actual cash value first, which is the repair cost minus depreciation and your deductible, and pay the rest after repairs are done. Terms and deadlines vary by policy, so read the letter that came with the check.</p><p class="sc">Want me to look at your letter with you?</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details><details><summary>The insurance estimate is too low and no contractor will take the job. What now?</summary><div class="ans"><p>That is common. Estimates and real repair costs can differ for many reasons, such as missed items, labor, and materials. A public adjuster builds a line-by-line estimate of the true cost to repair and presents the difference to the insurance company in writing.</p><p class="sc">Do you have the insurance estimate and your contractor's number in front of you?</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details><details><summary>Should I repair anything before the insurance adjuster comes out?</summary><div class="ans"><p>Protect your home from further damage first, such as tarping a roof or drying out water. Take photos and keep receipts, and keep damaged materials if you can. Do not start permanent repairs until the damage is documented.</p><p class="sc">Not sure what to document before the inspection?</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details><details><summary>If I cash the insurance check, is the claim over?</summary><div class="ans"><p>Not always, but read the check, the letter and anything you are asked to sign first. A partial payment is often not the final one. When in doubt, ask before you cash it.</p><p class="sc">Want a second set of eyes on that letter before you do anything?</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details><details><summary>Will filing a claim raise my rates or get my policy cancelled?</summary><div class="ans"><p>It can affect renewal or rates in some cases, but not in every case, and rules vary by state and insurer. Your insurance agent is the right person to ask about your own policy. A public adjuster can explain how the claim process works.</p><p class="sc">Are you holding off on a claim because of that worry?</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details><details><summary>What does a public adjuster cost?</summary><div class="ans"><p>Most charge a percentage of what the claim recovers. Some charge a flat or hourly fee. It varies by state and adjuster, so get the fee in writing before you sign anything.</p><p class="sc">Want me to explain how it would work on your claim?</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details><details><summary>Who does a public adjuster work for?</summary><div class="ans"><p>A public adjuster represents you, the policyholder, not the insurance company, and not your roofer or contractor. Public adjusters are licensed by the state and are generally held to a duty to act in good faith for the person they represent.</p><p class="sc">Do you want someone on your side of the table?</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details><details><summary>Can my contractor handle my insurance claim?</summary><div class="ans"><p>Contractors are good at repairs, but handling the insurance claim is a separate role. In many places, negotiating a claim for someone requires a public adjuster or attorney license. A contractor and a public adjuster can work well together when each stays in their own lane.</p><p class="sc">Want me to coordinate with your contractor so you get both done right?</p><a href="tel:+14075550142">Call (407) 555-0142</a></div></details><p style="margin:18px 4px 0;font-size:13px;color:var(--p-mut)">Learn more from the National Association of Public Insurance Adjusters at <a href="https://www.napia.com/what-is-a-public-adjuster" target="_blank" rel="noopener nofollow" style="color:var(--p-ac)">napia.com</a>. General information, not legal or insurance advice.</p></div><footer><span>Cedric Moore · Public adjuster · License W000000 · <a href="https://licenseesearch.fldfs.com/" target="_blank" rel="noopener" style="color:var(--p-ac)">Check my license</a></span><span style="display:flex;align-items:center;gap:8px"><img src="/assets/ct-shield.png" alt="" style="width:16px;height:auto">Page by ClaimTract</span></footer></div>
+</body></html>
