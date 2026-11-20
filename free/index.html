@@ -186,7 +186,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
     <input type="text" id="tn" placeholder="First name" autocomplete="given-name">
     <input type="tel" id="tp" placeholder="Mobile number" autocomplete="tel">
     <button class="btn" type="submit">Text me the link</button>
-    <div class="tr" id="tt" role="radiogroup" aria-label="What do you do?"><span>What do you do?</span><button type="button" class="on" data-t="Public adjuster">Public adjuster</button><button type="button" data-t="Roofer">Roofer</button><button type="button" data-t="Water mitigation">Water mitigation</button><button type="button" data-t="HVAC">HVAC</button><button type="button" data-t="General contractor">General contractor</button><button type="button" data-t="Other">Other</button></div>
+    <label class="tr" for="tt"><span>What do you do?</span><select id="tt" style="flex:1;min-width:200px;padding:11px 12px;border:1px solid var(--ln);border-radius:12px;background:var(--bg);color:var(--tx);font:600 15px Inter,sans-serif"><option>Public adjuster</option><option>Roofer</option><option>Water mitigation</option><option>HVAC</option><option>General contractor</option><option>Other</option></select></label>
     <label class="c"><input type="checkbox" id="tc"><span>Yes, text me this link, tips for using my page, and offers from ClaimTract. Texts may be sent with automated technology, including AI-assisted messaging. Consent is not required to build your page. Message and data rates may apply. Reply STOP to cancel.</span></label>
     <div class="msg" id="tm"></div>
   </form>
@@ -347,7 +347,7 @@ function setLinks(){var b=back();document.querySelectorAll('[data-cta]').forEach
  document.querySelectorAll('[data-again]').forEach(function(a){a.hidden=!b;a.href='/free/build/?view=preview'+(PS?'&'+PS:'')});
  document.getElementById('pitch').hidden=!b;document.getElementById('skip').hidden=b;document.querySelector('[data-skip]').href='/free/build/'+(PS?'?'+PS:'');}
 var _seen=seen;seen=function(on){_seen(on);setLinks()};
-var TR='Public adjuster';document.querySelectorAll('#tt button').forEach(function(x){x.onclick=function(){document.querySelectorAll('#tt button').forEach(function(y){y.classList.remove('on')});x.classList.add('on');TR=x.getAttribute('data-t')}});
+var TR='Public adjuster';document.getElementById('tt').onchange=function(){TR=this.value};
 document.getElementById('tf').onsubmit=function(){var m=document.getElementById('tm'),n=document.getElementById('tn').value.trim(),ph=document.getElementById('tp').value.trim(),d=ph.replace(/\D/g,'');
  if(d.length===11&&d[0]==='1')d=d.slice(1);
  if(!n||d.length!==10){m.textContent='Put in your first name and a 10-digit mobile number.';return false}
