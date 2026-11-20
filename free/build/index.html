@@ -643,25 +643,49 @@ function ctLive(url,go){var t=document.getElementById('ctToast');
  try{var u=new URL(url,location.href);if(u.origin!==location.origin){go();return}fetch(u.pathname,{method:'HEAD',cache:'no-store'}).then(function(r){r.ok?go():msg()}).catch(msg)}catch(e){msg()}}
 /* approve */
 $('approve').onclick=function(){
- if($('hp').value)return;var b=this;b.disabled=true;b.textContent='Sending...';
+ if($('hp').value)return;var b=this,TEST=/[?&]test=1\b/.test(location.search);b.disabled=true;b.textContent='Building your website...';
  var er=$('apErr');if(!er){er=document.createElement('p');er.id='apErr';er.style.cssText='color:#c0392b;font-weight:600;margin:10px 0 0';b.parentNode.insertBefore(er,b.nextSibling)}er.textContent='';
- var d=$('ph').value.replace(/\D/g,'');if(d.length===11&&d.charAt(0)==='1')d=d.slice(1);
- var p={firstName:$('fn').value.trim(),lastName:$('ln').value.trim(),phone:{value:'+1'+d},email:{value:$('em').value.trim()},
-  textField:$('ci').value.trim(),textField1:$('st').value.trim().toUpperCase(),
-  license:$('lic').value.trim(),type:$('lt').value,source:'free-page',channel:'text',
-  consent_time:new Date().toISOString(),clicked:'no',consent_version:'2026-11-19-page-v1',consent_text:$('c1').nextElementSibling.textContent,consent_url:location.href,consent_ua:navigator.userAgent,
-  link:'https://claimtract.app/'+slug(),background:S.bgv||'none'};
- if(bkUrl())p.booking=bkUrl();if(ytId())p.video='https://youtu.be/'+ytId();
- if(S.lid)p.call_id=S.lid;if(S.ref)p.referred_by=S.ref;
- try{p.hidden4=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}
- fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)})
- .then(function(r){return r.json()}).then(function(j){
-  if(!(j&&(j.success||j.succeed)))throw new Error('rejected');
-  track('free_approve');
+ function fail(msg,field){track('free_approve_fail');b.disabled=false;b.textContent='Approve and go live';er.textContent=msg||'That didn\'t go through. Check your connection and tap Approve and go live again.';if(field&&$(field)){try{$(field).focus();$(field).scrollIntoView({block:'center',behavior:'smooth'})}catch(e){}}}
+ function api(path,body,raw){return fetch(path,{method:'POST',headers:raw?{'Content-Type':raw}:{'Content-Type':'application/json'},body:raw?body:JSON.stringify(body)}).then(function(r){return r.json().catch(function(){return {ok:false,error:'Server error ('+r.status+')'}}).then(function(j){j._s=r.status;return j})})}
+ // collect fields by element id
+ var F={},ids=['fn','ln','ph','em','ci','st','lt','lic','lsy','dfs','ar','ab','yt','bk','hrs','rpl','oad'];
+ ['facebook','instagram','youtube','linkedin','tiktok','x','google','threads','nextdoor','pinterest','yelp','bbb','whatsapp','telegram','snapchat','web'].forEach(function(k){ids.push('so_'+k)});
+ for(var i=0;i<5;i++){ids.push('ll'+i,'lu'+i)}
+ ids.forEach(function(id){var el=$(id);if(el&&el.value&&el.value.trim())F[id]=el.value.trim()});
+ if(S.lid)F.call_id=S.lid;if(S.ref)F.referred_by=S.ref;try{F.timezone=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}
+ var langs=[].slice.call(document.querySelectorAll('#lgs input:checked')).map(function(x){return x.value});
+ var consent={c1:$('c1').checked,c2:$('c2').checked,consent_time:new Date().toISOString(),consent_version:'2026-11-19-page-v1',consent_text:$('c1').nextElementSibling.textContent.trim()};
+ var body={fields:F,tpl:S.tpl,bgv:S.bgv||undefined,specs:S.spec||[],langs:langs,consent:consent};if(S.acc)body.acc=S.acc;if(TEST)body.test=true;
+ var tok,res;
+ api('/api/pages/draft',body).then(function(j){
+  if(!j.ok)throw {m:j.error,f:j.field};tok=j.token;
+  var ups=[];if(S.head&&S.head.file)ups.push(['head',S.head.file]);if(S.cover&&S.cover.file)ups.push(['cover',S.cover.file]);(S.gal||[]).forEach(function(g){if(g.file)ups.push(['gallery',g.file])});
+  return ups.reduce(function(p,u){return p.then(function(){return api('/api/pages/draft/'+tok+'/photo?kind='+u[0],u[1],u[1].type||'image/jpeg').then(function(r){if(!r.ok)throw {m:'One of your photos didn\'t upload: '+(r.error||'please try a different photo')+'.'}})})},Promise.resolve());
+ }).then(function(){
+  var card;try{var cv=$('hshCv');if(cv&&cv.width===1080&&cv.height===1350)card=cv.toDataURL('image/png')}catch(e){}
+  return api('/api/pages/draft/'+tok+'/approve',card?{card:card}:{});
+ }).then(function(j){
+  if(!j.ok)throw {m:j.error,f:j.field};res=j;
+  if(j.test){track('free_approve_test');return null}
+  // CloseGPT: tag, pipeline card, stop reminders (unchanged form, now with the real link and status)
+  var d=(F.ph||'').replace(/\D/g,'');if(d.length===11&&d.charAt(0)==='1')d=d.slice(1);
+  var p={firstName:F.fn||'',lastName:F.ln||'',phone:{value:'+1'+d},email:{value:F.em||''},textField:F.ci||'',textField1:(F.st||'').toUpperCase(),
+   license:F.lic||'',type:F.lt||'',source:'free-page',channel:'text',consent_time:consent.consent_time,clicked:'no',consent_version:consent.consent_version,consent_text:consent.consent_text,consent_url:location.href,consent_ua:navigator.userAgent,
+   link:j.page_url||('https://claimtract.app/'+(j.slug||slug())),background:S.bgv||'none'};
+  if(bkUrl())p.booking=bkUrl();if(ytId())p.video='https://youtu.be/'+ytId();if(S.lid)p.call_id=S.lid;if(S.ref)p.referred_by=S.ref;if(F.timezone)p.hidden4=F.timezone;
+  return fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}).catch(function(){});
+ }).then(function(){
+  var j=res,url=j.page_url||(j.would&&j.would.page_url)||('https://claimtract.app/'+(j.slug||slug())+'/');
+  track(j.test?'free_approve_test_ok':'free_approve');
   $('review').style.display='none';$('done').style.display='block';toolkit();
-  $('doneMsg').textContent='We\'re setting up claimtract.app/'+slug()+' with the '+S.tpl.charAt(0).toUpperCase()+S.tpl.slice(1)+' look. Save it to your home screen and turn on notifications below, so we can tell you the moment it\'s live.';
-  window.scrollTo({top:0,behavior:'smooth'})})
- .catch(function(){track('free_approve_fail');b.disabled=false;b.textContent='Approve and go live';er.textContent='That didn\'t go through. Check your connection and tap Approve and go live again.'})};
+  var msg;
+  if(j.test)msg='TEST MODE: nothing was published. The server says this page would be "'+((j.would&&j.would.status)||'live')+'" at '+url+(j.would&&j.would.reason?' ('+j.would.reason+')':'')+'.';
+  else if(j.status==='held')msg='Thanks! Your website is built. One more look on our side before it goes live, because that license already has a page. We\'ll notify you as soon as it\'s up.';
+  else msg='Your website is live at '+url.replace(/^https?:\/\//,'').replace(/\/$/,'')+'. Save it to your home screen and turn on notifications below, so we can reach you there.';
+  $('doneMsg').textContent=msg;
+  window.scrollTo({top:0,behavior:'smooth'});
+ }).catch(function(e){fail(e&&e.m,e&&e.f)});
+};
 
 try{var qv=new URLSearchParams(location.search);if(qv.get('view')==='preview'){S.pvmode=1;
  var gen=!qv.get('fn');var dflt={fn:gen?'Ezekiel':'',ln:gen?'':'',ci:'Orlando',st:'FL',lic:'W000000',ph:'4075550142',lsy:''};if(!gen){dflt.fn='Cedric';dflt.ln='Moore'}
