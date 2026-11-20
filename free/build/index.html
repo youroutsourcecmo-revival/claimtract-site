@@ -409,7 +409,7 @@ body.pvmode #pv .own{display:none!important}body.pvmode #pv{border:0!important;b
     <div class="done-box" id="done" style="display:none">
       <h2>Approved. Your page is on its way.</h2>
       <p class="sub" id="doneMsg"></p>
-      <div class="inst"><h3>Put your page on your phone</h3><p>When your page is live, we'll text you the link. Open it on your phone, tap Share, then Add to Home Screen (on Android, tap the menu, then Install app). It opens like an app, with a Send my page bar so you can text it, email it, or show the QR code in seconds.</p></div>
+      <div class="inst"><h3>Put your page on your phone</h3><p>Open your page on your phone, tap Share, then Add to Home Screen (on Android, tap the menu, then Install app). It opens like an app, with a Send my page bar so you can text it, email it, or show the QR code in seconds. We'll notify you there the moment your page is live.</p></div>
       <h2 style="font-size:24px;margin-top:34px">Your free toolkit</h2>
       <p class="sub">Everything below is yours. Copy it, print it, send it before your next appointment.</p>
       <div class="tk" id="tk"></div>
@@ -639,7 +639,7 @@ function ctRot(){var W=['Water','Wind','Hail','Roof','Hurricane','Fire','Smoke',
   cyc()})}
 function ctLive(url,go){var t=document.getElementById('ctToast');
  function msg(){if(!t){t=document.createElement('div');t.id='ctToast';t.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:300;max-width:340px;width:calc(100% - 32px);background:#111;color:#fff;border:1px solid #F5A524;border-radius:14px;padding:14px 16px;font:500 14px/1.45 Inter,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.4)';document.body.appendChild(t)}
-  t.innerHTML='<b style="color:#F5A524">Your page isn\'t live yet.</b><br>Approve it and we\'ll text you the moment it\'s ready to share.';t.style.display='block';clearTimeout(t.__h);t.__h=setTimeout(function(){t.style.display='none'},5000)}
+  t.innerHTML='<b style="color:#F5A524">Your page isn\'t live yet.</b><br>Approve it and we\'ll notify you in your app the moment it\'s ready to share.';t.style.display='block';clearTimeout(t.__h);t.__h=setTimeout(function(){t.style.display='none'},5000)}
  try{var u=new URL(url,location.href);if(u.origin!==location.origin){go();return}fetch(u.pathname,{method:'HEAD',cache:'no-store'}).then(function(r){r.ok?go():msg()}).catch(msg)}catch(e){msg()}}
 /* approve */
 $('approve').onclick=function(){
@@ -659,7 +659,7 @@ $('approve').onclick=function(){
   if(!(j&&(j.success||j.succeed)))throw new Error('rejected');
   track('free_approve');
   $('review').style.display='none';$('done').style.display='block';toolkit();
-  $('doneMsg').textContent='We\'re setting up claimtract.app/'+slug()+' with the '+S.tpl.charAt(0).toUpperCase()+S.tpl.slice(1)+' look. We\'ll text you the moment it\'s live. Questions before then? Just reply to that text.';
+  $('doneMsg').textContent='We\'re setting up claimtract.app/'+slug()+' with the '+S.tpl.charAt(0).toUpperCase()+S.tpl.slice(1)+' look. Save it to your home screen below. That\'s your app, and we\'ll notify you there the moment your page is live.';
   window.scrollTo({top:0,behavior:'smooth'})})
  .catch(function(){track('free_approve_fail');b.disabled=false;b.textContent='Approve and go live';er.textContent='That didn\'t go through. Check your connection and tap Approve and go live again.'})};
 
