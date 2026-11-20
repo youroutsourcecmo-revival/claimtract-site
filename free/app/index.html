@@ -135,6 +135,25 @@ svg{display:block}
 .toast div{flex:1;min-width:0}.toast b{font-size:11px;display:block}.toast small{font-size:9.5px;color:#C9CDD3}
 .toast time{font-size:9px;color:var(--mu);align-self:flex-start}
 .mini{display:flex;gap:6px;align-items:center;font-size:10px;color:var(--mu);margin-top:6px}
+.tier{position:relative;background:var(--cd);border:1px solid var(--ln);border-radius:16px;padding:12px;margin-top:9px}
+.tier.ft{border:1.5px solid var(--go);background:linear-gradient(160deg,#2A2110,#1A1C21 75%)}
+.tier .rb{position:absolute;top:-8px;left:12px;background:var(--go);color:#111;font:800 8px Inter;letter-spacing:.6px;padding:3px 7px;border-radius:99px}
+.tier h3{font-size:13px;font-weight:800}.tier .pr{display:flex;align-items:baseline;gap:5px;margin:4px 0 2px}.tier .pr b{font-size:22px;font-weight:800}.tier .pr span{color:var(--mu);font-size:10px}.tier .pr s{color:var(--mu);font-size:11px}
+.tier p{font-size:10.5px;color:var(--mu);line-height:1.4;margin:3px 0 8px}
+.tier .cur{font:700 10px Inter;color:var(--mu);text-align:center;padding:8px;border:1px dashed var(--ln);border-radius:10px}
+.ph{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.ph div{position:relative;aspect-ratio:1;border-radius:10px;background-size:cover;background-position:center;overflow:hidden}
+.ph div i{position:absolute;left:4px;bottom:4px;font:800 7.5px Inter;font-style:normal;background:rgba(17,17,17,.82);color:#F5A524;border-radius:5px;padding:2px 4px}
+.ph div.x{outline:2px solid var(--go);outline-offset:-2px}
+.hint{background:#14161A;border:1px solid var(--ln);border-radius:12px;padding:9px 10px;margin-top:7px;font-size:10.5px;line-height:1.45}
+.hint b{display:block;font-size:9px;letter-spacing:1px;color:var(--go);margin-bottom:2px}
+.rec{display:flex;align-items:center;gap:10px;margin-top:9px;background:var(--cd);border:1px solid var(--ln);border-radius:99px;padding:6px 12px 6px 6px}
+.rec span{width:34px;height:34px;border-radius:50%;background:#E5484D;display:grid;place-items:center;flex:none;box-shadow:0 0 0 5px rgba(229,72,77,.18)}
+.rec .wv{flex:1;display:flex;gap:2px;align-items:center;height:20px}.rec .wv i{flex:1;background:var(--go);border-radius:2px;animation:wv 1s ease-in-out infinite}
+@keyframes wv{50%{transform:scaleY(.35)}}
+.ar{display:flex;gap:9px;align-items:center;padding:9px 10px;border-top:1px solid var(--ln)}.ar:first-child{border-top:0}
+.ar div{flex:1;min-width:0}.ar b{font-size:11px;display:block;line-height:1.3}.ar small{font-size:9px;color:var(--mu)}
+.soc{display:flex;gap:4px}.soc span{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font:800 9px Inter;color:#fff}
 p.s{font-size:11px;color:var(--mu);line-height:1.5;margin:2px 2px 0}
 </style></head>
 <body><div class="app" id="app">
@@ -182,8 +201,17 @@ var P={
 function I(n,s,c){s=s||16;return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="'+(c||'currentColor')+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+P[n]+'</svg>'}
 function ic(n){return '<span class="ic">'+I(n,15)+'</span>'}
 var CH=I('chev',14);
+var TEX=[
+ 'repeating-linear-gradient(0deg,#3b3631 0 9px,#2a2622 9px 11px),repeating-linear-gradient(90deg,transparent 0 16px,#221f1b 16px 18px)',
+ 'linear-gradient(120deg,transparent 45%,rgba(240,220,190,.35) 46% 52%,transparent 53%),repeating-linear-gradient(0deg,#4a4239 0 9px,#2d2823 9px 11px)',
+ 'repeating-linear-gradient(90deg,#8a6a45 0 14px,#7a5c3b 14px 15px,#93714b 15px 28px)',
+ 'linear-gradient(160deg,#9aa1a8 0 40%,#6d747b 40% 46%,#3b3631 46%)',
+ 'radial-gradient(circle at 60% 45%,#b48a5a 0 18%,#d9c6a6 19% 32%,#efe9df 33%)',
+ 'repeating-linear-gradient(30deg,#5c4a36 0 6px,#4a3b2b 6px 12px),linear-gradient(#000,#000)'
+];
 
-var avail=true,unread=3,tog={binder:1,install:1,night:1,txt:1,read:1,search:1,print:1,help:1};
+
+var plan='free',avail=true,unread=3,tog={binder:1,install:1,night:1,txt:1,read:1,search:1,print:1,help:1};
 function qrSvg(seed){var n=25,c=7,s='',r=seed||7;function rnd(){r=(r*9301+49297)%233280;return r/233280}
  function fin(x,y){return '<rect x="'+x+'" y="'+y+'" width="7" height="7" rx="1.6" fill="#111"/><rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" rx="1" fill="#fff"/><rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3" rx=".6" fill="#111"/>'}
  for(var y=0;y<n;y++)for(var x=0;x<n;x++){if((x<8&&y<8)||(x>16&&y<8)||(x<8&&y>16))continue;if(x>9&&x<15&&y>9&&y<15)continue;if(rnd()>.52)s+='<rect x="'+x+'" y="'+y+'" width="1" height="1" rx=".25" fill="#111"/>'}
@@ -269,11 +297,35 @@ found:function(){return top('Get found kit')+'<div class="scr"><div class="card"
  '<div class="card" style="margin-top:8px">'+[['Claim your free profile',1],['Copy your name exactly',1],['Copy your phone and hours',0],['Add your page link',0],['Ask 3 clients for a review',0]].map(function(c){return '<div class="lt"><span style="display:flex;gap:8px;align-items:center;'+(c[1]?'color:#A9AEB7;text-decoration:line-through':'')+'"><i style="width:16px;height:16px;border-radius:5px;display:grid;place-items:center;'+(c[1]?'background:#F5A524;color:#111':'border:1.5px solid #3A3E46')+'">'+(c[1]?I('check',10,'#111'):'')+'</i>'+c[0]+'</span></div>'}).join('')+'</div>'+
  '<p class="lb">Copy and paste</p><div class="card">'+[['Business name','Cedric Moore, Public Adjuster'],['Phone','(904) 555-0142'],['Hours','Mon to Fri, 9 AM to 5 PM']].map(function(c){return '<div class="cp"><div><small>'+c[0]+'</small><b>'+c[1]+'</b></div><button class="cpb" data-act="copy">Copy</button></div>'}).join('')+'</div>'+
  '<p class="lb">Your bio</p><div class="seg"><span class="on">Short</span><span>Medium</span><span>Long</span></div><div class="card cp"><div><b style="white-space:normal;font-weight:500;color:#D8DBE0;line-height:1.45">Licensed Florida public adjuster. I work for homeowners, not insurance companies.</b></div><button class="cpb" data-act="copy">Copy</button></div></div>'},
-sophia:function(){return '<div class="top"><h1 style="padding-left:4px">Sophia</h1><span class="up" style="font-size:9px;padding:3px 8px">UPGRADE</span></div><div class="scr">'+
+sophia:function(){if(plan!=='free')return V.claims();return '<div class="top"><h1 style="padding-left:4px">Sophia</h1><span class="up" style="font-size:9px;padding:3px 8px">UPGRADE</span></div><div class="scr">'+
  '<div class="lk" style="margin-top:0;cursor:default"><div class="so"><span>S</span><b>Your old files, working again</b></div><p>Upload a closed claim\'s photos. Talk about each one like the homeowner is standing next to you. Sophia writes the articles.</p></div>'+
  '<div class="card" style="margin-top:9px">'+[['scan','Upload photos','Off your drive, into the cloud'],['spark','Get hints on every photo','Building code and Florida statute notes'],['vol','Talk about each one','Plain words, 10 to 30 seconds'],['book','One claim, a dozen pages','Each answers one real question'],['share','Post with your thumb','Facebook, Google and Instagram']].map(function(r,i){return '<div class="row">'+ic(r[0])+'<div><b>'+(i+1)+'. '+r[1]+'</b><small>'+r[2]+'</small></div></div>'}).join('')+'</div>'+
  '<div class="card st3" style="margin-top:9px"><div><b>100</b><small>Old claims</small></div><div><b>×12</b><small>Pages each</small></div><div><b style="color:#F5A524">1,200</b><small>Answers</small></div></div>'+
- '<div style="margin-top:10px"><button class="cta">See the upgrade</button></div></div>'+nav('sophia')}
+ '<div style="margin-top:10px"><button class="cta" data-go="plans">See the plans</button></div></div>'+nav('sophia')},
+plans:function(){return top('Plans')+'<div class="scr"><p class="s">Your website and app stay free. The first 40 Florida adjusters get Founder pricing.</p>'+
+ '<div class="tier"><h3>Free</h3><div class="pr"><b>$0</b><span>forever</span></div><p>Your website, field app and homeowner tools.</p><div class="cur">Your current plan</div></div>'+
+ '<div class="tier ft" style="margin-top:14px"><span class="rb">FLORIDA FOUNDERS</span><h3>ClaimTract</h3><div class="pr"><b>$99</b><span>/month</span><s>$299</s></div><p>Sophia turns your old and new claim files into answer pages, ready to post.</p><button class="cta" data-act="plan" data-p="pro">Claim a Founder spot</button></div>'+
+ '<div class="tier" style="margin-top:14px"><span class="rb" style="background:#F4F4F5">FLORIDA FOUNDERS</span><h3>ClaimTract + CloseGPT</h3><div class="pr"><b>$299</b><span>/month</span><s>$499</s></div><p>Everything in ClaimTract, wired to CloseGPT for follow-up and booking.</p><button class="ghost" data-act="plan" data-p="plus">Claim a Founder spot</button></div>'+
+ '<div class="note gold">'+I('shield',14)+'<span>Sample only. Checkout opens on a secure payment page.</span></div></div>'},
+claims:function(){return '<div class="top"><h1 style="padding-left:4px">Your claims</h1><span class="chip">'+I('star',11)+(plan==='plus'?'Founder +':'Founder')+'</span></div><div class="scr">'+
+ '<button class="cta" data-go="claim">'+I('scan',15)+'Turn a claim into pages</button>'+
+ '<p class="lb">In progress</p><div class="card">'+
+ '<div class="row" data-go="claim"><span class="ic" style="background:repeating-linear-gradient(0deg,#4a4239 0 5px,#2d2823 5px 6px)"></span><div><b>Roof, Atlantic Beach</b><small>40 photos · 28 talked through</small><div class="bar"><i style="width:70%"></i></div></div>'+CH+'</div>'+
+ '<div class="row" data-go="articles">'+ic('book')+'<div><b>Water, Mandarin</b><small>13 pages ready to approve</small></div>'+CH+'</div></div>'+
+ '<p class="lb">Your footprint</p><div class="card st3"><div><b>26</b><small>Pages live</small></div><div><b>78</b><small>Posts sent</small></div><div><b>412</b><small>Views</small></div></div>'+
+ (plan==='plus'?'<div class="note">'+I('cal',14)+'<span>CloseGPT is connected. New leads from your pages land in your pipeline.</span></div>':'')+
+ '</div>'+nav('sophia')},
+claim:function(){var ph=[0,1,2,3,4,5];return top('Roof, Atlantic Beach')+'<div class="scr"><p class="lb" style="margin-top:2px">Photo 12 of 40</p><div class="ph">'+ph.map(function(q,i){return '<div class="'+(i===1?'x':'')+'" style="background:'+TEX[i]+'"><i>'+['Shingles','Lifted tabs','Decking','Flashing','Ceiling','Attic'][i]+'</i></div>'}).join('')+'</div>'+
+ '<div class="hint"><b>WHAT I SEE</b>Lifted and creased shingle tabs along the ridge.</div>'+
+ '<div class="hint"><b>BUILDING CODE HINT</b>Check the Florida Building Code section on roof repair and replacement for this roof.</div>'+
+ '<div class="hint"><b>STATUTE HINT</b>Look at the Florida statute that covers roof claims for this policy.</div>'+
+ '<div class="rec"><span>'+I('vol',15,'#fff')+'</span><div class="wv">'+'<i></i>'.repeat(18).replace(/<i><\/i>/g,function(){return '<i style="height:'+(30+Math.random()*70|0)+'%;animation-delay:'+(Math.random()).toFixed(2)+'s"></i>'})+'</div><small style="color:#A9AEB7;font-size:10px">0:18</small></div>'+
+ '<p class="s" style="margin-top:7px">Talk like the homeowner is standing next to you. Plain words.</p>'+
+ '<div style="margin-top:9px"><button class="ghost" data-go="articles">Next photo '+I('chev',13)+'</button></div></div>'},
+articles:function(){return top('Pages from this claim')+'<div class="scr"><div class="card" style="padding:10px 11px;display:flex;align-items:center;gap:9px"><span class="so"><span>S</span></span><div style="flex:1"><b style="font-size:12px">13 pages ready</b><small style="display:block;color:#A9AEB7;font-size:9.5px">1 main article, 12 answers</small></div></div>'+
+ '<div class="card" style="margin-top:8px">'+[['Main','Water through the ceiling: what one Mandarin family did next'],['Answer','Will insurance pay for a ceiling leak from the AC?'],['Answer','Is mold covered after a slow leak?'],['Answer','How long does water damage take to show?'],['Answer','Do I have to keep the wet drywall?']].map(function(a){return '<div class="ar"><div><small style="color:#F5A524;font-weight:700">'+a[0].toUpperCase()+'</small><b>'+a[1]+'</b></div><div class="soc"><span style="background:#1877F2">f</span><span style="background:#34A853">G</span><span style="background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)">ig</span></div></div>'}).join('')+'</div>'+
+ '<div style="margin-top:10px"><button class="cta" data-act="sent">'+I('check',15)+'Approve and post</button></div><p class="s" style="text-align:center;margin-top:7px">Nothing goes live until you approve it.</p></div>'}
+
 };
 
 var app=document.getElementById('app'),stack=[],cur=null;
@@ -293,6 +345,7 @@ app.addEventListener('click',function(e){
  if(t=e.target.closest('[data-act]')){var a=t.dataset.act;
   if(a==='avail'){avail=!avail;render('home');return}
   if(a==='copy'){t.textContent='Copied';t.classList.add('ok');return}
+  if(a==='plan'){plan=t.dataset.p;stack=[];render('sophia');toast('Welcome, Florida Founder','Sample: checkout would open here first.');return}
   if(a==='sent'){toast('Ready to send','Opens in your own app. Nothing extra to pay.');return}}
  if(t=e.target.closest('[data-back]'))return back();
  if(t=e.target.closest('[data-tab]'))return tab(t.dataset.tab);
