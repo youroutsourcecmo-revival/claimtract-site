@@ -385,7 +385,7 @@ sophia:function(){if(plan!=='free')return V.claims();return '<div class="top"><h
 plans:function(){return top('Plans')+'<div class="scr"><p class="s">Your website and app stay free. The first 40 Florida adjusters get Founder pricing.</p>'+
  '<div class="tier"><h3>Free</h3><div class="pr"><b>$0</b><span>forever</span></div><p>Your website, field app and homeowner tools.</p><div class="cur">Your current plan</div></div>'+
  '<div class="tier ft" style="margin-top:14px"><span class="rb">FLORIDA FOUNDERS</span><h3>ClaimTract</h3><div class="pr"><b>$99</b><span>/month</span><s>$299</s></div><p>Sophia turns your old and new claim files into answer pages, ready to post.</p><button class="cta" data-act="plan" data-p="pro">Claim a Founder spot</button></div>'+
- '<div class="tier" style="margin-top:14px"><span class="rb" style="background:#F4F4F5">FLORIDA FOUNDERS</span><h3>ClaimTract + CloseGPT</h3><div class="pr"><b>$299</b><span>/month</span><s>$499</s></div><p>Everything in ClaimTract, wired to CloseGPT for follow-up and booking.</p><button class="ghost" data-act="plan" data-p="plus">Claim a Founder spot</button></div>'+
+ '<div class="tier" style="margin-top:14px"><span class="rb" style="background:#F4F4F5">FLORIDA FOUNDERS</span><h3>ClaimTract Pro</h3><div class="pr"><b>$299</b><span>/month</span><s>$499</s></div><p>Everything in ClaimTract, plus your ClaimTract CRM for follow-up and booking.</p><button class="ghost" data-act="plan" data-p="plus">Claim a Founder spot</button></div>'+
  '<div class="note gold">'+I('shield',14)+'<span>Sample only. Checkout opens on a secure payment page.</span></div></div>'},
 claims:function(){return '<div class="top"><h1 style="padding-left:4px">Your claims</h1><span class="chip">'+I('star',11)+(plan==='plus'?'Founder +':'Founder')+'</span></div><div class="scr">'+
  '<button class="cta" data-go="claim">'+I('scan',15)+'Turn a claim into pages</button>'+
@@ -393,7 +393,7 @@ claims:function(){return '<div class="top"><h1 style="padding-left:4px">Your cla
  '<div class="row" data-go="claim"><span class="ic" style="background:repeating-linear-gradient(0deg,#4a4239 0 5px,#2d2823 5px 6px)"></span><div><b>Roof, Atlantic Beach</b><small>40 photos · 28 talked through</small><div class="bar"><i style="width:70%"></i></div></div>'+CH+'</div>'+
  '<div class="row" data-go="articles">'+ic('book')+'<div><b>Water, Mandarin</b><small>13 pages ready to approve</small></div>'+CH+'</div></div>'+
  '<p class="lb">Your footprint</p><div class="card st3"><div><b>26</b><small>Pages live</small></div><div><b>78</b><small>Posts sent</small></div><div><b>412</b><small>Views</small></div></div>'+
- (plan==='plus'?'<div class="note">'+I('cal',14)+'<span>CloseGPT is connected. New leads from your pages land in your pipeline.</span></div>':'')+
+ (plan==='plus'?'<div class="note">'+I('cal',14)+'<span>Your ClaimTract CRM is connected. New leads from your pages land in your pipeline.</span></div>':'')+
  '</div>'+nav('sophia')},
 claim:function(){var ph=[0,1,2,3,4,5];return top('Roof, Atlantic Beach')+'<div class="scr"><p class="lb" style="margin-top:2px">Photo 12 of 40</p><div class="ph">'+ph.map(function(q,i){return '<div class="'+(i===1?'x':'')+'" style="background:'+TEX[i]+'"><i>'+['Shingles','Lifted tabs','Decking','Flashing','Ceiling','Attic'][i]+'</i></div>'}).join('')+'</div>'+
  '<div class="hint"><b>WHAT I SEE</b>Lifted and creased shingle tabs along the ridge.</div>'+
