@@ -615,13 +615,13 @@ var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(functio
    x.textAlign='left';x.font='700 40px '+F;x.fillStyle='#111';x.fillText('See the page first',430,1130);x.font='500 34px '+F;x.fillStyle='#55585F';x.fillText(pageUrl.replace(/^https?:\/\//,''),430,1185);x.fillText('Check the license there too.',430,1235)}
   draw(null);if(S.head&&S.head.url){var im=new Image();im.crossOrigin='anonymous';im.onload=function(){try{draw(im)}catch(e){draw(null)}};im.src=S.head.url}
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){if(!(S.head&&S.head.url))draw(null)});
-  bt.onclick=function(){track('free_hshare_mms');cv.toBlob(function(b){var f=b?new File([b],slug()+'-card.png',{type:'image/png'}):null;
+  bt.onclick=function(){track('free_hshare_mms');ctLive(pageUrl,function(){cv.toBlob(function(b){var f=b?new File([b],slug()+'-card.png',{type:'image/png'}):null;
    if(f&&navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],text:msg}).catch(function(){})}
    else if(navigator.share){navigator.share({title:name+', public adjuster',text:msg,url:pageUrl}).catch(function(){})}
-   else{location.href='sms:?&body='+encodeURIComponent(msg)}},'image/png')}})();
+   else{location.href='sms:?&body='+encodeURIComponent(msg)}},'image/png')})}})();
  $('qrBtn').onclick=function(){qc.toBlob(function(b){dl(b,slug()+'-qr.png')},'image/png')};
  $('vcfBtn').onclick=function(){var f=$('fn').value.trim(),l=$('ln').value.trim(),v=['BEGIN:VCARD','VERSION:3.0','N:'+ve(l)+';'+ve(f)+';;;','FN:'+ve(f+' '+l),'TITLE:Public Adjuster','TEL;TYPE=WORK,VOICE:'+$('ph').value.trim(),'ADR;TYPE=WORK:;;;'+ve($('ci').value.trim())+';'+ve($('st').value.trim().toUpperCase())+';;US','URL:'+pageUrl,'NOTE:'+ve('License '+$('lic').value.trim()),'END:VCARD'].join('\r\n');dl(new Blob([v],{type:'text/vcard'}),slug()+'.vcf')};
- $('shBtn').onclick=function(){var b=this,t=$('fn').value.trim()+' '+$('ln').value.trim()+', public adjuster';if(navigator.share){navigator.share({title:t,text:'A short page that explains what I do and answers the questions most people ask.',url:pageUrl}).catch(function(){})}else{cp(pageUrl,b,'Link copied')}};
+ $('shBtn').onclick=function(){var b=this;ctLive(pageUrl,function(){var t=$('fn').value.trim()+' '+$('ln').value.trim()+', public adjuster';if(navigator.share){navigator.share({title:t,text:'A short page that explains what I do and answers the questions most people ask.',url:pageUrl}).catch(function(){})}else{cp(pageUrl,b,'Link copied')}})};
  pv.querySelectorAll('.faq details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)pv.querySelectorAll('.faq details').forEach(function(o){if(o!==d)o.open=false})})});
  $('url').textContent='claimtract.app/'+slug()+'  (private preview)';
  var sw=$('swap');sw.innerHTML='';[['paper','Light'],['storm','Dark']].forEach(function(t){var b=document.createElement('button');b.type='button';b.textContent=t[1];b.setAttribute('aria-pressed',String(S.tpl===t[0]));b.onclick=function(){S.tpl=t[0];render();track('free_swap',t[0])};sw.appendChild(b)});
@@ -637,6 +637,10 @@ function ctRot(){var W=['Water','Wind','Hail','Roof','Hurricane','Fire','Smoke',
    var n=0;(function ty(){if(!alive())return;w.textContent=t.slice(0,++n);if(n<t.length)setTimeout(ty,TY);else setTimeout(function er(){if(!alive())return;w.textContent=t.slice(0,--n);if(n>0)setTimeout(er,DL);else nx()},HOLD)})()}
   function nx(){i=(i+1)%W.length;cyc()}
   cyc()})}
+function ctLive(url,go){var t=document.getElementById('ctToast');
+ function msg(){if(!t){t=document.createElement('div');t.id='ctToast';t.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:300;max-width:340px;width:calc(100% - 32px);background:#111;color:#fff;border:1px solid #F5A524;border-radius:14px;padding:14px 16px;font:500 14px/1.45 Inter,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.4)';document.body.appendChild(t)}
+  t.innerHTML='<b style="color:#F5A524">Your page isn\'t live yet.</b><br>Approve it and we\'ll text you the moment it\'s ready to share.';t.style.display='block';clearTimeout(t.__h);t.__h=setTimeout(function(){t.style.display='none'},5000)}
+ try{var u=new URL(url,location.href);if(u.origin!==location.origin){go();return}fetch(u.pathname,{method:'HEAD',cache:'no-store'}).then(function(r){r.ok?go():msg()}).catch(msg)}catch(e){msg()}}
 /* approve */
 $('approve').onclick=function(){
  if($('hp').value)return;var b=this;b.disabled=true;b.textContent='Sending...';
