@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>ClaimTract app (sample)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:Inter,system-ui,sans-serif;background:#0F1115;color:#F4F4F5;overflow:hidden;-webkit-font-smoothing:antialiased}
+.app{height:100%;display:flex;flex-direction:column}
+.sb{display:flex;justify-content:space-between;align-items:center;padding:10px 20px 4px;font:600 12px Inter;color:#F4F4F5}
+.sb i{font-style:normal;letter-spacing:1px}
+.scr{flex:1;overflow-y:auto;padding:6px 14px 14px;scrollbar-width:none}
+.scr::-webkit-scrollbar{display:none}
+.hd{display:flex;align-items:center;justify-content:space-between;margin:6px 2px 14px}
+.hd small{display:block;color:#A9AEB7;font-size:11px;font-weight:500}
+.hd b{font-size:19px;font-weight:800}
+.hd img{width:30px;height:30px}
+.pg{background:#1A1C21;border:1px solid #2A2E36;border-radius:18px;padding:12px;display:flex;gap:11px;align-items:center}
+.pg .av{width:52px;height:52px;border-radius:50%;background:#333 url(/assets/cedric-headshot.jpg) center/cover;border:2px solid #F5A524;flex:none}
+.pg .t{flex:1;min-width:0}
+.pg .t b{font-size:14px;display:block}
+.pg .t span{font-size:11px;color:#A9AEB7;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pg .t .live{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:#5BD48A;margin-top:3px}
+.live:before{content:"";width:6px;height:6px;border-radius:50%;background:#5BD48A}
+.share{margin:10px 0 16px;width:100%;border:0;border-radius:14px;background:#F5A524;color:#111;font:800 15px Inter;padding:14px;cursor:pointer;animation:pl 2.6s ease-in-out infinite}
+@keyframes pl{0%,100%{box-shadow:0 0 0 0 rgba(245,165,36,.45)}50%{box-shadow:0 0 0 8px rgba(245,165,36,0)}}
+.lb{font:700 10px Inter;letter-spacing:1.6px;color:#F5A524;text-transform:uppercase;margin:0 2px 8px}
+.gr{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.tl{background:#1A1C21;border:1px solid #2A2E36;border-radius:14px;padding:11px 6px 9px;text-align:center;cursor:pointer;color:#F4F4F5;font:600 11px Inter;transition:transform .15s,border-color .15s}
+.tl:active{transform:scale(.96)}.tl:hover{border-color:#5A4512}
+.tl .ic{font-size:20px;display:block;margin-bottom:5px}
+.lk{position:relative;background:linear-gradient(160deg,#2A2110,#1A1C21 70%);border:1px solid #5A4512;border-radius:18px;padding:14px;margin-bottom:12px;cursor:pointer}
+.lk .pill{position:absolute;top:12px;right:12px;background:#F5A524;color:#111;font:800 10px Inter;padding:4px 8px;border-radius:99px}
+.lk .so{display:flex;gap:9px;align-items:center;margin-bottom:8px}
+.lk .so span{width:34px;height:34px;border-radius:50%;background:#F5A524;color:#111;display:grid;place-items:center;font:900 15px Inter}
+.lk b{font-size:14px}
+.lk p{font-size:12px;color:#A9AEB7;line-height:1.45}
+.lk ul{list-style:none;margin-top:8px}
+.lk li{font-size:11.5px;color:#D8DBE0;padding:3px 0 3px 18px;position:relative}
+.lk li:before{content:"🔒";position:absolute;left:0;font-size:10px;top:4px}
+.ls{background:#1A1C21;border:1px solid #2A2E36;border-radius:14px;margin-bottom:12px}
+.ls div{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;font-size:12px;border-top:1px solid #2A2E36}
+.ls div:first-child{border-top:0}
+.ls em{font-style:normal;color:#A9AEB7;font-size:11px}
+.nav{display:flex;justify-content:space-around;border-top:1px solid #2A2E36;background:#14161A;padding:8px 4px 12px}
+.nav span{font:600 9.5px Inter;color:#A9AEB7;text-align:center;cursor:pointer}
+.nav span i{display:block;font-style:normal;font-size:17px;margin-bottom:2px}
+.nav .on{color:#F5A524}
+.sh{position:absolute;left:0;right:0;bottom:0;background:#1A1C21;border-top:1px solid #2A2E36;border-radius:22px 22px 0 0;padding:10px 18px 22px;transform:translateY(105%);transition:transform .3s ease;z-index:5}
+.sh.on{transform:none}
+.sh .gp{width:36px;height:4px;border-radius:9px;background:#3A3E46;margin:0 auto 12px}
+.sh b{font-size:15px;display:block;margin-bottom:6px}
+.sh p{font-size:12.5px;color:#C9CDD3;line-height:1.5;margin-bottom:8px}
+.sh .ho{font-size:11.5px;color:#A9AEB7;border-left:3px solid #F5A524;padding-left:9px;margin-bottom:12px}
+.sh button{width:100%;border:0;border-radius:12px;padding:11px;background:#2A2E36;color:#F4F4F5;font:700 13px Inter;cursor:pointer}
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .3s;z-index:4}
+.dim.on{opacity:1;pointer-events:auto}
+.smp{margin-left:6px;vertical-align:3px;font:700 8.5px Inter;letter-spacing:1px;color:#A9AEB7;border:1px solid #2A2E36;border-radius:6px;padding:2px 5px}
+</style></head>
+<body><div class="app">
+<div class="sb"><span>9:41</span><i>●●● ▲ ▮</i></div>
+<div class="scr">
+ <div class="hd"><div><small>Good morning</small><b>Cedric</b><span class="smp">SAMPLE</span></div><img src="/assets/ct-shield.png" alt="ClaimTract"></div>
+ <div class="pg"><div class="av"></div><div class="t"><b>Your page</b><span>claimtract.app/cedric-moore</span><span class="live">Live</span></div></div>
+ <button class="share" data-s="share">Share my page</button>
+ <p class="lb">Your free tools</p>
+ <div class="gr">
+  <div class="tl" data-s="text"><span class="ic">💬</span>Text a homeowner</div>
+  <div class="tl" data-s="qr"><span class="ic">▦</span>QR code</div>
+  <div class="tl" data-s="card"><span class="ic">👤</span>Contact card</div>
+  <div class="tl" data-s="book"><span class="ic">📅</span>Bookings</div>
+  <div class="tl" data-s="video"><span class="ic">▶</span>Your video</div>
+  <div class="tl" data-s="edit"><span class="ic">✎</span>Edit page</div>
+ </div>
+ <p class="lb">This week</p>
+ <div class="ls">
+  <div>Page opened<em>From your shares and QR</em></div>
+  <div>Tapped to call you<em>Straight to your phone</em></div>
+  <div>Booked a time<em>On your calendar</em></div>
+ </div>
+ <div class="lk" data-s="sophia"><span class="pill">Upgrade</span>
+  <div class="so"><span>S</span><b>Sophia</b></div>
+  <p>Talk over your inspection photos. Sophia turns them into articles with your name on them, so homeowners find you on Google.</p>
+  <ul><li>Photos to articles, approved by you</li><li>Your page fills with your own claims</li><li>Posts ready for Facebook and Google</li></ul>
+ </div>
+</div>
+<div class="nav"><span class="on"><i>⌂</i>Home</span><span data-s="share"><i>↗</i>Share</span><span data-s="text"><i>✉</i>Letters</span><span data-s="sophia"><i>✦</i>Sophia</span><span data-s="edit"><i>⚙</i>Page</span></div>
+</div>
+<div class="dim" id="dim"></div>
+<div class="sh" id="sh"><div class="gp"></div><b id="st"></b><p id="sp"></p><p class="ho" id="sho"></p><button id="sx">Got it</button></div>
+<script>
+var S={
+share:['Share my page','One tap sends your page by text, with a picture card of you and your number.','Your homeowner sees: your face, your license and "works for you, not the insurance company," before you knock.'],
+text:['Text a homeowner','Ready-made texts for confirming, thanking, running late and asking for referrals, signed with your name.','Your homeowner sees: a short, friendly text from you with your page link.'],
+qr:['QR code','Print-ready QR images for your phone, business card, door note and truck magnet.','Your homeowner sees: a code that opens your page, no typing.'],
+card:['Contact card','Your contact card, ready to save. One tap and you are in their phone.','Your homeowner sees: you saved as "Public Adjuster," so they find you when the carrier calls.'],
+book:['Bookings','Homeowners pick a time from your page. You get a text when they do.','Your homeowner sees: open times, a confirmation, and a reminder from you.'],
+video:['Your video','Add a YouTube video and it plays at the top of your page.','Your homeowner sees: you, explaining what you do, in your own words.'],
+edit:['Edit page','Change your photo, colors, story and links any time.','Your homeowner sees: the latest version, the moment you save.'],
+sophia:['Sophia (upgrade)','Everything free stays free. Upgrading adds Sophia, who turns your inspection photos and voice notes into articles that get you found.','Your homeowner sees: answers to their exact questions, approved by you, with your number on every page.']};
+var sh=document.getElementById('sh'),dim=document.getElementById('dim');
+function open(k){var s=S[k];if(!s)return;st.textContent=s[0];sp.textContent=s[1];sho.textContent=s[2];sh.classList.add('on');dim.classList.add('on')}
+function close(){sh.classList.remove('on');dim.classList.remove('on')}
+document.addEventListener('click',function(e){var t=e.target.closest('[data-s]');if(t)open(t.getAttribute('data-s'))});
+dim.onclick=close;document.getElementById('sx').onclick=close;
+</script>
+</body></html>
