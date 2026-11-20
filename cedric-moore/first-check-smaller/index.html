@@ -39,4 +39,16 @@ footer{border-top:1px solid #E1E1DC;margin-top:40px}footer .w{display:flex;justi
 <section class="rel"><h2>More answers for homeowners</h2><div class="rg"><a class="rc" href="/cedric-moore/cash-the-check/"><span>RELATED ARTICLE</span><h3>Should I Cash My Insurance Check If It Is Too Low?</h3><i>Read it &rarr;</i></a><a class="rc" href="/cedric-moore/adjuster-only-roof/"><span>RELATED ARTICLE</span><h3>What To Do When the Adjuster Only Looked at Part of the Damage</h3><i>Read it &rarr;</i></a><a class="rc" href="/cedric-moore/wear-and-tear-denial/"><span>RELATED ARTICLE</span><h3>My Claim Was Denied for Wear and Tear. Now What?</h3><i>Read it &rarr;</i></a></div></section>
 </main>
 <footer><div class="w"><span>Cedric Moore &middot; Public adjuster &middot; License W000000</span><a href="/free/?ref=cedric-moore&amp;src=article">Get a free page like this</a></div></footer>
+<script>/* preview: show the previewing adjuster's details instead of the sample */
+(function(){try{var q=new URLSearchParams(location.search);if(!q.get('fn'))return;
+var fn=q.get('fn').slice(0,40),ln=(q.get('ln')||'').slice(0,40),full=(fn+' '+ln).trim(),d=(q.get('ph')||'').replace(/\D/g,'').slice(-10),ci=(q.get('city')||'').slice(0,60),st=(q.get('st')||'').slice(0,2).toUpperCase(),lic=(q.get('lic')||'').slice(0,20);
+var pf=d.length===10?'('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6):'';
+var R=[['Cedric Moore is not a real adjuster.','This is a preview of your page.'],['Cedric Moore',full],['Cedric',fn]];
+if(pf)R.push(['(407) 555-0142',pf]);if(ci)R.push(['Orlando, FL',ci+(st?', '+st:'')],['Orlando',ci]);if(lic)R.push(['W000000',lic]);
+var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),n,a=[];while(n=w.nextNode())a.push(n);
+a.forEach(function(t){var v=t.nodeValue,o=v;R.forEach(function(r){v=v.split(r[0]).join(r[1])});if(v!==o)t.nodeValue=v});
+document.title=document.title.split('Cedric Moore').join(full);
+if(d.length===10)document.querySelectorAll('a[href*="4075550142"]').forEach(function(x){x.href=x.getAttribute('href').split('4075550142').join(d)});
+document.querySelectorAll('a[href^="/cedric-moore/"]').forEach(function(x){x.href=x.getAttribute('href').split('?')[0]+location.search});
+}catch(e){}})();</script>
 </body></html>
