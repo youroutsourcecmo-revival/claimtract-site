@@ -417,7 +417,7 @@ body.pvmode #pv .own{display:none!important}body.pvmode #pv{border:0!important;b
 (function(){
 document.addEventListener('input',function(e){if(e.target&&e.target.id==='yt'){var v=e.target.value.trim();document.getElementById('yte').textContent=v&&!ytId()?'That doesn\'t look like a YouTube link. On YouTube, tap Share, then Copy link.':''}});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#bgs button');if(!b)return;document.querySelectorAll('#bgs button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});S.bgv=b.dataset.b;try{track('free_bg',S.bgv||'none')}catch(_){}});
-var ENDPOINT='https://app.closegpt.ai/api/input/9u02pn';
+var ENDPOINT='https://app.closegpt.ai/api/input/i2wb1n/contact?public_key=XsF7UA09Ds7PUxV6gq6F';
 var $=function(i){return document.getElementById(i)};
 var S={tpl:'paper',bgv:'roof-table',acc:null,spec:[],head:null,cover:null,gal:[]};
 var SPECS=['Roof','Wind and hurricane','Water','Fire','Hail','Mold','Theft and vandalism','Commercial'];
@@ -619,21 +619,24 @@ var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(functio
 /* approve */
 $('approve').onclick=function(){
  if($('hp').value)return;var b=this;b.disabled=true;b.textContent='Sending...';
- var p=new URLSearchParams();
- p.set('firstName',$('fn').value.trim());p.set('lastName',$('ln').value.trim());p.set('phone',$('ph').value.trim());p.set('email',$('em').value.trim());
- p.set('textField',$('ci').value.trim());p.set('textField1',$('st').value.trim().toUpperCase());
- p.set('license',$('lic').value.trim());p.set('type',$('lt').value);p.set('source','free-page');p.set('channel','text');
- p.set('consent_time',new Date().toISOString());p.set('clicked','no');
- p.set('consent_version','2026-11-19-page-v1');p.set('consent_text',$('c1').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);
- p.set('link','https://claimtract.app/'+slug());p.set('background',S.bgv||'none');if(bkUrl())p.set('booking',bkUrl());if(ytId())p.set('video','https://youtu.be/'+ytId());
- if(S.lid)p.set('call_id',S.lid);if(S.ref)p.set('referred_by',S.ref);
- try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(e){}
- fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()})
- .catch(function(){}).then(function(){
+ var er=$('apErr');if(!er){er=document.createElement('p');er.id='apErr';er.style.cssText='color:#c0392b;font-weight:600;margin:10px 0 0';b.parentNode.insertBefore(er,b.nextSibling)}er.textContent='';
+ var d=$('ph').value.replace(/\D/g,'');if(d.length===11&&d.charAt(0)==='1')d=d.slice(1);
+ var p={firstName:$('fn').value.trim(),lastName:$('ln').value.trim(),phone:{value:'+1'+d},email:{value:$('em').value.trim()},
+  textField:$('ci').value.trim(),textField1:$('st').value.trim().toUpperCase(),
+  license:$('lic').value.trim(),type:$('lt').value,source:'free-page',channel:'text',
+  consent_time:new Date().toISOString(),clicked:'no',consent_version:'2026-11-19-page-v1',consent_text:$('c1').nextElementSibling.textContent,consent_url:location.href,consent_ua:navigator.userAgent,
+  link:'https://claimtract.app/'+slug(),background:S.bgv||'none'};
+ if(bkUrl())p.booking=bkUrl();if(ytId())p.video='https://youtu.be/'+ytId();
+ if(S.lid)p.call_id=S.lid;if(S.ref)p.referred_by=S.ref;
+ try{p.hidden4=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}
+ fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)})
+ .then(function(r){return r.json()}).then(function(j){
+  if(!(j&&(j.success||j.succeed)))throw new Error('rejected');
   track('free_approve');
   $('review').style.display='none';$('done').style.display='block';toolkit();
   $('doneMsg').textContent='We\'re setting up claimtract.app/'+slug()+' with the '+S.tpl.charAt(0).toUpperCase()+S.tpl.slice(1)+' look. We\'ll text you the moment it\'s live. Questions before then? Just reply to that text.';
-  window.scrollTo({top:0,behavior:'smooth'})})};
+  window.scrollTo({top:0,behavior:'smooth'})})
+ .catch(function(){track('free_approve_fail');b.disabled=false;b.textContent='Approve and go live';er.textContent='That didn\'t go through. Check your connection and tap Approve and go live again.'})};
 
 try{var qv=new URLSearchParams(location.search);if(qv.get('view')==='preview'){S.pvmode=1;
  var gen=!qv.get('fn');var dflt={fn:gen?'Ezekiel':'',ln:gen?'':'',ci:'Orlando',st:'FL',lic:'W000000',ph:'4075550142',lsy:''};if(!gen){dflt.fn='Cedric';dflt.ln='Moore'}
@@ -665,32 +668,5 @@ try{var qv=new URLSearchParams(location.search);if(qv.get('view')==='preview'){S
 })();
 </script>
 
-<script>
-(function(){
-var EP='https://app.closegpt.ai/api/input/9u02pn',$=function(i){return document.getElementById(i)};
-function digits(v){return v.replace(/\D/g,'')}
-if($('lpb'))$('lpb').onclick=function(){
- var e=$('lpe');e.textContent='';
- if($('lph').value)return;
- var n=$('lpn').value.trim(),ph=$('lpp').value.trim();
- if(!n){e.textContent='Please add your first name.';return}
- if(digits(ph).length<10){e.textContent='Please add a 10-digit mobile number.';return}
- if(!$('lpc').checked){e.textContent='Please tick the box so I can text you the link.';return}
- var b=this;b.disabled=true;b.textContent='Sending...';
- var q;try{q=new URLSearchParams(location.search)}catch(x){q=new URLSearchParams('')}
- var p=new URLSearchParams();
- p.set('firstName',n);p.set('phone',ph);p.set('source','free-lander');if(q.get('ref'))p.set('referred_by',q.get('ref').slice(0,80));p.set('channel','text');
- p.set('consent_time',new Date().toISOString());p.set('clicked','no');
- p.set('consent_version','2026-11-19-lander-v1');p.set('consent_text',$('lpc').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);
- p.set('link','https://claimtract.app/free');
- if(q.get('lid'))p.set('call_id',q.get('lid'));
- try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(x){}
- fetch(EP,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()}).catch(function(){}).then(function(){
-  try{window.__ctT&&window.__ctT('free_lander_text')}catch(x){}
-  $('lpTxt').innerHTML='<h3>Got it, '+n.replace(/[<>&"]/g,'')+'.</h3><p class="s" style="margin:0">I\'ll text the link to your phone. You can also start right now with the button above.</p>';
- });
-};
-})();
-</script>
 </body>
 </html>
