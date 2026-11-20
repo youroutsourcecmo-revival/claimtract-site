@@ -1,107 +1,306 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex">
 <title>ClaimTract app (sample)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
-body{font-family:Inter,system-ui,sans-serif;background:#0F1115;color:#F4F4F5;overflow:hidden;-webkit-font-smoothing:antialiased}
-.app{height:100%;display:flex;flex-direction:column}
-.sb{display:flex;justify-content:space-between;align-items:center;padding:10px 20px 4px;font:600 12px Inter;color:#F4F4F5}
-.sb i{font-style:normal;letter-spacing:1px}
-.scr{flex:1;overflow-y:auto;padding:6px 14px 14px;scrollbar-width:none}
+body{font-family:Inter,system-ui,sans-serif;background:#0F1115;color:#F4F4F5;overflow:hidden;-webkit-font-smoothing:antialiased;font-size:12px}
+:root{--bg:#0F1115;--cd:#1A1C21;--cd2:#20232A;--ln:#2A2E36;--mu:#A9AEB7;--go:#F5A524;--gd:#5A4512;--gr:#5BD48A}
+button{font-family:inherit}
+svg{display:block}
+.app{position:relative;height:100%;overflow:hidden}
+.sb{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:9px 18px 0;font:700 11px Inter;height:28px;pointer-events:none}
+.sb i{display:flex;gap:4px;align-items:center}
+.view{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);transition:transform .32s cubic-bezier(.2,.8,.2,1),opacity .32s}
+.view.in{transform:translateX(100%)}.view.out{transform:translateX(-28%);opacity:.4}
+.top{display:flex;align-items:center;gap:8px;padding:34px 12px 8px;min-height:62px}
+.top h1{font-size:15px;font-weight:800;flex:1;letter-spacing:-.2px}
+.bk{width:30px;height:30px;border-radius:50%;border:0;background:var(--cd);color:#fff;display:grid;place-items:center;cursor:pointer}
+.scr{flex:1;overflow-y:auto;padding:4px 12px 16px;scrollbar-width:none}
 .scr::-webkit-scrollbar{display:none}
-.hd{display:flex;align-items:center;justify-content:space-between;margin:6px 2px 14px}
-.hd small{display:block;color:#A9AEB7;font-size:11px;font-weight:500}
-.hd b{font-size:19px;font-weight:800}
-.hd img{width:30px;height:30px}
-.pg{background:#1A1C21;border:1px solid #2A2E36;border-radius:18px;padding:12px;display:flex;gap:11px;align-items:center}
-.pg .av{width:52px;height:52px;border-radius:50%;background:#333 url(/assets/cedric-headshot.jpg) center/cover;border:2px solid #F5A524;flex:none}
-.pg .t{flex:1;min-width:0}
-.pg .t b{font-size:14px;display:block}
-.pg .t span{font-size:11px;color:#A9AEB7;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pg .t .live{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:#5BD48A;margin-top:3px}
-.live:before{content:"";width:6px;height:6px;border-radius:50%;background:#5BD48A}
-.share{margin:10px 0 16px;width:100%;border:0;border-radius:14px;background:#F5A524;color:#111;font:800 15px Inter;padding:14px;cursor:pointer;animation:pl 2.6s ease-in-out infinite}
-@keyframes pl{0%,100%{box-shadow:0 0 0 0 rgba(245,165,36,.45)}50%{box-shadow:0 0 0 8px rgba(245,165,36,0)}}
-.lb{font:700 10px Inter;letter-spacing:1.6px;color:#F5A524;text-transform:uppercase;margin:0 2px 8px}
-.gr{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
-.tl{background:#1A1C21;border:1px solid #2A2E36;border-radius:14px;padding:11px 6px 9px;text-align:center;cursor:pointer;color:#F4F4F5;font:600 11px Inter;transition:transform .15s,border-color .15s}
-.tl:active{transform:scale(.96)}.tl:hover{border-color:#5A4512}
-.tl .ic{font-size:20px;display:block;margin-bottom:5px}
-.lk{position:relative;background:linear-gradient(160deg,#2A2110,#1A1C21 70%);border:1px solid #5A4512;border-radius:18px;padding:14px;margin-bottom:12px;cursor:pointer}
-.lk .pill{position:absolute;top:12px;right:12px;background:#F5A524;color:#111;font:800 10px Inter;padding:4px 8px;border-radius:99px}
-.lk .so{display:flex;gap:9px;align-items:center;margin-bottom:8px}
-.lk .so span{width:34px;height:34px;border-radius:50%;background:#F5A524;color:#111;display:grid;place-items:center;font:900 15px Inter}
-.lk b{font-size:14px}
-.lk p{font-size:12px;color:#A9AEB7;line-height:1.45}
-.lk ul{list-style:none;margin-top:8px}
-.lk li{font-size:11.5px;color:#D8DBE0;padding:3px 0 3px 18px;position:relative}
-.lk li:before{content:"🔒";position:absolute;left:0;font-size:10px;top:4px}
-.ls{background:#1A1C21;border:1px solid #2A2E36;border-radius:14px;margin-bottom:12px}
-.ls div{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;font-size:12px;border-top:1px solid #2A2E36}
-.ls div:first-child{border-top:0}
-.ls em{font-style:normal;color:#A9AEB7;font-size:11px}
-.nav{display:flex;justify-content:space-around;border-top:1px solid #2A2E36;background:#14161A;padding:8px 4px 12px}
-.nav span{font:600 9.5px Inter;color:#A9AEB7;text-align:center;cursor:pointer}
-.nav span i{display:block;font-style:normal;font-size:17px;margin-bottom:2px}
-.nav .on{color:#F5A524}
-.sh{position:absolute;left:0;right:0;bottom:0;background:#1A1C21;border-top:1px solid #2A2E36;border-radius:22px 22px 0 0;padding:10px 18px 22px;transform:translateY(105%);transition:transform .3s ease;z-index:5}
-.sh.on{transform:none}
-.sh .gp{width:36px;height:4px;border-radius:9px;background:#3A3E46;margin:0 auto 12px}
-.sh b{font-size:15px;display:block;margin-bottom:6px}
-.sh p{font-size:12.5px;color:#C9CDD3;line-height:1.5;margin-bottom:8px}
-.sh .ho{font-size:11.5px;color:#A9AEB7;border-left:3px solid #F5A524;padding-left:9px;margin-bottom:12px}
-.sh button{width:100%;border:0;border-radius:12px;padding:11px;background:#2A2E36;color:#F4F4F5;font:700 13px Inter;cursor:pointer}
-.dim{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .3s;z-index:4}
-.dim.on{opacity:1;pointer-events:auto}
-.smp{margin-left:6px;vertical-align:3px;font:700 8.5px Inter;letter-spacing:1px;color:#A9AEB7;border:1px solid #2A2E36;border-radius:6px;padding:2px 5px}
+.hd{display:flex;align-items:center;justify-content:space-between;padding:34px 14px 6px}
+.hd small{display:block;color:var(--mu);font-size:10.5px;font-weight:500}
+.hd b{font-size:18px;font-weight:800;letter-spacing:-.3px}
+.hd img{width:28px;height:28px}
+.smp{margin-left:6px;vertical-align:3px;font:700 7.5px Inter;letter-spacing:1px;color:var(--mu);border:1px solid var(--ln);border-radius:5px;padding:2px 4px}
+.card{background:var(--cd);border:1px solid var(--ln);border-radius:16px}
+.pg{padding:10px;display:flex;gap:10px;align-items:center}
+.av{width:44px;height:44px;border-radius:50%;background:#333 url(/assets/cedric-headshot.jpg) center/cover;border:2px solid var(--go);flex:none}
+.pg .t{flex:1;min-width:0}.pg .t b{font-size:13px;display:block}
+.pg .t span{font-size:10px;color:var(--mu);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.live{display:inline-flex!important;align-items:center;gap:4px;font-size:9.5px!important;font-weight:700;color:var(--gr)!important;margin-top:2px}
+.live:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gr);box-shadow:0 0 0 3px rgba(91,212,138,.18)}
+.views{text-align:right}.views b{font-size:17px;font-weight:800}.views small{display:block;font-size:9px;color:var(--mu)}
+.avl{display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px}
+.avl .d{width:9px;height:9px;border-radius:50%;background:#3A3E46;flex:none;transition:.3s}
+.avl.on .d{background:var(--gr);box-shadow:0 0 0 4px rgba(91,212,138,.18)}
+.avl div{flex:1}.avl b{font-size:12px;display:block}.avl small{font-size:9.5px;color:var(--mu)}
+.tg{width:38px;height:22px;border-radius:99px;background:#3A3E46;position:relative;flex:none;cursor:pointer;transition:.25s;border:0}
+.tg:after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.25s}
+.tg.on{background:var(--gr)}.tg.on:after{left:19px}
+.cta{width:100%;border:0;border-radius:13px;background:var(--go);color:#111;font:800 14px Inter;padding:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
+.cta.pl{animation:pl 2.6s ease-in-out infinite}
+@keyframes pl{0%,100%{box-shadow:0 0 0 0 rgba(245,165,36,.45)}50%{box-shadow:0 0 0 7px rgba(245,165,36,0)}}
+.ghost{width:100%;border:1px solid var(--ln);border-radius:12px;background:var(--cd);color:#fff;font:700 12px Inter;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.lb{display:flex;justify-content:space-between;align-items:center;font:700 9px Inter;letter-spacing:1.5px;color:var(--go);text-transform:uppercase;margin:16px 2px 7px}
+.lb a{color:var(--mu);letter-spacing:.3px;text-transform:none;font-size:10px;cursor:pointer}
+.gr{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.tl{background:var(--cd);border:1px solid var(--ln);border-radius:13px;padding:10px 4px 8px;text-align:center;cursor:pointer;font:600 10px Inter;line-height:1.2;transition:transform .15s,border-color .15s;position:relative}
+.tl:active{transform:scale(.95)}.tl:hover{border-color:var(--gd)}
+.ic{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;margin:0 auto 5px;background:#262A31;color:var(--go)}
+.tl .nw{position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--go)}
+.al{display:flex;gap:9px;align-items:flex-start;padding:9px 10px;border-top:1px solid var(--ln);cursor:pointer}
+.al:first-child{border-top:0}
+.al .ic{margin:0;width:28px;height:28px;flex:none}
+.al div{flex:1;min-width:0}.al b{font-size:11.5px;display:block;line-height:1.3}
+.al small{font-size:9.5px;color:var(--mu);display:block;margin-top:1px}
+.al time{font-size:9px;color:var(--mu);white-space:nowrap}
+.al .hr{display:inline-block;margin-top:4px;font-size:9px;color:var(--go);background:#2A2110;border-radius:6px;padding:2px 6px}
+.up{font:800 8px Inter;letter-spacing:.4px;background:var(--go);color:#111;border-radius:99px;padding:2px 6px;vertical-align:1px;margin-left:4px}
+.st3{display:grid;grid-template-columns:repeat(3,1fr)}
+.st3 div{padding:10px 6px;text-align:center;border-left:1px solid var(--ln)}.st3 div:first-child{border-left:0}
+.st3 b{font-size:17px;font-weight:800;display:block}.st3 small{font-size:9px;color:var(--mu)}
+.lk{position:relative;background:linear-gradient(160deg,#2A2110,#1A1C21 70%);border:1px solid var(--gd);border-radius:16px;padding:12px;margin-top:12px;cursor:pointer}
+.lk .pill{position:absolute;top:11px;right:11px;background:var(--go);color:#111;font:800 9px Inter;padding:3px 7px;border-radius:99px}
+.lk .so{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.so span{width:30px;height:30px;border-radius:50%;background:var(--go);color:#111;display:grid;place-items:center;font:900 13px Inter}
+.lk b{font-size:13px}.lk p{font-size:11px;color:var(--mu);line-height:1.45}
+.row{display:flex;align-items:center;gap:10px;padding:10px;border-top:1px solid var(--ln);cursor:pointer}
+.row:first-child{border-top:0}
+.row .ic{margin:0;flex:none}
+.row div{flex:1;min-width:0}.row b{font-size:12px;display:block}.row small{font-size:9.5px;color:var(--mu);display:block;line-height:1.35;margin-top:1px}
+.chev{color:#5A5F69;flex:none}
+.nav{display:flex;justify-content:space-around;border-top:1px solid var(--ln);background:#14161A;padding:7px 2px 12px}
+.nav span{font:600 9px Inter;color:var(--mu);text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}
+.nav .on{color:var(--go)}
+.nav .bd{position:absolute;top:-3px;right:2px;min-width:14px;height:14px;border-radius:99px;background:#E5484D;color:#fff;font:800 8px/14px Inter;padding:0 3px}
+.inp{display:flex;align-items:center;gap:8px;background:var(--cd);border:1px solid var(--ln);border-radius:12px;padding:10px 11px;font-size:13px}
+.inp span{color:var(--mu);font-size:11px}
+.inp b{flex:1;font-weight:600}
+.caret{display:inline-block;width:1.5px;height:14px;background:var(--go);vertical-align:-2px;animation:bl 1s step-end infinite}
+@keyframes bl{50%{opacity:0}}
+.lnk{display:flex;align-items:center;gap:8px;margin-top:8px;padding:9px 11px;border-radius:12px;background:#14161A;border:1px dashed #3A3E46;font:700 12px ui-monospace,Menlo,monospace;color:var(--go)}
+.lnk em{flex:1;font-style:normal}
+.og{margin-top:10px;border-radius:14px;overflow:hidden;background:#fff;color:#111}
+.og .im{height:92px;background:linear-gradient(90deg,#111 0,#111 52%,transparent 52%),url(/assets/cedric-headshot.jpg) right center/48% auto no-repeat,#222;display:flex;flex-direction:column;justify-content:center;padding:0 12px;color:#fff}
+.og .im b{font-size:13px}.og .im small{font-size:9px;color:#F5A524;font-weight:700;display:flex;align-items:center;gap:4px;margin-top:3px}
+.og .tx{padding:8px 10px}.og .tx b{font-size:11px;display:block}.og .tx small{font-size:9px;color:#666}
+.bub{margin:10px 0 0 auto;max-width:86%;background:#2B7BF6;color:#fff;border-radius:16px 16px 4px 16px;padding:8px 10px;font-size:11px;line-height:1.4}
+.b2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:10px}
+.b2 button{border:1px solid var(--ln);background:var(--cd);color:#fff;border-radius:12px;padding:9px 2px 7px;font:700 10px Inter;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.b2 button svg{color:var(--go)}
+.note{display:flex;gap:8px;align-items:flex-start;margin-top:10px;padding:9px 10px;border-radius:12px;background:#122119;border:1px solid #1F3A2A;font-size:10.5px;line-height:1.4;color:#CDEBD8}
+.note svg{color:var(--gr);flex:none;margin-top:1px}
+.note.gold{background:#2A2110;border-color:var(--gd);color:#F3DFB6}.note.gold svg{color:var(--go)}
+.qr{background:#fff;border-radius:18px;padding:14px;margin:4px auto 0;width:200px}
+.qr small{display:block;text-align:center;color:#111;font:700 10px Inter;margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:5px;font:700 10px Inter;background:var(--cd2);border:1px solid var(--ln);border-radius:99px;padding:4px 9px;color:#fff}
+.hp{background:#F4F4F1;color:#111;border-radius:16px;padding:12px;margin-top:8px;font-size:11px;line-height:1.45;position:relative;overflow:hidden}
+.hp .tag{display:table;margin:0 0 7px;font:800 7.5px Inter;letter-spacing:1px;color:#8F5400;background:#FFF3DC;border-radius:6px;padding:3px 5px}
+.hp h4{font-size:13px;font-weight:800;margin-bottom:6px;letter-spacing:-.2px}
+.hp .mu{color:#55585F}
+.hp .b{display:flex;align-items:center;justify-content:center;gap:5px;border-radius:10px;background:#111;color:#fff;font:700 11px Inter;padding:8px;margin-top:8px}
+.hp .b.go{background:#F5A524;color:#111}
+.ck{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px solid #E1E1DC}
+.ck:first-of-type{border-top:0}
+.ck i{width:15px;height:15px;border-radius:5px;border:1.5px solid #BDBDB6;flex:none;display:grid;place-items:center}
+.ck i.y{background:#8F5400;border-color:#8F5400}
+.ck.y span{color:#888;text-decoration:line-through}
+.bar{height:6px;border-radius:9px;background:#2A2E36;overflow:hidden;margin-top:5px}.bar i{display:block;height:100%;background:var(--go);border-radius:9px}
+.cp{display:flex;align-items:center;gap:8px;padding:9px 10px;border-top:1px solid var(--ln)}
+.cp:first-child{border-top:0}
+.cp div{flex:1;min-width:0}.cp small{font-size:9px;color:var(--mu);display:block}.cp b{font-size:11.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cpb{border:1px solid var(--ln);background:var(--cd2);color:#fff;border-radius:8px;font:700 9.5px Inter;padding:5px 8px;cursor:pointer;flex:none}
+.cpb.ok{color:var(--gr);border-color:#1F3A2A}
+.seg{display:flex;background:#14161A;border:1px solid var(--ln);border-radius:10px;padding:3px;gap:3px;margin-bottom:8px}
+.seg span{flex:1;text-align:center;font:700 10px Inter;padding:6px 0;border-radius:7px;color:var(--mu);cursor:pointer}
+.seg .on{background:var(--cd2);color:#fff}
+.hbar{display:flex;align-items:center;gap:8px;padding:7px 10px;border-top:1px solid var(--ln);font-size:10.5px}
+.hbar:first-child{border-top:0}
+.hbar span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar .m{width:70px;height:6px;border-radius:9px;background:#3A2326;overflow:hidden;flex:none}.hbar .m i{display:block;height:100%;background:var(--gr)}
+.hbar em{font-style:normal;color:var(--mu);font-size:9.5px;width:30px;text-align:right}
+.ap{display:flex;gap:10px;align-items:center;padding:10px;border-top:1px solid var(--ln);cursor:pointer}
+.ap:first-child{border-top:0}
+.ap .dt{width:40px;text-align:center;flex:none;background:var(--cd2);border-radius:10px;padding:5px 0}
+.ap .dt small{display:block;font:800 8px Inter;color:var(--go);letter-spacing:1px}.ap .dt b{font-size:15px;font-weight:800}
+.ap div{flex:1}.ap div b{font-size:12px;display:block}.ap div small{font-size:9.5px;color:var(--mu)}
+.ok{color:var(--gr)}
+.lt{display:flex;justify-content:space-between;align-items:center;padding:9px 10px;border-top:1px solid var(--ln);font-size:11px;cursor:pointer}
+.lt:first-child{border-top:0}.lt small{color:var(--mu);font-size:9.5px;display:block}
+.toast{position:absolute;left:12px;right:12px;top:34px;z-index:40;background:rgba(32,35,42,.96);border:1px solid var(--ln);border-radius:16px;padding:9px 10px;display:flex;gap:9px;align-items:center;box-shadow:0 12px 30px rgba(0,0,0,.5);transform:translateY(-140%);transition:transform .45s cubic-bezier(.2,.9,.2,1);cursor:pointer}
+.toast.on{transform:none}
+.toast img{width:26px;height:26px;border-radius:7px;flex:none}
+.toast div{flex:1;min-width:0}.toast b{font-size:11px;display:block}.toast small{font-size:9.5px;color:#C9CDD3}
+.toast time{font-size:9px;color:var(--mu);align-self:flex-start}
+.mini{display:flex;gap:6px;align-items:center;font-size:10px;color:var(--mu);margin-top:6px}
+p.s{font-size:11px;color:var(--mu);line-height:1.5;margin:2px 2px 0}
 </style></head>
-<body><div class="app">
-<div class="sb"><span>9:41</span><i>●●● ▲ ▮</i></div>
-<div class="scr">
- <div class="hd"><div><small>Good morning</small><b>Cedric</b><span class="smp">SAMPLE</span></div><img src="/assets/ct-shield.png" alt="ClaimTract"></div>
- <div class="pg"><div class="av"></div><div class="t"><b>Your page</b><span>claimtract.app/cedric-moore</span><span class="live">Live</span></div></div>
- <button class="share" data-s="share">Share my page</button>
- <p class="lb">Your free tools</p>
- <div class="gr">
-  <div class="tl" data-s="text"><span class="ic">💬</span>Text a homeowner</div>
-  <div class="tl" data-s="qr"><span class="ic">▦</span>QR code</div>
-  <div class="tl" data-s="card"><span class="ic">👤</span>Contact card</div>
-  <div class="tl" data-s="book"><span class="ic">📅</span>Bookings</div>
-  <div class="tl" data-s="video"><span class="ic">▶</span>Your video</div>
-  <div class="tl" data-s="edit"><span class="ic">✎</span>Edit page</div>
- </div>
- <p class="lb">This week</p>
- <div class="ls">
-  <div>Page opened<em>From your shares and QR</em></div>
-  <div>Tapped to call you<em>Straight to your phone</em></div>
-  <div>Booked a time<em>On your calendar</em></div>
- </div>
- <div class="lk" data-s="sophia"><span class="pill">Upgrade</span>
-  <div class="so"><span>S</span><b>Sophia</b></div>
-  <p>Talk over your inspection photos. Sophia turns them into articles with your name on them, so homeowners find you on Google.</p>
-  <ul><li>Photos to articles, approved by you</li><li>Your page fills with your own claims</li><li>Posts ready for Facebook and Google</li></ul>
- </div>
+<body><div class="app" id="app">
+<div class="sb"><span>9:41</span><i><svg width="16" height="10" viewBox="0 0 16 10"><rect x="0" y="6" width="3" height="4" rx="1" fill="#fff"/><rect x="4.3" y="4" width="3" height="6" rx="1" fill="#fff"/><rect x="8.6" y="2" width="3" height="8" rx="1" fill="#fff"/><rect x="12.9" y="0" width="3" height="10" rx="1" fill="#fff"/></svg><svg width="22" height="11" viewBox="0 0 22 11"><rect x=".5" y=".5" width="19" height="10" rx="3" fill="none" stroke="#fff" opacity=".5"/><rect x="2" y="2" width="14" height="7" rx="1.6" fill="#fff"/><rect x="20.3" y="3.5" width="1.5" height="4" rx=".7" fill="#fff" opacity=".5"/></svg></i></div>
+<div class="toast" id="toast"><img src="/assets/ct-shield.png" alt=""><div><b id="tt"></b><small id="ts"></small></div><time>now</time></div>
 </div>
-<div class="nav"><span class="on"><i>⌂</i>Home</span><span data-s="share"><i>↗</i>Share</span><span data-s="text"><i>✉</i>Letters</span><span data-s="sophia"><i>✦</i>Sophia</span><span data-s="edit"><i>⚙</i>Page</span></div>
-</div>
-<div class="dim" id="dim"></div>
-<div class="sh" id="sh"><div class="gp"></div><b id="st"></b><p id="sp"></p><p class="ho" id="sho"></p><button id="sx">Got it</button></div>
 <script>
-var S={
-share:['Share my page','One tap sends your page by text, with a picture card of you and your number.','Your homeowner sees: your face, your license and "works for you, not the insurance company," before you knock.'],
-text:['Text a homeowner','Ready-made texts for confirming, thanking, running late and asking for referrals, signed with your name.','Your homeowner sees: a short, friendly text from you with your page link.'],
-qr:['QR code','Print-ready QR images for your phone, business card, door note and truck magnet.','Your homeowner sees: a code that opens your page, no typing.'],
-card:['Contact card','Your contact card, ready to save. One tap and you are in their phone.','Your homeowner sees: you saved as "Public Adjuster," so they find you when the carrier calls.'],
-book:['Bookings','Homeowners pick a time from your page. You get a text when they do.','Your homeowner sees: open times, a confirmation, and a reminder from you.'],
-video:['Your video','Add a YouTube video and it plays at the top of your page.','Your homeowner sees: you, explaining what you do, in your own words.'],
-edit:['Edit page','Change your photo, colors, story and links any time.','Your homeowner sees: the latest version, the moment you save.'],
-sophia:['Sophia (upgrade)','Everything free stays free. Upgrading adds Sophia, who turns your inspection photos and voice notes into articles that get you found.','Your homeowner sees: answers to their exact questions, approved by you, with your number on every page.']};
-var sh=document.getElementById('sh'),dim=document.getElementById('dim');
-function open(k){var s=S[k];if(!s)return;st.textContent=s[0];sp.textContent=s[1];sho.textContent=s[2];sh.classList.add('on');dim.classList.add('on')}
-function close(){sh.classList.remove('on');dim.classList.remove('on')}
-document.addEventListener('click',function(e){var t=e.target.closest('[data-s]');if(t)open(t.getAttribute('data-s'))});
-dim.onclick=close;document.getElementById('sx').onclick=close;
+(function(){
+var P={
+ home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+ bell:'<path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/>',
+ share:'<path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/>',
+ grid:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',
+ spark:'<path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/>',
+ msg:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5.1A8 8 0 1 1 21 12z"/>',
+ qr:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 17h4v4h-4"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+ cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/>',
+ play:'<circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z"/>',
+ edit:'<path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+ house:'<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/>',
+ pin:'<path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+ chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+ back:'<path d="M15 18l-6-6 6-6"/>',
+ chev:'<path d="M9 18l6-6-6-6"/>',
+ check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+ eye:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+ save:'<path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3M8 14h8M8 17.5h5"/>',
+ scan:'<path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ book:'<path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 21.5A2.5 2.5 0 0 1 6.5 19H20v3H6.5"/>',
+ phone:'<rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/>',
+ moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
+ mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+ vol:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>',
+ search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+ print:'<path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/>',
+ thumb:'<path d="M7 10v11H3V10zM7 10l4-8a2.5 2.5 0 0 1 2.5 2.5V9h5.3a2 2 0 0 1 2 2.3l-1.4 8A2 2 0 0 1 17.4 21H7"/>',
+ flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+ g:'<circle cx="12" cy="12" r="9"/><path d="M12 12h6a6 6 0 1 1-1.8-4.3"/>',
+ copy:'<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/>',
+ shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+ star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>'
+};
+function I(n,s,c){s=s||16;return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="'+(c||'currentColor')+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+P[n]+'</svg>'}
+function ic(n){return '<span class="ic">'+I(n,15)+'</span>'}
+var CH=I('chev',14);
+
+var avail=true,unread=3,tog={binder:1,install:1,night:1,txt:1,read:1,search:1,print:1,help:1};
+function qrSvg(seed){var n=25,c=7,s='',r=seed||7;function rnd(){r=(r*9301+49297)%233280;return r/233280}
+ function fin(x,y){return '<rect x="'+x+'" y="'+y+'" width="7" height="7" rx="1.6" fill="#111"/><rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" rx="1" fill="#fff"/><rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3" rx=".6" fill="#111"/>'}
+ for(var y=0;y<n;y++)for(var x=0;x<n;x++){if((x<8&&y<8)||(x>16&&y<8)||(x<8&&y>16))continue;if(x>9&&x<15&&y>9&&y<15)continue;if(rnd()>.52)s+='<rect x="'+x+'" y="'+y+'" width="1" height="1" rx=".25" fill="#111"/>'}
+ return '<svg viewBox="0 0 25 25" width="172" height="172">'+s+fin(0,0)+fin(18,0)+fin(0,18)+'<rect x="10" y="10" width="5" height="5" rx="1.4" fill="#F5A524"/><path d="M12.5 10.9l1.6.6v1.1c0 .9-.7 1.5-1.6 1.7-.9-.2-1.6-.8-1.6-1.7v-1.1z" fill="#111"/></svg>'}
+
+var NAV=[['home','home','Home'],['activity','bell','Activity'],['share','share','Share'],['tools','grid','Page'],['sophia','spark','Sophia']];
+function nav(on){return '<div class="nav">'+NAV.map(function(n){return '<span data-tab="'+n[0]+'" class="'+(n[0]===on?'on':'')+'">'+I(n[1],18)+n[2]+(n[0]==='activity'&&unread?'<i class="bd">'+unread+'</i>':'')+'</span>'}).join('')+'</div>'}
+function top(t){return '<div class="top"><button class="bk" data-back>'+I('back',16)+'</button><h1>'+t+'</h1></div>'}
+
+var ALERTS=[
+ ['eye','Mary opened your page','From your text · reading now',' 9:42 PM',1,'Earliest you can reach out: 8:00 AM'],
+ ['save','Someone saved your contact','From your water damage article','9:31 PM',0],
+ ['scan','Someone scanned your door hanger','Ponte Vedra · QR on door hanger','6:05 PM',0],
+ ['clock','Mary read for over a minute','Who works for you, and who doesn\'t','Yesterday',1],
+ ['cal','James booked an inspection','Tue 10:00 AM · prep page sent','Yesterday',0],
+ ['book','4 homeowners used your claim binder','On your page this week','Mon',0]
+];
+function alertRow(a){return '<div class="al">'+ic(a[0])+'<div><b>'+a[1]+(a[4]?'<span class="up">UPGRADE</span>':'')+'</b><small>'+a[2]+'</small>'+(a[5]?'<span class="hr">'+a[5]+'</span>':'')+'</div><time>'+a[3]+'</time></div>'}
+
+var V={
+home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedric</b><span class="smp">SAMPLE</span></div><img src="/assets/ct-shield.png" alt="ClaimTract"></div><div class="scr">'+
+ '<div class="card avl '+(avail?'on':'')+'" id="avl"><span class="d"></span><div><b id="avt">'+(avail?'Available now':'Not taking calls')+'</b><small>'+(avail?'Your page shows a green "taking calls" badge':'Badge hidden on your page')+'</small></div><button class="tg '+(avail?'on':'')+'" data-act="avail" aria-label="Available now"></button></div>'+
+ '<div class="card pg" data-go="mypage"><div class="av"></div><div class="t"><b>Your page</b><span>claimtract.app/cedric-moore</span><span class="live">Live</span></div><div class="views"><b>14</b><small>views today</small></div></div>'+
+ '<div style="margin-top:9px"><button class="cta pl" data-go="share">'+I('share',16)+'Share my page</button></div>'+
+ '<p class="lb">Right now <a data-tab="activity">See all</a></p><div class="card">'+alertRow(ALERTS[0])+alertRow(ALERTS[1])+'</div>'+
+ '<p class="lb">Your free tools</p><div class="gr">'+
+ [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['video','play','Your video'],['edit','edit','Edit page'],['tools','house','Homeowner tools',1],['found','g','Get found',1],['insights','chart','What\'s working',1]].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+(t[3]?'<i class="nw"></i>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
+ '<p class="lb">This week</p><div class="card st3"><div><b>61</b><small>Page views</small></div><div><b>7</b><small>Tapped to call</small></div><div><b>3</b><small>Booked</small></div></div>'+
+ '<div class="lk" data-tab="sophia"><span class="pill">Upgrade</span><div class="so"><span>S</span><b>Sophia</b></div><p>Turn your old claim files into dozens of answer pages with your name on every one.</p></div>'+
+ '</div>'+nav('home')},
+activity:function(){unread=0;return '<div class="top"><h1 style="padding-left:4px">Activity</h1><span class="chip">'+I('bell',12)+'Alerts on</span></div><div class="scr"><div class="card">'+ALERTS.map(alertRow).join('')+'</div>'+
+ '<div class="note gold">'+I('clock',14)+'<span>Florida contact hours are built in. Late-night alerts tell you the earliest time you can reach out.</span></div>'+
+ '<div class="note">'+I('shield',14)+'<span>Free: you see that someone looked. Upgrade: you see who, from every link you share by name.</span></div></div>'+nav('activity')},
+share:function(){return '<div class="top"><h1 style="padding-left:4px">Share my page</h1></div><div class="scr">'+
+ '<div class="inp"><span>For</span><b>Mary<i class="caret"></i></b>'+I('user',15,'#A9AEB7')+'</div>'+
+ '<div class="lnk">'+I('shield',14)+'<em>clmt.us/k4m2</em><button class="cpb" data-act="copy">Copy</button></div>'+
+ '<p class="lb">What Mary sees</p><div class="bub">Hi Mary, it was good meeting you today. Here\'s my page so you can check my license and see how I work.</div>'+
+ '<div class="og" style="margin-left:auto;max-width:86%"><div class="im"><b>Cedric Moore</b><small>'+I('check',10,'#F5A524')+'License verified</small></div><div class="tx"><b>Cedric Moore, Public Adjuster</b><small>clmt.us</small></div></div>'+
+ '<div class="b2"><button data-act="sent">'+I('msg',17)+'Text</button><button data-act="sent">'+I('mail',17)+'Email</button><button data-go="qr">'+I('qr',17)+'Show QR</button></div>'+
+ '<div class="note">'+I('bell',14)+'<span>You\'ll get an alert when Mary opens it.<span class="up">UPGRADE</span></span></div></div>'+nav('share')},
+qr:function(){return top('QR code')+'<div class="scr" style="text-align:center"><span class="chip">'+I('user',11)+'Made for Mary</span><div class="qr">'+qrSvg(11)+'<small>Scan to see Cedric\'s page</small></div>'+
+ '<p class="s" style="margin:10px 6px">Hold up your phone, or type a name first so you know who scanned.</p><div class="b2" style="grid-template-columns:1fr 1fr"><button data-go="handout">'+I('print',17)+'Door hanger</button><button data-act="sent">'+I('share',17)+'Save image</button></div></div>'},
+handout:function(){return top('Print a handout')+'<div class="scr"><p class="s">Pick any article. It prints as one clean page with your name, number and QR code.</p>'+
+ '<div class="hp" style="padding:14px 14px 12px"><span class="tag">PRINTED PAGE</span><h4 style="font-size:12px">Who works for you, and who doesn\'t</h4><p class="mu" style="font-size:9.5px">Your insurance company has adjusters. They work for the company. A public adjuster works for you…</p><div style="display:flex;gap:10px;align-items:center;margin-top:10px;border-top:1px solid #E1E1DC;padding-top:8px"><div style="background:#fff;border-radius:6px;padding:3px">'+qrSvg(5).replace('width="172" height="172"','width="44" height="44"')+'</div><div><b style="font-size:10.5px">Cedric Moore</b><div class="mu" style="font-size:9px">Licensed Public Adjuster · (904) 555-0142</div></div></div></div>'+
+ '<div style="margin-top:10px"><button class="cta" data-act="sent">'+I('print',16)+'Print or save PDF</button></div></div>'},
+letters:function(){return top('Ready-made texts')+'<div class="scr"><div class="card">'+
+ [['Thanks for meeting','Sent after a visit'],['Running a few minutes late','One tap, on the way'],['Inspection reminder','The day before'],['Checking in','A week later'],['Ask for a referral','After the claim closes']].map(function(l){return '<div class="lt" data-act="sent"><div><b style="font-size:11.5px">'+l[0]+'</b><small>'+l[1]+'</small></div>'+CH+'</div>'}).join('')+'</div>'+
+ '<div class="note">'+I('msg',14)+'<span>Texts open in your own messages app. Nothing is sent for you, and nothing costs extra.</span></div></div>'},
+card:function(){return top('Contact card')+'<div class="scr"><div class="hp" style="text-align:center;padding:16px 12px"><span class="tag">THEIR PHONE</span><div class="av" style="width:64px;height:64px;margin:4px auto 8px"></div><h4 style="margin:0">Cedric Moore</h4><div class="mu">Public Adjuster · Lic. W123456</div><div style="display:flex;gap:6px;justify-content:center;margin-top:10px">'+['phone','msg','mail'].map(function(n){return '<span style="width:34px;height:34px;border-radius:50%;background:#111;color:#fff;display:grid;place-items:center">'+I(n,15)+'</span>'}).join('')+'</div><div class="b go" style="margin-top:12px">Save contact</div></div>'+
+ '<p class="s" style="margin-top:10px">Saved as "Cedric Moore, Public Adjuster," so they find you the moment the carrier calls.</p></div>'},
+book:function(){return top('Bookings')+'<div class="scr"><p class="lb" style="margin-top:4px">Coming up</p><div class="card">'+
+ '<div class="ap" data-go="prep"><div class="dt"><small>TUE</small><b>24</b></div><div><b>James Porter</b><small>10:00 AM · Roof leak · Jacksonville</small><div class="mini ok">'+I('check',11)+'Prep page sent</div></div>'+CH+'</div>'+
+ '<div class="ap" data-go="prep"><div class="dt"><small>WED</small><b>25</b></div><div><b>Linda Reyes</b><small>2:30 PM · Water damage · Orange Park</small><div class="mini ok">'+I('check',11)+'Prep page sent</div></div>'+CH+'</div></div>'+
+ '<p class="lb">Your open times</p><div class="card"><div class="lt"><span>Weekdays</span><small>9 AM to 5 PM</small></div><div class="lt"><span>Saturday</span><small>10 AM to 2 PM</small></div></div></div>'},
+prep:function(){return top('Appointment prep')+'<div class="scr"><p class="s">After James booked, he got this page:</p><div class="hp"><span class="tag">HOMEOWNER VIEW</span><h4>Your inspection with Cedric</h4><div class="mu" style="margin-bottom:6px">Tue, Nov 24 · 10:00 AM · about 45 minutes</div>'+
+ [['Your insurance policy or declarations page',1],['Your claim number, if you have one',1],['Photos you\'ve taken so far',0],['Any letters from the insurance company',0]].map(function(c){return '<div class="ck'+(c[1]?' y':'')+'"><i class="'+(c[1]?'y':'')+'">'+(c[1]?I('check',10,'#fff'):'')+'</i><span>'+c[0]+'</span></div>'}).join('')+
+ '<div class="b">'+I('cal',13)+'Add to my calendar</div></div><div class="note">'+I('check',14)+'<span>Homeowners who know what to expect show up ready, and fewer of them cancel.</span></div></div>'},
+video:function(){return top('Your video')+'<div class="scr"><div class="hp" style="padding:0;overflow:hidden"><div style="height:120px;background:#222 url(/assets/cedric-headshot.jpg) center 30%/cover;display:grid;place-items:center"><span style="width:44px;height:44px;border-radius:50%;background:rgba(245,165,36,.95);display:grid;place-items:center;color:#111">'+I('play',22)+'</span></div><div style="padding:9px 11px"><b>Meet Cedric</b><div class="mu" style="font-size:10px">Plays at the top of your page</div></div></div>'+
+ '<div class="inp" style="margin-top:10px"><span>YouTube</span><b style="font-size:11px;color:#A9AEB7">youtu.be/…</b></div><p class="s" style="margin-top:8px">One minute on camera: who you are and what you do.</p></div>'},
+edit:function(){return top('Edit page')+'<div class="scr"><div class="card">'+[['user','Photo and name','Cedric Moore'],['shield','License','W123456 · verified'],['pin','Service area','Duval, St. Johns, Clay'],['clock','Hours','Weekdays 9 to 5'],['book','Your story','17 years in Florida…']].map(function(r){return '<div class="row">'+ic(r[0])+'<div><b>'+r[1]+'</b><small>'+r[2]+'</small></div>'+CH+'</div>'}).join('')+'</div><p class="s" style="margin-top:10px">Changes show on your page the moment you save.</p></div>'},
+mypage:function(){return top('Your page')+'<div class="scr"><div class="hp" style="padding:0"><div style="background:#111;color:#fff;padding:12px;display:flex;gap:10px;align-items:center"><div class="av" style="width:40px;height:40px"></div><div><b style="font-size:12px">Cedric Moore</b><div style="font-size:9px;color:#5BD48A;display:flex;gap:4px;align-items:center">'+(avail?'<span style="width:6px;height:6px;border-radius:50%;background:#5BD48A"></span>Taking calls now':'')+'</div></div></div><div style="padding:10px 12px"><h4>Who works for you, and who doesn\'t</h4><p class="mu" style="font-size:10px">Your insurance company has adjusters. They work for the company…</p><div class="b go">'+I('phone',12)+'Call Cedric</div></div></div><p class="s" style="margin-top:8px">This is what homeowners see. 14 people have opened it today.</p></div>'},
+tools:function(){return '<div class="top"><h1 style="padding-left:4px">On your page</h1></div><div class="scr"><p class="s" style="margin-bottom:8px">Free tools your homeowners get. Turn any of them off. Tap to see what they see.</p><div class="card">'+
+ [['binder','book','Claim binder','Their call log, inventory and checklists'],['install','phone','Save to home screen','Your page as an app on their phone'],['night','moon','3 a.m. mode','A calm page after dark'],['txt','msg','Text and email me','One tap, from their own phone'],['read','vol','Read it to me','Articles read out loud'],['search','search','Search','Find an answer in seconds'],['print','print','Print a handout','One clean page with your QR'],['help','thumb','"Did this help?"','See which answers work']].map(function(t){return '<div class="row" data-go="t_'+t[0]+'">'+ic(t[1])+'<div><b>'+t[2]+'</b><small>'+t[3]+'</small></div><button class="tg '+(tog[t[0]]?'on':'')+'" data-tog="'+t[0]+'" aria-label="'+t[2]+'"></button></div>'}).join('')+'</div></div>'+nav('tools')},
+t_binder:function(){return top('Claim binder')+'<div class="scr"><div class="hp"><span class="tag">HOMEOWNER VIEW</span><h4>My claim binder</h4><div class="seg" style="background:#E9E9E4;border-color:#E1E1DC"><span class="on" style="background:#fff;color:#111">Calls</span><span>Inventory</span><span>Checklist</span></div>'+
+ [['Nov 14','Claims line, Rachel','Adjuster visit Thursday'],['Nov 18','Field adjuster, Tom','Said estimate in 10 days']].map(function(c){return '<div class="ck" style="align-items:flex-start"><b style="font-size:9.5px;width:38px;flex:none;color:#8F5400">'+c[0]+'</b><span><b style="font-size:10.5px">'+c[1]+'</b><br><span class="mu" style="font-size:10px">'+c[2]+'</span></span></div>'}).join('')+
+ '<div class="b">+ Add a call</div><div class="mu" style="font-size:9px;margin-top:6px;text-align:center">Saved only on this phone · Cedric Moore</div></div><div class="note">'+I('book',14)+'<span>Your name sits on a tool they open for weeks.</span></div></div>'},
+t_install:function(){return top('Save to home screen')+'<div class="scr"><div class="hp" style="background:linear-gradient(160deg,#355C7D,#6C5B7B);color:#fff;padding:16px"><span class="tag">THEIR PHONE</span><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px;text-align:center;font-size:8.5px">'+
+ ['#4CD964','#FF9500','#5AC8FA','#FF2D55','#FFCC00','#34C759'].map(function(c){return '<div><span style="display:block;width:38px;height:38px;border-radius:10px;background:'+c+';margin:0 auto 3px;opacity:.85"></span>&nbsp;</div>'}).join('')+
+ '<div><span style="display:block;width:38px;height:38px;border-radius:10px;margin:0 auto 3px;background:#111 url(/assets/cedric-headshot.jpg) center/cover;box-shadow:0 0 0 2px #F5A524"></span>Cedric</div></div></div><div class="note">'+I('phone',14)+'<span>Your face and call button stay on their phone for the whole claim. It even opens with no signal after a storm.</span></div></div>'},
+t_night:function(){return top('3 a.m. mode')+'<div class="scr"><div class="hp" style="background:#FBF6EC"><span class="tag">AFTER 9 PM</span><h4>You\'re not alone tonight.</h4><p class="mu">Here\'s what to do first, and Cedric will call you in the morning.</p>'+
+ [['Stay safe. Turn off power to wet areas.',0],['Take photos before you clean up.',0],['Keep damaged materials for now.',0]].map(function(c){return '<div class="ck"><i></i><span>'+c[0]+'</span></div>'}).join('')+'<div class="b go">'+I('cal',12)+'Book a morning call</div></div><div class="note">'+I('moon',14)+'<span>Late-night visits turn into morning calls instead of closed tabs.</span></div></div>'},
+t_txt:function(){return top('Text and email me')+'<div class="scr"><div class="hp"><span class="tag">HOMEOWNER VIEW</span><h4>Reach Cedric your way</h4><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><div class="b" style="margin:0">'+I('msg',13)+'Text</div><div class="b" style="margin:0;background:#fff;color:#111;border:1px solid #E1E1DC">'+I('mail',13)+'Email</div></div><div style="margin-top:9px;background:#fff;border:1px solid #E1E1DC;border-radius:10px;padding:8px;font-size:10px" class="mu">"Hi Cedric, I found your page. I have water damage and…"</div></div><div class="note">'+I('msg',14)+'<span>No form to fill out. It opens their own texting app with the message started.</span></div></div>'},
+t_read:function(){return top('Read it to me')+'<div class="scr"><div class="hp"><span class="tag">HOMEOWNER VIEW</span><div style="display:flex;align-items:center;gap:8px;background:#111;color:#fff;border-radius:99px;padding:6px 10px 6px 6px;width:max-content;margin-bottom:8px"><span style="width:24px;height:24px;border-radius:50%;background:#F5A524;color:#111;display:grid;place-items:center">'+I('vol',13)+'</span><b style="font-size:10px">Reading to you · 1:12</b></div><h4>What to do when water comes through the ceiling</h4><p class="mu" style="font-size:10px"><span style="background:#FFE8B8">First, turn off the water if you can find the shutoff.</span> Then move what you can away from the drip…</p></div><div class="note">'+I('vol',14)+'<span>For the homeowner too shaken to read. It uses the phone\'s own voice, so it costs nothing.</span></div></div>'},
+t_search:function(){return top('Search')+'<div class="scr"><div class="hp"><span class="tag">HOMEOWNER VIEW</span><div style="display:flex;gap:6px;align-items:center;background:#fff;border:1px solid #E1E1DC;border-radius:10px;padding:7px 9px;margin-top:14px">'+I('search',13,'#55585F')+'<b style="font-size:11px">denied</b></div>'+
+ ['My claim was denied. What now?','Can I reopen a denied claim?','Who works for you, and who doesn\'t'].map(function(r){return '<div class="ck"><span style="font-size:10.5px;font-weight:600">'+r+'</span></div>'}).join('')+'</div><div class="note">'+I('search',14)+'<span>They find their exact worry in seconds, on your page.</span></div></div>'},
+t_print:function(){return V.handout()},
+t_help:function(){return V.insights()},
+insights:function(){return top('What\'s working')+'<div class="scr"><p class="lb" style="margin-top:4px">"Did this help?"</p><div class="card">'+
+ [['Who works for you',94,'47'],['Water through the ceiling',88,'31'],['My claim was denied',81,'22'],['Mold after a leak',63,'11']].map(function(h){return '<div class="hbar"><span>'+h[0]+'</span><span class="m"><i style="width:'+h[1]+'%"></i></span><em>'+h[1]+'%</em></div>'}).join('')+'</div>'+
+ '<p class="lb">What they searched</p><div class="card">'+[['denied',18],['mold',12],['roof leak',9],['deductible',6]].map(function(h){return '<div class="hbar"><span>"'+h[0]+'"</span><em style="width:auto">'+h[1]+' times</em></div>'}).join('')+'</div>'+
+ '<div class="note gold">'+I('spark',14)+'<span>"Mold" keeps coming up. That\'s your next article.</span></div></div>'},
+found:function(){return top('Get found kit')+'<div class="scr"><div class="card" style="padding:10px 11px"><div style="display:flex;justify-content:space-between;font-size:11px"><b>Google Business Profile</b><span style="color:#A9AEB7">2 of 5</span></div><div class="bar"><i style="width:40%"></i></div></div>'+
+ '<div class="card" style="margin-top:8px">'+[['Claim your free profile',1],['Copy your name exactly',1],['Copy your phone and hours',0],['Add your page link',0],['Ask 3 clients for a review',0]].map(function(c){return '<div class="lt"><span style="display:flex;gap:8px;align-items:center;'+(c[1]?'color:#A9AEB7;text-decoration:line-through':'')+'"><i style="width:16px;height:16px;border-radius:5px;display:grid;place-items:center;'+(c[1]?'background:#F5A524;color:#111':'border:1.5px solid #3A3E46')+'">'+(c[1]?I('check',10,'#111'):'')+'</i>'+c[0]+'</span></div>'}).join('')+'</div>'+
+ '<p class="lb">Copy and paste</p><div class="card">'+[['Business name','Cedric Moore, Public Adjuster'],['Phone','(904) 555-0142'],['Hours','Mon to Fri, 9 AM to 5 PM']].map(function(c){return '<div class="cp"><div><small>'+c[0]+'</small><b>'+c[1]+'</b></div><button class="cpb" data-act="copy">Copy</button></div>'}).join('')+'</div>'+
+ '<p class="lb">Your bio</p><div class="seg"><span class="on">Short</span><span>Medium</span><span>Long</span></div><div class="card cp"><div><b style="white-space:normal;font-weight:500;color:#D8DBE0;line-height:1.45">Licensed Florida public adjuster. I work for homeowners, not insurance companies.</b></div><button class="cpb" data-act="copy">Copy</button></div></div>'},
+sophia:function(){return '<div class="top"><h1 style="padding-left:4px">Sophia</h1><span class="up" style="font-size:9px;padding:3px 8px">UPGRADE</span></div><div class="scr">'+
+ '<div class="lk" style="margin-top:0;cursor:default"><div class="so"><span>S</span><b>Your old files, working again</b></div><p>Upload a closed claim\'s photos. Talk about each one like the homeowner is standing next to you. Sophia writes the articles.</p></div>'+
+ '<div class="card" style="margin-top:9px">'+[['scan','Upload photos','Off your drive, into the cloud'],['spark','Get hints on every photo','Building code and Florida statute notes'],['vol','Talk about each one','Plain words, 10 to 30 seconds'],['book','One claim, a dozen pages','Each answers one real question'],['share','Post with your thumb','Facebook, Google and Instagram']].map(function(r,i){return '<div class="row">'+ic(r[0])+'<div><b>'+(i+1)+'. '+r[1]+'</b><small>'+r[2]+'</small></div></div>'}).join('')+'</div>'+
+ '<div class="card st3" style="margin-top:9px"><div><b>100</b><small>Old claims</small></div><div><b>×12</b><small>Pages each</small></div><div><b style="color:#F5A524">1,200</b><small>Answers</small></div></div>'+
+ '<div style="margin-top:10px"><button class="cta">See the upgrade</button></div></div>'+nav('sophia')}
+};
+
+var app=document.getElementById('app'),stack=[],cur=null;
+function render(name,dir){var html=V[name]();var el=document.createElement('div');el.className='view';el.innerHTML=html;el.dataset.v=name;
+ if(dir==='push'){el.classList.add('in');app.appendChild(el);el.offsetWidth;el.classList.remove('in');if(cur){cur.classList.add('out');var o=cur;setTimeout(function(){o.remove()},340)}}
+ else if(dir==='pop'){el.classList.add('out');app.appendChild(el);el.offsetWidth;app.appendChild(cur);cur.classList.add('in');var o2=cur;el.classList.remove('out');setTimeout(function(){o2.remove()},340)}
+ else{if(cur)cur.remove();app.appendChild(el)}
+ cur=el}
+function go(n){stack.push(cur.dataset.v);render(n,'push')}
+function back(){var n=stack.pop()||'home';render(n,'pop')}
+function tab(n){stack=[];render(n)}
+var T=document.getElementById('toast'),tt=document.getElementById('tt'),ts=document.getElementById('ts');
+function toast(a,b){tt.textContent=a;ts.textContent=b;T.classList.add('on');clearTimeout(T._t);T._t=setTimeout(function(){T.classList.remove('on')},3600)}
+app.addEventListener('click',function(e){
+ var t;
+ if(t=e.target.closest('[data-tog]')){e.stopPropagation();var k=t.dataset.tog;tog[k]=!tog[k];t.classList.toggle('on');return}
+ if(t=e.target.closest('[data-act]')){var a=t.dataset.act;
+  if(a==='avail'){avail=!avail;render('home');return}
+  if(a==='copy'){t.textContent='Copied';t.classList.add('ok');return}
+  if(a==='sent'){toast('Ready to send','Opens in your own app. Nothing extra to pay.');return}}
+ if(t=e.target.closest('[data-back]'))return back();
+ if(t=e.target.closest('[data-tab]'))return tab(t.dataset.tab);
+ if(t=e.target.closest('[data-go]'))return go(t.dataset.go);
+ if(e.target.closest('#toast'))return tab('activity');
+});
+render('home');window.__ct={tab:tab,go:go,back:back};
+setTimeout(function(){toast('Mary opened your page','Reading now · earliest you can reach out: 8:00 AM')},2600);
+})();
 </script>
 </body></html>
