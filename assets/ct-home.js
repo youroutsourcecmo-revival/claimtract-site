@@ -118,7 +118,7 @@ function saveHome(){if(deferred){deferred.prompt();deferred=null;return}var ios=
 if('serviceWorker' in navigator){try{navigator.serviceWorker.register('/sw.js').catch(function(){})}catch(e){}}
 
 /* 3 a.m. mode: 10 PM to 6 AM on the homeowner's clock */
-function lateBanner(){var h=new Date().getHours();if(h>=6&&h<22)return;try{if(sessionStorage.getItem('cth_late_off'))return}catch(e){}
+function lateBanner(){if(SLUG==='preview')return;var h=new Date().getHours();if(h>=6&&h<22)return;try{if(sessionStorage.getItem('cth_late_off'))return}catch(e){}
  var b=el('div','cth cth-late','<div class="in"><b>It\'s late, and you\'re dealing with damage. Here\'s what to do right now.</b><ol><li>If water is coming in, shut off the main water valve. If anything sparks or smells like burning, shut off power at the breaker and get out.</li><li>Take photos and video of everything before you clean up.</li><li>Stop more damage if you safely can: towels, buckets, a tarp. Keep the receipts.</li><li>Don\'t throw away damaged items, and don\'t sign anything tonight.</li></ol>'+(PH?'<a href="sms:+1'+PH+'">Text '+esc(FIRST)+' now</a>':'')+'<button type="button">Show the full page</button><div style="font-size:12px;color:#9fb0c2;margin-top:8px">'+esc(FIRST)+' will see your text first thing in the morning. In an emergency, call 911.</div></div>');
  b.querySelector('button').onclick=function(){b.remove();try{sessionStorage.setItem('cth_late_off','1')}catch(e){}};document.body.insertBefore(b,document.body.firstChild)}
 
