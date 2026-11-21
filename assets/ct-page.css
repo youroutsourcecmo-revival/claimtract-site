@@ -131,6 +131,8 @@ textarea{min-height:190px;resize:vertical;line-height:1.55}
 .pv .faq .ans p{margin:0 0 12px}.pv .faq .ans .sc{color:var(--p-tx);font-weight:600}
 .pv .faq .ans a{display:inline-block;background:var(--p-ac);color:var(--p-acx);padding:11px 18px;border-radius:var(--p-r);font:700 15px Inter,sans-serif;text-decoration:none}
 .pv.heritage .faq .ans a{color:#fff}
+.pv .faq .ans a.fq-more{background:transparent;color:var(--p-tx,#111);border:2px solid var(--p-ac);margin-right:8px}
+.pv.heritage .faq .ans a.fq-more{color:inherit}
 .pv .badge{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:var(--p-card);border:1px solid var(--p-ac);color:var(--p-tx);border-radius:99px;padding:7px 14px 7px 10px;font:700 13px Inter,sans-serif;margin-bottom:16px}
 .pv .badge img{width:22px;height:auto;flex:none;display:block}
 .pv.heritage .badge{border-radius:3px}
