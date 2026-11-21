@@ -171,6 +171,17 @@ svg{display:block}
 .spl small{position:absolute;bottom:26px;left:0;right:0;text-align:center;font:600 10px Inter;color:#6B6F78;letter-spacing:.4px;opacity:0;transition:opacity .4s}
 .spl.tap small{opacity:1}
 .hd img{cursor:pointer}
+#sx{position:absolute;left:0;right:0;top:var(--sxt,92px);bottom:var(--sxb,64px);z-index:57;background:#0B0C0E;overflow:hidden;border-radius:22px 22px 0 0;transform:translateY(115%);transition:transform .45s cubic-bezier(.2,.9,.2,1);box-shadow:0 -14px 40px rgba(0,0,0,.6)}
+#sx.on{transform:none}
+#sx video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#sx .sxt{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:7px;padding:12px 14px;background:linear-gradient(#000a,#0000)}
+#sx .sxd{width:8px;height:8px;border-radius:50%;background:#5BD48A;box-shadow:0 0 0 3px #5BD48A33}
+#sx .sxt b{font:800 13px Inter;color:#fff}#sx .sxt small{font-size:10px;color:#C9CCD1}
+#sx #sxx{margin-left:auto;border:0;background:#0007;color:#fff;width:28px;height:28px;border-radius:50%;font:400 18px/28px Inter;cursor:pointer}
+#sx .sxs{position:absolute;left:50%;transform:translateX(-50%);top:54px;border:0;background:#000a;color:#fff;border-radius:99px;padding:7px 13px;font:700 11px Inter;cursor:pointer}
+#sx .sxb{position:absolute;left:0;right:0;bottom:0;padding:40px 14px 14px;background:linear-gradient(#0000,#000d 45%)}
+#sx .sxn{display:block;width:100%;margin-top:6px;border:0;background:none;color:#C9CCD1;font:600 12px Inter;padding:8px;cursor:pointer}
+
 #qm{position:absolute;inset:0;z-index:58;background:rgba(8,9,11,.82);display:none;align-items:center;justify-content:center;padding:18px}#qm.on{display:flex}
 #qm .qmc{position:relative;background:#fff;color:#111;border-radius:24px;padding:22px 18px 16px;width:100%;max-width:300px;text-align:center;box-shadow:0 30px 60px rgba(0,0,0,.5)}
 #qm #qmx{position:absolute;top:8px;right:10px;border:0;background:none;font:400 24px Inter;color:#888;cursor:pointer}
@@ -237,6 +248,7 @@ p.s{font-size:11px;color:var(--mu);line-height:1.5;margin:2px 2px 0}
 <div class="art" id="art"><div class="tb"><button id="arX" aria-label="Close">&#8595;</button><b id="arK"></b><span class="chip" id="arN" style="display:none;background:#FFF3DC;color:#8F5400;border-color:#F0D49A"></span></div><div class="bx2" id="arB"></div><div class="ab" id="arA"><button class="rj" id="arR">Send back</button><button class="ok2" id="arO">Approve</button></div><div class="rec" id="rec"><small style="color:#F5A524;font-weight:800;letter-spacing:1px">TELL IT YOUR WAY</small><q>What's the most memorable situation that comes to mind as you read this?</q><small id="recq" style="display:block;margin-top:8px;color:#A9AEB7;font-size:11px;max-width:270px"></small><div class="ring"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><div class="t" id="rect">0:00</div><small>Talk like you're telling another adjuster: at least 30 seconds, up to 2 minutes. No names or addresses.</small><button id="recs">Done</button></div><div class="nb" id="nb">&#9998; Add a note</div><div class="nbx" id="nbx"><textarea id="nbt" placeholder="What should change here?"></textarea><div class="r"><button id="nbc" style="background:#EEEEEA">Cancel</button><button id="nbs" style="background:#F5A524;flex:1">Save note</button></div></div><div class="rs" id="rs"><b>Why are you sending it back?</b><div class="chips" id="rsc"><span>Facts are wrong</span><span>Not how I'd say it</span><span>Too long</span><span>Names or address showing</span><span>Wrong photo</span><span>Other</span></div><textarea id="rst" placeholder="Tell the writer what to fix (required)"></textarea><div style="display:flex;gap:6px;margin-top:8px"><button class="go" id="rsx" style="background:#EEEEEA">Cancel</button><button class="go" id="rsg" style="background:#111;color:#fff;flex:1;opacity:.4">Send back</button></div></div></div>
 <div id="xp"><div class="av"><i><span class="bars"><b></b><b></b><b></b></span></i></div><div class="tx"><small>Explainer · 20 sec</small><b id="xpt"></b><p id="xpp"></p><div class="xpb"><i id="xpg"></i></div></div><button class="x" id="xpx" aria-label="Close">&times;</button></div>
 <div id="qm"><div class="qmc"><button id="qmx" aria-label="Close">&times;</button><img class="qma" src="/assets/cedric-headshot.jpg" alt="Cedric Moore"><b>Cedric Moore</b><small>Licensed Public Adjuster · Orlando, FL</small><div class="seg2"><b data-m="card" class="on">Contact card</b><b data-m="page">My page</b></div><div class="qmq" id="qmq"></div><p id="qmt">Scan to save my contact</p><span class="qmh">Tip: tap the shield anytime to show this</span></div></div>
+<div id="sx"><video id="sxv" playsinline muted preload="none" poster="/assets/7102df40772f1ed99a0c3d6c47072c85.jpg"><source src="/assets/f2808189dcf99ac3f118d638752b9ffa.mp4" type="video/mp4"></video><div class="sxt"><span class="sxd"></span><b>Sophia</b><small>ClaimTract</small><button id="sxx" aria-label="Close">&times;</button></div><button class="sxs" id="sxs">&#128264; Tap to hear Sophia</button><div class="sxb"><button class="cta" id="sxu" style="background:#F5A524;color:#111">See what upgrading gets you</button><button class="sxn" id="sxn">Not now</button></div></div>
 <div class="toast" id="toast"><img src="/assets/ct-shield.png" alt=""><div><b id="tt"></b><small id="ts"></small></div><time>now</time></div>
 </div>
 <script>
@@ -505,7 +517,7 @@ function render(name,dir){var html=V[name]();var el=document.createElement('div'
  cur=el}
 function go(n){stack.push(cur.dataset.v);render(n,'push')}
 function back(){var n=stack.pop()||'home';render(n,'pop')}
-function tab(n){stack=[];render(n)}
+function tab(n){if(n==='sophia'&&plan==='free'){openSx();return}if(typeof closeSx==='function')closeSx();stack=[];render(n)}
 var HELP={
 letters:['Text a homeowner','Ready-made texts with your page link. Mary gets a clean message, and you get an alert the moment she opens it. No more wondering if she read it.'],
 qr:['QR code','Your page as a code for door hangers, yard signs and trucks. When someone scans it, you know where and when.'],
@@ -530,6 +542,15 @@ function hbExplain(id){
 var xp=document.getElementById('xp'),xpT=null;
 function help(k){var h=HELP[k];if(!h)return;hbExplain(HB_IDS[k]||HB_EXPLAINER);document.getElementById('xpt').textContent=h[0];document.getElementById('xpp').textContent=h[1];var g=document.getElementById('xpg');g.style.transition='none';g.style.width='0';xp.classList.add('on');requestAnimationFrame(function(){requestAnimationFrame(function(){g.style.transition='width 9s linear';g.style.width='100%'})});clearTimeout(xpT);xpT=setTimeout(function(){xp.classList.remove('on')},9200)}
 document.getElementById('xpx').addEventListener('click',function(){xp.classList.remove('on');clearTimeout(xpT)});
+var sx=document.getElementById('sx'),sxv=document.getElementById('sxv'),sxs=document.getElementById('sxs');
+function sxPlace(){var ar=app.getBoundingClientRect(),hd=app.querySelector('.view .hd, .view .top'),nv=app.querySelector('.view .nav');sx.style.setProperty('--sxt',((hd?hd.getBoundingClientRect().bottom-ar.top:92)+4)+'px');sx.style.setProperty('--sxb',((nv?ar.bottom-nv.getBoundingClientRect().top:64))+'px')}
+function openSx(){sxPlace();sx.classList.add('on');sxv.muted=true;sxv.loop=true;sxs.innerHTML='&#128264; Tap to hear Sophia';try{sxv.currentTime=0}catch(e){}var p=sxv.play();if(p&&p.catch)p.catch(function(){})}
+function closeSx(){sx.classList.remove('on');sxv.pause()}
+function sxSound(){if(sxv.muted){sxv.muted=false;sxv.loop=false;try{sxv.currentTime=0}catch(e){}var p=sxv.play();if(p&&p.catch)p.catch(function(){});sxs.innerHTML='&#128263; Mute'}else{sxv.muted=true;sxs.innerHTML='&#128264; Tap to hear Sophia'}}
+sxs.onclick=sxSound;sxv.onclick=sxSound;
+sxv.addEventListener('ended',function(){sxv.muted=true;sxv.loop=true;sxv.play();sxs.innerHTML='&#128264; Hear it again'});
+document.getElementById('sxx').onclick=closeSx;document.getElementById('sxn').onclick=closeSx;
+document.getElementById('sxu').onclick=function(){closeSx();go('plans')};
 var T=document.getElementById('toast'),tt=document.getElementById('tt'),ts=document.getElementById('ts');
 function toast(a,b){tt.textContent=a;ts.textContent=b;T.classList.add('on');clearTimeout(T._t);T._t=setTimeout(function(){T.classList.remove('on')},3600)}
 app.addEventListener('click',function(e){
