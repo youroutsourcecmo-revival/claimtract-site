@@ -51,6 +51,7 @@ svg{display:block}
 .ic{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;margin:0 auto 5px;background:#262A31;color:var(--go)}
 .tl .qm{position:absolute;top:4px;left:4px;width:15px;height:15px;border-radius:50%;border:1px solid #3A3E46;color:#7C818B;font:700 9px/13px Inter;text-align:center;background:#15171B;cursor:pointer;z-index:2}
 .qm:hover{color:#F5A524;border-color:#5A4512}
+#hbs{position:absolute;right:12px;bottom:198px;height:170px;z-index:61;pointer-events:none;opacity:0;transition:opacity .2s}#hbs.on{opacity:1}#hbs canvas{display:block;height:170px;width:auto}
 #xp{position:absolute;left:10px;right:10px;bottom:84px;z-index:60;background:#0B0C0E;border:1px solid #5A4512;border-radius:18px;padding:12px;display:flex;gap:11px;align-items:flex-start;box-shadow:0 18px 40px rgba(0,0,0,.6);opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .25s,transform .25s}
 #xp.on{opacity:1;transform:none;pointer-events:auto}
 #xp .av{width:58px;height:58px;border-radius:50%;flex:none;background:#1A1C21 url(/assets/ezekiel-black.webp) center/cover;border:2px solid #F5A524;position:relative}
@@ -246,9 +247,9 @@ p.s{font-size:11px;color:var(--mu);line-height:1.5;margin:2px 2px 0}
 <div class="spl" id="spl"><video id="splv" muted playsinline preload="auto"><source src="/assets/ct-intro.webm" type="video/webm"><source src="/assets/ct-intro.mp4" type="video/mp4"></video><small>Tap for sound</small></div>
 <div class="shd" id="shd"></div><div class="sht" id="sht"><div class="gp"></div><div class="hd2"><b id="shT">Your pages</b><button class="bk" id="shX" style="width:26px;height:26px">&times;</button></div><div class="bd2" id="shB"></div></div>
 <div class="art" id="art"><div class="tb"><button id="arX" aria-label="Close">&#8595;</button><b id="arK"></b><span class="chip" id="arN" style="display:none;background:#FFF3DC;color:#8F5400;border-color:#F0D49A"></span></div><div class="bx2" id="arB"></div><div class="ab" id="arA"><button class="rj" id="arR">Send back</button><button class="ok2" id="arO">Approve</button></div><div class="rec" id="rec"><small style="color:#F5A524;font-weight:800;letter-spacing:1px">TELL IT YOUR WAY</small><q>What's the most memorable situation that comes to mind as you read this?</q><small id="recq" style="display:block;margin-top:8px;color:#A9AEB7;font-size:11px;max-width:270px"></small><div class="ring"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><div class="t" id="rect">0:00</div><small>Talk like you're telling another adjuster: at least 30 seconds, up to 2 minutes. No names or addresses.</small><button id="recs">Done</button></div><div class="nb" id="nb">&#9998; Add a note</div><div class="nbx" id="nbx"><textarea id="nbt" placeholder="What should change here?"></textarea><div class="r"><button id="nbc" style="background:#EEEEEA">Cancel</button><button id="nbs" style="background:#F5A524;flex:1">Save note</button></div></div><div class="rs" id="rs"><b>Why are you sending it back?</b><div class="chips" id="rsc"><span>Facts are wrong</span><span>Not how I'd say it</span><span>Too long</span><span>Names or address showing</span><span>Wrong photo</span><span>Other</span></div><textarea id="rst" placeholder="Tell the writer what to fix (required)"></textarea><div style="display:flex;gap:6px;margin-top:8px"><button class="go" id="rsx" style="background:#EEEEEA">Cancel</button><button class="go" id="rsg" style="background:#111;color:#fff;flex:1;opacity:.4">Send back</button></div></div></div>
-<div id="xp"><div class="av"><i><span class="bars"><b></b><b></b><b></b></span></i></div><div class="tx"><small>Explainer · 20 sec</small><b id="xpt"></b><p id="xpp"></p><div class="xpb"><i id="xpg"></i></div></div><button class="x" id="xpx" aria-label="Close">&times;</button></div>
+<div id="hbs" aria-hidden="true"><canvas width="170" height="512"></canvas></div><div id="xp"><div class="av"><i><span class="bars"><b></b><b></b><b></b></span></i></div><div class="tx"><small>Explainer · 20 sec</small><b id="xpt"></b><p id="xpp"></p><div class="xpb"><i id="xpg"></i></div></div><button class="x" id="xpx" aria-label="Close">&times;</button></div>
 <div id="qm"><div class="qmc"><button id="qmx" aria-label="Close">&times;</button><img class="qma" src="/assets/cedric-headshot.jpg" alt="Cedric Moore"><b>Cedric Moore</b><small>Licensed Public Adjuster · Orlando, FL</small><div class="seg2"><b data-m="card" class="on">Contact card</b><b data-m="page">My page</b></div><div class="qmq" id="qmq"></div><p id="qmt">Scan to save my contact</p><span class="qmh">Tip: tap the shield anytime to show this</span></div></div>
-<div id="sx"><video id="sxv" playsinline muted preload="none" poster="/assets/7102df40772f1ed99a0c3d6c47072c85.jpg"><source src="/assets/f2808189dcf99ac3f118d638752b9ffa.mp4" type="video/mp4"></video><div class="sxt"><span class="sxd"></span><b>Sophia</b><small>ClaimTract</small><button id="sxx" aria-label="Close">&times;</button></div><button class="sxs" id="sxs">&#128264; Tap to hear Sophia</button><div class="sxb"><button class="cta" id="sxu" style="background:#F5A524;color:#111">See what upgrading gets you</button><button class="sxn" id="sxn">Not now</button></div></div>
+<div id="sx"><video id="sxv" playsinline preload="auto" poster="/assets/7102df40772f1ed99a0c3d6c47072c85.jpg"><source src="/assets/f2808189dcf99ac3f118d638752b9ffa.mp4" type="video/mp4"></video><div class="sxt"><span class="sxd"></span><b>Sophia</b><small>ClaimTract</small><button id="sxx" aria-label="Close">&times;</button></div><button class="sxs" id="sxs">&#128264; Tap to hear Sophia</button><div class="sxb"><button class="cta" id="sxu" style="background:#F5A524;color:#111">See what upgrading gets you</button><button class="sxn" id="sxn">Not now</button></div></div>
 <div class="toast" id="toast"><img src="/assets/ct-shield.png" alt=""><div><b id="tt"></b><small id="ts"></small></div><time>now</time></div>
 </div>
 <script>
@@ -531,20 +532,35 @@ insights:['What\'s working','See which pages homeowners read and what they searc
 };
 var HB_EXPLAINER='R7XfQdKdjVWH';
 var HB_IDS={letters:'ZMYTR9auW9Tc',qr:'BBEu5vC2xLXM',card:'fXNDWaPM5dzs',book:'8NPFp7ZpmNQh',video:'Keb9bTtHpyaY',edit:'8JPLvmqC6dzk',tools:'gSTWCERQ7GGX',found:'3aUTN4RUh7Sh',insights:'8g7MushdLdLE',pages:'vZeBtjjybYt8',livechat:'vct8KB5WuCQp',avail:'XBgA8peVHDLj',earn:'usdEM7ZQCG4L',mail:'hmYL9cZv8fZS',trust:'QK6q9arJrd83'};
-var hbLoaded=false,hbBot=null;
-function hbExplain(id){
- function start(){try{hbBot=new AiBot({embedId:id,remoteBaseUrl:'https://humanchat.net/',version:'1.5.28'});hbBot.__id=id;window.dispatchEvent(new Event('load'))}catch(e){}}
- if(hbBot&&hbBot.__id===id){return}
- if(hbBot){try{document.querySelectorAll('.cp-chat').forEach(function(n){n.remove()})}catch(e){} hbBot=null}
- if(hbLoaded){start();return}
- var sc=document.createElement('script');sc.src='https://humanchat.net/build/js/hb_1.5.28.js';sc.integrity='sha384-f2GqKZr4plfDCjELPiZqzEfj9LuWzE2xPGL+wCEf/coynRhH0TnbNy9jGVAwFEeU';sc.crossOrigin='anonymous';sc.onload=function(){hbLoaded=true;start()};document.body.appendChild(sc);
-}
 var xp=document.getElementById('xp'),xpT=null;
-function help(k){var h=HELP[k];if(!h)return;hbExplain(HB_IDS[k]||HB_EXPLAINER);document.getElementById('xpt').textContent=h[0];document.getElementById('xpp').textContent=h[1];var g=document.getElementById('xpg');g.style.transition='none';g.style.width='0';xp.classList.add('on');requestAnimationFrame(function(){requestAnimationFrame(function(){g.style.transition='width 9s linear';g.style.width='100%'})});clearTimeout(xpT);xpT=setTimeout(function(){xp.classList.remove('on')},9200)}
-document.getElementById('xpx').addEventListener('click',function(){xp.classList.remove('on');clearTimeout(xpT)});
+/* Same method as Blog Scoreboard (lib/explainer-media.js + _bsbBuildCutout): HumanBot's own player is NOT on the page,
+   so there is no "Click To Play" and no chat launcher. The embedId is the one record; its public campaign record names the
+   rendered mp4 (packed frame: avatar on top, alpha matte below). We draw it ourselves and call play() with sound inside the
+   tap on the "?", so that tap is the play click. If the browser still refuses sound, the next tap anywhere starts it. */
+var HB_CLIPS={}; /* embedId -> {url,dur}, filled at page load */
+function hbResolve(id,cb){if(HB_CLIPS[id]){cb&&cb(HB_CLIPS[id]);return}
+ fetch('https://humanchat.net/campaign/pub/'+encodeURIComponent(id)).then(function(r){return r.json()}).then(function(c){c=c.campaign||c;var m=c.media||{};if(!m.filename||!m.userId)throw 0;var f=String(m.filename);
+  HB_CLIPS[id]={url:'https://humanchat.net/uploads/media/'+m.userId+'/'+f.slice(0,2)+'/'+f.slice(2,4)+'/'+f,dur:(m.data&&m.data.duration)||20};cb&&cb(HB_CLIPS[id])}).catch(function(){cb&&cb(null)})}
+hbResolve(HB_EXPLAINER);for(var _k in HB_IDS)hbResolve(HB_IDS[_k]);
+var hbs=document.getElementById('hbs'),hbc=hbs.querySelector('canvas'),hbx=hbc.getContext('2d'),hbv=document.createElement('video'),hbo=document.createElement('canvas'),hbox=hbo.getContext('2d',{willReadFrequently:true}),hbRaf=null,hbCrop=null,hbN=0;
+hbv.style.display='none';hbs.appendChild(hbv);hbv.playsInline=true;hbv.setAttribute('playsinline','');hbv.crossOrigin='anonymous';hbv.preload='auto';
+function hbDraw(){var W=hbv.videoWidth,H=hbv.videoHeight>>1;if(!W||!H)return;if(hbo.width!==W||hbo.height!==H*2){hbo.width=W;hbo.height=H*2;hbCrop=null}
+ hbox.drawImage(hbv,0,0);var rgb=hbox.getImageData(0,0,W,H),a=hbox.getImageData(0,H,W,H),p=rgb.data,q=a.data,need=!hbCrop||hbN%30===0,x0=W,x1=0;
+ for(var i=0;i<p.length;i+=4){var al=q[i];p[i+3]=al;if(need&&al>40){var x=(i>>2)%W;if(x<x0)x0=x;if(x>x1)x1=x}}
+ if(need&&x1>x0){var a0=Math.max(0,x0-6),a1=Math.min(W-1,x1+6);hbCrop=hbCrop?{x0:Math.min(hbCrop.x0,a0),x1:Math.max(hbCrop.x1,a1)}:{x0:a0,x1:a1}}
+ var c=hbCrop||{x0:0,x1:W-1},cw=c.x1-c.x0+1;hbox.putImageData(rgb,0,0);if(hbc.width!==cw||hbc.height!==H){hbc.width=cw;hbc.height=H}hbx.clearRect(0,0,cw,H);hbx.drawImage(hbo,c.x0,0,cw,H,0,0,cw,H);hbN++}
+function hbLoop(){if(hbv.paused||hbv.ended){hbRaf=null;return}try{hbDraw()}catch(e){}hbRaf=requestAnimationFrame(hbLoop)}
+hbv.addEventListener('playing',function(){hbs.classList.add('on');if(!hbRaf)hbLoop()});
+hbv.addEventListener('ended',function(){hbStop()});
+function hbStop(){try{hbv.pause()}catch(e){}hbs.classList.remove('on');xp.classList.remove('on');clearTimeout(xpT)}
+function hbPlay(clip){if(hbv.src!==clip.url){hbv.src=clip.url;hbCrop=null}try{hbv.currentTime=0}catch(e){}hbv.muted=false;var pr=hbv.play();
+ if(pr&&pr.catch)pr.catch(function(){document.addEventListener('click',function once(){document.removeEventListener('click',once,false);if(xp.classList.contains('on')&&hbv.paused){hbv.muted=false;hbv.play().catch(function(){})}},false)})}
+function hbExplain(id){var c=HB_CLIPS[id];if(c){hbPlay(c);return c.dur}hbResolve(id,function(r){if(r&&xp.classList.contains('on'))hbPlay(r)});return 20}
+function help(k){var h=HELP[k];if(!h)return;var d=hbExplain(HB_IDS[k]||HB_EXPLAINER);document.getElementById('xpt').textContent=h[0];document.getElementById('xpp').textContent=h[1];var g=document.getElementById('xpg');g.style.transition='none';g.style.width='0';xp.classList.add('on');requestAnimationFrame(function(){requestAnimationFrame(function(){g.style.transition='width '+d+'s linear';g.style.width='100%'})});clearTimeout(xpT);xpT=setTimeout(hbStop,(d+1)*1000)}
+document.getElementById('xpx').addEventListener('click',hbStop);
 var sx=document.getElementById('sx'),sxv=document.getElementById('sxv'),sxs=document.getElementById('sxs');
 function sxPlace(){var ar=app.getBoundingClientRect(),hd=app.querySelector('.view .hd, .view .top'),nv=app.querySelector('.view .nav');sx.style.setProperty('--sxt',((hd?hd.getBoundingClientRect().bottom-ar.top:92)+4)+'px');sx.style.setProperty('--sxb',((nv?ar.bottom-nv.getBoundingClientRect().top:64))+'px')}
-function openSx(){sxPlace();sx.classList.add('on');sxv.muted=true;sxv.loop=true;sxs.innerHTML='&#128264; Tap to hear Sophia';try{sxv.currentTime=0}catch(e){}var p=sxv.play();if(p&&p.catch)p.catch(function(){})}
+function openSx(){sxPlace();sx.classList.add('on');sxv.muted=false;sxv.loop=false;sxs.innerHTML='&#128263; Mute';try{sxv.currentTime=0}catch(e){}var p=sxv.play();if(p&&p.catch)p.catch(function(){sxv.muted=true;sxv.loop=true;sxs.innerHTML='&#128264; Tap to hear Sophia';sxv.play().catch(function(){})})}
 function closeSx(){sx.classList.remove('on');sxv.pause()}
 function sxSound(){if(sxv.muted){sxv.muted=false;sxv.loop=false;try{sxv.currentTime=0}catch(e){}var p=sxv.play();if(p&&p.catch)p.catch(function(){});sxs.innerHTML='&#128263; Mute'}else{sxv.muted=true;sxs.innerHTML='&#128264; Tap to hear Sophia'}}
 sxs.onclick=sxSound;sxv.onclick=sxSound;
