@@ -134,8 +134,8 @@ function tools(){if($('.cth-sec'))return;FIRST=D.first||'your adjuster';NAME=D.n
   if(a==='binder')openBinder();else if(a==='read')readAloud(b);else if(a==='search')openSearch();else if(a==='print')printHandout();else if(a==='home')saveHome()})}
 
 /* homeowner events */
-function events(){var q=new URLSearchParams(location.search),src=q.get('s')||(document.referrer?'referral':'direct');
- ev('homeowner_open',{source:src});if(src==='qr')ev('qr_scan',{qr_id:q.get('r')||'page'});
+function events(){var q=new URLSearchParams(location.search),src=q.get('s')||(q.get('qr')?'qr':(document.referrer?'referral':'direct'));
+ ev('homeowner_open',{source:src});if(src==='qr')ev('qr_scan',{qr_id:q.get('qr')||q.get('r')||'page'});
  var seen=0,done=false;setInterval(function(){if(done||document.hidden)return;seen+=5;if(seen>=60){done=true;ev('homeowner_read_60s')}},5000);
  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href$=".vcf"],a[href*="contact.vcf"],#vcfBtn,[data-save-contact]');if(a)ev('contact_saved')},true)}
 
