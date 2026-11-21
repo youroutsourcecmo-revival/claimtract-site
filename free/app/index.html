@@ -51,16 +51,8 @@ svg{display:block}
 .ic{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;margin:0 auto 5px;background:#262A31;color:var(--go)}
 .tl .qm{position:absolute;top:4px;left:4px;width:15px;height:15px;border-radius:50%;border:1px solid #3A3E46;color:#7C818B;font:700 9px/13px Inter;text-align:center;background:#15171B;cursor:pointer;z-index:2}
 .qm:hover{color:#F5A524;border-color:#5A4512}
-#hbs{position:absolute;right:12px;bottom:198px;height:170px;z-index:61;pointer-events:none;opacity:0;transition:opacity .2s}#hbs.on{opacity:1}#hbs canvas{display:block;height:170px;width:auto}
-#xp{position:absolute;left:10px;right:10px;bottom:84px;z-index:60;background:#0B0C0E;border:1px solid #5A4512;border-radius:18px;padding:12px;display:flex;gap:11px;align-items:flex-start;box-shadow:0 18px 40px rgba(0,0,0,.6);opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .25s,transform .25s}
-#xp.on{opacity:1;transform:none;pointer-events:auto}
-#xp .av{width:58px;height:58px;border-radius:50%;flex:none;background:#1A1C21 url(/assets/ezekiel-black.webp) center/cover;border:2px solid #F5A524;position:relative}
-#xp .av i{position:absolute;right:-2px;bottom:-2px;width:18px;height:18px;border-radius:50%;background:#F5A524;display:grid;place-items:center}
-#xp .bars{display:flex;gap:2px;align-items:flex-end;height:10px}#xp .bars b{width:2px;background:#111;animation:xb .8s ease-in-out infinite}#xp .bars b:nth-child(2){animation-delay:.2s}#xp .bars b:nth-child(3){animation-delay:.4s}
+#hbs{position:absolute;right:12px;bottom:198px;height:170px;z-index:61;pointer-events:none;cursor:pointer;opacity:0;transition:opacity .2s}#hbs.on{opacity:1;pointer-events:auto}#hbs canvas{display:block;height:170px;width:auto}
 @keyframes xb{0%,100%{height:3px}50%{height:9px}}
-#xp .tx{flex:1;min-width:0}#xp .tx small{display:block;font:700 9px Inter;letter-spacing:1px;color:#F5A524;text-transform:uppercase}#xp .tx b{display:block;font:700 12.5px Inter;color:#fff;margin:2px 0 4px}#xp .tx p{margin:0;font:400 11px/1.45 Inter;color:#D6D8DC}
-#xp .xpb{height:2px;background:#22252B;border-radius:2px;margin-top:8px;overflow:hidden}#xp .xpb i{display:block;height:100%;width:0;background:#F5A524}
-#xp .x{background:none;border:0;color:#7C818B;cursor:pointer;padding:0;font:600 16px Inter;line-height:1}
 .nw{position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--go)}
 .al{display:flex;gap:9px;align-items:flex-start;padding:9px 10px;border-top:1px solid var(--ln);cursor:pointer}
 .al:first-child{border-top:0}
@@ -69,7 +61,7 @@ svg{display:block}
 .al small{font-size:9.5px;color:var(--mu);display:block;margin-top:1px}
 .al time{font-size:9px;color:var(--mu);white-space:nowrap}
 .al .hr{display:inline-block;margin-top:4px;font-size:9px;color:var(--go);background:#2A2110;border-radius:6px;padding:2px 6px}
-.up{font:800 8px Inter;letter-spacing:.4px;background:var(--go);color:#111;border-radius:99px;padding:2px 6px;vertical-align:1px;margin-left:4px}
+.up{cursor:pointer;font:800 8px Inter;letter-spacing:.4px;background:var(--go);color:#111;border-radius:99px;padding:2px 6px;vertical-align:1px;margin-left:4px}
 .st3{display:grid;grid-template-columns:repeat(3,1fr)}
 .st3 div{padding:10px 6px;text-align:center;border-left:1px solid var(--ln)}.st3 div:first-child{border-left:0}
 .st3 b{font-size:17px;font-weight:800;display:block}.st3 small{font-size:9px;color:var(--mu)}
@@ -247,7 +239,7 @@ p.s{font-size:11px;color:var(--mu);line-height:1.5;margin:2px 2px 0}
 <div class="spl" id="spl"><video id="splv" muted playsinline preload="auto"><source src="/assets/ct-intro.webm" type="video/webm"><source src="/assets/ct-intro.mp4" type="video/mp4"></video><small>Tap for sound</small></div>
 <div class="shd" id="shd"></div><div class="sht" id="sht"><div class="gp"></div><div class="hd2"><b id="shT">Your pages</b><button class="bk" id="shX" style="width:26px;height:26px">&times;</button></div><div class="bd2" id="shB"></div></div>
 <div class="art" id="art"><div class="tb"><button id="arX" aria-label="Close">&#8595;</button><b id="arK"></b><span class="chip" id="arN" style="display:none;background:#FFF3DC;color:#8F5400;border-color:#F0D49A"></span></div><div class="bx2" id="arB"></div><div class="ab" id="arA"><button class="rj" id="arR">Send back</button><button class="ok2" id="arO">Approve</button></div><div class="rec" id="rec"><small style="color:#F5A524;font-weight:800;letter-spacing:1px">TELL IT YOUR WAY</small><q>What's the most memorable situation that comes to mind as you read this?</q><small id="recq" style="display:block;margin-top:8px;color:#A9AEB7;font-size:11px;max-width:270px"></small><div class="ring"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><div class="t" id="rect">0:00</div><small>Talk like you're telling another adjuster: at least 30 seconds, up to 2 minutes. No names or addresses.</small><button id="recs">Done</button></div><div class="nb" id="nb">&#9998; Add a note</div><div class="nbx" id="nbx"><textarea id="nbt" placeholder="What should change here?"></textarea><div class="r"><button id="nbc" style="background:#EEEEEA">Cancel</button><button id="nbs" style="background:#F5A524;flex:1">Save note</button></div></div><div class="rs" id="rs"><b>Why are you sending it back?</b><div class="chips" id="rsc"><span>Facts are wrong</span><span>Not how I'd say it</span><span>Too long</span><span>Names or address showing</span><span>Wrong photo</span><span>Other</span></div><textarea id="rst" placeholder="Tell the writer what to fix (required)"></textarea><div style="display:flex;gap:6px;margin-top:8px"><button class="go" id="rsx" style="background:#EEEEEA">Cancel</button><button class="go" id="rsg" style="background:#111;color:#fff;flex:1;opacity:.4">Send back</button></div></div></div>
-<div id="hbs" aria-hidden="true"><canvas width="170" height="512"></canvas></div><div id="xp"><div class="av"><i><span class="bars"><b></b><b></b><b></b></span></i></div><div class="tx"><small>Explainer · 20 sec</small><b id="xpt"></b><p id="xpp"></p><div class="xpb"><i id="xpg"></i></div></div><button class="x" id="xpx" aria-label="Close">&times;</button></div>
+<div id="hbs" aria-hidden="true"><canvas width="170" height="512"></canvas></div>
 <div id="qm"><div class="qmc"><button id="qmx" aria-label="Close">&times;</button><img class="qma" src="/assets/cedric-headshot.jpg" alt="Cedric Moore"><b>Cedric Moore</b><small>Licensed Public Adjuster · Orlando, FL</small><div class="seg2"><b data-m="card" class="on">Contact card</b><b data-m="page">My page</b></div><div class="qmq" id="qmq"></div><p id="qmt">Scan to save my contact</p><span class="qmh">Tip: tap the shield anytime to show this</span></div></div>
 <div id="sx"><video id="sxv" playsinline preload="auto" poster="/assets/7102df40772f1ed99a0c3d6c47072c85.jpg"><source src="/assets/f2808189dcf99ac3f118d638752b9ffa.mp4" type="video/mp4"></video><div class="sxt"><span class="sxd"></span><b>Sophia</b><small>ClaimTract</small><button id="sxx" aria-label="Close">&times;</button></div><button class="sxs" id="sxs">&#128264; Tap to hear Sophia</button><div class="sxb"><button class="cta" id="sxu" style="background:#F5A524;color:#111">See what upgrading gets you</button><button class="sxn" id="sxn">Not now</button></div></div>
 <div class="toast" id="toast"><img src="/assets/ct-shield.png" alt=""><div><b id="tt"></b><small id="ts"></small></div><time>now</time></div>
@@ -532,7 +524,8 @@ insights:['What\'s working','See which pages homeowners read and what they searc
 };
 var HB_EXPLAINER='R7XfQdKdjVWH';
 var HB_IDS={letters:'ZMYTR9auW9Tc',qr:'BBEu5vC2xLXM',card:'fXNDWaPM5dzs',book:'8NPFp7ZpmNQh',video:'Keb9bTtHpyaY',edit:'8JPLvmqC6dzk',tools:'gSTWCERQ7GGX',found:'3aUTN4RUh7Sh',insights:'8g7MushdLdLE',pages:'vZeBtjjybYt8',livechat:'vct8KB5WuCQp',avail:'XBgA8peVHDLj',earn:'usdEM7ZQCG4L',mail:'hmYL9cZv8fZS',trust:'QK6q9arJrd83'};
-var xp=document.getElementById('xp'),xpT=null;
+var hbWant=false;
+document.addEventListener('click',function(e){var h=document.getElementById('hbs');if(h&&h.contains(e.target))hbStop()});
 /* Same method as Blog Scoreboard (lib/explainer-media.js + _bsbBuildCutout): HumanBot's own player is NOT on the page,
    so there is no "Click To Play" and no chat launcher. The embedId is the one record; its public campaign record names the
    rendered mp4 (packed frame: avatar on top, alpha matte below). We draw it ourselves and call play() with sound inside the
@@ -552,18 +545,18 @@ function hbDraw(){var W=hbv.videoWidth,H=hbv.videoHeight>>1;if(!W||!H)return;if(
 function hbLoop(){if(hbv.paused||hbv.ended){hbRaf=null;return}try{hbDraw()}catch(e){}hbRaf=requestAnimationFrame(hbLoop)}
 hbv.addEventListener('playing',function(){hbs.classList.add('on');if(!hbRaf)hbLoop()});
 hbv.addEventListener('ended',function(){hbStop()});
-function hbStop(){try{hbv.pause()}catch(e){}hbs.classList.remove('on');xp.classList.remove('on');clearTimeout(xpT)}
+function hbStop(){hbWant=false;try{hbv.pause()}catch(e){}hbs.classList.remove('on')}
 function hbPlay(clip){if(hbv.src!==clip.url){hbv.src=clip.url;hbCrop=null}try{hbv.currentTime=0}catch(e){}hbv.muted=false;var pr=hbv.play();
- if(pr&&pr.catch)pr.catch(function(){document.addEventListener('click',function once(){document.removeEventListener('click',once,false);if(xp.classList.contains('on')&&hbv.paused){hbv.muted=false;hbv.play().catch(function(){})}},false)})}
-function hbExplain(id){var c=HB_CLIPS[id];if(c){hbPlay(c);return c.dur}hbResolve(id,function(r){if(r&&xp.classList.contains('on'))hbPlay(r)});return 20}
-function help(k){var h=HELP[k];if(!h)return;var d=hbExplain(HB_IDS[k]||HB_EXPLAINER);document.getElementById('xpt').textContent=h[0];document.getElementById('xpp').textContent=h[1];var g=document.getElementById('xpg');g.style.transition='none';g.style.width='0';xp.classList.add('on');requestAnimationFrame(function(){requestAnimationFrame(function(){g.style.transition='width '+d+'s linear';g.style.width='100%'})});clearTimeout(xpT);xpT=setTimeout(hbStop,(d+1)*1000)}
-document.getElementById('xpx').addEventListener('click',hbStop);
+ if(pr&&pr.catch)pr.catch(function(){document.addEventListener('click',function once(){document.removeEventListener('click',once,false);if(hbWant&&hbv.paused){hbv.muted=false;hbv.play().catch(function(){})}},false)})}
+function hbExplain(id){var c=HB_CLIPS[id];if(c){hbPlay(c);return c.dur}hbResolve(id,function(r){if(r&&hbWant)hbPlay(r)});return 20}
+function help(k){if(!HELP[k])return;if(hbWant&&hbs.classList.contains('on')){hbStop();return}hbWant=true;hbExplain(HB_IDS[k]||HB_EXPLAINER)}
 var sx=document.getElementById('sx'),sxv=document.getElementById('sxv'),sxs=document.getElementById('sxs');
 function sxPlace(){var ar=app.getBoundingClientRect(),hd=app.querySelector('.view .hd, .view .top'),nv=app.querySelector('.view .nav');sx.style.setProperty('--sxt',((hd?hd.getBoundingClientRect().bottom-ar.top:92)+4)+'px');sx.style.setProperty('--sxb',((nv?ar.bottom-nv.getBoundingClientRect().top:64))+'px')}
 function openSx(){sxPlace();sx.classList.add('on');sxv.muted=false;sxv.loop=false;sxs.innerHTML='&#128263; Mute';try{sxv.currentTime=0}catch(e){}var p=sxv.play();if(p&&p.catch)p.catch(function(){sxv.muted=true;sxv.loop=true;sxs.innerHTML='&#128264; Tap to hear Sophia';sxv.play().catch(function(){})})}
 function closeSx(){sx.classList.remove('on');sxv.pause()}
 function sxSound(){if(sxv.muted){sxv.muted=false;sxv.loop=false;try{sxv.currentTime=0}catch(e){}var p=sxv.play();if(p&&p.catch)p.catch(function(){});sxs.innerHTML='&#128263; Mute'}else{sxv.muted=true;sxs.innerHTML='&#128264; Tap to hear Sophia'}}
 sxs.onclick=sxSound;sxv.onclick=sxSound;
+document.addEventListener('click',function(e){if(plan!=='free')return;var u=e.target.closest&&e.target.closest('.up,.pill');if(!u||!/upgrade/i.test(u.textContent))return;e.preventDefault();e.stopPropagation();openSx()},true);
 sxv.addEventListener('ended',function(){sxv.muted=true;sxv.loop=true;sxv.play();sxs.innerHTML='&#128264; Hear it again'});
 document.getElementById('sxx').onclick=closeSx;document.getElementById('sxn').onclick=closeSx;
 document.getElementById('sxu').onclick=function(){closeSx();go('plans')};
