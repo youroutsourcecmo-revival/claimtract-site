@@ -740,7 +740,7 @@ app.addEventListener('click',function(e){
  if(t=e.target.closest('[data-go]'))return go(t.dataset.go);
  if(e.target.closest('#toast'))return tab('activity');
 });
-render('home');window.__ct={tab:tab,go:go,back:back};
+window.__ct={tab:tab,go:go,back:back};
 
 var PAGES={free:[{k:'MAIN ARTICLE',t:'Public adjuster vs. insurance adjuster: who works for you, and who doesn\'t',c:'Your page',st:'pend',a:['What is a public adjuster?','What is an independent adjuster, and who does it work for?','What is a property adjuster?','What is recoverable depreciation?','How much does a public adjuster charge?','When is it too late to hire a public adjuster?','Independent adjuster vs. public adjuster: what\'s the difference?','Desk adjuster vs. field adjuster: who decides your claim?','What is a supplemental insurance claim?','What not to tell your home insurance adjuster','What is the appraisal clause in homeowners insurance?','Should I hire a public adjuster?']}],
  paid:[{k:'CLAIM',t:'Water through the ceiling: what one Mandarin family did next',c:'Water · Mandarin',st:'need',a:['Will insurance pay for a ceiling leak from the AC?','Is mold covered after a slow leak?','How long does water damage take to show?','Do I have to keep the wet drywall?','Who pays for drying out the house?']},
@@ -841,6 +841,152 @@ function qmDraw(){var card=qmMode==='card';document.getElementById('qmq').innerH
 function openQm(){qmMode='card';qmDraw();document.getElementById('qm').classList.add('on')}
 document.getElementById('qm').addEventListener('click',function(e){var b=e.target.closest('[data-m]');if(b){qmMode=b.dataset.m;qmDraw();return}if(e.target.id==='qm'||e.target.closest('#qmx'))document.getElementById('qm').classList.remove('on')});
 try{new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting&&!shown){shown=true;playSplash(false)}})},{threshold:.5}).observe(app)}catch(e){shown=true;playSplash(false)}
+/* ===== REAL MODE (Z13): real adjuster data from the ClaimTract API. Demo only with ?demo=1 or inside an iframe (the /free phone). ===== */
+var QS=new URLSearchParams(location.search),DEMO=QS.has('demo')||(function(){try{return window.top!==window.self}catch(e){return true}})(),R=!DEMO,ME=null,ART=null,ALR=null,FIELD=null,STRIPE_CT='https://buy.stripe.com/fZuaEQ5bU38Y7Yh5Q75EY00';
+function hx(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function api(m,p,b,raw,ct){var h={'Accept':'application/json'};if(m!=='GET')h['X-CT-App']='1';var o={method:m,credentials:'same-origin',headers:h};
+ if(b!=null){if(raw){o.body=b;h['Content-Type']=ct||'application/octet-stream'}else{o.body=JSON.stringify(b);h['Content-Type']='application/json'}}
+ return fetch(p,o).then(function(r){return r.json().catch(function(){return {}}).then(function(j){j=j||{};j.__s=r.status;if(!r.ok)j.ok=false;return j})}).catch(function(){return {ok:false,error:'No connection. Try again in a moment.',__s:0}})}
+function track(name,f){if(!R||!ME)return;api('POST','/api/app/events',Object.assign({name:name},f||{}))}
+function fullN(){return ((ME&&ME.profile&&ME.profile.name)||(ME&&ME.adjuster&&ME.adjuster.name)||'').trim()}
+function firstN(){return fullN().split(/\s+/)[0]||'there'}
+function inits(){var p=fullN().split(/\s+/).filter(Boolean);return ((p[0]||'?')[0]+((p[1]||'')[0]||'')).toUpperCase()}
+function phF(p){p=String(p||'');return p.length===10?'('+p.slice(0,3)+') '+p.slice(3,6)+'-'+p.slice(6):''}
+function pageUrl(){return ME&&ME.page&&ME.page.url?ME.page.url:''}
+function pageHost(){return pageUrl().replace(/^https?:\/\//,'').replace(/\/$/,'')}
+
+/* swap the sample identity for his own wherever the shared screens show it */
+function swap(root){if(!R||!ME||!root)return;var fn=firstN(),nm=fullN()||'Your name',ph=phF(ME.profile&&ME.profile.phone)||'your phone',lic=(ME.license&&ME.license.number)||'your license',host=pageHost()||'your page address';
+ var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),ns=[];while(w.nextNode())ns.push(w.currentNode);
+ ns.forEach(function(n){var v=n.nodeValue,o=v;if(v.indexOf('Cedric')<0&&v.indexOf('555-0142')<0&&v.indexOf('W123456')<0&&v!=='CM'&&v.indexOf('cedric')<0)return;
+  v=v.split('claimtract.app/cedric-moore').join(host).split('Cedric Moore').join(nm).split('Cedric').join(fn).split('(904) 555-0142').join(ph).split('W123456').join(lic).split('cedric@in.claimtract.app').join('your alerts address');if(v==='CM')v=inits();if(v!==o)n.nodeValue=v});
+ (root.querySelectorAll?root.querySelectorAll('img[src*="cedric-headshot"],[style*="cedric-headshot"]'):[]).forEach(function(e){var u=ME.adjuster&&ME.adjuster.photo_url;if(e.tagName==='IMG'){if(u)e.src=u;else e.style.visibility='hidden'}else e.style.backgroundImage=u?'url("'+u+'")':'none'});
+ (root.querySelectorAll?root.querySelectorAll('.smp'):[]).forEach(function(e){e.remove()});
+ (root.querySelectorAll?root.querySelectorAll('.note'):[]).forEach(function(e){if(/Sample only/.test(e.textContent)){var s=e.querySelector('span');if(s)s.textContent='Checkout opens on a secure Stripe page. $1 today, cancel anytime.'}})}
+if(R)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1)swap(n)});if(m.type==='characterData')swap(m.target.parentNode)})}).observe(document.body,{childList:true,subtree:true});
+
+function hydrate(me){ME=me;plan=(me.plan&&me.plan!=='free')?me.plan:'free';var st=me.settings||{};
+ if(st.theme&&st.theme!==THEME){THEME=st.theme;try{localStorage.setItem('ct_theme',THEME)}catch(e){}applyTheme()}
+ tog.xp=st.explainers!==false;if(st.assistant_name)asst.n=st.assistant_name;
+ var pk=me.version&&me.version.pick;if(pk){pickedV=pk.replace('V','');PAGES.free[0].st='mine';VERS=VERS.filter(function(x){return x[0]===pickedV})}
+ window.__logo=me.logo?me.logo.url:null}
+function refresh(cb){api('GET','/api/app/me').then(function(j){if(j.ok){hydrate(j);ART=null}if(cb)cb(j)})}
+function loadAlerts(cb){api('GET','/api/app/alerts').then(function(j){if(j.ok){ALR=j;var list=j.alerts||j.items||[];unread=typeof j.unseen==='number'?j.unseen:list.filter(function(a){return !a.seen}).length}if(cb)cb()})}
+var AK={homeowner_open:['eye','a_open','Someone opened your page'],homeowner_read_60s:['clock','a_read','Someone read your page for over a minute'],contact_saved:['save','a_saved','Someone saved your contact'],qr_scan:['scan','a_scan','Someone scanned your QR code'],booking_made:['cal','a_booked','New booking'],binder_shared:['book','a_binder','A homeowner shared a claim binder'],binder_question:['msg','a_binder','A homeowner asked a question'],binder_doc:['book','a_binder','A homeowner sent a letter']};
+function when(t){if(!t)return '';var d=new Date(t);if(isNaN(d))return String(t);var n=new Date(),y=new Date(n-864e5);
+ return d.toDateString()===n.toDateString()?d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):d.toDateString()===y.toDateString()?'Yesterday':d.toLocaleDateString('en-US',{weekday:'short'})}
+function alertRows(){var list=(ALR&&(ALR.alerts||ALR.items))||[];return list.map(function(a){var k=AK[a.kind||a.name]||['bell','',a.kind||'Alert'];
+ var hint=(ALR&&ALR.call_ok_now===false&&ALR.next_open_label&&/open|read|saved|scan/.test(a.kind||''))?'Earliest you can reach out: '+ALR.next_open_label:'';
+ return [k[0],hx(a.title||a.text||k[2]),hx(a.detail||a.source||a.page||''),when(a.at||a.created_at),0,hint,k[1]]})}
+var EMPTY_AL='<div class="al" style="display:block;color:var(--mu);font-size:11px;line-height:1.5">Nothing yet. Share your page, and when a homeowner opens it, saves your contact or books a time, it shows up here.</div>';
+
+V.loading=function(){return '<div class="scr" style="display:grid;place-items:center;height:100%;text-align:center"><div><img src="/assets/ct-shield.png" alt="" style="width:64px;opacity:.9"><p class="s" style="margin-top:10px">Opening your app...</p></div></div>'};
+V.offline=function(){return '<div class="scr" style="display:grid;place-items:center;height:100%;text-align:center"><div><img src="/assets/ct-shield.png" alt="" style="width:64px"><h3 style="margin:10px 0 4px">Can\'t reach ClaimTract</h3><p class="s">Check your connection, then try again.</p><button class="cta" data-rx="retry" style="margin-top:12px">Try again</button></div></div>'};
+V.signin=function(){return '<div class="scr" style="display:flex;flex-direction:column;justify-content:center;min-height:100%;text-align:center;padding:24px 18px"><img src="/assets/ct-shield.png" alt="ClaimTract" style="width:76px;margin:0 auto 12px"><h2 style="margin:0 0 6px;font:800 22px Inter">Your free website and field app</h2><p class="s" style="margin:0 auto 18px;max-width:280px">Sign in with Google. Your website, answer pages and homeowner tools are waiting for you.</p><div id="gsi" style="display:flex;justify-content:center;min-height:44px"></div><p class="s" id="gsim" style="margin-top:12px"></p><p class="s" style="margin-top:18px;font-size:10px">By signing in you agree to the <a href="/terms/" target="_blank" style="color:inherit">Terms</a> and <a href="/privacy/" target="_blank" style="color:inherit">Privacy policy</a>.</p><a href="?demo=1" class="s" style="margin-top:10px;font-size:11px;color:var(--go)">See the sample app first</a></div>'};
+function startGsi(){var m=document.getElementById('gsim');api('GET','/api/app/config').then(function(c){var id=c&&c.google_client_id;
+ if(!c.ok||!c.signin_ready||!id||/^YOUR-ID/i.test(id)){if(m)m.textContent='Sign-in opens in a few minutes. Please check back shortly.';return}
+ function go(){if(!window.google||!google.accounts){if(m)m.textContent='Google sign-in didn\'t load. Check your connection and reload.';return}
+  google.accounts.id.initialize({client_id:id,callback:function(r){if(m)m.textContent='Signing you in...';var b={credential:r.credential};var ref=QS.get('ref');if(ref&&/^[A-Za-z0-9_-]{1,40}$/.test(ref))b.ref=ref;
+   api('POST','/api/app/signin',b).then(function(j){if(j.ok&&j.me){hydrate(Object.assign({ok:true},j.me));loadAlerts(function(){render('home')});if(j.new)toast('Welcome to ClaimTract','Your free website and answer pages are ready to make yours.')}else if(m)m.textContent=j.error||'Sign-in failed. Try again.'})}});
+  google.accounts.id.renderButton(document.getElementById('gsi'),{theme:'filled_black',size:'large',shape:'pill',text:'continue_with',width:270})}
+ if(window.google&&google.accounts)go();else{var s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.async=true;s.onload=go;s.onerror=function(){if(m)m.textContent='Google sign-in didn\'t load. Check your connection and reload.'};document.head.appendChild(s)}})}
+
+var R_HOME=function(){var p=ME.page,h=new Date().getHours(),g=h<12?'Good morning':h<18?'Good afternoon':'Good evening',rows=alertRows(),ph=ME.adjuster&&ME.adjuster.photo_url;
+ var pickTxt=PAGES.free[0].st==='mine'?('V'+pickedV+' is yours · '+(ME.personalized_pct||0)+'% personalized'):'Pick your version · 1 main article, 12 answers';
+ var pg=p?'<div class="card pg" data-go="mypage"><div class="av"'+(ph?' style="background:url(&quot;'+hx(ph)+'&quot;) center/cover"></div>':' style="background:#1d2a3a;display:grid;place-items:center;color:#F5A524;font:800 14px Inter">'+hx(inits())+'</div>')+'<div class="t"><b>Your page</b><span>'+hx(pageHost())+'</span><span class="live"'+(p.status==='live'?'':' style="background:#3a3320;color:#F5A524"')+'>'+hx(p.status==='live'?'Live':p.status==='missing'?'Not found':(p.status||'Pending'))+'</span></div></div>'
+  :'<a class="card row" href="/free/build/" target="_top" style="text-decoration:none;color:inherit;border-radius:16px">'+ic('house')+'<div><b>Build your free page</b><small>About ten minutes. Your license fills most of it in.</small></div>'+CH+'</a>';
+ return '<div class="hd"><div><small>'+g+'</small><b>'+hx(firstN())+'</b></div>'+(window.__logo?'<img src="'+hx(window.__logo)+'" alt="Your logo" style="border-radius:8px">':'<img src="/assets/ct-shield.png" alt="ClaimTract">')+'</div><div class="scr">'+
+ (ME.license_required?'<div class="card row" data-go="license" style="border-color:#5A4512;border-radius:16px;margin-bottom:8px">'+ic('shield')+'<div><b>Verify your license</b><small>Your Trust card and page go live after one check with the state</small></div>'+CH+'</div>':'')+
+ pg+'<div style="margin-top:9px"><button class="cta pulse" data-go="share">'+I('share',16)+'Share my page</button></div>'+
+ '<div class="card row" data-act="pages" style="margin-top:8px;border-radius:16px">'+ic('book')+'<div><b>Your free website</b><small>'+pickTxt+'</small></div>'+CH+'</div>'+
+ '<p class="lb">Right now <a data-tab="activity">See all</a></p><div class="card">'+(rows.length?rows.slice(0,2).map(alertRow).join(''):EMPTY_AL)+'</div>'+
+ '<p class="lb">Your free tools</p><div class="gr">'+
+ [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['edit','edit','Edit page'],['tools','house','Homeowner tools'],['found','g','Get found'],['insights','chart','What\'s working']].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+(tog.xp?'<span class="qm" data-help="'+t[0]+'">?</span>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
+ '<p class="lb"><span>This week'+qx('week')+'</span></p>'+R_WEEK()+
+ '<div class="lk" data-tab="sophia"><span class="pill">Upgrade</span><div class="so"><span>S</span><b>Sophia</b>'+qx('sophia')+'</div><p>Turn your old claim files into dozens of answer pages with your name on every one.</p></div>'+
+ '</div>'+nav('home')};
+function R_WEEK(){var list=(ALR&&(ALR.alerts||ALR.items))||[],wk=Date.now()-7*864e5,c={o:0,s:0,b:0,q:0};list.forEach(function(a){var t=new Date(a.at||a.created_at).getTime();if(!(t>=wk))return;var k=a.kind||a.name||'';
+  if(/open|read|scan/.test(k))c.o++;else if(/saved/.test(k))c.s++;else if(/book/.test(k))c.b++;else if(/binder/.test(k))c.q++});
+ var tot=c.o+c.s+c.b+c.q;return '<div class="card" style="display:grid;grid-template-columns:repeat(4,1fr);text-align:center;padding:10px 6px">'+[['Visits',c.o],['Saved you',c.s],['Bookings',c.b],['Binders',c.q]].map(function(x){return '<div><b style="display:block;font:800 18px Inter">'+x[1]+'</b><small style="font-size:9.5px;color:var(--mu)">'+x[0]+'</small></div>'}).join('')+'</div>'+(tot?'':'<p class="s" style="margin:6px 2px 0;font-size:10.5px">Your numbers start the first time a homeowner opens your page.</p>')}
+var R_ACT=function(){var rows=alertRows();unread=0;return '<div class="top"><h1 style="padding-left:4px">Activity</h1></div><div class="scr"><div class="card">'+(rows.length?rows.map(alertRow).join(''):EMPTY_AL)+'</div>'+
+ '<div class="note gold">'+I('clock',14)+'<span>Florida contact hours are built in: 8 AM to 8 PM Florida time.'+(ALR&&ALR.call_ok_now===false&&ALR.next_open_label?' Next window opens '+hx(ALR.next_open_label)+'.':'')+'</span></div></div>'+nav('activity')};
+var R_FIELDS={name:['Your name','text',80],phone:['Phone','tel',20],city:['City','text',60],service_area:['Service area','text',200],hours:['Hours','text',200],story:['Your story','area',4000],memberships:['Memberships','text',400]};
+var R_EDIT=function(V0){var P=ME.profile||{},L=ME.license,S=ME.settings||{};
+ var rows=[['spark','Your assistant',S.assistant_name?hx(S.assistant_name):'Pick its look and name','asst'],['user','Your name',hx(P.name||ME.adjuster.name||'Add your name'),'f:name'],['phone','Phone',hx(phF(P.phone)||'Add your phone'),'f:phone'],['shield','Your logo',window.__logo?'Added · shows on your website, QR and handout':'Not added yet · your initials show until you add one','logo'],['shield','License',L?hx(L.number)+' · '+(L.status==='active'?'verified'+(L.verified_at?' '+new Date(L.verified_at).toLocaleDateString('en-US',{month:'short',day:'numeric'}):''):hx(L.status)):'Not verified yet','license'],['pin','City',hx(P.city||'Add your city'),'f:city'],['pin','Service area',hx(P.service_area||'Add the counties you serve'),'f:service_area'],['clock','Hours',hx(P.hours||'Add your hours'),'f:hours'],['book','Your story',hx(P.story?P.story.slice(0,40)+(P.story.length>40?'...':''):'Tell homeowners who you are'),'f:story'],['star','Memberships',hx((P.memberships||[]).join(', ')||'FAPIA, NAPIA...'),'f:memberships'],['g','Google account',hx(ME.adjuster.email||'Signed in with Google'),'google']];
+ var orig=V0(),i=orig.indexOf('<p class="lb">App settings');
+ return top('Edit page')+'<div class="scr"><div class="card">'+rows.map(function(r){return '<div class="row" '+(r[3].indexOf('f:')===0?'data-rx="field" data-k="'+r[3].slice(2)+'"':'data-go="'+r[3]+'"')+'>'+ic(r[0])+'<div><b>'+r[1]+'</b><small>'+r[2]+'</small></div>'+CH+'</div>'}).join('')+'</div>'+orig.slice(i)};
+V.field=function(){var f=R_FIELDS[FIELD]||['Edit','text',200],P=(ME&&ME.profile)||{},v=FIELD==='memberships'?(P.memberships||[]).join(', '):FIELD==='phone'?phF(P.phone):(P[FIELD]||'');
+ return top(f[0])+'<div class="scr"><div class="card" style="padding:12px">'+(f[1]==='area'?'<textarea id="rfv" rows="9" maxlength="'+f[2]+'" style="width:100%;box-sizing:border-box;border:1px solid var(--ln);background:transparent;color:inherit;border-radius:10px;padding:10px;font:13px/1.5 Inter">'+hx(v)+'</textarea>':'<input id="rfv" type="'+(f[1]==='tel'?'tel':'text')+'" maxlength="'+f[2]+'" value="'+hx(v)+'" style="width:100%;box-sizing:border-box;border:1px solid var(--ln);background:transparent;color:inherit;border-radius:10px;padding:11px;font:14px Inter">')+
+ (FIELD==='memberships'?'<p class="s" style="margin-top:6px">Separate with commas.</p>':'')+'<button class="cta" data-rx="fsave" style="margin-top:10px">Save</button><p class="s" id="rfm" style="margin-top:8px"></p></div><p class="s">Changes show on your page the moment you save.</p></div>'};
+V.license=function(){var L=ME&&ME.license;return top('Your license')+'<div class="scr">'+(L&&L.status==='active'?'<div class="note gold">'+I('shield',14)+'<span>Verified: '+hx(L.holder_name||'')+' · '+hx(L.number)+(L.verified_at?' · last checked '+new Date(L.last_checked_at||L.verified_at).toLocaleDateString('en-US',{month:'short',day:'numeric'}):'')+'. We recheck it with the state every week.</span></div>':'')+
+ '<div class="card" style="padding:12px"><b style="font-size:13px">Verify with the Florida DFS</b><ol class="s" style="margin:8px 0 10px 16px;padding:0;line-height:1.6"><li>Open the state\'s licensee search.</li><li>Search your name and open your own license page.</li><li>Copy that page\'s address and paste it below.</li></ol>'+
+ '<a class="ghost" href="https://licenseesearch.fldfs.com/" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;margin-bottom:10px">Open the DFS licensee search</a><input id="rlu" type="url" placeholder="https://licenseesearch.fldfs.com/Licensee/..." style="width:100%;box-sizing:border-box;border:1px solid var(--ln);background:transparent;color:inherit;border-radius:10px;padding:11px;font:13px Inter"><button class="cta" data-rx="lic" style="margin-top:10px">Verify my license</button><p class="s" id="rlm" style="margin-top:8px"></p></div></div>'};
+V.google=function(){return top('Google account')+'<div class="scr"><div class="card" style="padding:12px"><b style="font-size:13px">'+hx(ME.adjuster.email||'')+'</b><p class="s" style="margin:4px 0 10px">You sign in with this Google account.</p><button class="cta" data-rx="gconnect">Connect Google Calendar for video calls</button><p class="s" style="margin-top:8px">Lets ClaimTract create Google Meet links on your own calendar for bookings and instant video calls. Google emails nobody.</p></div><button class="ghost" data-rx="signout" style="width:100%;margin-top:10px">Sign out</button></div>'};
+
+function md(t){t=String(t||'').replace(/\{\{link:([^}|]+)\|?([^}]*)\}\}/g,function(m,a,b){return b||a.replace(/-/g,' ')});var out='',list=null;
+ t.split(/\n{2,}/).forEach(function(blk){var ls=blk.split('\n');if(ls.every(function(l){return /^\s*([-*]|\d+\.)\s+/.test(l)})){var ol=/^\s*\d+\./.test(ls[0]);out+=(ol?'<ol>':'<ul>')+ls.map(function(l){return '<li>'+inl(l.replace(/^\s*([-*]|\d+\.)\s+/,''))+'</li>'}).join('')+(ol?'</ol>':'</ul>');return}
+  var hm=blk.match(/^(#{2,4})\s+(.*)/);if(hm){out+='<h3>'+inl(hm[2])+'</h3>';return}out+='<p>'+inl(blk.replace(/\n/g,' '))+'</p>'});return out}
+function inl(s){return hx(s).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/\*([^*]+)\*/g,'<i>$1</i>')}
+function withArt(cb){if(ART)return cb(ART);api('GET','/api/app/articles').then(function(j){if(j.ok){ART=j;cb(j)}else toast('Couldn\'t open it',j.error||'Try again.')})}
+var _openArt=openArt;openArt=function(i,j){if(!R||!ME||plan!=='free'||i!==0)return _openArt(i,j);
+ withArt(function(A){var a;if(j<0){var v='V'+(PAGES.free[0].st==='mine'?pickedV:window.__readV);a=A.articles.filter(function(x){return x.kind==='pillar'&&x.version===v})[0]||A.articles.filter(function(x){return x.kind==='pillar'})[0]}else a=A.articles.filter(function(x){return x.kind==='answer'&&x.no===j+1})[0];
+  window.__artJ=j;if(!a){toast('Not found','That page isn\'t in your account yet.');return}window.__artId=a.id;SEC_Q=[];
+  arB.innerHTML='<h2 style="margin:0 0 4px">'+hx(a.title)+'</h2><div class="by">Reviewed and approved by '+hx(fullN())+', Licensed Public Adjuster</div><div class="myo"><b>Make it yours</b><span>Tap the mic under any section and talk for a minute. The writer rebuilds that section around your story and sends it back for your OK.</span></div>'+
+   '<p class="s" style="margin:6px 0 10px">'+(a.indexable?'On Google':'Not on Google yet')+' · '+(a.unique_pct||0)+'% yours (Google sees it at '+(a.gate_pct||60)+'%)</p>'+
+   (a.sections||[]).map(function(s){SEC_Q[s.no]=s.question||'What happened on a claim like this, in your own words?';return '<div class="sec" data-sec="'+s.no+'">'+(s.heading?'<h3>'+hx(s.heading)+'</h3>':'')+md(s.text)+'<button class="mic" data-mic="'+s.no+'">'+I('vol',12)+'<span>Tell it your way</span></button></div>'}).join('');
+  document.getElementById('arA').style.display='none';document.getElementById('arK').textContent=j<0?'Main article '+(a.version||''):'Answer '+(j+1);art.classList.add('on')})};
+
+/* real recording -> writer -> draft -> OK */
+var REC=null,RECB=[];
+arB.addEventListener('click',function(e){if(!R)return;var m=e.target.closest('[data-mic]');if(!m)return;if(plan==='free'&&PAGES.free[0].st!=='mine'&&window.__readV)return;
+ RECB=[];if(!navigator.mediaDevices||!window.MediaRecorder){toast('No microphone','This browser can\'t record. Try Chrome or Safari.');return}
+ navigator.mediaDevices.getUserMedia({audio:true}).then(function(s){REC=new MediaRecorder(s);REC.ondataavailable=function(ev){if(ev.data&&ev.data.size)RECB.push(ev.data)};REC.start()}).catch(function(){toast('Microphone blocked','Allow the microphone for claimtract.app, then try again.');document.getElementById('rec').classList.remove('on');clearInterval(recT)})},true);
+var _recDone=document.getElementById('recs').onclick;
+document.getElementById('recs').onclick=function(){if(!R||!REC)return _recDone.apply(this,arguments);clearInterval(recT);document.getElementById('rec').classList.remove('on');var r=REC,n=recN;REC=null;
+ r.onstop=function(){r.stream.getTracks().forEach(function(t){t.stop()});var blob=new Blob(RECB,{type:r.mimeType||'audio/webm'});var sec=arB.querySelector('[data-sec="'+n+'"]'),b=sec&&sec.querySelector('.mic');if(b){b.classList.add('done');b.innerHTML='Writing your version...'}
+  track('section_recorded',{section_no:n,seconds:recS});
+  api('POST','/api/app/writer/'+window.__artId+'/'+n,blob,true,blob.type).then(function(j){if(!j.ok){if(b){b.classList.remove('done');b.innerHTML=I('vol',12)+'<span>Tell it your way</span>'}toast(j.__s===422?'I couldn\'t hear that':j.__s===429?'That\'s enough for today':'Not sent',j.__s===422?'Try again a little closer to the phone.':j.__s===429?'You\'ve used today\'s rewrites. More tomorrow.':(j.error||'Try again.'));return}
+   var d=j.draft||j,txt=d.after||d.text||d.rewrite||'',id=d.id||j.draft_id;showDraft(id,txt,n,b)})};r.stop()};
+function showDraft(id,txt,n,b){var o=document.createElement('div');o.className='rdraft';o.style.cssText='position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:120;display:flex;align-items:flex-end';
+ o.innerHTML='<div style="background:var(--cd,#16181d);color:inherit;width:100%;border-radius:18px 18px 0 0;padding:14px;max-height:80%;overflow:auto"><b style="font-size:14px">Your version</b><p class="s" style="margin:4px 0 8px">Read it, fix anything, then put it on your page.</p><textarea style="width:100%;box-sizing:border-box;min-height:180px;border:1px solid var(--ln);background:transparent;color:inherit;border-radius:10px;padding:10px;font:12.5px/1.55 Inter">'+hx(txt)+'</textarea><button class="cta" data-ok style="margin-top:8px">Put it on my page</button><button class="ghost" data-no style="width:100%;margin-top:6px">Not yet</button><p class="s" data-m style="margin-top:6px"></p></div>';
+ app.appendChild(o);o.addEventListener('click',function(e){if(e.target.hasAttribute('data-no')){o.remove();if(b){b.innerHTML='Draft saved · tap to record again'}return}
+  if(e.target.hasAttribute('data-ok')){var t=o.querySelector('textarea').value;o.querySelector('[data-m]').textContent='Saving...';api('POST','/api/app/writer/drafts/'+id,{action:'ok',text:t}).then(function(j){if(!j.ok){o.querySelector('[data-m]').textContent=j.error||'Not saved. Try again.';return}o.remove();ART=null;toast('On your page',(typeof j.unique_pct==='number'?'This page is now '+j.unique_pct+'% yours.':'Your section is live.'));refresh(function(){openArt(0,window.__artJ==null?-1:window.__artJ)})})}})}
+
+/* writes that the shared screens make */
+var _doPick=doPick;doPick=function(v){if(!R)return _doPick(v);api('PUT','/api/app/me',{version:'V'+v}).then(function(j){if(j.ok){hydrate(j);_doPick(v);ART=null}else toast('Not saved',j.error||'Try again.')})};
+var _help=help;help=function(k){track('explainer_tap',{explainer:String(k)});return _help.apply(this,arguments)};
+var _openSx=openSx;openSx=function(){track('upgrade_tap',{badge:'sophia'});return _openSx.apply(this,arguments)};
+function pickLogo(){var i=document.createElement('input');i.type='file';i.accept='image/png,image/jpeg,image/webp';i.onchange=function(){var f=i.files&&i.files[0];if(!f)return;if(f.size>2e6){toast('Too big','Your logo must be under 2 MB.');return}
+ toast('Uploading','Adding your logo...');api('POST','/api/app/me/logo',f,true,f.type).then(function(j){if(j.ok){hydrate(j);toast('Logo added','It now shows on your website, QR code and handout.');render('logo')}else toast('Not added',j.error||'Try again.')})};i.click()}
+document.addEventListener('click',function(e){if(!R)return;var t=e.target.closest('[data-act],[data-tog],[data-rx],[data-go],[data-tab]');if(!t)return;
+ if(!ME&&t.dataset.rx!=='retry')return;
+ var a=t.dataset.act,x=t.dataset.rx;
+ if(a==='theme')setTimeout(function(){api('PUT','/api/app/me',{settings:{theme:THEME}})},0);
+ if(t.dataset.tog==='xp')setTimeout(function(){api('PUT','/api/app/me',{settings:{explainers:!!tog.xp}})},0);
+ if(a==='logoup'){e.stopPropagation();e.preventDefault();pickLogo();return}
+ if(a==='plan'){e.stopPropagation();e.preventDefault();var p=t.dataset.p,u=p==='plus'?(window.CT_PRO_LINK||''):STRIPE_CT;track('upgrade_tap',{badge:'plan_'+p});
+  if(!u){toast('One moment','Pro checkout is being switched on. Try again shortly, or start with ClaimTract for $1.');return}
+  window.open(u+(u.indexOf('?')<0?'?':'&')+'client_reference_id='+encodeURIComponent(ME.adjuster.id)+(ME.adjuster.email?'&prefilled_email='+encodeURIComponent(ME.adjuster.email):''),'_blank');return}
+ if(/share|text|copy|qr|card/.test(a||'')&&cur&&/share|qr|card|letters/.test(cur.dataset.v))track('page_shared',{channel:/qr/.test(a)?'qr':/card/.test(a)?'contact':/text|sms/.test(a)?'text':'link'});
+ if(cur&&cur.dataset.v==='asst'){clearTimeout(window.__asT);window.__asT=setTimeout(function(){api('PUT','/api/app/me',{settings:{assistant_name:String(asst.n||'').slice(0,40),assistant_look:String(asst.a==null?'':asst.a).slice(0,40)}})},600)}
+ if(x==='retry'){boot();return}
+ if(x==='field'){FIELD=t.dataset.k;go('field');return}
+ if(x==='fsave'){var v=document.getElementById('rfv').value.trim(),pr={};pr[FIELD]=FIELD==='memberships'?v.split(',').map(function(s){return s.trim()}).filter(Boolean):v;var mm=document.getElementById('rfm');mm.textContent='Saving...';
+  api('PUT','/api/app/me',{profile:pr}).then(function(j){if(j.ok){hydrate(j);toast('Saved','It\'s on your page now.');back()}else mm.textContent=j.error||'Not saved. Try again.'});return}
+ if(x==='lic'){var u2=document.getElementById('rlu').value.trim(),lm=document.getElementById('rlm');lm.textContent='Checking with the Florida DFS...';
+  api('POST','/api/app/license',{url:u2}).then(function(j){if(j.ok){lm.textContent='Verified. Your Trust card is live.';refresh(function(){toast('License verified',(j.license&&j.license.holder_name)||'You\'re all set.');render('license')})}else lm.textContent=j.error||'That didn\'t work. Try again.'});return}
+ if(x==='gconnect'){api('GET','/api/app/google/connect').then(function(j){var u3=j.url||j.auth_url||j.redirect;if(u3)location.href=u3;else toast('Not yet',j.error||'Google video calls are being switched on. Try again shortly.')});return}
+ if(x==='signout'){api('POST','/api/app/signout').then(function(){ME=null;stack=[];render('signin');startGsi()});return}
+},true);
+
+if(R){var _V={home:V.home,activity:V.activity,edit:V.edit};V.home=function(){return ME?R_HOME():_V.home()};V.activity=function(){return ME?R_ACT():_V.activity()};V.edit=function(){return ME?R_EDIT(_V.edit):_V.edit()}}
+function boot(){if(DEMO){render('home');return}render('loading');
+ api('GET','/api/app/me').then(function(j){if(j.ok){hydrate(j);loadAlerts(function(){stack=[];render('home')});setInterval(function(){if(ME&&!document.hidden)loadAlerts(function(){if(cur&&(cur.dataset.v==='home'||cur.dataset.v==='activity')&&!art.classList.contains('on'))render(cur.dataset.v)})},60000)}
+  else if(j.__s===401){render('signin');startGsi()}else render('offline')})}
+
+var _greet=greet;greet=function(){if(R)return;return _greet.apply(this,arguments)};
+window.__ct.art=function(i,j){openArt(i,j)};window.__ct.pick=function(v){doPick(v)};
+boot();
 })();
 </script>
 </body></html>
