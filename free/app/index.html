@@ -40,7 +40,7 @@ svg{display:block}
 .tg:after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.25s}
 .tg.on{background:var(--gr)}.tg.on:after{left:19px}
 .cta{width:100%;border:0;border-radius:13px;background:var(--go);color:#111;font:800 14px Inter;padding:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
-.cta.pl{animation:pl 2.6s ease-in-out infinite}
+.cta.pulse{animation:pl 2.6s ease-in-out infinite}
 @keyframes pl{0%,100%{box-shadow:0 0 0 0 rgba(245,165,36,.45)}50%{box-shadow:0 0 0 7px rgba(245,165,36,0)}}
 .ghost{width:100%;border:1px solid var(--ln);border-radius:12px;background:var(--cd);color:#fff;font:700 12px Inter;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
 .lb{display:flex;justify-content:space-between;align-items:center;font:700 9px Inter;letter-spacing:1.5px;color:var(--go);text-transform:uppercase;margin:16px 2px 7px}
@@ -309,7 +309,7 @@ home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedri
  '<div class="seg" style="margin:9px 0 0"><span class="'+(!avail&&!sched.on?'on':'')+'" data-act="am" data-m="off">Off</span><span class="'+(avail?'on':'')+'" data-act="am" data-m="now">Now</span><span class="'+(sched.on&&!avail?'on':'')+'" data-act="am" data-m="sched">Scheduled</span></div></div>'+
  '<div class="card avl on" data-go="livechat" style="cursor:pointer"><span class="ic" style="margin:0;width:28px;height:28px;background:#122119;color:#5BD48A">'+I('msg',14)+'</span><div><b>Live chat</b><small>2 homeowners on your page right now</small></div>'+CH+'</div>'+
  '<div class="card pg" data-go="mypage"><div class="av"></div><div class="t"><b>Your page</b><span>claimtract.app/cedric-moore</span><span class="live">Live</span></div><div class="views"><b>14</b><small>views today</small></div></div>'+
- '<div style="margin-top:9px"><button class="cta pl" data-go="share">'+I('share',16)+'Share my page</button></div>'+
+ '<div style="margin-top:9px"><button class="cta pulse" data-go="share">'+I('share',16)+'Share my page</button></div>'+
  '<div class="card row" data-act="pages" style="margin-top:8px;border-radius:16px">'+ic('book')+'<div><b>Your pages</b><small>'+(plan==='free'?'1 main article, 4 answers':'3 claims, 38 pages · 13 need your OK')+'</small></div>'+(plan==='free'?'':'<span class="bd" style="position:static;min-width:18px;height:18px;border-radius:99px;background:#F5A524;color:#111;font:800 9px/18px Inter;text-align:center;padding:0 5px">13</span>')+CH+'</div>'+
  '<div class="card row" data-go="earn" style="margin-top:8px;border-radius:16px">'+ic('spark')+'<div><b>Your referrals</b><small>3 paying signups · $75 this month</small></div>'+CH+'</div>'+
   '<p class="lb">Right now <a data-tab="activity">See all</a></p><div class="card">'+alertRow(ALERTS[0])+alertRow(ALERTS[1])+'</div>'+
