@@ -503,8 +503,16 @@ tools:['Homeowner tools','Free tools on your page, like a claim binder and a pho
 found:['Get found','A short checklist to set up your free Google profile right. More homeowners find you on the map, at no cost.'],
 insights:['What\'s working','See which pages homeowners read and what they search for. It tells you what to write about next.']
 };
+var HB_EXPLAINER='R7XfQdKdjVWH'; /* example HumanBot explainer campaign; one embedId per feature later */
+var hbLoaded=false,hbBot=null;
+function hbExplain(id){
+ function start(){try{hbBot=new AiBot({embedId:id,remoteBaseUrl:'https://humanchat.net/',version:'1.5.28'});window.dispatchEvent(new Event('load'))}catch(e){}}
+ if(hbBot){try{var w=document.querySelector('[id^=aibot],[class*=aibot],[class*=hb-]');if(w)w.style.display=''}catch(e){} return}
+ if(hbLoaded){start();return}
+ var sc=document.createElement('script');sc.src='https://humanchat.net/build/js/hb_1.5.28.js';sc.integrity='sha384-f2GqKZr4plfDCjELPiZqzEfj9LuWzE2xPGL+wCEf/coynRhH0TnbNy9jGVAwFEeU';sc.crossOrigin='anonymous';sc.onload=function(){hbLoaded=true;start()};document.body.appendChild(sc);
+}
 var xp=document.getElementById('xp'),xpT=null;
-function help(k){var h=HELP[k];if(!h)return;document.getElementById('xpt').textContent=h[0];document.getElementById('xpp').textContent=h[1];var g=document.getElementById('xpg');g.style.transition='none';g.style.width='0';xp.classList.add('on');requestAnimationFrame(function(){requestAnimationFrame(function(){g.style.transition='width 9s linear';g.style.width='100%'})});clearTimeout(xpT);xpT=setTimeout(function(){xp.classList.remove('on')},9200)}
+function help(k){var h=HELP[k];if(!h)return;hbExplain(HB_EXPLAINER);document.getElementById('xpt').textContent=h[0];document.getElementById('xpp').textContent=h[1];var g=document.getElementById('xpg');g.style.transition='none';g.style.width='0';xp.classList.add('on');requestAnimationFrame(function(){requestAnimationFrame(function(){g.style.transition='width 9s linear';g.style.width='100%'})});clearTimeout(xpT);xpT=setTimeout(function(){xp.classList.remove('on')},9200)}
 document.getElementById('xpx').addEventListener('click',function(){xp.classList.remove('on');clearTimeout(xpT)});
 var T=document.getElementById('toast'),tt=document.getElementById('tt'),ts=document.getElementById('ts');
 function toast(a,b){tt.textContent=a;ts.textContent=b;T.classList.add('on');clearTimeout(T._t);T._t=setTimeout(function(){T.classList.remove('on')},3600)}
