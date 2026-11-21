@@ -858,14 +858,14 @@ function pageUrl(){return ME&&ME.page&&ME.page.url?ME.page.url:''}
 function pageHost(){return pageUrl().replace(/^https?:\/\//,'').replace(/\/$/,'')}
 
 /* swap the sample identity for his own wherever the shared screens show it */
-function swap(root){if(!R||!ME||!root)return;var fn=firstN(),nm=fullN()||'Your name',ph=phF(ME.profile&&ME.profile.phone)||'your phone',lic=(ME.license&&ME.license.number)||'your license',host=pageHost()||'your page address';
+function swap(root){if(!ME||!root||(!R&&!window.__demoLead))return;var fn=firstN(),nm=fullN()||'Your name',ph=phF(ME.profile&&ME.profile.phone)||'your phone',lic=(ME.license&&ME.license.number)||'your license',host=pageHost()||'your page address';
  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),ns=[];while(w.nextNode())ns.push(w.currentNode);
  ns.forEach(function(n){var v=n.nodeValue,o=v;if(v.indexOf('Cedric')<0&&v.indexOf('555-0142')<0&&v.indexOf('W123456')<0&&v!=='CM'&&v.indexOf('cedric')<0)return;
   v=v.split('claimtract.app/cedric-moore').join(host).split('Cedric Moore').join(nm).split('Cedric').join(fn).split('(904) 555-0142').join(ph).split('W123456').join(lic).split('cedric@in.claimtract.app').join('your alerts address');if(v==='CM')v=inits();if(v!==o)n.nodeValue=v});
  (root.querySelectorAll?root.querySelectorAll('img[src*="cedric-headshot"],[style*="cedric-headshot"]'):[]).forEach(function(e){var u=ME.adjuster&&ME.adjuster.photo_url;if(e.tagName==='IMG'){if(u)e.src=u;else e.style.visibility='hidden'}else e.style.backgroundImage=u?'url("'+u+'")':'none'});
  (root.querySelectorAll?root.querySelectorAll('.smp'):[]).forEach(function(e){e.remove()});
  (root.querySelectorAll?root.querySelectorAll('.note'):[]).forEach(function(e){if(/Sample only/.test(e.textContent)){var s=e.querySelector('span');if(s)s.textContent='Checkout opens on a secure Stripe page. $1 today, cancel anytime.'}})}
-if(R)new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1)swap(n)});if(m.type==='characterData')swap(m.target.parentNode)})}).observe(document.body,{childList:true,subtree:true});
+if(R||(DEMO&&QS.get('c')))new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1)swap(n)});if(m.type==='characterData')swap(m.target.parentNode)})}).observe(document.body,{childList:true,subtree:true});
 
 function hydrate(me){ME=me;plan=(me.plan&&me.plan!=='free')?me.plan:'free';var st=me.settings||{};
  if(st.theme&&st.theme!==THEME){THEME=st.theme;try{localStorage.setItem('ct_theme',THEME)}catch(e){}applyTheme()}
@@ -985,6 +985,8 @@ function boot(){if(DEMO){render('home');return}render('loading');
  api('GET','/api/app/me').then(function(j){if(j.ok){hydrate(j);loadAlerts(function(){stack=[];render('home')});setInterval(function(){if(ME&&!document.hidden)loadAlerts(function(){if(cur&&(cur.dataset.v==='home'||cur.dataset.v==='activity')&&!art.classList.contains('on'))render(cur.dataset.v)})},60000)}
   else if(j.__s===401){render('signin');startGsi()}else render('offline')})}
 
+if(DEMO&&QS.get('c')&&/^[A-Za-z0-9_-]{6,40}$/.test(QS.get('c'))){fetch('/api/pages/lead/'+encodeURIComponent(QS.get('c'))).then(function(r){return r.ok?r.json():null}).then(function(d){if(!d||!d.ok)return;window.__demoLead=d;
+ ME={profile:{name:d.full_name||((d.first||'')+' '+(d.last||'')).trim(),phone:d.phone||''},adjuster:{name:d.full_name,photo_url:null},license:{number:d.license},page:{url:'https://claimtract.app/'+String(d.full_name||d.first+' '+d.last).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'/'}};swap(document.body)}).catch(function(){})}
 var _greet=greet;greet=function(){if(R)return;return _greet.apply(this,arguments)};
 var _qrSvg=qrSvg;qrSvg=function(seed){if(!window.qrcode)return _qrSvg(seed);var RM=R&&ME,u=RM?(pageUrl()||'https://claimtract.app/'):'https://claimtract.app/cedric-moore/';try{var q=qrcode(0,'H');q.addData(u+(u.indexOf('?')<0?'?':'&')+'s=qr');q.make();var n=q.getModuleCount(),s='';
  for(var y=0;y<n;y++)for(var x=0;x<n;x++)if(q.isDark(y,x))s+='<rect x="'+x+'" y="'+y+'" width="1.02" height="1.02" fill="#111"/>';var c=n/2,w=n*0.22;

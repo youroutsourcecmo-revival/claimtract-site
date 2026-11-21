@@ -409,14 +409,19 @@ window.addEventListener('focus',check);document.addEventListener('visibilitychan
 
 
 
-var Q=new URLSearchParams(location.search),P=new URLSearchParams();['fn','ln','lic','city','st','dfs','ph','lsy','lid','ref'].forEach(function(k){if(Q.get(k))P.set(k,Q.get(k).slice(0,80))});var PS=P.toString();
+var Q=new URLSearchParams(location.search),P=new URLSearchParams();['fn','ln','lic','city','st','dfs','ph','lsy','lid','ref','c'].forEach(function(k){if(Q.get(k))P.set(k,Q.get(k).slice(0,80))});var PS=P.toString();
 function T(e,x){try{window.__ctT&&window.__ctT(e,x)}catch(_){}}
-var fn=(Q.get('fn')||'').replace(/[<>&"]/g,'');
+function applyP(Q){var fn=(Q.get('fn')||'').replace(/[<>&"]/g,'');
 if(fn){document.querySelector('.hero .k').textContent='Made for '+fn+(Q.get('ln')?' '+Q.get('ln').replace(/[<>&"]/g,''):'');document.getElementById('lead').textContent=fn+', your page is already started from your state license record. See what it looks like, then make it yours. It works as a website and as an app on your phone.'}
 try{if(fn){var ln2=(Q.get('ln')||'').replace(/[<>&"]/g,''),ct=(Q.get('city')||'').replace(/[<>&"]/g,''),stt=(Q.get('st')||'FL').replace(/[<>&"]/g,'').slice(0,2).toUpperCase(),full=(fn+' '+ln2).trim();
  document.getElementById('wsN').textContent=full;document.getElementById('wsB').textContent='Approved by '+full+', Licensed Public Adjuster';document.getElementById('wsK').textContent=full.toUpperCase();
  var wi=document.getElementById('wsI');wi.style.background='';wi.textContent=(fn.charAt(0)+(ln2.charAt(0)||'')).toUpperCase();if(ct){document.getElementById('wsC').textContent='Public adjuster serving '+ct+', '+stt+'. I work for you, not the insurance company.';document.getElementById('wsA').textContent=ct}
- if(Q.get('lic'))document.querySelector('.ws-card span').lastChild.textContent=Q.get('lic').replace(/[<>&"]/g,'').slice(0,12)}}catch(e){}
+ if(Q.get('lic'))document.querySelector('.ws-card span').lastChild.textContent=Q.get('lic').replace(/[<>&"]/g,'').slice(0,12)}}catch(e){}}
+applyP(Q);
+if(Q.get('c')&&/^[A-Za-z0-9_-]{6,40}$/.test(Q.get('c'))){fetch('/api/pages/lead/'+encodeURIComponent(Q.get('c'))).then(function(r){return r.ok?r.json():null}).then(function(d){if(!d||!d.ok)return;window.__lead=d;
+ var M={fn:d.first,ln:d.last,lic:d.license,city:d.city,st:d.state||'FL'};applyP({get:function(k){return M[k]||''}});
+ var fr=document.querySelector('.mphone iframe');if(fr){var u='/free/app/?demo=1&c='+encodeURIComponent(d.code||Q.get('c'));if(fr.getAttribute('src')!==u)fr.setAttribute('src',u)}
+ try{T('lead_link_open',{c:Q.get('c')})}catch(_){}}).catch(function(){})}
 var pp=document.getElementById('pgPhone');function goPage(){var a=document.querySelector('.hero [data-cta]');if(a){try{window.__ctT&&window.__ctT('free_phone_click')}catch(_){}location.href=a.href}}pp.onclick=goPage;pp.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();goPage()}};
 
 (function(){var box=document.getElementById('ez'),btn=document.getElementById('ezP');if(!box)return;var saf=/^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent),vt=document.createElement('video'),wm=!saf&&vt.canPlayType('video/webm; codecs="vp9, opus"');var SRC=wm?'/assets/ezekiel-intro.webm':'/assets/ezekiel-intro.mp4',TY=wm?'video/webm':'video/mp4';
