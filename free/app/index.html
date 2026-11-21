@@ -51,6 +51,7 @@ svg{display:block}
 .ic{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;margin:0 auto 5px;background:#262A31;color:var(--go)}
 .tl .qm{position:absolute;top:4px;left:4px;width:15px;height:15px;border-radius:50%;border:1px solid #3A3E46;color:#7C818B;font:700 9px/13px Inter;text-align:center;background:#15171B;cursor:pointer;z-index:2}
 .qm:hover{color:#F5A524;border-color:#5A4512}
+.qx{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;border:1px solid #3A3E46;color:#7C818B;font:700 9px/1 Inter;background:#15171B;cursor:pointer;vertical-align:middle;margin-left:5px;flex:none;position:relative;z-index:2}.qx:hover{color:#F5A524;border-color:#5A4512}.so .qx{width:15px!important;height:15px!important;background:#15171B!important;color:#7C818B!important;font:700 9px/1 Inter!important;border:1px solid #3A3E46!important;border-radius:50%!important}
 #hbs{position:absolute;right:12px;bottom:198px;height:170px;z-index:61;pointer-events:none;cursor:pointer;opacity:0;transition:opacity .2s}#hbs.on{opacity:1;pointer-events:auto}#hbs canvas{display:block;height:170px;width:auto}
 @keyframes xb{0%,100%{height:3px}50%{height:9px}}
 .nw{position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--go)}
@@ -310,6 +311,7 @@ var P={
  star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>'
 };
 function I(n,s,c){s=s||16;return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="'+(c||'currentColor')+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+P[n]+'</svg>'}
+function qx(k){return tog.xp?'<span class="qx" data-help="'+k+'">?</span>':''}
 function ic(n){return '<span class="ic">'+I(n,15)+'</span>'}
 var CH=I('chev',14);
 function weekCard(){var D=['M','T','W','T','F','S','S'],V=[6,9,7,12,8,11,8],C=[1,1,0,2,1,1,1],B=[0,1,0,1,0,1,0];
@@ -326,7 +328,7 @@ function weekCard(){var D=['M','T','W','T','F','S','S'],V=[6,9,7,12,8,11,8],C=[1
  function spark(n){if(!paid)return '<svg width="100%" height="16" viewBox="0 0 100 16"><path d="M0 13 H100" stroke="#2A2E36" stroke-width="2" stroke-dasharray="3 3"/></svg>';var a=[2,5,4,8,7,11,13].map(function(v,i){return (i*16.6).toFixed(1)+','+(15-v).toFixed(1)}).join(' ');return '<svg width="100%" height="16" viewBox="0 0 100 16"><polyline points="'+a+'" fill="none" stroke="#F5A524" stroke-width="1.8"/></svg>'}
  return '<div class="card wk"><div class="lg"><span><i style="background:#F5A524"></i>Page views</span><span><i style="background:#5BD48A;border-radius:50%"></i>Tapped to call</span><span><i style="background:#F4F4F5;border-radius:50%"></i>Booked</span></div>'+svg+
  '<div class="tot"><div><b>61</b><small>Page views</small></div><div><b style="color:#5BD48A">7</b><small>Tapped to call</small></div><div><b>3</b><small>Booked</small></div></div></div>'+
- '<div class="gw">'+G.map(function(t){return '<div class="gt" data-'+(paid?'go="insights"':'act="unlock" data-k="'+t[0]+'"')+'><div class="top2"><span class="bx" style="background:'+t[2]+'">'+t[3]+'</span><b>'+t[1]+'</b></div><div class="n">'+t[4]+'<small>this week</small>'+(paid?'':'<span class="up" style="position:static;margin-left:auto">UPGRADE</span>')+'</div>'+spark(t[4])+'</div>'}).join('')+'</div>'}
+ '<div class="gw">'+G.map(function(t){return '<div class="gt" data-'+(paid?'go="insights"':'act="unlock" data-k="'+t[0]+'"')+'><div class="top2"><span class="bx" style="background:'+t[2]+'">'+t[3]+'</span><b>'+t[1]+'</b>'+qx('g_'+t[0])+'</div><div class="n">'+t[4]+'<small>this week</small>'+(paid?'':'<span class="up" style="position:static;margin-left:auto">UPGRADE</span>')+'</div>'+spark(t[4])+'</div>'}).join('')+'</div>'}
 var UNL={articles:['Articles published','Turn your old claim files into answer pages with your name on every one. One claim makes about a dozen.','book'],facebook:['Post to Facebook','Every page you approve comes ready for Facebook. Your thumb sends it.','share'],instagram:['Post to Instagram','Every page you approve comes ready for Instagram, picture and words included.','share'],google:['Google Business updates','Keep your Google profile fresh with a new update from every page you approve.','g']},unl='articles';
 
 var TEX=[
@@ -350,19 +352,19 @@ function nav(on){return '<div class="nav">'+NAV.map(function(n){return '<span da
 function top(t){return '<div class="top"><button class="bk" data-back>'+I('back',16)+'</button><h1>'+t+'</h1></div>'}
 
 var ALERTS=[
- ['eye','Mary opened your page','From your text · reading now',' 9:42 PM',1,'Earliest you can reach out: 8:00 AM'],
- ['save','Someone saved your contact','From your water damage article','9:31 PM',0],
- ['mail','Email from the carrier','Supplement request · Water, Mandarin claim','8:14 PM',0],
- ['spark','A roofer is looking at ClaimTract','Through your link · Orange Park · chat or invite to a video call','7:12 PM',0],
- ['scan','Someone scanned your door hanger','Ponte Vedra · QR on door hanger','6:05 PM',0],
- ['clock','Mary read for over a minute','Who works for you, and who doesn\'t','Yesterday',1],
- ['cal','James booked an inspection','Tue 10:00 AM · prep page sent','Yesterday',0],
- ['book','4 homeowners used your claim binder','On your page this week','Mon',0]
+ ['eye','Mary opened your page','From your text · reading now',' 9:42 PM',1,'Earliest you can reach out: 8:00 AM','a_open'],
+ ['save','Someone saved your contact','From your water damage article','9:31 PM',0,'a_saved'],
+ ['mail','Email from the carrier','Supplement request · Water, Mandarin claim','8:14 PM',0,'a_carrier'],
+ ['spark','A roofer is looking at ClaimTract','Through your link · Orange Park · chat or invite to a video call','7:12 PM',0,'a_roofer'],
+ ['scan','Someone scanned your door hanger','Ponte Vedra · QR on door hanger','6:05 PM',0,'a_scan'],
+ ['clock','Mary read for over a minute','Who works for you, and who doesn\'t','Yesterday',1,'a_read'],
+ ['cal','James booked an inspection','Tue 10:00 AM · prep page sent','Yesterday',0,'a_booked'],
+ ['book','4 homeowners used your claim binder','On your page this week','Mon',0,'a_binder']
 ];
-function alertRow(a){return '<div class="al">'+ic(a[0])+'<div><b>'+a[1]+(a[4]?'<span class="up">UPGRADE</span>':'')+'</b><small>'+a[2]+'</small>'+(a[5]?'<span class="wsh">'+a[5]+'</span>':'')+'</div><time>'+a[3]+'</time></div>'}
+function alertRow(a){var k=a[a.length-1];if(String(a[5]).indexOf('a_')===0)a=a.slice(0,5).concat(['',k]);return '<div class="al">'+ic(a[0])+'<div><b>'+a[1]+(a[4]?'<span class="up">UPGRADE</span>':'')+qx(k)+'</b><small>'+a[2]+'</small>'+(a[5]?'<span class="hr">'+a[5]+'</span>':'')+'</div><time>'+a[3]+'</time></div>'}
 
 var V={
-home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedric</b><span class="wsm">SAMPLE</span></div><img src="/assets/ct-shield.png" alt="ClaimTract"></div><div class="scr">'+
+home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedric</b><span class="smp">SAMPLE</span></div><img src="/assets/ct-shield.png" alt="ClaimTract"></div><div class="scr">'+
  '<div class="card" style="padding:10px 12px;margin-bottom:8px"><div class="avl '+(avail||sched.on?'on':'')+'" style="padding:0;margin:0"><span class="d"></span><div><b>'+(avail?'Available now':sched.on?'Taking calls '+sched.from+' to '+sched.to:'Not taking calls')+'</b><small>'+(avail?'Your page shows a green "taking calls" badge':sched.on?'Badge turns on by itself during these hours':'Badge hidden on your page')+'</small></div></div>'+
  '<div class="seg" style="margin:9px 0 0"><span class="'+(!avail&&!sched.on?'on':'')+'" data-act="am" data-m="off">Off</span><span class="'+(avail?'on':'')+'" data-act="am" data-m="now">Now</span><span class="'+(sched.on&&!avail?'on':'')+'" data-act="am" data-m="sched">Scheduled</span></div></div>'+
  '<div class="card avl on" data-go="livechat" style="cursor:pointer"><span class="ic" style="margin:0;width:28px;height:28px;background:#122119;color:#5BD48A">'+I('msg',14)+'</span><div><b>Live chat</b><small>2 homeowners on your page right now</small></div>'+CH+'</div>'+
@@ -372,9 +374,9 @@ home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedri
  '<div class="card row" data-go="earn" style="margin-top:8px;border-radius:16px">'+ic('spark')+'<div><b>Your referrals</b><small>3 paying signups · $75 this month</small></div>'+CH+'</div>'+
   '<p class="lb">Right now <a data-tab="activity">See all</a></p><div class="card">'+alertRow(ALERTS[0])+alertRow(ALERTS[1])+'</div>'+
  '<p class="lb">Your free tools</p><div class="gr">'+
- [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['video','play','Your videos'],['edit','edit','Edit page'],['tools','house','Homeowner tools',1],['found','g','Get found',1],['insights','chart','What\'s working',1]].map(function(t){return '<div class="wsl" data-go="'+t[0]+'">'+(tog.xp?'<span class="qm" data-help="'+t[0]+'">?</span>':'')+(t[3]?'<i class="nw"></i>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
- '<p class="lb">This week <a data-go="insights">Details</a></p>'+weekCard()+
- '<div class="lk" data-tab="sophia"><span class="pill">Upgrade</span><div class="so"><span>S</span><b>Sophia</b></div><p>Turn your old claim files into dozens of answer pages with your name on every one.</p></div>'+
+ [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['video','play','Your videos'],['edit','edit','Edit page'],['tools','house','Homeowner tools',1],['found','g','Get found',1],['insights','chart','What\'s working',1]].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+(tog.xp?'<span class="qm" data-help="'+t[0]+'">?</span>':'')+(t[3]?'<i class="nw"></i>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
+ '<p class="lb"><span>This week'+qx('week')+'</span><a data-go="insights">Details</a></p>'+weekCard()+
+ '<div class="lk" data-tab="sophia"><span class="pill">Upgrade</span><div class="so"><span>S</span><b>Sophia</b>'+qx('sophia')+'</div><p>Turn your old claim files into dozens of answer pages with your name on every one.</p></div>'+
  '</div>'+nav('home')},
 activity:function(){unread=0;return '<div class="top"><h1 style="padding-left:4px">Activity</h1><span class="chip">'+I('bell',12)+'Alerts on</span></div><div class="scr"><div class="card">'+ALERTS.map(alertRow).join('')+'</div>'+
  '<div class="note gold">'+I('clock',14)+'<span>Florida contact hours are built in. Late-night alerts tell you the earliest time you can reach out.</span></div>'+
@@ -473,7 +475,7 @@ mypage:function(){var A=PAGES.free[0].a;return top('Your website')+'<div class="
 '<div class="ft"><b>Cedric Moore Public Adjusting</b> · Florida License W123456<br>Orlando, FL · <a>Privacy</a> · <a>Terms</a><br><span style="opacity:.7">A public adjuster is not an attorney. Fees are explained in writing before you sign.</span><br><a>Made with ClaimTract</a></div>'+
 '</div><p class="s" style="margin-top:8px">14 people have opened it today.</p></div>'},
 tools:function(){return '<div class="top"><h1 style="padding-left:4px">On your page</h1></div><div class="scr"><p class="s" style="margin-bottom:8px">Free tools your homeowners get. Turn any of them off. Tap to see what they see.</p><div class="card">'+
- [['binder','book','Claim binder','Their call log, inventory and checklists'],['install','phone','Save to home screen','Your page as an app on their phone'],['night','moon','3 a.m. mode','A calm page after dark'],['txt','msg','Text and email me','One tap, from their own phone'],['read','vol','Read it to me','Articles read out loud'],['search','search','Search','Find an answer in seconds'],['print','print','Print a handout','One clean page with your QR'],['help','thumb','"Did this help?"','See which answers work']].map(function(t){return '<div class="row" data-go="t_'+t[0]+'">'+ic(t[1])+'<div><b>'+t[2]+'</b><small>'+t[3]+'</small></div><button class="tg '+(tog[t[0]]?'on':'')+'" data-tog="'+t[0]+'" aria-label="'+t[2]+'"></button></div>'}).join('')+'</div></div>'+nav('tools')},
+ [['binder','book','Claim binder','Their call log, inventory and checklists'],['install','phone','Save to home screen','Your page as an app on their phone'],['night','moon','3 a.m. mode','A calm page after dark'],['txt','msg','Text and email me','One tap, from their own phone'],['read','vol','Read it to me','Articles read out loud'],['search','search','Search','Find an answer in seconds'],['print','print','Print a handout','One clean page with your QR'],['help','thumb','"Did this help?"','See which answers work']].map(function(t){return '<div class="row" data-go="t_'+t[0]+'">'+ic(t[1])+'<div><b>'+t[2]+qx('t_'+t[0])+'</b><small>'+t[3]+'</small></div><button class="tg '+(tog[t[0]]?'on':'')+'" data-tog="'+t[0]+'" aria-label="'+t[2]+'"></button></div>'}).join('')+'</div></div>'+nav('tools')},
 t_binder:function(){return top('Claim binder')+'<div class="scr"><div class="hp"><span class="tag">HOMEOWNER VIEW</span><h4>My claim binder</h4><div class="seg" style="background:#E9E9E4;border-color:#E1E1DC"><span class="on" style="background:#fff;color:#111">Calls</span><span>Inventory</span><span>Checklist</span></div>'+
  [['Nov 14','Claims line, Rachel','Adjuster visit Thursday'],['Nov 18','Field adjuster, Tom','Said estimate in 10 days']].map(function(c){return '<div class="ck" style="align-items:flex-start"><b style="font-size:9.5px;width:38px;flex:none;color:#8F5400">'+c[0]+'</b><span><b style="font-size:10.5px">'+c[1]+'</b><br><span class="mu" style="font-size:10px">'+c[2]+'</span></span></div>'}).join('')+
  '<div class="b">+ Add a call</div><div class="mu" style="font-size:9px;margin-top:6px;text-align:center">Saved only on this phone · Cedric Moore</div></div><div class="note">'+I('book',14)+'<span>Your name sits on a tool they open for weeks.</span></div></div>'},
@@ -557,6 +559,28 @@ function go(n){stack.push(cur.dataset.v);render(n,'push')}
 function back(){var n=stack.pop()||'home';render(n,'pop')}
 function tab(n){if(n==='sophia'&&plan==='free'){openSx();return}if(typeof closeSx==='function')closeSx();stack=[];render(n)}
 var HELP={
+week:['This week','How many homeowners opened your page, tapped to call you, and booked a time. Watch it climb as you share your page.'],
+g_articles:['Articles published','New articles written from your own claims. Free gives you the main article and 12 answers. Upgrade and new ones keep coming.'],
+g_facebook:['Facebook posts','Short posts made from your articles, ready for Facebook. Your neighbors see you know your stuff, and tap through to your page.'],
+g_instagram:['Instagram posts','The same story, sized for Instagram. Homeowners scroll past an ad, but they stop for a real claim lesson.'],
+g_google:['Google updates','Posts for your free Google profile. Fresh updates help you show up on the map when someone nearby searches for help.'],
+sophia:['Sophia','Your assistant on the paid plan. She turns your old claim files into articles and posts with your name on them, while you work.'],
+a_open:['Someone opened your page','You see the moment a homeowner opens the page you sent. Upgrade and you see who it was, so you know exactly who to call.'],
+a_saved:['Someone saved your contact','A homeowner saved you in their phone. When the storm hits or the letter comes, you are the name they find.'],
+a_carrier:['Email from the carrier','Forward carrier emails here and important ones show up as alerts. No more digging through your inbox for a supplement request.'],
+a_roofer:['Someone is looking at ClaimTract','Someone clicked the Made with ClaimTract link on your page. Chat with them or invite them to a video call. If they sign up and pay, you earn $25 a month.'],
+a_scan:['Someone scanned your QR','A homeowner scanned your door hanger, yard sign or truck. You see where and when, so you know which ones are working.'],
+a_read:['Read for over a minute','This homeowner did not just glance. They read. A minute or more means they are thinking about their claim, and about you.'],
+a_booked:['Someone booked a time','A homeowner picked a time on your page. They get a prep page, so they show up with the right papers.'],
+a_binder:['Claim binder used','Homeowners used the free claim binder on your page. Every time they log a call, your name is right there.'],
+t_binder:['Claim binder','A free binder on your page where homeowners log calls, list damaged items and follow a checklist. Organized homeowners make easier files.'],
+t_install:['Save to home screen','Homeowners can save your page to their phone like an app. Your face sits next to their other apps.'],
+t_night:['3 a.m. mode','Late at night your page turns calm and dark. A worried homeowner reading at 3 a.m. feels looked after, not sold to.'],
+t_txt:['Text and email me','One tap opens their own text or email app with your number filled in. Easy to reach means you get the call.'],
+t_read:['Read it to me','Your articles read out loud. Homeowners can listen while they clean up, and many will.'],
+t_search:['Search','Homeowners type a question and land on your answer in seconds. They find what they need without leaving your page.'],
+t_print:['Print a handout','One clean printed page with your QR code. Leave it on the kitchen table after every visit.'],
+t_help:['Did this help?','A thumbs up or down under every answer. You see which answers work, and what to say more about.'],
 letters:['Text a homeowner','Ready-made texts with your page link. Mary gets a clean message, and you get an alert the moment she opens it. No more wondering if she read it.'],
 qr:['QR code','Your page as a code for door hangers, yard signs and trucks. When someone scans it, you know where and when.'],
 card:['Contact card','One tap saves you in a homeowner\'s phone, with your photo and license. When they need you at midnight, you\'re right there.'],
