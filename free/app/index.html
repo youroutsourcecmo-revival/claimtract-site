@@ -143,7 +143,7 @@ svg{display:block}
 .tier{position:relative;background:var(--cd);border:1px solid var(--ln);border-radius:16px;padding:12px;margin-top:9px}
 .tier.ft{border:1.5px solid var(--go);background:linear-gradient(160deg,#2A2110,#1A1C21 75%)}
 .tier .rb{position:absolute;top:-8px;left:12px;background:var(--go);color:#111;font:800 8px Inter;letter-spacing:.6px;padding:3px 7px;border-radius:99px}
-.tier h3{font-size:13px;font-weight:800}.tier .pr{display:flex;align-items:baseline;gap:5px;margin:4px 0 2px}.tier .pr b{font-size:22px;font-weight:800}.tier .pr span{color:var(--mu);font-size:10px}.tier .pr s{color:var(--mu);font-size:11px}
+.tier h3{font-size:13px;font-weight:800}.tier .pr{display:flex;align-items:baseline;gap:5px;margin:4px 0 2px}.tier .pr b{font-size:22px;font-weight:800}.tier .pr span{color:var(--mu);font-size:10px}.tier .pr s{color:var(--mu);font-size:11px}.pr.one b{font-size:44px;line-height:1;color:var(--go)}.pr.one span{font-size:13px;font-weight:700;color:inherit}.then{color:var(--mu);font-size:11px;margin:2px 0 4px}.then s{margin-left:3px}
 .tier p{font-size:10.5px;color:var(--mu);line-height:1.4;margin:3px 0 8px}
 .tier .cur{font:700 10px Inter;color:var(--mu);text-align:center;padding:8px;border:1px dashed var(--ln);border-radius:10px}
 .ph{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
@@ -600,8 +600,8 @@ sophia:function(){if(plan!=='free')return V.claims();return '<div class="top"><h
  '<div style="margin-top:10px"><button class="cta" data-go="plans">See the plans</button></div></div>'+nav('sophia')},
 plans:function(){return top('Plans')+'<div class="scr"><p class="s">Your website and app stay free. The first 40 Florida adjusters get Founder pricing.</p>'+
  '<div class="tier"><h3>Free</h3><div class="pr"><b>$0</b><span>forever</span></div><p>Your website, field app and homeowner tools.</p><div class="cur">Your current plan</div></div>'+
- '<div class="tier ft" style="margin-top:14px"><span class="rb">FLORIDA FOUNDERS</span><h3>ClaimTract</h3><div class="pr"><b>$99</b><span>/month</span><s>$299</s></div><p>Sophia turns your old and new claim files into answer pages, ready to post.</p><button class="cta" data-act="plan" data-p="pro">Claim a Founder spot</button></div>'+
- '<div class="tier" style="margin-top:14px"><span class="rb" style="background:#F4F4F5">FLORIDA FOUNDERS</span><h3>ClaimTract Pro</h3><div class="pr"><b>$299</b><span>/month</span><s>$499</s></div><p>Everything in ClaimTract, plus your ClaimTract CRM for follow-up and booking.</p><button class="ghost" data-act="plan" data-p="plus">Claim a Founder spot</button></div>'+
+ '<div class="tier ft" style="margin-top:14px"><span class="rb">FLORIDA FOUNDERS</span><h3>ClaimTract</h3><div class="pr one"><b>$1</b><span>for 14 days</span></div><div class="then">Then $99/month for life as a Founder <s>$299</s></div><p>Sophia turns your old and new claim files into answer pages, ready to post.</p><button class="cta" data-act="plan" data-p="pro">Start for $1</button></div>'+
+ '<div class="tier" style="margin-top:14px"><span class="rb" style="background:#F4F4F5">FLORIDA FOUNDERS</span><h3>ClaimTract Pro</h3><div class="then">$299/month as a Founder <s>$499</s></div><p>Everything in ClaimTract, plus your ClaimTract CRM for follow-up and booking.</p><button class="ghost" data-act="plan" data-p="plus">Claim a Founder spot</button></div>'+
  '<div class="note gold">'+I('shield',14)+'<span>Sample only. Checkout opens on a secure payment page.</span></div></div>'},
 claims:function(){return '<div class="top"><h1 style="padding-left:4px">Your claims</h1><span class="chip">'+I('star',11)+(plan==='plus'?'Founder +':'Founder')+'</span></div><div class="scr">'+
  '<button class="cta" data-go="claim">'+I('scan',15)+'Turn a claim into pages</button>'+
