@@ -524,8 +524,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <script src="/assets/ct-explain.js"></script>
 <script>
 (function(){
-/* pricing rail explainers: Esther (HumanBot) per item; 16 is Ezekiel. Fill PXID after rendering in HumanBot. */
-var PXID={};var BOOK_EZEKIEL='';
+/* pricing rail explainers: Esther (HumanBot) per item; 16 is Ezekiel. Embed IDs from HumanBot campaigns "Rail NN ..." (rendered 2026-11-22). */
+var PXID={1:"XnyfdjPBSk2v",2:"9WZktchLUbR5",3:"PPVWenSuQc4z",4:"mr5gZ6crXpcR",5:"98sy2K8ULBFK",6:"muGfgESBCamQ",7:"ayP3JSqdxVAD",8:"xmGJ7b4puTJ5",9:"B5nWYepn7LfF",10:"LF9QpqDSGzVm",11:"rs6Z2EqVMD25",12:"jUyaey3eANjH",13:"TfVpCqx8UNMf",14:"UhRJzMxtfnjs",15:"C6qf7rJAQxA7",17:"7CVeaDcJWAsj",18:"p5QYjbqzyvJe",19:"NG8uAedpbdGu",20:"GcbN6brqgkBx",21:"zq55kKL7U4tM",22:"DvfxmXSLAju8",23:"SuaZvGWjKNj2",24:"tGEc9BCVFP9k",25:"t9ZZVM27pHVq",26:"ydxkPUtv2UKm",27:"HXvWXpxteraD",28:"KFB4RDA8GhEJ",29:"nDV5nHRUuVR4",30:"SHMymHShp5qX",31:"DJZtGMkDe79t",32:"DYMFHHANJ3Sq"};var BOOK_EZEKIEL='';
 var D={1:'C:top',2:'C:trust',3:'C:hero',4:'C:about',5:'C:article',6:'C:answers',7:'P:pick',8:'C:top',9:'P:pages',10:'P:share',11:'P:qr',12:'P:card',13:'P:book',14:'P:meet',15:'P:mail',16:'P:earn',17:'P:letters',18:'P:hours',19:'P:home',20:'P:edit',21:'C:tools',22:'C:tools',23:'C:tools',24:'C:contact',25:'C:tools',26:'F:assistant',27:'P:livechat',28:'P:asst',29:'P:found',30:'P:found',31:'P:insights',32:'P:activity'};
 function reveal(li){if(li&&!li.offsetParent){var h=li.previousElementSibling;while(h&&!h.classList.contains('gh'))h=h.previousElementSibling;if(h)h.click()}}
 function backTo(n){CTExplain.back('Back to pricing',null,function(){var li=document.getElementById('px'+n);reveal(li);setTimeout(function(){if(li)li.scrollIntoView({behavior:'smooth',block:'center'})},60)})}
