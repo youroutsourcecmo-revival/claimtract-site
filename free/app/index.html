@@ -330,6 +330,7 @@ p.s{font-size:11px;color:var(--mu);line-height:1.5;margin:2px 2px 0}
 .app.light .art .ok2{background:#FFFFFF;color:#16181C}
 .app.light .nb{background:#FFFFFF;color:#16181C}
 .app.light .rs .chips span.on{background:#FFFFFF;color:#16181C}
+@property --qp{syntax:'<number>';inherits:false;initial-value:0}@keyframes qxb{0%,100%{--qp:0;box-shadow:0 0 0 0 rgba(245,165,36,0)}50%{--qp:1;box-shadow:0 0 0 4px rgba(245,165,36,.28),0 0 12px rgba(245,165,36,.55)}}.app.pulse .qx,.app.pulse .tl .qm{animation:qxb 2.6s ease-in-out infinite;border-color:#F5A524!important;background:color-mix(in srgb,#F5A524 calc(var(--qp)*100%),#15171B)!important;color:color-mix(in srgb,#15171B calc(var(--qp)*100%),#F5A524)!important}@media (prefers-reduced-motion:reduce){.app.pulse .qx,.app.pulse .tl .qm{animation:none;--qp:1}}
 </style></head>
 <body><div class="app" id="app">
 <div class="sb"><span>9:41</span><i><svg width="16" height="10" viewBox="0 0 16 10"><rect x="0" y="6" width="3" height="4" rx="1" fill="#fff"/><rect x="4.3" y="4" width="3" height="6" rx="1" fill="#fff"/><rect x="8.6" y="2" width="3" height="8" rx="1" fill="#fff"/><rect x="12.9" y="0" width="3" height="10" rx="1" fill="#fff"/></svg><svg width="22" height="11" viewBox="0 0 22 11"><rect x=".5" y=".5" width="19" height="10" rx="3" fill="none" stroke="#fff" opacity=".5"/><rect x="2" y="2" width="14" height="7" rx="1.6" fill="#fff"/><rect x="20.3" y="3.5" width="1.5" height="4" rx=".7" fill="#fff" opacity=".5"/></svg></i></div>
@@ -627,6 +628,7 @@ articles:function(){return top('Pages from this claim')+'<div class="scr"><div c
 var app=document.getElementById('app'),stack=[],cur=null;
 var THEME='auto';try{THEME=localStorage.getItem('ct_theme')||'auto'}catch(e){}var mqDark=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
 function applyTheme(){var l=THEME==='light'||(THEME==='auto'&&!(mqDark&&mqDark.matches));tog.lt=l;app.classList.toggle('light',l)}
+try{var OPN=+(localStorage.getItem('ct_opens')||0)+1;localStorage.setItem('ct_opens',OPN);if(OPN<=5)app.classList.add('pulse')}catch(e){app.classList.add('pulse')}
 applyTheme();if(mqDark&&mqDark.addEventListener)mqDark.addEventListener('change',function(){if(THEME==='auto')applyTheme()});
 function render(name,dir){var html=V[name]();var el=document.createElement('div');el.className='view';el.innerHTML=html;el.dataset.v=name;
  if(dir==='push'){el.classList.add('in');app.appendChild(el);el.offsetWidth;el.classList.remove('in');if(cur){cur.classList.add('out');var o=cur;setTimeout(function(){o.remove()},340)}}
