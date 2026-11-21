@@ -420,6 +420,7 @@ body.pvmode #pv .own{display:none!important}body.pvmode #pv{border:0!important;b
   </section>
   <input class="hp" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 </div>
+<script src="/assets/ct-article.js"></script>
 <script src="/ct-track.js"></script>
 <script src="/vendor/qrcode.js"></script>
 <script src="/assets/ct-owner.js" defer></script><script src="/assets/ct-ready.js" defer></script>
@@ -561,11 +562,12 @@ function render(){var Q0=(function(){try{var q=new URLSearchParams(location.sear
 var guides='<div class="sec gds"><h2>Guides for homeowners</h2>'+GUIDES.map(function(g){return '<details class="gd"><summary>'+g[0]+'</summary><div class="ans"><ul class="rdy">'+g[1].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul><p class="sc">'+g[2]+'</p><a href="'+tel+'">Call '+esc(fp)+'</a></div></details>'}).join('')+'</div>';
 var TK=function(x){return esc(x).replace(/\{\{FIRST\}\}/g,fn).replace(/\{\{FULL_NAME\}\}/g,name).replace(/\{\{CITY\}\}/g,city||'your area').replace(/\{\{STATE\}\}/g,st).replace(/\{\{PHONE\}\}/g,esc(fp)).replace(/\{\{LICENSED_SINCE\}\}/g,esc($('lsy').value.trim()||'Florida'))};
  var P=CT.pillar,slugv=slug(),relBase=(location.pathname.indexOf('/free/build')===0)?'/cedric-moore/':'/'+slugv+'/';var relQ='';if(relBase==='/cedric-moore/'){var rq=new URLSearchParams();rq.set('fn',$('fn').value.trim());if($('ln').value.trim())rq.set('ln',$('ln').value.trim());rq.set('ph',$('ph').value.replace(/\D/g,'').slice(-10));rq.set('city',$('ci').value.trim());rq.set('st',$('st').value.trim().toUpperCase());if($('lic').value.trim())rq.set('lic',$('lic').value.trim());relQ='?'+rq.toString()}
- var team='<div class="sec team"><p class="tk" style="color:#0E9F6E">'+P.label+'</p><h2>'+TK(P.title)+'</h2><p class="by">'+city+', '+st+' &middot; Approved by '+name+', Licensed Public Adjuster</p>'+P.intro.map(function(x){return '<p class="ti">'+TK(x)+'</p>'}).join('')
+  var teamOld='<div class="sec team"><p class="tk" style="color:#0E9F6E">'+P.label+'</p><h2>'+TK(P.title)+'</h2><p class="by">'+city+', '+st+' &middot; Approved by '+name+', Licensed Public Adjuster</p>'+P.intro.map(function(x){return '<p class="ti">'+TK(x)+'</p>'}).join('')
  +'<figure class="pq"><blockquote>&ldquo;'+TK(P.quote)+'&rdquo;</blockquote><div class="cta"><a href="'+tel+'">Call '+fn+'</a><a href="sms:+1'+d.slice(-10)+'">Text '+fn+'</a></div></figure>'
  +'<p class="ti">'+TK(P.lead)+'</p><div class="chain">'+P.team.map(function(t,i){return '<div class="tc"><b>'+(i+1)+'</b><h3>'+t[0]+'</h3><p class="r">'+t[1]+'</p><p>'+TK(t[2])+'</p></div>'}).join('')+'</div>'
  +'<div class="yours"><div><p class="tk" style="margin:0 0 6px">Your side of your claim</p><h3>'+TK(P.close_h)+'</h3><p>'+TK(P.close)+'</p></div><a href="'+tel+'">Call '+fn+' &middot; '+esc(fp)+'</a></div>'
  +'<p class="tn">General information. Every insurance company handles claims its own way.</p></div>';
+ var team=window.CTArticle?CTArticle.html({raw:1,fn:fn,name:name,place:city+', '+st,after:'<div class="yours"><div><p class="tk" style="margin:0 0 6px">Your side of your claim</p><h3>'+TK(P.close_h)+'</h3><p>'+TK(P.close)+'</p></div><a href="'+tel+'">Call '+fn+' &middot; '+esc(fp)+'</a></div><p class="tn">General information. Every insurance company handles claims its own way.</p>'}):teamOld;
  
  var arf=$('ar').value.split(',')[0].trim()||city;
  var lcard='<div class="sec"><div class="pab"><div class="pab-h"><span>'+name.toUpperCase()+'</span><small>Licensed Public Adjuster &middot; '+city+', '+st+'</small></div><div class="pab-ok"><img src="/assets/ct-shield.png" alt="">License active &middot; last verified '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+'</div><div class="pab-g"><div><i>LICENSE #</i><b>'+(lic||'&mdash;')+'</b></div>'+(yr2?'<div><i>LICENSED SINCE</i><b>'+esc(yr2)+'</b></div>':'')+'<div><i>LICENSE TYPE</i><b>'+lt+'</b></div><div><i>LICENSED IN</i><b>'+esc(({FL:'Florida',GA:'Georgia',TX:'Texas',CA:'California',LA:'Louisiana',SC:'South Carolina',NC:'North Carolina',AL:'Alabama'})[st]||st)+'</b></div></div>'+(function(){var ch=function(a){return a.map(function(x){return '<span>'+esc(x)+'</span>'}).join('')},ars=$('ar').value.split(',').map(function(x){return x.trim()}).filter(Boolean).slice(0,10),lgs=[].slice.call(document.querySelectorAll('#lgs input:checked')).map(function(x){return x.value}),sv=(S.spec||[]).slice();return '<div class="pab-x">'+(sv.length?'<i>SERVICES</i><div>'+ch(sv)+'</div>':'')+'<i>SERVES</i><div>'+ch(ars.length?ars:[arf])+'</div>'+(lgs.length?'<i>SPEAKS</i><div>'+ch(lgs)+'</div>':'')+'</div>'})()+'<a class="pab-v" href="'+(dfsU||'https://licenseesearch.fldfs.com/')+'" target="_blank" rel="noopener">Verify this license on the state&#39;s site &rarr;</a></div></div>';
@@ -717,5 +719,6 @@ try{var qv=new URLSearchParams(location.search);if(qv.get('view')==='preview'){S
 })();
 </script>
 
+<script>window.CTArticle&&CTArticle.bind()</script>
 </body>
 </html>
