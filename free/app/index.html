@@ -171,6 +171,15 @@ svg{display:block}
 .spl small{position:absolute;bottom:26px;left:0;right:0;text-align:center;font:600 10px Inter;color:#6B6F78;letter-spacing:.4px;opacity:0;transition:opacity .4s}
 .spl.tap small{opacity:1}
 .hd img{cursor:pointer}
+#qm{position:absolute;inset:0;z-index:58;background:rgba(8,9,11,.82);display:none;align-items:center;justify-content:center;padding:18px}#qm.on{display:flex}
+#qm .qmc{position:relative;background:#fff;color:#111;border-radius:24px;padding:22px 18px 16px;width:100%;max-width:300px;text-align:center;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+#qm #qmx{position:absolute;top:8px;right:10px;border:0;background:none;font:400 24px Inter;color:#888;cursor:pointer}
+#qm .qma{width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid #F5A524;display:block;margin:0 auto 8px;background:#eee}
+#qm .qmc>b{display:block;font:800 16px Inter}#qm .qmc>small{display:block;font-size:11px;color:#666;margin-top:2px}
+#qm .seg2{display:flex;background:#F1F1EE;border-radius:11px;padding:3px;margin:14px 0 10px}#qm .seg2 b{flex:1;padding:7px;border-radius:8px;font:700 11px Inter;color:#666;cursor:pointer}#qm .seg2 b.on{background:#111;color:#fff}
+#qm .qmq{width:210px;height:210px;margin:0 auto}#qm .qmq svg{width:100%;height:100%;display:block}
+#qm p{margin:10px 0 2px;font:700 13px Inter}#qm .qmh{display:block;font-size:10px;color:#999;margin-top:6px}
+
 .wk{padding:11px 11px 9px}
 .wk .lg{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 6px}
 .wk .lg span{display:flex;align-items:center;gap:4px;font:600 9px Inter;color:var(--mu)}
@@ -227,6 +236,7 @@ p.s{font-size:11px;color:var(--mu);line-height:1.5;margin:2px 2px 0}
 <div class="shd" id="shd"></div><div class="sht" id="sht"><div class="gp"></div><div class="hd2"><b id="shT">Your pages</b><button class="bk" id="shX" style="width:26px;height:26px">&times;</button></div><div class="bd2" id="shB"></div></div>
 <div class="art" id="art"><div class="tb"><button id="arX" aria-label="Close">&#8595;</button><b id="arK"></b><span class="chip" id="arN" style="display:none;background:#FFF3DC;color:#8F5400;border-color:#F0D49A"></span></div><div class="bx2" id="arB"></div><div class="ab" id="arA"><button class="rj" id="arR">Send back</button><button class="ok2" id="arO">Approve</button></div><div class="rec" id="rec"><small style="color:#F5A524;font-weight:800;letter-spacing:1px">TELL IT YOUR WAY</small><q id="recq"></q><div class="ring"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><div class="t" id="rect">0:00</div><small>Talk like you're telling another adjuster. No names or addresses.</small><button id="recs">Done</button></div><div class="nb" id="nb">&#9998; Add a note</div><div class="nbx" id="nbx"><textarea id="nbt" placeholder="What should change here?"></textarea><div class="r"><button id="nbc" style="background:#EEEEEA">Cancel</button><button id="nbs" style="background:#F5A524;flex:1">Save note</button></div></div><div class="rs" id="rs"><b>Why are you sending it back?</b><div class="chips" id="rsc"><span>Facts are wrong</span><span>Not how I'd say it</span><span>Too long</span><span>Names or address showing</span><span>Wrong photo</span><span>Other</span></div><textarea id="rst" placeholder="Tell the writer what to fix (required)"></textarea><div style="display:flex;gap:6px;margin-top:8px"><button class="go" id="rsx" style="background:#EEEEEA">Cancel</button><button class="go" id="rsg" style="background:#111;color:#fff;flex:1;opacity:.4">Send back</button></div></div></div>
 <div id="xp"><div class="av"><i><span class="bars"><b></b><b></b><b></b></span></i></div><div class="tx"><small>Explainer · 20 sec</small><b id="xpt"></b><p id="xpp"></p><div class="xpb"><i id="xpg"></i></div></div><button class="x" id="xpx" aria-label="Close">&times;</button></div>
+<div id="qm"><div class="qmc"><button id="qmx" aria-label="Close">&times;</button><img class="qma" src="/assets/ezekiel.webp" alt=""><b>Cedric Moore</b><small>Licensed Public Adjuster · Orlando, FL</small><div class="seg2"><b data-m="card" class="on">Contact card</b><b data-m="page">My page</b></div><div class="qmq" id="qmq"></div><p id="qmt">Scan to save my contact</p><span class="qmh">Tip: tap the shield anytime to show this</span></div></div>
 <div class="toast" id="toast"><img src="/assets/ct-shield.png" alt=""><div><b id="tt"></b><small id="ts"></small></div><time>now</time></div>
 </div>
 <script>
@@ -612,7 +622,11 @@ function playSplash(withSound){spl.classList.remove('off','tap');try{sv.currentT
 function end(){spl.classList.add('off');greet()}
 sv.addEventListener('ended',function(){setTimeout(end,250)});
 spl.addEventListener('click',function(){if(spl.classList.contains('tap')){spl.classList.remove('tap');playSplash(true)}else end()});
-app.addEventListener('click',function(e){if(e.target.closest('.hd img'))playSplash(true)});
+app.addEventListener('click',function(e){if(e.target.closest('.hd img'))openQm()});
+var qmMode='card';
+function qmDraw(){var card=qmMode==='card';document.getElementById('qmq').innerHTML=qrSvg(card?23:7);document.getElementById('qmt').textContent=card?'Scan to save my contact':'Scan to see my page';document.querySelectorAll('#qm .seg2 b').forEach(function(b){b.classList.toggle('on',b.dataset.m===qmMode)})}
+function openQm(){qmMode='card';qmDraw();document.getElementById('qm').classList.add('on')}
+document.getElementById('qm').addEventListener('click',function(e){var b=e.target.closest('[data-m]');if(b){qmMode=b.dataset.m;qmDraw();return}if(e.target.id==='qm'||e.target.closest('#qmx'))document.getElementById('qm').classList.remove('on')});
 try{new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting&&!shown){shown=true;playSplash(false)}})},{threshold:.5}).observe(app)}catch(e){shown=true;playSplash(false)}
 })();
 </script>
