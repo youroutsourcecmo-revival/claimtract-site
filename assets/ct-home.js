@@ -142,7 +142,7 @@ function events(){var q=new URLSearchParams(location.search),src=q.get('s')||(do
 function newAnswer(){var b=load();if(!b||!b.auto||!b.questions||!b.questions.some(function(q){return !q.answer}))return;b=binder();
  answers(b,function(){var n=el('div','cth cth-sbar','<b style="font-size:13.5px;padding-right:4px">'+esc(FIRST)+' answered your question</b><button data-o>Read it</button><button data-c style="background:#333;color:#fff">Later</button>');document.body.appendChild(n);
   n.addEventListener('click',function(e){if(e.target.dataset.o!=null){n.remove();openBinder('q')}if(e.target.dataset.c!=null)n.remove()})})}
-function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(st);tools();lateBanner();events();newAnswer();
+function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(st);tools();lateBanner();events();newAnswer();if(/[?&]print=1/.test(location.search))setTimeout(printHandout,800);
  window.CTHome={tools:function(){var o=$('.cth-sec');if(o)o.remove();tools()},binder:openBinder,read:readAloud,search:openSearch,print:printHandout,home:saveHome,late:lateBanner}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
