@@ -241,6 +241,7 @@ svg{display:block}
 .ezv .ln{display:flex;justify-content:space-between;align-items:center;margin-top:7px;font:600 10.5px Inter;color:#A9AEB7}
 .ezv .ctl{display:flex;gap:6px}.ezv .ctl button{background:#1B1F25;border:1px solid #2A2D33;color:#fff;border-radius:8px;padding:5px 9px;font:700 10px Inter;cursor:pointer}
 .vo .pk.lock{background:#2A2D33;color:#7C818B;cursor:not-allowed}
+.sec h3{font:800 14px Inter;margin:14px 0 6px;color:inherit}.sec ul{margin:6px 0 8px 18px}.sec li{margin:3px 0}.vlead p,.sec p{margin:0 0 9px}
 .st.pend{background:#2A2210;color:#F5A524}
 .vo{border:1px solid #2A2D33;border-radius:14px;padding:11px 12px;margin-bottom:8px;background:#111317}.vo b{display:block;font-size:13px;color:#fff;margin:3px 0 2px}.vo small{display:block;color:#A9AEB7;font-size:10.5px;line-height:1.4}.vo .k2{color:#F5A524}.vo .r{display:flex;gap:7px;margin-top:9px}.vo .r button{flex:1;border-radius:10px;padding:8px;font:700 11px Inter;cursor:pointer}.vo .rd{background:none;border:1px solid #3A3E46;color:#fff}.vo .pk{background:#F5A524;border:0;color:#111}.vo.off{opacity:.45}
 .an{display:flex;gap:9px;align-items:flex-start;padding:9px 10px;border:1px solid var(--ln);border-radius:12px;margin:0 0 6px 14px;cursor:pointer;position:relative;background:var(--cd)}
@@ -775,7 +776,17 @@ function closeSheet(){if(typeof ezHide==='function')ezHide();sht.classList.remov
 shd.onclick=closeSheet;document.getElementById('shX').onclick=closeSheet;
 shB.addEventListener('click',function(e){var t=e.target.closest('[data-rv]');if(t){window.__readV=t.dataset.rv;openArt(0,-1);var k=document.getElementById('arK');if(k)k.textContent='Main article V'+t.dataset.rv;return}t=e.target.closest('[data-ez]');if(t){if(t.dataset.ez==='replay'){ezStart()}else{if(ezEl){ezEl.muted=!ezEl.muted;t.textContent=ezEl.muted?'Unmute':'Mute'}else{t.textContent=t.textContent==='Mute'?'Unmute':'Mute'}}return}t=e.target.closest('[data-pv]');if(t){if(t.classList.contains('lock')){toast('One minute first','Hear Ezekiel out, then pick your voice.');return}askPick(t.dataset.pv,function(){pagesFocus(0)});return}t=e.target.closest('[data-pi]');if(t){if(plan==='free'&&PAGES.free[0].st==='pend'){pickList();if(!ezSeen)ezStart();return}pagesFocus(+t.dataset.pi);return}t=e.target.closest('[data-open]');if(t){var q=t.dataset.open.split('|');openArt(+q[0],+q[1]);return}if(e.target.closest('#shBack')){if(typeof ezHide==='function')ezHide();pagesList()}});
 var art=document.getElementById('art'),arB=document.getElementById('arB'),arN=document.getElementById('arN'),nb=document.getElementById('nb'),nbx=document.getElementById('nbx'),rs=document.getElementById('rs'),notes=0,rng=null;
-function openArt(i,j){var p=PAGES[plan==='free'?'free':'paid'][i],title=j<0?p.t:p.a[j];notes=0;arN.style.display='none';
+var VDATA=null;
+function openArt(i,j){var vk=(plan==='free'&&i===0&&j<0)?(PAGES.free[0].st==='mine'?pickedV:window.__readV):null;
+ if(vk&&!VDATA){fetch('/free/app/versions.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){VDATA=d;openArt(i,j)}).catch(function(){VDATA={};openArt(i,j)});return}
+ if(vk&&VDATA&&VDATA[vk]){var V=VDATA[vk];notes=0;arN.style.display='none';document.getElementById('arK').textContent='Main article V'+vk;
+  SEC_Q=V.secs.map(function(x){return x.q||'What happened on a claim like this, in your own words?'});
+  arB.innerHTML='<h2>'+V.title+'</h2><div class="by">Reviewed and approved by Cedric Moore, Licensed Public Adjuster · Orlando, FL</div>'+
+  '<div class="myo"><b>'+I('msg',13)+' Make it yours</b><span>Tap the mic under any section and talk for a minute. The writer rebuilds that section around your story and sends it back for your OK.</span></div>'+
+  '<div class="vlead">'+V.lead+'</div>'+V.secs.map(function(x,n){return '<div class="sec" data-sec="'+n+'"><h3>'+x.h+'</h3>'+x.html+'<button class="mic" data-mic="'+n+'">'+I('vol',12)+'<span>Tell it your way</span></button></div>'}).join('')+
+  '<p style="color:#55585F;font-size:11px">Select any words to leave a note for the writer.</p>';
+  document.getElementById('arA').style.display='none';art.classList.add('on');arB.scrollTop=0;return}
+ var p=PAGES[plan==='free'?'free':'paid'][i],title=j<0?p.t:p.a[j];notes=0;arN.style.display='none';
  document.getElementById('arK').textContent=j<0?(p.k==='CLAIM'?'Main article':'Main article'):'Answer '+(j+1);
  var SEC=[
   ['p','A ceiling stain rarely shows how far the water went. When Cedric reviewed this file, the stain was the smallest part of the story.','What was the first thing you checked on a claim like this, and why?'],
