@@ -1,0 +1,26 @@
+/* Answer pages (child pages). Builds on ct-page.css (.pv, .nv, .hero2, .pab, .rel). Owner: Claude. */
+.pv.ans .hero2.ans-hero{min-height:max(440px,calc(100svh - 215px))}
+.smp~.pv.ans .hero2.ans-hero{min-height:max(420px,calc(100svh - 270px))}
+.pv.ans .hero2 h1{font-size:clamp(30px,5vw,50px);line-height:1.08;max-width:780px}
+.pv .ans-crumb{position:relative;z-index:2;margin:0 0 10px;font:600 13px Inter,sans-serif;color:rgba(255,255,255,.8)}
+.pv .ans-crumb a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.pv .ans-lb{position:relative;z-index:2;margin:0 0 10px;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--p-ac)}
+.pv .sec.ans-trs{padding-top:36px}
+.pv .ans-art{max-width:760px;margin:0 auto}
+.pv .ans-sa{background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-left:4px solid #0E9F6E;border-radius:0 14px 14px 0;padding:18px 20px;margin:0 0 26px}
+.pv .ans-sa b{display:block;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#0E9F6E;margin-bottom:6px}
+.pv .ans-sa p{margin:0;font-size:17px;line-height:1.6}
+.pv .ans-body p{margin:0 0 18px;font-size:17.5px;line-height:1.7;color:var(--p-tx)}
+.pv .ans-pq{margin:26px 0;padding:22px 24px;border-left:4px solid var(--p-ac);background:var(--p-card);border-radius:0 14px 14px 0}
+.pv .ans-pq blockquote{margin:0 0 14px;font:800 21px/1.35 Inter,sans-serif}
+.pv .ans-cta{display:flex;gap:10px;flex-wrap:wrap}
+.pv .ans-cta a,.pv .ans-cl a{text-decoration:none;font:800 15px Inter,sans-serif;padding:12px 18px;border-radius:12px;background:var(--p-ac);color:var(--p-acx)}
+.pv .ans-cta a+a{background:transparent;border:2px solid var(--p-ac);color:var(--p-tx)}
+.pv .ans-nx{background:var(--p-card);border:1px solid rgba(128,128,128,.25);border-radius:16px;padding:20px 22px;margin:26px 0}
+.pv .ans-nx h2{margin:0 0 10px;font-size:20px}
+.pv .ans-nx ol{margin:0;padding-left:22px}.pv .ans-nx li{margin:7px 0;line-height:1.55}
+.pv .ans-cl{background:var(--p-ac);color:var(--p-acx);border-radius:16px;padding:22px 24px;margin:26px 0}
+.pv .ans-cl p{margin:0 0 14px;font-size:17px;line-height:1.6}
+.pv .ans-cl a{display:inline-block;background:#111;color:#fff}
+.pv .ans-disc{font-size:13px;color:var(--p-mut);margin:10px 0 0}
+.pv .ans-f{padding:24px;font-size:13px;color:var(--p-mut)}

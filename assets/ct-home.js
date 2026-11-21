@@ -129,7 +129,7 @@ function tools(){if($('.cth-sec'))return;FIRST=D.first||'your adjuster';NAME=D.n
  '<button class="cth-t" data-a="search"><i>&#128269;</i><b>Search this page</b><small>Find your answer fast</small></button>'+
  '<button class="cth-t" data-a="print"><i>&#128424;</i><b>Print a handout</b><small>First steps for the kitchen table</small></button>'+
  '<button class="cth-t" data-a="home"><i>&#128241;</i><b>Save to home screen</b><small>Opens like an app after a storm</small></button></div>');
- var anchor=$('.sec .pab')?$('.sec .pab').closest('.sec'):($('footer')||null);if(anchor)anchor.parentNode.insertBefore(s,anchor);else document.body.appendChild(s);
+ var tr=$('.sec .pab')?$('.sec .pab').closest('.sec'):null,anchor=tr?tr.nextSibling:($('footer')||null);if(tr&&!anchor)tr.parentNode.appendChild(s);else if(anchor)anchor.parentNode.insertBefore(s,anchor);else document.body.appendChild(s);
  s.addEventListener('click',function(e){var b=e.target.closest('.cth-t');if(!b)return;var a=b.dataset.a;
   if(a==='binder')openBinder();else if(a==='read')readAloud(b);else if(a==='search')openSearch();else if(a==='print')printHandout();else if(a==='home')saveHome()})}
 
