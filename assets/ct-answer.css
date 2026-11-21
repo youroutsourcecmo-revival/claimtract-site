@@ -24,3 +24,7 @@
 .pv .ans-cl a{display:inline-block;background:#111;color:#fff}
 .pv .ans-disc{font-size:13px;color:var(--p-mut);margin:10px 0 0}
 .pv .ans-f{padding:24px;font-size:13px;color:var(--p-mut)}
+.pv .ans-sh{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.pv .ans-sh a,.pv .ans-sh button{font:800 14px Inter,sans-serif;padding:11px 16px;border-radius:12px;border:2px solid var(--p-ac);background:transparent;color:var(--p-tx);text-decoration:none;cursor:pointer}
+.pv .ans-sh a:first-child{background:var(--p-ac);color:var(--p-acx)}
+.pv.ans .faq .ans a.fq-more{background:transparent;color:var(--p-tx);border:2px solid var(--p-ac);margin-right:8px}

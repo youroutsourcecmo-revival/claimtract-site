@@ -16,7 +16,7 @@ function ev(name,f){if(SAMPLE||!SLUG)return;var b=Object.assign({name:name,page:
 
 var CSS='.cth{font-family:Inter,system-ui,sans-serif}.cth-sec{max-width:1100px;margin:28px auto;padding:0 20px}.cth-sec h2{margin:0 0 4px}.cth-sec>p{color:#666;margin:0 0 14px}'+
 '.cth-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}.cth-t{background:#111316;color:#fff;border:1px solid #24272d;border-radius:14px;padding:14px;text-align:left;cursor:pointer;font:inherit}.cth-t b{display:block;font-size:15px;margin:6px 0 3px}.cth-t small{color:#9aa0a8;font-size:12.5px;line-height:1.4;display:block}.cth-t i{font-style:normal;font-size:20px}'+
-'.cth-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2147483000;display:flex;align-items:flex-end;justify-content:center}.cth-sh{background:#fff;color:#111;width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px 18px 26px}.cth-sh h3{margin:0 0 4px;font-size:19px}.cth-sh .mu{color:#666;font-size:13px}.cth-x{float:right;border:0;background:#eee;border-radius:99px;width:32px;height:32px;font-size:18px;cursor:pointer}'+
+'.cth-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2147483000;display:flex;align-items:flex-end;justify-content:center}.cth-sh{background:#fff;color:#111;width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px 18px 26px}.cth-sh h3{margin:0 0 4px;font-size:19px}.cth-sh .mu{color:#666;font-size:13px}.cth-sh input,.cth-sh textarea,.cth-sh select{background:#fff!important;color:#111!important;border:1px solid #ccc!important}.cth-x{float:right;border:0;background:#eee;border-radius:99px;width:32px;height:32px;font-size:18px;cursor:pointer}'+
 '.cth-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}.cth-tabs button{flex:1 1 auto;border:1px solid #ddd;background:#fff;border-radius:99px;padding:8px;font:700 13px Inter,sans-serif;cursor:pointer}.cth-tabs button.on{background:#111;color:#F5A524;border-color:#111}'+
 '.cth-row{border:1px solid #eee;border-radius:12px;padding:10px;margin:8px 0;font-size:14px}.cth-row small{color:#777}.cth-f input,.cth-f textarea{width:100%;box-sizing:border-box;border:1px solid #ccc;border-radius:10px;padding:10px;font:15px Inter,sans-serif;margin:4px 0}.cth-b{display:block;width:100%;border:0;border-radius:12px;padding:13px;font:800 15px Inter,sans-serif;cursor:pointer;margin-top:8px;background:#F5A524;color:#111}.cth-b.g{background:#111;color:#fff}.cth-b.l{background:#f1f1f1;color:#111}'+
 '.cth-ck{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #f0f0f0;font-size:14.5px}.cth-ck input{width:20px;height:20px;accent-color:#111}'+
@@ -85,6 +85,20 @@ function push(b,cb){if(SAMPLE){cb('This is a sample page, so nothing was sent. O
 /* read it to me */
 var speaking=false;
 function mainText(){var a=$('.cta-art .vb.on')||$('main')||$('.cta-art')||document.body;return a.innerText.replace(/\s+/g,' ').trim()}
+
+/* Listen (top of page): plays the page's recorded voice track; falls back to the phone's own voice */
+var LA=null,LS=false;
+function lsnLbl(b,on){var t=b.querySelector('.lsn-t');if(t)t.textContent=on?'Pause':(b.getAttribute('data-l')||'Listen to this page');b.classList.toggle('on',on)}
+function lsnFallback(b){var sy=window.speechSynthesis;if(!sy)return;if(LS){sy.cancel();LS=false;lsnLbl(b,false);return}
+ var t=mainText(),parts=t.match(/[^.!?]+[.!?]+/g)||[t],i=0;LS=true;lsnLbl(b,true);
+ (function next(){if(!LS||i>=parts.length){LS=false;lsnLbl(b,false);return}var u=new SpeechSynthesisUtterance(parts[i++]);u.lang='en-US';u.onend=next;u.onerror=next;sy.speak(u)})()}
+function listen(b){if(LS){lsnFallback(b);return}
+ var src=b.getAttribute('data-src')||'';if(src.indexOf('{v}')>=0){var v=document.querySelector('.cta-art .vt button[aria-pressed=true]');src=src.split('{v}').join(v?v.getAttribute('data-v'):'1')}
+ if(LA&&LA._src===src){if(LA.paused){LA.play();lsnLbl(b,true)}else{LA.pause();lsnLbl(b,false)}return}
+ if(LA)LA.pause();if(!src){lsnFallback(b);return}
+ var a=new Audio(src);a._src=src;LA=a;a.onended=function(){lsnLbl(b,false)};a.onerror=function(){if(LA===a)LA=null;lsnFallback(b)};
+ var pr=a.play();lsnLbl(b,true);if(pr&&pr.catch)pr.catch(function(){})}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.lsn');if(!b)return;e.preventDefault();listen(b)});
 function readAloud(btn){var sy=window.speechSynthesis;if(!sy){alertSheet('Read it to me','Your browser can\'t read pages aloud. Try Chrome or Safari.');return}
  if(speaking){sy.cancel();speaking=false;setLbl(btn,'Read it to me','Listen to this page, hands free');return}
  var t=mainText(),parts=t.match(/[^.!?]+[.!?]+/g)||[t],i=0;speaking=true;setLbl(btn,'Stop reading','Tap again to stop');
@@ -125,8 +139,7 @@ function lateBanner(){if(SLUG==='preview')return;var h=new Date().getHours();if(
 /* tools section */
 function tools(){if($('.cth-sec'))return;FIRST=D.first||'your adjuster';NAME=D.name||FIRST;PH=(D.phone||'').replace(/\D/g,'').slice(-10);var s=el('section','cth cth-sec','<h2>Tools for your claim</h2><p>Free, from '+esc(FIRST)+'. They work on your phone, even with weak signal.</p><div class="cth-g">'+
  '<button class="cth-t" data-a="binder"><i>&#128210;</i><b>Claim binder</b><small>Call log, damage list and checklist on your phone</small></button>'+
- '<button class="cth-t" data-a="read"><i>&#128266;</i><b>Read it to me</b><small>Listen to this page, hands free</small></button>'+
- '<button class="cth-t" data-a="search"><i>&#128269;</i><b>Search this page</b><small>Find your answer fast</small></button>'+
+  '<button class="cth-t" data-a="search"><i>&#128269;</i><b>Search this page</b><small>Find your answer fast</small></button>'+
  '<button class="cth-t" data-a="print"><i>&#128424;</i><b>Print a handout</b><small>First steps for the kitchen table</small></button>'+
  '<button class="cth-t" data-a="home"><i>&#128241;</i><b>Save to home screen</b><small>Opens like an app after a storm</small></button></div>');
  var tr=$('.sec .pab')?$('.sec .pab').closest('.sec'):null,anchor=tr?tr.nextSibling:($('footer')||null);if(tr&&!anchor)tr.parentNode.appendChild(s);else if(anchor)anchor.parentNode.insertBefore(s,anchor);else document.body.appendChild(s);

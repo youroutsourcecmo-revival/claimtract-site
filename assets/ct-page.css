@@ -333,3 +333,31 @@ body.pvmode #pv .own{display:none!important}body.pvmode #pv{border:0!important;b
 .pv .rel .rnav button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(128,128,128,.35);background:var(--p-card);color:var(--p-tx);font:700 17px Inter,sans-serif;cursor:pointer}
 @media(max-width:700px){.pv .rel .rnav{display:none}}
 @media(min-width:701px){.pv .rel h2::after{content:none}}
+/* v3 trust card (Nov 22): photo + about + crest badge + call icon, then license facts */
+.pv .pab-top{display:flex;align-items:center;gap:14px;padding:16px;background:#111317;border-bottom:1px solid #23262C}
+.pv .pab-top .pab-ph{width:84px;height:84px;border-radius:50%;flex:none;background:#23262C center/cover;border:3px solid var(--p-ac,#F5A524);display:flex;align-items:center;justify-content:center;font:800 24px Inter,sans-serif;color:var(--p-ac,#F5A524);text-decoration:none}
+.pv .pab-top a.pab-ph{font-size:13px}
+.pv .pab-id{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.pv .pab-nm{font:800 20px/1.2 Inter,sans-serif;color:#fff}
+.pv .pab-id small{font-size:13px;color:#8B9099}
+.pv .pab-bd{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;margin-top:5px;padding:4px 11px 4px 5px;border-radius:999px;border:1px solid #2A2D34;font:700 12.5px Inter,sans-serif;color:#E6E7EA}
+.pv .pab-bd.ok{border-color:#2f6b41;color:#7FD99A;background:#0E1A12}
+.pv .pab-bd img{width:24px;height:24px}
+.pv .pab-call{width:52px;height:52px;border-radius:50%;flex:none;background:var(--p-ac,#F5A524);display:flex;align-items:center;justify-content:center;font-size:22px;text-decoration:none;box-shadow:0 6px 18px rgba(245,165,36,.35)}
+.pv .pab-ab{padding:16px;border-bottom:1px solid #23262C}
+.pv .pab-ab h3{margin:0 0 6px;font:800 16px Inter,sans-serif;color:#fff}
+.pv .pab-ab p{margin:0;color:#C9CCD2;font-size:15.5px;line-height:1.6}
+.pv .pab-ab .addp{display:inline-block;margin-top:10px;color:var(--p-ac,#F5A524)}
+.pv .pab-ab .soc{margin-top:12px}
+.pv .pab-ok img{width:18px;height:18px}
+@media(max-width:520px){.pv .pab-top .pab-ph{width:68px;height:68px}.pv .pab-nm{font-size:18px}.pv .pab-call{width:46px;height:46px}}
+.pv .sec.svc h2{margin:0 0 12px}
+.pv .hsw{display:none}
+.pv .sec.trs{padding-top:34px}
+.pv .hero2.hasv{min-height:max(460px,calc(100svh - 205px))}
+@media(max-width:700px){.pv .sec.trs{padding-top:24px}.pv .hero2.hasv{min-height:max(440px,calc(100svh - 190px))}}
+.pv .lsn{position:relative;z-index:2;display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:rgba(17,17,17,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:999px;padding:5px 16px 5px 5px;font:700 14px Inter,sans-serif;cursor:pointer;margin:0 0 14px}
+.pv .lsn-i{width:34px;height:34px;border-radius:50%;background:var(--p-ac,#F5A524);position:relative;flex:none}
+.pv .lsn-i::after{content:"";position:absolute;left:13px;top:10px;border-left:11px solid #111;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.pv .lsn.on .lsn-i::after{left:12px;top:11px;width:3px;height:12px;border:0;border-left:3px solid #111;border-right:3px solid #111}
+.pv .hero2.hasv{padding-top:34px;padding-bottom:34px}.pv .hero2.hasv .meta{margin-bottom:10px}.pv .hero2.hasv .lsn{margin-bottom:10px}
