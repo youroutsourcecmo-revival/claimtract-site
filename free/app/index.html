@@ -207,6 +207,30 @@ svg{display:block}
 .pl.sel{border-color:var(--go);background:linear-gradient(160deg,#2A2110,#1A1C21 75%);cursor:default}
 .pl .k2{font:800 8px Inter;letter-spacing:1px;color:var(--go)}.pl b{display:block;font-size:12px;line-height:1.3;margin:2px 0}.pl small{font-size:9.5px;color:var(--mu)}
 .st{display:inline-block;font:800 8px Inter;border-radius:6px;padding:2px 5px;margin-left:5px}.st.need{background:#F5A524;color:#111}.st.ok{background:#122119;color:#5BD48A}
+.ws{background:#FAFAF7;color:#16181C;border-radius:16px;overflow:hidden;font-size:11px;line-height:1.5}
+.ws .wh{background:#fff;border-bottom:1px solid #ECECE6;padding:10px 12px;display:flex;align-items:center;gap:9px;position:sticky;top:0;z-index:2}
+.ws .wa{width:34px;height:34px;border-radius:50%;background:#ddd url(/assets/cedric-headshot.jpg) center/cover;flex:none}
+.ws .wh b{display:block;font-size:12px}.ws .wh small{display:flex;align-items:center;gap:4px;color:#1E8E4E;font-size:9px;font-weight:700}
+.ws .wh small i{width:6px;height:6px;border-radius:50%;background:#22A55B}
+.ws .wcl{margin-left:auto;display:flex;align-items:center;gap:4px;background:#16181C;color:#fff;border-radius:99px;padding:6px 11px;font:700 10px Inter}
+.ws .wn{display:flex;gap:12px;padding:7px 12px;background:#fff;border-bottom:1px solid #ECECE6;font:700 9px Inter;color:#6B6F78;overflow-x:auto;white-space:nowrap}
+.ws section{padding:12px;border-bottom:1px solid #ECECE6}
+.ws h4{font-size:15px;line-height:1.25;margin:0 0 4px}.ws h5{font:800 9px Inter;letter-spacing:1.2px;color:#9A6A00;text-transform:uppercase;margin:0 0 7px}
+.ws .by{color:#6B6F78;font-size:9.5px;margin-bottom:8px}
+.ws .ab{background:#FFF6E2;border-left:3px solid #F5A524;border-radius:8px;padding:8px 10px;font-weight:600;margin-bottom:8px}
+.ws p{margin:0 0 7px}
+.ws .tc{background:#fff;border:1px solid #E6E3D8;border-radius:14px;padding:11px}
+.ws .tt{display:flex;gap:10px;align-items:center;margin-bottom:9px}.ws .tt .wa{width:52px;height:52px}
+.ws .tt b{font-size:13px;display:block}.ws .tt small{color:#6B6F78;font-size:9.5px;display:block}
+.ws .vf{display:inline-flex;align-items:center;gap:4px;background:#E9F7EF;color:#1E8E4E;border-radius:99px;padding:3px 8px;font:700 9px Inter;margin-top:3px}
+.ws .wsl{background:none;padding:0;border:0;border-radius:0;text-align:left;font:800 8.5px Inter;letter-spacing:1px;color:#8A8E96;text-transform:uppercase;margin:9px 0 5px}
+.ws .ch{display:flex;flex-wrap:wrap;gap:5px}.ws .ch span{background:#F2F1EC;border:1px solid #E6E3D8;border-radius:99px;padding:3px 8px;font-size:9.5px;font-weight:600}
+.ws .st5{display:grid;gap:7px}.ws .st5 div{display:flex;gap:8px;align-items:flex-start}.ws .st5 em{font-style:normal;width:18px;height:18px;border-radius:50%;background:#16181C;color:#fff;display:grid;place-items:center;font:800 9px Inter;flex:none}
+.ws .rv{background:#fff;border:1px solid #ECECE6;border-radius:10px;padding:8px 10px;margin-bottom:6px}.ws .rv b{color:#E8A317;letter-spacing:1px}
+.ws .fq{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid #F0EFEA;font-weight:600}
+.ws .wsh{display:grid;grid-template-columns:1fr 1fr;gap:6px}.ws .wsh .wbt{border-radius:10px;padding:9px;display:flex;align-items:center;justify-content:center;gap:5px;font:700 10px Inter;background:#16181C;color:#fff}.ws .wsh .wbt.l{background:#fff;color:#16181C;border:1px solid #DAD8CF}
+.ws .ft{background:#16181C;color:#A9AEB7;font-size:9px;padding:12px}.ws .ft b{color:#fff}.ws .ft a{color:#F5A524}
+.ws .wsm{font-size:8.5px;color:#9A9EA6;font-style:italic}
 .st.pend{background:#2A2210;color:#F5A524}
 .vo{border:1px solid #2A2D33;border-radius:14px;padding:11px 12px;margin-bottom:8px;background:#111317}.vo b{display:block;font-size:13px;color:#fff;margin:3px 0 2px}.vo small{display:block;color:#A9AEB7;font-size:10.5px;line-height:1.4}.vo .k2{color:#F5A524}.vo .r{display:flex;gap:7px;margin-top:9px}.vo .r button{flex:1;border-radius:10px;padding:8px;font:700 11px Inter;cursor:pointer}.vo .rd{background:none;border:1px solid #3A3E46;color:#fff}.vo .pk{background:#F5A524;border:0;color:#111}.vo.off{opacity:.45}
 .an{display:flex;gap:9px;align-items:flex-start;padding:9px 10px;border:1px solid var(--ln);border-radius:12px;margin:0 0 6px 14px;cursor:pointer;position:relative;background:var(--cd)}
@@ -335,10 +359,10 @@ var ALERTS=[
  ['cal','James booked an inspection','Tue 10:00 AM · prep page sent','Yesterday',0],
  ['book','4 homeowners used your claim binder','On your page this week','Mon',0]
 ];
-function alertRow(a){return '<div class="al">'+ic(a[0])+'<div><b>'+a[1]+(a[4]?'<span class="up">UPGRADE</span>':'')+'</b><small>'+a[2]+'</small>'+(a[5]?'<span class="hr">'+a[5]+'</span>':'')+'</div><time>'+a[3]+'</time></div>'}
+function alertRow(a){return '<div class="al">'+ic(a[0])+'<div><b>'+a[1]+(a[4]?'<span class="up">UPGRADE</span>':'')+'</b><small>'+a[2]+'</small>'+(a[5]?'<span class="wsh">'+a[5]+'</span>':'')+'</div><time>'+a[3]+'</time></div>'}
 
 var V={
-home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedric</b><span class="smp">SAMPLE</span></div><img src="/assets/ct-shield.png" alt="ClaimTract"></div><div class="scr">'+
+home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedric</b><span class="wsm">SAMPLE</span></div><img src="/assets/ct-shield.png" alt="ClaimTract"></div><div class="scr">'+
  '<div class="card" style="padding:10px 12px;margin-bottom:8px"><div class="avl '+(avail||sched.on?'on':'')+'" style="padding:0;margin:0"><span class="d"></span><div><b>'+(avail?'Available now':sched.on?'Taking calls '+sched.from+' to '+sched.to:'Not taking calls')+'</b><small>'+(avail?'Your page shows a green "taking calls" badge':sched.on?'Badge turns on by itself during these hours':'Badge hidden on your page')+'</small></div></div>'+
  '<div class="seg" style="margin:9px 0 0"><span class="'+(!avail&&!sched.on?'on':'')+'" data-act="am" data-m="off">Off</span><span class="'+(avail?'on':'')+'" data-act="am" data-m="now">Now</span><span class="'+(sched.on&&!avail?'on':'')+'" data-act="am" data-m="sched">Scheduled</span></div></div>'+
  '<div class="card avl on" data-go="livechat" style="cursor:pointer"><span class="ic" style="margin:0;width:28px;height:28px;background:#122119;color:#5BD48A">'+I('msg',14)+'</span><div><b>Live chat</b><small>2 homeowners on your page right now</small></div>'+CH+'</div>'+
@@ -348,7 +372,7 @@ home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedri
  '<div class="card row" data-go="earn" style="margin-top:8px;border-radius:16px">'+ic('spark')+'<div><b>Your referrals</b><small>3 paying signups · $75 this month</small></div>'+CH+'</div>'+
   '<p class="lb">Right now <a data-tab="activity">See all</a></p><div class="card">'+alertRow(ALERTS[0])+alertRow(ALERTS[1])+'</div>'+
  '<p class="lb">Your free tools</p><div class="gr">'+
- [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['video','play','Your videos'],['edit','edit','Edit page'],['tools','house','Homeowner tools',1],['found','g','Get found',1],['insights','chart','What\'s working',1]].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+(tog.xp?'<span class="qm" data-help="'+t[0]+'">?</span>':'')+(t[3]?'<i class="nw"></i>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
+ [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['video','play','Your videos'],['edit','edit','Edit page'],['tools','house','Homeowner tools',1],['found','g','Get found',1],['insights','chart','What\'s working',1]].map(function(t){return '<div class="wsl" data-go="'+t[0]+'">'+(tog.xp?'<span class="qm" data-help="'+t[0]+'">?</span>':'')+(t[3]?'<i class="nw"></i>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
  '<p class="lb">This week <a data-go="insights">Details</a></p>'+weekCard()+
  '<div class="lk" data-tab="sophia"><span class="pill">Upgrade</span><div class="so"><span>S</span><b>Sophia</b></div><p>Turn your old claim files into dozens of answer pages with your name on every one.</p></div>'+
  '</div>'+nav('home')},
@@ -428,7 +452,26 @@ unlock:function(){var u=UNL[unl];return top(u[0])+'<div class="scr"><div class="
  '<div class="card st3" style="margin-top:9px"><div><b>1</b><small>Old claim</small></div><div><b>×12</b><small>Pages</small></div><div><b style="color:#F5A524">×3</b><small>Places to post</small></div></div>'+
  '<div class="tier ft" style="margin-top:16px"><span class="rb">FLORIDA FOUNDERS</span><h3>ClaimTract</h3><div class="pr"><b>$99</b><span>/month</span><s>$299</s></div><p>Locked for life while you stay. Try it 14 days for $1.</p><button class="cta" data-act="plan" data-p="pro">Start my $1 trial</button></div>'+
  '<p class="s" style="text-align:center;margin-top:8px">Your free website stays yours either way.</p><div style="margin-top:6px"><button class="ghost" data-go="plans">See all plans</button></div></div>'},
-mypage:function(){return top('Your page')+'<div class="scr"><div class="hp" style="padding:0"><div style="background:#111;color:#fff;padding:12px;display:flex;gap:10px;align-items:center"><div class="av" style="width:40px;height:40px"></div><div><b style="font-size:12px">Cedric Moore</b><div style="font-size:9px;color:#5BD48A;display:flex;gap:4px;align-items:center">'+(avail?'<span style="width:6px;height:6px;border-radius:50%;background:#5BD48A"></span>Taking calls now':'')+'</div></div></div><div style="padding:10px 12px"><h4>Who works for you, and who doesn\'t</h4><p class="mu" style="font-size:10px">Your insurance company has adjusters. They work for the company…</p><div class="b go">'+I('phone',12)+'Call Cedric</div></div></div><p class="s" style="margin-top:8px">This is what homeowners see. 14 people have opened it today.</p></div>'},
+mypage:function(){var A=PAGES.free[0].a;return top('Your website')+'<div class="scr"><p class="s" style="margin-bottom:8px">This is what a homeowner sees. One page, everything a website does.</p><div class="ws">'+
+'<div class="wh"><div class="wa"></div><div><b>Cedric Moore</b><small>'+(avail?'<i></i>Taking calls now':'Back tomorrow 8 AM')+'</small></div><span class="wcl">'+I('phone',11)+' Call</span></div>'+
+'<div class="wn"><span>ARTICLE</span><span>ABOUT</span><span>SERVICES</span><span>HOW IT WORKS</span><span>REVIEWS</span><span>ANSWERS</span><span>CONTACT</span></div>'+
+'<section><h4>Public adjuster vs. insurance adjuster: who works for you, and who doesn\'t</h4><div class="by">Reviewed and approved by Cedric Moore, Licensed Public Adjuster</div>'+
+'<div class="ab">Four layers of people at the insurance company handle your claim, and every one works for the carrier. In Florida you can hire your own licensed public adjuster to work for you.</div>'+
+'<p>A homeowner opens an envelope and finds a check for half of what the contractor quoted. Yet the letter reads like a final decision&hellip;</p><p style="color:#9A6A00;font-weight:700">Keep reading &rarr;</p></section>'+
+'<section><h5>About</h5><div class="tc"><div class="tt"><div class="wa"></div><div><b>Cedric Moore</b><small>Licensed Public Adjuster · Orlando, FL</small><span class="vf">'+I('shield',10)+' License verified active · Nov 21, 2026</span></div></div>'+
+'<p style="margin:0">Twelve years working for homeowners, never for an insurance company. He reads the policy, documents every room and handles the back-and-forth with the carrier.</p>'+
+'<div class="wsl">Licensed in</div><div class="ch"><span>Florida · W123456</span><span>Georgia</span></div>'+
+'<div class="wsl">Member of</div><div class="ch"><span>FAPIA</span><span>NAPIA</span></div>'+
+'<div class="wsl">Speaks</div><div class="ch"><span>English</span><span>Spanish</span></div>'+
+'<div class="wsl">Serves</div><div class="ch"><span>Orange</span><span>Seminole</span><span>Osceola</span><span>Lake</span><span>Volusia</span></div>'+
+'<p style="margin:9px 0 0;font-size:9.5px"><a style="color:#9A6A00;font-weight:700">Verify this license with the Florida Department of Financial Services &rarr;</a></p></div></section>'+
+'<section><h5>Services</h5><div class="ch"><span>Hurricane &amp; wind</span><span>Roof &amp; hail</span><span>Water &amp; plumbing leaks</span><span>Fire &amp; smoke</span><span>Mold</span><span>Condo &amp; HOA</span><span>Denied or underpaid claims</span><span>Supplements</span></div><p style="margin:8px 0 0;color:#6B6F78">Homes and condos. Not sure if your claim fits? Ask him, the first conversation is free.</p></section>'+
+'<section><h5>How it works</h5><div class="st5"><div><em>1</em><span><b>Free claim review.</b> He looks at your policy and damage and tells you honestly if you need him.</span></div><div><em>2</em><span><b>Full inspection.</b> Every room, roof and attic, photographed and measured.</span></div><div><em>3</em><span><b>Written agreement.</b> His fee is explained in writing before you sign. Florida law caps it.</span></div><div><em>4</em><span><b>He handles the carrier.</b> Estimates, supplements and negotiation, while you get back to your life.</span></div></div></section>'+
+'<section><h5>Reviews</h5><div class="rv"><b>★★★★★</b> <small style="color:#6B6F78">Google</small><p style="margin:3px 0 0">Reviews appear here straight from his Google Business Profile.</p></div><div class="wsm">Sample adjuster: real reviews come from Google, never written by us.</div></section>'+
+'<section><h5>Answers</h5>'+A.slice(0,5).map(function(q){return '<div class="fq"><span>'+q+'</span><span>&rsaquo;</span></div>'}).join('')+'<p style="margin:7px 0 0;color:#9A6A00;font-weight:700">All 12 answers &rarr;</p></section>'+
+'<section><h5>Contact &amp; hours</h5><p><b>'+(avail?'Taking calls now':'Back tomorrow')+'</b> · Mon to Fri 8 AM to 6 PM, storms anytime</p><div class="wsh"><div class="wbt">'+I('phone',11)+' Call</div><div class="wbt l">'+I('msg',11)+' Text</div><div class="wbt l">'+I('cal',11)+' Book a time</div><div class="wbt l">'+I('play',11)+' Video call</div></div></section>'+
+'<div class="ft"><b>Cedric Moore Public Adjusting</b> · Florida License W123456<br>Orlando, FL · <a>Privacy</a> · <a>Terms</a><br><span style="opacity:.7">A public adjuster is not an attorney. Fees are explained in writing before you sign.</span><br><a>Made with ClaimTract</a></div>'+
+'</div><p class="s" style="margin-top:8px">14 people have opened it today.</p></div>'},
 tools:function(){return '<div class="top"><h1 style="padding-left:4px">On your page</h1></div><div class="scr"><p class="s" style="margin-bottom:8px">Free tools your homeowners get. Turn any of them off. Tap to see what they see.</p><div class="card">'+
  [['binder','book','Claim binder','Their call log, inventory and checklists'],['install','phone','Save to home screen','Your page as an app on their phone'],['night','moon','3 a.m. mode','A calm page after dark'],['txt','msg','Text and email me','One tap, from their own phone'],['read','vol','Read it to me','Articles read out loud'],['search','search','Search','Find an answer in seconds'],['print','print','Print a handout','One clean page with your QR'],['help','thumb','"Did this help?"','See which answers work']].map(function(t){return '<div class="row" data-go="t_'+t[0]+'">'+ic(t[1])+'<div><b>'+t[2]+'</b><small>'+t[3]+'</small></div><button class="tg '+(tog[t[0]]?'on':'')+'" data-tog="'+t[0]+'" aria-label="'+t[2]+'"></button></div>'}).join('')+'</div></div>'+nav('tools')},
 t_binder:function(){return top('Claim binder')+'<div class="scr"><div class="hp"><span class="tag">HOMEOWNER VIEW</span><h4>My claim binder</h4><div class="seg" style="background:#E9E9E4;border-color:#E1E1DC"><span class="on" style="background:#fff;color:#111">Calls</span><span>Inventory</span><span>Checklist</span></div>'+
