@@ -1077,6 +1077,31 @@ document.addEventListener('click',function(e){if(!R||!ME)return;var t=e.target.c
 document.addEventListener('click',function(e){if(!R||!ME)return;var al=e.target.closest&&e.target.closest('.view .al');if(!al||e.target.closest('.qx'))return;var tx=al.textContent;if(/binder|asked a question|sent you a letter/i.test(tx)){BN=null;go('binders')}else if(/booking/i.test(tx)){BK=null;go('book')}});
 document.addEventListener('change',function(e){if(!R||!ME||!BK)return;var t=e.target;if(t.dataset.bk){var p=t.dataset.bk.split('.'),o={};o[p[0]]={minutes:+t.value};bkPut(o)}
  if(t.dataset.bh){var q=t.dataset.bh.split('.'),cur2=((BK.s.settings||{}).hours||{})[q[0]]||['09:00','17:00'],nv=cur2.slice();nv[+q[1]]=t.value;if(nv[0]>=nv[1]){toast('Check the hours','The start has to be before the end.');render('book');return}var o4={hours:{}};o4.hours[q[0]]=nv;bkPut(o4)}},true);
+/* ===== REAL MODE part 4: Get found kit with his real details, bio in three lengths, email signature ===== */
+var GFK=['Claim your free Google Business Profile','Copy your name exactly as below','Add your phone and hours','Add your page link as your website','Ask 3 past clients for a review'];
+function gfState(){try{return JSON.parse(localStorage.getItem('ct_gfk_'+(ME&&ME.adjuster.id))||'[]')}catch(e){return []}}
+function bios(){var P=ME.profile||{},nm=fullN(),a=P.service_area||P.city||'Florida',L=ME.license,yr=L&&L.verified_at?'':'',st=(P.story||'').replace(/\s+/g,' ').trim(),first=(st.match(/^[^.!?]*[.!?]/)||[''])[0];
+ var s='Licensed Florida public adjuster serving '+a+'. I work for homeowners, not insurance companies.';
+ var m='I\'m '+nm+', a licensed Florida public adjuster serving '+a+'. '+(first?first+' ':'')+'I read the policy, document every room and handle the back-and-forth with the insurance company, so you get a fair look at your claim.';
+ var l=m+(st&&st!==first?' '+st.slice(first.length).trim().slice(0,700):'')+' Call or text me'+(phF(P.phone)?' at '+phF(P.phone):'')+(pageHost()?', or visit '+pageHost():'')+'.';
+ return [s,m.trim(),l.trim()]}
+var BIO_I=0;
+var R4={found:function(){var P=ME.profile||{},done=gfState(),n=done.filter(Boolean).length,L=ME.license,b=bios();
+ var rows=[['Business name',fullN()+', Public Adjuster'],['Category','Public adjuster'],['Phone',phF(P.phone)],['Website',pageUrl()],['Hours',P.hours||''],['Service area',P.service_area||P.city||'']].filter(function(r){return r[1]});
+ var sig=fullN()+'\nLicensed Public Adjuster'+(L&&L.number?' · Florida License '+L.number:'')+(phF(P.phone)?'\n'+phF(P.phone):'')+(pageUrl()?'\n'+pageUrl():'');
+ return top('Get found kit')+'<div class="scr"><div class="card" style="padding:10px 11px"><div style="display:flex;justify-content:space-between;font-size:11px"><b>Google Business Profile</b><span style="color:#A9AEB7">'+n+' of 5</span></div><div class="bar"><i style="width:'+(n*20)+'%"></i></div></div>'+
+ '<div class="card" style="margin-top:8px">'+GFK.map(function(c,i){var d=done[i];return '<div class="lt" data-gf="'+i+'" style="cursor:pointer"><span style="display:flex;gap:8px;align-items:center;'+(d?'color:#A9AEB7;text-decoration:line-through':'')+'"><i style="width:16px;height:16px;border-radius:5px;display:grid;place-items:center;'+(d?'background:#F5A524;color:#111':'border:1.5px solid #3A3E46')+'">'+(d?I('check',10,'#111'):'')+'</i>'+c+'</span></div>'}).join('')+'</div>'+
+ '<a class="ghost" href="https://www.google.com/business/" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;margin-top:8px">Open Google Business Profile</a>'+
+ '<p class="lb">Copy and paste</p><div class="card">'+rows.map(function(c){return '<div class="cp"><div><small>'+c[0]+'</small><b>'+hx(c[1])+'</b></div><button class="cpb" data-cp="'+hx(c[1])+'">Copy</button></div>'}).join('')+'</div>'+
+ '<p class="lb">Your bio</p><div class="seg">'+['Short','Medium','Long'].map(function(t,i){return '<span class="'+(i===BIO_I?'on':'')+'" data-bio="'+i+'">'+t+'</span>'}).join('')+'</div><div class="card cp"><div><b style="white-space:normal;font-weight:500;line-height:1.45">'+hx(b[BIO_I])+'</b></div><button class="cpb" data-cp="'+hx(b[BIO_I])+'">Copy</button></div>'+
+ '<p class="lb">Email signature</p><div class="card cp"><div><b style="white-space:pre-line;font-weight:500;line-height:1.45">'+hx(sig)+'</b></div><button class="cpb" data-cp="'+hx(sig)+'">Copy</button></div>'+
+ '<p class="s">Your bio comes from your story in Edit page. Add more there and it gets better.</p></div>'}};
+if(R){var _vf=V.found;V.found=function(){return ME?R4.found():_vf.apply(this,arguments)}}
+document.addEventListener('click',function(e){if(!R||!ME)return;var t=e.target.closest('[data-cp],[data-bio],[data-gf],[data-act="copy"]');if(!t)return;e.stopPropagation();
+ if(t.dataset.cp!=null){copyTxt(t.dataset.cp,t);return}
+ if(t.dataset.bio!=null){BIO_I=+t.dataset.bio;render('found');return}
+ if(t.dataset.gf!=null){var d=gfState();d[+t.dataset.gf]=!d[+t.dataset.gf];try{localStorage.setItem('ct_gfk_'+ME.adjuster.id,JSON.stringify(d))}catch(_){}render('found');return}
+ if(t.dataset.act==='copy'){var box=t.closest('.cp,.lnk,.card'),txt=box?(box.querySelector('b,em')||box).textContent.trim():'';copyTxt(txt,t)}},true);
 window.__ct.art=function(i,j){openArt(i,j)};window.__ct.pick=function(v){doPick(v)};
 boot();
 })();
