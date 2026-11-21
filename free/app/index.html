@@ -342,6 +342,7 @@ p.s{font-size:11px;color:var(--mu);line-height:1.5;margin:2px 2px 0}
 <div id="sx"><video id="sxv" playsinline preload="auto" poster="/assets/7102df40772f1ed99a0c3d6c47072c85.jpg"><source src="/assets/sophia-full.mp4" type="video/mp4"></video><div class="sxt"><span class="sxd"></span><b>Sophia</b><small>ClaimTract</small><button id="sxx" aria-label="Close">&times;</button></div><button class="sxs" id="sxs">&#128264; Tap to hear Sophia</button><div class="sxb"><button class="cta" id="sxu" style="background:#F5A524;color:#111">See what upgrading gets you</button><button class="sxn" id="sxn">Not now</button></div></div>
 <div class="toast" id="toast"><img src="/assets/ct-shield.png" alt=""><div><b id="tt"></b><small id="ts"></small></div><time>now</time></div>
 </div>
+<script src="/vendor/qrcode.js"></script>
 <script>
 (function(){
 var P={
@@ -985,6 +986,9 @@ function boot(){if(DEMO){render('home');return}render('loading');
   else if(j.__s===401){render('signin');startGsi()}else render('offline')})}
 
 var _greet=greet;greet=function(){if(R)return;return _greet.apply(this,arguments)};
+var _qrSvg=qrSvg;qrSvg=function(seed){if(!R||!ME||!window.qrcode)return _qrSvg(seed);var u=pageUrl()||'https://claimtract.app/';try{var q=qrcode(0,'H');q.addData(u+(u.indexOf('?')<0?'?':'&')+'s=qr');q.make();var n=q.getModuleCount(),s='';
+ for(var y=0;y<n;y++)for(var x=0;x<n;x++)if(q.isDark(y,x))s+='<rect x="'+x+'" y="'+y+'" width="1.02" height="1.02" fill="#111"/>';var c=n/2,w=n*0.22;
+ return '<svg viewBox="-2 -2 '+(n+4)+' '+(n+4)+'" width="172" height="172"><rect x="-2" y="-2" width="'+(n+4)+'" height="'+(n+4)+'" fill="#fff"/>'+s+'<rect x="'+(c-w/2)+'" y="'+(c-w/2)+'" width="'+w+'" height="'+w+'" rx="1" fill="#F5A524"/>'+(window.__logo?'<image href="'+hx(window.__logo)+'" x="'+(c-w/2+.4)+'" y="'+(c-w/2+.4)+'" width="'+(w-.8)+'" height="'+(w-.8)+'"/>':'<text x="'+c+'" y="'+(c+w*0.18)+'" font-size="'+(w*0.5)+'" font-family="Inter,sans-serif" font-weight="800" text-anchor="middle" fill="#111">'+hx(inits())+'</text>')+'</svg>'}catch(e){return _qrSvg(seed)}};
 window.__ct.art=function(i,j){openArt(i,j)};window.__ct.pick=function(v){doPick(v)};
 boot();
 })();
