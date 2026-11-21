@@ -100,7 +100,7 @@ function openSearch(){if($('.cth-sbar'))return;var bar=el('div','cth cth-sbar','
   var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;if(!p||p.closest('script,style,.cth-sbar,.cth-ov,#cth-print'))return NodeFilter.FILTER_REJECT;return re.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}}),ns=[];
   while(w.nextNode())ns.push(w.currentNode);
   ns.forEach(function(n){var f=document.createDocumentFragment(),s=n.nodeValue,last=0;s.replace(re,function(m,o){f.appendChild(document.createTextNode(s.slice(last,o)));var mk=el('mark','cth-hit');mk.textContent=m;f.appendChild(mk);hits.push(mk);last=o+m.length});f.appendChild(document.createTextNode(s.slice(last)));n.parentNode.replaceChild(f,n)});
-  show()}
+  show();clearTimeout(window.__cthSq);var qq=q;window.__cthSq=setTimeout(function(){ev('page_search',{q:qq.slice(0,80),hits:hits.length})},1500)}
  function show(){cnt.textContent=hits.length?(k+1)+' of '+hits.length:'none';if(hits[k])hits[k].scrollIntoView({block:'center',behavior:'smooth'})}
  var tm;inp.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(run,250)});inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&hits.length){k=(k+1)%hits.length;show()}});
  bar.addEventListener('click',function(e){if(e.target.dataset.n!=null&&hits.length){k=(k+1)%hits.length;show()}if(e.target.dataset.c!=null){clearHits();bar.remove()}})}
@@ -133,6 +133,13 @@ function tools(){if($('.cth-sec'))return;FIRST=D.first||'your adjuster';NAME=D.n
  s.addEventListener('click',function(e){var b=e.target.closest('.cth-t');if(!b)return;var a=b.dataset.a;
   if(a==='binder')openBinder();else if(a==='read')readAloud(b);else if(a==='search')openSearch();else if(a==='print')printHandout();else if(a==='home')saveHome()})}
 
+/* "Did this help?" under the article, and what homeowners search for */
+function helpful(){var a=$('.cta-art');if(!a||$('.cth-help'))return;var k='ct_help_'+SLUG,done=false;try{done=!!localStorage.getItem(k)}catch(e){}
+ var b=el('div','cth cth-help','<div style="max-width:1100px;margin:18px auto 0;padding:14px 18px;border:1px solid rgba(128,128,128,.25);border-radius:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font:600 15px Inter,sans-serif"><span>Did this help?</span><button type="button" data-h="yes" style="border:1px solid #ccc;background:#fff;border-radius:99px;padding:7px 16px;font:700 14px Inter;cursor:pointer">Yes</button><button type="button" data-h="no" style="border:1px solid #ccc;background:#fff;border-radius:99px;padding:7px 16px;font:700 14px Inter;cursor:pointer">Not really</button><span class="cth-hm" style="font-weight:500;color:#666"></span></div>');
+ a.appendChild(b);if(done){b.querySelector('.cth-hm').textContent='Thanks for letting '+FIRST+' know.';b.querySelectorAll('button').forEach(function(x){x.remove()})}
+ b.addEventListener('click',function(e){var h=e.target.dataset&&e.target.dataset.h;if(!h)return;var v=$('.cta-art .vb.on');ev('page_helpful',{answer:h,article:v?v.getAttribute('data-vb'):'main'});try{localStorage.setItem(k,h)}catch(_){}
+  b.querySelector('.cth-hm').textContent=h==='yes'?'Thanks for letting '+FIRST+' know.':'Thanks. Text '+FIRST+' your question and get a straight answer.';b.querySelectorAll('button').forEach(function(x){x.remove()})})}
+
 /* homeowner events */
 function events(){var q=new URLSearchParams(location.search),src=q.get('s')||(q.get('qr')?'qr':(document.referrer?'referral':'direct'));
  ev('homeowner_open',{source:src});if(src==='qr')ev('qr_scan',{qr_id:q.get('qr')||q.get('r')||'page'});
@@ -142,7 +149,7 @@ function events(){var q=new URLSearchParams(location.search),src=q.get('s')||(q.
 function newAnswer(){var b=load();if(!b||!b.auto||!b.questions||!b.questions.some(function(q){return !q.answer}))return;b=binder();
  answers(b,function(){var n=el('div','cth cth-sbar','<b style="font-size:13.5px;padding-right:4px">'+esc(FIRST)+' answered your question</b><button data-o>Read it</button><button data-c style="background:#333;color:#fff">Later</button>');document.body.appendChild(n);
   n.addEventListener('click',function(e){if(e.target.dataset.o!=null){n.remove();openBinder('q')}if(e.target.dataset.c!=null)n.remove()})})}
-function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(st);tools();lateBanner();events();newAnswer();if(/[?&]print=1/.test(location.search))setTimeout(printHandout,800);
+function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(st);tools();lateBanner();events();newAnswer();helpful();setTimeout(helpful,1200);if(/[?&]print=1/.test(location.search))setTimeout(printHandout,800);
  window.CTHome={tools:function(){var o=$('.cth-sec');if(o)o.remove();tools()},binder:openBinder,read:readAloud,search:openSearch,print:printHandout,home:saveHome,late:lateBanner}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
