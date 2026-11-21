@@ -1,0 +1,5 @@
+{
+ "text": "Hi {first}, it's Ezekiel with ClaimTract. Here's the free website we talked about, already started from your Florida license: {link} Reply STOP to opt out.",
+ "email_subject": "{first}, your free website is already started",
+ "email_body": "Hi {first},\n\nThanks for taking my call. Here's the free website we talked about. It's already started from your Florida license record, so most of it is filled in:\n\n{link}\n\nTake a look, make it yours, and approve it when you're ready. Nothing goes live until you say so.\n\nEzekiel\nClaimTract"
+}

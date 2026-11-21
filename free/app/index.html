@@ -888,7 +888,7 @@ V.signin=function(){return '<div class="scr" style="display:flex;flex-direction:
 function startGsi(){var m=document.getElementById('gsim');api('GET','/api/app/config').then(function(c){var id=c&&c.google_client_id;
  if(!c.ok||!c.signin_ready||!id||/^YOUR-ID/i.test(id)){if(m)m.textContent='Sign-in opens in a few minutes. Please check back shortly.';return}
  function go(){if(!window.google||!google.accounts){if(m)m.textContent='Google sign-in didn\'t load. Check your connection and reload.';return}
-  google.accounts.id.initialize({client_id:id,callback:function(r){if(m)m.textContent='Signing you in...';var b={credential:r.credential};var ref=QS.get('ref');if(ref&&/^[A-Za-z0-9_-]{1,40}$/.test(ref))b.ref=ref;
+  google.accounts.id.initialize({client_id:id,callback:function(r){if(m)m.textContent='Signing you in...';var b={credential:r.credential};var ref=QS.get('ref')||(QS.get('c')?'c:'+QS.get('c'):'')||(function(){try{return localStorage.getItem('ct_lead_ref')||''}catch(e){return ''}})();if(ref&&/^[A-Za-z0-9_:-]{1,40}$/.test(ref))b.ref=ref;
    api('POST','/api/app/signin',b).then(function(j){if(j.ok&&j.me){hydrate(Object.assign({ok:true},j.me));loadAlerts(function(){render('home')});if(j.new)toast('Welcome to ClaimTract','Your free website and answer pages are ready to make yours.')}else if(m)m.textContent=j.error||'Sign-in failed. Try again.'})}});
   google.accounts.id.renderButton(document.getElementById('gsi'),{theme:'filled_black',size:'large',shape:'pill',text:'continue_with',width:270})}
  if(window.google&&google.accounts)go();else{var s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.async=true;s.onload=go;s.onerror=function(){if(m)m.textContent='Google sign-in didn\'t load. Check your connection and reload.'};document.head.appendChild(s)}})}
@@ -988,6 +988,7 @@ function boot(){if(DEMO){render('home');return}render('loading');
 
 if(DEMO&&QS.get('c')&&/^[A-Za-z0-9_-]{6,40}$/.test(QS.get('c'))){fetch('/api/pages/lead/'+encodeURIComponent(QS.get('c'))).then(function(r){return r.ok?r.json():null}).then(function(d){if(!d||!d.ok)return;window.__demoLead=d;
  ME={profile:{name:d.full_name||((d.first||'')+' '+(d.last||'')).trim(),phone:d.phone||''},adjuster:{name:d.full_name,photo_url:null},license:{number:d.license},page:{url:'https://claimtract.app/'+String(d.full_name||d.first+' '+d.last).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'/'}};swap(document.body)}).catch(function(){})}
+try{if(QS.get('c')&&/^[A-Za-z0-9_-]{6,40}$/.test(QS.get('c')))localStorage.setItem('ct_lead_ref','c:'+QS.get('c'))}catch(e){}
 var _greet=greet;greet=function(){if(R)return;return _greet.apply(this,arguments)};
 var _qrSvg=qrSvg;qrSvg=function(seed){if(!window.qrcode)return _qrSvg(seed);var RM=R&&ME,u=RM?(pageUrl()||'https://claimtract.app/'):'https://claimtract.app/cedric-moore/';try{var q=qrcode(0,'H');q.addData(u+(u.indexOf('?')<0?'?':'&')+'s=qr');q.make();var n=q.getModuleCount(),s='';
  for(var y=0;y<n;y++)for(var x=0;x<n;x++)if(q.isDark(y,x))s+='<rect x="'+x+'" y="'+y+'" width="1.02" height="1.02" fill="#111"/>';var c=n/2,w=n*0.22;
