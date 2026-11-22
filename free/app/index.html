@@ -1280,6 +1280,27 @@ V.crm=function(){if(!R||!crmOn())setTimeout(crmExplain,500);
   return h.replace('<button class="ghost" data-rx="signout"','<button class="ghost" data-cxopen style="width:100%;margin-top:10px">Cancel my founder seat</button><button class="ghost" data-rx="signout"')};
  document.addEventListener('click',function(e){if(e.target.closest('[data-cxopen]')){e.preventDefault();open()}},true);
 })();
+/* ===== Snap and post (Nov 22): their photo, their words, their thumb. We write nothing. ===== */
+(function(){var SN={file:null,url:null};
+ var st=document.createElement('style');st.textContent='.snp{width:100%;aspect-ratio:4/3;border-radius:14px;border:1px dashed rgba(245,165,36,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#F5A524;font-weight:700;cursor:pointer;background:rgba(245,165,36,.05);overflow:hidden;position:relative}.snp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.snt{width:100%;min-height:90px;box-sizing:border-box;border-radius:12px;border:1px solid rgba(127,127,127,.35);background:transparent;color:inherit;padding:10px;font:13px Inter,system-ui;margin-top:10px;resize:vertical}.snr{display:flex;gap:8px;margin-top:10px}.snr button{flex:1}';document.head.appendChild(st);
+ V.snap=function(){return top('Snap and post')+'<div class="scr"><p class="s" style="margin-bottom:10px">Take a photo, write it your way, and post it to Facebook or Instagram from your phone. Nothing here is written for you.</p>'+
+  '<label class="snp" id="snp">'+(SN.url?'<img src="'+SN.url+'" alt="Your photo">':I('scan',26)+'<span>Tap to take a photo</span><small style="color:var(--mu);font-weight:400">or pick one from your phone</small>')+'<input type="file" accept="image/*" capture="environment" id="snf" style="display:none"></label>'+
+  '<textarea class="snt" id="snt" placeholder="Say it in your own words (optional)"></textarea>'+
+  '<p class="s" style="margin-top:6px;font-size:11px">Leave out house numbers, street signs, faces and license plates.</p>'+
+  '<div class="snr"><button class="cta" data-snap="share"'+(SN.file?'':' disabled style="opacity:.45"')+'>'+I('share',16)+'Post it</button></div>'+
+  '<p class="s" id="snm" style="margin-top:8px;font-size:11px">Facebook and Instagram don\'t let apps fill in your words. Your words get copied, so you just paste them in.</p>'+
+  (SN.file?'<button class="ghost" data-snap="new" style="width:100%;margin-top:8px">Take a different photo</button>':'')+'</div>'};
+ document.addEventListener('change',function(e){if(e.target.id!=='snf')return;var f=e.target.files&&e.target.files[0];if(!f)return;if(SN.url)URL.revokeObjectURL(SN.url);SN.file=f;SN.url=URL.createObjectURL(f);var t=document.getElementById('snt'),keep=t?t.value:'';render('snap');var t2=document.getElementById('snt');if(t2)t2.value=keep;if(typeof lg==='function')lg('snap','photo')},true);
+ document.addEventListener('click',function(e){var b=e.target.closest('[data-snap]');if(!b)return;e.preventDefault();var a=b.dataset.snap;
+  if(a==='new'){SN.file=null;if(SN.url)URL.revokeObjectURL(SN.url);SN.url=null;render('snap');return}
+  if(a==='share'&&SN.file){var txt=(document.getElementById('snt')||{}).value||'',m=document.getElementById('snm');
+   function cp(){if(!txt)return Promise.resolve();return (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(txt):Promise.reject()).catch(function(){})}
+   cp().then(function(){var d={files:[SN.file]};if(txt)d.text=txt;
+    if(navigator.canShare&&navigator.canShare({files:[SN.file]})){navigator.share(d).then(function(){if(typeof lg==='function')lg('snap','shared');if(m)m.textContent='Posted? Nice. Snap another any time.'}).catch(function(){})}
+    else{var a2=document.createElement('a');a2.href=SN.url;a2.download='photo.jpg';a2.click();if(m)m.textContent='This device can\'t post straight to the apps, so the photo was saved'+(txt?' and your words were copied':'')+'. Open Facebook or Instagram and post it from there.'}})}},true);
+ var _RH=R_HOME;R_HOME=function(){var h=_RH.apply(this,arguments);var a='Share my page</button></div>';if(h.indexOf(a)<0)return h;
+  return h.replace(a,a+'<div class="card row" data-go="snap" style="margin-top:8px;border-radius:16px">'+ic('scan')+'<div><b>Snap and post</b><small>Your photo, your words, to Facebook or Instagram</small></div>'+CH+'</div>')};
+})();
 boot();
 })();
 </script>
