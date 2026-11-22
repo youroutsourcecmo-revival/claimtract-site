@@ -330,7 +330,7 @@ p.s{font-size:11px;color:var(--mu);line-height:1.5;margin:2px 2px 0}
 .app.light .art .ok2{background:#FFFFFF;color:#16181C}
 .app.light .nb{background:#FFFFFF;color:#16181C}
 .app.light .rs .chips span.on{background:#FFFFFF;color:#16181C}
-@property --qp{syntax:'<number>';inherits:false;initial-value:0}@keyframes qxb{0%,100%{--qp:0;box-shadow:0 0 0 0 rgba(245,165,36,0)}50%{--qp:1;box-shadow:0 0 0 4px rgba(245,165,36,.28),0 0 12px rgba(245,165,36,.55)}}.app.pulse .qx,.app.pulse .tl .qm{animation:qxb 2.6s ease-in-out infinite;border-color:#F5A524!important;background:color-mix(in srgb,#F5A524 calc(var(--qp)*100%),#15171B)!important;color:color-mix(in srgb,#15171B calc(var(--qp)*100%),#F5A524)!important}@media (prefers-reduced-motion:reduce){.app.pulse .qx,.app.pulse .tl .qm{animation:none;--qp:1}}
+@property --qp{syntax:'<number>';inherits:false;initial-value:0}@keyframes qxb{0%,100%{--qp:0;box-shadow:0 0 0 0 rgba(245,165,36,0)}50%{--qp:1;box-shadow:0 0 0 4px rgba(245,165,36,.28),0 0 12px rgba(245,165,36,.55)}}.app.pulse .qx,.app.pulse .tl .qm{animation:qxb 2.6s ease-in-out infinite;border-color:#F5A524!important;background:color-mix(in srgb,#F5A524 calc(var(--qp)*100%),#15171B)!important;color:color-mix(in srgb,#15171B calc(var(--qp)*100%),#F5A524)!important}.app .qx.nwq,.app .tl .qm.nwq{animation:qxb 2.6s ease-in-out infinite;border-color:#F5A524!important;background:color-mix(in srgb,#F5A524 calc(var(--qp)*100%),#15171B)!important;color:color-mix(in srgb,#15171B calc(var(--qp)*100%),#F5A524)!important}@media (prefers-reduced-motion:reduce){.app.pulse .qx,.app.pulse .tl .qm,.app .qx.nwq,.app .tl .qm.nwq{animation:none;--qp:1}}
 .b2 a.rxb{border:1px solid var(--ln);background:var(--cd);color:#fff;border-radius:12px;padding:9px 2px 7px;font:700 10px Inter;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none}.app.light .b2 a.rxb{color:#16181C}
 </style></head>
 <body><div class="app" id="app">
@@ -384,7 +384,18 @@ var P={
  star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>'
 };
 function I(n,s,c){s=s||16;return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="'+(c||'currentColor')+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+P[n]+'</svg>'}
-function qx(k){return tog.xp?'<span class="qx" data-help="'+k+'">?</span>':''}
+/* "?" rule: explainers ON = every feature shows its "?". Explainers OFF = a "?" shows only on a feature added after this
+   user started, and only until its explainer has played once. To launch a feature: add its help key to NEWF with today's date. */
+var NEWF={/* 'key':'2026-12-01' */};
+var SINCE=(function(){try{var v=localStorage.getItem('ct_since');if(!v){v=new Date().toISOString().slice(0,10);localStorage.setItem('ct_since',v)}return v}catch(e){return new Date().toISOString().slice(0,10)}})();
+function seenGet(){try{return JSON.parse(localStorage.getItem('ct_seen')||'{}')}catch(e){return {}}}
+function isNewF(k){return !!(NEWF[k]&&NEWF[k]>SINCE&&!seenGet()[k])}
+function showQ(k){return tog.xp||isNewF(k)}
+function markSeen(k){var o=seenGet();if(o[k])return;o[k]=1;try{localStorage.setItem('ct_seen',JSON.stringify(o))}catch(e){}
+ if(typeof R!=='undefined'&&R&&typeof api==='function')try{api('PUT','/api/app/me',{settings:{explainers_seen:Object.keys(o)}})}catch(e){}
+ [].forEach.call(document.querySelectorAll('[data-help="'+k+'"]'),function(q){if(!tog.xp)q.remove();else q.classList.remove('nwq')})}
+function qx(k){return showQ(k)?'<span class="qx'+(isNewF(k)?' nwq':'')+'" data-help="'+k+'">?</span>':''}
+function qm(k){return showQ(k)?'<span class="qm'+(isNewF(k)?' nwq':'')+'" data-help="'+k+'">?</span>':''}
 function ic(n){return '<span class="ic">'+I(n,15)+'</span>'}
 var CH=I('chev',14);
 function weekCard(){var D=['M','T','W','T','F','S','S'],V=[6,9,7,12,8,11,8],C=[1,1,0,2,1,1,1],B=[0,1,0,1,0,1,0];
@@ -414,7 +425,7 @@ var TEX=[
 ];
 
 
-var sched={on:false,from:'9:00 AM',to:'5:00 PM',days:'Mon to Fri'},asst={n:'Cedric\'s assistant',a:0},plan='free',avail=true,unread=3,tog={feat:1,binder:1,install:1,night:1,txt:1,read:1,search:1,print:1,help:1,xp:1};
+var sched={on:false,from:'9:00 AM',to:'5:00 PM',days:'Mon to Fri'},asst={n:'Cedric\'s assistant',a:0},plan='free',avail=true,unread=3,tog={feat:1,binder:1,install:1,night:1,txt:1,read:1,search:1,print:1,help:1,xp:1};try{if(localStorage.getItem('ct_xp')==='0')tog.xp=0}catch(e){}
 function qrSvg(seed){var n=25,c=7,s='',r=seed||7;function rnd(){r=(r*9301+49297)%233280;return r/233280}
  function fin(x,y){return '<rect x="'+x+'" y="'+y+'" width="7" height="7" rx="1.6" fill="#111"/><rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" rx="1" fill="#fff"/><rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3" rx=".6" fill="#111"/>'}
  for(var y=0;y<n;y++)for(var x=0;x<n;x++){if((x<8&&y<8)||(x>16&&y<8)||(x<8&&y>16))continue;if(x>9&&x<15&&y>9&&y<15)continue;if(rnd()>.52)s+='<rect x="'+x+'" y="'+y+'" width="1" height="1" rx=".25" fill="#111"/>'}
@@ -447,7 +458,7 @@ home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedri
  '<div class="card row" data-go="earn" style="margin-top:8px;border-radius:16px">'+ic('spark')+'<div><b>Your referrals</b><small>3 paying signups · $75 this month</small></div>'+CH+'</div>'+
   '<p class="lb">Right now <a data-tab="activity">See all</a></p><div class="card">'+alertRow(ALERTS[0])+alertRow(ALERTS[1])+'</div>'+
  '<p class="lb">Your free tools</p><div class="gr">'+
- [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['video','play','Your videos'],['edit','edit','Edit page'],['tools','house','Homeowner tools',1],['found','g','Get found',1],['insights','chart','What\'s working',1]].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+(tog.xp?'<span class="qm" data-help="'+t[0]+'">?</span>':'')+(t[3]?'<i class="nw"></i>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
+ [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['video','play','Your videos'],['edit','edit','Edit page'],['tools','house','Homeowner tools',1],['found','g','Get found',1],['insights','chart','What\'s working',1]].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+qm(t[0])+(t[3]?'<i class="nw"></i>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
  '<p class="lb"><span>This week'+qx('week')+'</span><a data-go="insights">Details</a></p>'+weekCard()+
  '<div class="lk" data-tab="sophia"><span class="pill">Upgrade</span><div class="so"><span>S</span><b>Sophia</b>'+qx('sophia')+'</div><p>Turn your old claim files into dozens of answer pages with your name on every one.</p></div>'+
  '</div>'+nav('home')},
@@ -700,7 +711,7 @@ function hbStop(){hbWant=false;try{hbv.pause()}catch(e){}hbs.classList.remove('o
 function hbPlay(clip){if(hbv.src!==clip.url){hbv.src=clip.url;hbCrop=null}try{hbv.currentTime=0}catch(e){}hbv.muted=false;var pr=hbv.play();
  if(pr&&pr.catch)pr.catch(function(){document.addEventListener('click',function once(){document.removeEventListener('click',once,false);if(hbWant&&hbv.paused){hbv.muted=false;hbv.play().catch(function(){})}},false)})}
 function hbExplain(id){var c=HB_CLIPS[id];if(c){hbPlay(c);return c.dur}hbResolve(id,function(r){if(r&&hbWant)hbPlay(r)});return 20}
-function help(k){if(!HELP[k])return;if(hbWant&&hbs.classList.contains('on')){hbStop();return}hbWant=true;hbExplain(HB_IDS[k]||HB_EXPLAINER)}
+function help(k){if(!HELP[k])return;markSeen(k);if(hbWant&&hbs.classList.contains('on')){hbStop();return}hbWant=true;hbExplain(HB_IDS[k]||HB_EXPLAINER)}
 var sx=document.getElementById('sx'),sxv=document.getElementById('sxv'),sxs=document.getElementById('sxs');
 function sxPlace(){var ar=app.getBoundingClientRect(),hd=app.querySelector('.view .hd, .view .top'),nv=app.querySelector('.view .nav');sx.style.setProperty('--sxt',((hd?hd.getBoundingClientRect().bottom-ar.top:92)+4)+'px');sx.style.setProperty('--sxb',((nv?ar.bottom-nv.getBoundingClientRect().top:64))+'px')}
 function openSx(){sxPlace();sx.classList.add('on');sxv.muted=false;sxv.loop=false;sxs.innerHTML='&#128263; Mute';try{sxv.currentTime=0}catch(e){}var p=sxv.play();if(p&&p.catch)p.catch(function(){sxv.muted=true;sxv.loop=true;sxs.innerHTML='&#128264; Tap to hear Sophia';sxv.play().catch(function(){})})}
@@ -869,7 +880,7 @@ if(R||(DEMO&&QS.get('c')))new MutationObserver(function(ms){ms.forEach(function(
 
 function hydrate(me){ME=me;plan=(me.plan&&me.plan!=='free')?me.plan:'free';var st=me.settings||{};
  if(st.theme&&st.theme!==THEME){THEME=st.theme;try{localStorage.setItem('ct_theme',THEME)}catch(e){}applyTheme()}
- tog.xp=st.explainers!==false;if(st.assistant_name)asst.n=st.assistant_name;
+ tog.xp=st.explainers!==false;if(st.explainers_seen&&st.explainers_seen.length){var _o=seenGet();st.explainers_seen.forEach(function(k){_o[k]=1});try{localStorage.setItem('ct_seen',JSON.stringify(_o))}catch(e){}}if(ME&&ME.created_at){SINCE=String(ME.created_at).slice(0,10)}if(st.assistant_name)asst.n=st.assistant_name;
  var pk=me.version&&me.version.pick;if(pk){pickedV=pk.replace('V','');PAGES.free[0].st='mine';VERS=VERS.filter(function(x){return x[0]===pickedV})}
  window.__logo=me.logo?me.logo.url:null}
 function refresh(cb){api('GET','/api/app/me').then(function(j){if(j.ok){hydrate(j);ART=null}if(cb)cb(j)})}
@@ -903,7 +914,7 @@ var R_HOME=function(){var p=ME.page,h=new Date().getHours(),g=h<12?'Good morning
  '<div class="card row" data-act="pages" style="margin-top:8px;border-radius:16px">'+ic('book')+'<div><b>Your free website</b><small>'+pickTxt+'</small></div>'+CH+'</div>'+
  '<p class="lb">Right now <a data-tab="activity">See all</a></p><div class="card">'+(rows.length?rows.slice(0,2).map(alertRow).join(''):EMPTY_AL)+'</div>'+
  '<p class="lb">Your free tools</p><div class="gr">'+
- [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['edit','edit','Edit page'],['tools','house','Homeowner tools'],['binders','book','Claim binders'],['found','g','Get found'],['insights','chart','What\'s working']].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+(tog.xp&&t[0]!=='binders'?'<span class="qm" data-help="'+t[0]+'">?</span>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
+ [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['edit','edit','Edit page'],['tools','house','Homeowner tools'],['binders','book','Claim binders'],['found','g','Get found'],['insights','chart','What\'s working']].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+(t[0]!=='binders'?qm(t[0]):'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
  '<p class="lb"><span>This week'+qx('week')+'</span></p>'+R_WEEK()+
  '<div class="lk" data-tab="sophia"><span class="pill">Upgrade</span><div class="so"><span>S</span><b>Sophia</b>'+qx('sophia')+'</div><p>Turn your old claim files into dozens of answer pages with your name on every one.</p></div>'+
  '</div>'+nav('home')};
@@ -965,7 +976,7 @@ document.addEventListener('click',function(e){if(!R)return;var t=e.target.closes
  if(!ME&&t.dataset.rx!=='retry')return;
  var a=t.dataset.act,x=t.dataset.rx;
  if(a==='theme')setTimeout(function(){api('PUT','/api/app/me',{settings:{theme:THEME}})},0);
- if(t.dataset.tog==='xp')setTimeout(function(){api('PUT','/api/app/me',{settings:{explainers:!!tog.xp}})},0);
+ if(t.dataset.tog==='xp'){try{localStorage.setItem('ct_xp',tog.xp?'1':'0')}catch(e){}setTimeout(function(){api('PUT','/api/app/me',{settings:{explainers:!!tog.xp}})},0)}
  if(a==='logoup'){e.stopPropagation();e.preventDefault();pickLogo();return}
  if(a==='plan'){e.stopPropagation();e.preventDefault();var p=t.dataset.p,u=p==='plus'?(window.CT_PRO_LINK||''):STRIPE_CT;track('upgrade_tap',{badge:'plan_'+p});
   if(!u){toast('One moment','Pro checkout is being switched on. Try again shortly, or start with ClaimTract for $1.');return}
