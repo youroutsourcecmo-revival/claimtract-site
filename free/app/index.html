@@ -1194,11 +1194,7 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
  '#wrs .what{font-size:11px;opacity:.85;margin:6px 0 12px;line-height:1.45}#wrs .what u{cursor:pointer}#wrs pre{white-space:pre-wrap;font:10px ui-monospace,monospace;max-height:160px;overflow:auto;background:rgba(127,127,127,.12);padding:8px;border-radius:8px}'+
  '#wrs .go{width:100%;padding:12px;border:0;border-radius:12px;background:#FFC400;color:#14171C;font:800 14px Inter,system-ui;cursor:pointer}#wrs .go[disabled]{opacity:.45}#wrs .x{float:right;background:none;border:0;color:inherit;font-size:22px;line-height:1;cursor:pointer}'+
  '#wrs .ok{text-align:center;padding:18px 6px}#wrs .ok b{display:block;font-size:15px;margin-bottom:6px}'+
- '#wrs .xp{display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px 4px 4px;animation:wrxin .35s ease}@keyframes wrxin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}'+
- '#wrs .xp .av{width:84px;height:84px;border-radius:50%;border:3px solid #FFC400;background-color:#1A1C21;background-repeat:no-repeat;display:grid;place-items:center;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.35)}'+
- '#wrs .xp .nm{font:800 14px Inter,system-ui;margin:10px 0 2px}#wrs .xp .rl{font-size:11px;opacity:.7;margin-bottom:12px}'+
- '#wrs .xp .bb{background:rgba(255,196,0,.12);border:1px solid rgba(255,196,0,.35);border-radius:14px 14px 14px 4px;padding:12px 13px;font-size:13.5px;line-height:1.5;text-align:left;margin-bottom:14px}.app.light #wrs .xp .bb{background:#FFF7DC}'+
- '#wrs .xp .go{max-width:100%}';
+ '#hbs.wr{z-index:90}#hbs.wr canvas{height:210px}';
  document.head.appendChild(css);
 
  var W='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>';
@@ -1219,22 +1215,25 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
   '<p class="what">Sent with it: the screen you were on, your last taps, any errors, and your device type. Homeowner emails, phone numbers and addresses are removed. <u data-w="peek">See exactly what\'s sent</u></p><div id="wrp"></div>'+
   '<button class="go" data-w="send">Send to Ezekiel</button>'}
 
- var WRX={bug:{n:'Esther',r:'Something\'s broken',c:'#1F2430',bg:'#2B3A55',t:'Hi, I\'m Esther. If something in your Back office ever breaks, tap the wrench and tell me what happened. Type it, or tap the mic and just talk. Your system log comes with it, with homeowner details removed, so Ezekiel sees exactly what went wrong. You\'ll hear back from him within 24 hours.'},
-  idea:{n:'Esther',r:'I have an idea',c:'#E8A33D',bg:'#7A5C8A',t:'Got an idea that would make ClaimTract better? Tell me right here. One founder is enough to start it. If we can build it, every founder tries it for 30 days, then you vote. More than half of the votes, with at least five votes, and it goes to every new customer.'}};
- function EST(x){return '<svg viewBox="0 0 60 60" width="84" height="84"><rect width="60" height="60" fill="'+x.bg+'"/><path d="M15 28c0-15 30-15 30 0v16H15z" fill="#3a2a22"/><path d="M10 60c0-11 9-16 20-16s20 5 20 16z" fill="'+x.c+'"/>'+(x.c==='#1F2430'?'<path d="M26 44l4 8 4-8z" fill="#fff"/>':'')+'<rect x="26" y="34" width="8" height="10" fill="#B88F6C"/><circle cx="30" cy="27" r="11" fill="#C9A27E"/><path d="M19 25c1-9 21-10 22 0-6-4-14-4-22 0z" fill="#3a2a22"/><circle cx="26" cy="27" r="1.2" fill="#2a1d17"/><circle cx="34" cy="27" r="1.2" fill="#2a1d17"/><path d="M26.5 32c2 1.6 5 1.6 7 0" stroke="#8a4b3c" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>'}
+ /* One-time Esther explainers (HumanBot floating avatar): burgundy formal for "Something's broken", blue casual for "I have an idea". */
+ var WRX={bug:'PG5npXWedx7b',idea:'mWefGZURp9Ba'};
+ if(typeof hbResolve==='function'){hbResolve(WRX.bug);hbResolve(WRX.idea)}
  function wrxSeen(k){try{return localStorage.getItem('ct_wrx_'+k)==='1'}catch(e){return false}}
  function wrxMark(k){try{localStorage.setItem('ct_wrx_'+k,'1')}catch(e){}lg('wrench','explainer_'+k)}
- function explain(k){var x=WRX[k];bx.innerHTML='<button class="x" data-w="close" aria-label="Close">&times;</button><div class="xp"><div class="av">'+EST(x)+'</div><div class="nm">'+x.n+'</div><div class="rl">'+x.r+'</div><div class="bb">'+x.t+'</div><button class="go" data-w="xok" data-k="'+k+'">Got it</button></div>'}
- function show(){if(!wrxSeen(kind)){explain(kind);return true}draw();return false}
+ function wrxOff(){var h=document.getElementById('hbs');if(h&&h.classList.contains('wr')){h.classList.remove('wr');h.style.bottom=''}}
+ function wrxStop(){var h=document.getElementById('hbs');if(h&&h.classList.contains('wr')){if(typeof hbStop==='function')hbStop();wrxOff()}}
+ if(typeof hbv!=='undefined'){hbv.addEventListener('ended',wrxOff);hbv.addEventListener('pause',function(){if(!hbWant)wrxOff()})}
+ function wrxPlay(k){if(wrxSeen(k)||typeof hbExplain!=='function')return;wrxMark(k);var h=document.getElementById('hbs');if(typeof hbStop==='function')hbStop();
+  h.classList.add('wr');h.style.bottom=Math.max(0,bx.offsetHeight-24)+'px';hbWant=true;hbExplain(WRX[k])}
+ function show(){draw();wrxPlay(kind)}
  function stopRec(){if(rec){try{rec.stop()}catch(e){}rec=null}var m=bx.querySelector('.mic');if(m){m.classList.remove('rec');m.lastChild.textContent='Tap and talk'}}
- function open(){kind='bug';show();sh.classList.add('on');lg('wrench','opened')}
- function close(){stopRec();if(bx.querySelector('.xp'))wrxMark(bx.querySelector('[data-w=xok]').dataset.k);sh.classList.remove('on')}
+ function open(){kind='bug';sh.classList.add('on');show();lg('wrench','opened')}
+ function close(){stopRec();wrxStop();sh.classList.remove('on')}
  btn.addEventListener('click',open);
  function ok(j){return j&&j.ok!==false&&j.__s<400&&j.__s!==0}
  sh.addEventListener('click',function(e){if(e.target===sh)return close();var w=e.target.closest('[data-w]');if(!w)return;var a=w.dataset.w,ta=bx.querySelector('#wrt');
   if(a==='close')return close();
-  if(a==='xok'){wrxMark(w.dataset.k);var kp=sh._kp||'';draw();bx.querySelector('#wrt').value=kp;sh._kp='';return}
-  if(a==='bug'||a==='idea'){var keep=ta.value;kind=a;sh._kp=keep;if(show())return;bx.querySelector('#wrt').value=keep;sh._kp='';return}
+  if(a==='bug'||a==='idea'){var keep=ta.value;kind=a;show();bx.querySelector('#wrt').value=keep;return}
   if(a==='peek'){var p=bx.querySelector('#wrp');p.innerHTML=p.innerHTML?'':'<pre></pre>';if(p.firstChild)p.firstChild.textContent=JSON.stringify(packet(kind,ta.value).log,null,1);return}
   if(a==='mic'){if(rec)return stopRec();var SR=window.SpeechRecognition||window.webkitSpeechRecognition;rec=new SR();rec.lang='en-US';rec.interimResults=true;rec.continuous=true;var base=ta.value?ta.value.replace(/\s*$/,' '):'';
    rec.onresult=function(ev){var s='';for(var i=0;i<ev.results.length;i++)s+=ev.results[i][0].transcript;ta.value=base+s};rec.onend=function(){stopRec()};rec.onerror=function(){stopRec()};
