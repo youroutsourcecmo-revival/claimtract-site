@@ -461,7 +461,6 @@ home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedri
  '<p class="lb">Your free tools</p><div class="gr">'+
  [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['video','play','Your videos'],['edit','edit','Edit page'],['tools','house','Homeowner tools',1],['found','g','Get found',1],['insights','chart','What\'s working',1]].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+qm(t[0])+(t[3]?'<i class="nw"></i>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
  '<p class="lb"><span>This week'+qx('week')+'</span><a data-go="insights">Details</a></p>'+weekCard()+
- '<div class="lk" data-tab="sophia"><span class="pill">Upgrade</span><div class="so"><span>S</span><b>Sophia</b>'+qx('sophia')+'</div><p>Turn your old claim files into dozens of answer pages with your name on every one.</p></div>'+
  '</div>'+nav('home')},
 activity:function(){unread=0;return '<div class="top"><h1 style="padding-left:4px">Activity</h1><span class="chip">'+I('bell',12)+'Alerts on</span></div><div class="scr"><div class="card">'+ALERTS.map(function(a,i){return alertRow(a,i)}).join('')+'</div>'+
  '<div class="note gold">'+I('clock',14)+'<span>Florida contact hours are built in. Late-night alerts tell you the earliest time you can reach out.</span></div>'+
@@ -933,7 +932,6 @@ var R_HOME=function(){var p=ME.page,h=new Date().getHours(),g=h<12?'Good morning
  '<p class="lb">Your free tools</p><div class="gr">'+
  [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['edit','edit','Edit page'],['tools','house','Homeowner tools'],['binders','book','Claim binders'],['found','g','Get found'],['insights','chart','What\'s working']].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+(t[0]!=='binders'?qm(t[0]):'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
  '<p class="lb"><span>This week'+qx('week')+'</span></p>'+R_WEEK()+
- '<div class="lk" data-tab="sophia"><span class="pill">Upgrade</span><div class="so"><span>S</span><b>Sophia</b>'+qx('sophia')+'</div><p>Turn your old claim files into dozens of answer pages with your name on every one.</p></div>'+
  '</div>'+nav('home')};
 function R_WEEK(){var list=(ALR&&(ALR.alerts||ALR.items))||[],wk=Date.now()-7*864e5,c={o:0,s:0,b:0,q:0};list.forEach(function(a){var t=new Date(a.at||a.created_at).getTime();if(!(t>=wk))return;var k=a.kind||a.name||'';
   if(/open|read|scan/.test(k))c.o++;else if(/saved/.test(k))c.s++;else if(/book/.test(k))c.b++;else if(/binder/.test(k))c.q++});
