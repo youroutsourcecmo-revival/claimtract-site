@@ -1322,6 +1322,7 @@ V.crm=function(){if(!R||!crmOn())setTimeout(crmExplain,500);
 ['Follow-up that keeps you booked','When a homeowner acts on one of your pages, follow-up starts by itself.','Coming'],
 ['Get paid to share','$25 a month for every paying signup from your link.','Coming']];
  var LOG=null,tabR='road';
+ function loadRoad(cb){fetch('/assets/roadmap.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){var a=(j.items||[]).filter(function(x){return x.status!=='deployed'}).map(function(x){return [x.title,x.desc,x.status==='in_progress'?'In progress':'Coming']});if(a.length)ROAD=a;cb()}).catch(function(){cb()})}
  function loadLog(cb){if(!R){LOG=false;return cb()}api('GET','/api/app/wrench/log').then(function(j){LOG=(j&&j.ok&&Array.isArray(j.items))?j.items:false;cb()}).catch(function(){LOG=false;cb()})}
  function st(x){var c={received:['Received','#2A2E36','#C4C8CF'],contacted:['✓ Ezekiel called','#1E2A1E','#86EFAC'],in_progress:['In progress','#2A2414','#FCD58A'],deployed:['Deployed','#14281C','#22C55E']}[x.status]||['Received','#2A2E36','#C4C8CF'];
   return '<span style="background:'+c[1]+';color:'+c[2]+';border-radius:99px;padding:3px 9px;font-size:10.5px;font-weight:800;white-space:nowrap">'+c[0]+(x.status==='deployed'&&x.deployed_on?' · '+hx(x.deployed_on):'')+'</span>'}
@@ -1331,7 +1332,7 @@ V.crm=function(){if(!R||!crmOn())setTimeout(crmExplain,500);
    :'<p class="s" style="margin-bottom:8px">Problems and ideas from adjusters like you, and where each one stands.</p>'+LOG.map(function(x){return '<div class="card" style="margin-bottom:8px;padding:11px 12px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b style="font-size:12.5px">'+hx(x.initials||'')+' · '+(x.type==='idea'?'Idea':'Problem')+'</b>'+st(x)+'</div><small style="display:block;margin-top:5px;font-size:12px;line-height:1.45">'+hx(x.text||'')+'</small></div>'}).join('');
   return top('Roadmap')+'<div class="scr">'+seg+body+'</div>'};
  document.addEventListener('click',function(e){var t=e.target.closest('[data-rm]');if(!t)return;tabR=t.dataset.rm;render('roadmap')},true);
- var _go=go;go=function(n){if(n==='roadmap'&&LOG===null){loadLog(function(){_go(n)});return}_go(n)};
+ var _go=go;go=function(n){if(n==='roadmap'){loadRoad(function(){if(LOG===null){loadLog(function(){_go(n)})}else _go(n)});return}_go(n)};
 })();
 boot();
 })();
