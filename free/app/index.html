@@ -394,7 +394,7 @@ function showQ(k){return tog.xp||isNewF(k)}
 function markSeen(k){var o=seenGet();if(o[k])return;o[k]=1;try{localStorage.setItem('ct_seen',JSON.stringify(o))}catch(e){}
  if(typeof R!=='undefined'&&R&&typeof api==='function')try{api('PUT','/api/app/me',{settings:{explainers_seen:Object.keys(o)}})}catch(e){}
  [].forEach.call(document.querySelectorAll('[data-help="'+k+'"]'),function(q){if(!tog.xp)q.remove();else q.classList.remove('nwq')})}
-function qx(k){return showQ(k)?'<span class="qx'+(isNewF(k)?' nwq':'')+'" data-help="'+k+'">?</span>':''}
+function qx(k){return showQ(k)?'<span class="qx'+((isNewF(k)||!seenGet()[k])?' nwq':'')+'" data-help="'+k+'">?</span>':''}
 function qm(k){return showQ(k)?'<span class="qm'+(isNewF(k)?' nwq':'')+'" data-help="'+k+'">?</span>':''}
 function ic(n){return '<span class="ic">'+I(n,15)+'</span>'}
 var CH=I('chev',14);
