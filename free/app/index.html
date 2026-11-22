@@ -1304,7 +1304,23 @@ V.crm=function(){if(!R||!crmOn())setTimeout(crmExplain,500);
   return h.replace(a,a+'<div class="card row" data-go="snap" style="margin-top:8px;border-radius:16px">'+ic('scan')+'<div><b>Snap and post</b><small>Your photo, your words, to Facebook or Instagram</small></div>'+CH+'</div>')};
 })();
 /* ===== Roadmap + fixed log (Nov 23): proof we ship. Roadmap = Ezekiel's list; Fixed = approved wrench rows from the server. ===== */
-(function(){var ROAD=[['Public Adjusters Training Course','Seventeen years of field playbook, from first call to paid. Included in every founder seat.','Coming'],['Public Adjuster’s Marketing Course','How to get found and keep your phone ringing, without buying leads.','Coming']];
+(function(){var ROAD=[['Public Adjusters Training Course','Seventeen years of field playbook, from first call to paid. Included in every founder seat.','Coming'],
+['Public Adjuster\u2019s Marketing Course','How to get found and keep your phone ringing, without buying leads.','Coming'],
+['Know who\u2019s reading','Share your page with Mary and see when she opens it.','Coming'],
+['Return visitors','Know when a homeowner comes back to your page.','Coming'],
+['Where they\u2019re from','Visits to your pages by city.','Coming'],
+['Tracked links','Links for your cards, door hangers and partners, so you see what works.','Coming'],
+['Visitor dashboard','Views, calls and bookings, page by page.','Coming'],
+['Weekly report','What homeowners use most on your pages, every week.','Coming'],
+['Your dashboard in one view','Your numbers at a glance the moment you log in.','Coming'],
+['City pages','A page for every town you serve.','Coming'],
+['Damage-type pages','Pages for water, wind, hail, fire and roof claims.','Coming'],
+['Partner pages','Pages for the roofers and plumbers who send you work.','Coming'],
+['Your YouTube channel on your site','New videos from your channel show up on your site by themselves.','Coming'],
+['Past-client check-ins','A friendly check-in to past clients after a storm hits their area.','Coming'],
+['Homeowner reminders','Reminders homeowners opt into, sent free through your Back office.','Coming'],
+['Follow-up that keeps you booked','When a homeowner acts on one of your pages, follow-up starts by itself.','Coming'],
+['Get paid to share','$25 a month for every paying signup from your link.','Coming']];
  var LOG=null,tabR='road';
  function loadLog(cb){if(!R){LOG=false;return cb()}api('GET','/api/app/wrench/log').then(function(j){LOG=(j&&j.ok&&Array.isArray(j.items))?j.items:false;cb()}).catch(function(){LOG=false;cb()})}
  function st(x){var c={received:['Received','#2A2E36','#C4C8CF'],contacted:['✓ Ezekiel called','#1E2A1E','#86EFAC'],in_progress:['In progress','#2A2414','#FCD58A'],deployed:['Deployed','#14281C','#22C55E']}[x.status]||['Received','#2A2E36','#C4C8CF'];
