@@ -707,12 +707,13 @@ function hbDraw(){var W=hbv.videoWidth,H=hbv.videoHeight>>1;if(!W||!H)return;if(
  var c=hbCrop||{x0:0,x1:W-1},cw=c.x1-c.x0+1;hbox.putImageData(rgb,0,0);if(hbc.width!==cw||hbc.height!==H){hbc.width=cw;hbc.height=H}hbx.clearRect(0,0,cw,H);hbx.drawImage(hbo,c.x0,0,cw,H,0,0,cw,H);hbN++}
 function hbLoop(){if(hbv.paused||hbv.ended){hbRaf=null;return}try{hbDraw()}catch(e){}hbRaf=requestAnimationFrame(hbLoop)}
 hbv.addEventListener('playing',function(){hbs.classList.add('on');if(!hbRaf)hbLoop()});
-hbv.addEventListener('ended',function(){hbStop()});
-function hbStop(){hbWant=false;try{hbv.pause()}catch(e){}hbs.classList.remove('on')}
+hbv.addEventListener('ended',function(){if(hbKey){markSeen(hbKey);hbKey=null}hbStop()});
+function hbStop(){hbWant=false;if(!hbv.ended)hbKey=null;try{hbv.pause()}catch(e){}hbs.classList.remove('on')}
 function hbPlay(clip){if(hbv.src!==clip.url){hbv.src=clip.url;hbCrop=null}try{hbv.currentTime=0}catch(e){}hbv.muted=false;var pr=hbv.play();
  if(pr&&pr.catch)pr.catch(function(){document.addEventListener('click',function once(){document.removeEventListener('click',once,false);if(hbWant&&hbv.paused){hbv.muted=false;hbv.play().catch(function(){})}},false)})}
 function hbExplain(id){var c=HB_CLIPS[id];if(c){hbPlay(c);return c.dur}hbResolve(id,function(r){if(r&&hbWant)hbPlay(r)});return 20}
-function help(k){if(!HELP[k])return;markSeen(k);if(hbWant&&hbs.classList.contains('on')){hbStop();return}hbWant=true;hbExplain(HB_IDS[k]||HB_EXPLAINER)}
+var hbKey=null;
+function help(k){if(!HELP[k])return;if(hbWant&&hbs.classList.contains('on')){hbStop();return}hbKey=k;hbWant=true;hbExplain(HB_IDS[k]||HB_EXPLAINER)}
 var sx=document.getElementById('sx'),sxv=document.getElementById('sxv'),sxs=document.getElementById('sxs');
 function sxPlace(){var ar=app.getBoundingClientRect(),hd=app.querySelector('.view .hd, .view .top'),nv=app.querySelector('.view .nav');sx.style.setProperty('--sxt',((hd?hd.getBoundingClientRect().bottom-ar.top:92)+4)+'px');sx.style.setProperty('--sxb',((nv?ar.bottom-nv.getBoundingClientRect().top:64))+'px')}
 function openSx(){sxPlace();sx.classList.add('on');sxv.muted=false;sxv.loop=false;sxs.innerHTML='&#128263; Mute';try{sxv.currentTime=0}catch(e){}var p=sxv.play();if(p&&p.catch)p.catch(function(){sxv.muted=true;sxv.loop=true;sxs.innerHTML='&#128264; Tap to hear Sophia';sxv.play().catch(function(){})})}
