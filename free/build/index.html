@@ -91,7 +91,7 @@
     <div class="done-box" id="done" style="display:none">
       <h2>Approved. Your page is on its way.</h2>
       <p class="sub" id="doneMsg"></p>
-      <div class="inst" style="border-color:#F5A524"><h3>Your field app is ready</h3><p>Sign in with Google to make your page yours: pick your version, record your stories, see who opens your page, share it and get bookings.</p><a class="btn" id="openApp" href="/free/app/" style="display:inline-block;margin-top:8px">Open my app</a></div>
+      <div class="inst" style="border-color:#F5A524"><h3>Your Back office is ready</h3><p>Sign in with Google to make your page yours: pick your version, record your stories, see who opens your page, share it and get bookings.</p><a class="btn" id="openApp" href="/free/app/" style="display:inline-block;margin-top:8px">Open my app</a></div>
       <div class="inst"><h3>Put your page on your phone</h3><p>Open your page on your phone, tap Share, then Add to Home Screen (on Android, tap the menu, then Install app). It opens like an app, with a Send my page bar so you can text it, email it, or show the QR code in seconds.</p><div data-ct-ready></div></div>
       <h2 style="font-size:24px;margin-top:34px">Your free toolkit</h2>
       <p class="sub">Everything below is yours. Copy it, print it, send it before your next appointment.</p>
@@ -335,7 +335,7 @@ function ctRot(){var W=['Water','Wind','Hail','Roof','Hurricane','Fire','Smoke',
   cyc()})}
 function ctLive(url,go){var t=document.getElementById('ctToast');
  function msg(){if(!t){t=document.createElement('div');t.id='ctToast';t.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:300;max-width:340px;width:calc(100% - 32px);background:#111;color:#fff;border:1px solid #F5A524;border-radius:14px;padding:14px 16px;font:500 14px/1.45 Inter,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.4)';document.body.appendChild(t)}
-  t.innerHTML='<b style="color:#F5A524">Your page isn\'t live yet.</b><br>Approve it, save the app to your home screen and turn on notifications, and we\'ll tell you the moment it\'s ready to share.';t.style.display='block';clearTimeout(t.__h);t.__h=setTimeout(function(){t.style.display='none'},5000)}
+  t.innerHTML='<b style="color:#F5A524">Your page isn\'t live yet.</b><br>Approve it, save your Back office to your home screen and turn on notifications, and we\'ll tell you the moment it\'s ready to share.';t.style.display='block';clearTimeout(t.__h);t.__h=setTimeout(function(){t.style.display='none'},5000)}
  try{var u=new URL(url,location.href);if(u.origin!==location.origin){go();return}fetch(u.pathname,{method:'HEAD',cache:'no-store'}).then(function(r){r.ok?go():msg()}).catch(msg)}catch(e){msg()}}
 /* approve */
 $('approve').onclick=function(){
