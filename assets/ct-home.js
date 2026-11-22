@@ -86,19 +86,20 @@ function push(b,cb){if(SAMPLE){cb('This is a sample page, so nothing was sent. O
 var speaking=false;
 function mainText(){var a=$('.cta-art .vb.on')||$('main')||$('.cta-art')||document.body;return a.innerText.replace(/\s+/g,' ').trim()}
 
-/* Listen (top of page): plays the page's recorded voice track; falls back to the phone's own voice */
-var LA=null,LS=false;
-function lsnLbl(b,on){var t=b.querySelector('.lsn-t');if(t)t.textContent=on?'Pause':(b.getAttribute('data-l')||'Listen to this page');b.classList.toggle('on',on)}
-function lsnFallback(b){var sy=window.speechSynthesis;if(!sy)return;if(LS){sy.cancel();LS=false;lsnLbl(b,false);return}
- var t=mainText(),parts=t.match(/[^.!?]+[.!?]+/g)||[t],i=0;LS=true;lsnLbl(b,true);
- (function next(){if(!LS||i>=parts.length){LS=false;lsnLbl(b,false);return}var u=new SpeechSynthesisUtterance(parts[i++]);u.lang='en-US';u.onend=next;u.onerror=next;sy.speak(u)})()}
-function listen(b){if(LS){lsnFallback(b);return}
- var src=b.getAttribute('data-src')||'';if(src.indexOf('{v}')>=0){var v=document.querySelector('.cta-art .vt button[aria-pressed=true]');src=src.split('{v}').join(v?v.getAttribute('data-v'):'1')}
+/* Listen (top of page): plays the page's recorded Sofia (Zuri) voice track only. No robotic phone-voice fallback:
+   if the page has no recording (voice is an upgrade), the button stays hidden. */
+var LA=null;
+function lsnSrc(b){var src=b.getAttribute('data-src')||'';if(src.indexOf('{v}')>=0){var v=document.querySelector('.cta-art .vt button[aria-pressed=true]');src=src.split('{v}').join(v?v.getAttribute('data-v'):'1')}return src}
+function lsnLbl(b,on){var t=b.querySelector('.lsn-t');if(t)t.textContent=on?'Pause':'Listen to this page';b.classList.toggle('on',on)}
+function listen(b){var src=lsnSrc(b);if(!src)return;
  if(LA&&LA._src===src){if(LA.paused){LA.play();lsnLbl(b,true)}else{LA.pause();lsnLbl(b,false)}return}
- if(LA)LA.pause();if(!src){lsnFallback(b);return}
- var a=new Audio(src);a._src=src;LA=a;a.onended=function(){lsnLbl(b,false)};a.onerror=function(){if(LA===a)LA=null;lsnFallback(b)};
- var pr=a.play();lsnLbl(b,true);if(pr&&pr.catch)pr.catch(function(){})}
-document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.lsn');if(!b)return;e.preventDefault();listen(b)});
+ if(LA)LA.pause();var a=new Audio(src);a._src=src;LA=a;a.onended=function(){lsnLbl(b,false)};a.onerror=function(){lsnLbl(b,false)};
+ var pr=a.play();lsnLbl(b,true);if(pr&&pr.catch)pr.catch(function(){lsnLbl(b,false)})}
+function lsnCheck(){[].forEach.call(document.querySelectorAll('.lsn'),function(b){b.style.display='none';var src=lsnSrc(b);if(!src)return;
+ fetch(src,{method:'HEAD',cache:'no-store'}).then(function(r){if(r.ok&&/audio/.test(r.headers.get('content-type')||''))b.style.display=''}).catch(function(){})})}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.lsn');if(b){e.preventDefault();listen(b);return}
+ var vt=e.target.closest&&e.target.closest('.cta-art .vt button');if(vt){if(LA){LA.pause();LA=null}setTimeout(lsnCheck,50)}});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',lsnCheck);else lsnCheck();
 function readAloud(btn){var sy=window.speechSynthesis;if(!sy){alertSheet('Read it to me','Your browser can\'t read pages aloud. Try Chrome or Safari.');return}
  if(speaking){sy.cancel();speaking=false;setLbl(btn,'Read it to me','Listen to this page, hands free');return}
  var t=mainText(),parts=t.match(/[^.!?]+[.!?]+/g)||[t],i=0;speaking=true;setLbl(btn,'Stop reading','Tap again to stop');
