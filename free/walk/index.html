@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sophia: how ClaimTract works for you</title><meta name="robots" content="noindex">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0B0D10;color:#E9ECF1;font:15px Inter,system-ui,-apple-system,sans-serif;overflow:hidden}
+#app{position:relative;width:100%;max-width:440px;height:100%;margin:0 auto;background:#0F1115;overflow:hidden}
+.top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 10px) 12px 0}
+.top button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(15,17,21,.7);color:#E9ECF1;font-size:17px;cursor:pointer}
+#stage{position:absolute;inset:0;padding:64px 16px 0}
+#sophia{position:absolute;right:-6px;bottom:0;width:58%;max-width:250px;z-index:20;pointer-events:none;transition:opacity .4s}
+#sheet{position:absolute;inset:0;z-index:25;background:#000;transition:transform .7s cubic-bezier(.6,0,.3,1)}
+#sheet video{width:100%;height:100%;object-fit:cover}
+#sheet.gone{transform:translateY(105%)}
+#start{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(circle at 50% 40%,#1b2230,#0B0D10);text-align:center;padding:24px}
+#start img{width:96px}#start h1{font-size:21px}#start p{color:#A9AEB7;font-size:14px;max-width:300px;line-height:1.45}
+.go{border:0;border-radius:14px;background:#F5A524;color:#14171C;font:800 16px Inter,system-ui;padding:15px 22px;cursor:pointer}
+.el{position:absolute;transition:all .55s cubic-bezier(.3,.7,.3,1)}
+.card{background:#171A20;border:1px solid #262A31;border-radius:14px;padding:12px}
+.chip{display:inline-block;background:#1E2A1E;color:#86EFAC;border:1px solid #2F5A3A;border-radius:99px;padding:5px 10px;font-size:12px;font-weight:700}
+.lbl{font-size:11px;letter-spacing:2px;color:#F5A524;font-weight:800}
+.ttl{font-size:19px;font-weight:800;line-height:1.25}
+.mu{color:#A9AEB7;font-size:13px}
+.hide{opacity:0;transform:translateY(24px)}
+.thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.thumbs div{aspect-ratio:1;border-radius:6px;background:#222 center/cover;position:relative;overflow:hidden;opacity:0;transform:scale(.6);transition:all .35s}
+.thumbs div.on{opacity:1;transform:none}
+.thumbs div i{position:absolute;left:0;bottom:0;height:3px;background:#F5A524;width:0;transition:width .9s linear}
+.thumbs div.on i{width:100%}
+.thumbs div.dim{opacity:.18}
+.done{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%) scale(.3);opacity:0;width:132px;height:132px;border-radius:50%;background:#16A34A;display:grid;place-items:center;box-shadow:0 0 0 14px rgba(22,163,74,.18);transition:all .4s cubic-bezier(.2,1.6,.4,1)}
+.done.on{transform:translate(-50%,-50%) scale(1);opacity:1}
+.blob{width:150px;height:150px;margin:24px auto 18px;border-radius:50%;background:conic-gradient(from 0deg,#F5A524,#7DD3FC,#C4B5FD,#F5A524);filter:blur(2px);animation:morph 3s ease-in-out infinite,spin 6s linear infinite}
+@keyframes morph{0%,100%{border-radius:50% 45% 55% 48%}50%{border-radius:40% 60% 45% 55%}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tick{font-size:14px;margin:6px 0;opacity:0;transform:translateX(-12px);transition:all .4s}.tick.on{opacity:1;transform:none}.tick b{color:#86EFAC}
+.photo{width:100%;aspect-ratio:4/3;border-radius:14px;background:#222 center/cover;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.wave{width:100%;border-radius:10px;margin-top:10px;display:block}
+.ezk{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;color:#FCD58A;font-weight:700}
+.post{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:12px;background:#171A20;border:1px solid #262A31;margin:6px 0;font-size:13px;font-weight:700}
+.post span{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;color:#fff;font-weight:900;font-size:13px}
+.kid{padding:8px 10px;margin:5px 0 5px 18px;border-left:2px solid #F5A524;background:#14171C;border-radius:0 10px 10px 0;font-size:12.5px}
+.tap{position:absolute;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.35);border:2px solid #fff;transform:scale(0);transition:transform .25s}
+.tap.on{transform:scale(1)}
+.ipad{background:#fff;color:#202124;border-radius:16px;padding:12px;border:8px solid #2A2E36}
+.gq{border:1px solid #DFE1E5;border-radius:24px;padding:9px 14px;font-size:14px;min-height:38px}
+.gres{margin-top:10px;font-size:12px;opacity:0;transition:opacity .4s}.gres.on{opacity:1}
+.gres a{color:#1A0DAB;font-size:15px;display:block;margin:2px 0}
+.kb{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-top:10px}.kb i{background:#EEF0F3;border-radius:5px;height:24px;font:600 11px Inter;display:grid;place-items:center;font-style:normal;color:#333}.kb i.p{background:#C9D3E0}
+.swoop{color:#E11D2E;font-weight:900;font-size:20px;margin-top:8px;opacity:0;transition:opacity .4s}.swoop.on{opacity:1}
+.bubble{max-width:82%;padding:9px 12px;border-radius:16px;margin:6px 0;font-size:13.5px;line-height:1.35}
+.bin{background:#2A2E36}.bout{background:#2563EB;margin-left:auto;color:#fff}
+.big{font-size:52px;font-weight:900;color:#F5A524;line-height:1}
+.row3{display:flex;gap:8px;margin-top:10px}.row3 div{flex:1;text-align:center;padding:10px 4px;border-radius:12px;background:#171A20;border:1px solid #262A31}.row3 b{display:block;font-size:22px}
+.ring{text-align:center;padding-top:30px}.ring .av{width:84px;height:84px;margin:10px auto;border-radius:50%;background:#1d2a3a;display:grid;place-items:center;font:800 28px Inter;color:#F5A524;animation:pulse 1s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 18px rgba(245,165,36,.15)}}
+.note{display:flex;gap:9px;align-items:center;background:rgba(30,33,40,.95);border:1px solid #2C3038;border-radius:14px;padding:9px 11px;margin:7px 0;font-size:13px;transform:translateY(-14px);opacity:0;transition:all .35s}
+.note.on{opacity:1;transform:none}.note span{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;color:#fff;font-weight:900;font-size:12px;flex:none}
+.ben{display:flex;gap:10px;align-items:flex-start;background:#171A20;border:1px solid #262A31;border-left:3px solid #F5A524;border-radius:12px;padding:10px 12px;margin:7px 0;font-size:13.5px;line-height:1.35;opacity:0;transform:translateY(40px);transition:all .45s}
+.ben.on{opacity:1;transform:none}
+#fin{position:absolute;inset:0;z-index:26;background:#000;display:none}
+#fin video{width:100%;height:100%;object-fit:cover}
+#buy{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 22px);z-index:27;display:none;text-align:center;text-decoration:none;font-size:18px}
+#buy small{display:block;font-weight:600;font-size:12px;margin-top:3px}
+</style></head><body>
+<div id="app">
+ <div class="top"><button id="mute" aria-label="Sound on or off">&#128266;</button><button id="x" aria-label="Close">&#10005;</button></div>
+ <div id="stage"></div>
+ <canvas id="sophia" width="528" height="600" aria-hidden="true"></canvas>
+ <div id="sheet"><video id="hero" src="/assets/sophia-full.mp4" playsinline preload="auto"></video></div>
+ <div id="fin"><video id="fv" src="/assets/sophia-full.mp4" playsinline preload="auto"></video></div>
+ <a id="buy" class="go" href="https://buy.stripe.com/fZuaEQ5bU38Y7Yh5Q75EY00" target="_top">Get started for just $1<small>Founders Lab seat · 14 days, then $99 a month</small></a>
+ <div id="start"><img src="/assets/ct-shield.png" alt="ClaimTract"><h1>Sophia will walk you through it</h1><p>About seven minutes. Turn your sound on.</p><button class="go" id="go">Start</button></div>
+</div>
+<script>
+(function(){
+var A='/assets/sw/',P=A+'p/',$=function(id){return document.getElementById(id)},stage=$('stage');
+var muted=false,stopped=false,cur=null,raf=0;
+var sv=document.createElement('video');sv.playsInline=true;sv.preload='auto';sv.crossOrigin='anonymous';
+var idle=document.createElement('video');idle.src=A+'sw-idle.mp4';idle.loop=true;idle.muted=true;idle.playsInline=true;idle.preload='auto';
+function lg(a){try{fetch('/api/app/events',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({type:'walkthrough',action:a})})}catch(e){}}
+/* ---------- green-screen keyer (WebGL, runs on the viewer's phone) ---------- */
+var cv=$('sophia'),gl=cv.getContext('webgl',{premultipliedAlpha:false,alpha:true}),src=null;
+if(gl){var vs='attribute vec2 p;varying vec2 t;void main(){t=vec2((p.x+1.)/2.,1.-(p.y+1.)/2.);gl_Position=vec4(p,0,1);}',
+ fs='precision mediump float;varying vec2 t;uniform sampler2D s;void main(){vec4 c=texture2D(s,t);float k=clamp((c.g-max(c.r,c.b)-.10)/.16,0.,1.);float g=min(c.g,max(c.r,c.b)*1.05);gl_FragColor=vec4(c.r,g,c.b,1.-k);}';
+ function sh(ty,s){var o=gl.createShader(ty);gl.shaderSource(o,s);gl.compileShader(o);return o}
+ var pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
+ var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+ var loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+ var tx=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tx);[gl.TEXTURE_WRAP_S,gl.TEXTURE_WRAP_T].forEach(function(w){gl.texParameteri(gl.TEXTURE_2D,w,gl.CLAMP_TO_EDGE)});gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+ gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);}
+function draw(){raf=requestAnimationFrame(draw);if(!gl||!src||src.readyState<2)return;gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
+ try{gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,src);gl.drawArrays(gl.TRIANGLE_STRIP,0,4)}catch(e){}}
+function show(v){src=v;cv.style.opacity=1}
+/* ---------- helpers ---------- */
+function H(h){stage.innerHTML=h}
+function q(s){return stage.querySelector(s)}
+function at(t,fn){(cur.cues=cur.cues||[]).push({t:t,fn:fn,done:false})}
+function on(el){if(el)el.classList.add('on')}
+function chime(){if(muted)return;try{var c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(880,c.currentTime);o.frequency.setValueAtTime(1320,c.currentTime+.12);g.gain.setValueAtTime(.25,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.6);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.6)}catch(e){}}
+function ringtone(sec){if(muted)return;try{var c=new (window.AudioContext||window.webkitAudioContext)();for(var i=0;i<sec;i+=2){[0,.25].forEach(function(d){var o=c.createOscillator(),g=c.createGain();o.frequency.value=d?480:440;g.gain.setValueAtTime(.08,c.currentTime+i);g.gain.setValueAtTime(0,c.currentTime+i+.9);o.connect(g);g.connect(c.destination);o.start(c.currentTime+i);o.stop(c.currentTime+i+.95)})}}catch(e){}}
+function tick(){if(!cur||!cur.cues)return;var t=sv.currentTime;cur.cues.forEach(function(c){if(!c.done&&t>=c.t){c.done=true;c.fn()}})}
+sv.addEventListener('timeupdate',tick);
+var ORDER=['sw-s01.mp4','sw-s02.mp4','sw-s03.mp4','sw-s04.mp4','ez-demo-1-wind-wave.mp4','sw-s05.mp4','ez-demo-2-disposal-wave.mp4','sw-s06.mp4','ez-demo-3-dryout-wave.mp4','sw-s07a.mp4','sw-s07b.mp4','sw-s08.mp4','sw-s09.mp4','sw-s10.mp4','sw-s11.mp4'],pf={};
+function prefetch(file){var i=ORDER.indexOf(file);[1,2].forEach(function(d){var f=ORDER[i+d];if(!f||pf[f])return;var v=document.createElement('video');v.preload='auto';v.muted=true;v.src=A+f;pf[f]=v})}
+function play(file,setup,next){if(stopped)return;cur={};setup(sv);sv.src=A+file;prefetch(file);sv.muted=muted;show(sv);
+ sv.onended=function(){sv.onended=null;cur.cues&&cur.cues.forEach(function(c){if(!c.done){c.done=true;c.fn()}});next()};sv.play().catch(function(){})}
+function idleFor(ms,next){if(stopped)return;show(idle);idle.currentTime=0;idle.play().catch(function(){});setTimeout(function(){if(!stopped)next()},ms)}
+function ezk(n,photo,dur,next){if(stopped)return;show(idle);idle.play().catch(function(){});
+ var w=document.createElement('video');w.src=A+'ez-demo-'+n+'-wave.mp4';w.className='wave';w.playsInline=true;w.muted=muted;
+ var box=q('#ez');if(box){box.innerHTML='<div class="ezk">&#127908; You, talking to the homeowner</div>';box.appendChild(w)}
+ w.onended=function(){setTimeout(next,700)};w.play().catch(function(){setTimeout(next,dur*1000+700)})}
+var D=function(s){return 'background-image:url('+P+s+'.jpg)'};
+/* ---------- scenes ---------- */
+var S=[];
+S.push(function(n){H('<div class="lbl">STEP ONE</div><div class="ttl" style="margin:4px 0 12px">The homeowner</div><div class="card" style="position:relative;padding:0;overflow:hidden"><img src="'+A+'dec.jpg" style="width:100%;display:block" alt="Sample declarations page"><div id="scan" style="position:absolute;left:0;right:0;top:0;height:3px;background:#7DD3FC;box-shadow:0 0 18px 6px rgba(125,211,252,.6);transition:top 3.2s linear"></div></div><div id="f" style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px"></div>');
+ play('sw-s01.mp4',function(){at(.3,function(){q('#scan').style.top='100%'});[['HO-3 Special Form',1.6],['Dwelling $350,000',2.4],['Hurricane 2%',3.1],['Ordinance or Law 25%',3.8]].forEach(function(c){at(c[1],function(){q('#f').insertAdjacentHTML('beforeend','<span class="chip">'+c[0]+'</span>')})});
+  at(5.4,function(){q('#f').insertAdjacentHTML('beforeend','<span class="chip" style="background:#2A2414;color:#FCD58A;border-color:#5B4520">&#128274; Name and address kept private</span>')})},n)});
+S.push(function(n){var ids=['01','02','03','04','05','06','08','09','10','11','12','13','14','15','16','17','18','19','20'],h='';for(var i=0;i<20;i++)h+='<div style="'+D(ids[i%19])+'"><i></i></div>';
+ H('<div class="lbl">STEP TWO</div><div class="ttl" style="margin:4px 0 12px">Upload your photos</div><div class="thumbs" id="th">'+h+'</div><div class="mu" style="margin-top:10px;font-weight:700"><span id="cnt">0</span> of 100 uploaded</div><div class="done" id="ok"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>');
+ var tiles=stage.querySelectorAll('#th div');tiles.forEach(function(t,i){setTimeout(function(){on(t)},i*70)});
+ var c=0,iv=setInterval(function(){c=Math.min(100,c+4);q('#cnt')&&(q('#cnt').textContent=c);if(c>=100){clearInterval(iv)}},55);
+ play('sw-s02.mp4',function(){at(3.3,function(){on(q('#ok'));chime()})},n)});
+S.push(function(n){H('<div class="blob"></div><div id="tk"></div><div class="thumbs" id="th" style="margin-top:14px"></div>');
+ var lines=[['Looking at every photo',.5],['Duplicates removed',3],['Near duplicates removed',4.5],['Keepers picked for your articles',7],['Florida Building Code, your wind zone',11],['Florida statutes that apply',13]];
+ play('sw-s03.mp4',function(){lines.forEach(function(l){at(l[1],function(){q('#tk').insertAdjacentHTML('beforeend','<div class="tick on"><b>&#10003;</b> '+l[0]+'</div>')})});
+  at(15.5,function(){q('#th').innerHTML=['20','08','14'].map(function(s){return '<div class="on" style="'+D(s)+';grid-column:span 1"></div>'}).join('');q('#th').style.gridTemplateColumns='repeat(3,1fr)'})},n)});
+function photoScene(file,img,lbl,ez,dur){return function(n){H('<div class="lbl">'+lbl+'</div><div class="photo" style="margin-top:8px;'+D(img)+'"></div><div id="ez"></div>');play(file,function(){},function(){ezk(ez,img,dur,n)})}}
+S.push(photoScene('sw-s04.mp4','20','KEEPER 1 OF 3 · WIND','1-wind',12.4));
+S.push(photoScene('sw-s05.mp4','08','KEEPER 2 OF 3 · WATER','2-disposal',13));
+S.push(photoScene('sw-s06.mp4','14','KEEPER 3 OF 3 · DRY-OUT','3-dryout',10.2));
+S.push(function(n){H('<div class="lbl">YOUR PILLAR ARTICLE</div><div class="card" id="pl" style="margin-top:8px;position:relative"><div class="photo" style="aspect-ratio:16/8;'+D('20')+'"></div><div class="ttl" style="font-size:16px;margin:8px 0 4px">Wind tore off half a slope: what one Florida family learned about the 25 percent rule</div><div class="mu">Approved by you · living case study</div><div style="margin-top:10px;display:flex;gap:8px"><span class="chip" id="apv" style="background:#14171C;color:#A9AEB7;border-color:#2C3038">Waiting for you</span></div><div class="tap" id="tp" style="right:30px;bottom:6px"></div></div><div id="posts"></div>');
+ play('sw-s07a.mp4',function(){at(12.5,function(){on(q('#tp'));setTimeout(function(){var a=q('#apv');if(a){a.textContent='&#10003; Approved'.replace('&#10003;','✓');a.className='chip'}q('#tp')&&q('#tp').classList.remove('on')},500)});
+  [['f','#1877F2','Facebook post ready',20],['IG','linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)','Instagram post ready',21.5],['G','#34A853','Google Business post ready',23]].forEach(function(p){at(p[3],function(){q('#posts').insertAdjacentHTML('beforeend','<div class="post"><span style="background:'+p[1]+'">'+p[0]+'</span>'+p[2]+'</div>')})})},n)});
+S.push(function(n){H('<div class="card" style="padding:9px 11px"><b style="font-size:13px">Pillar: the 25 percent rule after a windstorm</b></div><div id="kids"></div><div id="ip" style="display:none"></div><div id="site" style="display:none"></div>');
+ var kids=['Does insurance cover shingles blown off by wind?','What is the 25 percent roof rule in Florida?','Roof older than 2007: what the carrier owes','Should I call a roofer or a public adjuster first?','Found shingles in the yard after a storm?'];
+ play('sw-s07b.mp4',function(){kids.forEach(function(k,i){at(1+i*2.2,function(){q('#kids').insertAdjacentHTML('beforeend','<div class="kid">'+k+'</div>')})});
+  at(17,function(){q('#kids').style.display='none';var ip=q('#ip');ip.style.display='block';ip.innerHTML='<div class="ipad"><div style="font:700 22px Inter;text-align:center;margin-bottom:8px"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></div><div class="gq" id="gq"></div><div class="kb">'+'qwertyuiopasdfghjklzxcvbnm'.split('').map(function(c){return '<i data-k="'+c+'">'+c+'</i>'}).join('')+'</div><div class="gres" id="gr"><div style="color:#5f6368">3:07 AM</div><a>Water dripping from the ceiling? What to do before you call anyone</a><div>Your page · Licensed public adjuster</div></div></div><div class="swoop" id="sw">&#8599; You start showing up.</div>';
+   var txt='water dripping from the ceiling',i=0,ti=setInterval(function(){if(stopped||!q('#gq')){clearInterval(ti);return}var ch=txt[i];q('#gq').textContent=txt.slice(0,++i);var k=stage.querySelector('[data-k="'+ch+'"]');if(k){k.classList.add('p');setTimeout(function(){k.classList.remove('p')},120)}if(i>=txt.length){clearInterval(ti);setTimeout(function(){on(q('#gr'));setTimeout(function(){on(q('#sw'))},700)},400)}},95)});
+  at(40,function(){q('#ip').style.display='none';var s=q('#site');s.style.display='block';s.innerHTML='<div class="lbl">YOUR WEBSITE</div><div class="card" style="margin-top:8px;text-align:center"><div class="mu">Articles on your site</div><div class="big" id="ac">1</div></div>';var c=1,iv=setInterval(function(){if(!q('#ac')){clearInterval(iv);return}c++;q('#ac').textContent=c;if(c>=36)clearInterval(iv)},60)})},n)});
+S.push(function(n){H('<div class="lbl">THE CLAIM KEEPS TALKING</div><div class="card" style="margin-top:8px"><b>Claim: wind, roof and ceiling</b><div class="mu">Open · Day 21</div></div><div id="ev"></div><div id="nw"></div>');
+ var ev=[['&#127908;','Call from the carrier',8],['&#127908;','Call from Mary: confused by a letter',11],['&#128193;','Mary added a letter to her binder',14.5]];
+ play('sw-s08.mp4',function(){ev.forEach(function(e){at(e[2],function(){q('#ev').insertAdjacentHTML('beforeend','<div class="post"><span style="background:#2A2E36">'+e[0]+'</span>'+e[1]+'</div>')})});
+  at(24,function(){q('#nw').innerHTML='<div class="blob" style="width:70px;height:70px;margin:12px auto"></div>'});at(28,function(){q('#nw').innerHTML='<div class="kid">What does a reservation of rights letter mean? <span class="chip" style="margin-left:6px;background:#2A2414;color:#FCD58A;border-color:#5B4520">Waiting for your approval</span></div>'})},n)});
+S.push(function(n){H('<div class="lbl">9:14 PM</div><div class="card" style="margin-top:8px;min-height:300px"><div class="mu" style="text-align:center;margin-bottom:6px">Mary Johnson</div><div id="th"></div></div>');
+ play('sw-s09.mp4',function(){at(2.5,function(){q('#th').insertAdjacentHTML('beforeend','<div class="bubble bin">Sorry it’s late. I got this letter that says reservation of rights. What does that mean??</div>')});
+  at(7.5,function(){q('#th').insertAdjacentHTML('beforeend','<div class="bubble bout">Here’s a page that explains it: what a reservation of rights letter means →</div>')});
+  at(12.5,function(){q('#th').insertAdjacentHTML('beforeend','<div class="bubble bin">Thank you, that makes sense now.</div>')})},n)});
+S.push(function(n){H('<div class="lbl">DO THE MATH</div><div class="card" style="margin-top:8px;text-align:center"><div class="mu">Answer pages a month</div><div class="big" id="pg">4</div></div><div class="row3"><div><span class="mu">Facebook</span><b id="a1">0</b></div><div><span class="mu">Instagram</span><b id="a2">0</b></div><div><span class="mu">Google</span><b id="a3">0</b></div></div><div class="card" style="margin-top:10px;text-align:center"><div class="mu">Posts a month</div><b style="font-size:30px" id="ps">0</b></div><div class="card" id="yr" style="margin-top:10px;text-align:center;opacity:0;transition:opacity .4s"><div class="mu">In one year</div><div class="big" id="ya">0</div><div class="mu">articles working for you</div></div>');
+ function cnt(id,to,ms){var el=q('#'+id);if(!el)return;var s=+el.textContent||0,st=performance.now();(function f(){var k=Math.min(1,(performance.now()-st)/ms);if(q('#'+id))q('#'+id).textContent=Math.round(s+(to-s)*k);if(k<1)requestAnimationFrame(f)})()}
+ play('sw-s10.mp4',function(){at(6,function(){cnt('pg',52,1200)});at(11,function(){cnt('a1',52,900);cnt('a2',52,900);cnt('a3',52,900)});at(15,function(){cnt('ps',156,1200)});at(41,function(){q('#yr').style.opacity=1;cnt('ya',624,1500)})},function(){
+  H('<div style="text-align:center;margin-top:34%;font:800 28px Inter">The end result…</div>');setTimeout(function(){
+   H('<div class="ring"><div class="mu">Incoming call…</div><div class="av">MJ</div><div class="ttl">Mary Johnson</div><div class="mu">from your answer page</div></div><div id="nt" style="margin-top:22px"></div>');ringtone(7);
+   [['f','#1877F2','Facebook message from Mary'],['IG','linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)','Instagram message'],['G','#34A853','New message from Google'],['&#9993;','#22C55E','Text: “Can you look at my roof this week?”'],['&#9998;','#F5A524','New form from your website']].forEach(function(m,i){setTimeout(function(){var nt=q('#nt');if(!nt)return;nt.insertAdjacentHTML('beforeend','<div class="note"><span style="background:'+m[1]+'">'+m[0]+'</span>'+m[2]+'</div>');setTimeout(function(){on(nt.lastChild)},30)},900+i*1100)});
+   idleFor(7500,n)},1600)})});
+S.push(function(n){var b=['One claim becomes about a dozen answer pages','You approve every page; names and addresses never reach them','Facebook, Google and Instagram posts, ready for your thumb','Your old files work again, from your laptop','The Claim Engine: one inbox, pipelines, automations','Homeowners book your inspections, with reminders','Founders get every new feature first'];
+ H('<div class="lbl">WHAT YOU GET</div><div id="bn" style="margin-top:6px"></div>');
+ play('sw-s11.mp4',function(){b.forEach(function(t,i){at(3+i*5.4,function(){q('#bn').insertAdjacentHTML('beforeend','<div class="ben"><b style="color:#F5A524">✓</b><span>'+t+'</span></div>');var e=q('#bn').lastChild;setTimeout(function(){on(e)},30)})})},n)});
+function finale(){if(stopped)return;cv.style.opacity=0;var f=$('fin'),v=$('fv');f.style.display='block';v.muted=muted;v.currentTime=33.8;v.play().catch(function(){});
+ var shown=false;function sb(){if(shown)return;shown=true;$('buy').style.display='block';lg('buy_shown')}
+ v.addEventListener('timeupdate',function(){if(v.currentTime>v.duration-6)sb()});v.onended=function(){sb();v.currentTime=v.duration-0.05}}
+function run(i){if(stopped)return;if(i>=S.length)return finale();lg('scene_'+(i+1));S[i](function(){run(i+1)})}
+/* ---------- start / controls ---------- */
+$('go').onclick=function(){$('start').remove();lg('start');requestAnimationFrame(draw);var h=$('hero');h.muted=muted;h.currentTime=0;h.play().catch(function(){});
+ var cut=function(){if(h.currentTime>=33.6){h.removeEventListener('timeupdate',cut);h.pause();$('sheet').classList.add('gone');setTimeout(function(){run(0)},500)}};h.addEventListener('timeupdate',cut);
+ [sv,idle].forEach(function(v){v.load()})};
+$('mute').onclick=function(){muted=!muted;this.innerHTML=muted?'&#128263;':'&#128266;';[sv,$('hero'),$('fv')].forEach(function(v){v.muted=muted});stage.querySelectorAll('video').forEach(function(v){v.muted=muted})};
+$('x').onclick=function(){stopped=true;lg('closed');[sv,idle,$('hero'),$('fv')].forEach(function(v){try{v.pause()}catch(e){}});
+ if(window.parent!==window){try{window.parent.postMessage({ct:'walk_close'},'*')}catch(e){}}else{location.href='/free/app/'}};
+$('buy').onclick=function(){lg('buy_tap')};
+})();
+</script></body></html>
