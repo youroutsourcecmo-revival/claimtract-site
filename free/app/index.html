@@ -1159,6 +1159,83 @@ function run(){if(!app.classList.contains('light'))return;var w=document.createT
 function reset(){[].forEach.call(app.querySelectorAll('[data-cg]'),function(e){e.style.removeProperty('color');e.removeAttribute('data-cg')})}
 var tm=null;function sched(){clearTimeout(tm);tm=setTimeout(function(){if(app.classList.contains('light'))run();else reset()},60)}
 new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='attributes'&&ms[i].attributeName==='style')return}sched()}).observe(app,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});sched();window.__ctContrast=run})();
+/* ===== Founder line (wrench): report a problem or send an idea, with a clean system log ===== */
+(function(){
+ var LOG=[],MAX=60,t0=Date.now();
+ function scrub(s){return String(s==null?'':s)
+  .replace(/[\w.+-]+@[\w-]+\.[\w.-]+/g,'[email]')
+  .replace(/\+?\d[\d\s().-]{6,}\d/g,'[number]')
+  .replace(/\b\d{1,6}\s+[A-Za-z0-9.' -]{2,40}\b(street|st|ave|avenue|road|rd|drive|dr|lane|ln|court|ct|blvd|way|circle|cir|place|pl)\b\.?/gi,'[address]')
+  .slice(0,160)}
+ function lg(type,detail){LOG.push({t:Math.round((Date.now()-t0)/1000),type:type,d:scrub(detail)});if(LOG.length>MAX)LOG.shift()}
+ window.addEventListener('error',function(e){lg('error',(e.message||'')+' @'+String(e.filename||'').split('/').pop()+':'+(e.lineno||''))});
+ window.addEventListener('unhandledrejection',function(e){lg('error','promise: '+((e.reason&&e.reason.message)||e.reason||''))});
+ window.addEventListener('offline',function(){lg('net','went offline')});window.addEventListener('online',function(){lg('net','back online')});
+ var _r=render;render=function(n,d){lg('screen',n);try{return _r.apply(this,arguments)}catch(err){lg('error','render '+n+': '+err.message);throw err}};
+ var _a=api;api=function(m,p){var path=String(p).split('?')[0];return _a.apply(this,arguments).then(function(j){if(j&&(j.ok===false||j.__s>=400||j.__s===0)&&path.indexOf('/api/app/events')<0)lg('api',m+' '+path+' failed ('+(j.__s||'no connection')+')');return j})};
+ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button,a,[data-go],[data-act],[data-al],[data-tog]');if(!b||b.closest('#wr,#wrs'))return;
+  var k=b.dataset.go?'go:'+b.dataset.go:b.dataset.act?'act:'+b.dataset.act:b.dataset.tog?'toggle:'+b.dataset.tog:'';lg('tap',(k?k+' ':'')+(b.getAttribute('aria-label')||b.textContent||'').replace(/\s+/g,' ').trim().slice(0,40))},true);
+
+ function isF(){return !R||!!(ME&&(ME.plan==='founder'||ME.founder||ME.plan_founder||(ME.settings&&ME.settings.founder)))}
+ function device(){var n=navigator,c=n.connection||{};return {screen:(cur&&cur.dataset?cur.dataset.v:'')||'',stack:stack.slice(-5),ua:n.userAgent,size:innerWidth+'x'+innerHeight,theme:THEME+(tog.lt?'/light':'/dark'),online:n.onLine,net:c.effectiveType||'',lang:n.language,plan:(ME&&ME.plan)||'free',demo:!R,when:new Date().toISOString()}}
+ function packet(kind,msg){return {kind:kind,founder:isF(),message:String(msg||'').trim().slice(0,2000),log:{device:device(),events:LOG.slice()}}}
+
+ var css=document.createElement('style');css.textContent=
+ '#wr{position:absolute;left:10px;bottom:66px;z-index:62;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,196,0,.45);background:#14171C;color:#FFC400;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;padding:0}'+
+ '.app.light #wr{background:#fff;color:#9A6200;border-color:rgba(154,98,0,.4)}#wr svg{width:18px;height:18px}'+
+ '#wrs{position:absolute;inset:0;z-index:80;display:none;align-items:flex-end;background:rgba(0,0,0,.55)}#wrs.on{display:flex}'+
+ '#wrs .bx{width:100%;max-height:92%;overflow:auto;background:#14171C;color:#E9ECF1;border-radius:18px 18px 0 0;padding:16px 16px 20px;font:13px Inter,system-ui,sans-serif;box-sizing:border-box}'+
+ '.app.light #wrs .bx{background:#fff;color:#1A1D22}#wrs h2{font:800 16px Inter,system-ui;margin:0 0 4px}#wrs .sub{font-size:12px;opacity:.85;margin:0 0 12px;line-height:1.45}'+
+ '#wrs .seg2{display:flex;gap:6px;margin-bottom:10px}#wrs .seg2 span{flex:1;text-align:center;padding:9px 6px;border-radius:10px;border:1px solid rgba(255,255,255,.14);font-weight:700;font-size:12px;cursor:pointer}'+
+ '#wrs .seg2 span.on{background:#FFC400;color:#14171C;border-color:#FFC400}.app.light #wrs .seg2 span{border-color:#D6D9DE}'+
+ '#wrs textarea{width:100%;min-height:96px;box-sizing:border-box;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;padding:10px;font:13px Inter,system-ui;resize:vertical}'+
+ '.app.light #wrs textarea{border-color:#D6D9DE;background:#F6F7F9}'+
+ '#wrs .mic{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,196,0,.4);background:none;color:inherit;font-weight:700;width:100%;cursor:pointer}#wrs .mic.rec{background:#C62828;color:#fff;border-color:#C62828}'+
+ '#wrs .what{font-size:11px;opacity:.85;margin:6px 0 12px;line-height:1.45}#wrs .what u{cursor:pointer}#wrs pre{white-space:pre-wrap;font:10px ui-monospace,monospace;max-height:160px;overflow:auto;background:rgba(127,127,127,.12);padding:8px;border-radius:8px}'+
+ '#wrs .go{width:100%;padding:12px;border:0;border-radius:12px;background:#FFC400;color:#14171C;font:800 14px Inter,system-ui;cursor:pointer}#wrs .go[disabled]{opacity:.45}#wrs .x{float:right;background:none;border:0;color:inherit;font-size:22px;line-height:1;cursor:pointer}'+
+ '#wrs .ok{text-align:center;padding:18px 6px}#wrs .ok b{display:block;font-size:15px;margin-bottom:6px}';
+ document.head.appendChild(css);
+
+ var W='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>';
+ var btn=document.createElement('button');btn.id='wr';btn.type='button';btn.innerHTML=W;app.appendChild(btn);
+ var sh=document.createElement('div');sh.id='wrs';sh.innerHTML='<div class="bx"></div>';app.appendChild(sh);var bx=sh.firstChild;
+ var kind='bug',rec=null;
+ function sync(){var f=isF();btn.setAttribute('aria-label',f?'Founder line: report a problem or send an idea':'Report a problem');btn.title=btn.getAttribute('aria-label');
+  var v=cur&&cur.dataset&&cur.dataset.v;btn.style.display=(!v||v==='signin')?'none':'flex'}
+ setInterval(sync,1500);
+
+ function draw(){var f=isF();
+  bx.innerHTML='<button class="x" data-w="close" aria-label="Close">&times;</button>'+
+  '<h2>'+(f?'Founder line to Ezekiel':'Report a problem')+'</h2>'+
+  '<p class="sub">'+(f?(kind==='bug'?'Something not working? Tell me in a sentence or two. Your system log rides along, so we can see exactly what happened. You\'ll hear back from me within 24 hours, and most fixes ship within a day.':'One founder is enough. If we can build it, every founder gets it to try for 30 days. Then each founder votes approve or not. If more than half of those who vote say yes, with at least 5 votes, every new customer gets it too.'):'Tell us what went wrong. Your system log rides along so we can see what happened.')+'</p>'+
+  (f?'<div class="seg2"><span data-w="bug" class="'+(kind==='bug'?'on':'')+'">Something\'s broken</span><span data-w="idea" class="'+(kind==='idea'?'on':'')+'">I have an idea</span></div>':'')+
+  '<textarea id="wrt" placeholder="'+(kind==='bug'?'What did you tap, and what happened?':'What should it do for you?')+'"></textarea>'+
+  ((window.SpeechRecognition||window.webkitSpeechRecognition)?'<button class="mic" data-w="mic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>Tap and talk</span></button>':'')+
+  '<p class="what">Sent with it: the screen you were on, your last taps, any errors, and your device type. Homeowner emails, phone numbers and addresses are removed. <u data-w="peek">See exactly what\'s sent</u></p><div id="wrp"></div>'+
+  '<button class="go" data-w="send">Send to Ezekiel</button>'}
+
+ function stopRec(){if(rec){try{rec.stop()}catch(e){}rec=null}var m=bx.querySelector('.mic');if(m){m.classList.remove('rec');m.lastChild.textContent='Tap and talk'}}
+ function open(){kind='bug';draw();sh.classList.add('on');lg('wrench','opened')}
+ function close(){stopRec();sh.classList.remove('on')}
+ btn.addEventListener('click',open);
+ function ok(j){return j&&j.ok!==false&&j.__s<400&&j.__s!==0}
+ sh.addEventListener('click',function(e){if(e.target===sh)return close();var w=e.target.closest('[data-w]');if(!w)return;var a=w.dataset.w,ta=bx.querySelector('#wrt');
+  if(a==='close')return close();
+  if(a==='bug'||a==='idea'){var keep=ta.value;kind=a;draw();bx.querySelector('#wrt').value=keep;return}
+  if(a==='peek'){var p=bx.querySelector('#wrp');p.innerHTML=p.innerHTML?'':'<pre></pre>';if(p.firstChild)p.firstChild.textContent=JSON.stringify(packet(kind,ta.value).log,null,1);return}
+  if(a==='mic'){if(rec)return stopRec();var SR=window.SpeechRecognition||window.webkitSpeechRecognition;rec=new SR();rec.lang='en-US';rec.interimResults=true;rec.continuous=true;var base=ta.value?ta.value.replace(/\s*$/,' '):'';
+   rec.onresult=function(ev){var s='';for(var i=0;i<ev.results.length;i++)s+=ev.results[i][0].transcript;ta.value=base+s};rec.onend=function(){stopRec()};rec.onerror=function(){stopRec()};
+   try{rec.start();w.classList.add('rec');w.lastChild.textContent='Listening… tap to stop'}catch(err){stopRec()}return}
+  if(a==='send'){stopRec();var msg=ta.value.trim();if(msg.length<3){ta.focus();return}w.disabled=true;w.textContent='Sending…';var pk=packet(kind,msg);
+   function fin(state){bx.innerHTML='<div class="ok"><b>'+(state==='demo'?'Preview only':state==='fail'?'Not sent yet':'Sent. Thank you.')+'</b><p class="sub">'+(state==='demo'?'This is the sample Back office. In yours, this goes straight to Ezekiel with your log.':state==='fail'?'No connection right now. Your message is still here; try again in a moment.':(isF()?(kind==='bug'?'Ezekiel will get back to you within 24 hours.':'Ezekiel reads every idea himself. If we build it, you\'ll hear first.'):'We\'ll take a look.'))+'</p><button class="go" data-w="'+(state==='fail'?'retry':'close')+'">'+(state==='fail'?'Back to my message':'Done')+'</button></div>'}
+   if(!R)return fin('demo');
+   api('POST','/api/app/feedback',pk).then(function(j){if(ok(j))return fin('sent');
+    return api('POST','/api/app/events',{name:'wrench_'+kind,feedback:pk}).then(function(k){fin(ok(k)?'sent':'fail');if(!ok(k))sh._keep=msg})})}
+  if(a==='retry'){draw();bx.querySelector('#wrt').value=sh._keep||'';return}
+ });
+ sync();
+})();
+
 boot();
 })();
 </script>
