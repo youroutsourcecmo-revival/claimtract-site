@@ -1193,7 +1193,12 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
  '#wrs .mic{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,196,0,.4);background:none;color:inherit;font-weight:700;width:100%;cursor:pointer}#wrs .mic.rec{background:#C62828;color:#fff;border-color:#C62828}'+
  '#wrs .what{font-size:11px;opacity:.85;margin:6px 0 12px;line-height:1.45}#wrs .what u{cursor:pointer}#wrs pre{white-space:pre-wrap;font:10px ui-monospace,monospace;max-height:160px;overflow:auto;background:rgba(127,127,127,.12);padding:8px;border-radius:8px}'+
  '#wrs .go{width:100%;padding:12px;border:0;border-radius:12px;background:#FFC400;color:#14171C;font:800 14px Inter,system-ui;cursor:pointer}#wrs .go[disabled]{opacity:.45}#wrs .x{float:right;background:none;border:0;color:inherit;font-size:22px;line-height:1;cursor:pointer}'+
- '#wrs .ok{text-align:center;padding:18px 6px}#wrs .ok b{display:block;font-size:15px;margin-bottom:6px}';
+ '#wrs .ok{text-align:center;padding:18px 6px}#wrs .ok b{display:block;font-size:15px;margin-bottom:6px}'+
+ '#wrs .xp{display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px 4px 4px;animation:wrxin .35s ease}@keyframes wrxin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}'+
+ '#wrs .xp .av{width:84px;height:84px;border-radius:50%;border:3px solid #FFC400;background-color:#1A1C21;background-repeat:no-repeat;display:grid;place-items:center;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.35)}'+
+ '#wrs .xp .nm{font:800 14px Inter,system-ui;margin:10px 0 2px}#wrs .xp .rl{font-size:11px;opacity:.7;margin-bottom:12px}'+
+ '#wrs .xp .bb{background:rgba(255,196,0,.12);border:1px solid rgba(255,196,0,.35);border-radius:14px 14px 14px 4px;padding:12px 13px;font-size:13.5px;line-height:1.5;text-align:left;margin-bottom:14px}.app.light #wrs .xp .bb{background:#FFF7DC}'+
+ '#wrs .xp .go{max-width:100%}';
  document.head.appendChild(css);
 
  var W='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>';
@@ -1207,21 +1212,29 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
  function draw(){var f=isF();
   bx.innerHTML='<button class="x" data-w="close" aria-label="Close">&times;</button>'+
   '<h2>'+(f?'Founder line to Ezekiel':'Report a problem')+'</h2>'+
-  '<p class="sub">'+(f?(kind==='bug'?'Something not working? Tell me in a sentence or two. Your system log rides along, so we can see exactly what happened. You\'ll hear back from me within 24 hours, and most fixes ship within a day.':'One founder is enough. If we can build it, every founder gets it to try for 30 days. Then each founder votes approve or not. If more than half of those who vote say yes, with at least 5 votes, every new customer gets it too.'):'Tell us what went wrong. Your system log rides along so we can see what happened.')+'</p>'+
+  '<p class="sub">'+(f?(kind==='bug'?'Something not working? Tell me in a sentence or two. Your system log rides along, so we can see exactly what happened. You\'ll hear back from me within 24 hours,.':'One founder is enough. If we can build it, every founder gets it to try for 30 days. Then each founder votes approve or not. If more than half of those who vote say yes, with at least 5 votes, every new customer gets it too.'):'Tell us what went wrong. Your system log rides along so we can see what happened.')+'</p>'+
   (f?'<div class="seg2"><span data-w="bug" class="'+(kind==='bug'?'on':'')+'">Something\'s broken</span><span data-w="idea" class="'+(kind==='idea'?'on':'')+'">I have an idea</span></div>':'')+
   '<textarea id="wrt" placeholder="'+(kind==='bug'?'What did you tap, and what happened?':'What should it do for you?')+'"></textarea>'+
   ((window.SpeechRecognition||window.webkitSpeechRecognition)?'<button class="mic" data-w="mic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>Tap and talk</span></button>':'')+
   '<p class="what">Sent with it: the screen you were on, your last taps, any errors, and your device type. Homeowner emails, phone numbers and addresses are removed. <u data-w="peek">See exactly what\'s sent</u></p><div id="wrp"></div>'+
   '<button class="go" data-w="send">Send to Ezekiel</button>'}
 
+ var WRX={bug:{n:'Sophia',r:'Your assistant',t:'Hi, I\'m Sophia. If anything ever breaks, tap the wrench, then tell me what happened. Type it, or tap the mic and just talk. I attach the system log for you, with homeowner details removed, so Ezekiel sees exactly what went wrong. You\'ll hear back from him within 24 hours.',av:'background-image:url(/assets/7102df40772f1ed99a0c3d6c47072c85.jpg);background-size:250%;background-position:56% 20%'},
+  idea:{n:'Esther',r:'Founders Lab',t:'I\'m Esther. Got an idea that would make ClaimTract work better for you? Tell it here, typed or spoken. One founder is enough to start it. If we can build it, every founder tries it for 30 days, then you all vote. More than half of those who vote, with at least 5 votes, and every new customer gets it too.',av:''}};
+ var EST='<svg viewBox="0 0 60 60" width="84" height="84"><rect width="60" height="60" fill="#7A5C8A"/><path d="M15 28c0-15 30-15 30 0v16H15z" fill="#3a2a22"/><path d="M10 60c0-11 9-16 20-16s20 5 20 16z" fill="#1F2430"/><rect x="26" y="34" width="8" height="10" fill="#B88F6C"/><circle cx="30" cy="27" r="11" fill="#C9A27E"/><path d="M19 25c1-9 21-10 22 0-6-4-14-4-22 0z" fill="#3a2a22"/><circle cx="26" cy="27" r="1.2" fill="#2a1d17"/><circle cx="34" cy="27" r="1.2" fill="#2a1d17"/><path d="M26.5 32c2 1.6 5 1.6 7 0" stroke="#8a4b3c" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>';
+ function wrxSeen(k){try{return localStorage.getItem('ct_wrx_'+k)==='1'}catch(e){return false}}
+ function wrxMark(k){try{localStorage.setItem('ct_wrx_'+k,'1')}catch(e){}lg('wrench','explainer_'+k)}
+ function explain(k){var x=WRX[k];bx.innerHTML='<button class="x" data-w="close" aria-label="Close">&times;</button><div class="xp"><div class="av" style="'+x.av+'">'+(k==='idea'?EST:'')+'</div><div class="nm">'+x.n+'</div><div class="rl">'+x.r+'</div><div class="bb">'+x.t+'</div><button class="go" data-w="xok" data-k="'+k+'">Got it</button></div>'}
+ function show(){if(!wrxSeen(kind)){explain(kind);return true}draw();return false}
  function stopRec(){if(rec){try{rec.stop()}catch(e){}rec=null}var m=bx.querySelector('.mic');if(m){m.classList.remove('rec');m.lastChild.textContent='Tap and talk'}}
- function open(){kind='bug';draw();sh.classList.add('on');lg('wrench','opened')}
- function close(){stopRec();sh.classList.remove('on')}
+ function open(){kind='bug';show();sh.classList.add('on');lg('wrench','opened')}
+ function close(){stopRec();if(bx.querySelector('.xp'))wrxMark(bx.querySelector('[data-w=xok]').dataset.k);sh.classList.remove('on')}
  btn.addEventListener('click',open);
  function ok(j){return j&&j.ok!==false&&j.__s<400&&j.__s!==0}
  sh.addEventListener('click',function(e){if(e.target===sh)return close();var w=e.target.closest('[data-w]');if(!w)return;var a=w.dataset.w,ta=bx.querySelector('#wrt');
   if(a==='close')return close();
-  if(a==='bug'||a==='idea'){var keep=ta.value;kind=a;draw();bx.querySelector('#wrt').value=keep;return}
+  if(a==='xok'){wrxMark(w.dataset.k);var kp=sh._kp||'';draw();bx.querySelector('#wrt').value=kp;sh._kp='';return}
+  if(a==='bug'||a==='idea'){var keep=ta.value;kind=a;sh._kp=keep;if(show())return;bx.querySelector('#wrt').value=keep;sh._kp='';return}
   if(a==='peek'){var p=bx.querySelector('#wrp');p.innerHTML=p.innerHTML?'':'<pre></pre>';if(p.firstChild)p.firstChild.textContent=JSON.stringify(packet(kind,ta.value).log,null,1);return}
   if(a==='mic'){if(rec)return stopRec();var SR=window.SpeechRecognition||window.webkitSpeechRecognition;rec=new SR();rec.lang='en-US';rec.interimResults=true;rec.continuous=true;var base=ta.value?ta.value.replace(/\s*$/,' '):'';
    rec.onresult=function(ev){var s='';for(var i=0;i<ev.results.length;i++)s+=ev.results[i][0].transcript;ta.value=base+s};rec.onend=function(){stopRec()};rec.onerror=function(){stopRec()};
