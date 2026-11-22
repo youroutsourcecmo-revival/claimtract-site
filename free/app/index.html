@@ -1214,7 +1214,7 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
   '<textarea id="wrt" placeholder="'+(kind==='bug'?'What did you tap, and what happened?':'What should it do for you?')+'"></textarea>'+
   ((window.SpeechRecognition||window.webkitSpeechRecognition)?'<button class="mic" data-w="mic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>Tap and talk</span></button>':'')+
   '<p class="what">Sent with it: the screen you were on, your last taps, any errors, and your device type. Homeowner emails, phone numbers and addresses are removed. <u data-w="peek">See exactly what\'s sent</u></p><div id="wrp"></div>'+
-  '<button class="go" data-w="send">Send to Ezekiel</button>'}
+  '<button class="go" data-w="send">Send to Ezekiel</button>'+'<button data-w="road" style="display:block;width:100%;margin-top:10px;background:none;border:0;color:#F5A524;font:700 13px Inter,system-ui;cursor:pointer">See the Roadmap and what we\'ve fixed &rarr;</button>'}
 
  /* One-time Esther explainers (HumanBot floating avatar): burgundy formal for "Something's broken", blue casual for "I have an idea". */
  var WRX={bug:'PG5npXWedx7b',idea:'mWefGZURp9Ba'};
@@ -1234,6 +1234,7 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
  function ok(j){return j&&j.ok!==false&&j.__s<400&&j.__s!==0}
  sh.addEventListener('click',function(e){if(sh.classList.contains('wx')){wrxStop();return}if(e.target===sh)return close();var w=e.target.closest('[data-w]');if(!w)return;var a=w.dataset.w,ta=bx.querySelector('#wrt');
   if(a==='close')return close();
+  if(a==='road'){close();if(typeof go==='function')go('roadmap');lg('wrench','roadmap_open');return}
   if(a==='bug'||a==='idea'){var keep=ta.value;kind=a;show();bx.querySelector('#wrt').value=keep;return}
   if(a==='peek'){var p=bx.querySelector('#wrp');p.innerHTML=p.innerHTML?'':'<pre></pre>';if(p.firstChild)p.firstChild.textContent=JSON.stringify(packet(kind,ta.value).log,null,1);return}
   if(a==='mic'){if(rec)return stopRec();var SR=window.SpeechRecognition||window.webkitSpeechRecognition;rec=new SR();rec.lang='en-US';rec.interimResults=true;rec.continuous=true;var base=ta.value?ta.value.replace(/\s*$/,' '):'';
@@ -1301,6 +1302,20 @@ V.crm=function(){if(!R||!crmOn())setTimeout(crmExplain,500);
     else{var a2=document.createElement('a');a2.href=SN.url;a2.download='photo.jpg';a2.click();if(m)m.textContent='This device can\'t post straight to the apps, so the photo was saved'+(txt?' and your words were copied':'')+'. Open Facebook or Instagram and post it from there.'}})}},true);
  var _RH=R_HOME;R_HOME=function(){var h=_RH.apply(this,arguments);var a='Share my page</button></div>';if(h.indexOf(a)<0)return h;
   return h.replace(a,a+'<div class="card row" data-go="snap" style="margin-top:8px;border-radius:16px">'+ic('scan')+'<div><b>Snap and post</b><small>Your photo, your words, to Facebook or Instagram</small></div>'+CH+'</div>')};
+})();
+/* ===== Roadmap + fixed log (Nov 23): proof we ship. Roadmap = Ezekiel's list; Fixed = approved wrench rows from the server. ===== */
+(function(){var ROAD=[['Public Adjusters Training Course','Seventeen years of field playbook, from first call to paid. Included in every founder seat.','Coming'],['Public Adjuster’s Marketing Course','How to get found and keep your phone ringing, without buying leads.','Coming']];
+ var LOG=null,tabR='road';
+ function loadLog(cb){if(!R){LOG=false;return cb()}api('GET','/api/app/wrench/log').then(function(j){LOG=(j&&j.ok&&Array.isArray(j.items))?j.items:false;cb()}).catch(function(){LOG=false;cb()})}
+ function st(x){var c={received:['Received','#2A2E36','#C4C8CF'],contacted:['✓ Ezekiel called','#1E2A1E','#86EFAC'],in_progress:['In progress','#2A2414','#FCD58A'],deployed:['Deployed','#14281C','#22C55E']}[x.status]||['Received','#2A2E36','#C4C8CF'];
+  return '<span style="background:'+c[1]+';color:'+c[2]+';border-radius:99px;padding:3px 9px;font-size:10.5px;font-weight:800;white-space:nowrap">'+c[0]+(x.status==='deployed'&&x.deployed_on?' · '+hx(x.deployed_on):'')+'</span>'}
+ V.roadmap=function(){var showLog=LOG&&LOG.length;
+  var seg=showLog?'<div class="seg" style="margin-bottom:10px"><span data-rm="road" class="'+(tabR==='road'?'on':'')+'">Roadmap</span><span data-rm="log" class="'+(tabR==='log'?'on':'')+'">What we’ve fixed</span></div>':'';
+  var body=(!showLog||tabR==='road')?'<p class="s" style="margin-bottom:8px">What’s being built next, in order.</p>'+ROAD.map(function(r,i){return '<div class="card" style="margin-bottom:8px;padding:12px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><b style="font-size:13.5px">'+(i+1)+'. '+r[0]+'</b><span style="background:#2A2414;color:#FCD58A;border-radius:99px;padding:3px 9px;font-size:10.5px;font-weight:800">'+r[2]+'</span></div><small style="display:block;margin-top:4px;color:var(--mu);font-size:11.5px;line-height:1.4">'+r[1]+'</small></div>'}).join('')
+   :'<p class="s" style="margin-bottom:8px">Problems and ideas from adjusters like you, and where each one stands.</p>'+LOG.map(function(x){return '<div class="card" style="margin-bottom:8px;padding:11px 12px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b style="font-size:12.5px">'+hx(x.initials||'')+' · '+(x.type==='idea'?'Idea':'Problem')+'</b>'+st(x)+'</div><small style="display:block;margin-top:5px;font-size:12px;line-height:1.45">'+hx(x.text||'')+'</small></div>'}).join('');
+  return top('Roadmap')+'<div class="scr">'+seg+body+'</div>'};
+ document.addEventListener('click',function(e){var t=e.target.closest('[data-rm]');if(!t)return;tabR=t.dataset.rm;render('roadmap')},true);
+ var _go=go;go=function(n){if(n==='roadmap'&&LOG===null){loadLog(function(){_go(n)});return}_go(n)};
 })();
 boot();
 })();
