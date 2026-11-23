@@ -4,87 +4,110 @@
   {
    "title": "Public Adjusters Training Course",
    "desc": "Seventeen years of field playbook, from first call to paid. Included in every founder seat.",
-   "status": "coming"
+   "status": "coming",
+   "id": "public-adjusters-training-course"
   },
   {
    "title": "Public Adjuster’s Marketing Course",
    "desc": "How to get found and keep your phone ringing, without buying leads.",
-   "status": "coming"
+   "status": "coming",
+   "id": "public-adjusters-marketing-course"
   },
   {
    "title": "Know who’s reading",
-   "desc": "Share your page with Mary and see when she opens it.",
+   "desc": "Share your page with a homeowner and see when they open it.",
+   "status": "coming",
+   "id": "know-whos-reading"
+  },
+  {
+   "id": "claim-engine-booking",
+   "title": "Bookings that run themselves",
+   "desc": "On Pro, Add to my calendar books straight into the Claim Engine, and reminders and follow-ups go out for you.",
    "status": "coming"
   },
   {
    "title": "Return visitors",
    "desc": "Know when a homeowner comes back to your page.",
-   "status": "coming"
+   "status": "coming",
+   "id": "return-visitors"
   },
   {
    "title": "Where they’re from",
    "desc": "Visits to your pages by city.",
-   "status": "coming"
+   "status": "coming",
+   "id": "where-theyre-from"
   },
   {
    "title": "Tracked links",
    "desc": "Links for your cards, door hangers and partners, so you see what works.",
-   "status": "coming"
+   "status": "coming",
+   "id": "tracked-links"
   },
   {
    "title": "Visitor dashboard",
    "desc": "Views, calls and bookings, page by page.",
-   "status": "coming"
+   "status": "coming",
+   "id": "visitor-dashboard"
   },
   {
    "title": "Weekly report",
    "desc": "What homeowners use most on your pages, every week.",
-   "status": "coming"
+   "status": "coming",
+   "id": "weekly-report"
   },
   {
    "title": "Your dashboard in one view",
    "desc": "Your numbers at a glance the moment you log in.",
-   "status": "coming"
+   "status": "coming",
+   "id": "your-dashboard-in-one-view"
   },
   {
    "title": "City pages",
    "desc": "A page for every town you serve.",
-   "status": "coming"
+   "status": "coming",
+   "id": "city-pages"
   },
   {
    "title": "Damage-type pages",
    "desc": "Pages for water, wind, hail, fire and roof claims.",
-   "status": "coming"
+   "status": "coming",
+   "id": "damage-type-pages"
   },
   {
    "title": "Partner pages",
    "desc": "Pages for the roofers and plumbers who send you work.",
-   "status": "coming"
+   "status": "coming",
+   "id": "partner-pages"
   },
   {
    "title": "Your YouTube channel on your site",
    "desc": "New videos from your channel show up on your site by themselves.",
-   "status": "coming"
+   "status": "coming",
+   "id": "your-youtube-channel-on-your-site"
   },
   {
    "title": "Past-client check-ins",
    "desc": "A friendly check-in to past clients after a storm hits their area.",
-   "status": "coming"
+   "status": "coming",
+   "id": "past-client-check-ins"
   },
   {
    "title": "Homeowner reminders",
    "desc": "Reminders homeowners opt into, sent free through your Back office.",
-   "status": "coming"
+   "status": "coming",
+   "id": "homeowner-reminders"
   },
   {
    "title": "Follow-up that keeps you booked",
    "desc": "When a homeowner acts on one of your pages, follow-up starts by itself.",
-   "status": "coming"
+   "status": "coming",
+   "id": "follow-up-that-keeps-you-booked"
   },
   {
    "title": "Get paid to share",
    "desc": "$25 a month for every paying signup from your link.",
-   "status": "coming"
+   "status": "coming",
+   "id": "get-paid-to-share"
   }
  ]
 }
