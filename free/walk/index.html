@@ -168,9 +168,10 @@ function finale(){if(stopped)return;cv.style.opacity=0;var f=$('fin'),v=$('fv');
 function prog(i){var p=$('prog');if(!p.children.length){for(var k=0;k<S.length+1;k++)p.appendChild(document.createElement('i'))}[].forEach.call(p.children,function(e,k){e.classList.toggle('on',k<=i)})}
 function run(i){if(stopped)return;prog(i);if(i>=S.length)return finale();lg('scene_'+(i+1));S[i](function(){run(i+1)})}
 /* ---------- start / controls ---------- */
-$('go').onclick=function(){$('start').remove();lg('start');requestAnimationFrame(draw);var h=$('hero');h.muted=muted;h.currentTime=0;h.play().catch(function(){});
+$('go').onclick=function(){$('start').remove();lg('start');requestAnimationFrame(draw);var h=$('hero');h.muted=muted;h.currentTime=0;h.play().catch(function(){muted=true;h.muted=true;try{$('mute').innerHTML='&#128263;'}catch(_){}h.play().catch(function(){})});
  var cut=function(){if(h.currentTime>=33.6){h.removeEventListener('timeupdate',cut);h.pause();$('sheet').classList.add('gone');setTimeout(function(){run(0)},500)}};h.addEventListener('timeupdate',cut);
  [sv,idle].forEach(function(v){v.load()})};
+if(/[?&]app=1/.test(location.search)){try{$('go').onclick()}catch(_){}}
 $('mute').onclick=function(){muted=!muted;this.innerHTML=muted?'&#128263;':'&#128266;';[sv,$('hero'),$('fv')].forEach(function(v){v.muted=muted});stage.querySelectorAll('video').forEach(function(v){v.muted=muted})};
 $('x').onclick=function(){stopped=true;lg('closed');[sv,idle,$('hero'),$('fv')].forEach(function(v){try{v.pause()}catch(e){}});
  if(window.parent!==window){try{window.parent.postMessage({ct:'walk_close'},'*')}catch(e){}}else{location.href='/free/app/'}};
