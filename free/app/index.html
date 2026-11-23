@@ -1411,7 +1411,7 @@ try{if('serviceWorker' in navigator)navigator.serviceWorker.register('/free/app/
  function draw(){var W=av.videoWidth,H=av.videoHeight>>1;if(!W||!H)return;if(off.width!==W){off.width=W;off.height=H*2;cv.width=W;cv.height=H}ox.drawImage(av,0,0);var c=ox.getImageData(0,0,W,H),m=ox.getImageData(0,H,W,H),p=c.data,q=m.data;for(var i=0;i<p.length;i+=4)p[i+3]=q[i];cx.putImageData(c,0,0)}
  function loop(){if(!av||av.paused||av.ended){raf=null;return}try{draw()}catch(e){}raf=requestAnimationFrame(loop)}
  function open(){close();var host=document.getElementById('app')||document.body,o=document.createElement('div');o.id='tko';ended={v:0,a:0};
-  o.innerHTML='<video src="'+VID+'" poster="/assets/door-lesson.jpg" muted playsinline preload="auto"></video><div class="tkq">'+tkQr()+'</div><div class="tkcap">This code goes on every ticket.</div>'+
+  o.innerHTML='<video src="'+VID+'" poster="/assets/door-lesson.jpg" muted playsinline preload="auto"></video><div class="tkq">'+tkQr()+'</div><div class="tkcap">This code goes on every door hanger.</div>'+
    '<div class="tka"><canvas width="180" height="415"></canvas></div><button class="tkx" aria-label="Close">&#215;</button><button class="tkhb" data-go="tkhow">How to use this</button>';
   host.appendChild(o);requestAnimationFrame(function(){requestAnimationFrame(function(){o.classList.add('in')})});
   o.querySelector('.tkx').addEventListener('click',function(e){e.stopPropagation();close()});
@@ -1427,7 +1427,7 @@ try{if('serviceWorker' in navigator)navigator.serviceWorker.register('/free/app/
  var _q=V.qr;V.qr=function(){var h=_q.apply(this,arguments),btn='<button class="ghost" data-tk="lesson" style="margin-top:10px;background:#F5A524;color:#111;border:0;padding:13px;font-size:13px">'+I('play',14)+'See how to use this as a door hanger</button>',i=h.lastIndexOf('</div>');return i<0?h+btn:h.slice(0,i)+btn+h.slice(i)};
  V.tkhow=function(){if(TK_HB&&tog.xp&&typeof hbExplain==='function')setTimeout(function(){hbWant=true;hbExplain(TK_HB)},500);
   return top('How to use this')+'<div class="scr"><div class="card">'+
-  [['Print','Take your ticket file to a printer and get it printed on sticky-note stock.'],['Distribute','Pick a neighborhood. Stick one on each front door and walk away.'],['Wait for the phone',''],['Repeat','']].map(function(r,i){return '<div class="tks"><i>'+(i+1)+'</i><div><b>'+r[0]+'</b>'+(r[1]?'<small>'+r[1]+'</small>':'')+'</div></div>'}).join('')+'</div></div>'};
+  [['Print','Take your QR code to a printer and get it printed on sticky-note stock.'],['Distribute','Pick a neighborhood. Stick one on each front door and walk away.'],['Wait for the phone',''],['Repeat','']].map(function(r,i){return '<div class="tks"><i>'+(i+1)+'</i><div><b>'+r[0]+'</b>'+(r[1]?'<small>'+r[1]+'</small>':'')+'</div></div>'}).join('')+'</div></div>'};
  document.addEventListener('click',function(e){var t=e.target.closest('[data-tk="lesson"]');if(t){e.stopPropagation();open();return}if(e.target.closest('[data-back]')&&typeof hbStop==='function'&&document.querySelector('.view[data-v="tkhow"]'))hbStop()},true);
 })();
 boot();
