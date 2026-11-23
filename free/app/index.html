@@ -1382,7 +1382,7 @@ try{if('serviceWorker' in navigator)navigator.serviceWorker.register('/free/app/
    vid.addEventListener('playing',function(){box.classList.add('on');if(!raf)loop()});vid.addEventListener('ended',function(){try{localStorage.setItem(K,'1')}catch(e){}setTimeout(function(){box.classList.remove('on')},500)})}
   vid.muted=false;try{vid.currentTime=0}catch(e){}var pr=vid.play();if(pr&&pr.catch)pr.catch(function(){vid.muted=true;var b=box.querySelector('[data-sf=mute]');if(b)b.textContent='Unmute';vid.play().catch(function(){})})}
  window.ctSofiaFound=play;window.ctSofiaFoundStop=stop;
- var _f=V.found;V.found=function(){var h=_f.apply(this,arguments);setTimeout(play,500);
+ var _f=V.found;V.found=function(){var h=_f.apply(this,arguments);if(!tog.xp)return h;setTimeout(play,500);
   var btn='<button class="ghost" onclick="ctSofiaFound()" style="margin:0 0 8px;width:100%">'+I('play',13)+'Sophia explains why this matters (54 s)</button>';var i=h.indexOf('<div class="scr">');return i<0?h:h.slice(0,i+17)+btn+h.slice(i+17)};
  document.addEventListener('click',function(e){if(e.target.closest('[data-back],[data-go]')&&!e.target.closest('#sfs'))stop()},true);
 })();
