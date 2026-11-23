@@ -109,7 +109,7 @@ function alertSheet(h,p){sheet('<button class="cth-x" aria-label="Close">&times;
 
 /* search this page */
 function clearHits(){document.querySelectorAll('mark.cth-hit').forEach(function(m){var t=document.createTextNode(m.textContent);m.parentNode.replaceChild(t,m);t.parentNode.normalize()})}
-function openSearch(){if($('.cth-sbar'))return;var bar=el('div','cth cth-sbar','<input type="search" placeholder="Search this page" aria-label="Search this page"><span></span><button data-n>Next</button><button data-c>Done</button>');document.body.appendChild(bar);
+function openSearch(){if($('.cth-sbar'))return;var bar=el('div','cth cth-sbar','<input type="search" placeholder="Search this website" aria-label="Search this page"><span></span><button data-n>Next</button><button data-c>Done</button>');document.body.appendChild(bar);
  var inp=bar.querySelector('input'),cnt=bar.querySelector('span'),hits=[],k=0;inp.focus();
  function run(){clearHits();hits=[];k=0;var q=inp.value.trim();if(q.length<2){cnt.textContent='';return}var re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
   var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;if(!p||p.closest('script,style,.cth-sbar,.cth-ov,#cth-print'))return NodeFilter.FILTER_REJECT;return re.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}}),ns=[];
@@ -137,13 +137,15 @@ function lateBanner(){if(SLUG==='preview')return;var h=new Date().getHours();if(
  var b=el('div','cth cth-late','<div class="in"><b>It\'s late, and you\'re dealing with damage. Here\'s what to do right now.</b><ol><li>If water is coming in, shut off the main water valve. If anything sparks or smells like burning, shut off power at the breaker and get out.</li><li>Take photos and video of everything before you clean up.</li><li>Stop more damage if you safely can: towels, buckets, a tarp. Keep the receipts.</li><li>Don\'t throw away damaged items, and don\'t sign anything tonight.</li></ol>'+(PH?'<a href="sms:+1'+PH+'">Text '+esc(FIRST)+' now</a>':'')+'<button type="button">Show the full page</button><div style="font-size:12px;color:#9fb0c2;margin-top:8px">'+esc(FIRST)+' will see your text first thing in the morning. In an emergency, call 911.</div></div>');
  b.querySelector('button').onclick=function(){b.remove();try{sessionStorage.setItem('cth_late_off','1')}catch(e){}};document.body.insertBefore(b,document.body.firstChild)}
 
+/* Nov 24: the hero says she's in the right place; the problem comes next. Adjuster details and tools move to the end. */
+function reorder(){var t=document.getElementById('trust'),f=$('footer');if(t&&f&&(t.compareDocumentPosition(f)&4))f.parentNode.insertBefore(t,f)}
+
 /* tools section */
 function tools(){if($('.cth-sec'))return;FIRST=D.first||'your adjuster';NAME=D.name||FIRST;PH=(D.phone||'').replace(/\D/g,'').slice(-10);var s=el('section','cth cth-sec','<h2>Tools for your claim</h2><p>Free, from '+esc(FIRST)+'. They work on your phone, even with weak signal.</p><div class="cth-g">'+
  '<button class="cth-t" data-a="binder"><i>&#128210;</i><b>Claim binder</b><small>Call log, damage list and checklist on your phone</small></button>'+
   '<button class="cth-t" data-a="search"><i>&#128269;</i><b>Search this page</b><small>Find your answer fast</small></button>'+
- '<button class="cth-t" data-a="print"><i>&#128424;</i><b>Print a handout</b><small>First steps for the kitchen table</small></button>'+
- '<button class="cth-t" data-a="home"><i>&#128241;</i><b>Save to home screen</b><small>Opens like an app after a storm</small></button></div>');
- var tr=$('.sec .pab')?$('.sec .pab').closest('.sec'):null,anchor=tr?tr.nextSibling:($('footer')||null);if(tr&&!anchor)tr.parentNode.appendChild(s);else if(anchor)anchor.parentNode.insertBefore(s,anchor);else document.body.appendChild(s);
+ '<button class="cth-t" data-a="print"><i>&#128424;</i><b>Print a handout</b><small>First steps for the kitchen table</small></button></div>');
+ var anchor=$('footer');if(anchor)anchor.parentNode.insertBefore(s,anchor);else document.body.appendChild(s);
  s.addEventListener('click',function(e){var b=e.target.closest('.cth-t');if(!b)return;var a=b.dataset.a;
   if(a==='binder')openBinder();else if(a==='read')readAloud(b);else if(a==='search')openSearch();else if(a==='print')printHandout();else if(a==='home')saveHome()})}
 
@@ -163,7 +165,7 @@ function events(){var q=new URLSearchParams(location.search),src=q.get('s')||(q.
 function newAnswer(){var b=load();if(!b||!b.auto||!b.questions||!b.questions.some(function(q){return !q.answer}))return;b=binder();
  answers(b,function(){var n=el('div','cth cth-sbar','<b style="font-size:13.5px;padding-right:4px">'+esc(FIRST)+' answered your question</b><button data-o>Read it</button><button data-c style="background:#333;color:#fff">Later</button>');document.body.appendChild(n);
   n.addEventListener('click',function(e){if(e.target.dataset.o!=null){n.remove();openBinder('q')}if(e.target.dataset.c!=null)n.remove()})})}
-function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(st);tools();lateBanner();events();newAnswer();helpful();setTimeout(helpful,1200);if(/[?&]print=1/.test(location.search))setTimeout(printHandout,800);
+function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(st);reorder();tools();events();newAnswer();helpful();setTimeout(helpful,1200);if(/[?&]print=1/.test(location.search))setTimeout(printHandout,800);
  window.CTHome={tools:function(){var o=$('.cth-sec');if(o)o.remove();tools()},binder:openBinder,read:readAloud,search:openSearch,print:printHandout,home:saveHome,late:lateBanner}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
