@@ -104,10 +104,10 @@ function doc(D,O){O=O||{};var r=render(D),F=D.fields||{},nm=((F.fn||'')+' '+(F.l
  return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'+title+'</title><meta name="description" content="'+desc+'">'+
   '<meta name="robots" content="'+(O.index?'index,follow':'noindex,follow')+'"><link rel="canonical" href="'+url+'"><link rel="icon" href="/favicon.ico"><link rel="manifest" href="/'+esc(r.slug)+'/manifest.webmanifest">'+
   '<meta property="og:title" content="'+title+'"><meta property="og:description" content="'+desc+'"><meta property="og:url" content="'+url+'">'+(D.S&&D.S.head&&D.S.head.url?'<meta property="og:image" content="'+esc(D.S.head.url)+'">':'')+
-  '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/ct-page.css">'+(O.head||'')+'</head><body>'+
+  '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/ct-page.css?v=1124b">'+(O.head||'')+'</head><body>'+
   '<div class="'+r.cls+'"'+(r.style?' style="'+r.style+'"':'')+'>'+r.inner+'</div>'+
   '<script src="/vendor/qrcode.js" defer></script><script src="/assets/ct-footer.js" defer></script><script src="/assets/ct-hero.js" defer></script><script src="/assets/ct-explain.js" defer></script>'+
-  '<script src="/assets/ct-home.js" data-slug="'+esc(r.slug)+'" data-first="'+esc(F.fn||'')+'" data-name="'+esc(nm)+'" data-phone="'+esc(ph)+'" defer></script>'+
-  '<script src="/assets/ct-article.js"></script><script>window.CTArticle&&CTArticle.bind()</script>'+(O.body||'')+'</body></html>'}
+  '<script src="/assets/ct-home.js?v=1124b" data-slug="'+esc(r.slug)+'" data-first="'+esc(F.fn||'')+'" data-name="'+esc(nm)+'" data-phone="'+esc(ph)+'" defer></script>'+
+  '<script src="/assets/ct-article.js?v=1124b"></script><script>window.CTArticle&&CTArticle.bind()</script>'+(O.body||'')+'</body></html>'}
 root.CTPage={CT:CT,doc:doc,render:render,html:function(D){var r=render(D);return '<div class="'+r.cls+'"'+(r.style?' style="'+r.style+'"':'')+'>'+r.inner+'</div>'},ctRot:ctRot};
 })(typeof window!=='undefined'?window:globalThis);
