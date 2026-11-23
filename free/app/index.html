@@ -1411,7 +1411,7 @@ try{if('serviceWorker' in navigator)navigator.serviceWorker.register('/free/app/
 /* ===== Door tickets: from the QR screen, "See how to use this as a door hanger" opens a full-screen lesson:
    video slides up and fills the app, Ezekiel's avatar stands on top (lower right), small QR lower left, X closes,
    "How to use this" fades in near the end, then the video fades and the QR grows. ===== */
-(function(){var VID='/assets/door-lesson.mp4',AV='/assets/door-avatar.mp4',TK_HB=null,av=null,vv=null,raf=null,cv,cx,off,ox,ended={v:0,a:0};
+(function(){var VID='/assets/door-lesson.mp4',AV='/assets/door-avatar.mp4',TK_HB='9PscEUzKXkqg',av=null,vv=null,raf=null,cv,cx,off,ox,ended={v:0,a:0};
  function tkUrl(){var u=(typeof R!=='undefined'&&R&&ME)?(pageUrl()||'https://claimtract.app/'):'https://claimtract.app/cedric-moore/';return u+(u.indexOf('?')<0?'?':'&')+'s=ticket'}
  function tkQr(){if(!window.qrcode)return qrSvg(13);try{var q=qrcode(0,'M');q.addData(tkUrl());q.make();var n=q.getModuleCount(),d='';for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(q.isDark(r,c))d+='M'+c+' '+r+'h1v1h-1z';return '<svg viewBox="0 0 '+n+' '+n+'" shape-rendering="crispEdges"><rect width="'+n+'" height="'+n+'" fill="#fff"/><path d="'+d+'" fill="#000"/></svg>'}catch(e){return qrSvg(13)}}
  function close(){raf=null;if(vv){try{vv.pause()}catch(e){}}if(av){try{av.pause()}catch(e){}}var o=document.getElementById('tko');if(o){o.classList.remove('in');setTimeout(function(){o.remove()},400)}vv=av=null}
@@ -1431,7 +1431,7 @@ try{if('serviceWorker' in navigator)navigator.serviceWorker.register('/free/app/
   av=document.createElement('video');av.src=AV;av.playsInline=true;av.setAttribute('playsinline','');av.preload='auto';av.style.display='none';holder.appendChild(av);
   av.addEventListener('error',function(){holder.style.display='none'});av.addEventListener('playing',function(){if(!raf)loop()});av.addEventListener('ended',function(){ended.a=1;maybeEnd()});
   var pa=av.play();if(pa&&pa.catch)pa.catch(function(){av.muted=true;av.play().catch(function(){})})}
- window.ctDoorLesson=open;
+ window.ctDoorLesson=open;try{if(typeof hbResolve==='function')hbResolve(TK_HB)}catch(e){}
  var _q=V.qr;V.qr=function(){var h=_q.apply(this,arguments),btn='<button class="ghost" data-tk="lesson" style="margin-top:10px;background:#F5A524;color:#111;border:0;padding:13px;font-size:13px">'+I('play',14)+'See how to use this as a door hanger</button>',i=h.lastIndexOf('</div>');return i<0?h+btn:h.slice(0,i)+btn+h.slice(i)};
  V.tkhow=function(){if(TK_HB&&tog.xp&&typeof hbExplain==='function')setTimeout(function(){hbWant=true;hbExplain(TK_HB)},500);
   var fn=(typeof R!=='undefined'&&R&&ME&&typeof firstN==='function')?firstN():'Cedric',qr=tkQr().replace('fill="#000"','fill="#1d3fa8"').replace('fill="#fff"','fill="#FFE873"');
@@ -1440,6 +1440,15 @@ try{if('serviceWorker' in navigator)navigator.serviceWorker.register('/free/app/
   '<div class="tksh"><i class="tkgrab"></i><h2>How to use this</h2><div class="card">'+
   [['Print','Take your QR code to a printer and get it printed on sticky-note stock.'],['Distribute','Pick a neighborhood. Stick one on each front door and walk away.'],['Wait for the phone',''],['Repeat','']].map(function(r,i){return '<div class="tks"><i>'+(i+1)+'</i><div><b>'+r[0]+'</b>'+(r[1]?'<small>'+r[1]+'</small>':'')+'</div></div>'}).join('')+'</div></div></div>'};
  document.addEventListener('click',function(e){var t=e.target.closest('[data-tk="lesson"]');if(t){e.stopPropagation();open();return}if(e.target.closest('[data-back]')&&typeof hbStop==='function'&&document.querySelector('.view[data-v="tkhow"]'))hbStop()},true);
+})();
+
+/* ===== Sophia tab: with Explainers ON, tapping Sophia plays the walkthrough (/free/walk/) full screen; X returns Home.
+   Explainers OFF: her normal screen. ===== */
+(function(){var _tab=tab;
+ function closeWalk(){var f=document.getElementById('wlk');if(f)f.remove();stack=[];render('home')}
+ window.addEventListener('message',function(e){if(e&&e.data&&e.data.ct==='walk_close')closeWalk()});
+ tab=function(n){if(n==='sophia'&&tog.xp&&!document.getElementById('wlk')){var host=document.getElementById('app')||document.body,f=document.createElement('iframe');f.id='wlk';f.src='/free/walk/?app=1';f.allow='autoplay; fullscreen';f.title='Sophia walkthrough';f.setAttribute('style','position:absolute;inset:0;width:100%;height:100%;border:0;z-index:95;background:#000');host.appendChild(f);if(typeof track==='function')try{track('walk_open',{})}catch(_){};return}
+  return _tab.apply(this,arguments)};
 })();
 boot();
 })();
