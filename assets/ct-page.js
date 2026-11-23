@@ -102,7 +102,7 @@ var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(functio
 function doc(D,O){O=O||{};var r=render(D),F=D.fields||{},nm=((F.fn||'')+' '+(F.ln||'')).trim(),city=F.ci||'',st=F.st||'FL',url='https://claimtract.app/'+r.slug+'/',ph=String(F.ph||'').replace(/\D/g,'').slice(-10);
  var title=esc(nm+', Public Adjuster'+(city?' in '+city+', '+st:'')),desc=esc('Licensed public adjuster'+(city?' serving '+city+', '+st:'')+'. Works for you, not the insurance company. License '+(F.lic||''));
  return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'+title+'</title><meta name="description" content="'+desc+'">'+
-  '<meta name="robots" content="'+(O.index?'index,follow':'noindex,follow')+'"><link rel="canonical" href="'+url+'"><link rel="icon" href="/favicon.ico"><link rel="manifest" href="/manifest.webmanifest">'+
+  '<meta name="robots" content="'+(O.index?'index,follow':'noindex,follow')+'"><link rel="canonical" href="'+url+'"><link rel="icon" href="/favicon.ico"><link rel="manifest" href="/'+esc(r.slug)+'/manifest.webmanifest">'+
   '<meta property="og:title" content="'+title+'"><meta property="og:description" content="'+desc+'"><meta property="og:url" content="'+url+'">'+(D.S&&D.S.head&&D.S.head.url?'<meta property="og:image" content="'+esc(D.S.head.url)+'">':'')+
   '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/ct-page.css">'+(O.head||'')+'</head><body>'+
   '<div class="'+r.cls+'"'+(r.style?' style="'+r.style+'"':'')+'>'+r.inner+'</div>'+
