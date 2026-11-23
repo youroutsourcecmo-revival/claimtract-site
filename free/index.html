@@ -162,7 +162,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 .agc::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(245,165,36,.28),transparent);transform:skewX(-18deg);pointer-events:none;opacity:0}
 .agc:hover,.agc:focus-visible,.agc.wake{transform:translateY(-8px) scale(1.035);border-color:#F5A524;box-shadow:0 0 0 2px #F5A524,0 22px 44px rgba(245,165,36,.28),0 8px 18px rgba(0,0,0,.12)}
 .agc:hover::after,.agc.wake::after{opacity:1;animation:agcShine .9s ease-out}
-.agc>i{transition:transform .3s cubic-bezier(.2,.9,.3,1.4),background .2s,color .2s}
+.agc>i{width:62px!important;height:62px!important;border-radius:16px!important;font-size:30px!important;display:grid!important;place-items:center!important;font-style:normal;margin-bottom:14px;transition:transform .3s cubic-bezier(.2,.9,.3,1.4),background .2s,color .2s}
 .agc:hover>i,.agc.wake>i{background:#F5A524!important;color:#111!important;transform:scale(1.25) rotate(-8deg);animation:agcWig .6s ease-in-out .15s}
 .agc .try{transition:letter-spacing .25s,color .2s}
 .agc:hover .try,.agc.wake .try{color:#C77800;letter-spacing:.02em}
@@ -268,19 +268,19 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 
   <section class="app">
     <p class="k">Free website. Free Back office.</p>
-    <h2>You're not just getting a website. You're getting a Back office.</h2>
-    <p class="app-l">Add it to your home screen. It works like an app. No app store, no download.</p>
+    <h2>You're not just getting a website. You're getting an arsenal.</h2>
+    <p class="app-l">A marketing arsenal, purpose-built for public adjusters.</p>
     <div class="ag">
-      <button type="button" class="agc" data-demo="share"><i>&#8599;</i><h3>Share in two taps</h3><p>Send your website by text, email, WhatsApp, Facebook, LinkedIn or Nextdoor before you knock.</p><span class="try">Tap to try &rarr;</span></button>
-      <button type="button" class="agc" data-demo="qr"><i>&#9638;</i><h3>Your QR code</h3><p>Show it at the kitchen table, put it on a business card, a door hanger or a yard sign.</p><span class="try">Tap to try &rarr;</span></button>
-      <button type="button" class="agc" data-demo="contact"><i>&#9742;</i><h3>Save my contact</h3><p>One tap puts your name and number in the homeowner's phone, so you're the one they call.</p><span class="try">Tap to try &rarr;</span></button>
-      <button type="button" class="agc" data-demo="book"><i>&#128197;</i><h3>Book a time</h3><p>Homeowners pick a time on your Google Calendar or Calendly, right from your website.</p><span class="try">Tap to try &rarr;</span></button>
-      <button type="button" class="agc" data-tool="letter"><i>&#9993;</i><h3>Homeowner letter</h3><p>Type their name and a letter explaining who you are and what happens next writes itself. Copy it or text it.</p><span class="try">Tap to try &rarr;</span></button>
-      <button type="button" class="agc" data-tool="check"><i>&#10003;</i><h3>What to have ready</h3><p>A checklist you text before the visit: policy, photos, letters, receipts. They tick it off as they go.</p><span class="try">Tap to try &rarr;</span></button>
-      <button type="button" class="agc" data-tool="appt"><i>&#128172;</i><h3>Appointment text</h3><p>Pick the day and time and the reminder text writes itself, with your website link in it.</p><span class="try">Tap to try &rarr;</span></button>
-      <button type="button" class="agc" data-demo="video"><i>&#9654;</i><h3>Your video</h3><p>Paste your YouTube link and homeowners can meet you on camera before you arrive.</p><span class="try">Tap to try &rarr;</span></button>
+      <button type="button" class="agc" data-demo="share"><i>&#8599;</i><h3>Share in two taps</h3><p>Text, email, WhatsApp, Facebook, LinkedIn. Done.</p><span class="try">Tap to try &rarr;</span></button>
+      <button type="button" class="agc" data-demo="qr"><i>&#9638;</i><h3>Your QR code</h3><p>Open the app. Two taps. They scan.</p><span class="try">Tap to try &rarr;</span></button>
+      <button type="button" class="agc" data-demo="contact"><i>&#9742;</i><h3>Save my contact</h3><p>One tap. You're in their phone.</p><span class="try">Tap to try &rarr;</span></button>
+      <button type="button" class="agc" data-demo="book"><i>&#128197;</i><h3>Book a time</h3><p>They pick a time. It lands on your calendar.</p><span class="try">Tap to try &rarr;</span></button>
+      <button type="button" class="agc" data-tool="letter"><i>&#9993;</i><h3>Homeowner letter</h3><p>Type a name. It writes itself.</p><span class="try">Tap to try &rarr;</span></button>
+      <button type="button" class="agc" data-tool="check"><i>&#10003;</i><h3>What to have ready</h3><p>A checklist they tick off before you arrive.</p><span class="try">Tap to try &rarr;</span></button>
+      <button type="button" class="agc" data-tool="appt"><i>&#128172;</i><h3>Appointment text</h3><p>Pick a time. The reminder writes itself.</p><span class="try">Tap to try &rarr;</span></button>
+      <button type="button" class="agc" data-demo="video"><i>&#9654;</i><h3>Your video</h3><p>Paste a YouTube link. They meet you first.</p><span class="try">Tap to try &rarr;</span></button>
     </div>
-    <p class="grow"><b>Free as long as you want it.</b><span>Or upgrade, and it&rsquo;s self-growing.</span></p>
+    <p class="grow"><b>30+ tools. Free as long as you want.</b><span>Upgrade, and your digital footprint grows on its own.</span></p>
     
   </section>
 
@@ -557,5 +557,6 @@ if(location.hash&&/^#px\d+$/.test(location.hash)){setTimeout(function(){var li=d
 <script>(function(){var cs=[].slice.call(document.querySelectorAll('.agc'));if(!cs.length||!('IntersectionObserver' in window))return;var on=false,hov=false,i=0,t=null;
 cs.forEach(function(c){c.addEventListener('mouseenter',function(){hov=true;cs.forEach(function(x){x.classList.remove('wake')})});c.addEventListener('mouseleave',function(){hov=false})});
 function tick(){if(on&&!hov){cs.forEach(function(x){x.classList.remove('wake')});var c=cs[i++%cs.length];c.classList.add('wake');setTimeout(function(){c.classList.remove('wake')},1100)}}
-new IntersectionObserver(function(es){on=es[0].isIntersecting;if(on&&!t)t=setInterval(tick,2600);if(!on&&t){clearInterval(t);t=null}},{threshold:.4}).observe(cs[0].parentNode)})();</script></body>
+new IntersectionObserver(function(es){on=es[0].isIntersecting;if(on&&!t)t=setInterval(tick,2600);if(!on&&t){clearInterval(t);t=null}},{threshold:.4}).observe(cs[0].parentNode)})();</script><script src="/assets/ct-esther.js?v=1124"></script><script>(function(){var M=/*ESTHER_IDS*/{};if(!window.CTEsther)return;CTEsther.init(M);
+document.addEventListener('click',function(e){var c=e.target.closest&&e.target.closest('.agc');if(!c)return;var k=c.getAttribute('data-demo')||c.getAttribute('data-tool');if(k)CTEsther.play(k)},true);})();</script></body>
 </html>
