@@ -191,18 +191,22 @@ Nothing in this section prevents you from retaining and using your independently
 
 ### 6.4 How articles are written
 
-Articles are written by Sophia, ClaimTract's AI writing assistant. You provide your photographs and talk through what you saw, as if explaining it to a homeowner. Sophia combines your firsthand explanation with ClaimTract's supporting research and information and writes the article.
+ClaimTract-generated articles are written and prepared by ClaimTract's AI writing assistant, Sophia, for the benefit of the participating public adjuster, using information, explanations, photographs, and professional knowledge contributed by that adjuster. You provide your photographs and talk through what you saw, as if explaining it to a homeowner, and Sophia combines that with supporting research and information assembled by ClaimTract.
 
 The relationships are:
 
 - **Sophia is the writer.**
-- **You are the contributing subject-matter expert.**
-- **ClaimTract is the publisher and platform.**
+- **You are the contributing professional and the intended beneficiary of the publication.**
+- **ClaimTract is the publisher and the owner and operator of the platform.**
 - **The homeowner is the reader.**
 
-Articles may carry a disclosure such as: "Written by Sophia, ClaimTract's AI writing assistant, as told by [Your Name], a public insurance adjuster. Published with [Your Name]'s authorization."
+Articles may carry an attribution such as:
 
-That disclosure identifies you as the professional who contributed the knowledge and authorized publication. It does not represent that you personally wrote the article or own it, and approval does not transfer ownership to you or give you a right to export or republish it.
+"Written by Sophia, ClaimTract's AI writing assistant, for the benefit of [Your Name], Licensed Public Adjuster. This article was developed using [Your First Name]'s firsthand explanations, professional experience, and submitted materials, together with supporting research and information assembled by ClaimTract. Published by ClaimTract with [Your First Name]'s authorization."
+
+You are not represented as the article's individual author. ClaimTract retains control of the publication platform and the content's continued availability under these Terms.
+
+The phrase "for the benefit of" describes why the article was created. It does not by itself establish ownership, transfer any rights, or waive any of your rights. Ownership, license, attribution, and contact permissions are each stated separately in these Terms.
 
 ### 6.4A Four separate permissions
 
@@ -210,7 +214,7 @@ By using ClaimTract you grant four separate permissions:
 
 1. **Contribution permission.** ClaimTract may use your photographs, explanations, voice notes, and professional knowledge to create articles.
 2. **Publication permission.** Articles you approve may be published on ClaimTract permanently.
-3. **Attribution permission.** ClaimTract may identify you as the contributing professional on articles you approved, using the disclosure in Section 6.4 or a similar format, including after your account ends.
+3. **Attribution permission.** ClaimTract may identify you as the contributing professional on articles you approved, using the attribution in Section 6.4 or a similar format, including after your account ends.
 4. **Contact permission.** ClaimTract may display your name, credentials, profile, photograph, telephone number, and other contact details in a contact panel alongside your articles, so a reader who wants a public insurance adjuster can reach you. Contact permission lasts only while you have an active account or Keep-Alive subscription, as described below.
 
 ### 6.5 ClaimTract controls publication
@@ -246,7 +250,7 @@ Keep-Alive pricing, billing terms, eligibility, and availability are presented s
 
 When your account ends, or your Keep-Alive subscription ends, your previously approved articles remain published on ClaimTract's domain as educational resources.
 
-- They keep their original attribution, identifying you as the professional who contributed the knowledge, in a form that reflects the past contribution.
+- They keep their original attribution, identifying you as the professional who contributed the knowledge, in a form that reflects the past contribution. Credentials shown in the attribution reflect your status when the article was published, and ClaimTract may adjust the wording so it does not suggest a current license or a current relationship.
 - Your contact panel and contact pathways are removed or replaced.
 - ClaimTract will not present you as a current subscriber, as currently accepting claims, or as still receiving ClaimTract services.
 - ClaimTract may update, correct, consolidate, reorganize, or unpublish the articles.
