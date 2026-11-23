@@ -1,9 +1,9 @@
-/* ClaimTract Back office service worker (Nov 23). Network first for the app shell; never caches /api/. Shows push alerts and opens the app on tap. */
-var C='ct-bo-v1';
-self.addEventListener('install',function(){self.skipWaiting()});
-self.addEventListener('activate',function(e){e.waitUntil(self.clients.claim())});
-self.addEventListener('fetch',function(e){var r=e.request;if(r.method!=='GET')return;var u=new URL(r.url);if(u.origin!==location.origin||u.pathname.indexOf('/api/')===0||u.pathname.indexOf('/free/app/')!==0)return;
- e.respondWith(fetch(r).then(function(res){if(res&&res.ok&&res.type==='basic'){var cp=res.clone();caches.open(C).then(function(c){c.put(r,cp)})}return res}).catch(function(){return caches.match(r).then(function(m){return m||caches.match('/free/app/')})}))});
+/* ClaimTract Back office service worker v2 (Nov 23; matches Atlas's live fix). Saves the shell on install, cleans old caches, network first, never touches /api/. Shows push alerts and opens the app on tap. */
+var C='ct-bo-v2',SHELL=['/free/app/','/free/app/manifest.json','/assets/app-192.png','/assets/app-512.png'];
+self.addEventListener('install',function(e){self.skipWaiting();e.waitUntil(caches.open(C).then(function(c){return Promise.all(SHELL.map(function(u){return c.add(u).catch(function(){})}))}))});
+self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf('ct-bo-')===0&&k!==C}).map(function(k){return caches.delete(k)}))}).then(function(){return self.clients.claim()}))});
+self.addEventListener('fetch',function(e){var r=e.request;if(r.method!=='GET'||r.headers.has('range'))return;var u=new URL(r.url);if(u.origin!==location.origin||u.pathname.indexOf('/api/')===0||u.pathname.indexOf('/free/app/')!==0&&SHELL.indexOf(u.pathname)<0)return;if(/\.(mp4|webm|mp3)$/.test(u.pathname))return;
+ e.respondWith(fetch(r).then(function(res){if(res&&res.ok&&res.type==='basic'){var cp=res.clone();caches.open(C).then(function(c){c.put(r,cp)})}return res}).catch(function(){return caches.match(r,{ignoreSearch:true}).then(function(m){return m||caches.match('/free/app/')})}))});
 self.addEventListener('push',function(e){var d={};try{d=e.data?e.data.json():{}}catch(x){d={title:'ClaimTract',body:e.data?e.data.text():''}}
  e.waitUntil(self.registration.showNotification(d.title||'ClaimTract',{body:d.body||'',icon:'/assets/app-192.png',badge:'/assets/app-192.png',tag:d.tag||undefined,data:{url:d.url||'/free/app/'}}))});
 self.addEventListener('notificationclick',function(e){e.notification.close();var url=(e.notification.data&&e.notification.data.url)||'/free/app/';
