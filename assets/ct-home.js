@@ -138,7 +138,16 @@ function lateBanner(){if(SLUG==='preview')return;var h=new Date().getHours();if(
  b.querySelector('button').onclick=function(){b.remove();try{sessionStorage.setItem('cth_late_off','1')}catch(e){}};document.body.insertBefore(b,document.body.firstChild)}
 
 /* Nov 24: the hero says she's in the right place; the problem comes next. Adjuster details and tools move to the end. */
-function reorder(){var t=document.getElementById('trust'),f=$('footer');if(t&&f&&(t.compareDocumentPosition(f)&4))f.parentNode.insertBefore(t,f)}
+function reorder(){var t=document.getElementById('trust'),f=$('footer');if(t&&f&&(t.compareDocumentPosition(f)&4))f.parentNode.insertBefore(t,f);placeTrust();
+ document.addEventListener('change',function(e){if(e.target&&e.target.classList&&e.target.classList.contains('vsel'))setTimeout(placeTrust,0)});
+ document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.vt button'))setTimeout(placeTrust,0)})}
+/* Nov 24: once she has some substance, the trust card sits in the middle of the article, where the first call bar was */
+function placeTrust(){var t=document.getElementById('trust');if(!t)return;
+ if(!document.getElementById('trs-in-css')){var c=el('style');c.id='trs-in-css';c.textContent='.sec.trs.trs-in{padding:0!important;margin:30px 0!important;max-width:none!important;background:none!important}.trs-in .pab{max-width:none!important;margin:0!important}';document.head.appendChild(c)}
+ [].forEach.call(document.querySelectorAll('.cta-art .vb'),function(vb){var a=vb.querySelector('.abrk');if(a)a.style.display='none'});
+ var scope=document.querySelector('.cta-art .vb.on')||document.querySelector('.ans-art'),slot=null;
+ if(scope){slot=scope.querySelector('.abrk');if(!slot){var hs=scope.querySelectorAll('h2,h3');slot=hs.length>2?hs[2]:(hs.length>1?hs[1]:null)}}
+ if(slot){slot.parentNode.insertBefore(t,slot);t.classList.add('trs-in')}else{t.classList.remove('trs-in');var f=$('footer');if(f)f.parentNode.insertBefore(t,f)}}
 
 /* tools section */
 function tools(){if($('.cth-sec'))return;FIRST=D.first||'your adjuster';NAME=D.name||FIRST;PH=(D.phone||'').replace(/\D/g,'').slice(-10);var s=el('section','cth cth-sec','<h2>Tools for your claim</h2><p>Free, from '+esc(FIRST)+'. They work on your phone, even with weak signal.</p><div class="cth-g">'+
