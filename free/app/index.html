@@ -233,17 +233,16 @@ svg{display:block}
 .ws .ft{background:#16181C;color:#A9AEB7;font-size:9px;padding:12px}.ws .ft b{color:#fff}.ws .ft a{color:#F5A524}
 .ws .wsm{font-size:8.5px;color:#9A9EA6;font-style:italic}
 #cf{position:absolute;inset:0;z-index:95;background:rgba(0,0,0,.6);display:none;align-items:flex-end}#cf.on{display:flex}#cf .bx{background:#15171B;border-top:1px solid #2A2D33;border-radius:20px 20px 0 0;padding:18px 16px 22px;width:100%}#cf b{display:block;font:800 16px Inter;color:#fff;margin-bottom:6px}#cf p{margin:0 0 14px;color:#A9AEB7;font-size:12px;line-height:1.5}#cf .y{width:100%;background:#F5A524;color:#111;border:0;border-radius:12px;padding:12px;font:800 13px Inter;cursor:pointer}#cf .n{width:100%;background:none;color:#fff;border:1px solid #3A3E46;border-radius:12px;padding:11px;font:700 12px Inter;margin-top:8px;cursor:pointer}
-#tkv{position:relative;height:440px;border-radius:16px;overflow:hidden;background:#151A22;margin-top:4px}
-#tkv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:translateY(100%);transition:transform .6s ease-out,opacity .9s}
-#tkv.in video{transform:none}#tkv.done video{opacity:0}
-#tkq{position:absolute;left:10px;bottom:10px;width:64px;height:64px;background:#fff;border-radius:8px;padding:4px;box-sizing:border-box;transition:all .9s ease;z-index:3}
-#tkq svg,#tkq img{width:100%;height:100%;display:block}
-#tkv.done #tkq{left:50%;top:50%;bottom:auto;width:220px;height:220px;padding:12px;transform:translate(-50%,-55%);border-radius:16px}
-#tka{position:absolute;right:0;bottom:0;height:260px;z-index:4;transition:opacity .6s}#tka canvas{height:260px;width:auto;display:block}
-#tkcap{position:absolute;left:0;right:0;bottom:24px;text-align:center;font:600 12px Inter;color:#fff;opacity:0;transition:opacity .6s;z-index:3}
-#tkv.done #tkcap{opacity:1}
-#tkhow{margin-top:10px;opacity:0;pointer-events:none;transition:opacity .5s}#tkhow.on{opacity:1;pointer-events:auto}
-.tkx{position:absolute;right:10px;top:10px}
+#tko{position:absolute;inset:0;z-index:90;background:#0E1116;overflow:hidden;transform:translateY(100%);transition:transform .6s ease-out}#tko.in{transform:none}
+#tko video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .9s}#tko.done video{opacity:0}
+#tko .tkq{position:absolute;left:14px;bottom:18px;width:72px;height:72px;background:#fff;border-radius:10px;padding:5px;box-sizing:border-box;transition:all .9s ease;z-index:3}
+#tko .tkq svg{width:100%;height:100%;display:block}
+#tko.done .tkq{left:50%;top:42%;bottom:auto;width:240px;height:240px;padding:12px;transform:translate(-50%,-50%);border-radius:18px}
+#tko .tka{position:absolute;right:0;bottom:0;height:62%;z-index:4;transition:opacity .6s;pointer-events:none}#tko .tka canvas{height:100%;width:auto;display:block}
+#tko .tkcap{position:absolute;left:0;right:0;top:calc(42% + 136px);text-align:center;font:600 13px Inter;color:#fff;opacity:0;transition:opacity .6s;z-index:3}#tko.done .tkcap{opacity:1}
+#tko .tkx{position:absolute;right:12px;top:40px;width:44px;height:44px;border-radius:22px;border:0;background:rgba(0,0,0,.45);color:#fff;font-size:22px;line-height:1;z-index:6;cursor:pointer}
+#tko .tkhb{position:absolute;left:16px;right:16px;bottom:22px;height:50px;border:0;border-radius:14px;background:#F5A524;color:#111;font:700 14px Inter;z-index:5;opacity:0;pointer-events:none;transition:opacity .5s;cursor:pointer}
+#tko.how .tkhb{opacity:1;pointer-events:auto}#tko.how .tkq{bottom:86px}#tko.done.how .tkq{bottom:auto}
 .tks{display:flex;gap:10px;padding:11px;border-bottom:1px solid var(--ln);align-items:flex-start}.tks:last-child{border-bottom:0}
 .tks i{width:24px;height:24px;border-radius:12px;background:#F5A524;color:#111;font:700 12px Inter;display:flex;align-items:center;justify-content:center;flex:none;font-style:normal}
 .tks b{display:block;font-size:12.5px}.tks small{font-size:11px;color:#A9AEB7;line-height:1.45}
@@ -474,7 +473,7 @@ home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedri
  '<div class="card row" data-go="earn" style="margin-top:8px;border-radius:16px">'+ic('spark')+'<div><b>Your referrals</b><small>3 paying signups · $75 this month</small></div>'+CH+'</div>'+
   '<p class="lb">Right now <a data-tab="activity">See all</a></p><div class="card">'+alertRow(ALERTS[0])+alertRow(ALERTS[1])+'</div>'+
  '<p class="lb">Your free tools</p><div class="gr">'+
- [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['video','play','Your videos'],['edit','edit','Edit page'],['tools','house','Homeowner tools',1],['tickets','qr','Door tickets',1],['found','g','Get found',1],['insights','chart','What\'s working',1]].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+qm(t[0])+(t[3]?'<i class="nw"></i>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
+ [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['video','play','Your videos'],['edit','edit','Edit page'],['tools','house','Homeowner tools',1],['found','g','Get found',1],['insights','chart','What\'s working',1]].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+qm(t[0])+(t[3]?'<i class="nw"></i>':'')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
  '<p class="lb"><span>This week'+qx('week')+'</span><a data-go="insights">Details</a></p>'+weekCard()+
  '</div>'+nav('home')},
 activity:function(){unread=0;return '<div class="top"><h1 style="padding-left:4px">Activity</h1><span class="chip">'+I('bell',12)+'Alerts on</span></div><div class="scr"><div class="card">'+ALERTS.map(function(a,i){return alertRow(a,i)}).join('')+'</div>'+
@@ -945,7 +944,7 @@ var R_HOME=function(){var p=ME.page,h=new Date().getHours(),g=h<12?'Good morning
  '<div class="card row" data-act="pages" style="margin-top:8px;border-radius:16px">'+ic('book')+'<div><b>Your free website</b><small>'+pickTxt+'</small></div>'+CH+'</div>'+
  '<p class="lb">Right now <a data-tab="activity">See all</a></p><div class="card">'+(rows.length?rows.slice(0,2).map(alertRow).join(''):EMPTY_AL)+'</div>'+
  '<p class="lb">Your free tools</p><div class="gr">'+
- [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['edit','edit','Edit page'],['tools','house','Homeowner tools'],['binders','book','Claim binders'],['tickets','qr','Door tickets'],['found','g','Get found'],['insights','chart','What\'s working']].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+(t[0]!=='binders'?qm(t[0]):'<span class="qm" data-bx="1">?</span>')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
+ [['letters','msg','Text a homeowner'],['qr','qr','QR code'],['card','user','Contact card'],['book','cal','Bookings'],['edit','edit','Edit page'],['tools','house','Homeowner tools'],['binders','book','Claim binders'],['found','g','Get found'],['insights','chart','What\'s working']].map(function(t){return '<div class="tl" data-go="'+t[0]+'">'+(t[0]!=='binders'?qm(t[0]):'<span class="qm" data-bx="1">?</span>')+'<span class="ic">'+I(t[1],16)+'</span>'+t[2]+'</div>'}).join('')+'</div>'+
  '<p class="lb"><span>This week'+qx('week')+'</span></p>'+R_WEEK()+
  '</div>'+nav('home')};
 function R_WEEK(){var list=(ALR&&(ALR.alerts||ALR.items))||[],wk=Date.now()-7*864e5,c={o:0,s:0,b:0,q:0};list.forEach(function(a){var t=new Date(a.at||a.created_at).getTime();if(!(t>=wk))return;var k=a.kind||a.name||'';
@@ -1401,34 +1400,35 @@ try{if('serviceWorker' in navigator)navigator.serviceWorker.register('/free/app/
  document.addEventListener('click',function(e){if(e.target.closest('[data-back],[data-go]')&&!e.target.closest('#sfs'))stop()},true);
 })();
 
-/* ===== Door tickets: lesson (video slides up, avatar lower right, small QR lower left -> QR grows), then How to use ===== */
-(function(){var VID='/assets/door-lesson.mp4',AV='/assets/door-avatar.mp4',av=null,raf=null,cv,cx,off,ox,vv=null,ended={v:0,a:0},T=null;
+/* ===== Door tickets: from the QR screen, "See how to use this as a door hanger" opens a full-screen lesson:
+   video slides up and fills the app, Ezekiel's avatar stands on top (lower right), small QR lower left, X closes,
+   "How to use this" fades in near the end, then the video fades and the QR grows. ===== */
+(function(){var VID='/assets/door-lesson.mp4',AV='/assets/door-avatar.mp4',TK_HB=null,av=null,vv=null,raf=null,cv,cx,off,ox,ended={v:0,a:0};
  function tkUrl(){var u=(typeof R!=='undefined'&&R&&ME)?(pageUrl()||'https://claimtract.app/'):'https://claimtract.app/cedric-moore/';return u+(u.indexOf('?')<0?'?':'&')+'s=ticket'}
  function tkQr(){if(!window.qrcode)return qrSvg(13);try{var q=qrcode(0,'M');q.addData(tkUrl());q.make();var n=q.getModuleCount(),d='';for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(q.isDark(r,c))d+='M'+c+' '+r+'h1v1h-1z';return '<svg viewBox="0 0 '+n+' '+n+'" shape-rendering="crispEdges"><rect width="'+n+'" height="'+n+'" fill="#fff"/><path d="'+d+'" fill="#000"/></svg>'}catch(e){return qrSvg(13)}}
- function stopAll(){clearTimeout(T);if(vv){try{vv.pause()}catch(e){}}if(av){try{av.pause()}catch(e){}}raf=null}
- function maybeEnd(){var box=document.getElementById('tkv');if(!box)return;if(ended.v){box.classList.add('done')}if(ended.v||ended.a){var h=document.getElementById('tkhow');if(h)h.classList.add('on')}if(ended.a){var a=document.getElementById('tka');if(a)a.style.opacity='0'}}
+ function close(){raf=null;if(vv){try{vv.pause()}catch(e){}}if(av){try{av.pause()}catch(e){}}var o=document.getElementById('tko');if(o){o.classList.remove('in');setTimeout(function(){o.remove()},400)}vv=av=null}
+ function maybeEnd(){var o=document.getElementById('tko');if(!o)return;if(ended.v)o.classList.add('done');if(ended.v||ended.a)o.classList.add('how');if(ended.a){var a=o.querySelector('.tka');if(a)a.style.opacity='0'}}
  function draw(){var W=av.videoWidth,H=av.videoHeight>>1;if(!W||!H)return;if(off.width!==W){off.width=W;off.height=H*2;cv.width=W;cv.height=H}ox.drawImage(av,0,0);var c=ox.getImageData(0,0,W,H),m=ox.getImageData(0,H,W,H),p=c.data,q=m.data;for(var i=0;i<p.length;i+=4)p[i+3]=q[i];cx.putImageData(c,0,0)}
  function loop(){if(!av||av.paused||av.ended){raf=null;return}try{draw()}catch(e){}raf=requestAnimationFrame(loop)}
- function start(){var box=document.getElementById('tkv');if(!box)return;ended={v:0,a:0};vv=box.querySelector('video');
-  requestAnimationFrame(function(){box.classList.add('in')});
-  vv.addEventListener('ended',function(){ended.v=1;maybeEnd()});var pv=vv.play();if(pv&&pv.catch)pv.catch(function(){});
-  // near the end: show How to use 8 s before the video ends
-  vv.addEventListener('timeupdate',function(){if(vv.duration&&vv.duration-vv.currentTime<8){var h=document.getElementById('tkhow');if(h)h.classList.add('on')}});
-  var holder=document.getElementById('tka');cv=holder.querySelector('canvas');cx=cv.getContext('2d');off=document.createElement('canvas');ox=off.getContext('2d',{willReadFrequently:true});
+ function open(){close();var host=document.getElementById('app')||document.body,o=document.createElement('div');o.id='tko';ended={v:0,a:0};
+  o.innerHTML='<video src="'+VID+'" poster="/assets/door-lesson.jpg" muted playsinline preload="auto"></video><div class="tkq">'+tkQr()+'</div><div class="tkcap">This code goes on every ticket.</div>'+
+   '<div class="tka"><canvas width="180" height="415"></canvas></div><button class="tkx" aria-label="Close">&#215;</button><button class="tkhb" data-go="tkhow">How to use this</button>';
+  host.appendChild(o);requestAnimationFrame(function(){requestAnimationFrame(function(){o.classList.add('in')})});
+  o.querySelector('.tkx').addEventListener('click',function(e){e.stopPropagation();close()});
+  o.querySelector('.tkhb').addEventListener('click',function(){setTimeout(close,50)});
+  vv=o.querySelector('video');vv.addEventListener('ended',function(){ended.v=1;maybeEnd()});
+  vv.addEventListener('timeupdate',function(){if(vv&&vv.duration&&vv.duration-vv.currentTime<8)o.classList.add('how')});
+  var pv=vv.play();if(pv&&pv.catch)pv.catch(function(){});
+  var holder=o.querySelector('.tka');cv=holder.querySelector('canvas');cx=cv.getContext('2d');off=document.createElement('canvas');ox=off.getContext('2d',{willReadFrequently:true});
   av=document.createElement('video');av.src=AV;av.playsInline=true;av.setAttribute('playsinline','');av.preload='auto';av.style.display='none';holder.appendChild(av);
-  av.addEventListener('error',function(){holder.style.display='none'});
-  av.addEventListener('playing',function(){if(!raf)loop()});av.addEventListener('ended',function(){ended.a=1;maybeEnd()});
+  av.addEventListener('error',function(){holder.style.display='none'});av.addEventListener('playing',function(){if(!raf)loop()});av.addEventListener('ended',function(){ended.a=1;maybeEnd()});
   var pa=av.play();if(pa&&pa.catch)pa.catch(function(){av.muted=true;av.play().catch(function(){})})}
- V.tickets=function(){stopAll();T=setTimeout(start,60);
-  return top('Door tickets').replace('</h1></div>','</h1><button class="bk" data-back aria-label="Close" style="margin-left:auto;font-size:18px;line-height:1">&#215;</button></div>')+'<div class="scr"><div id="tkv"><video src="'+VID+'" poster="/assets/door-lesson.jpg" muted playsinline preload="auto"></video>'+
-  '<div id="tkq">'+tkQr()+'</div><div id="tkcap">This code goes on every ticket.</div><div id="tka"><canvas width="180" height="415"></canvas></div></div>'+
-  '<div id="tkhow"><button class="ghost" data-go="tkhow" style="background:#F5A524;color:#111;border:0;padding:13px;font-size:13px">How to use this</button></div></div>'};
- V.tkhow=function(){stopAll();return top('How to use this')+'<div class="scr"><div class="card">'+
-  [['Print','Take your ticket file to a printer and get it printed on sticky-note stock.'],['Distribute','Pick a neighborhood. Stick one on each front door and walk away.'],['Wait for the phone',''],['Repeat','']].map(function(r,i){return '<div class="tks"><i>'+(i+1)+'</i><div><b>'+r[0]+'</b>'+(r[1]?'<small>'+r[1]+'</small>':'')+'</div></div>'}).join('')+
-  '</div><div class="qr" id="rqr" style="margin-top:12px">'+tkQr()+'<small>Your ticket code</small></div><div class="b2" style="grid-template-columns:1fr"><button data-tk="save">'+I('share',17)+'Save code for your printer</button></div></div>'};
- document.addEventListener('click',function(e){if(e.target.closest('[data-back]')||(e.target.closest('[data-go]')&&!e.target.closest('#tkv,#tkhow')))stopAll()},true);
- document.addEventListener('click',function(e){var t=e.target.closest('[data-tk="save"]');if(!t)return;e.stopPropagation();var svg=document.querySelector('#rqr svg');if(!svg)return;var x=new XMLSerializer().serializeToString(svg),img=new Image(),c=document.createElement('canvas');c.width=c.height=1200;img.onload=function(){var g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,1200,1200);g.imageSmoothingEnabled=false;g.drawImage(img,60,60,1080,1080);var a=document.createElement('a');a.download='door-ticket-code.png';a.href=c.toDataURL('image/png');a.click()};img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(x.indexOf('xmlns=')<0?x.replace('<svg','<svg xmlns="http://www.w3.org/2000/svg"'):x)});
-
+ window.ctDoorLesson=open;
+ var _q=V.qr;V.qr=function(){var h=_q.apply(this,arguments),btn='<button class="ghost" data-tk="lesson" style="margin-top:10px;background:#F5A524;color:#111;border:0;padding:13px;font-size:13px">'+I('play',14)+'See how to use this as a door hanger</button>',i=h.lastIndexOf('</div>');return i<0?h+btn:h.slice(0,i)+btn+h.slice(i)};
+ V.tkhow=function(){if(TK_HB&&tog.xp&&typeof hbExplain==='function')setTimeout(function(){hbWant=true;hbExplain(TK_HB)},500);
+  return top('How to use this')+'<div class="scr"><div class="card">'+
+  [['Print','Take your ticket file to a printer and get it printed on sticky-note stock.'],['Distribute','Pick a neighborhood. Stick one on each front door and walk away.'],['Wait for the phone',''],['Repeat','']].map(function(r,i){return '<div class="tks"><i>'+(i+1)+'</i><div><b>'+r[0]+'</b>'+(r[1]?'<small>'+r[1]+'</small>':'')+'</div></div>'}).join('')+'</div></div>'};
+ document.addEventListener('click',function(e){var t=e.target.closest('[data-tk="lesson"]');if(t){e.stopPropagation();open();return}if(e.target.closest('[data-back]')&&typeof hbStop==='function'&&document.querySelector('.view[data-v="tkhow"]'))hbStop()},true);
 })();
 boot();
 })();
