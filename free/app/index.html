@@ -518,11 +518,11 @@ book:function(){return top('Bookings')+'<div class="scr"><button class="cta" dat
  '<p class="lb">How homeowners can book</p><div class="card"><div class="lt"><span style="display:flex;gap:8px;align-items:center">'+I('house',14)+'In person, at the property</span><small style="color:#5BD48A">On</small></div><div class="lt"><span style="display:flex;gap:8px;align-items:center">'+I('video',14)+'Video call, Google Meet</span><small style="color:#5BD48A">On</small></div></div><div class="note">'+I('video',14)+'<span>Video calls let a homeowner show you the damage on their phone before you drive out. The Meet link is made for you and sent with the booking.</span></div><p class="lb">Your open times</p><div class="card"><div class="lt"><span>Weekdays</span><small>9 AM to 5 PM</small></div><div class="lt"><span>Saturday</span><small>10 AM to 2 PM</small></div></div></div>'},
 meet:function(){return top('Video call')+'<div class="scr"><p class="s">After Robert booked, he got this:</p><div class="hp"><span class="tag">HOMEOWNER VIEW</span><h4>Your video call with Cedric</h4><div class="mu" style="margin-bottom:8px">Mon, Nov 23 · 4:00 PM · about 20 minutes</div>'+
  [['Have your phone charged and nearby',0],['Stand near the damage so you can show it',0],['Keep your policy or claim number handy',0]].map(function(c){return '<div class="ck'+(c[1]?' y':'')+'"><i class="'+(c[1]?'y':'')+'">'+(c[1]?I('check',10,'#fff'):'')+'</i><span>'+c[0]+'</span></div>'}).join('')+
- '<div class="b" style="background:#1a73e8;color:#fff">'+I('video',13,'#fff')+'Join with Google Meet</div><div class="b">'+I('cal',13)+'Add to my calendar</div></div>'+
+ '<a class="b" href="https://meet.google.com/new" target="_blank" rel="noopener" style="background:#1a73e8;color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center">'+I('video',13,'#fff')+'Join with Google Meet</a><a class="b" data-calup="1" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Video%20call%20with%20your%20public%20adjuster&dates=20261123T210000Z/20261123T212000Z" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:flex;align-items:center;justify-content:center">'+I('cal',13)+'Add to my calendar<span style="margin-left:6px;padding:2px 6px;border-radius:6px;background:#F5A524;color:#111;font:800 9px Inter,system-ui;letter-spacing:.04em">UPGRADE</span></a></div>'+
  '<div class="note">'+I('check',14)+'<span>One tap to join. No app, no account, nothing to install.</span></div></div>'},
 prep:function(){return top('Appointment prep')+'<div class="scr"><p class="s">After James booked, he got this page:</p><div class="hp"><span class="tag">HOMEOWNER VIEW</span><h4>Your inspection with Cedric</h4><div class="mu" style="margin-bottom:6px">Tue, Nov 24 · 10:00 AM · about 45 minutes</div>'+
  [['Your insurance policy or declarations page',1],['Your claim number, if you have one',1],['Photos you\'ve taken so far',0],['Any letters from the insurance company',0]].map(function(c){return '<div class="ck'+(c[1]?' y':'')+'"><i class="'+(c[1]?'y':'')+'">'+(c[1]?I('check',10,'#fff'):'')+'</i><span>'+c[0]+'</span></div>'}).join('')+
- '<div class="b">'+I('cal',13)+'Add to my calendar</div></div><div class="note">'+I('check',14)+'<span>Homeowners who know what to expect show up ready, and fewer of them cancel.</span></div></div>'},
+ '<a class="b" data-calup="1" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Home%20inspection%20with%20your%20public%20adjuster&dates=20261124T150000Z/20261124T154500Z" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:flex;align-items:center;justify-content:center">'+I('cal',13)+'Add to my calendar<span style="margin-left:6px;padding:2px 6px;border-radius:6px;background:#F5A524;color:#111;font:800 9px Inter,system-ui;letter-spacing:.04em">UPGRADE</span></a></div><div class="note">'+I('check',14)+'<span>Homeowners who know what to expect show up ready, and fewer of them cancel.</span></div></div>'},
 video:function(){return top('Your videos')+'<div class="scr">'+
  '<p class="lb" style="margin-top:2px">Intro video</p><div class="card row" style="border-radius:16px"><span class="ic" style="background:#222 url(/assets/cedric-headshot.jpg) center 30%/cover"></span><div><b>Meet Cedric</b><small>Top of your page · always on</small></div>'+CH+'</div>'+
  '<p class="lb">Featured video <a>Shows on every page</a></p>'+
@@ -765,7 +765,7 @@ app.addEventListener('click',function(e){
  if(a==='logoup'){window.__logo=true;toast('Logo added','It now shows on your website, QR code and handout.');return render('logo')}
  if(a==='payas'){window.__pay=t.dataset.v;render('earn');return}
   if(a==='payout'){toast('Stripe opens here','A secure Stripe form for your bank. Takes about 3 minutes.');return}
-  if(a==='meetnow'){toast('Your Meet link is ready','meet.google.com/cmr-xkpq-tdn · copied, ready to text');return}
+  if(a==='meetnow'){window.open('https://meet.google.com/new','_blank','noopener');toast('Your Meet call is opening','Copy the link from Meet and text it to the homeowner');return}
   if(a==='meetinv'){toast('Video call invite ready','He gets your Meet link and a time picker');return}
   if(a==='copy'){t.textContent='Copied';t.classList.add('ok');return}
   if(a==='wk5'||a==='wk6'){for(var d=0;d<5;d++)tog['d'+d]=1;tog.d5=a==='wk6'?1:0;tog.d6=0;var sc=cur.querySelector('.scr').scrollTop;render('hours');cur.querySelector('.scr').scrollTop=sc;return}
@@ -1504,6 +1504,7 @@ function ctQrCards(D){var q=null;try{q=qrcode(0,'M');q.addData(D.url);q.make()}c
 boot();
 })();
 
+app.addEventListener('click',function(e){if(e.target.closest('[data-calup]'))toast('Added to Google Calendar','Free plan: your Google Calendar. Pro: the Claim Engine books it and sends the reminders for you.')});
 /* Global nav: every screen keeps the bottom navigation */
 (function(){
  var st=document.createElement('style');
