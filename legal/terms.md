@@ -189,15 +189,29 @@ You may not:
 
 Nothing in this section prevents you from retaining and using your independently owned customer-supplied materials.
 
-### 6.4 Approval does not establish authorship or ownership
+### 6.4 How articles are written
 
-Your review and approval of an article authorizes its publication through ClaimTract.
+Articles are written by Sophia, ClaimTract's AI writing assistant. You provide your photographs and talk through what you saw, as if explaining it to a homeowner. Sophia combines your firsthand explanation with ClaimTract's supporting research and information and writes the article.
 
-Approval does not transfer ownership of the article to you, make you its author, or grant you an independent right to export or republish it.
+The relationships are:
 
-Articles may be displayed with language such as "Approved by [Customer Name]," "Published with the authorization of [Customer Name]," or another appropriate authorization disclosure.
+- **Sophia is the writer.**
+- **You are the contributing subject-matter expert.**
+- **ClaimTract is the publisher and platform.**
+- **The homeowner is the reader.**
 
-Such language identifies the professional who authorized publication. It does not represent that the customer personally wrote, independently commissioned, or owns the underlying content.
+Articles may carry a disclosure such as: "Written by Sophia, ClaimTract's AI writing assistant, as told by [Your Name], a public insurance adjuster. Published with [Your Name]'s authorization."
+
+That disclosure identifies you as the professional who contributed the knowledge and authorized publication. It does not represent that you personally wrote the article or own it, and approval does not transfer ownership to you or give you a right to export or republish it.
+
+### 6.4A Four separate permissions
+
+By using ClaimTract you grant four separate permissions:
+
+1. **Contribution permission.** ClaimTract may use your photographs, explanations, voice notes, and professional knowledge to create articles.
+2. **Publication permission.** Articles you approve may be published on ClaimTract permanently.
+3. **Attribution permission.** ClaimTract may identify you as the contributing professional on articles you approved, using the disclosure in Section 6.4 or a similar format, including after your account ends.
+4. **Contact permission.** ClaimTract may display your name, credentials, profile, photograph, telephone number, and other contact details in a contact panel alongside your articles, so a reader who wants a public insurance adjuster can reach you. Contact permission lasts only while you have an active account or Keep-Alive subscription, as described below.
 
 ### 6.5 ClaimTract controls publication
 
@@ -217,32 +231,27 @@ The content does not become your property upon cancellation, and you do not acqu
 
 ### 6.7 Keep-Alive service
 
-ClaimTract may offer a separate Keep-Alive subscription to customers who end ClaimTract Pro but want their existing ClaimTract-created content to stay connected to them.
+ClaimTract may offer a separate Keep-Alive subscription to customers who end ClaimTract Pro but want their contact panel to stay on their existing articles.
 
-While Keep-Alive is active and in good standing, ClaimTract will continue to display the existing approved content with:
+While Keep-Alive is active and in good standing, ClaimTract will continue to display your existing approved articles with:
 
-- Your name and approval disclosure.
+- Your contact panel, including supported contact pathways to your business telephone number or other designated contact destination.
 - Supported internal links and content relationships.
-- Supported contact pathways to your business telephone number or other designated contact destination.
 
 Keep-Alive is a static service. It does not include new article creation, new content clusters, new research, routine updates, ongoing publishing, new distribution campaigns, active optimization, or search-ranking or traffic guarantees.
 
-The content stays static except for necessary technical maintenance, security updates, corrections required by law, or changes needed to keep the service working.
-
 Keep-Alive pricing, billing terms, eligibility, and availability are presented separately before enrollment. Keep-Alive is not included automatically in a cancelled ClaimTract Pro subscription.
 
-### 6.8 Content without Keep-Alive
+### 6.8 After your account or Keep-Alive ends
 
-If you end ClaimTract Pro without Keep-Alive, or Keep-Alive ends, previously approved ClaimTract-created content continues to be published on ClaimTract's domain under ClaimTract's control.
+When your account ends, or your Keep-Alive subscription ends, your previously approved articles remain published on ClaimTract's domain as educational resources.
 
-In that case, ClaimTract may, at its discretion and without further notice:
+- They keep their original attribution, identifying you as the professional who contributed the knowledge, in a form that reflects the past contribution.
+- Your contact panel and contact pathways are removed or replaced.
+- ClaimTract will not present you as a current subscriber, as currently accepting claims, or as still receiving ClaimTract services.
+- ClaimTract may update, correct, consolidate, reorganize, or unpublish the articles.
 
-- Remove or replace your name, photograph, license number, contact details, and approval disclosure on that content.
-- Present the content as general educational material.
-- Change, redirect, or remove contact pathways on that content.
-- Update, consolidate, reorganize, or unpublish the content.
-
-ClaimTract will not present a former customer as an active ClaimTract customer.
+ClaimTract preserves the knowledge. While you are a customer, you receive the opportunity to turn that knowledge into visibility and business.
 
 ### 6.9 No automatic portability
 
@@ -544,7 +553,7 @@ We may take immediate action when necessary to protect individuals, data, system
 
 Upon account closure:
 
-- Your Back office access will end, and your name, photograph, license number, and contact details will be removed from content we display, as described in Section 6.8.
+- Your Back office access will end, and your contact panel will be removed from your articles, as described in Section 6.8.
 - Previously approved ClaimTract-created content may remain published on ClaimTract's domain as described in Section 6.
 - Your custom domain connection will be discontinued on our side.
 - Your paid subscription will be terminated according to the billing terms.
