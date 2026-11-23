@@ -183,7 +183,7 @@ $('go').onclick=function(){var st0=$('start');if(st0)st0.remove();var tz=$('teas
  var cut=function(){if(h.currentTime>=33.6){h.removeEventListener('timeupdate',cut);h.pause();$('sheet').classList.add('gone');setTimeout(function(){run(0)},500)}};h.addEventListener('timeupdate',cut);
  [sv,idle].forEach(function(v){v.load()})};
 /* Nov 24: inside the app, Sophia's full-body parts loop silently under a light scrim until the adjuster taps; then the show starts from the top with sound */
-if(/[?&]app=1/.test(location.search)){try{var st1=$('start');if(st1)st1.remove();var h0=$('hero'),fv0=$('fv');h0.muted=true;h0.loop=true;h0.currentTime=0;h0.play().catch(function(){});
+if(/[?&]app=1/.test(location.search)){try{var st1=$('start');if(st1)st1.style.display='none';var h0=$('hero'),fv0=$('fv');h0.muted=true;h0.loop=true;h0.currentTime=0;h0.play().catch(function(){});
  var tz=document.createElement('div');tz.id='tease';tz.setAttribute('role','button');tz.setAttribute('aria-label','Start the show');
  tz.innerHTML='<div class="tz-in"><b>See what you get when you upgrade</b><span>A 7-minute show from Sophia</span><i>&#9654; Tap anywhere to start</i></div>';
  $('app').appendChild(tz);lg('tease_shown');
