@@ -256,6 +256,8 @@ svg{display:block}
 .qci canvas{max-width:100%;max-height:250px;width:auto;height:auto;box-shadow:0 12px 26px rgba(0,0,0,.45);border-radius:8px;transform:rotate(-1.5deg)}
 .qcdots{display:flex;gap:6px;justify-content:center;margin-top:8px}.qcdots i{width:8px;height:8px;border-radius:50%;background:#C9CED6;display:block}
 .qccap{text-align:center;margin-top:6px}.qccap b{display:block;font-size:12.5px}.qccap small{font-size:11px;color:#8A919C}
+.tksh{transition:transform .5s ease-in}.tkh.done .tksh{transform:translateY(110%)}
+.tkhome{position:absolute;left:16px;right:16px;bottom:22px;height:52px;border-radius:14px;background:#F5A524;color:#111;font:700 14px Inter;display:flex;align-items:center;justify-content:center;text-decoration:none;transform:translateY(160%);transition:transform .5s ease-out .35s;z-index:4}.tkh.done .tkhome{transform:none}
 .tks{display:flex;gap:10px;padding:11px;border-bottom:1px solid var(--ln);align-items:flex-start}.tks:last-child{border-bottom:0}
 .tks i{width:24px;height:24px;border-radius:12px;background:#F5A524;color:#111;font:700 12px Inter;display:flex;align-items:center;justify-content:center;flex:none;font-style:normal}
 .tks b{display:block;font-size:12.5px}.tks small{font-size:11px;color:#A9AEB7;line-height:1.45}
@@ -1481,12 +1483,13 @@ function ctQrCards(D){var q=null;try{q=qrcode(0,'M');q.addData(D.url);q.make()}c
   var pa=av.play();if(pa&&pa.catch)pa.catch(function(){av.muted=true;av.play().catch(function(){})})}
  window.ctDoorLesson=open;try{if(typeof hbResolve==='function')hbResolve(TK_HB)}catch(e){}
  var _q=V.qr;V.qr=function(){var h=_q.apply(this,arguments),btn='<button class="ghost" data-tk="lesson" style="display:none;margin-top:10px;background:#F5A524;color:#111;border:0;padding:13px;font-size:13px">'+I('play',14)+'See how to use this as a door hanger</button>',i=h.lastIndexOf('</div>');return i<0?h+btn:h.slice(0,i)+btn+h.slice(i)};
- V.tkhow=function(){if(TK_HB&&tog.xp&&typeof hbExplain==='function')setTimeout(function(){hbWant=true;hbExplain(TK_HB)},500);
+ V.tkhow=function(){var done=function(){var h=document.querySelector('.tkh');if(h)h.classList.add('done')};
+  if(TK_HB&&tog.xp&&typeof hbExplain==='function'){setTimeout(function(){hbWant=true;hbExplain(TK_HB);if(typeof hbv!=='undefined'){var once=function(){hbv.removeEventListener('ended',once);done()};hbv.addEventListener('ended',once)}},500)}else setTimeout(done,4000);
   var fn=(typeof R!=='undefined'&&R&&ME&&typeof firstN==='function')?firstN():'Cedric',qr=tkQr().replace('fill="#000"','fill="#1d3fa8"').replace('fill="#fff"','fill="#FFE873"');
   return '<div class="tkh"><button class="tkhx" data-back aria-label="Close">&#215;</button>'+
   '<div class="tkn"><b>Sorry I missed you.</b><span>I came by about a matter that may be of financial importance to the owner of this home.</span><span>I\'ll try again tomorrow.</span><em>&mdash; '+hx(fn)+'</em><div class="tknq">'+qr+'</div></div>'+
   '<div class="tksh"><i class="tkgrab"></i><h2>How to use this</h2><div class="card">'+
-  [['Print','Take your QR code to a printer and get it printed on sticky-note stock.'],['Distribute','Pick a neighborhood. Stick one on each front door and walk away.'],['Wait for the phone',''],['Repeat','']].map(function(r,i){return '<div class="tks"><i>'+(i+1)+'</i><div><b>'+r[0]+'</b>'+(r[1]?'<small>'+r[1]+'</small>':'')+'</div></div>'}).join('')+'</div></div></div>'};
+  [['Print','Take your QR code to a printer and get it printed on sticky-note stock.'],['Distribute','Pick a neighborhood. Stick one on each front door and walk away.'],['Wait for the phone',''],['Repeat','']].map(function(r,i){return '<div class="tks"><i>'+(i+1)+'</i><div><b>'+r[0]+'</b>'+(r[1]?'<small>'+r[1]+'</small>':'')+'</div></div>'}).join('')+'</div></div><a class="tkhome" target="_blank" rel="noopener" href="'+hx(((typeof R!=='undefined'&&R&&ME&&pageUrl())||'https://claimtract.app/cedric-moore/')+'?s=ticket')+'">See what the homeowner sees when they scan</a></div>'};
  document.addEventListener('click',function(e){var t=e.target.closest('[data-tk="lesson"]');if(t){e.stopPropagation();open();return}if(e.target.closest('[data-back]')&&typeof hbStop==='function'&&document.querySelector('.view[data-v="tkhow"]'))hbStop()},true);
 })();
 
