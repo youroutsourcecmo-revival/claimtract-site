@@ -374,7 +374,9 @@ body.pvmode #pv .own{display:none!important}body.pvmode #pv{border:0!important;b
 /* Nov 24: hero = eyebrow, headline, subheadline, CTA. Nothing else. */
 .pv .hero2 .badge,.pv .hero2 .meta,.pv .hero2 .lsn{display:none!important}
 .pv .hero2.hasv>.cthv{max-width:none!important;width:100%!important;z-index:0!important}
-.vt,.vh{display:none!important}.vpick .vt{display:flex!important}.vpick .vh{display:block!important}
+.vt,.vh{display:none!important}
+/* Nov 24: one play button only (the hero). The floating dog explainer is gone. */
+#dg,.dg{display:none!important}
 @media(max-width:700px){
  .pv .hero2.hasv,.smp~.pv .hero2.hasv{min-height:0!important;padding:calc(56.25vw + 22px) 22px 26px!important;justify-content:flex-start;background:#0A0C10}
  .pv .hero2.hasv .hv,.hero2 .cthv{top:0!important;left:0!important;right:0!important;bottom:auto!important;height:56.25vw!important}

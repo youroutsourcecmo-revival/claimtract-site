@@ -21,6 +21,13 @@ window.CTArticle={
  },
  bind:function(root){
   if(!document.getElementById('cta-art-css')){var st=document.createElement('style');st.id='cta-art-css';st.textContent=CSS;document.head.appendChild(st)}
+  /* Nov 24: the four voices are one compact dropdown */
+  var sc=document.getElementById('cta-vsel-css');if(!sc){sc=document.createElement('style');sc.id='cta-vsel-css';sc.textContent='.cta-art .vtop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 10px}.cta-art .vtop .tk{margin:0}.cta-art .vsel{font:700 12.5px Inter,sans-serif;padding:7px 30px 7px 12px;border-radius:999px;border:1px solid #D9D6CE;background:#fff url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%276%27%3E%3Cpath d=%27M1 1l4 4 4-4%27 stroke=%27%23333%27 fill=%27none%27 stroke-width=%271.6%27/%3E%3C/svg%3E") no-repeat right 12px center;color:#222;-webkit-appearance:none;appearance:none;cursor:pointer}';document.head.appendChild(sc)}
+  function conv(){[].forEach.call(document.querySelectorAll('.cta-art .vt'),function(vt){var a=vt.closest('.cta-art');if(a.querySelector('.vsel'))return;var sel=document.createElement('select');sel.className='vsel';sel.setAttribute('aria-label','Article version');
+   [].forEach.call(vt.querySelectorAll('button'),function(b){var o=document.createElement('option');o.value=b.getAttribute('data-v');o.textContent=b.textContent.replace(/\s+/g,' ').trim();if(b.getAttribute('aria-pressed')==='true')o.selected=true;sel.appendChild(o)});
+   var tk=a.querySelector('.tk'),row=document.createElement('div');row.className='vtop';if(tk){tk.parentNode.insertBefore(row,tk);row.appendChild(tk)}else a.insertBefore(row,a.firstChild);row.appendChild(sel);
+   sel.addEventListener('change',function(){var v=sel.value;a.querySelectorAll('.vb').forEach(function(x){x.classList.toggle('on',x.getAttribute('data-vb')===v)});a.querySelectorAll('.vt button').forEach(function(x){x.setAttribute('aria-pressed',String(x.getAttribute('data-v')===v))})})})}
+  conv();try{new MutationObserver(function(){if(document.querySelector('.cta-art .vt')&&document.querySelectorAll('.cta-art .vsel').length<document.querySelectorAll('.cta-art .vt').length)conv()}).observe(document.body||document.documentElement,{childList:true,subtree:true})}catch(e){}
   (root||document).addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.cta-art .vt button');if(!b)return;var a=b.closest('.cta-art');
    a.querySelectorAll('.vt button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});
    a.querySelectorAll('.vb').forEach(function(x){x.classList.toggle('on',x.getAttribute('data-vb')===b.getAttribute('data-v'))});
