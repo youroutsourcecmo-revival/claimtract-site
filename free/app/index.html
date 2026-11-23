@@ -1501,9 +1501,6 @@ function ctQrCards(D){var q=null;try{q=qrcode(0,'M');q.addData(D.url);q.make()}c
  tab=function(n){if(n==='sophia'&&tog.xp&&!document.getElementById('wlk')){var host=document.getElementById('app')||document.body,f=document.createElement('iframe');f.id='wlk';f.src='/free/walk/?app=1&t='+Date.now();f.allow='autoplay; fullscreen';f.title='Sophia walkthrough';var _vs=document.querySelectorAll('.view'),_v=_vs[_vs.length-1],nv=(_v&&_v.querySelector('.nav'))||document.querySelector('.nav'),ar=host.getBoundingClientRect(),nb=nv?Math.round(nv.getBoundingClientRect().height):52;if(!nb||nb<40)nb=52;f.setAttribute('style','position:absolute;left:0;right:0;top:0;bottom:'+nb+'px;width:100%;height:calc(100% - '+nb+'px);border:0;z-index:95;background:#000');host.appendChild(f);if(typeof track==='function')try{track('walk_open',{})}catch(_){};return}
   return _tab.apply(this,arguments)};
 })();
-boot();
-})();
-
 app.addEventListener('click',function(e){if(e.target.closest('[data-calup]'))toast('Added to Google Calendar','Free plan: your Google Calendar. Pro: the Claim Engine books it and sends the reminders for you.')});
 /* Global nav: every screen keeps the bottom navigation */
 (function(){
@@ -1519,5 +1516,9 @@ app.addEventListener('click',function(e){if(e.target.closest('[data-calup]'))toa
  if(cur&&!cur.querySelector('.nav')){var d=document.createElement('div');d.innerHTML=nav(T);cur.appendChild(d.firstChild)}
  paint();window.addEventListener('resize',paint);
 })();
+
+boot();
+})();
+
 </script>
 </body></html>
