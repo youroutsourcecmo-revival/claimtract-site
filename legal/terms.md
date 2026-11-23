@@ -169,11 +169,15 @@ To the extent permitted by law, Ezekiel Enterprises LLC retains all ownership an
 
 Where a particular element is not eligible for copyright protection or exclusive ownership, the customer's rights remain limited by the contractual license and service restrictions described in these Terms.
 
-### 6.3 Limited customer license
+### 6.3 Limited service license
 
-While your applicable paid subscription remains active and in good standing, ClaimTract grants you a limited, non-exclusive, non-transferable, non-sublicensable license to authorize and use approved ClaimTract-created content on the ClaimTract website and through the publishing destinations made available under your subscription.
+While your account remains active and in good standing, ClaimTract grants you a limited, non-exclusive, non-transferable, non-sublicensable license to use the ClaimTract platform and to authorize the display of approved ClaimTract-created content through ClaimTract and the publishing destinations made available to your account.
 
-This license is limited to the purposes and destinations supported by ClaimTract.
+For customers on the free plan, this license covers the content provided with the free website and Back office for as long as the free account remains active.
+
+For ClaimTract Pro customers, this license also covers content created through ClaimTract Pro while the Pro subscription remains active.
+
+This is a license to use a service. It is not ownership of, or a portability right in, ClaimTract-created content.
 
 You may not:
 
@@ -191,48 +195,56 @@ Your review and approval of an article authorizes its publication through ClaimT
 
 Approval does not transfer ownership of the article to you, make you its author, or grant you an independent right to export or republish it.
 
-Articles may be displayed with language such as "Published with the authorization of [Customer Name]" or another appropriate authorization disclosure.
+Articles may be displayed with language such as "Approved by [Customer Name]," "Published with the authorization of [Customer Name]," or another appropriate authorization disclosure.
 
-Such language identifies the professional who authorized publication. It does not represent that the customer personally wrote, commissioned independently, or owns the underlying content.
+Such language identifies the professional who authorized publication. It does not represent that the customer personally wrote, independently commissioned, or owns the underlying content.
 
-### 6.5 Expiration of content license
+### 6.5 ClaimTract controls publication
 
-When your paid ClaimTract Pro subscription terminates, expires, or is cancelled, your license to use ClaimTract-created content under that subscription ends, subject to any applicable keep-alive subscription.
+ClaimTract retains control of the ClaimTract domain, hosting, content architecture, internal linking, and publication of ClaimTract-created content.
 
-The content does not become your property upon cancellation, and you do not acquire a right to download, export, transfer, or independently host the articles.
+Approved ClaimTract-created content is published on ClaimTract's domain and remains part of the ClaimTract platform.
 
-Continued access to ClaimTract-created content requires an active service arrangement that expressly permits that access.
+### 6.6 Cancellation ends paid services, not publication
 
-### 6.6 Keep-alive service
+When a ClaimTract Pro subscription ends for any reason, the paid services end. These include new research, new articles, new content clusters, ongoing publishing, distribution campaigns, and optimization.
 
-ClaimTract may offer a separate Keep-Alive subscription to customers who discontinue the active publishing service but wish to preserve their existing ClaimTract website and approved content.
+Cancellation does not remove previously approved ClaimTract-created content. That content remains published on ClaimTract's domain.
 
-The Keep-Alive service is a separate, limited hosting and display license.
+Your free website and Back office continue under the free plan described in Section 3.
 
-If offered and purchased, it may permit:
+The content does not become your property upon cancellation, and you do not acquire a right to download, export, transfer, or independently host it.
 
-- Continued hosting of the existing website.
-- Continued display of existing approved articles.
-- Continued operation of existing internal links and supported content relationships.
-- Continued availability of existing website pages and approved contact pathways.
-- Continued use of supported links directing visitors to the customer's business telephone number or other designated contact destination.
+### 6.7 Keep-Alive service
 
-The Keep-Alive service does not include:
+ClaimTract may offer a separate Keep-Alive subscription to customers who end ClaimTract Pro but want their existing ClaimTract-created content to stay connected to them.
 
-- New article creation.
-- New content clusters.
-- New content research.
-- Routine article updates.
-- Ongoing publishing.
-- New distribution campaigns.
-- Active content development.
-- Search-ranking or traffic guarantees.
+While Keep-Alive is active and in good standing, ClaimTract will continue to display the existing approved content with:
 
-The existing content and website structure remain static, except for necessary technical maintenance, security updates, corrections required by law, or changes necessary to keep the service functioning.
+- Your name and approval disclosure.
+- Supported internal links and content relationships.
+- Supported contact pathways to your business telephone number or other designated contact destination.
 
-Keep-Alive pricing, billing terms, eligibility, and availability will be disclosed when the service is offered. The service is not included automatically in a cancelled ClaimTract Pro subscription.
+Keep-Alive is a static service. It does not include new article creation, new content clusters, new research, routine updates, ongoing publishing, new distribution campaigns, active optimization, or search-ranking or traffic guarantees.
 
-### 6.7 No automatic portability
+The content stays static except for necessary technical maintenance, security updates, corrections required by law, or changes needed to keep the service working.
+
+Keep-Alive pricing, billing terms, eligibility, and availability are presented separately before enrollment. Keep-Alive is not included automatically in a cancelled ClaimTract Pro subscription.
+
+### 6.8 Content without Keep-Alive
+
+If you end ClaimTract Pro without Keep-Alive, or Keep-Alive ends, previously approved ClaimTract-created content continues to be published on ClaimTract's domain under ClaimTract's control.
+
+In that case, ClaimTract may, at its discretion and without further notice:
+
+- Remove or replace your name, photograph, license number, contact details, and approval disclosure on that content.
+- Present the content as general educational material.
+- Change, redirect, or remove contact pathways on that content.
+- Update, consolidate, reorganize, or unpublish the content.
+
+ClaimTract will not present a former customer as an active ClaimTract customer.
+
+### 6.9 No automatic portability
 
 ClaimTract's content and interconnected website architecture are designed to function as part of the ClaimTract platform.
 
@@ -242,13 +254,9 @@ Accordingly, ClaimTract does not provide a general content-portability or websit
 
 This restriction does not prevent you from retrieving your independently owned original submissions, subject to reasonable technical limitations, applicable law, and our Privacy Policy.
 
-### 6.8 Rights after termination
+### 6.10 No ownership transfer
 
-Upon termination of all applicable services, ClaimTract may deactivate the website, remove public access to licensed content, and discontinue hosting and publication.
-
-If you purchase an available Keep-Alive subscription, the applicable static hosting license will continue according to that subscription's terms.
-
-No ownership of ClaimTract-created content transfers to you as a result of cancellation, termination, payment history, or continued hosting.
+No ownership of ClaimTract-created content transfers to you as a result of cancellation, termination, payment history, Keep-Alive, or continued hosting.
 
 ## 7. HOMEOWNER INFORMATION AND CONFIDENTIAL MATERIAL
 
@@ -536,7 +544,8 @@ We may take immediate action when necessary to protect individuals, data, system
 
 Upon account closure:
 
-- Your active ClaimTract website will be removed or deactivated.
+- Your Back office access will end, and your name, photograph, license number, and contact details will be removed from content we display, as described in Section 6.8.
+- Previously approved ClaimTract-created content may remain published on ClaimTract's domain as described in Section 6.
 - Your custom domain connection will be discontinued on our side.
 - Your paid subscription will be terminated according to the billing terms.
 - Your active account access will be disabled.
