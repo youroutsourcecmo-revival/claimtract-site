@@ -1302,10 +1302,10 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
  function packet(kind,msg){return {kind:kind,founder:isF(),message:String(msg||'').trim().slice(0,2000),log:{device:device(),events:LOG.slice()}}}
 
  var css=document.createElement('style');css.textContent=
- '#wr{position:absolute;left:10px;bottom:66px;z-index:62;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,196,0,.45);background:#14171C;color:#FFC400;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;padding:0}'+
- '.app.light #wr{background:#fff;color:#9A6200;border-color:rgba(154,98,0,.4)}#wr svg{width:18px;height:18px}'+
+ '#wr{position:absolute;right:14px;bottom:calc(var(--gnh,58px) + 14px);z-index:62;width:54px;height:54px;border-radius:50%;border:0;background:#F5A524;color:#14171C;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer;padding:0}'+
+ '#wr svg{width:22px;height:22px}#wr:active{transform:scale(.94)}.view .scr{padding-bottom:84px}'+
  '#wrs{position:absolute;inset:0;z-index:80;display:none;align-items:flex-end;background:rgba(0,0,0,.55)}#wrs.on{display:flex}'+
- '#wrs .bx{width:100%;max-height:92%;overflow:auto;background:#14171C;color:#E9ECF1;border-radius:18px 18px 0 0;padding:16px 16px 20px;font:13px Inter,system-ui,sans-serif;box-sizing:border-box}'+
+ '#wrs .bx{width:100%;max-height:60%;overflow:auto;background:#14171C;color:#E9ECF1;border-radius:18px 18px 0 0;padding:16px 16px 20px;font:13px Inter,system-ui,sans-serif;box-sizing:border-box}'+
  '.app.light #wrs .bx{background:#fff;color:#1A1D22}#wrs h2{font:800 16px Inter,system-ui;margin:0 0 4px}#wrs .sub{font-size:12px;opacity:.85;margin:0 0 12px;line-height:1.45}'+
  '#wrs .seg2{display:flex;gap:6px;margin-bottom:10px}#wrs .seg2 span{flex:1;text-align:center;padding:9px 6px;border-radius:10px;border:1px solid rgba(255,255,255,.14);font-weight:700;font-size:12px;cursor:pointer}'+
  '#wrs .seg2 span.on{background:#FFC400;color:#14171C;border-color:#FFC400}.app.light #wrs .seg2 span{border-color:#D6D9DE}'+
@@ -1314,6 +1314,8 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
  '#wrs .mic{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,196,0,.4);background:none;color:inherit;font-weight:700;width:100%;cursor:pointer}#wrs .mic.rec{background:#C62828;color:#fff;border-color:#C62828}'+
  '#wrs .what{font-size:11px;opacity:.85;margin:6px 0 12px;line-height:1.45}#wrs .what u{cursor:pointer}#wrs pre{white-space:pre-wrap;font:10px ui-monospace,monospace;max-height:160px;overflow:auto;background:rgba(127,127,127,.12);padding:8px;border-radius:8px}'+
  '#wrs .go{width:100%;padding:12px;border:0;border-radius:12px;background:#FFC400;color:#14171C;font:800 14px Inter,system-ui;cursor:pointer}#wrs .go[disabled]{opacity:.45}#wrs .x{float:right;background:none;border:0;color:inherit;font-size:22px;line-height:1;cursor:pointer}'+
+ '#wrs .menu{display:grid;gap:8px;margin-top:10px}#wrs .menu button{display:flex;align-items:center;gap:10px;width:100%;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:inherit;font:700 14px Inter,system-ui;cursor:pointer;text-align:left}.app.light #wrs .menu button{border-color:#D6D9DE;background:#F6F7F9}#wrs .menu button.y{background:#FFC400;color:#14171C;border-color:#FFC400}'+
+ '#wrs .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}#wrs .row2 .mic,#wrs .row2 .go{margin:0;width:100%}#wrs .row2 .mic{background:#1F6FEB;border-color:#1F6FEB;color:#fff}#wrs .bk2{background:none;border:0;color:inherit;font-size:20px;line-height:1;cursor:pointer;margin-right:6px;padding:0}#wrs h2{display:flex;align-items:center;margin-bottom:10px}'+
  '#wrs .ok{text-align:center;padding:18px 6px}#wrs .ok b{display:block;font-size:15px;margin-bottom:6px}'+
  '#hbs.wr{z-index:90}#wrs.wx .bx{transform:translateY(105%);transition:transform .25s}#wrs .bx{transition:transform .25s}';
  document.head.appendChild(css);
@@ -1326,15 +1328,13 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
   var v=cur&&cur.dataset&&cur.dataset.v;btn.style.display=(!v||v==='signin')?'none':'flex'}
  setInterval(sync,1500);
 
- function draw(){var f=isF();
-  bx.innerHTML='<button class="x" data-w="close" aria-label="Close">&times;</button>'+
-  '<h2>'+(f?'Founder line to Ezekiel':'Report a problem')+'</h2>'+
-  '<p class="sub">'+(f?(kind==='bug'?'Something not working? Tell me in a sentence or two. Your system log rides along, so we can see exactly what happened. You\'ll hear back from me within 24 hours.':'One founder is enough. If we can build it, every founder gets it to try for 30 days. Then each founder votes approve or not. If more than half of those who vote say yes, with at least 5 votes, every new customer gets it too.'):'Tell us what went wrong. Your system log rides along so we can see what happened.')+'</p>'+
-  (f?'<div class="seg2"><span data-w="bug" class="'+(kind==='bug'?'on':'')+'">Something\'s broken</span><span data-w="idea" class="'+(kind==='idea'?'on':'')+'">I have an idea</span></div>':'')+
+ var step='menu';
+ function draw(){var f=isF();if(!f)step='form';var X='<button class="x" data-w="close" aria-label="Close">&times;</button>';
+  if(step==='menu'){bx.innerHTML=X+'<h2>Founder line to Ezekiel</h2><div class="menu"><button data-w="bug">Something\'s broken</button><button data-w="idea" class="y">I have an idea</button><button data-w="road">See the Roadmap &rarr;</button></div>';return}
+  var hasSR=!!(window.SpeechRecognition||window.webkitSpeechRecognition);
+  bx.innerHTML=X+'<h2>'+(f?'<button class="bk2" data-w="menu" aria-label="Back">&lsaquo;</button>':'')+(f?(kind==='bug'?'Something\'s broken':'I have an idea'):'Report a problem')+'</h2>'+
   '<textarea id="wrt" placeholder="'+(kind==='bug'?'What did you tap, and what happened?':'What should it do for you?')+'"></textarea>'+
-  ((window.SpeechRecognition||window.webkitSpeechRecognition)?'<button class="mic" data-w="mic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>Tap and talk</span></button>':'')+
-  '<p class="what">Sent with it: the screen you were on, your last taps, any errors, and your device type. Homeowner emails, phone numbers and addresses are removed. <u data-w="peek">See exactly what\'s sent</u></p><div id="wrp"></div>'+
-  '<button class="go" data-w="send">Send to Ezekiel</button>'+'<button data-w="road" style="display:block;width:100%;margin-top:10px;background:none;border:0;color:#F5A524;font:700 13px Inter,system-ui;cursor:pointer">See the Roadmap and what we\'ve fixed &rarr;</button>'}
+  '<div class="row2"'+(hasSR?'':' style="grid-template-columns:1fr"')+'>'+(hasSR?'<button class="mic" data-w="mic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>Tap to talk</span></button>':'')+'<button class="go" data-w="send">Send to Ezekiel</button></div>'}
 
  /* One-time Esther explainers (HumanBot floating avatar): burgundy formal for "Something's broken", blue casual for "I have an idea". */
  var WRX={bug:'PG5npXWedx7b',idea:'mWefGZURp9Ba'};
@@ -1347,22 +1347,23 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
  function wrxPlay(k){if(wrxSeen(k)||typeof hbExplain!=='function')return;wrxMark(k);var h=document.getElementById('hbs');if(typeof hbStop==='function')hbStop();
   h.classList.add('wr');sh.classList.add('wx');hbWant=true;hbExplain(WRX[k]);setTimeout(function(){if(sh.classList.contains('wx')&&!h.classList.contains('on'))wrxStop()},6000)}
  function show(){draw();wrxPlay(kind)}
- function stopRec(){if(rec){try{rec.stop()}catch(e){}rec=null}var m=bx.querySelector('.mic');if(m){m.classList.remove('rec');m.lastChild.textContent='Tap and talk'}}
- function open(){kind='bug';sh.classList.add('on');show();lg('wrench','opened')}
- window.ctIdea=function(topic){kind='idea';sh.classList.add('on');draw();var ta=bx.querySelector('#wrt');if(ta){ta.value='About "'+topic+'": ';try{ta.focus()}catch(_){}}lg('wrench','roadmap_idea')};
+ function stopRec(){if(rec){try{rec.stop()}catch(e){}rec=null}var m=bx.querySelector('.mic');if(m){m.classList.remove('rec');m.lastChild.textContent='Tap to talk'}}
+ function open(){kind='bug';step='menu';sh.classList.add('on');draw();lg('wrench','opened')}
+ window.ctIdea=function(topic){kind='idea';step='form';sh.classList.add('on');draw();var ta=bx.querySelector('#wrt');if(ta){ta.value='About "'+topic+'": ';try{ta.focus()}catch(_){}}lg('wrench','roadmap_idea')};
  function close(){stopRec();wrxStop();sh.classList.remove('on')}
  btn.addEventListener('click',open);
  function ok(j){return j&&j.ok!==false&&j.__s<400&&j.__s!==0}
  sh.addEventListener('click',function(e){if(sh.classList.contains('wx')){wrxStop();return}if(e.target===sh)return close();var w=e.target.closest('[data-w]');if(!w)return;var a=w.dataset.w,ta=bx.querySelector('#wrt');
   if(a==='close')return close();
   if(a==='road'){close();if(typeof go==='function')go('roadmap');lg('wrench','roadmap_open');return}
-  if(a==='bug'||a==='idea'){var keep=ta.value;kind=a;show();bx.querySelector('#wrt').value=keep;return}
+  if(a==='menu'){stopRec();step='menu';draw();return}
+  if(a==='bug'||a==='idea'){var keep=ta?ta.value:'';kind=a;step='form';show();bx.querySelector('#wrt').value=keep;try{bx.querySelector('#wrt').focus()}catch(_){}return}
   if(a==='peek'){var p=bx.querySelector('#wrp');p.innerHTML=p.innerHTML?'':'<pre></pre>';if(p.firstChild)p.firstChild.textContent=JSON.stringify(packet(kind,ta.value).log,null,1);return}
   if(a==='mic'){if(rec)return stopRec();var SR=window.SpeechRecognition||window.webkitSpeechRecognition;rec=new SR();rec.lang='en-US';rec.interimResults=true;rec.continuous=true;var base=ta.value?ta.value.replace(/\s*$/,' '):'';
    rec.onresult=function(ev){var s='';for(var i=0;i<ev.results.length;i++)s+=ev.results[i][0].transcript;ta.value=base+s};rec.onend=function(){stopRec()};rec.onerror=function(){stopRec()};
    try{rec.start();w.classList.add('rec');w.lastChild.textContent='Listening… tap to stop'}catch(err){stopRec()}return}
   if(a==='send'){stopRec();var msg=ta.value.trim();if(msg.length<3){ta.focus();return}w.disabled=true;w.textContent='Sending…';var pk=packet(kind,msg);
-   function fin(state){bx.innerHTML='<div class="ok"><b>'+(state==='demo'?'Preview only':state==='fail'?'Not sent yet':'Sent. Thank you.')+'</b><p class="sub">'+(state==='demo'?'This is the sample Back office. In yours, this goes straight to Ezekiel with your log.':state==='fail'?'No connection right now. Your message is still here; try again in a moment.':(isF()?(kind==='bug'?'Ezekiel will get back to you within 24 hours.':'Ezekiel reads every idea himself. If we build it, you\'ll hear first.'):'We\'ll take a look.'))+'</p><button class="go" data-w="'+(state==='fail'?'retry':'close')+'">'+(state==='fail'?'Back to my message':'Done')+'</button></div>'}
+   function fin(state){bx.innerHTML='<div class="ok"><b>'+(state==='demo'?'Sample only. Yours goes to Ezekiel.':state==='fail'?'No connection. Try again.':'Sent. Thank you.')+'</b><button class="go" data-w="'+(state==='fail'?'retry':'close')+'">'+(state==='fail'?'Back to my message':'Done')+'</button></div>'}
    if(!R)return fin('demo');
    api('POST','/api/app/feedback',pk).then(function(j){if(ok(j))return fin('sent');
     return api('POST','/api/app/events',{name:'wrench_'+kind,feedback:pk}).then(function(k){fin(ok(k)?'sent':'fail');if(!ok(k))sh._keep=msg})})}
