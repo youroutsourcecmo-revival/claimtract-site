@@ -272,7 +272,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
     
   </section>
 
-  <section class="mission mphone"><div class="bapp-ph" aria-label="The ClaimTract app on a phone"><iframe src="/free/app/?demo=1" title="Sample ClaimTract app, Cedric Moore" loading="lazy"></iframe></div><div><p class="k">The whole point</p><h2>Become the answer Google is hunting for. Build real authority. <em>Make your phone ring without begging.</em></h2><p>Your free page is step one. Why not take it tonight?</p><a class="btn" data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></section>
+  <section class="mission mphone"><div class="bapp-ph" aria-label="The ClaimTract app on a phone"><iframe src="/free/app/?demo=1" title="Sample ClaimTract app, Cedric Moore" loading="lazy"></iframe><script>(function(){var f=document.currentScript.previousElementSibling;if(f&&f.tagName==="IFRAME")f.setAttribute("src","/free/app/?demo=1&t="+Date.now())})()</script></div><div><p class="k">The whole point</p><h2>Become the answer Google is hunting for. Build real authority. <em>Make your phone ring without begging.</em></h2><p>Your free page is step one. Why not take it tonight?</p><a class="btn" data-cta href="/free/build/?view=preview">See my page &rarr;</a></div></section>
 
   <section class="who">
     <div class="who-t">
@@ -420,7 +420,7 @@ try{if(fn){var ln2=(Q.get('ln')||'').replace(/[<>&"]/g,''),ct=(Q.get('city')||''
 applyP(Q);
 if(Q.get('c')&&/^[A-Za-z0-9_-]{6,40}$/.test(Q.get('c'))){fetch('/api/pages/lead/'+encodeURIComponent(Q.get('c'))).then(function(r){return r.ok?r.json():null}).then(function(d){if(!d||!d.ok)return;window.__lead=d;
  var M={fn:d.first,ln:d.last,lic:d.license,city:d.city,st:d.state||'FL'};applyP({get:function(k){return M[k]||''}});
- var fr=document.querySelector('.mphone iframe');if(fr){var u='/free/app/?demo=1&c='+encodeURIComponent(d.code||Q.get('c'));if(fr.getAttribute('src')!==u)fr.setAttribute('src',u)}
+ var fr=document.querySelector('.mphone iframe');if(fr){var u='/free/app/?demo=1&c='+encodeURIComponent(d.code||Q.get('c'));if((fr.getAttribute('src')||'').indexOf(u)!==0)fr.setAttribute('src',u+'&t='+Date.now())}
  try{T('lead_link_open',{c:Q.get('c')})}catch(_){}}).catch(function(){})}
 var pp=document.getElementById('pgPhone');function goPage(){var a=document.querySelector('.hero [data-cta]');if(a){try{window.__ctT&&window.__ctT('free_phone_click')}catch(_){}location.href=a.href}}pp.onclick=goPage;pp.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();goPage()}};
 
