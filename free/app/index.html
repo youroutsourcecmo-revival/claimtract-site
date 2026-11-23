@@ -680,6 +680,21 @@ function render(name,dir){var html=V[name]();var el=document.createElement('div'
 function go(n){stack.push(cur.dataset.v);render(n,'push')}
 function back(){var n=stack.pop()||'home';render(n,'pop')}
 function tab(n){if(n==='sophia'&&plan==='free'){openSx();return}if(typeof closeSx==='function')closeSx();stack=[];render(n)}
+app.addEventListener('click',function(e){if(e.target.closest('[data-calup]'))toast('Added to Google Calendar','Free plan: your Google Calendar. Pro: the Claim Engine books it and sends the reminders for you.')});
+/* Global nav: every screen keeps the bottom navigation */
+(function(){
+ var st=document.createElement('style');
+ st.textContent='#gnav{position:absolute;left:0;right:0;bottom:0;z-index:150}#gnav .nav{margin:0}.view .nav{visibility:hidden}.crmv{position:relative!important;inset:auto!important;flex:1;min-height:0}.spl,#qm,.shd,#cf,.art,.rec,#wrs,#cxs,#bxs,#fns,#tko{bottom:var(--gnh,58px)!important}';
+ document.head.appendChild(st);
+ var T='home',g=document.createElement('div');g.id='gnav';app.appendChild(g);
+ function paint(){var on=cur&&cur.querySelector('.nav span.on');if(on&&on.dataset.tab)T=on.dataset.tab;g.innerHTML=nav(T);app.appendChild(g);var h=g.offsetHeight;if(h)app.style.setProperty('--gnh',h+'px')}
+ var _r=render;render=function(name,dir){_r(name,dir);if(cur&&!cur.querySelector('.nav')){var d=document.createElement('div');d.innerHTML=nav(T);cur.appendChild(d.firstChild)}paint()};
+ function closeAll(){['#qm','.shd','#cf','.art','.rec','#wrs','#cxs','#bxs','#fns'].forEach(function(q){document.querySelectorAll(q).forEach(function(el){el.classList.remove('on')})});var k=document.getElementById('tko');if(k)k.remove();document.querySelectorAll('#tko video,.tkh video').forEach(function(v){try{v.pause()}catch(_){}})}
+ var _t=tab;tab=function(n){T=n;closeAll();_t(n);paint()};
+ g.addEventListener('click',function(e){var t=e.target.closest('[data-tab]');if(!t)return;e.stopPropagation();tab(t.dataset.tab)});
+ if(cur&&!cur.querySelector('.nav')){var d=document.createElement('div');d.innerHTML=nav(T);cur.appendChild(d.firstChild)}
+ paint();window.addEventListener('resize',paint);
+})();
 var HELP={
 week:['This week','How many homeowners opened your page, tapped to call you, and booked a time. Watch it climb as you share your page.'],
 g_articles:['Articles published','New articles written from your own claims. Free gives you the main article and 12 answers. Upgrade and new ones keep coming.'],
@@ -1500,21 +1515,6 @@ function ctQrCards(D){var q=null;try{q=qrcode(0,'M');q.addData(D.url);q.make()}c
  window.addEventListener('message',function(e){if(e&&e.data&&e.data.ct==='walk_close')closeWalk()});document.addEventListener('click',function(e){if(document.getElementById('wlk')&&e.target.closest('[data-tab]')){var f=document.getElementById('wlk');if(f)f.remove()}},true);
  tab=function(n){if(n==='sophia'&&tog.xp&&!document.getElementById('wlk')){var host=document.getElementById('app')||document.body,f=document.createElement('iframe');f.id='wlk';f.src='/free/walk/?app=1&t='+Date.now();f.allow='autoplay; fullscreen';f.title='Sophia walkthrough';var _vs=document.querySelectorAll('.view'),_v=_vs[_vs.length-1],nv=(_v&&_v.querySelector('.nav'))||document.querySelector('.nav'),ar=host.getBoundingClientRect(),nb=nv?Math.round(nv.getBoundingClientRect().height):52;if(!nb||nb<40)nb=52;f.setAttribute('style','position:absolute;left:0;right:0;top:0;bottom:'+nb+'px;width:100%;height:calc(100% - '+nb+'px);border:0;z-index:95;background:#000');host.appendChild(f);if(typeof track==='function')try{track('walk_open',{})}catch(_){};return}
   return _tab.apply(this,arguments)};
-})();
-app.addEventListener('click',function(e){if(e.target.closest('[data-calup]'))toast('Added to Google Calendar','Free plan: your Google Calendar. Pro: the Claim Engine books it and sends the reminders for you.')});
-/* Global nav: every screen keeps the bottom navigation */
-(function(){
- var st=document.createElement('style');
- st.textContent='#gnav{position:absolute;left:0;right:0;bottom:0;z-index:150}#gnav .nav{margin:0}.view .nav{visibility:hidden}.crmv{position:relative!important;inset:auto!important;flex:1;min-height:0}.spl,#qm,.shd,#cf,.art,.rec,#wrs,#cxs,#bxs,#fns,#tko{bottom:var(--gnh,58px)!important}';
- document.head.appendChild(st);
- var T='home',g=document.createElement('div');g.id='gnav';app.appendChild(g);
- function paint(){var on=cur&&cur.querySelector('.nav span.on');if(on&&on.dataset.tab)T=on.dataset.tab;g.innerHTML=nav(T);app.appendChild(g);var h=g.offsetHeight;if(h)app.style.setProperty('--gnh',h+'px')}
- var _r=render;render=function(name,dir){_r(name,dir);if(cur&&!cur.querySelector('.nav')){var d=document.createElement('div');d.innerHTML=nav(T);cur.appendChild(d.firstChild)}paint()};
- function closeAll(){['#qm','.shd','#cf','.art','.rec','#wrs','#cxs','#bxs','#fns'].forEach(function(q){document.querySelectorAll(q).forEach(function(el){el.classList.remove('on')})});var k=document.getElementById('tko');if(k)k.remove();document.querySelectorAll('#tko video,.tkh video').forEach(function(v){try{v.pause()}catch(_){}})}
- var _t=tab;tab=function(n){T=n;closeAll();_t(n);paint()};
- g.addEventListener('click',function(e){var t=e.target.closest('[data-tab]');if(!t)return;e.stopPropagation();tab(t.dataset.tab)});
- if(cur&&!cur.querySelector('.nav')){var d=document.createElement('div');d.innerHTML=nav(T);cur.appendChild(d.firstChild)}
- paint();window.addEventListener('resize',paint);
 })();
 
 boot();
