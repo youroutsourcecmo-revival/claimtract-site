@@ -495,12 +495,12 @@ activity:function(){unread=0;return '<div class="top"><h1 style="padding-left:4p
  '<div class="note gold">'+I('clock',14)+'<span>Florida contact hours are built in. Late-night alerts tell you the earliest time you can reach out.</span></div>'+
  '<div class="note">'+I('shield',14)+'<span>Free: you see that someone looked. Upgrade: you see who, from every link you share by name.</span></div></div>'+nav('activity')},
 share:function(){return '<div class="top"><h1 style="padding-left:4px">Share my page</h1></div><div class="scr">'+
- '<div class="inp"><span>For</span><b>Mary<i class="caret"></i></b>'+I('user',15,'#A9AEB7')+'</div>'+
- '<div class="lnk">'+I('shield',14)+'<em>claimtract.app/l/k4m2</em><button class="cpb" data-act="copy">Copy</button></div>'+
- '<p class="lb">What Mary sees</p><div class="bub">Hi Mary, it was good meeting you today. Here\'s my page so you can check my license and see how I work.</div>'+
+ 
+ '<div class="lnk">'+I('shield',14)+'<em>claimtract.app/cedric-moore</em><button class="cpb" data-dcopy="https://claimtract.app/cedric-moore/">Copy</button></div>'+
+ '<p class="lb">What the homeowner sees</p><div class="bub">Hi, it was good meeting you today. Here\'s my page so you can check my license and see how I work.</div>'+
  '<div class="og" style="margin-left:auto;max-width:86%"><div class="im"><b>Cedric Moore</b><small>'+I('check',10,'#F5A524')+'License verified</small></div><div class="tx"><b>Cedric Moore, Public Adjuster</b><small>clmt.us</small></div></div>'+
- '<div class="b2"><button data-act="sent">'+I('msg',17)+'Text</button><button data-act="sent">'+I('mail',17)+'Email</button><button data-go="qr">'+I('qr',17)+'Show QR</button></div>'+
- '<div class="note">'+I('bell',14)+'<span>You\'ll get an alert when Mary opens it.<span class="up">UPGRADE</span></span></div></div>'+nav('share')},
+ '<div class="b2"><a class="rxb" href="sms:?&body=Hi%2C%20it%20was%20good%20meeting%20you%20today.%20Here%27s%20my%20page%20so%20you%20can%20check%20my%20license%20and%20see%20how%20I%20work%3A%20https%3A//claimtract.app/cedric-moore/">'+I('msg',17)+'Text</a><a class="rxb" href="mailto:?subject=My%20page&body=Hi%2C%20it%20was%20good%20meeting%20you%20today.%20Here%27s%20my%20page%20so%20you%20can%20check%20my%20license%20and%20see%20how%20I%20work%3A%20https%3A//claimtract.app/cedric-moore/">'+I('mail',17)+'Email</a><button data-go="qr">'+I('qr',17)+'Show QR</button></div>'+
+ '<div class="note">'+I('bell',14)+'<span>You\'ll get an alert when they open it.<span class="up">UPGRADE</span></span></div></div>'+nav('share')},
 qr:function(){return top('QR code')+'<div class="scr" style="text-align:center"><span class="chip">'+I('user',11)+'Made for Mary</span><div class="qr">'+qrSvg(11)+'<small>Scan to see Cedric\'s page</small></div>'+
  '<p class="s" style="margin:10px 6px">Hold up your phone, or type a name first so you know who scanned.</p><div class="b2" style="grid-template-columns:1fr 1fr"><button data-go="handout">'+I('print',17)+'Door hanger</button><button data-act="sent">'+I('share',17)+'Save image</button></div></div>'},
 handout:function(){return top('Print a handout')+'<div class="scr"><p class="s">Pick any article. It prints as one clean page with your name, number and QR code.</p>'+
@@ -566,8 +566,7 @@ callwin:function(){var T=['7:00 AM','8:00 AM','9:00 AM','10:00 AM','12:00 PM','1
  '<p class="lb" style="margin-top:4px">From</p>'+pick('from')+'<p class="lb">To</p>'+pick('to')+
  '<p class="lb">Days</p><div class="seg"><span class="'+(sched.days==='Mon to Fri'?'on':'')+'" data-act="td" data-d="Mon to Fri">Mon to Fri</span><span class="'+(sched.days==='Mon to Sat'?'on':'')+'" data-act="td" data-d="Mon to Sat">Mon to Sat</span><span class="'+(sched.days==='Every day'?'on':'')+'" data-act="td" data-d="Every day">Every day</span></div>'+
  '<div class="card" style="padding:11px 12px;margin-top:6px;display:flex;gap:10px;align-items:center"><span class="d" style="width:9px;height:9px;border-radius:50%;background:#5BD48A;box-shadow:0 0 0 4px rgba(91,212,138,.18)"></span><div><b style="font-size:12px;display:block">Taking calls '+sched.from+' to '+sched.to+'</b><small style="font-size:9.5px;color:#A9AEB7">'+sched.days+'</small></div></div>'+
- '<div style="margin-top:10px"><button class="cta" data-act="tsave">'+I('check',15)+'Save schedule</button></div>'+
- '<div class="note gold">'+I('clock',14)+'<span>Calls homeowners ask you for are fine any time. Reaching out first is limited to daytime hours in Florida.</span></div></div>'},
+ '<div style="margin-top:10px"><button class="cta" data-act="tsave">'+I('check',15)+'Save schedule</button></div>'+'</div>'},
 unlock:function(){var u=UNL[unl];return top(u[0])+'<div class="scr"><div class="lk" style="margin-top:0;cursor:default"><span class="pill">ClaimTract</span><div class="so"><span>'+I(u[2],15,'#111')+'</span><b>'+u[0]+'</b></div><p>'+u[1]+'</p></div>'+
  '<div class="card st3" style="margin-top:9px"><div><b>1</b><small>Old claim</small></div><div><b>×12</b><small>Pages</small></div><div><b style="color:#F5A524">×3</b><small>Places to post</small></div></div>'+
  '<div class="tier ft" style="margin-top:16px"><span class="rb">FOUNDERS LAB &middot; 40 SEATS</span><h3>Everything, for life</h3><div class="pr"><b>$99</b><span>/month</span><s>$499</s></div><p>ClaimTract Pro with the Claim Engine. Locked for life while you stay. Coming soon, included in your founder seat: the ClaimTract course, seventeen years of field playbook. Tough claim? Send Ezekiel your question for a second set of eyes. Try it 14 days for $1.</p><button class="cta" data-act="plan" data-p="pro">Start my $1 trial</button></div>'+
@@ -680,6 +679,29 @@ function render(name,dir){var html=V[name]();var el=document.createElement('div'
 function go(n){stack.push(cur.dataset.v);render(n,'push')}
 function back(){var n=stack.pop()||'home';render(n,'pop')}
 function tab(n){if(n==='sophia'&&plan==='free'){openSx();return}if(typeof closeSx==='function')closeSx();stack=[];render(n)}
+
+(function(){var st=document.createElement('style');st.textContent='#wlk{bottom:var(--gnh,52px)!important}'+
+ '.sch .dys{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:6px 0 14px}.sch .dys span{aspect-ratio:1;display:grid;place-items:center;border-radius:50%;font:800 12px Inter;cursor:pointer;border:1.5px solid var(--ln,#2A2E36);color:var(--mu,#A9AEB7)}.sch .dys span.on{background:#F5A524;border-color:#F5A524;color:#111}'+
+ '.sch .tm{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sch .tm label{display:block;border:1px solid var(--ln,#2A2E36);border-radius:14px;padding:10px 12px;background:var(--cd,#16191E)}.sch .tm small{display:block;font:800 10px Inter;letter-spacing:.08em;color:#F5A524;margin-bottom:2px}.sch .tm select{width:100%;border:0;background:transparent;color:inherit;font:800 18px Inter;appearance:none;-webkit-appearance:none;padding:0;cursor:pointer}.sch .tm select option{color:#111}'+
+ '.sch .pre{display:flex;gap:6px;margin:10px 0 2px;flex-wrap:wrap}.sch .pre span{padding:6px 10px;border-radius:99px;border:1px solid var(--ln,#2A2E36);font:700 11px Inter;cursor:pointer}'+
+ '.mpf{position:relative;height:calc(100% - 8px);min-height:420px;border-radius:14px;overflow:hidden;border:1px solid var(--ln,#2A2E36)}.mpf iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}';document.head.appendChild(st);
+ var DN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],DL=['S','M','T','W','T','F','S'];
+ if(!sched.dset)sched.dset=[1,2,3,4,5];
+ var TIMES=[];for(var h=5;h<=22;h++){[0,30].forEach(function(m){var hh=h%12||12;TIMES.push(hh+':'+(m?'30':'00')+' '+(h<12?'AM':'PM'))})}
+ function dayStr(){var d=sched.dset.slice().sort();var k=d.join('');if(k==='12345')return 'Mon to Fri';if(k==='123456')return 'Mon to Sat';if(d.length===7)return 'Every day';if(!d.length)return 'No days set';return d.map(function(i){return DN[i]}).join(', ')}
+ function opts(sel){return TIMES.map(function(t){return '<option'+(t===sel?' selected':'')+'>'+t+'</option>'}).join('')}
+ V.callwin=function(){sched.days=dayStr();return top('When you take calls')+'<div class="scr sch"><p class="s" style="margin-bottom:6px">Set it once. Your "taking calls" badge and live chat turn on and off by themselves.</p>'+
+  '<p class="lb">Days</p><div class="dys">'+DL.map(function(l,i){return '<span data-sd="'+i+'" class="'+(sched.dset.indexOf(i)>=0?'on':'')+'" title="'+DN[i]+'">'+l+'</span>'}).join('')+'</div>'+
+  '<p class="lb">Hours</p><div class="tm"><label><small>FROM</small><select data-st="from">'+opts(sched.from)+'</select></label><label><small>TO</small><select data-st="to">'+opts(sched.to)+'</select></label></div>'+
+  '<div class="pre"><span data-sp="9:00 AM|5:00 PM">9 to 5</span><span data-sp="8:00 AM|6:00 PM">8 to 6</span><span data-sp="7:00 AM|7:00 PM">7 to 7</span></div>'+
+  '<div class="card" style="padding:12px;margin-top:12px;display:flex;gap:10px;align-items:center"><span style="width:9px;height:9px;border-radius:50%;background:#5BD48A;box-shadow:0 0 0 4px rgba(91,212,138,.18);flex:none"></span><div><b style="font-size:13px;display:block">Taking calls '+sched.from+' to '+sched.to+'</b><small style="font-size:11px;color:var(--mu,#A9AEB7)">'+sched.days+'</small></div></div>'+
+  '<div style="margin-top:12px"><button class="cta" data-act="tsave">'+I('check',15)+'Save schedule</button></div></div>'};
+ function rr(){var sc=cur&&cur.querySelector('.scr'),y=sc?sc.scrollTop:0;render('callwin');var s2=cur&&cur.querySelector('.scr');if(s2)s2.scrollTop=y}
+ app.addEventListener('click',function(e){var t=e.target.closest('[data-sd]');if(t){var i=+t.dataset.sd,k=sched.dset.indexOf(i);if(k>=0)sched.dset.splice(k,1);else sched.dset.push(i);rr();return}t=e.target.closest('[data-sp]');if(t){var p=t.dataset.sp.split('|');sched.from=p[0];sched.to=p[1];rr();return}
+  t=e.target.closest('[data-dcopy]');if(t){var v=t.dataset.dcopy;try{navigator.clipboard.writeText(v)}catch(_){}t.textContent='Copied';setTimeout(function(){t.textContent='Copy'},1500)}},true);
+ app.addEventListener('change',function(e){var t=e.target.closest('[data-st]');if(t){sched[t.dataset.st]=t.value;rr()}});
+ var _mp=V.mypage;V.mypage=function(){if(typeof R!=='undefined'&&R)return _mp.apply(this,arguments);return top('Your website')+'<div class="scr" style="display:flex;flex-direction:column"><p class="s" style="margin-bottom:8px">This is exactly what a homeowner sees. Scroll it.</p><div class="mpf"><iframe src="/cedric-moore/?app=1" title="Your website" loading="lazy"></iframe></div><a class="ghost" href="/cedric-moore/" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;margin-top:8px">Open it full screen</a></div>'};
+})();
 app.addEventListener('click',function(e){if(e.target.closest('[data-calup]'))toast('Added to Google Calendar','Free plan: your Google Calendar. Pro: the Claim Engine books it and sends the reminders for you.')});
 /* Global nav: every screen keeps the bottom navigation */
 (function(){
@@ -1271,7 +1293,7 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
  function show(){draw();wrxPlay(kind)}
  function stopRec(){if(rec){try{rec.stop()}catch(e){}rec=null}var m=bx.querySelector('.mic');if(m){m.classList.remove('rec');m.lastChild.textContent='Tap and talk'}}
  function open(){kind='bug';sh.classList.add('on');show();lg('wrench','opened')}
- window.ctIdea=function(topic){kind='idea';sh.classList.add('on');show();var ta=bx.querySelector('#wrt');if(ta){ta.value='About "'+topic+'": ';try{ta.focus()}catch(_){}}lg('wrench','roadmap_idea')};
+ window.ctIdea=function(topic){kind='idea';sh.classList.add('on');draw();var ta=bx.querySelector('#wrt');if(ta){ta.value='About "'+topic+'": ';try{ta.focus()}catch(_){}}lg('wrench','roadmap_idea')};
  function close(){stopRec();wrxStop();sh.classList.remove('on')}
  btn.addEventListener('click',open);
  function ok(j){return j&&j.ok!==false&&j.__s<400&&j.__s!==0}
@@ -1376,7 +1398,8 @@ V.crm=function(){if(!R||!crmOn())setTimeout(crmExplain,500);
   return top('Roadmap')+'<div class="scr">'+seg+body+'</div>'};
  document.addEventListener('click',function(e){var t=e.target.closest('[data-rm]');if(!t)return;tabR=t.dataset.rm;render('roadmap')},true);
  document.addEventListener('click',function(e){var t=e.target.closest('[data-rmref]');if(t){t.innerHTML='&#8635; Checking...';loadRoad(function(){var sc=cur&&cur.querySelector('.scr');var y=sc?sc.scrollTop:0;render('roadmap');var s2=cur&&cur.querySelector('.scr');if(s2)s2.scrollTop=y;if(typeof toast==='function')toast('Roadmap is up to date','Built items show a green check.')});return}t=e.target.closest('[data-rmnew]');if(t){if(window.ctIdea){window.ctIdea('A new idea');var ta=document.getElementById('wrt');if(ta)ta.value=''}return}t=e.target.closest('[data-rmi]');if(t&&window.ctIdea)window.ctIdea(t.dataset.rmi)},true);
- var _go=go;go=function(n){if(n==='roadmap'){loadRoad(function(){if(LOG===null){loadLog(function(){_go(n)})}else _go(n)});return}_go(n)};
+ var RM_HB='';function rmX(){if(RM_HB&&tog.xp&&typeof hbExplain==='function'){try{if(typeof hbResolve==='function')hbResolve(RM_HB);hbExplain(RM_HB)}catch(_){}}}
+ var _go=go;go=function(n){if(n==='roadmap'){loadRoad(function(){if(LOG===null){loadLog(function(){_go(n);rmX()})}else{_go(n);rmX()}});return}_go(n)};
 })();
 /* ===== Claim binders explainer (Nov 23): "?" sheet + empty state ===== */
 (function(){
@@ -1470,7 +1493,7 @@ function ctQrCards(D){var q=null;try{q=qrcode(0,'M');q.addData(D.url);q.make()}c
  var _q=V.qr;V.qr=function(){var h=_q.apply(this,arguments);cur=0;var hand=/data-go="handout"/.test(h);h=h.replace(/<span class="chip">[\s\S]*?<\/span>/,'').replace(/<div class="qr"[^>]*>[\s\S]*?<\/small><\/div>/,'').replace(/<p class="s" style="margin:10px 6px">[\s\S]*?<\/p>/,'').replace(/<div class="b2" style="grid-template-columns:1fr 1fr">[\s\S]*?<\/button><\/div>/,'').replace('<p class="lb" style="margin-top:14px">','<p class="lb" style="margin-top:4px">');setTimeout(function(){draw();var sc=document.querySelector('.qcar .qcs');if(sc)sc.addEventListener('scroll',function(){var i=Math.round(sc.scrollLeft/sc.clientWidth);if(i!==cur){cur=i;mark()}});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw)},30);
   var names=['On your phone','Business card','Door note','Truck magnet'];
   var car='<p class="lb" style="margin-top:14px">Ways to use your QR</p><div class="qcar"><div class="qcs">'+names.map(function(n,i){return '<div class="qci"><canvas data-i="'+i+'" aria-label="'+n+'"></canvas></div>'}).join('')+'</div>'+
-   '<div class="qcdots">'+names.map(function(){return '<i></i>'}).join('')+'</div><div class="qccap"></div><button class="ghost" data-qc="save" style="margin-top:8px">'+I('share',14)+'Save this one</button><button class="ghost" data-go="handout" style="margin-top:8px">'+I('print',14)+'Print a handout</button></div>';
+   '<div class="qcdots">'+names.map(function(){return '<i></i>'}).join('')+'</div><!--TKSLOT--><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px"><button class="ghost" data-qc="save" style="margin:0">'+I('share',14)+'Save</button><button class="ghost" data-go="handout" style="margin:0">'+I('print',14)+'Print</button></div></div>';
   var i=h.lastIndexOf('</div>');return i<0?h+car:h.slice(0,i)+car+h.slice(i)};
  document.addEventListener('click',function(e){var t=e.target.closest('[data-qc="save"]');if(!t||!CARDS)return;e.stopPropagation();var cv=document.querySelector('.qcar canvas[data-i="'+cur+'"]');if(!cv)return;try{var a=document.createElement('a');a.download=(data().first+'-'+CARDS[cur][0]).toLowerCase().replace(/[^a-z0-9]+/g,'-')+'.png';a.href=cv.toDataURL('image/png');a.click()}catch(_){}} ,true);
 })();
@@ -1499,7 +1522,7 @@ function ctQrCards(D){var q=null;try{q=qrcode(0,'M');q.addData(D.url);q.make()}c
   av.addEventListener('error',function(){holder.style.display='none'});av.addEventListener('playing',function(){if(!raf)loop()});av.addEventListener('ended',function(){ended.a=1;maybeEnd()});
   var pa=av.play();if(pa&&pa.catch)pa.catch(function(){av.muted=true;av.play().catch(function(){})})}
  window.ctDoorLesson=open;try{if(typeof hbResolve==='function')hbResolve(TK_HB)}catch(e){}
- var _q=V.qr;V.qr=function(){var h=_q.apply(this,arguments),btn='<button class="ghost" data-tk="lesson" style="display:none;margin-top:10px;background:#F5A524;color:#111;border:0;padding:13px;font-size:13px">'+I('play',14)+'See how to use this as a door hanger</button>',i=h.lastIndexOf('</div>');return i<0?h+btn:h.slice(0,i)+btn+h.slice(i)};
+ var _q=V.qr;V.qr=function(){var h=_q.apply(this,arguments),btn='<button class="ghost" data-tk="lesson" style="display:none;margin-top:10px;background:#F5A524;color:#111;border:0;padding:13px;font-size:13px">'+I('play',14)+'See how to use this as a door hanger</button>',i=h.lastIndexOf('</div>');if(h.indexOf('<!--TKSLOT-->')>=0)return h.replace('<!--TKSLOT-->',btn.replace('margin-top:10px','margin-top:6px'));return i<0?h+btn:h.slice(0,i)+btn+h.slice(i)};
  V.tkhow=function(){var done=function(){var h=document.querySelector('.tkh');if(h)h.classList.add('done')};
   if(TK_HB&&tog.xp&&typeof hbExplain==='function'){setTimeout(function(){hbWant=true;hbExplain(TK_HB);if(typeof hbv!=='undefined'){var once=function(){hbv.removeEventListener('ended',once);done()};hbv.addEventListener('ended',once)}},500)}else setTimeout(done,4000);
   var fn=(typeof R!=='undefined'&&R&&ME&&typeof firstN==='function')?firstN():'Cedric',qr=tkQr().replace('fill="#000"','fill="#1d3fa8"').replace('fill="#fff"','fill="#FFE873"');
