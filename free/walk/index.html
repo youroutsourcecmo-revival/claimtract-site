@@ -7,7 +7,7 @@ html,body{height:100%;background:#0B0D10;color:#E9ECF1;font:15px Inter,system-ui
 #app{position:relative;width:100%;max-width:440px;height:100%;margin:0 auto;background:radial-gradient(120% 70% at 50% 0%,#1A2130 0%,#0F1115 60%);overflow:hidden}
 .top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 10px) 12px 0}
 .top button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(15,17,21,.7);color:#E9ECF1;font-size:17px;cursor:pointer}
-#stage{position:absolute;left:0;right:0;top:0;height:64%;padding:62px 16px 0;transition:opacity .35s,transform .35s}
+#stage{position:absolute;left:0;right:0;top:0;height:64%;z-index:2;padding:62px 16px 0;transition:opacity .35s,transform .35s}
 #stage.fade{animation:fin .45s ease-out}@keyframes fin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 #prog{position:absolute;left:62px;right:62px;top:calc(env(safe-area-inset-top) + 27px);z-index:31;display:flex;gap:3px}#prog i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.15);transition:background .4s}#prog i.on{background:#F5A524}
 #glow{position:absolute;right:0;bottom:0;width:70%;height:42%;z-index:19;pointer-events:none;background:radial-gradient(60% 60% at 70% 80%,rgba(245,165,36,.12),transparent 70%)}
@@ -98,7 +98,7 @@ function draw(){raf=requestAnimationFrame(draw);if(!gl||!src||src.readyState<2)r
  try{gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,src);gl.drawArrays(gl.TRIANGLE_STRIP,0,4)}catch(e){}}
 function show(v){src=v;cv.style.opacity=1}
 /* ---------- helpers ---------- */
-function H(h){stage.innerHTML=h;stage.classList.remove('fade');void stage.offsetWidth;stage.classList.add('fade')}
+function H(h){var bp=document.getElementById('bgp');if(bp)bp.remove();stage.innerHTML=h;stage.classList.remove('fade');void stage.offsetWidth;stage.classList.add('fade')}
 function q(s){return stage.querySelector(s)}
 function at(t,fn){(cur.cues=cur.cues||[]).push({t:t,fn:fn,done:false})}
 function on(el){if(el)el.classList.add('on')}
@@ -131,7 +131,7 @@ S.push(function(n){H('<div class="blob"></div><div id="tk"></div><div class="thu
  var lines=[['Looking at every photo',.5],['Duplicates removed',3],['Near duplicates removed',4.5],['Keepers picked for your articles',7],['Florida Building Code, your wind zone',11],['Florida statutes that apply',13]];
  play('sw-s03.mp4',function(){lines.forEach(function(l){at(l[1],function(){q('#tk').insertAdjacentHTML('beforeend','<div class="tick on"><b>&#10003;</b> '+l[0]+'</div>')})});
   at(15.5,function(){q('#th').innerHTML=['20','08','14'].map(function(s){return '<div class="on" style="'+D(s)+';grid-column:span 1"></div>'}).join('');q('#th').style.gridTemplateColumns='repeat(3,1fr)'})},n)});
-function photoScene(file,img,lbl,ez,dur,hints){return function(n){H('<div class="lbl">'+lbl+'</div><div class="photo" style="margin-top:8px;'+D(img)+'"></div><div class="hints" id="hn"></div><div id="ez"></div>');play(file,function(){hints.forEach(function(h){at(h[1],function(){var e=q('#hn');if(!e)return;e.insertAdjacentHTML('beforeend','<span class="hint">'+h[0]+'</span>');var l=e.lastChild;setTimeout(function(){l.classList.add('on')},30)})})},function(){ezk(ez,img,dur,n)})}}
+function photoScene(file,img,lbl,ez,dur,hints){return function(n){H('<div class="lbl" style="position:relative;z-index:2;text-shadow:0 1px 6px rgba(0,0,0,.8)">'+lbl+'</div><div class="hints" id="hn" style="position:relative;z-index:2"></div><div id="ez"></div>');var bp=document.createElement('div');bp.id='bgp';bp.className='photo';bp.setAttribute('style',D(img)+';position:absolute;inset:0;width:auto;height:auto;aspect-ratio:auto;border-radius:0;box-shadow:none;z-index:1');var sh=document.createElement('div');sh.setAttribute('style','position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 60%,rgba(0,0,0,.6) 100%)');bp.appendChild(sh);stage.parentNode.insertBefore(bp,stage);play(file,function(){hints.forEach(function(h){at(h[1],function(){var e=q('#hn');if(!e)return;e.insertAdjacentHTML('beforeend','<span class="hint">'+h[0]+'</span>');var l=e.lastChild;setTimeout(function(){l.classList.add('on')},30)})})},function(){ezk(ez,img,dur,n)})}}
 S.push(photoScene('sw-s04.mp4','20','KEEPER 1 OF 3 · WIND','1-wind',12.4,[['Wind, not age',6],['Roof before 2007?',11],['25 percent rule',15],['Brought up to code',19]]));
 S.push(photoScene('sw-s05.mp4','08','KEEPER 2 OF 3 · WATER','2-disposal',13,[['When did it start?',6],['Sudden vs. long-term leak',10],['Check wall and subfloor',16],['EPA: dry within 24 to 48 hours',21],['Mold coverage?',25]]));
 S.push(photoScene('sw-s06.mp4','14','KEEPER 3 OF 3 · DRY-OUT','3-dryout',10.2,[['Mitigation underway',4],['Who pays for drying?',10],['Protect from further damage',15],['Drying usually part of the claim',19]]));
