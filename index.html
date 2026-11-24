@@ -197,6 +197,8 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 @media(max-width:820px){.mphone{grid-template-columns:1fr;gap:26px;justify-items:center}.bapp-ph{width:270px;height:560px}}
 .grow{font:800 clamp(24px,5.6vw,44px)/1.15 Inter,system-ui,sans-serif;letter-spacing:-.02em;margin:28px 0 0;color:inherit}.grow b{display:block}.grow span{display:block;color:#C77800}
 .hero{min-height:100vh!important;min-height:100svh!important}
+.hero .cta{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}.hv2{font-size:16px}@media(max-width:700px){.hero h1{font-size:40px!important;line-height:1.05}.hero .cta{flex-direction:column;align-items:stretch}.hero .cta .btn{text-align:center;justify-content:center}.hv2{text-align:center;border-bottom:0;text-decoration:underline;text-underline-offset:4px}.hero .k{font-size:11px;line-height:1.4}}
+@media(max-width:700px){.hero #pgPhone,.hero .phone{display:none!important}.hero{align-items:center!important}.hero .in{padding:90px 0 40px!important}}
 </style>
 </head>
 <body>
@@ -205,12 +207,25 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
   <script>(function(){if(!matchMedia('(max-width:700px)').matches)return;var v=document.getElementById('hv');v.poster='/assets/bg/hero-portrait.jpg';v.querySelector('source').src='/assets/bg/hero-portrait.mp4';v.style.objectPosition='center top';v.load();v.play&&v.play().catch(function(){})})()</script>
   <div class="top"><div class="w"><b>Free website for public adjusters</b><span>Florida</span></div></div>
   <div class="w hg"><div class="in">
-    <p class="k">Built for Florida public adjusters</p>
-    <h1>No website? <em>Here's one. Free.</em></h1>
-    <p class="lead" id="lead">Homeowners look you up before they open the door. Will they find you?</p>
-    <div class="cta"><a class="btn" data-cta href="/free/build/?view=preview">See my website &rarr;</a><a class="ghost" data-again href="/free/build/?view=preview" hidden>See my website again</a></div>
-    <div class="trust"><span>Free</span><span>No clock</span><span>No credit card</span><span>No pitch</span></div>
-    <p class="tsub">No trial timer counting down, no card required to look, and nothing for sale on this page.</p>
+    <p class="k">Built by a 17-year public adjuster, for public adjusters.</p>
+    <h1 id="hh">You lost the claim <em>before you knocked.</em></h1>
+    <p class="lead" id="lead">Your license already built your free website. 30+ tools. One phone. Want to see what homeowners will find?</p>
+    <div class="cta"><a class="btn" data-cta href="/free/build/?view=preview">See my free website &rarr;</a><a class="ghost hv2" href="#demo">Tap through the tools &darr;</a><a class="ghost" data-again href="/free/build/?view=preview" hidden>See my website again</a></div>
+    <div class="trust"><span>Free</span><span>30+ tools</span><span>No credit card</span></div>
+  <script>(function(){var V=[
+["You lost the claim","before you knocked.","Your license already built your free website. 30+ tools. One phone. Want to see what homeowners will find?","Lost the claim","before you knocked.","Free website. 30+ tools. One phone. Want to see it?"],
+["You're good at claims.","You're invisible online.","Your license already built your free website, plus 30+ tools in one phone. Want to see what homeowners will find?","Good at claims.","Invisible online.","Free website. 30+ tools. One phone. Want to see it?"],
+["Your whole business is","one roofer's phone number.","Own your lead flow: a free website and 30+ tools that put you in front of homeowners yourself. Want to see it?","One roofer is","your whole pipeline.","Your own free website. 30+ tools. Want to see it?"],
+["The homeowner googled you.","Found nothing.","Your license already built your free website. 30+ tools. One phone. Want to see what they'll find now?","They googled you.","Nothing came up.","Free website. 30+ tools. One phone. Want to see it?"],
+["Your license already","built your website.","Your name, license number and service area are already on it, plus 30+ tools in one phone. Want to see it?","Your license built","your website.","Free. Plus 30+ tools in one phone. Want to see it?"],
+["The better adjuster","doesn't always win.","Sometimes the homeowner hires the one with the website. Yours is built and free, plus 30+ tools. Want to see it?","The better adjuster","doesn't always win.","Yours is built and free. Want to see it?"]
+],i=-1;try{i=+localStorage.getItem('ct_hv')}catch(e){}if(!(i>=0&&i<V.length)){i=Math.floor(Math.random()*V.length);try{localStorage.setItem('ct_hv',i)}catch(e){}}
+var q=new URLSearchParams(location.search);if(q.has('hv'))i=Math.min(V.length-1,Math.max(0,+q.get('hv')||0));
+var v=V[i],m=matchMedia('(max-width:700px)').matches,h=document.getElementById('hh'),l=document.getElementById('lead');
+h.innerHTML='';h.appendChild(document.createTextNode((m?v[3]:v[0])+' '));var e=document.createElement('em');e.textContent=m?v[4]:v[1];h.appendChild(e);
+if(!q.get('fn'))l.textContent=m?v[5]:v[2];document.documentElement.setAttribute('data-hv',i);
+function t(ev){try{window.__ctT&&window.__ctT(ev+'_v'+i)}catch(_){}}setTimeout(function(){t('hero_view')},800);
+document.querySelectorAll('.hero [data-cta],.hero .hv2').forEach(function(a){a.addEventListener('click',function(){t(a.classList.contains('hv2')?'hero_demo':'hero_cta')})});})();</script>
   </div>
   <div class="sp sp-hero" id="spHero" hidden aria-label="Sophia from ClaimTract">
     <div class="sp-top"><i></i><b>Sophia</b><span>ClaimTract</span></div>
@@ -219,14 +234,14 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
     <div class="sp-c"><a href="/engine.html" target="_blank" rel="noopener">See how Sophia works for you &rarr;</a></div>
   </div>
   <div class="phone ws" id="pgPhone" role="link" tabindex="0" aria-label="See my website"><span class="ws-tap">Tap to see yours &rarr;</span><div class="ws-s">
-    <div class="ws-top"><b id="wsN">Ezekiel</b><span>Call</span></div>
+    <div class="ws-top"><b id="wsN">Cedric Moore</b><span>Call</span></div>
     <div class="ws-hero"><video autoplay muted loop playsinline poster="/assets/bg/bg-roof-table.jpg"><source src="/assets/bg/bg-roof-table.mp4" type="video/mp4"></video>
       <div class="ws-hin"><i class="ws-b">Licensed public adjuster</i><h4>Damage to your home?<br><em>Get someone in your corner.</em></h4><p id="wsC">Public adjuster serving Orlando, FL. I work for you, not the insurance company.</p><div class="ws-cta"><span>Call me</span><span>Text me</span></div></div></div>
     <div class="ws-av" id="wsI" style="background:url(/assets/cedric-headshot.jpg) center/cover"></div>
     <div class="ws-body">
-      <p class="ws-l">PILLAR ARTICLE &middot; HOMEOWNER GUIDE</p><h5>Who Works For You</h5><p class="ws-by" id="wsB">Approved by Ezekiel, Licensed Public Adjuster</p>
+      <p class="ws-l">PILLAR ARTICLE &middot; HOMEOWNER GUIDE</p><h5>Who Works For You</h5><p class="ws-by" id="wsB">Approved by Cedric Moore, Licensed Public Adjuster</p>
       <p class="ws-t">When damage hits your home, your insurance company puts a team to work right away. Most homeowners only ever meet one of them...</p>
-      <div class="ws-card"><b id="wsK">EZEKIEL</b><div><span><i>LICENSE #</i>W000000</span><span><i>AREA</i><em id="wsA">Orlando</em></span></div><u>Verify on the state's site &rarr;</u></div>
+      <div class="ws-card"><b id="wsK">CEDRIC MOORE</b><div><span><i>LICENSE #</i>W000000</span><span><i>AREA</i><em id="wsA">Orlando</em></span></div><u>Verify on the state's site &rarr;</u></div>
       <div class="ws-team"><span>1 Field adjuster</span><span>2 Desk adjuster</span><span>3 Supervisor</span><span>4 Legal</span></div>
       <div class="ws-yours">Four people work for your insurance company. Who works for you?</div>
       <p class="ws-l" style="margin-top:14px">RELATED ARTICLES</p>
@@ -285,7 +300,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
     
   </section>
 
-  <section class="mission mphone"><div class="bapp-ph" aria-label="The ClaimTract app on a phone"><iframe src="/free/app/?demo=1" title="Sample ClaimTract app, Cedric Moore" loading="lazy"></iframe><script>(function(){var f=document.currentScript.previousElementSibling;if(f&&f.tagName==="IFRAME")f.setAttribute("src","/free/app/?demo=1&t="+Date.now())})()</script></div><div><p class="k">The whole point</p><h2>Become the answer Google is hunting for. Build real authority. <em>Make your phone ring without begging.</em></h2><p>Your free website is step one. Why not take it tonight?</p><a class="btn" data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></section>
+  <section class="mission mphone" id="demo"><div class="bapp-ph" aria-label="The ClaimTract app on a phone"><iframe src="/free/app/?demo=1" title="Sample ClaimTract app, Cedric Moore" loading="lazy"></iframe><script>(function(){var f=document.currentScript.previousElementSibling;if(f&&f.tagName==="IFRAME")f.setAttribute("src","/free/app/?demo=1&t="+Date.now())})()</script></div><div><p class="k">The whole point</p><h2>Become the answer Google is hunting for. Build real authority. <em>Make your phone ring without begging.</em></h2><p>Your free website is step one. Why not take it tonight?</p><a class="btn" data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></section>
 
   <section class="who">
     <div class="who-t">
