@@ -199,7 +199,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 .hero{min-height:100vh!important;min-height:100svh!important}
 .hero .cta{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}.hv2{font-size:16px}@media(max-width:700px){.hero h1{font-size:40px!important;line-height:1.05}.hero .cta{flex-direction:column;align-items:stretch}.hero .cta .btn{text-align:center;justify-content:center}.hv2{text-align:center;border-bottom:0;text-decoration:underline;text-underline-offset:4px}.hero .k{font-size:11px;line-height:1.4}}
 @media(max-width:700px){.hero #pgPhone,.hero .phone{display:none!important}.hero{align-items:center!important}.hero .in{padding:90px 0 40px!important}}
-@media(max-width:700px){.hero #hv{display:none!important}.hero{background:#0A0B0D!important}.hero::before{display:none!important}}
+.hero .k{text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 12px rgba(0,0,0,.7);font-weight:800}@media(max-width:700px){.hero .k{display:inline-block;background:rgba(10,11,13,.72);padding:6px 10px;border-radius:8px;backdrop-filter:blur(4px)}}
 </style>
 </head>
 <body>
@@ -463,7 +463,7 @@ var pp=document.getElementById('pgPhone');function goPage(){var a=document.query
   btn.onclick=talk;m.onclick=talk;m.style.cursor='pointer';
   v.addEventListener('ended',function(){v.muted=true;v.loop=true;v.play();btn.innerHTML='&#128264; Hear it again'})}).catch(function(){})})();
 function back(){return Q.get('back')==='1'||flag()}
-function setLinks(){var b=back();document.querySelectorAll('[data-cta]').forEach(function(a){a.href=b?'/free/build/'+(PS?'?'+PS:''):'/free/build/?view=preview'+(PS?'&'+PS:'');a.innerHTML=b?'Build my free website &rarr;':'See my website &rarr;';a.onclick=function(){T(b?'free_build_click':'free_sample_click')}});
+function setLinks(){var b=back();document.querySelectorAll('[data-cta]').forEach(function(a){a.href=b?'/free/build/'+(PS?'?'+PS:''):'/free/build/?view=preview'+(PS?'&'+PS:'');a.innerHTML=b?'Build my free website &rarr;':'See my free website &rarr;';a.onclick=function(){T(b?'free_build_click':'free_sample_click')}});
  document.querySelectorAll('[data-again]').forEach(function(a){a.hidden=!b;a.href='/free/build/?view=preview'+(PS?'&'+PS:'')});
  document.getElementById('pitch').hidden=!b;document.getElementById('skip').hidden=b;document.querySelector('[data-skip]').href='/free/build/'+(PS?'?'+PS:'');}
 var _seen=seen;seen=function(on){_seen(on);setLinks()};
