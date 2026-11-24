@@ -23,7 +23,7 @@ function seen(k){try{return localStorage.getItem('ct_es_'+k)==='1'}catch(e){retu
 function mark(k){try{localStorage.setItem('ct_es_'+k,'1')}catch(e){}}
 window.CTEsther={
  init:function(map){IDS=map||{};for(var k in IDS)if(IDS[k])resolve(IDS[k])},
- play:function(k,force){var id=IDS[k];if(!id||(!force&&seen(k)))return;mark(k);want=true;var c=CLIPS[id];if(c)playClip(c);else resolve(id,function(r){if(r&&want)playClip(r)})},
+ play:function(k,force){try{if(localStorage.getItem('ct_exp_off')==='1')return}catch(e){}var id=IDS[k];if(!id||(!force&&seen(k)))return;mark(k);want=true;var c=CLIPS[id];if(c)playClip(c);else resolve(id,function(r){if(r&&want)playClip(r)})},
  stop:stop
 };
 })();
