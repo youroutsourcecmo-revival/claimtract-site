@@ -131,7 +131,7 @@
 <script src="/assets/ct-home.js?v=1124l" data-slug="preview" data-first="your adjuster" data-sample="1" defer></script>
 <script src="/ct-track.js"></script>
 <script src="/vendor/qrcode.js"></script>
-<script src="/assets/ct-esther.js?v=1124"></script>
+<script src="/assets/ct-esther.js?v=1124t"></script>
 <script src="/assets/ct-owner.js" defer></script><script src="/assets/ct-ready.js" defer></script>
 <script>
 (function(){
@@ -419,7 +419,7 @@ try{var qv=new URLSearchParams(location.search);if(qv.get('view')==='preview'){S
  document.body.classList.add('pvmode');render();
  var pv=$('pv'),bar=document.createElement('div');bar.className='pvbar';
  var who=$('fn').value.replace(/[<>&"]/g,'');
- bar.innerHTML='<span>'+(qv.get('fn')?'This is your page, '+who+'. It\'s free.':'This is what your free page looks like, shown with a sample adjuster.')+'</span><a href="'+'/free/build/'+(function(q){q=q.replace(/[?&]view=preview/,'').replace(/^[?&]+/,'');return q?'?'+q:''})(location.search)+'">Make it mine &rarr;</a><label class="exp-tg" title="Turn the short video explainers on or off"><input type="checkbox" id="expTg"><span>Explainers</span></label>';
+ bar.innerHTML='<span>'+(qv.get('fn')?'This is your page, '+who+'. It\'s free.':'This is what your free page looks like, shown with a sample adjuster.')+'</span><a href="'+'/free/build/'+(function(q){q=q.replace(/[?&]view=preview/,'').replace(/^[?&]+/,'');return q?'?'+q:''})(location.search)+'">Make it mine &rarr;</a>';
  document.body.insertBefore(bar,document.body.firstChild);(function(){var t=document.getElementById('expTg');if(!t)return;var off=false;try{off=localStorage.getItem('ct_exp_off')==='1'}catch(e){}t.checked=!off;t.onchange=function(){try{localStorage.setItem('ct_exp_off',t.checked?'0':'1')}catch(e){}if(window.CTEsther&&CTEsther.stop&&!t.checked)CTEsther.stop()}})();document.body.insertBefore(pv,bar.nextSibling);
  var tab=document.createElement('a');tab.className='mimtab';tab.href=bar.querySelector('a').href;tab.innerHTML='Make it mine &rarr;';tab.onclick=function(){track('free_sidetab')};document.body.appendChild(tab);
  try{sessionStorage.setItem('ct_seen_sample','1')}catch(e){}
