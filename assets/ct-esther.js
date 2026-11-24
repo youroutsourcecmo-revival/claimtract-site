@@ -2,7 +2,7 @@
    Same method as the app: read the HumanBot campaign record, play the packed mp4 (avatar on top, matte below)
    on our own canvas. Plays once per key (localStorage), inside the tap that opened the demo. Tap her to stop. */
 (function(){
-var OFF_ID=/*OFF_CLIP*/'',CLIPS={},IDS={},box,cv,cx,v,off,ox,raf=null,crop=null,n=0,want=false;
+var OFF_ID=/*OFF_CLIP*/'ZHAfSSz6m64e',CLIPS={},IDS={},box,cv,cx,v,off,ox,raf=null,crop=null,n=0,want=false;
 function resolve(id,cb){if(CLIPS[id]){cb&&cb(CLIPS[id]);return}
  fetch('https://humanchat.net/campaign/pub/'+encodeURIComponent(id)).then(function(r){return r.json()}).then(function(c){c=c.campaign||c;var m=c.media||{};if(!m.filename||!m.userId)throw 0;var f=String(m.filename);
   CLIPS[id]={url:'https://humanchat.net/uploads/media/'+m.userId+'/'+f.slice(0,2)+'/'+f.slice(2,4)+'/'+f,dur:(m.data&&m.data.duration)||20};cb&&cb(CLIPS[id])}).catch(function(){cb&&cb(null)})}
