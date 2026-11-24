@@ -31,7 +31,7 @@ function seen(k){try{return localStorage.getItem('ct_es_'+k)==='1'}catch(e){retu
 function mark(k){try{localStorage.setItem('ct_es_'+k,'1')}catch(e){}}
 window.CTEsther={
  init:function(map){IDS={};CTA={};for(var k in (map||{})){var m=map[k];if(m&&typeof m==='object'){IDS[k]=m.id;if(m.cta)CTA[k]=m.cta}else IDS[k]=m}for(var j in IDS)if(IDS[j])resolve(IDS[j])},
- play:function(k,force){try{if(localStorage.getItem('ct_exp_off')==='1')return}catch(e){}var id=IDS[k];if(!id||(!force&&seen(k)))return;mark(k);want=true;cta(k);var c=CLIPS[id];if(c)playClip(c);else resolve(id,function(r){if(r&&want)playClip(r)})},
+ play:function(k,force){try{if(localStorage.getItem('ct_exp_off')==='1')return}catch(e){}var id=IDS[k];if(!id)return;mark(k);want=true;cta(k);var c=CLIPS[id];if(c)playClip(c);else resolve(id,function(r){if(r&&want)playClip(r)})},
  stop:stop,
  /* turning explainers off: she says how to bring her back, once per tap */
  bye:function(){var id=OFF_ID;if(!id)return;want=true;var c=CLIPS[id];if(c)playClip(c);else resolve(id,function(r){if(r&&want)playClip(r)})}

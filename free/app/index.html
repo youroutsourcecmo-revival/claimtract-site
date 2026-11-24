@@ -759,7 +759,7 @@ var XP_OFF='v433KGLpv7xc';
 function xpsSeen(){try{return JSON.parse(localStorage.getItem('ct_xps')||'{}')}catch(e){return {}}}
 function xpsMark(k){var o=xpsSeen();o[k]=1;try{localStorage.setItem('ct_xps',JSON.stringify(o))}catch(e){}}
 function xpsPlay(id){if(!id||typeof hbExplain!=='function')return;try{if(typeof hbStop==='function')hbStop();if(typeof hbResolve==='function')hbResolve(id);hbWant=true;hbExplain(id)}catch(_){}}
-function xpsGreet(name){var id=XPS[name]||(XPS_HB.indexOf(name)>=0&&typeof HB_IDS!=='undefined'?HB_IDS[name]:null);if(!id)return;var fresh=(typeof isNewF==='function'&&isNewF(name));if(!tog.xp&&!fresh)return;if(xpsSeen()[name]&&!fresh)return;xpsMark(name);if(fresh&&typeof markSeen==='function')markSeen(name);setTimeout(function(){xpsPlay(id)},450)}
+function xpsGreet(name){var id=XPS[name]||(XPS_HB.indexOf(name)>=0&&typeof HB_IDS!=='undefined'?HB_IDS[name]:null);if(!id)return;var fresh=(typeof isNewF==='function'&&isNewF(name));if(!tog.xp&&!fresh)return;xpsMark(name);if(fresh&&typeof markSeen==='function')markSeen(name);setTimeout(function(){xpsPlay(id)},450)}
 /* Global nav: every screen keeps the bottom navigation */
 (function(){
  var st=document.createElement('style');
@@ -851,7 +851,7 @@ function toast(a,b){tt.textContent=a;ts.textContent=b;T.classList.add('on');clea
 app.addEventListener('click',function(e){
  var t;
  if(t=e.target.closest('[data-help]')){e.stopPropagation();help(t.dataset.help);return}
- if(t=e.target.closest('[data-tog]')){e.stopPropagation();var k=t.dataset.tog;tog[k]=!tog[k];t.classList.toggle('on');if(k==='xp'){try{localStorage.setItem('ct_xp',tog.xp?'1':'0')}catch(e){}if(tog.xp){try{localStorage.removeItem('ct_xps');localStorage.removeItem('ct_wel')}catch(e){}if(typeof toast==='function')toast('Esther is back','She will explain each screen again, once.')}else{xpsPlay(XP_OFF)}}return}
+ if(t=e.target.closest('[data-tog]')){e.stopPropagation();var k=t.dataset.tog;tog[k]=!tog[k];t.classList.toggle('on');if(k==='xp'){try{localStorage.setItem('ct_xp',tog.xp?'1':'0')}catch(e){}if(tog.xp){try{localStorage.removeItem('ct_xps');localStorage.removeItem('ct_wel')}catch(e){}if(typeof toast==='function')toast('Esther is back','She explains every screen you open until you turn her off.')}else{xpsPlay(XP_OFF)}}return}
  if(t=e.target.closest('[data-act]')){var a=t.dataset.act;
   if(a==='avail'){avail=!avail;render('home');return}
   if(a==='mailfilter'){toast('Gmail filter copied','Paste it in Gmail: Settings, Filters, Create filter');return}
@@ -874,7 +874,7 @@ app.addEventListener('click',function(e){
   if(a==='sent'){toast('Ready to send','Opens in your own app. Nothing extra to pay.');return}}
  if(t=e.target.closest('[data-back]'))return back();
  if(t=e.target.closest('[data-tab]'))return tab(t.dataset.tab);
- if(t=e.target.closest('[data-al]')){var _a=ALERTS[+t.dataset.al],_k=_a[_a.length-1];if(AL_GO[_k])return go(AL_GO[_k]);ALI=+t.dataset.al;return go('alert')}if(t=e.target.closest('[data-ala]')){var x=t.dataset.ala;if(x.indexOf('art')===0){var jj=+(x.split(':')[1]||-1);if(window.__ct&&window.__ct.art)window.__ct.art(0,jj);else go('mypage');return}if(x==='sched'){toast('Scheduled','Your text goes out at 8:00 AM, inside Florida contact hours.');return}if(x.indexOf('go:')===0)return go(x.slice(3));return}if(t=e.target.closest('[data-go]'))return go(t.dataset.go);
+ if(t=e.target.closest('[data-al]')){var _a=ALERTS[+t.dataset.al],_k=_a[_a.length-1];if(AL_GO[_k])return go(AL_GO[_k]);ALI=+t.dataset.al;go('alert');if(tog.xp&&HB_IDS[_k])setTimeout(function(){xpsPlay(HB_IDS[_k])},500);return}if(t=e.target.closest('[data-ala]')){var x=t.dataset.ala;if(x.indexOf('art')===0){var jj=+(x.split(':')[1]||-1);if(window.__ct&&window.__ct.art)window.__ct.art(0,jj);else go('mypage');return}if(x==='sched'){toast('Scheduled','Your text goes out at 8:00 AM, inside Florida contact hours.');return}if(x.indexOf('go:')===0)return go(x.slice(3));return}if(t=e.target.closest('[data-go]'))return go(t.dataset.go);
  if(e.target.closest('#toast'))return tab('activity');
 });
 
@@ -1613,4 +1613,11 @@ boot();
 
 </script>
 <script>(function(){var g=new URLSearchParams(location.search).get('go');if(g!=='door')return;var n=0,t=setInterval(function(){n++;if(window.ctDoorLesson){clearInterval(t);setTimeout(function(){try{ctDoorLesson()}catch(e){}},600)}if(n>40)clearInterval(t)},250)})();</script>
+<script>/* Explainer avatars on/off: a tab on the right edge of the app. Hides while scrolling, returns when scrolling stops. */
+(function(){var app=document.getElementById('app');if(!app)return;var st=document.createElement('style');st.textContent='#xtab{position:absolute;right:0;top:34%;z-index:160;writing-mode:vertical-rl;transform:rotate(180deg);display:flex;align-items:center;gap:7px;padding:12px 7px;border:0;border-radius:0 10px 10px 0;background:#14161A;color:#fff;font:700 11px Inter,system-ui,sans-serif;cursor:pointer;box-shadow:-3px 4px 12px rgba(0,0,0,.25);transition:transform .25s,opacity .25s}#xtab.hid{opacity:0;transform:rotate(180deg) translateX(-40px);pointer-events:none}#xtab i{display:inline-block;width:14px;height:26px;border-radius:99px;background:#555;position:relative}#xtab i::after{content:"";position:absolute;left:2px;top:2px;width:10px;height:10px;border-radius:50%;background:#fff;transition:transform .2s}#xtab.on i{background:#F5A524}#xtab.on i::after{transform:translateY(12px)}';document.head.appendChild(st);
+ var b=document.createElement('button');b.id='xtab';b.type='button';b.setAttribute('data-tog','xp');function paint(){var on=typeof tog!=='undefined'&&!!tog.xp;b.classList.toggle('on',on);b.innerHTML='<i></i><span>Explainers '+(on?'on':'off')+'</span>'}paint();app.appendChild(b);
+ b.addEventListener('click',function(){setTimeout(function(){paint();[].forEach.call(document.querySelectorAll('[data-tog="xp"]'),function(x){if(x!==b)x.classList.toggle('on',!!tog.xp)})},0)});
+ new MutationObserver(function(){if(b.parentNode!==app)app.appendChild(b)}).observe(app,{childList:true});
+ var tm=null;document.addEventListener('scroll',function(){b.classList.add('hid');clearTimeout(tm);tm=setTimeout(function(){b.classList.remove('hid')},700)},true);
+ setInterval(paint,1500)})();</script>
 </body></html>
