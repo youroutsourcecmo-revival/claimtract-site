@@ -199,6 +199,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 .hero{min-height:100vh!important;min-height:100svh!important}
 .hero .cta{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}.hv2{font-size:16px}@media(max-width:700px){.hero h1{font-size:40px!important;line-height:1.05}.hero .cta{flex-direction:column;align-items:stretch}.hero .cta .btn{text-align:center;justify-content:center}.hv2{text-align:center;border-bottom:0;text-decoration:underline;text-underline-offset:4px}.hero .k{font-size:11px;line-height:1.4}}
 @media(max-width:700px){.hero #pgPhone,.hero .phone{display:none!important}.hero{align-items:center!important}.hero .in{padding:90px 0 40px!important}}
+@media(max-width:700px){.hero #hv{display:none!important}.hero{background:#0A0B0D!important}.hero::before{display:none!important}}
 </style>
 </head>
 <body>
@@ -218,7 +219,9 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 ["Your whole business is","one roofer's phone number.","Own your lead flow: a free website and 30+ tools that put you in front of homeowners yourself. Want to see it?","One roofer is","your whole pipeline.","Your own free website. 30+ tools. Want to see it?"],
 ["The homeowner googled you.","Found nothing.","Your license already built your free website. 30+ tools. One phone. Want to see what they'll find now?","They googled you.","Nothing came up.","Free website. 30+ tools. One phone. Want to see it?"],
 ["Your license already","built your website.","Your name, license number and service area are already on it, plus 30+ tools in one phone. Want to see it?","Your license built","your website.","Free. Plus 30+ tools in one phone. Want to see it?"],
-["The better adjuster","doesn't always win.","Sometimes the homeowner hires the one with the website. Yours is built and free, plus 30+ tools. Want to see it?","The better adjuster","doesn't always win.","Yours is built and free. Want to see it?"]
+["You knocked first.","His website won.","The homeowner checked you both. Your license already built your free website, plus 30+ tools in one phone. Want to see it?","You knocked first.","His website won.","Free website. 30+ tools. One phone. Want to see it?"],
+["The carrier's adjuster looks official.","You look like a guy with a clipboard.","Show them your license and who you work for, on your own free website, plus 30+ tools in one phone. Want to see it?","Carrier looks official.","You look like a clipboard.","Free website. 30+ tools. One phone. Want to see it?"],
+["Great talk on the porch.","Then total radio silence.","Leave your free website behind, and get an alert the moment they save your contact. 30+ tools in one phone. Want to see it?","Great porch talk.","Then radio silence.","Free website, plus alerts when they save you. Want to see it?"]
 ],i=-1;try{i=+localStorage.getItem('ct_hv')}catch(e){}if(!(i>=0&&i<V.length)){i=Math.floor(Math.random()*V.length);try{localStorage.setItem('ct_hv',i)}catch(e){}}
 var q=new URLSearchParams(location.search);if(q.has('hv'))i=Math.min(V.length-1,Math.max(0,+q.get('hv')||0));
 var v=V[i],m=matchMedia('(max-width:700px)').matches,h=document.getElementById('hh'),l=document.getElementById('lead');
