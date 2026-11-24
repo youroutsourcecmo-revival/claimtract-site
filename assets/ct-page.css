@@ -382,3 +382,9 @@ body.pvmode #pv .own{display:none!important}body.pvmode #pv{border:0!important;b
  .pv .hero2.hasv .hv,.hero2 .cthv{top:0!important;left:0!important;right:0!important;bottom:auto!important;height:56.25vw!important}
  .pv .hero2.hasv::before{background:linear-gradient(180deg,rgba(10,12,16,0) 0,rgba(10,12,16,0) calc(56.25vw - 70px),#0A0C10 56.25vw)!important}
 }
+/* floating call button (Nov 24): no name, no "Call X" bar */
+.pv{position:relative}
+.pv .nv{position:absolute;top:14px;right:14px;left:auto;padding:0!important;background:none!important;z-index:30;display:block}
+.pv .nv .nm{display:none}
+.pv .nv .call{width:46px;height:46px;padding:0;border-radius:50%;font-size:0!important;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.pv .nv .call::before{content:"\1F4DE";font-size:21px;line-height:1}
