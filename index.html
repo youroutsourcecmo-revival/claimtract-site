@@ -197,7 +197,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 @media(max-width:820px){.mphone{grid-template-columns:1fr;gap:26px;justify-items:center}.bapp-ph{width:270px;height:560px}}
 .grow{font:800 clamp(24px,5.6vw,44px)/1.15 Inter,system-ui,sans-serif;letter-spacing:-.02em;margin:28px 0 0;color:inherit}.grow b{display:block}.grow span{display:block;color:#C77800}
 .hero{min-height:100vh!important;min-height:100svh!important}
-.hero .cta{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}.hv2{font-size:16px}@media(max-width:700px){.hero h1{font-size:40px!important;line-height:1.05}.hero .cta{flex-direction:column;align-items:stretch}.hero .cta .btn{text-align:center;justify-content:center}.hv2{text-align:center;border-bottom:0;text-decoration:underline;text-underline-offset:4px}.hero .k{font-size:11px;line-height:1.4}}
+.offer2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0 18px;max-width:760px}.o2{display:flex;align-items:center;gap:14px;background:rgba(10,12,16,.62);border:1.5px solid rgba(245,165,36,.7);border-radius:16px;padding:14px 16px;backdrop-filter:blur(6px)}.o2 b{flex:none;background:#F5A524;color:#111;font:900 15px/1 Inter,sans-serif;letter-spacing:.06em;padding:9px 10px;border-radius:9px}.o2 strong{display:block;color:#fff;font:800 21px/1.15 Inter,sans-serif}.o2 small{display:block;color:rgba(255,255,255,.78);font-size:14px;margin-top:4px}.hero h1{font-size:clamp(38px,5vw,64px)!important}@media(max-width:700px){.offer2{grid-template-columns:1fr;gap:10px;margin:16px 0 12px}.o2 strong{font-size:18px}.o2{padding:12px 14px}}.hero .cta{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}.hv2{font-size:16px}@media(max-width:700px){.hero h1{font-size:40px!important;line-height:1.05}.hero .cta{flex-direction:column;align-items:stretch}.hero .cta .btn{text-align:center;justify-content:center}.hv2{text-align:center;border-bottom:0;text-decoration:underline;text-underline-offset:4px}.hero .k{font-size:11px;line-height:1.4}}
 @media(max-width:700px){.hero #pgPhone,.hero .phone{display:none!important}.hero{align-items:center!important}.hero .in{padding:90px 0 40px!important}}
 .hero .k{text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 12px rgba(0,0,0,.7);font-weight:800}@media(max-width:700px){.hero .k{display:inline-block;background:rgba(10,11,13,.72);padding:6px 10px;border-radius:8px;backdrop-filter:blur(4px)}}
 </style>
@@ -210,9 +210,13 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
   <div class="w hg"><div class="in">
     <p class="k">Built by a 17-year public adjuster, for public adjusters.</p>
     <h1 id="hh">You lost the claim <em>before you knocked.</em></h1>
+    <div class="offer2" aria-label="What you get free">
+      <div class="o2"><b>FREE</b><span><strong>Your public adjuster website</strong><small>Built from your license. Live tonight.</small></span></div>
+      <div class="o2"><b>FREE</b><span><strong>30+ tools to win clients</strong><small>So you stop waiting on contractor referrals.</small></span></div>
+    </div>
     <p class="lead" id="lead">Your license already built your free website. 30+ tools. One phone. Want to see what homeowners will find?</p>
     <div class="cta"><a class="btn" data-cta href="/free/build/?view=preview">See my free website &rarr;</a><a class="ghost hv2" href="#demo">Tap through the tools &darr;</a><a class="ghost" data-again href="/free/build/?view=preview" hidden>See my website again</a></div>
-    <div class="trust"><span>Free</span><span>30+ tools</span><span>No credit card</span></div>
+    <div class="trust"><span>No credit card</span><span>Nothing goes live until you approve it</span></div>
   <script>(function(){var V=[
 ["You lost the claim","before you knocked.","Your license already built your free website. 30+ tools. One phone. Want to see what homeowners will find?","Lost the claim","before you knocked.","Free website. 30+ tools. One phone. Want to see it?"],
 ["You're good at claims.","You're invisible online.","Your license already built your free website, plus 30+ tools in one phone. Want to see what homeowners will find?","Good at claims.","Invisible online.","Free website. 30+ tools. One phone. Want to see it?"],
