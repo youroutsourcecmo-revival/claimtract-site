@@ -1,7 +1,7 @@
 /* ClaimTract homeowner tools for adjuster pages.
    Claim binder (saved on the homeowner's phone; shared only when they tap Send), 3 a.m. mode,
    read it to me, search this page, print a handout, save to home screen, and homeowner events.
-   Include: <script src="/assets/ct-home.js?v=1124j" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
+   Include: <script src="/assets/ct-home.js?v=1124k" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
 (function(){
 var S=document.currentScript||document.querySelector('script[src*="ct-home.js"]');if(!S)return;
 var D=S.dataset,SLUG=D.slug||location.pathname.split('/')[1]||'',FIRST=D.first||'your adjuster',NAME=D.name||FIRST,PH=(D.phone||'').replace(/\D/g,'').slice(-10),SAMPLE=D.sample==='1';
@@ -206,7 +206,12 @@ function vidFrame(){if(!document.body.classList.contains('pvmode')||vidFrame.on)
   f.querySelector('button').onclick=function(){ev('sample_backoffice');var m=el('div','cth cth-mod','<div class="cth-ph"><button class="cth-mx" aria-label="Close">&times;</button><iframe src="/free/app/?demo=1" title="Your Back office"></iframe></div>');document.body.appendChild(m);m.addEventListener('click',function(x){if(x.target===m||x.target.closest('.cth-mx'))m.remove()})}
  }).observe(document.body,{childList:true,subtree:false})}
 
-function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(st);reorder();tools();rail();stay();vidFrame();events();newAnswer();helpful();setTimeout(helpful,1200);if(/[?&]print=1/.test(location.search))setTimeout(printHandout,800);
+
+/* sample live chat (HumanBot) on the preview and sample adjuster pages only */
+function sampleChat(){if(sampleChat.on)return;var isS=SAMPLE||document.body.classList.contains('pvmode')||/^\/cedric(-moore)?\//.test(location.pathname);if(!isS)return;sampleChat.on=1;
+ var sc=document.createElement('script');sc.src='https://humanchat.net/build/js/hb_latest.js?v=1.5.28';sc.crossOrigin='anonymous';sc.onload=function(){try{new AiBot({embedId:'3DvtdG39mSMA',remoteBaseUrl:'https://humanchat.net/',version:'1.5.28'})}catch(e){}};document.head.appendChild(sc)}
+
+function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(st);reorder();tools();rail();stay();vidFrame();sampleChat();events();newAnswer();helpful();setTimeout(helpful,1200);if(/[?&]print=1/.test(location.search))setTimeout(printHandout,800);
  window.CTHome={tools:function(){var o=$('.cth-sec');if(o)o.remove();tools()},binder:openBinder,read:readAloud,search:openSearch,print:printHandout,home:saveHome,late:lateBanner}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
