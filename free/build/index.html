@@ -113,8 +113,12 @@
     <div class="done-box" id="done" style="display:none">
       <h2>Approved. Your page is on its way.</h2>
       <p class="sub" id="doneMsg"></p>
-      <div class="inst" style="border-color:#F5A524"><h3>Your Back office is ready</h3><p>Sign in with Google to make your page yours: pick your version, record your stories, see who opens your page, share it and get bookings.</p><a class="btn" id="openApp" href="/free/app/" style="display:inline-block;margin-top:8px">Open my app</a></div>
-      <div class="inst"><h3>Put your page on your phone</h3><p>Open your page on your phone, tap Share, then Add to Home Screen (on Android, tap the menu, then Install app). It opens like an app, with a Send my page bar so you can text it, email it, or show the QR code in seconds.</p><div data-ct-ready></div></div>
+      <div class="inst" id="pwaStep" style="border-color:#F5A524;border-width:2px"><p style="margin:0 0 4px;font:800 12px Inter,sans-serif;letter-spacing:.08em;color:#C9861A">NEXT STEP</p><h3>Put your Back office on your phone</h3>
+       <div data-os="ios"><p>On your iPhone, open your Back office in Safari, tap the Share button, then <b>Add to Home Screen</b>.</p></div>
+       <div data-os="android"><p>On your Android phone, open your Back office in Chrome, tap the three dots, then <b>Install app</b>.</p></div>
+       <div data-os="desk"><p>Point your phone's camera at this code. Your Back office opens on your phone. Then tap Share and <b>Add to Home Screen</b> (Android: menu, <b>Install app</b>).</p><div id="pwaQr" style="width:170px;height:170px;background:#fff;border-radius:12px;padding:8px;margin:8px 0"></div></div>
+       <p>It opens like an app: see who opened your page, send your all-in-one text card, share your QR code, and get booking alerts.</p><a class="btn" id="openApp" href="/free/app/" style="display:inline-block;margin-top:8px">Open my Back office</a><div data-ct-ready></div></div>
+      <div class="inst"><h3>Then sign in with Google</h3><p>Sign in to make your page yours: pick your version, record your stories, and see who opens your page.</p></div>
       <h2 style="font-size:24px;margin-top:34px">Your free toolkit</h2>
       <p class="sub">Everything below is yours. Copy it, print it, send it before your next appointment.</p>
       <div class="tk" id="tk"></div>
@@ -442,5 +446,8 @@ try{var qv=new URLSearchParams(location.search);if(qv.get('view')==='preview'){S
 </script>
 
 <script>window.CTArticle&&CTArticle.bind()</script>
+<script>(function(){var ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?'ios':(/Android/.test(ua)?'android':'desk');document.querySelectorAll('#pwaStep [data-os]').forEach(function(e){e.style.display=e.dataset.os===os?'':'none'});
+ function qr(){var b=document.getElementById('pwaQr'),a=document.getElementById('openApp');if(!b||!window.qrcode||b.dataset.done)return;var u=new URL(a.getAttribute('href'),location.href).href,q=qrcode(0,'M');q.addData(u);q.make();b.innerHTML=q.createSvgTag({cellSize:4,margin:0});var sv=b.querySelector('svg');if(sv){sv.style.width='100%';sv.style.height='100%'}b.dataset.done=1}
+ new MutationObserver(function(){var d=document.getElementById('done');if(d&&d.style.display!=='none'){document.getElementById('pwaQr')&&(document.getElementById('pwaQr').dataset.done='');qr()}}).observe(document.getElementById('done'),{attributes:true,attributeFilter:['style']});setTimeout(qr,1500)})();</script>
 </body>
 </html>

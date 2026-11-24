@@ -725,7 +725,7 @@ function tab(n){if(n==='sophia'&&plan==='free'){openSx();return}if(typeof closeS
 /* Ready-made texts: open the phone's share sheet with the message and a contact card image (Nov 24) */
 (function(){
  function info(){var real=(typeof R!=='undefined'&&R&&typeof ME!=='undefined'&&ME);
-  if(real){var lic=(ME.license&&ME.license.number)||'';var ph=(ME.profile&&ME.profile.phone)||'';var area=(ME.profile&&(ME.profile.city||ME.profile.area))||'';return {name:fullN()||'Your public adjuster',lic:lic,area:area,phone:ph,photo:(ME.adjuster&&ME.adjuster.photo_url)||'',url:typeof pageUrl==='function'?pageUrl():''}}
+  if(real){var lic=(ME.license&&ME.license.number)||'';var ph=(ME.profile&&ME.profile.phone)||'';var area=(ME.profile&&(ME.profile.city||ME.profile.area))||'';return {name:fullN()||'Your public adjuster',lic:lic,area:area,phone:ph,photo:(ME.adjuster&&ME.adjuster.photo_url)||'',logo:(ME.adjuster&&(ME.adjuster.logo_url||ME.adjuster.logo))||(ME.profile&&ME.profile.logo_url)||'',url:typeof pageUrl==='function'?pageUrl():''}}
   return {name:'Cedric Moore',lic:'W123456',area:'Orlando, FL',phone:'(904) 555-0142',photo:'/assets/cedric-headshot.jpg',url:location.origin+'/cedric-moore/'}}
  function text(k,d){if(typeof R!=='undefined'&&R&&typeof msgFor==='function')return msgFor(k);var fn=d.name.split(' ')[0],u=d.url,T={
   meet:'Hi, this is '+fn+'. It was good meeting you today. Here\'s my website so you can check my license and see how I work: '+u,
@@ -743,7 +743,7 @@ function tab(n){if(n==='sophia'&&plan==='free'){openSx();return}if(typeof closeS
   c.fillStyle='#F5A524';rr(c,40,40,W-80,360,40);c.fill();
   var im=await loadImg(d.photo),R2=110,py=190;c.save();c.beginPath();c.arc(170,py,R2+8,0,7);c.fillStyle='#fff';c.fill();c.beginPath();c.arc(170,py,R2,0,7);c.clip();if(im){var s2=Math.max(2*R2/im.width,2*R2/im.height);c.drawImage(im,170-im.width*s2/2,py-im.height*s2/2,im.width*s2,im.height*s2)}c.restore();
   c.textAlign='left';c.fillStyle='#111';c.font='900 64px '+F;c.fillText(d.name,310,170);c.font='600 34px '+F;c.fillText('Licensed Public Adjuster',310,222);c.font='500 30px '+F;c.fillText((d.lic?'License '+d.lic:'')+(d.area?'  ·  '+d.area:''),310,268);
-  c.font='800 30px '+F;c.fillText('I work for you, not the insurance company.',80,360);
+  c.font='800 30px '+F;c.fillText('I work for you, not the insurance company.',80,360);if(d.logo){var lg=await loadImg(d.logo);if(lg){var lh=110,lw=Math.min(240,lg.width*lh/lg.height);c.drawImage(lg,W-80-lw,80,lw,lh)}}
   /* the message in the middle */
   var t=(TITLES[k]||'A note from '+d.name.split(' ')[0]);c.fillStyle='#fff';rr(c,40,440,W-80,470,40);c.fill();
   c.fillStyle='#C9861A';c.font='800 30px '+F;c.fillText(t.toUpperCase(),90,510);
