@@ -9,13 +9,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/ct-page.css?v=1124d">
-<style>body:not(.pvmode){--bg:#F6F5F1;--card:#FFFFFF;--line:#E2DFD6;--tx:#14161A;--mut:#555B66;--dim:#8A8F98}body:not(.pvmode) .tpl[aria-pressed=true]{border-color:#F5A524;box-shadow:0 8px 22px rgba(245,165,36,.18)}body:not(.pvmode) input,body:not(.pvmode) textarea,body:not(.pvmode) select{background:#fff;color:#14161A;border-color:#D8D4C9}#bgsF,#swF{display:none!important}</style>
+<style>body:not(.pvmode){--bg:#F6F5F1;--card:#FFFFFF;--line:#E2DFD6;--tx:#14161A;--mut:#555B66;--dim:#8A8F98}body:not(.pvmode) .tpl[aria-pressed=true]{border-color:#F5A524;box-shadow:0 8px 22px rgba(245,165,36,.18)}body:not(.pvmode) input,body:not(.pvmode) textarea,body:not(.pvmode) select{background:#fff;color:#14161A;border-color:#D8D4C9}#bgsF,#swF{display:none!important}
+.ctlogo{display:flex;align-items:center;gap:10px;text-decoration:none}.ctl-s{height:38px;width:auto}.ctl-w{height:20px;width:auto}
+.lpv{margin:22px 0 6px;border-radius:18px;overflow:hidden;border:1px solid var(--line);transition:background .35s,color .35s,box-shadow .35s;box-shadow:0 14px 34px rgba(0,0,0,.08)}
+.lpv[data-t=paper]{background:#FBFAF7;color:#14161A}.lpv[data-t=storm]{background:#0F1115;color:#F2F2F2;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.lpv-h{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(127,127,127,.18)}.lpv-h img{width:44px;height:44px;border-radius:50%;object-fit:cover}.lpv-h b{display:block;font-size:15px}.lpv-h span{font-size:12px;opacity:.65}.lpv-ph{margin-left:auto;width:38px;height:38px;border-radius:50%;background:#F5A524;display:grid;place-items:center;font-style:normal}
+.lpv-b{padding:18px 18px 16px}.lpv-b small{font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.08em;color:#C9861A}.lpv-b h3{font:700 22px/1.2 'Source Serif 4',serif;margin:8px 0}.lpv-b p{margin:0 0 14px;opacity:.8;font-size:14px}
+.lpv-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.lpv-btns span{padding:9px 14px;border-radius:999px;font-weight:700;font-size:13px;background:#F5A524;color:#14161A}.lpv-btns span+span{background:transparent;border:1px solid currentColor;color:inherit;opacity:.85}
+.lpv-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.lpv-cards div{border-radius:12px;padding:10px;font-size:12px;font-weight:600;background:rgba(127,127,127,.09)}.lpv-cards em{display:block;font-style:normal;font-size:18px;margin-bottom:4px}
+.lpv-cap{margin:0;padding:8px 16px 10px;font-size:12px;opacity:.6;border-top:1px solid rgba(127,127,127,.15)}
+.lpv-pop{animation:lpvp .45s ease}@keyframes lpvp{0%{transform:scale(.985)}60%{transform:scale(1.008)}100%{transform:none}}
+.vcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px}.vc{text-align:left;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;color:var(--tx);font:inherit;transition:border-color .2s,box-shadow .2s,transform .2s}.vc:hover{transform:translateY(-2px)}.vc[aria-pressed=true]{border-color:#F5A524;box-shadow:0 8px 22px rgba(245,165,36,.2)}.vc h3{margin:0 0 4px;font-size:17px}.vc .vd{margin:0 0 10px;color:var(--mut);font-size:13px}.vc blockquote{margin:0 0 12px;padding:10px 12px;border-left:3px solid #F5A524;background:rgba(245,165,36,.07);border-radius:0 10px 10px 0;font:400 14px/1.5 'Source Serif 4',serif}.vpk{font-weight:700;font-size:13px;color:#C9861A}
+@media(max-width:640px){.ctl-w{height:16px}.ctl-s{height:32px}}
+</style>
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><div class="logo">CLAIM<b>tract</b></div><span class="free-tag">Free for adjusters</span></header>
+  <header class="top"><a class="logo ctlogo" href="/" aria-label="ClaimTract home"><img src="/assets/ct-shield.png" alt="" class="ctl-s"><img src="/assets/ct-wordmark.png" alt="ClaimTract" class="ctl-w"></a><span class="free-tag">Free for adjusters</span></header>
   <span id="build"></span>
-  <div class="steps" id="steps"><div class="on">1 Light or dark</div><div>2 Your details</div><div>3 Consent</div><div>4 Preview and approve</div></div>
+  <div class="steps" id="steps"><div class="on">1 Light or dark</div><div>2 Your voice</div><div>3 Your details</div><div>4 Consent</div><div>5 Preview and approve</div></div>
 
   <section class="step on" id="s1">
     <h2>Light or dark?</h2>
@@ -24,12 +36,20 @@
       <button class="tpl" data-t="paper" aria-pressed="true"><div class="mini m-paper"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Light</h3><p>Clean and bright. Easy to read on any phone.</p></button>
       <button class="tpl" data-t="storm" aria-pressed="false"><div class="mini m-storm"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Dark</h3><p>Dark and bold. Built for urgency.</p></button>
     </div>
+    <div class="lpv" id="lpv" data-t="paper" aria-live="polite"><div class="lpv-h"><img src="/assets/cedric-headshot.jpg" alt=""><div><b>Cedric Moore</b><span>Licensed Public Adjuster · Orlando</span></div><i class="lpv-ph">&#128222;</i></div><div class="lpv-b"><small>HOMEOWNER GUIDE</small><h3>Four people work for your insurance company. Who works for you?</h3><p>The moment you get a claim number, the carrier puts a whole team on your file. You only ever meet one of them.</p><div class="lpv-btns"><span>Call Cedric</span><span>Find my answer</span></div><div class="lpv-cards"><div><em>&#128193;</em>Claim binder</div><div><em>&#128424;</em>Handout</div><div><em>&#9989;</em>Verify license</div></div></div><p class="lpv-cap">Live preview: this is how homeowners will see your page.</p></div>
     <div class="f" id="swF" style="margin-top:22px"><label>Your color</label><div class="sw" id="sw"></div><small>It colors your buttons and highlights. Pick the one that feels like you.</small></div>
     <div class="f" id="bgsF"><label>Background video</label><div class="bgs" id="bgs"><button type="button" data-b="roof-table" aria-pressed="true"><img src="/assets/bg/bg-roof-table.jpg" alt=""><span>Kitchen table</span></button><button type="button" data-b="roof-yard" aria-pressed="false"><img src="/assets/bg/bg-roof-yard.jpg" alt=""><span>In the yard</span></button></div><small>Plays quietly behind your headline. Your words sit on a dark band on the left so they're easy to read.</small></div>
     <div class="nav"><span></span><button class="btn" data-go="2">Continue</button></div>
   </section>
 
   <section class="step" id="s2">
+    <h2>Which one sounds like you?</h2>
+    <p class="sub">Same question, four voices. Tap through them and pick the one that sounds most like you talking at the kitchen table. You can change it later in your Back office.</p>
+    <div class="vcs" id="vcs"><button type="button" class="vc" data-v="thorough" aria-pressed="true"><h3>Thorough</h3><p class="vd">Explains every layer. Reads like a patient guide.</p><blockquote>Your first insurance check is usually an opening number, not the final one. Carriers subtract depreciation for the age of what was damaged, price repairs with software that can lag behind local costs, and often leave out damage nobody looked for. Under a replacement cost policy, much of that held-back money is still yours once the repairs are documented. Have you seen the line-by-line breakdown that came with your check?</blockquote><span class="vpk">Selected</span></button><button type="button" class="vc" data-v="straight" aria-pressed="false"><h3>Straight to the point</h3><p class="vd">Short, direct, gets to the move fast.</p><blockquote>That first check is low for three reasons: depreciation held back, hidden damage missed, and prices below what local contractors charge. Most of it can be recovered. Want me to look at your breakdown?</blockquote><span class="vpk">Pick this voice</span></button><button type="button" class="vc" data-v="steps" aria-pressed="false"><h3>Step by step</h3><p class="vd">Walks the homeowner through it in order.</p><blockquote>1. Find the Statement of Loss that came with your check. 2. Circle the depreciation column. 3. List any damage the inspector didn’t write down. 4. Send me both, and I’ll show you what’s missing.</blockquote><span class="vpk">Pick this voice</span></button><button type="button" class="vc" data-v="story" aria-pressed="false"><h3>Story-led</h3><p class="vd">Opens with a real family’s claim.</p><blockquote>When the Garcias opened their check, it covered half of what their roofer quoted. They almost signed the repair contract and paid the difference themselves. Then we read the breakdown together and found two rooms nobody had inspected. Want to know what happened next?</blockquote><span class="vpk">Pick this voice</span></button></div>
+    <div class="nav"><button class="btn ghost" data-go="1">Back</button><button class="btn" data-go="3">Continue</button></div>
+  </section>
+
+  <section class="step" id="s3">
     <h2>Tell us about you</h2>
     <p class="sub">This is what goes on your page. Homeowners see it, so make it yours.</p>
     <div class="grid">
@@ -68,26 +88,26 @@
     <div class="f"><label>Your social links (optional)</label><small style="margin:0 0 12px">Paste the web address of each page you use. They show as small icons on your page. Leave blank any you don't have.</small><div class="sgrid" id="socf"></div></div>
     <div class="f"><label>Your links (optional, up to 5)</label><small style="margin:0 0 12px">Add a button for anything you want people to tap: your reviews page, a guide, a booking page, a video. Give each one a short name.</small><div id="lkf"></div></div>
     <div class="err" id="e2"></div>
-    <div class="nav"><button class="btn ghost" data-go="1">Back</button><button class="btn" data-go="3">Continue</button></div>
+    <div class="nav"><button class="btn ghost" data-go="2">Back</button><button class="btn" data-go="4">Continue</button></div>
   </section>
 
-  <section class="step" id="s3">
+  <section class="step" id="s4">
     <h2>Two quick agreements</h2>
     <p class="sub">Both are required. Neither is ticked for you.</p>
     <div class="consent"><label><input type="checkbox" id="c1"><span>I agree to receive texts and calls from ClaimTract at the number I gave, about my free page and about ClaimTract. Messages and calls may be automated or AI-assisted. Message and data rates may apply. Reply STOP to opt out at any time. Agreeing is not required to buy anything.</span></label></div>
     <div class="consent"><label><input type="checkbox" id="c2"><span>I agree to the <a href="/terms/" target="_blank" rel="noopener">terms of use</a>, <a href="/privacy/" target="_blank" rel="noopener">privacy policy</a>, <a href="/data-processing/" target="_blank" rel="noopener">data processing addendum</a> and <a href="/content-distribution/" target="_blank" rel="noopener">content distribution authorization</a>.</span></label></div>
     <div class="err" id="e3"></div>
-    <div class="nav"><button class="btn ghost" data-go="2">Back</button><button class="btn" data-go="4">See my page</button></div>
+    <div class="nav"><button class="btn ghost" data-go="3">Back</button><button class="btn" data-go="5">See my page</button></div>
   </section>
 
-  <section class="step" id="s4">
+  <section class="step" id="s5">
     <div id="review">
       <h2>Here's your page</h2>
       <div class="banner">This is a private preview. It's hidden from Google and nobody can see it but you, until you approve it.</div>
       <div class="row2" style="margin-bottom:12px"><div class="chips" id="swap"></div></div>
       <div class="pvwrap"><div class="pvbar"><i></i><i></i><i></i><span id="url"></span></div><div class="pv" id="pv"></div></div>
       <div class="err" id="e4"></div>
-      <div class="nav"><button class="btn ghost" data-go="2">Make changes</button><button class="btn" id="approve">Approve and go live</button></div>
+      <div class="nav"><button class="btn ghost" data-go="3">Make changes</button><button class="btn" id="approve">Approve and go live</button></div>
     </div>
     <div class="done-box" id="done" style="display:none">
       <h2>Approved. Your page is on its way.</h2>
@@ -110,6 +130,7 @@
 <script src="/assets/ct-home.js?v=1124l" data-slug="preview" data-first="your adjuster" data-sample="1" defer></script>
 <script src="/ct-track.js"></script>
 <script src="/vendor/qrcode.js"></script>
+<script src="/assets/ct-esther.js?v=1124"></script>
 <script src="/assets/ct-owner.js" defer></script><script src="/assets/ct-ready.js" defer></script>
 <script>
 (function(){
@@ -117,7 +138,7 @@ document.addEventListener('input',function(e){if(e.target&&e.target.id==='yt'){v
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#bgs button');if(!b)return;document.querySelectorAll('#bgs button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});S.bgv=b.dataset.b;try{track('free_bg',S.bgv||'none')}catch(_){}});
 var ENDPOINT='https://app.closegpt.ai/api/input/i2wb1n/contact?public_key=XsF7UA09Ds7PUxV6gq6F';
 var $=function(i){return document.getElementById(i)};
-var S={tpl:'paper',bgv:'roof-table',acc:null,spec:[],head:null,cover:null,gal:[]};
+var S={voice:'thorough',tpl:'paper',bgv:'roof-table',acc:null,spec:[],head:null,cover:null,gal:[]};
 var SPECS=['Roof','Wind and hurricane','Water','Fire','Hail','Mold','Theft and vandalism','Commercial'];
 function track(e,s){try{window.__ctT&&window.__ctT(e,s)}catch(x){}}
 /* prefill from the link we text them */
@@ -133,7 +154,11 @@ try{var q=new URLSearchParams(location.search);
 /* chips */
 var sp=$('spec');SPECS.forEach(function(n){var b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-pressed','false');b.onclick=function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);var i=S.spec.indexOf(n);if(on&&i<0)S.spec.push(n);if(!on&&i>=0)S.spec.splice(i,1)};sp.appendChild(b)});
 /* template cards */
-var tp=$('tpls');tp.querySelectorAll('.tpl').forEach(function(b){b.onclick=function(){tp.querySelectorAll('.tpl').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');S.tpl=b.dataset.t}});
+var tp=$('tpls');tp.querySelectorAll('.tpl').forEach(function(b){b.onclick=function(){tp.querySelectorAll('.tpl').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');S.tpl=b.dataset.t;var l=$('lpv');if(l){l.dataset.t=S.tpl;l.classList.remove('lpv-pop');void l.offsetWidth;l.classList.add('lpv-pop')}try{track('free_theme',S.tpl)}catch(_){}}});
+$('vcs').querySelectorAll('.vc').forEach(function(b){b.onclick=function(){$('vcs').querySelectorAll('.vc').forEach(function(x){x.setAttribute('aria-pressed','false');x.querySelector('.vpk').textContent='Pick this voice'});b.setAttribute('aria-pressed','true');b.querySelector('.vpk').textContent='Selected';S.voice=b.dataset.v;try{track('free_voice',S.voice)}catch(_){}}});
+/* Esther explainers on the builder steps */
+var ES_IDS=/*BUILDER_ESTHER*/{};function esPlay(k){try{if(!window.CTEsther||!ES_IDS[k]||S.pvmode)return;CTEsther.init(ES_IDS);CTEsther.play(k)}catch(_){}}
+setTimeout(function(){if(document.getElementById('s1').classList.contains('on'))esPlay('theme')},600);
 var ACC=[['Look default',null],['Amber','#F5A524'],['Teal','#0E7C86'],['Navy','#1F3A6E'],['Crimson','#B3261E'],['Forest','#2E6B3F'],['Violet','#6B3FA0']];
 var swe=$('sw');ACC.forEach(function(a){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',a[0]);b.title=a[0];b.setAttribute('aria-pressed',String(a[1]===S.acc));b.style.background=a[1]||'conic-gradient(#F5A524,#0E7C86,#1F3A6E,#B3261E,#F5A524)';b.onclick=function(){S.acc=a[1];swe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true')};swe.appendChild(b)});
 /* social links */
@@ -214,7 +239,7 @@ drop($('dHead'),'fHead','head');drop($('dCover'),'fCover','cover');
 $('fGal').onchange=function(){S.gal=[];var g=$('gal');g.innerHTML='';Array.prototype.slice.call(this.files,0,5).forEach(function(f){pic(f,function(u,file){S.gal.push({url:u,file:file});var im=new Image();im.src=u;im.alt='';g.appendChild(im)})})};
 /* steps */
 var labels=document.querySelectorAll('#steps div');
-function go(n){n=+n;[1,2,3,4].forEach(function(i){$('s'+i).classList.toggle('on',i===n)});labels.forEach(function(l,i){l.className=i+1<n?'done':(i+1===n?'on':'')});window.scrollTo({top:0,behavior:'smooth'});track('free_step',String(n));if(n===4)render()}
+function go(n){n=+n;[1,2,3,4,5].forEach(function(i){$('s'+i).classList.toggle('on',i===n)});labels.forEach(function(l,i){l.className=i+1<n?'done':(i+1===n?'on':'')});window.scrollTo({top:0,behavior:'smooth'});track('free_step',String(n));if(n===5)render();if(n===2)esPlay('voice')}
 function val2(){var m=[];['fn','ln','ph','em','ci','st','lic'].forEach(function(k){if(!$(k).value.trim())m.push(k)});
  var e=$('e2');if(m.length){e.textContent='Please fill in your name, phone, email, city, state and license number.';return false}
  if(($('ph').value.replace(/\D/g,'')).length<10){e.textContent='That phone number looks short. Please include the area code.';return false}
@@ -227,7 +252,7 @@ function val2(){var m=[];['fn','ln','ph','em','ci','st','lic'].forEach(function(
  e.textContent='';return true}
 function val3(){var e=$('e3');if(!$('c1').checked||!$('c2').checked){e.textContent='Please tick both boxes to continue.';return false}e.textContent='';return true}
 document.querySelectorAll('[data-go]').forEach(function(b){b.onclick=function(){var n=+b.dataset.go,cur=document.querySelector('section.step.on').id.slice(1);
- if(n>+cur){if(+cur===2&&!val2())return;if(+cur===3&&!val3())return}
+ if(n>+cur){if(+cur===3&&!val2())return;if(+cur===4&&!val3())return}
  go(n)}});
 /* preview */
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
@@ -353,7 +378,7 @@ $('approve').onclick=function(){
  if(S.lid)F.call_id=S.lid;if(S.ref)F.referred_by=S.ref;try{F.timezone=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}
  var langs=[].slice.call(document.querySelectorAll('#lgs input:checked')).map(function(x){return x.value});
  var consent={c1:$('c1').checked,c2:$('c2').checked,consent_time:new Date().toISOString(),consent_version:'2026-11-19-page-v1',consent_text:$('c1').nextElementSibling.textContent.trim()};
- var body={fields:F,tpl:S.tpl,bgv:S.bgv||undefined,specs:S.spec||[],langs:langs,consent:consent};if(S.acc)body.acc=S.acc;if(TEST)body.test=true;
+ var body={fields:F,tpl:S.tpl,voice:S.voice||'thorough',bgv:S.bgv||undefined,specs:S.spec||[],langs:langs,consent:consent};if(S.acc)body.acc=S.acc;if(TEST)body.test=true;
  var tok,res;
  api('/api/pages/draft',body).then(function(j){
   if(!j.ok)throw {m:j.error,f:j.field};tok=j.token;
