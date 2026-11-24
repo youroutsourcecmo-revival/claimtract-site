@@ -1,7 +1,7 @@
 /* ClaimTract homeowner tools for adjuster pages.
    Claim binder (saved on the homeowner's phone; shared only when they tap Send), 3 a.m. mode,
    read it to me, search this page, print a handout, save to home screen, and homeowner events.
-   Include: <script src="/assets/ct-home.js?v=1124i" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
+   Include: <script src="/assets/ct-home.js?v=1124j" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
 (function(){
 var S=document.currentScript||document.querySelector('script[src*="ct-home.js"]');if(!S)return;
 var D=S.dataset,SLUG=D.slug||location.pathname.split('/')[1]||'',FIRST=D.first||'your adjuster',NAME=D.name||FIRST,PH=(D.phone||'').replace(/\D/g,'').slice(-10),SAMPLE=D.sample==='1';
@@ -202,7 +202,7 @@ function stay(){if(stay.on)return;stay.on=1;document.addEventListener('click',fu
 /* sample page: video pop-up gets a frame with a "see it in your Back office" button */
 function vidFrame(){if(!document.body.classList.contains('pvmode')||vidFrame.on)return;vidFrame.on=1;
  new MutationObserver(function(){var v=$('.vm-in');if(!v||v.querySelector('.cth-vf'))return;
-  var f=el('div','cth cth-vf','<p>Put your face on your website. Record a short video: introduce yourself, walk a roof, show how you measure. Upload it to YouTube, paste the link in your Back office, and it plays right here.</p><button type="button" class="cth-vfb">See it in your Back office &rarr;</button>');v.appendChild(f);
+  var f=el('div','cth cth-vf','<p>Put your face on every page. Record one short video: introduce yourself, walk a roof, show how you measure. Upload it to YouTube, paste the link in your Back office, and it plays here and at the top of every answer page. Upgrade, and that&#39;s hundreds of pages, each one introducing you before you knock.</p><button type="button" class="cth-vfb">See it in your Back office &rarr;</button>');v.appendChild(f);
   f.querySelector('button').onclick=function(){ev('sample_backoffice');var m=el('div','cth cth-mod','<div class="cth-ph"><button class="cth-mx" aria-label="Close">&times;</button><iframe src="/free/app/?demo=1" title="Your Back office"></iframe></div>');document.body.appendChild(m);m.addEventListener('click',function(x){if(x.target===m||x.target.closest('.cth-mx'))m.remove()})}
  }).observe(document.body,{childList:true,subtree:false})}
 
