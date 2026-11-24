@@ -2,7 +2,7 @@
    Same method as the app: read the HumanBot campaign record, play the packed mp4 (avatar on top, matte below)
    on our own canvas. Plays once per key (localStorage), inside the tap that opened the demo. Tap her to stop. */
 (function(){
-var CLIPS={},IDS={},box,cv,cx,v,off,ox,raf=null,crop=null,n=0,want=false;
+var OFF_ID=/*OFF_CLIP*/'',CLIPS={},IDS={},box,cv,cx,v,off,ox,raf=null,crop=null,n=0,want=false;
 function resolve(id,cb){if(CLIPS[id]){cb&&cb(CLIPS[id]);return}
  fetch('https://humanchat.net/campaign/pub/'+encodeURIComponent(id)).then(function(r){return r.json()}).then(function(c){c=c.campaign||c;var m=c.media||{};if(!m.filename||!m.userId)throw 0;var f=String(m.filename);
   CLIPS[id]={url:'https://humanchat.net/uploads/media/'+m.userId+'/'+f.slice(0,2)+'/'+f.slice(2,4)+'/'+f,dur:(m.data&&m.data.duration)||20};cb&&cb(CLIPS[id])}).catch(function(){cb&&cb(null)})}
@@ -24,13 +24,15 @@ function mark(k){try{localStorage.setItem('ct_es_'+k,'1')}catch(e){}}
 window.CTEsther={
  init:function(map){IDS=map||{};for(var k in IDS)if(IDS[k])resolve(IDS[k])},
  play:function(k,force){try{if(localStorage.getItem('ct_exp_off')==='1')return}catch(e){}var id=IDS[k];if(!id||(!force&&seen(k)))return;mark(k);want=true;var c=CLIPS[id];if(c)playClip(c);else resolve(id,function(r){if(r&&want)playClip(r)})},
- stop:stop
+ stop:stop,
+ /* turning explainers off: she says how to bring her back, once per tap */
+ bye:function(){var id=OFF_ID;if(!id)return;want=true;var c=CLIPS[id];if(c)playClip(c);else resolve(id,function(r){if(r&&want)playClip(r)})}
 };
 })();
 
 /* Explainers on/off: a tab stuck to the right edge, always in view */
 (function(){function off(){try{return localStorage.getItem('ct_exp_off')==='1'}catch(e){return false}}
 function mk(){if(document.getElementById('ctxt'))return;var st=document.createElement('style');st.textContent='#ctxt{position:fixed;right:0;top:20%;z-index:100001;writing-mode:vertical-rl;transform:rotate(180deg);display:flex;align-items:center;gap:8px;padding:14px 9px;border:0;border-radius:0 12px 12px 0;background:#14161A;color:#fff;font:700 13px Inter,system-ui,sans-serif;letter-spacing:.02em;cursor:pointer;box-shadow:-4px 6px 18px rgba(0,0,0,.25)}#ctxt i{font-style:normal;display:inline-block;width:18px;height:32px;border-radius:99px;background:#555;position:relative;transition:background .2s}#ctxt i::after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .2s}#ctxt[aria-pressed=true] i{background:#F5A524}#ctxt[aria-pressed=true] i::after{transform:translateY(14px)}#ctxt:focus-visible{outline:3px solid #F5A524}@media(max-width:600px){#ctxt{padding:10px 7px;font-size:12px}}';document.head.appendChild(st);
- var b=document.createElement('button');b.id='ctxt';b.type='button';function set(){var on=!off();b.setAttribute('aria-pressed',String(on));b.innerHTML='<i></i><span>Explainers '+(on?'on':'off')+'</span>';b.title=on?'Tap to turn the video explainers off':'Tap to turn the video explainers on'}set();
- b.onclick=function(){var on=!off();try{localStorage.setItem('ct_exp_off',on?'1':'0')}catch(e){}if(on&&window.CTEsther)CTEsther.stop();set()};document.body.appendChild(b)}
+ var b=document.createElement('button');b.id='ctxt';b.type='button';function set(){var on=!off();b.setAttribute('aria-pressed',String(on));b.innerHTML='<i></i><span>Explainer avatars '+(on?'on':'off')+'</span>';b.title=on?'Tap to turn the video explainers off':'Tap to turn the video explainers on'}set();
+ b.onclick=function(){var on=!off();try{localStorage.setItem('ct_exp_off',on?'1':'0')}catch(e){}if(on&&window.CTEsther){CTEsther.stop();CTEsther.bye()}set()};document.body.appendChild(b)}
 if(document.body)mk();else document.addEventListener('DOMContentLoaded',mk)})();
