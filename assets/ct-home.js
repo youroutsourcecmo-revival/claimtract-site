@@ -1,7 +1,7 @@
 /* ClaimTract homeowner tools for adjuster pages.
    Claim binder (saved on the homeowner's phone; shared only when they tap Send), 3 a.m. mode,
    read it to me, search this page, print a handout, save to home screen, and homeowner events.
-   Include: <script src="/assets/ct-home.js?v=1124l" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
+   Include: <script src="/assets/ct-home.js?v=1124m" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
 (function(){
 var S=document.currentScript||document.querySelector('script[src*="ct-home.js"]');if(!S)return;
 var D=S.dataset,SLUG=D.slug||location.pathname.split('/')[1]||'',FIRST=D.first||'your adjuster',NAME=D.name||FIRST,PH=(D.phone||'').replace(/\D/g,'').slice(-10),SAMPLE=D.sample==='1';
@@ -14,7 +14,7 @@ function vid(){try{var v=localStorage.getItem('ct_vid');if(!v){v='v'+Math.random
 function ev(name,f){if(SAMPLE||!SLUG)return;var b=Object.assign({name:name,page:SLUG,visitor_id:vid()},f||{});
  try{fetch('/api/events',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b),keepalive:true}).catch(function(){})}catch(e){}}
 
-var CSS='.cth{font-family:Inter,system-ui,sans-serif}.cth-sec{max-width:1100px;margin:28px auto;padding:0 20px}.cth-sec h2{margin:0 0 4px}.cth-sec>p{color:#666;margin:0 0 14px}'+
+var CSS='.cth-pulse{position:relative;z-index:5;animation:cthp 1.6s ease-out 5;box-shadow:0 0 0 0 rgba(245,165,36,.8)!important;outline:3px solid #F5A524!important;outline-offset:3px}@keyframes cthp{0%{box-shadow:0 0 0 0 rgba(245,165,36,.8)}70%{box-shadow:0 0 0 18px rgba(245,165,36,0)}100%{box-shadow:0 0 0 0 rgba(245,165,36,0)}}.cth-back{position:fixed;left:14px;top:14px;z-index:100003;background:#F5A524;color:#111!important;text-decoration:none;font:800 14px Inter,sans-serif;padding:11px 16px;border-radius:999px;animation:cthp 1.8s ease-out infinite}.cth{font-family:Inter,system-ui,sans-serif}.cth-sec{max-width:1100px;margin:28px auto;padding:0 20px}.cth-sec h2{margin:0 0 4px}.cth-sec>p{color:#666;margin:0 0 14px}'+
 '.cth-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}.cth-t{background:#111316;color:#fff;border:1px solid #24272d;border-radius:14px;padding:14px;text-align:left;cursor:pointer;font:inherit}.cth-t b{display:block;font-size:15px;margin:6px 0 3px}.cth-t small{color:#9aa0a8;font-size:12.5px;line-height:1.4;display:block}.cth-t i{font-style:normal;font-size:20px}'+
 '.cth-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2147483000;display:flex;align-items:flex-end;justify-content:center}.cth-sh{background:#fff;color:#111;width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px 18px 26px}.cth-sh h3{margin:0 0 4px;font-size:19px}.cth-sh .mu{color:#666;font-size:13px}.cth-sh input,.cth-sh textarea,.cth-sh select{background:#fff!important;color:#111!important;border:1px solid #ccc!important}.cth-x{float:right;border:0;background:#eee;border-radius:99px;width:32px;height:32px;font-size:18px;cursor:pointer}'+
 '.cth-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}.cth-tabs button{flex:1 1 auto;border:1px solid #ddd;background:#fff;border-radius:99px;padding:8px;font:700 13px Inter,sans-serif;cursor:pointer}.cth-tabs button.on{background:#111;color:#F5A524;border-color:#111}'+
@@ -211,7 +211,12 @@ function vidFrame(){if(!document.body.classList.contains('pvmode')||vidFrame.on)
 function sampleChat(){if(sampleChat.on)return;var isS=document.body.classList.contains('pvmode')||/^\/cedric(-moore)?\//.test(location.pathname);if(!isS)return;sampleChat.on=1;
  var sc=document.createElement('script');sc.src='https://humanchat.net/build/js/hb_latest.js?v=1.5.28';sc.crossOrigin='anonymous';sc.onload=function(){try{new AiBot({embedId:'3DvtdG39mSMA',remoteBaseUrl:'https://humanchat.net/',version:'1.5.28'})}catch(e){}};document.head.appendChild(sc)}
 
-function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(st);reorder();tools();rail();stay();vidFrame();sampleChat();events();newAnswer();helpful();setTimeout(helpful,1200);if(/[?&]print=1/.test(location.search))setTimeout(printHandout,800);
+
+/* arrivals from an explainer button: point at the spot, and a glowing way back */
+function arrive(){var q=new URLSearchParams(location.search),g=q.get('go'),T={save:'#vcfBtn',share:'#shBtn',qr:'#qrBtn'};
+ if(g&&T[g])setTimeout(function(){var e=document.querySelector(T[g]);if(!e)return;e.scrollIntoView({behavior:'smooth',block:'center'});e.classList.add('cth-pulse');setTimeout(function(){e.classList.remove('cth-pulse')},9000)},900);
+ if(q.get('back')==='1'){var b=el('a','cth cth-back','&larr; Back');b.href=document.referrer&&/claimtract\.app/.test(document.referrer)?document.referrer:'/';b.onclick=function(e){if(history.length>1){e.preventDefault();history.back()}};document.body.appendChild(b)}}
+function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(st);reorder();tools();rail();stay();vidFrame();sampleChat();arrive();events();newAnswer();helpful();setTimeout(helpful,1200);if(/[?&]print=1/.test(location.search))setTimeout(printHandout,800);
  window.CTHome={tools:function(){var o=$('.cth-sec');if(o)o.remove();tools()},binder:openBinder,read:readAloud,search:openSearch,print:printHandout,home:saveHome,late:lateBanner}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
