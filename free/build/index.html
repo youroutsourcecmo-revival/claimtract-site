@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/ct-page.css?v=1124d">
-<style>body:not(.pvmode){--bg:#F6F5F1;--card:#FFFFFF;--line:#E2DFD6;--tx:#14161A;--mut:#555B66;--dim:#8A8F98}body:not(.pvmode) .tpl[aria-pressed=true]{border-color:#F5A524;box-shadow:0 8px 22px rgba(245,165,36,.18)}body:not(.pvmode) input,body:not(.pvmode) textarea,body:not(.pvmode) select{background:#fff;color:#14161A;border-color:#D8D4C9}#bgsF{display:none!important}</style>
+<style>body:not(.pvmode){--bg:#F6F5F1;--card:#FFFFFF;--line:#E2DFD6;--tx:#14161A;--mut:#555B66;--dim:#8A8F98}body:not(.pvmode) .tpl[aria-pressed=true]{border-color:#F5A524;box-shadow:0 8px 22px rgba(245,165,36,.18)}body:not(.pvmode) input,body:not(.pvmode) textarea,body:not(.pvmode) select{background:#fff;color:#14161A;border-color:#D8D4C9}#bgsF,#swF{display:none!important}</style>
 </head>
 <body>
 <div class="wrap">
@@ -24,7 +24,7 @@
       <button class="tpl" data-t="paper" aria-pressed="true"><div class="mini m-paper"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Light</h3><p>Clean and bright. Easy to read on any phone.</p></button>
       <button class="tpl" data-t="storm" aria-pressed="false"><div class="mini m-storm"><div class="bar"><i></i><u></u></div><div class="hl"><s></s><s></s></div><div class="btns"><b></b><b></b></div><div class="row"><b></b><b></b><b></b></div></div><h3>Dark</h3><p>Dark and bold. Built for urgency.</p></button>
     </div>
-    <div class="f" style="margin-top:22px"><label>Your color</label><div class="sw" id="sw"></div><small>It colors your buttons and highlights. Pick the one that feels like you.</small></div>
+    <div class="f" id="swF" style="margin-top:22px"><label>Your color</label><div class="sw" id="sw"></div><small>It colors your buttons and highlights. Pick the one that feels like you.</small></div>
     <div class="f" id="bgsF"><label>Background video</label><div class="bgs" id="bgs"><button type="button" data-b="roof-table" aria-pressed="true"><img src="/assets/bg/bg-roof-table.jpg" alt=""><span>Kitchen table</span></button><button type="button" data-b="roof-yard" aria-pressed="false"><img src="/assets/bg/bg-roof-yard.jpg" alt=""><span>In the yard</span></button></div><small>Plays quietly behind your headline. Your words sit on a dark band on the left so they're easy to read.</small></div>
     <div class="nav"><span></span><button class="btn" data-go="2">Continue</button></div>
   </section>
