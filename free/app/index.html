@@ -736,25 +736,24 @@ function tab(n){if(n==='sophia'&&plan==='free'){openSx();return}if(typeof closeS
   ref:'Hi, this is '+fn+'. I was glad to help with your claim. If you know anyone dealing with property damage, I\'d be grateful if you passed along my website: '+u};return T[k]||T.meet}
  function loadImg(src){return new Promise(function(res){if(!src)return res(null);var im=new Image();im.crossOrigin='anonymous';im.onload=function(){res(im)};im.onerror=function(){res(null)};im.src=src})}
  function rr(c,x,y,w,h,r){c.beginPath();if(c.roundRect)c.roundRect(x,y,w,h,r);else c.rect(x,y,w,h)}
- async function card(d,msg,k,vu){var W=1080,H=1640,cv=document.createElement('canvas');cv.width=W;cv.height=H;var c=cv.getContext('2d'),cx=W/2,F='Inter, Arial, sans-serif',fn=d.name.split(' ')[0];
+ async function card(d,msg,k,vu){var W=1080,H=1060,cv=document.createElement('canvas');cv.width=W;cv.height=H;var c=cv.getContext('2d'),cx=W/2,F='Inter, Arial, sans-serif',fn=d.name.split(' ')[0];
   c.fillStyle='#F4F1EA';c.fillRect(0,0,W,H);
-  /* white frame */
-  c.fillStyle='#fff';rr(c,60,50,W-120,H-100,48);c.fill();c.strokeStyle='#E7E2D8';c.lineWidth=4;c.stroke();
-  if(d.logo){var lg=await loadImg(d.logo);if(lg){var lh=90,lw=Math.min(200,lg.width*lh/lg.height);c.drawImage(lg,W-110-lw,90,lw,lh)}}
-  /* headshot, name, license */
-  var im=await loadImg(d.photo),R2=110,py=210;c.beginPath();c.arc(cx,py,R2+12,0,7);c.fillStyle='#F5A524';c.fill();c.save();c.beginPath();c.arc(cx,py,R2,0,7);c.clip();c.fillStyle='#ddd';c.fill();if(im){var s2=Math.max(2*R2/im.width,2*R2/im.height);c.drawImage(im,cx-im.width*s2/2,py-im.height*s2/2,im.width*s2,im.height*s2)}c.restore();
-  c.textAlign='center';c.fillStyle='#111';c.font='900 62px '+F;c.fillText(d.name,cx,410);
-  c.fillStyle='#0E9F6E';c.font='800 34px '+F;c.fillText('✓ '+(d.lic?'License '+d.lic+' · ':'')+'Verified',cx,462);
-  c.fillStyle='#555';c.font='500 30px '+F;c.fillText('Licensed Public Adjuster'+(d.area?' · '+d.area:''),cx,506);
-  /* QR */
-  var qs=400,qx=cx-qs/2,qy=550;try{if(typeof qrcode==='function'&&(vu||d.url)){var q=qrcode(0,'M');q.addData(vu||d.url);q.make();var n=q.getModuleCount(),cs=qs/n;c.fillStyle='#111';for(var a=0;a<n;a++)for(var b2=0;b2<n;b2++)if(q.isDark(a,b2))c.fillRect(qx+b2*cs,qy+a*cs,cs+.5,cs+.5)}}catch(e){}
-  c.fillStyle='#555';c.font='600 28px '+F;c.fillText('Scan to watch',cx,qy+qs+42);
-  /* the video square */
-  var vy=qy+qs+80,vs=400,vx=cx-vs/2,bg=await loadImg('/assets/bg/bg-roof-table.jpg');rr(c,vx,vy,vs,vs,28);c.save();c.clip();c.fillStyle='#14161A';c.fillRect(vx,vy,vs,vs);if(bg){var s3=Math.max(vs/bg.width,vs/bg.height);c.drawImage(bg,cx-bg.width*s3/2,vy+vs/2-bg.height*s3/2,bg.width*s3,bg.height*s3)}var gr=c.createLinearGradient(0,vy,0,vy+vs);gr.addColorStop(0,'rgba(0,0,0,.15)');gr.addColorStop(1,'rgba(0,0,0,.8)');c.fillStyle=gr;c.fillRect(vx,vy,vs,vs);c.restore();
-  var pc=vy+170;c.beginPath();c.arc(cx,pc,64,0,7);c.fillStyle='#F5A524';c.fill();c.beginPath();c.moveTo(cx-20,pc-34);c.lineTo(cx-20,pc+34);c.lineTo(cx+34,pc);c.closePath();c.fillStyle='#111';c.fill();
-  c.fillStyle='#fff';c.font='800 34px '+F;c.fillText('What a public adjuster',cx,vy+310);c.fillText('can do for you',cx,vy+352);c.fillStyle='#F5A524';c.font='700 24px '+F;c.fillText('A SHORT VIDEO FROM '+fn.toUpperCase(),cx,vy+386);
+  c.fillStyle='#fff';rr(c,36,32,W-72,H-64,44);c.fill();c.strokeStyle='#E7E2D8';c.lineWidth=4;c.stroke();
+  if(d.logo){var lg=await loadImg(d.logo);if(lg){var lh=80,lw=Math.min(180,lg.width*lh/lg.height);c.drawImage(lg,W-80-lw,70,lw,lh)}}
+  /* headshot left, name + license right */
+  var im=await loadImg(d.photo),R2=96,px=190,py=176;c.beginPath();c.arc(px,py,R2+10,0,7);c.fillStyle='#F5A524';c.fill();c.save();c.beginPath();c.arc(px,py,R2,0,7);c.clip();c.fillStyle='#ddd';c.fill();if(im){var s2=Math.max(2*R2/im.width,2*R2/im.height);c.drawImage(im,px-im.width*s2/2,py-im.height*s2/2,im.width*s2,im.height*s2)}c.restore();
+  c.textAlign='left';c.fillStyle='#111';c.font='900 60px '+F;c.fillText(d.name,320,158);
+  c.fillStyle='#0E9F6E';c.font='800 32px '+F;c.fillText('✓ '+(d.lic?'License '+d.lic+' · ':'')+'Verified',320,206);
+  c.fillStyle='#555';c.font='500 28px '+F;c.fillText('Public Adjuster'+(d.area?' · '+d.area:''),320,248);
+  /* QR and video, side by side */
+  var sz=420,gy=320,qx=84,vx=W-84-sz;
+  try{if(typeof qrcode==='function'&&(vu||d.url)){var q=qrcode(0,'M');q.addData(vu||d.url);q.make();var n=q.getModuleCount(),cs=sz/n;c.fillStyle='#111';for(var a=0;a<n;a++)for(var b2=0;b2<n;b2++)if(q.isDark(a,b2))c.fillRect(qx+b2*cs,gy+a*cs,cs+.5,cs+.5)}}catch(e){}
+  var bg=await loadImg('/assets/bg/bg-roof-table.jpg');rr(c,vx,gy,sz,sz,28);c.save();c.clip();c.fillStyle='#14161A';c.fillRect(vx,gy,sz,sz);if(bg){var s3=Math.max(sz/bg.width,sz/bg.height);c.drawImage(bg,vx+sz/2-bg.width*s3/2,gy+sz/2-bg.height*s3/2,bg.width*s3,bg.height*s3)}var gr=c.createLinearGradient(0,gy,0,gy+sz);gr.addColorStop(0,'rgba(0,0,0,.15)');gr.addColorStop(1,'rgba(0,0,0,.82)');c.fillStyle=gr;c.fillRect(vx,gy,sz,sz);c.restore();
+  var vc=vx+sz/2,pc=gy+160;c.beginPath();c.arc(vc,pc,62,0,7);c.fillStyle='#F5A524';c.fill();c.beginPath();c.moveTo(vc-19,pc-33);c.lineTo(vc-19,pc+33);c.lineTo(vc+33,pc);c.closePath();c.fillStyle='#111';c.fill();
+  c.textAlign='center';c.fillStyle='#fff';c.font='800 34px '+F;c.fillText('What a public adjuster',vc,gy+318);c.fillText('can do for you',vc,gy+358);c.fillStyle='#F5A524';c.font='700 22px '+F;c.fillText('A SHORT VIDEO FROM '+fn.toUpperCase(),vc,gy+392);
+  c.fillStyle='#555';c.font='600 28px '+F;c.fillText('Scan to watch',qx+sz/2,gy+sz+44);c.fillText('Tap to watch',vc,gy+sz+44);
   /* share line */
-  var sy=vy+vs+40;c.fillStyle='#14161A';rr(c,110,sy,W-220,96,48);c.fill();c.fillStyle='#fff';c.font='800 34px '+F;c.fillText('Know a homeowner? Tap to share this card.',cx,sy+60);
+  var sy=gy+sz+80;c.fillStyle='#14161A';rr(c,84,sy,W-168,96,48);c.fill();c.fillStyle='#fff';c.font='800 36px '+F;c.fillText('Know a homeowner? Tap to share this card.',cx,sy+61);
   return new Promise(function(res){cv.toBlob(function(b){res(b)},'image/png')})}
  function preview(b,msg,k){return new Promise(function(res){var u=URL.createObjectURL(b),m=document.createElement('div');m.id='shpv';m.innerHTML='<style>#shpv{position:absolute;inset:0;z-index:400;background:rgba(10,11,13,.92);display:flex;flex-direction:column;padding:14px;gap:10px;overflow:auto}#shpv img{width:100%;max-width:440px;margin:0 auto;border-radius:14px;display:block}#shpv textarea,#shpv .bt,#shpv .t{width:100%;max-width:440px;margin-left:auto;margin-right:auto;box-sizing:border-box}#shpv .t{font:700 10px Inter,sans-serif;letter-spacing:.08em;color:#F5A524}#shpv textarea{display:block;min-height:120px;color:#fff;font:15px/1.45 Inter,sans-serif;margin:0;background:#1d1f24;border:1px solid #3a3d44;border-radius:12px;padding:10px 12px;resize:vertical;outline:none}#shpv textarea:focus{border-color:#F5A524}#shpv .bt{display:flex;gap:8px;position:sticky;bottom:0;padding-top:6px}#shpv button{flex:1;min-height:44px;border-radius:12px;border:0;font:800 14px Inter,sans-serif;cursor:pointer}#shpv .go{background:#F5A524;color:#111}#shpv .no{background:#2a2d33;color:#fff}</style><div class="t">WHAT '+(k==='ref'?'THEY':'MARY')+' GETS</div><img alt="Your all-in-one card"><div class="t">YOUR MESSAGE &middot; TYPE IT YOUR WAY</div><textarea rows="6"></textarea><div class="bt"><button class="no" type="button">Close</button><button class="go" type="button">Send it</button></div>';
   m.querySelector('img').src=u;var ta=m.querySelector('textarea');ta.value=msg;var host=document.getElementById('app')||document.body;host.appendChild(m);
