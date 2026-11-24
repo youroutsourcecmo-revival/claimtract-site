@@ -824,7 +824,7 @@ found:['Get found','A short checklist to set up your free Google profile right. 
 insights:['What\'s working','See which pages homeowners read and what they search for. It tells you what to write about next.']
 };
 var HB_EXPLAINER='R7XfQdKdjVWH';
-var HB_IDS={week:'NQ27QFhQz98u',g_articles:'Fdpf7GVbSN7U',g_facebook:'9CNNHmKxjrJM',g_instagram:'VSCSJgj9EWrY',g_google:'CaPEtCnk6gj6',sophia:'xmZpxFN9VRzh',a_open:'ACGsVhKzgaAC',a_saved:'zTPX44NB6FLs',a_carrier:'MEG2dKhvC5cD',a_roofer:'JCCfXGmJeD2u',a_scan:'PBE3N5uxCWzd',a_read:'9XvtZgU3jHbg',a_booked:'j8XSEq5CyAHK',a_binder:'7h8xY4DBzUSk',t_binder:'C3KqM6uue7Bh',t_install:'vxQevJTCNNZs',t_night:'b7xpuvPTbAAy',t_txt:'MHpyqRmheZy9',t_read:'aXDGWLtqZ9JQ',t_search:'sunp3A4R23q3',t_print:'LVcC2f4MhJYC',t_help:'yaqJHWCxFkHX',letters:'SzjzKYWs8Dnv',qr:'BBEu5vC2xLXM',card:'fXNDWaPM5dzs',book:'8NPFp7ZpmNQh',video:'Keb9bTtHpyaY',edit:'8JPLvmqC6dzk',tools:'gSTWCERQ7GGX',found:'3aUTN4RUh7Sh',insights:'8g7MushdLdLE',pages:'vZeBtjjybYt8',livechat:'vct8KB5WuCQp',avail:'XBgA8peVHDLj',earn:'usdEM7ZQCG4L',mail:'hmYL9cZv8fZS',trust:'QK6q9arJrd83'};
+var HB_IDS={week:'NQ27QFhQz98u',g_articles:'Fdpf7GVbSN7U',g_facebook:'9CNNHmKxjrJM',g_instagram:'VSCSJgj9EWrY',g_google:'CaPEtCnk6gj6',sophia:'xmZpxFN9VRzh',a_open:'ACGsVhKzgaAC',a_saved:'zTPX44NB6FLs',a_carrier:'MEG2dKhvC5cD',a_roofer:'JCCfXGmJeD2u',a_scan:'PBE3N5uxCWzd',a_read:'9XvtZgU3jHbg',a_booked:'j8XSEq5CyAHK',a_binder:'7h8xY4DBzUSk',t_binder:'C3KqM6uue7Bh',t_install:'vxQevJTCNNZs',t_night:'b7xpuvPTbAAy',t_txt:'MHpyqRmheZy9',t_read:'aXDGWLtqZ9JQ',t_search:'sunp3A4R23q3',t_print:'LVcC2f4MhJYC',t_help:'yaqJHWCxFkHX',letters:'SzjzKYWs8Dnv',qr:'BBEu5vC2xLXM',card:'fXNDWaPM5dzs',book:'8NPFp7ZpmNQh',video:'Keb9bTtHpyaY',edit:'8JPLvmqC6dzk',tools:'gSTWCERQ7GGX',found:'3aUTN4RUh7Sh',insights:'8g7MushdLdLE',pages:'vZeBtjjybYt8',livechat:'vct8KB5WuCQp',avail:'XBgA8peVHDLj',earn:'usdEM7ZQCG4L',invite:'gRNke6FPm6Xq',mail:'hmYL9cZv8fZS',trust:'QK6q9arJrd83'};
 var hbWant=false;
 document.addEventListener('click',function(e){var h=document.getElementById('hbs');if(h&&h.contains(e.target))hbStop()});
 /* Same method as Blog Scoreboard (lib/explainer-media.js + _bsbBuildCutout): HumanBot's own player is NOT on the page,
@@ -876,7 +876,7 @@ app.addEventListener('click',function(e){
  if(a==='payas'){window.__pay=t.dataset.v;render('earn');return}
   if(a==='payout'){toast('Stripe opens here','A secure Stripe form for your bank. Takes about 3 minutes.');return}
   if(a==='meetnow'){window.open('https://meet.google.com/new','_blank','noopener');toast('Your Meet call is opening','Copy the link from Meet and text it to the homeowner');return}
-  if(a==='meetinv'){toast('Video call invite ready','He gets your Meet link and a time picker');return}
+  if(a==='meetinv'){toast('Video call invite ready','He gets your Meet link and a time picker');if(tog.xp&&typeof xpsPlay==='function')xpsPlay(HB_IDS.invite);return}
   if(a==='copy'){t.textContent='Copied';t.classList.add('ok');return}
   if(a==='wk5'||a==='wk6'){for(var d=0;d<5;d++)tog['d'+d]=1;tog.d5=a==='wk6'?1:0;tog.d6=0;var sc=cur.querySelector('.scr').scrollTop;render('hours');cur.querySelector('.scr').scrollTop=sc;return}
   if(a==='pages'){openSheet();return}
