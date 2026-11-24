@@ -321,7 +321,7 @@ var faq='<div class="sec faq"><h2>Questions homeowners ask</h2>'+FAQ.map(functio
  pv.querySelectorAll('.faq details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)pv.querySelectorAll('.faq details').forEach(function(o){if(o!==d)o.open=false})})});
  $('url').textContent='claimtract.app/'+slug()+'  (private preview)';
  var sw=$('swap');sw.innerHTML='';[['paper','Light'],['storm','Dark']].forEach(function(t){var b=document.createElement('button');b.type='button';b.textContent=t[1];b.setAttribute('aria-pressed',String(S.tpl===t[0]));b.onclick=function(){S.tpl=t[0];render();track('free_swap',t[0])};sw.appendChild(b)});
- ctRot();track('free_preview');try{var _s=document.querySelector('script[src*="ct-home.js"]');if(_s){_s.dataset.first=fn;_s.dataset.name=name;_s.dataset.phone=d||''}if(window.CTHome)CTHome.tools()}catch(_e){}}
+ ctRot();track('free_preview');try{var _s=document.querySelector('script[src*="ct-home.js?v=1124e"]');if(_s){_s.dataset.first=fn;_s.dataset.name=name;_s.dataset.phone=d||''}if(window.CTHome)CTHome.tools()}catch(_e){}}
 
 function ctRot(){var W=['Water','Wind','Hail','Roof','Hurricane','Fire','Smoke','Lightning','Mold','Sinkhole','Stucco','Plumbing','Burglary','Automobile'];
  document.querySelectorAll('.hero2 .rot').forEach(function(r){var h=r.closest('.hero2');if(!h)return;var w=r.querySelector('.rw'),bar=h.querySelector('.rbar i'),dd=h.querySelector('.rdots');if(!w||!bar||!dd)return;
