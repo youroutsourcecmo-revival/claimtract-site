@@ -1,7 +1,7 @@
 /* ClaimTract homeowner tools for adjuster pages.
    Claim binder (saved on the homeowner's phone; shared only when they tap Send), 3 a.m. mode,
    read it to me, search this page, print a handout, save to home screen, and homeowner events.
-   Include: <script src="/assets/ct-home.js?v=1124e" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
+   Include: <script src="/assets/ct-home.js?v=1124f" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
 (function(){
 var S=document.currentScript||document.querySelector('script[src*="ct-home.js"]');if(!S)return;
 var D=S.dataset,SLUG=D.slug||location.pathname.split('/')[1]||'',FIRST=D.first||'your adjuster',NAME=D.name||FIRST,PH=(D.phone||'').replace(/\D/g,'').slice(-10),SAMPLE=D.sample==='1';
@@ -22,7 +22,7 @@ var CSS='.cth{font-family:Inter,system-ui,sans-serif}.cth-sec{max-width:1100px;m
 '.cth-ck{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #f0f0f0;font-size:14.5px}.cth-ck input{width:20px;height:20px;accent-color:#111}'+
 '.cth-late{background:#0d1b2a;color:#e8eef5;padding:18px 20px}.cth-late .in{max-width:1100px;margin:0 auto}.cth-late b{font-size:18px;display:block;margin-bottom:6px}.cth-late ol{margin:6px 0 10px 20px;padding:0;line-height:1.6}.cth-late a{display:inline-block;background:#F5A524;color:#111;font-weight:800;text-decoration:none;border-radius:99px;padding:9px 16px;margin-right:8px}.cth-late button{background:none;border:1px solid #4a5a6a;color:#cfd8e2;border-radius:99px;padding:8px 14px;cursor:pointer}'+
 'mark.cth-hit{background:#F5A524;color:#111;border-radius:3px}.cth-sbar{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:2147483001;background:#111;color:#fff;border-radius:99px;padding:6px 6px 6px 14px;display:flex;gap:6px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}.cth-sbar input{border:0;background:#222;color:#fff;border-radius:99px;padding:8px 12px;font:14px Inter,sans-serif;width:180px}.cth-sbar button{border:0;background:#F5A524;color:#111;border-radius:99px;padding:8px 12px;font:700 13px Inter,sans-serif;cursor:pointer}.cth-sbar span{font-size:12px;color:#aaa;min-width:44px;text-align:center}'+
-'#cth-print{display:none}@media print{body>*{display:none!important}#cth-print{display:block!important;font-family:Inter,Arial,sans-serif;color:#000;padding:24px}#cth-print h1{margin:0 0 4px}#cth-print .q{float:right;width:150px;height:150px}#cth-print li{margin:4px 0}}'+'.cth-rail{display:none}@media(min-width:1320px){.cth-rail{display:block;position:fixed;z-index:25;top:96px;left:max(12px,calc((100vw - 1040px)/2 - 248px));width:224px;max-height:calc(100vh - 110px);overflow:auto;scrollbar-width:none}.cth-hasrail .hsh-card{display:none}.cth-hasrail .cth-sec .cth-g{display:none}.cth-hasrail .cth-sec{display:none}}'
+'#cth-print{display:none}@media print{body>*{display:none!important}#cth-print{display:block!important;font-family:Inter,Arial,sans-serif;color:#000;padding:24px}#cth-print h1{margin:0 0 4px}#cth-print .q{float:right;width:150px;height:150px}#cth-print li{margin:4px 0}}'+'.cth-rail{display:none}@media(min-width:1320px){.cth-rail{display:block!important;position:fixed;z-index:25;top:96px;left:max(12px,calc((100vw - 1040px)/2 - 248px));width:224px;max-height:calc(100vh - 110px);overflow:auto;scrollbar-width:none}.cth-hasrail .cth-sec .cth-g{display:none}.cth-hasrail .cth-sec{display:none}}'
 +'.cth-rc{zoom:.8;display:flex;justify-content:center}.cth-rc .hsh-card{display:block!important;width:auto;margin:0}'
 +'.cth-rsave{display:block;width:100%;margin:10px 0 14px;border:0;border-radius:12px;background:#111;color:#fff;font:800 13px Inter,sans-serif;padding:11px 10px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.18);transition:transform .15s}.cth-rsave:hover{transform:translateY(-2px)}'
 +'.cth-rh{margin:0 2px 8px;font:800 11px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:#8F5400}'
@@ -182,14 +182,14 @@ function newAnswer(){var b=load();if(!b||!b.auto||!b.questions||!b.questions.som
 
 /* sticky left rail on wide screens: who-to-call card + homeowner tools */
 function rail(){if($('.cth-rail'))return;var card=$('.hsh-card');if(!card){if((rail.n=(rail.n||0)+1)<20)setTimeout(rail,500);return}
- var r=el('aside','cth cth-rail');var c=el('div','cth-rc');c.appendChild(card.cloneNode(true));r.appendChild(c);
+ var r=el('aside','cth cth-rail');var c=el('div','cth-rc');var ph=document.createComment('hsh');card.parentNode.insertBefore(ph,card);var mq=matchMedia('(min-width:1320px)');function place(){if(mq.matches)c.appendChild(card);else ph.parentNode.insertBefore(card,ph.nextSibling)}r.appendChild(c);
  var sv=el('button','cth-rsave','&#128241; Save '+esc(FIRST)+' to my phone');sv.type='button';sv.onclick=function(){var b=$('#vcfBtn');if(b)b.click();ev('rail_save')};r.appendChild(sv);
  var t=el('div','cth-rt','<p class="cth-rh">Free tools from '+esc(FIRST)+'</p>'+
   '<button class="cth-rb" data-a="binder"><i style="background:linear-gradient(135deg,#F5A524,#E07B00)">&#128210;</i><span><b>Claim binder</b><small>Call log, damage list, checklist. Print it.</small></span></button>'+
   '<button class="cth-rb" data-a="print"><i style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">&#128424;</i><span><b>Kitchen-table handout</b><small>First steps, one page</small></span></button>'+
   '<button class="cth-rb" data-a="search"><i style="background:linear-gradient(135deg,#10B981,#047857)">&#128269;</i><span><b>Find my answer</b><small>Search this page</small></span></button>');
  r.appendChild(t);t.addEventListener('click',function(e){var b=e.target.closest('.cth-rb');if(!b)return;var a=b.dataset.a;ev('rail_'+a);if(a==='binder')openBinder();else if(a==='print')printHandout();else if(a==='search')openSearch()});
- document.body.appendChild(r);document.body.classList.add('cth-hasrail')}
+ document.body.appendChild(r);document.body.classList.add('cth-hasrail');place();mq.addEventListener&&mq.addEventListener('change',place)}
 
 function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(st);reorder();tools();rail();events();newAnswer();helpful();setTimeout(helpful,1200);if(/[?&]print=1/.test(location.search))setTimeout(printHandout,800);
  window.CTHome={tools:function(){var o=$('.cth-sec');if(o)o.remove();tools()},binder:openBinder,read:readAloud,search:openSearch,print:printHandout,home:saveHome,late:lateBanner}}
