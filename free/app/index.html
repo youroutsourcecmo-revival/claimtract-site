@@ -1331,7 +1331,7 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
 
  var step='menu';
  function draw(){var f=isF();if(!f)step='form';var X='<button class="x" data-w="close" aria-label="Close">&times;</button>';
-  if(step==='menu'){bx.innerHTML=X+'<h2>Founder line to Ezekiel</h2><div class="menu"><button data-w="bug">Something\'s broken</button><button data-w="idea" class="y">I have an idea</button><button data-w="road">See the Roadmap &rarr;</button></div>';return}
+  if(step==='menu'){bx.innerHTML=X+'<h2>Founder line to Ezekiel</h2><div class="menu"><button data-w="bug">Something\'s broken</button><button data-w="idea" class="y">I have an idea</button><button data-w="vid"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg>Record a video for Ezekiel</button><button data-w="road">See the Roadmap &rarr;</button></div>';return}
   var hasSR=!!(window.SpeechRecognition||window.webkitSpeechRecognition);
   bx.innerHTML=X+'<h2>'+(f?'<button class="bk2" data-w="menu" aria-label="Back">&lsaquo;</button>':'')+(f?(kind==='bug'?'Something\'s broken':'I have an idea'):'Report a problem')+'</h2>'+
   '<textarea id="wrt" placeholder="'+(kind==='bug'?'What did you tap, and what happened?':'What should it do for you?')+'"></textarea>'+
@@ -1378,6 +1378,63 @@ new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){if(ms[i].type==='
     return api('POST','/api/app/events',{name:'wrench_'+kind,feedback:pk}).then(function(k){fin(ok(k)?'sent':'fail');if(!ok(k))sh._keep=msg})})}
   if(a==='retry'){draw();bx.querySelector('#wrt').value=sh._keep||'';return}
  });
+
+ /* ===== Nov 25: record-yourself feedback (founders). Front camera, plus the screen on laptops. Up to 3 minutes. ===== */
+ (function(){var MAXS=180,css2=document.createElement('style');css2.textContent=
+  '#wrv{position:absolute;inset:0;z-index:170;display:none;background:#0B0D10;color:#E9ECF1;font:13px Inter,system-ui,sans-serif;flex-direction:column}#wrv.on{display:flex}'+
+  '#wrv .hd{display:flex;align-items:center;gap:8px;padding:12px 14px}#wrv .hd b{flex:1;font:800 15px Inter,system-ui}#wrv .hd button{background:none;border:0;color:inherit;font-size:24px;line-height:1;cursor:pointer}'+
+  '#wrv .st{position:relative;flex:1;min-height:0;margin:0 12px;border-radius:16px;overflow:hidden;background:#000}#wrv video{width:100%;height:100%;object-fit:cover;display:block}#wrv video.me{transform:scaleX(-1)}'+
+  '#wrv .tm{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.6);padding:4px 9px;border-radius:99px;font:700 12px Inter;display:none}#wrv .tm.on{display:block}#wrv .tm i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#E53935;margin-right:6px;animation:wrvb 1s steps(1) infinite}@keyframes wrvb{50%{opacity:.2}}'+
+  '#wrv .msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;line-height:1.5}'+
+  '#wrv .ft{padding:12px 14px 16px;display:grid;gap:8px}#wrv .md{display:flex;gap:6px}#wrv .md span{flex:1;text-align:center;padding:9px 6px;border-radius:10px;border:1px solid rgba(255,255,255,.16);font-weight:700;font-size:12px;cursor:pointer}#wrv .md span.on{background:#FFC400;color:#14171C;border-color:#FFC400}'+
+  '#wrv .rb{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px;border:0;border-radius:12px;background:#E53935;color:#fff;font:800 15px Inter,system-ui;cursor:pointer}#wrv .rb.stop{background:#fff;color:#111}'+
+  '#wrv .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}#wrv .gh{padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:none;color:inherit;font:700 14px Inter;cursor:pointer}#wrv .go{padding:12px;border:0;border-radius:12px;background:#FFC400;color:#14171C;font:800 14px Inter;cursor:pointer}#wrv .go[disabled]{opacity:.5}'+
+  '#wrv textarea{width:100%;box-sizing:border-box;min-height:54px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:inherit;padding:9px;font:13px Inter}#wrv .bar{height:4px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden}#wrv .bar i{display:block;height:100%;width:0;background:#FFC400}';
+  document.head.appendChild(css2);
+  var v=document.createElement('div');v.id='wrv';app.appendChild(v);
+  var MD=navigator.mediaDevices||{},canScreen=!!MD.getDisplayMedia&&!/iP(hone|ad|od)|Android/i.test(navigator.userAgent);
+  var mode='cam',streams=[],mr=null,chunks=[],blob=null,secs=0,tick=null,raf=null,mime='';
+  function pick(){var c=['video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'];for(var i=0;i<c.length;i++){try{if(window.MediaRecorder&&MediaRecorder.isTypeSupported(c[i]))return c[i]}catch(e){}}return ''}
+  function stopAll(){streams.forEach(function(st){st.getTracks().forEach(function(t){try{t.stop()}catch(e){}})});streams=[];if(raf){cancelAnimationFrame(raf);raf=null}clearInterval(tick);tick=null}
+  function fmt(n){return Math.floor(n/60)+':'+('0'+n%60).slice(-2)}
+  function shell(stage,foot){v.innerHTML='<div class="hd"><b>Record a video for Ezekiel</b><button data-v="x" aria-label="Close">&times;</button></div><div class="st">'+stage+'</div><div class="ft">'+foot+'</div>'}
+  function ready(err){shell('<video class="lv me" playsinline muted autoplay></video><div class="tm"><i></i><span>0:00</span></div>'+(err?'<div class="msg">'+err+'</div>':''),
+   (canScreen?'<div class="md"><span data-v="cam" class="'+(mode==='cam'?'on':'')+'">Just me</span><span data-v="scr" class="'+(mode==='scr'?'on':'')+'">Me + my screen</span></div>':'')+
+   '<button class="rb" data-v="rec"'+(err?' disabled':'')+'><span>&#9679;</span>Start recording</button><small style="opacity:.7;text-align:center">Up to 3 minutes. Show him what you see, say what you\'d change.</small>');
+   if(!err)preview()}
+  function preview(){stopAll();if(!MD.getUserMedia)return ready('This browser can\'t open the camera. Try Safari or Chrome.');
+   MD.getUserMedia({video:{facingMode:'user',width:{ideal:720},height:{ideal:1280}},audio:{echoCancellation:true,noiseSuppression:true}}).then(function(st){streams.push(st);var lv=v.querySelector('.lv');if(lv){lv.srcObject=st;lv.play().catch(function(){})}lg('wrench','video_camera_on')})
+   .catch(function(){ready('Camera or microphone is blocked. Allow them for claimtract.app in your browser settings, then try again.')})}
+  function composite(cam,scr){var c=document.createElement('canvas'),x=c.getContext('2d'),sv=document.createElement('video'),cv=document.createElement('video');sv.srcObject=scr;cv.srcObject=cam;sv.muted=cv.muted=true;sv.play();cv.play();
+   var st=scr.getVideoTracks()[0].getSettings();c.width=Math.min(1600,st.width||1280);c.height=Math.round(c.width*((st.height||720)/(st.width||1280)));
+   (function draw(){raf=requestAnimationFrame(draw);try{x.drawImage(sv,0,0,c.width,c.height);var r=Math.round(c.height*.22),cx=c.width-r-24,cy=c.height-r-24;x.save();x.beginPath();x.arc(cx,cy,r,0,7);x.closePath();x.clip();var vw=cv.videoWidth||640,vh=cv.videoHeight||480,s=Math.max(2*r/vw,2*r/vh);x.translate(cx,cy);x.scale(-1,1);x.drawImage(cv,-vw*s/2,-vh*s/2,vw*s,vh*s);x.restore();x.lineWidth=6;x.strokeStyle='#FFC400';x.beginPath();x.arc(cx,cy,r,0,7);x.stroke()}catch(e){}})();
+   var out=c.captureStream(30);cam.getAudioTracks().forEach(function(t){out.addTrack(t)});return out}
+  function start(){var cam=streams[0];if(!cam)return;var go=function(st){chunks=[];blob=null;mime=pick();try{mr=new MediaRecorder(st,mime?{mimeType:mime,videoBitsPerSecond:1500000}:{videoBitsPerSecond:1500000})}catch(e){return ready('This browser can\'t record video. Try Safari or Chrome.')}
+     mr.ondataavailable=function(e){if(e.data&&e.data.size)chunks.push(e.data)};mr.onstop=function(){blob=new Blob(chunks,{type:(mr.mimeType||mime||'video/webm').split(';')[0]});stopAll();review()};mr.start(1000);
+     secs=0;var tm=v.querySelector('.tm');tm.classList.add('on');var rb=v.querySelector('.rb');rb.classList.add('stop');rb.innerHTML='&#9632; Stop';rb.dataset.v='stop';var md=v.querySelector('.md');if(md)md.style.display='none';
+     tick=setInterval(function(){secs++;tm.lastChild.textContent=fmt(secs)+' / 3:00';if(secs>=MAXS)stop()},1000);lg('wrench','video_rec_'+mode)};
+   if(mode==='scr'){MD.getDisplayMedia({video:{frameRate:30},audio:false}).then(function(scr){streams.push(scr);scr.getVideoTracks()[0].addEventListener('ended',function(){if(mr&&mr.state==='recording')stop()});var lv=v.querySelector('.lv');lv.srcObject=scr;lv.classList.remove('me');go(composite(cam,scr))}).catch(function(){mode='cam';ready()})}
+   else go(cam)}
+  function stop(){if(mr&&mr.state!=='inactive')try{mr.stop()}catch(e){}}
+  function review(){var u=URL.createObjectURL(blob);shell('<video class="pb" playsinline controls src="'+u+'"></video>',
+   '<textarea id="wrvn" placeholder="Anything to add? (optional)"></textarea><div class="bar" style="display:none"><i></i></div><div class="g2"><button class="gh" data-v="again">Record again</button><button class="go" data-v="send">Send to Ezekiel</button></div><small style="opacity:.7;text-align:center">'+fmt(secs)+' · '+(blob.size/1048576).toFixed(1)+' MB</small>')}
+  function done(t,dl){var foot='<button class="go" data-v="x">Done</button>';if(dl)foot='<div class="g2"><button class="gh" data-v="dl">Save to my phone</button><button class="go" data-v="send">Try again</button></div>';
+   v.querySelector('.st').innerHTML='<div class="msg"><b style="font-size:16px">'+t+'</b></div>';v.querySelector('.ft').innerHTML=foot}
+  function send(){var b=v.querySelector('[data-v="send"]');if(b){b.disabled=true;b.textContent='Sending…'}var ne=v.querySelector('#wrvn'),note=ne?ne.value:(v._note||'');v._note=note;
+   if(!R)return done('Sample only. Yours goes straight to Ezekiel.');
+   var pk=packet('video',note);pk.video={seconds:secs,mode:mode,type:blob.type,bytes:blob.size};
+   var fd=new FormData();fd.append('meta',JSON.stringify(pk));fd.append('video',blob,'founder-video.'+(blob.type.indexOf('mp4')>=0?'mp4':'webm'));
+   var x=new XMLHttpRequest();x.open('POST','/api/app/feedback/video');x.withCredentials=true;var bar=v.querySelector('.bar');if(bar)bar.style.display='block';
+   x.upload.onprogress=function(e){if(e.lengthComputable&&bar)bar.firstChild.style.width=Math.round(e.loaded/e.total*100)+'%'};
+   x.onload=function(){if(x.status>=200&&x.status<300){lg('wrench','video_sent');done('Sent. Ezekiel will watch it himself.')}else{lg('wrench','video_fail_'+x.status);done('That didn\'t go through. Save it and try again.',true)}};
+   x.onerror=function(){lg('wrench','video_fail_net');done('No connection. Save it and try again.',true)};x.send(fd)}
+  function close(){stop();stopAll();v.classList.remove('on');v.innerHTML=''}
+  v.addEventListener('click',function(e){var t=e.target.closest('[data-v]');if(!t)return;var a=t.dataset.v;
+   if(a==='x')return close();if(a==='cam'||a==='scr'){mode=a;return ready()}if(a==='rec')return start();if(a==='stop')return stop();if(a==='again'){blob=null;return ready()}if(a==='send')return send();
+   if(a==='dl'&&blob){var l=document.createElement('a');l.href=URL.createObjectURL(blob);l.download='video-for-ezekiel.'+(blob.type.indexOf('mp4')>=0?'mp4':'webm');document.body.appendChild(l);l.click();l.remove()}});
+  sh.addEventListener('click',function(e){var w=e.target.closest&&e.target.closest('[data-w="vid"]');if(!w)return;e.stopImmediatePropagation();sh.classList.remove('on');mode='cam';v.classList.add('on');lg('wrench','video_open');
+   if(!window.MediaRecorder)return ready('This browser can\'t record video. Try Safari or Chrome.');ready()},true);
+ })();
  sync();
 })();
 

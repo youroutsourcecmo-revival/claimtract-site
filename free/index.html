@@ -288,11 +288,15 @@ body.ct-ezdock .hero>.ez-p{display:none}
 
 /* YouTube-style play button over Ezekiel; the CTA drawer stays on top of everything */
 .hero .in>.hdr{z-index:20!important}
-.hero>.ez-p{right:auto!important;top:0;left:0;width:68px;height:48px;padding:0!important;border-radius:14px!important;background:#FF0033!important;color:transparent!important;font-size:0!important;box-shadow:0 8px 22px rgba(0,0,0,.3)!important;transition:transform .15s,opacity .2s;z-index:8}
-.hero>.ez-p::before{content:"";position:absolute;left:27px;top:14px;border-style:solid;border-width:10px 0 10px 17px;border-color:transparent transparent transparent #fff}
+.hero>.ez-p{right:auto!important;top:0;left:0;width:68px;height:48px;padding:0!important;border-radius:14px!important;background:#F5A524!important;color:transparent!important;font-size:0!important;box-shadow:0 8px 22px rgba(0,0,0,.3)!important;transition:transform .15s,opacity .2s;z-index:8}
+.hero>.ez-p::before{content:"";position:absolute;left:27px;top:14px;border-style:solid;border-width:10px 0 10px 17px;border-color:transparent transparent transparent #15171C}
 .hero>.ez-p:hover{transform:scale(1.06)}
 .hero>.ez-p.on{width:40px;height:40px;border-radius:50%!important;background:rgba(17,17,17,.78)!important}
 .hero>.ez-p.on::before{left:13px;top:12px;width:4px;height:16px;border:0;background:#fff;box-shadow:10px 0 0 #fff}
+
+/* the arsenal button hands off to its two buttons */
+.hero .hdr.open .hdr-b{display:none!important}.hero .hdr.open .hdr-p{margin-top:0;animation:hdrIn .3s ease both}@keyframes hdrIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.hero .hdr-p .ghost{grid-column:1/-1;color:var(--tx)!important;text-align:center;font-size:14px;font-weight:700;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -323,7 +327,7 @@ function show(k){var v=V[k];h.innerHTML='';h.appendChild(document.createTextNode
 var mh=0,ml=0;for(var k=0;k<V.length;k++){show(k);mh=Math.max(mh,h.offsetHeight);ml=Math.max(ml,l.offsetHeight)}h.style.minHeight=mh+'px';if(!fn)l.style.minHeight=ml+'px';show(i);
 function t(ev){try{window.__ctT&&window.__ctT(ev+'_v'+i)}catch(_){}}setTimeout(function(){t('hero_view')},800);
 document.querySelectorAll('.hero [data-cta],.hero .hv2').forEach(function(a){a.addEventListener('click',function(){t(a.classList.contains('hv2')?'hero_demo':'hero_cta')})});
-var dr=document.getElementById('hdr'),db=dr.querySelector('.hdr-b'),dp=dr.querySelector('.hdr-p');db.addEventListener('click',function(){var o=dp.hidden;dp.hidden=!o;db.setAttribute('aria-expanded',String(o));dr.classList.toggle('open',o);if(o)t('hero_drawer')});
+var dr=document.getElementById('hdr'),db=dr.querySelector('.hdr-b'),dp=dr.querySelector('.hdr-p');db.addEventListener('click',function(){var o=dp.hidden;dp.hidden=!o;db.setAttribute('aria-expanded',String(o));dr.classList.toggle('open',o);if(o){t('hero_drawer');setTimeout(function(){var r=dp.getBoundingClientRect();if(r.bottom>innerHeight-12)scrollBy({top:r.bottom-innerHeight+24,behavior:'smooth'})},60)}});
 if(matchMedia('(prefers-reduced-motion: reduce)').matches||q.has('hv'))return;
 var bar=document.createElement('div');bar.className='hvt';bar.innerHTML='<i></i>';hero.appendChild(bar);var fill=bar.firstChild,D=9000,el=0,last=performance.now(),held=false;
 hero.addEventListener('pointerdown',function(){held=true});addEventListener('pointerup',function(){held=false});addEventListener('pointercancel',function(){held=false});
