@@ -32,6 +32,7 @@ var CSS=`
 .shm-a{display:flex;gap:8px;align-items:center}
 .shm-a .rp,.shm-a .nv{all:unset;cursor:pointer;height:44px;padding:0 14px;border-radius:12px;background:#1d2128;color:#fff;font:700 13px Inter,sans-serif;display:flex;align-items:center;gap:6px}
 .shm-a .cta{flex:1;text-align:center;height:44px;line-height:44px;border-radius:12px;background:#F5A524;color:#111;font:800 14px Inter,sans-serif;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 10px}
+@media (max-width:380px){.shm-a{gap:6px}.shm-a .cta{font-size:12.5px;padding:0 6px}.shm-a .rp,.shm-a .nv{padding:0 10px;font-size:12px}}
 .shm-d{display:flex;justify-content:center;gap:6px;margin-top:10px}.shm-d i{width:7px;height:7px;border-radius:50%;background:#3a3f48}.shm-d i.on{background:#F5A524;width:20px;border-radius:4px}
 /* phone inside the stage */
 .sp2{position:absolute;left:50%;top:50%;width:226px;height:452px;max-height:94%;transform:translate(-50%,-50%);border-radius:42px;background:#050506;box-shadow:0 0 0 1.5px #4a4e57,0 0 0 4px #1b1d22,0 0 0 5px #3a3d44,0 26px 60px rgba(0,0,0,.6)}
@@ -51,13 +52,25 @@ var CSS=`
 .s1-pg .who{display:flex;align-items:center;gap:8px}.s1-pg .who i{width:34px;height:34px;border-radius:50%;background:url(/assets/cedric-headshot.jpg) center 20%/cover;border:2px solid #F5A524}
 .s1-pg .lic{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:7px 10px;border-radius:10px;background:#E8F7EF;color:#0E7A4F;font:800 12px Inter,sans-serif}
 .s1-ct{position:absolute;right:10px;top:40px;z-index:5;background:#F5A524;color:#111;border-radius:999px;padding:4px 9px;font:800 11px 'JetBrains Mono',ui-monospace,monospace}
-.s1-sp{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:18px;align-items:center;opacity:0;transition:opacity .6s}
+.s1-sp{position:absolute;inset:0;display:flex;gap:14px;justify-content:center;align-items:center;padding:12px;opacity:0;transition:opacity .6s}
 .s1-sp.in{opacity:1}
-.s1-sp .a{background:#23262d;border-radius:14px;padding:12px;filter:grayscale(1);color:#9AA0A8;font:600 11.5px/1.4 Inter,sans-serif;text-align:center}
-.s1-sp .a .bc{height:52px;border-radius:6px;background:#3a3e46;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font:700 10px Inter;color:#c5c8cd}
-.s1-sp .b{background:#fff;color:#111;border-radius:14px;padding:12px;box-shadow:0 0 0 2px #F5A524,0 0 40px rgba(245,165,36,.55);text-align:center;font:800 12px/1.35 Inter,sans-serif;animation:glow 1.6s ease-in-out infinite alternate}
-.s1-sp .b .mini{height:82px;border-radius:8px;background:linear-gradient(#2b3340 0 40%,#fff 40%);margin-bottom:8px;position:relative}
-.s1-sp .b .mini:after{content:"";position:absolute;left:8px;right:8px;top:48px;height:5px;border-radius:3px;background:#E7E7E2;box-shadow:0 10px 0 #E7E7E2,0 20px 0 #F5A524}
+.s1-sp .col{flex:0 1 168px;min-width:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.s1-sp .mp{width:100%;height:min(310px,calc(58svh - 110px));border-radius:24px;background:#050506;padding:5px;box-shadow:0 0 0 1.5px #4a4e57,0 0 0 3px #1b1d22}
+.s1-sp .ms{height:100%;border-radius:19px;overflow:hidden;background:#fff;color:#202124;padding:14px 9px 9px;font-family:Arial,sans-serif;text-align:left}
+.s1-sp .a .mp{filter:grayscale(1) brightness(.7)}
+.s1-sp .b .mp{box-shadow:0 0 0 1.5px #4a4e57,0 0 0 3px #F5A524,0 0 44px rgba(245,165,36,.55);animation:glow 1.6s ease-in-out infinite alternate}
+.s1-sp .g{font:700 15px Arial;letter-spacing:-.02em;text-align:center}.s1-sp .g b{font-weight:700}
+.s1-sp .q{margin:7px 0 9px;padding:6px 9px;border-radius:999px;box-shadow:0 1px 4px rgba(32,33,36,.28);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s1-sp .r{display:flex;gap:7px;align-items:center;padding:7px 0;border-bottom:1px solid #EEE}
+.s1-sp .r i{flex:none;width:20px;height:20px;border-radius:50%;background:#E8EAED;color:#5F6368;display:flex;align-items:center;justify-content:center;font:700 11px Arial;font-style:normal}.s1-sp .r i.fb{background:#0866FF;color:#fff}
+.s1-sp .r span{min-width:0;display:block}.s1-sp .r b{display:block;font:400 11px/1.25 Arial;color:#1A0DAB}.s1-sp .r small{display:block;font:400 9.5px/1.3 Arial;color:#5F6368}
+.s1-sp .hd{text-align:center;padding-bottom:8px;border-bottom:1px solid #EEE}
+.s1-sp .hd .av{display:block;width:46px;height:46px;margin:0 auto 6px;border-radius:50%;background:url(/assets/cedric-headshot.jpg) center 20%/cover;border:2px solid #F5A524}
+.s1-sp .hd b{display:block;font:800 13px/1.2 Inter,sans-serif}.s1-sp .hd small{display:block;font:500 10px/1.3 Inter,sans-serif;color:#5F6368}
+.s1-sp .lc{display:inline-block;margin-top:5px;padding:3px 7px;border-radius:999px;background:#E8F7EF;color:#0E7A4F;font:800 9px Inter,sans-serif}
+.s1-sp .cl{margin:8px 0 6px;padding:7px;border-radius:999px;background:#F5A524;color:#111;text-align:center;font:800 11px Inter,sans-serif}
+.s1-sp .pg{padding:6px 2px;border-bottom:1px solid #F0F0EE;font:700 10.5px Inter,sans-serif;display:flex;justify-content:space-between}.s1-sp .pg:after{content:"\\203A";color:#9AA0A8}.s1-sp .pg.more{color:#B07A0E;border:0}
+.s1-sp p{margin:0;text-align:center;font:600 11.5px/1.35 Inter,sans-serif;color:#9AA0A8}.s1-sp p b{display:block;font:800 12.5px Inter,sans-serif;color:#C5C8CD}.s1-sp .b p b{color:#F5A524}.s1-sp .b p{color:#fff}
 @keyframes glow{to{box-shadow:0 0 0 2px #F5A524,0 0 60px rgba(245,165,36,.85)}}
 /* scene 2 */
 .s2{position:absolute;inset:0;background:#fff;padding:40px 12px 16px}
@@ -193,7 +206,7 @@ function s1(){var bg=el('<div class="s1-k"></div>');stage.appendChild(bg);var sc
  var ct=scr.querySelector('.s1-ct'),prev=null;
  P.forEach(function(q,i){T(function(){var h='';if(q[0]==='home')h='<div class="hd"></div><h4>'+q[1]+'</h4><div class="bar"></div><div class="bar s"></div>';else if(q[0]==='who')h='<div class="who"><i></i><h4 style="margin:0">'+q[1]+'</h4></div><div class="bar" style="margin-top:12px"></div><div class="bar"></div><div class="bar s"></div>';else if(q[0]==='lic')h='<h4>'+q[1]+'</h4><div class="bar"></div><div class="bar s"></div><span class="lic">&#10003; Active license on file</span>';else h='<h4>'+q[1]+'</h4><div class="bar"></div><div class="bar"></div><div class="bar s"></div><div class="bar"></div><div class="bar s"></div>';
   var pg=el('<div class="s1-pg">'+h+'</div>');scr.appendChild(pg);requestAnimationFrame(function(){requestAnimationFrame(function(){pg.classList.add('in')})});if(prev){var o=prev;o.classList.add('out');T(function(){o.remove()},420)}prev=pg;ct.textContent=(i+1)+' / 13'},300+i*420)});
- T(function(){var sp=el('<div class="s1-sp"><div class="a"><div class="bc">BUSINESS CARD</div>A card, and a Facebook page with 3 likes</div><div class="b"><div class="mini"></div>Your 13-page website</div></div>');stage.querySelector('.sp2').style.transition='opacity .5s';stage.querySelector('.sp2').style.opacity='0';stage.appendChild(sp);T(function(){sp.classList.add('in')},60)},300+13*420+700);
+ T(function(){var sp=el('<div class="s1-sp"><div class="col a"><div class="mp"><div class="ms"><div class="g"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></div><div class="q">cedric moore adjuster</div><div class="r"><i class="fb">f</i><span><b>Cedric Moore</b><small>Facebook &middot; 3 likes</small></span></div><div class="r"><i>?</i><span><b>Cedric Moore</b><small>Directory &middot; no reviews</small></span></div><div class="r"><i>?</i><span><b>No website found</b><small>Nothing else</small></span></div></div></div><p><b>Without it</b>A card and 3 likes</p></div><div class="col b"><div class="mp"><div class="ms"><div class="hd"><i class="av"></i><b>Cedric Moore</b><small>Public adjuster &middot; Orlando</small><span class="lc">&#10003; License verified</span></div><div class="cl">&#128222; Call Cedric</div><div class="pg">Roof claims</div><div class="pg">Water damage</div><div class="pg">Denied claims</div><div class="pg more">+ 10 more pages</div></div></div><p><b>With ClaimTract</b>Your 13-page website</p></div></div>');stage.querySelector('.sp2').style.transition='opacity .5s';stage.querySelector('.sp2').style.opacity='0';stage.appendChild(sp);T(function(){sp.classList.add('in')},60)},300+13*420+700);
  return 300+13*420+1500}
 
 /* 2: the search they actually type */
