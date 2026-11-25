@@ -74,6 +74,10 @@ html,body{height:100%;background:#0B0D10;color:#E9ECF1;font:15px Inter,system-ui
 #buy{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 22px);z-index:27;display:none;text-align:center;text-decoration:none;font-size:18px}
 #buy small{display:block;font-weight:600;font-size:12px;margin-top:3px}
 .ipd{background:#1C1D21;border-radius:30px;padding:16px 12px;box-shadow:0 0 0 2px #9A9FA8,0 0 0 3px #5E626A,0 24px 50px rgba(0,0,0,.55)}.ipd-s{border-radius:14px;overflow:hidden;background:#fff;color:#202124;min-height:330px;display:flex;flex-direction:column}.ipd-bar{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#E8EAED;border-bottom:1px solid #DADCE0}.ipd-bar i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}.ipd-url{flex:1;min-width:0;padding:4px 10px;border-radius:999px;background:#fff;font:11px Inter;color:#5F6368;white-space:nowrap;overflow:hidden}.ipd-b{flex:1;display:flex;flex-direction:column;align-items:center;padding:22px 14px 14px}.ipd-h{font:700 26px Inter;letter-spacing:-.03em;color:#3C4043;margin-bottom:14px}.ipd-box{width:100%;border:1px solid #DFE1E5;border-radius:22px;box-shadow:0 2px 8px rgba(32,33,36,.18);overflow:hidden}.ipd-q{display:flex;align-items:center;gap:9px;padding:10px 14px;min-height:42px;font:14px Arial,sans-serif;color:#202124}.ipd-q .cur{display:inline-block;width:1.5px;height:17px;background:#1A73E8;animation:ipc 1s steps(1) infinite}@keyframes ipc{50%{opacity:0}}.ipd-rec{border-top:1px solid #E8EAED;padding:5px 0}.ipd-rec div{display:flex;align-items:center;gap:10px;padding:6px 14px;font:13px Arial,sans-serif;color:#3C4043}.ipd-b .gres{width:100%;text-align:left}#tease{position:absolute;inset:0;z-index:40;background:rgba(10,12,16,.28);display:flex;align-items:flex-end;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#fv2{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;display:none;z-index:1}
+#chips{display:flex;flex-direction:column;gap:9px;margin-top:12px;align-items:stretch}#chips .go{display:block}#chips .gh{background:transparent;border:1px solid #4A4F58;color:#fff;font-weight:700}
+#pin{position:absolute;top:calc(env(safe-area-inset-top) + 14px);left:50%;transform:translateX(-50%);white-space:nowrap;z-index:45;display:none;border:0;border-radius:999px;background:#F5A524;color:#111;font:800 12px Inter,system-ui;padding:8px 12px;text-decoration:none}
+#full{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 22px);z-index:27;display:none;padding:16px;border-radius:14px;background:rgba(10,12,16,.86);color:#fff;text-align:center;font:600 14px/1.45 Inter,system-ui}#full b{display:block;font-size:17px;color:#F5A524;margin-bottom:4px}
 #tease .tz-in{margin:0 18px 40px;padding:16px 18px;border-radius:18px;background:rgba(10,12,16,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;text-align:center;font-family:Inter,system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 #tease b{display:block;font:800 21px/1.2 Inter,system-ui,sans-serif}#tease span{display:block;margin-top:5px;font-size:14px;color:#E6E8EC}
 #tease i{display:inline-block;margin-top:12px;font-style:normal;font-weight:800;font-size:14px;background:#F5A524;color:#111;padding:10px 16px;border-radius:999px;animation:tzp 1.6s ease-in-out infinite}
@@ -84,8 +88,8 @@ html,body{height:100%;background:#0B0D10;color:#E9ECF1;font:15px Inter,system-ui
  <div id="prog"></div><div id="stage"></div><div id="glow"></div>
  <canvas id="sophia" width="528" height="600" aria-hidden="true"></canvas>
  <div id="sheet"><video id="hero" src="/assets/sophia-full.mp4" playsinline preload="auto"></video></div>
- <div id="fin"><video id="fv" src="/assets/sophia-full.mp4" playsinline preload="auto"></video></div>
- <a id="buy" class="go" href="https://buy.stripe.com/fZuaEQ5bU38Y7Yh5Q75EY00" target="_top">Get started for just $1<small>Founders Lab seat · 14 days, then $99 a month</small></a>
+ <div id="fin"><video id="fv" src="/assets/sophia-full.mp4" playsinline preload="auto"></video><video id="fv2" playsinline preload="none"></video></div>
+ <a id="buy" class="go" href="https://buy.stripe.com/fZuaEQ5bU38Y7Yh5Q75EY00" target="_top">Take my founder seat<small id="buys">Founders Lab · 14 days for $1, then $99 a month</small></a><a id="pin" href="#" target="_top">Take my founder seat</a><div id="full"><b>The Founders Lab is full.</b>We'll tell you the day the doors reopen.</div>
  <div id="start"><img src="/assets/ct-shield.png" alt="ClaimTract"><h1>Sophia will walk you through it</h1><p>About seven minutes. Turn your sound on.</p><button class="go" id="go">Start</button></div>
 </div>
 <script>
@@ -128,6 +132,17 @@ function ezk(n,photo,dur,next){if(stopped)return;show(idle);idle.play().catch(fu
  var box=q('#ez')||document.getElementById('ez');if(box){box.innerHTML='<div class="ezk">&#127908; You, talking to the homeowner</div>';box.appendChild(w)}
  if(FAST)w.playbackRate=8;w.onended=function(){setTimeout(next,700)};w.play().catch(function(){setTimeout(next,dur*1000+700)})}
 var D=function(s){return 'background-image:url('+P+s+'.jpg)'};
+/* Nov 25: Sophia is the upgrade door. She remembers where they stopped; after one full watch the seat button stays up; Founders chapter closes the show. */
+var KP='ct_walk_pos',KD='ct_walk_done',Q=new URLSearchParams(location.search),SEATS=null;
+function gs(k){try{return localStorage.getItem(k)}catch(e){return null}}function ss(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+var POS=parseInt(Q.get('pos')||gs(KP)||'0',10)||0,DONE=Q.get('done')==='1'||gs(KD)==='1';
+function sp(i){POS=i;ss(KP,String(i));lg('pos_'+i);try{if(window.parent!==window)window.parent.postMessage({ct:'walk_pos',pos:i},'*')}catch(e){}}
+function done(){if(DONE)return;DONE=true;ss(KD,'1');ss(KP,'0');lg('watched_all');try{if(window.parent!==window)window.parent.postMessage({ct:'walk_done'},'*')}catch(e){}pin()}
+(function(){var u=(Q.get('uid')||'').replace(/[^A-Za-z0-9_-]/g,'').slice(0,64);if(!u)return;[$('buy'),$('pin')].forEach(function(a){a.href='https://buy.stripe.com/fZuaEQ5bU38Y7Yh5Q75EY00?client_reference_id='+u})})();
+$('pin').href=$('buy').href;$('pin').onclick=function(){lg('buy_tap_pin')};
+function pin(){var p=$('pin');if(!p)return;p.style.display=(DONE&&!(SEATS&&SEATS.open===false))?'block':'none'}
+try{fetch('/api/founder-seats',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){if(!j||typeof j.open!=='boolean')return;SEATS=j;var left=Math.max(0,(j.cap||40)-(j.taken||0));if(j.open)$('buys').textContent='Founders Lab · '+left+' of '+(j.cap||40)+' seats left · 14 days for $1, then $99 a month';pin()}).catch(function(){})}catch(e){}
+pin();
 /* ---------- scenes ---------- */
 var S=[];
 S.push(function(n){H('<div class="lbl">STEP ONE</div><div class="ttl" style="margin:4px 0 12px">The homeowner</div><div class="card" style="position:relative;padding:0;overflow:hidden"><img src="'+A+'dec.jpg" style="width:100%;display:block" alt="Sample declarations page"><div id="scan" style="position:absolute;left:0;right:0;top:0;height:3px;background:#7DD3FC;box-shadow:0 0 18px 6px rgba(125,211,252,.6);transition:top 3.2s linear"></div></div><div id="f" style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px"></div>');
@@ -173,11 +188,14 @@ S.push(function(n){H('<div class="lbl">DO THE MATH</div><div class="card" style=
 S.push(function(n){var b=['One claim becomes about a dozen answer pages','You approve every page; names and addresses never reach them','Facebook, Google and Instagram posts, ready for your thumb','Your old files work again, from your laptop','The Claim Engine: one inbox, pipelines, automations','Homeowners book your inspections, with reminders','Founders get every new feature first'];
  H('<div class="lbl">WHAT YOU GET</div><div id="bn" style="margin-top:6px"></div>');
  play('sw-s11.mp4',function(){b.forEach(function(t,i){at(3+i*5.4,function(){q('#bn').insertAdjacentHTML('beforeend','<div class="ben"><b style="color:#F5A524">✓</b><span>'+t+'</span></div>');var e=q('#bn').lastChild;setTimeout(function(){on(e)},30)})})},n)});
+var FL='/assets/video/founders-lab.mp4';
+function sb(){if(SEATS&&SEATS.open===false){$('buy').style.display='none';$('full').style.display='block';lg('full_shown');return}$('buy').style.display='block';lg('buy_shown')}
+function founders(){if(stopped)return;var v=$('fv'),w=$('fv2'),fin=$('fin');cv.style.opacity=0;stage.innerHTML='';fin.style.display='block';v.pause();v.style.display='none';w.style.display='block';w.muted=muted;lg('founders_start');
+ var ok=false;w.onended=function(){done();sb()};w.onerror=function(){if(ok)return;done();sb()};w.onplaying=function(){ok=true};w.src=FL;w.play().catch(function(){if(!ok){w.muted=true;muted=true;w.play().catch(function(){done();sb()})}});if(DONE)sb()}
 function finale(){if(stopped)return;cv.style.opacity=0;var f=$('fin'),v=$('fv');f.style.display='block';v.muted=muted;v.currentTime=33.8;v.play().catch(function(){});
- var shown=false;function sb(){if(shown)return;shown=true;$('buy').style.display='block';lg('buy_shown')}
- v.addEventListener('timeupdate',function(){if(v.currentTime>v.duration-6)sb()});v.onended=function(){sb();v.currentTime=v.duration-0.05}}
+ v.onended=function(){founders()}}
 function prog(i){var p=$('prog');if(!p.children.length){for(var k=0;k<S.length+1;k++)p.appendChild(document.createElement('i'))}[].forEach.call(p.children,function(e,k){e.classList.toggle('on',k<=i)})}
-function run(i){if(stopped)return;prog(i);if(i>=S.length)return finale();lg('scene_'+(i+1));S[i](function(){run(i+1)})}
+function run(i){if(stopped)return;prog(i);sp(i);if(i>=S.length)return finale();lg('scene_'+(i+1));S[i](function(){run(i+1)})}
 /* ---------- start / controls ---------- */
 $('go').onclick=function(){var st0=$('start');if(st0)st0.remove();var tz=$('tease');if(tz)tz.remove();lg('start');requestAnimationFrame(draw);var h=$('hero');h.muted=muted;h.currentTime=0;h.play().catch(function(){muted=true;h.muted=true;try{$('mute').innerHTML='&#128263;'}catch(_){}h.play().catch(function(){})});
  var cut=function(){if(h.currentTime>=33.6){h.removeEventListener('timeupdate',cut);h.pause();$('sheet').classList.add('gone');setTimeout(function(){run(0)},500)}};h.addEventListener('timeupdate',cut);
@@ -188,6 +206,15 @@ if(/[?&]app=1/.test(location.search)){try{var st1=$('start');if(st1)st1.style.di
  tz.innerHTML='<div class="tz-in"><b>See what you get when you upgrade</b><span>A 7-minute show from Sophia</span><i>&#9654; Tap anywhere to start</i></div>';
  $('app').appendChild(tz);lg('tease_shown');
  tz.addEventListener('click',function(){lg('tease_tap');h0.loop=false;h0.pause();muted=false;h0.muted=false;try{$('mute').innerHTML='&#128266;'}catch(_){}$('go').onclick()})}catch(_){try{$('go').onclick()}catch(__){}}}
+/* resume / skip */
+function begin(from){var st0=$('start');if(st0)st0.remove();var tz=$('tease');if(tz)tz.remove();var h=$('hero');try{h.loop=false;h.pause()}catch(e){}muted=false;h.muted=false;try{$('mute').innerHTML='&#128266;'}catch(_){}
+ $('sheet').classList.add('gone');[sv,idle].forEach(function(v){v.load()});if(from==='offer'){lg('skip_offer');founders();return}lg('resume_'+from);requestAnimationFrame(draw);setTimeout(function(){run(from)},300)}
+function chips(){var c=document.createElement('div');c.id='chips';var a,b;
+ if(DONE){a=['Watch again',function(){ss(KP,'0');$('go').onclick()}];b=['Skip to the offer',function(){begin('offer')}]}
+ else if(POS>0&&POS<S.length){a=['Pick up where you left off',function(){begin(POS)}];b=['Start over',function(){ss(KP,'0');$('go').onclick()}]}
+ else return null;
+ [a,b].forEach(function(x,i){var e=document.createElement('button');e.className='go'+(i?' gh':'');e.textContent=x[0];e.addEventListener('click',function(ev){ev.stopPropagation();x[1]()});c.appendChild(e)});return c}
+(function(){var c=chips();if(!c)return;var tz=$('tease');if(tz){var inn=tz.querySelector('.tz-in');var hint=inn&&inn.querySelector('i');if(hint)hint.remove();inn&&inn.appendChild(c);var first=c.firstChild;tz.addEventListener('click',function(e){if(e.target.closest('#chips'))return;e.stopImmediatePropagation();first.click()},true)}else{var st=$('start');var g=$('go');if(st&&g){g.style.display='none';st.appendChild(c)}}})();
 $('mute').onclick=function(){muted=!muted;this.innerHTML=muted?'&#128263;':'&#128266;';[sv,$('hero'),$('fv')].forEach(function(v){v.muted=muted});stage.querySelectorAll('video').forEach(function(v){v.muted=muted})};
 $('x').onclick=function(){stopped=true;lg('closed');[sv,idle,$('hero'),$('fv')].forEach(function(v){try{v.pause()}catch(e){}});
  if(window.parent!==window){try{window.parent.postMessage({ct:'walk_close'},'*')}catch(e){}}else{location.href='/free/app/'}};

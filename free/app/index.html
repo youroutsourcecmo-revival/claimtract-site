@@ -80,6 +80,7 @@ svg{display:block}
 .nav{display:flex;justify-content:space-around;border-top:1px solid var(--ln);background:#14161A;padding:7px 2px 12px}
 .nav span{font:600 9px Inter;color:var(--mu);text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}
 .nav .on{color:var(--go)}
+.nav .nup em{font:800 7px Inter;font-style:normal;letter-spacing:.6px;color:#F5A524;text-transform:uppercase;margin-top:-2px}.nav .bd.sb{background:#F5A524;color:#111}
 .nav .bd{position:absolute;top:-3px;right:2px;min-width:14px;height:14px;border-radius:99px;background:#E5484D;color:#fff;font:800 8px/14px Inter;padding:0 3px}
 .inp{display:flex;align-items:center;gap:8px;background:var(--cd);border:1px solid var(--ln);border-radius:12px;padding:10px 11px;font-size:13px}
 .inp span{color:var(--mu);font-size:11px}
@@ -465,7 +466,7 @@ function qrSvg(seed){var n=25,c=7,s='',r=seed||7;function rnd(){r=(r*9301+49297)
  return '<svg viewBox="0 0 25 25" width="172" height="172">'+s+fin(0,0)+fin(18,0)+fin(0,18)+'<rect x="10" y="10" width="5" height="5" rx="1.4" fill="#F5A524"/><path d="M12.5 10.9l1.6.6v1.1c0 .9-.7 1.5-1.6 1.7-.9-.2-1.6-.8-1.6-1.7v-1.1z" fill="#111"/></svg>'}
 
 var NAV=[['home','home','Home'],['activity','bell','Activity'],['share','share','Share'],['tools','grid','Page'],['sophia','spark','Sophia']];
-function nav(on){return '<div class="nav">'+NAV.map(function(n){return '<span data-tab="'+n[0]+'" class="'+(n[0]===on?'on':'')+'">'+I(n[1],18)+n[2]+(n[0]==='activity'&&unread?'<i class="bd">'+unread+'</i>':'')+'</span>'}).join('')+'</div>'}
+function nav(on){return '<div class="nav">'+NAV.map(function(n){var up=n[0]==='sophia'&&plan==='free',sl=window.__seatsLeft;return '<span data-tab="'+n[0]+'" class="'+(n[0]===on?'on':'')+(up?' nup':'')+'">'+I(n[1],18)+n[2]+(up?'<em>Upgrade</em>':'')+(n[0]==='activity'&&unread?'<i class="bd">'+unread+'</i>':'')+(up&&sl!=null&&sl>0?'<i class="bd sb" aria-label="'+sl+' founder seats left">'+sl+'</i>':'')+'</span>'}).join('')+'</div>'}
 function top(t){return '<div class="top"><button class="bk" data-back>'+I('back',16)+'</button><h1>'+t+'</h1></div>'}
 
 var ALERTS=[
@@ -1620,8 +1621,12 @@ function ctQrCards(D){var q=null;try{q=qrcode(0,'M');q.addData(D.url);q.make()}c
 (function(){var _tab=tab;
  function closeWalk(){var f=document.getElementById('wlk');if(f)f.remove();stack=[];render('home')}
  window.addEventListener('message',function(e){if(e&&e.data&&e.data.ct==='walk_close')closeWalk()});document.addEventListener('click',function(e){if(document.getElementById('wlk')&&e.target.closest('[data-tab]')){var f=document.getElementById('wlk');if(f)f.remove()}},true);
- tab=function(n){if(n==='sophia'&&tog.xp&&!document.getElementById('wlk')){var host=document.getElementById('app')||document.body,f=document.createElement('iframe');f.id='wlk';f.src='/free/walk/?app=1&t='+Date.now();f.allow='autoplay; fullscreen';f.title='Sophia walkthrough';var _vs=document.querySelectorAll('.view'),_v=_vs[_vs.length-1],nv=(_v&&_v.querySelector('.nav'))||document.querySelector('.nav'),ar=host.getBoundingClientRect(),nb=nv?Math.round(nv.getBoundingClientRect().height):52;if(!nb||nb<40)nb=52;f.setAttribute('style','position:absolute;left:0;right:0;top:0;bottom:'+nb+'px;width:100%;height:calc(100% - '+nb+'px);border:0;z-index:95;background:#000');host.appendChild(f);if(typeof track==='function')try{track('walk_open',{})}catch(_){};return}
+ tab=function(n){if(n==='sophia'&&plan==='free'&&!document.getElementById('wlk')){var host=document.getElementById('app')||document.body,f=document.createElement('iframe');f.id='wlk';f.src='/free/walk/?app=1'+(window.__uid?'&uid='+encodeURIComponent(window.__uid):'')+'&t='+Date.now();f.allow='autoplay; fullscreen';f.title='Sophia walkthrough';var _vs=document.querySelectorAll('.view'),_v=_vs[_vs.length-1],nv=(_v&&_v.querySelector('.nav'))||document.querySelector('.nav'),ar=host.getBoundingClientRect(),nb=nv?Math.round(nv.getBoundingClientRect().height):52;if(!nb||nb<40)nb=52;f.setAttribute('style','position:absolute;left:0;right:0;top:0;bottom:'+nb+'px;width:100%;height:calc(100% - '+nb+'px);border:0;z-index:95;background:#000');host.appendChild(f);if(typeof track==='function')try{track('walk_open',{})}catch(_){};return}
   return _tab.apply(this,arguments)};
+ /* Nov 25: every upgrade button opens Sophia (the walkthrough), never a second checkout */
+ openSx=function(){if(document.getElementById('wlk'))return;try{track('upgrade_tap',{badge:'sophia'})}catch(_){}tab('sophia')};
+ document.addEventListener('click',function(e){if(plan!=='free')return;var g=e.target.closest&&e.target.closest('[data-go="plans"]');if(!g)return;e.preventDefault();e.stopPropagation();openSx()},true);
+ try{fetch('/api/founder-seats',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){if(!j||typeof j.open!=='boolean')return;window.__seatsLeft=j.open?Math.max(0,(j.cap||40)-(j.taken||0)):0})}catch(_){}
 })();
 
 boot();
