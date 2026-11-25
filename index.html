@@ -234,6 +234,8 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 /* Nov 25: light hero. Ezekiel docked bottom-right; page color rises from the bottom and fades into the roof video. */
 .hero{background:var(--bg)!important;color:var(--tx)!important}
 .hero::before{display:none!important}
+/* Nov 25: never taller than the hero, so the feather always finishes inside it (no hard line at the hero's bottom on wide screens) */
+.hero #hv{max-height:100%!important}
 .hero #hv{inset:0 0 auto 0!important;width:100%!important;height:auto!important;aspect-ratio:16/9;object-fit:cover;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 45%,rgba(0,0,0,.5) 72%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 45%,rgba(0,0,0,.5) 72%,transparent 100%)}
 .hero .top b{display:inline-block;background:#2E5A43;color:#fff;text-shadow:none;padding:6px 12px;border-radius:999px;font-size:14px;box-shadow:0 2px 10px rgba(0,0,0,.18)}
 @media(max-width:700px){.hero{align-items:flex-end!important}.hero .in{padding:0 0 22px!important}.hero .lead{max-width:54%;font-size:17px;margin-bottom:18px}.hero .k{max-width:100%}.hero h1{font-size:40px!important;line-height:1.04!important;margin-bottom:14px!important}.hero .ez{height:min(50%,560px)}
