@@ -1,7 +1,7 @@
 /* ClaimTract homeowner tools for adjuster pages.
    Claim binder (saved on the homeowner's phone; shared only when they tap Send), 3 a.m. mode,
    read it to me, search this page, print a handout, save to home screen, and homeowner events.
-   Include: <script src="/assets/ct-home.js?v=1126a" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
+   Include: <script src="/assets/ct-home.js?v=1126b" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
 (function(){
 var S=document.currentScript||document.querySelector('script[src*="ct-home.js"]');if(!S)return;
 var D=S.dataset,SLUG=D.slug||location.pathname.split('/')[1]||'',FIRST=D.first||'your adjuster',NAME=D.name||FIRST,PH=(D.phone||'').replace(/\D/g,'').slice(-10),SAMPLE=D.sample==='1';
@@ -241,7 +241,7 @@ function openWatch(mode){var old=$('.cth-wp');if(old)old.remove();var yt=ytFind(
  var v=yt?'<iframe src="https://www.youtube-nocookie.com/embed/'+yt+'?autoplay=1&playsinline=1&rel=0" allow="autoplay;encrypted-media" allowfullscreen title="Video"></iframe>':'<video src="'+mxNext()+'" controls autoplay playsinline></video>';
  var CH=['Leak','Roof','Storm','Smoke or fire','Smell or mold','Something else'];
  var call=PH?'<div class="cth-wc"><a href="tel:+1'+PH+'">&#128222; Call '+esc(first)+'</a><a href="sms:+1'+PH+'">&#128172; Text '+esc(first)+'</a></div>':'';
- var body=pro?'<form class="cth-wf"><b>Shrugged something off this year?</b><small class="cth-wq">Why not tell '+esc(first)+'? The look is free.</small><div class="cth-chips">'+CH.map(function(c){return '<button type="button" class="cth-chip">'+c+'</button>'}).join('')+'</div><textarea name="d" rows="2" placeholder="What happened? (optional)"></textarea><div class="cth-w2"><input name="n" placeholder="Your name" autocomplete="name" required><input name="p" type="tel" placeholder="Phone" autocomplete="tel" required></div><div class="cth-w2"><select name="t"><option value="">Best time</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Anytime</option></select><button type="submit">Send &rarr;</button></div></form>'
+ var body=pro?'<form class="cth-wf"><b>What do you want to ask '+esc(first)+'?</b><small class="cth-wq">Type it the way you&#39;d say it. The look is free.</small><div class="cth-chips">'+CH.map(function(c){return '<button type="button" class="cth-chip">'+c+'</button>'}).join('')+'</div><textarea name="d" rows="2" placeholder="Like: Can you help me with this? Or should I call my insurance company first?"></textarea><div class="cth-w2"><input name="n" placeholder="Your name" autocomplete="name" required><input name="p" type="tel" placeholder="Phone" autocomplete="tel" required></div><div class="cth-w2"><select name="t"><option value="">Best time</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Anytime</option></select><button type="submit">Send &rarr;</button></div></form>'
   :'<div class="cth-wf"><b>Shrugged something off this year?</b><small class="cth-wq">Why not call '+esc(first)+'? The look is free.</small>'+call+'</div>';
  var m=el('div','cth cth-wp','<div class="cth-wi"><button class="cth-mx" aria-label="Close">&times;</button>'+
   '<div class="cth-wh"><span style="background-image:url('+esc(headUrl())+')"></span><div><b>'+esc(NAME)+', Public Adjuster</b></div></div>'+lvBadge()+

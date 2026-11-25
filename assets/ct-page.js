@@ -107,7 +107,7 @@ function doc(D,O){O=O||{};var r=render(D),F=D.fields||{},nm=((F.fn||'')+' '+(F.l
   '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/ct-page.css?v=1124b">'+(O.head||'')+'</head><body>'+
   '<div class="'+r.cls+'"'+(r.style?' style="'+r.style+'"':'')+'>'+r.inner+'</div>'+
   '<script src="/vendor/qrcode.js" defer></script><script src="/assets/ct-footer.js" defer></script><script src="/assets/ct-hero.js" defer></script><script src="/assets/ct-explain.js" defer></script>'+
-  '<script src="/assets/ct-home.js?v=1126a" data-slug="'+esc(r.slug)+'" data-first="'+esc(F.fn||'')+'" data-name="'+esc(nm)+'" data-phone="'+esc(ph)+'" defer></script>'+
+  '<script src="/assets/ct-home.js?v=1126b" data-slug="'+esc(r.slug)+'" data-first="'+esc(F.fn||'')+'" data-name="'+esc(nm)+'" data-phone="'+esc(ph)+'" defer></script>'+
   '<script src="/assets/ct-article.js?v=1124b"></script><script>window.CTArticle&&CTArticle.bind()</script>'+(O.body||'')+'</body></html>'}
 root.CTPage={CT:CT,doc:doc,render:render,html:function(D){var r=render(D);return '<div class="'+r.cls+'"'+(r.style?' style="'+r.style+'"':'')+'>'+r.inner+'</div>'},ctRot:ctRot};
 })(typeof window!=='undefined'?window:globalThis);
