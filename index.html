@@ -461,12 +461,12 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
   <section class="calc" id="calc">
     <p class="k">An estimate, not a promise</p>
     <h2>What could you build if you stopped depending on referrals?</h2>
-    <p class="calc-l">Move the four numbers. See what your files could become, and what it costs you.</p>
+    <p class="calc-l">Move the three numbers. See what your files could become, and what it costs you.</p>
     <div class="cx">
       <div class="cx-in">
         <label class="cx-r"><div class="cx-h"><span>Existing claim files</span><b id="cv-past"></b></div><input type="range" id="c-past" min="0" max="200" step="5" value="25"><small>Closed files you could turn into pages homeowners read.</small></label>
         <label class="cx-r"><div class="cx-h"><span>New claim files a month</span><b id="cv-files"></b></div><input type="range" id="c-files" min="0" max="20" step="1" value="4"></label>
-        <label class="cx-r"><div class="cx-h"><span>Homeowner shares a month</span><b id="cv-shares"></b></div><input type="range" id="c-shares" min="0" max="100" step="5" value="20"><small>Times you send your website or an article to a homeowner.</small></label>
+        
         <label class="cx-r"><div class="cx-h"><span>Your average fee per signed claim</span><b id="cv-fee"></b></div><input type="range" id="c-fee" min="1500" max="15000" step="250" value="4000"><small>Use your own history, not an industry average.</small></label>
         <div class="cx-r"><div class="cx-h"><span>Look ahead</span></div><div class="cx-ch" id="cx-m" role="radiogroup" aria-label="Months"><button type="button" data-m="3">3 months</button><button type="button" data-m="6">6 months</button><button type="button" data-m="12" class="on">12 months</button></div></div>
         <div class="cx-r"><div class="cx-h"><span>Your plan</span></div><div class="cx-ch" id="cx-p" role="radiogroup" aria-label="Plan"><button type="button" data-p="99" class="on">Founder $99</button><button type="button" data-p="299">$299</button><button type="button" data-p="499">Pro $499</button></div></div>
@@ -823,16 +823,16 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <script>/* Nov 25 (v2): business-building calculator. Pages = files x 12 (working estimate). Visitors = pages x 5 (illustration from the reference site). Cost = plan over the period. Nothing else is projected. */
 (function(){var $=function(i){return document.getElementById(i)};if(!$('calc'))return;var plan=99,M=12;
  function v(i){return parseFloat($('c-'+i).value)}function money(n){return '$'+Math.round(n).toLocaleString('en-US')}function num(n){return Math.round(n).toLocaleString('en-US')}
- function run(){var P=v('past'),F=v('files'),S=v('shares'),fee=v('fee');
-  $('cv-past').textContent=P;$('cv-files').textContent=F;$('cv-shares').textContent=S;$('cv-fee').textContent=money(fee);
+ function run(){var P=v('past'),F=v('files'),fee=v('fee');
+  $('cv-past').textContent=P;$('cv-files').textContent=F;$('cv-fee').textContent=money(fee);
   var pages=(P+F*M)*12,views=pages*5,cost=plan===99?1+99*(M-1):plan*M;
   $('co-pages').textContent=num(pages);
-  $('co-pages-n').textContent=num(P*12)+' from your existing files, plus '+num(F*12*M)+' from new files over '+M+' months. Working estimate: about 12 pages per file, after your review. Plus '+num(S*M)+' homeowner shares you send.';
+  $('co-pages-n').textContent=num(P*12)+' from your existing files, plus '+num(F*12*M)+' from new files over '+M+' months. Working estimate: about 12 pages per file, after your review.';
   $('co-views').textContent='~'+num(views);
   $('co-cost').textContent=money(cost);
   $('co-cost-n').textContent=(plan===99?'Founder seat: $1 for 14 days, then $99 a month, over '+M+' months.':(plan===299?'$299':'Pro: $499')+' a month, over '+M+' months.')+' For scale: one signed claim at your '+money(fee)+' fee equals '+(Math.floor(fee/plan*10)/10)+' months of this plan.';
   $('cb-pages').textContent=num(pages);$('cb-views').textContent='~'+num(views);$('cb-cost').textContent=money(cost)}
- ['past','files','shares','fee'].forEach(function(i){$('c-'+i).addEventListener('input',run)});
+ ['past','files','fee'].forEach(function(i){$('c-'+i).addEventListener('input',run)});
  function chips(id,fn){var g=$(id);g.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){g.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});fn(b);run()})})}
  chips('cx-m',function(b){M=+b.dataset.m});chips('cx-p',function(b){plan=+b.dataset.p});run();
  var told=false;document.querySelectorAll('#calc input,#calc .cx-ch button').forEach(function(i){i.addEventListener('change',tk);i.addEventListener('click',tk)});function tk(){if(told)return;told=true;try{window.__ctT&&window.__ctT('calc_used')}catch(_){}}
