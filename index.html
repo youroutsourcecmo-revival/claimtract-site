@@ -333,6 +333,9 @@ html.saf.ezk .hero .ez{mix-blend-mode:normal!important}
 html.saf.ezk .hero .ez .ez-m video{opacity:0!important;filter:none!important}
 .ez-m canvas.ezc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 92%,transparent);mask-image:linear-gradient(to bottom,#000 92%,transparent)}
 .hero .ez .ez-m{position:relative}
+
+/* Nov 25: phones: close the headline/subhead gap (no reserved height for longer rotating headlines); Ezekiel less cut off on the right */
+@media(max-width:700px){#hh,#lead{min-height:0!important}.hero .ez:not(.dock){right:-3%!important}}
 </style>
 </head>
 <body>
@@ -838,7 +841,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 (function(){var h=document.querySelector('.hero'),ez=document.getElementById('ez'),hh=document.getElementById('hh');if(!h||!ez||!hh)return;var proxies=[];
  function size(){if(ez.classList.contains('dock')){['top','height','width'].forEach(function(k){ez.style.removeProperty(k)});return}if(innerWidth>700){['top','height','width'].forEach(function(k){ez.style.removeProperty(k)});return}
   var hr=h.getBoundingClientRect(),r=hh.getBoundingClientRect(),top=(r.top-hr.top)+r.height*.38,vh=window.innerHeight,ht=Math.max(vh*.5,vh-top+(h.getBoundingClientRect().top+scrollY>0?0:0));
-  ht=Math.min(ht,vh*.78);ez.style.setProperty('top',top+'px','important');ez.style.setProperty('height',ht+'px','important');ez.style.setProperty('width',(ht*.618)+'px','important')}
+  ht=Math.min(ht,vh*.78);ht=Math.min(ht*1.3,vh*.9,innerWidth*.92/.618);top=vh-ht;ez.style.setProperty('top',top+'px','important');ez.style.setProperty('height',ht+'px','important');ez.style.setProperty('width',(ht*.618)+'px','important')}
  function targets(){return [].slice.call(h.querySelectorAll('.hdr-b,.hdr-p .hb')).filter(function(b){return b.offsetParent&&getComputedStyle(b).display!=='none'})}
  function cover(){proxies.forEach(function(p){p.remove()});proxies=[];if(ez.classList.contains('dock'))return;var hr=h.getBoundingClientRect(),er=ez.getBoundingClientRect();
   targets().forEach(function(b){var r=b.getBoundingClientRect();if(r.right<er.left||r.bottom<er.top||r.top>er.bottom)return;var p=document.createElement('button');p.type='button';p.className='ctp';p.setAttribute('aria-hidden','true');p.tabIndex=-1;
