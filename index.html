@@ -231,7 +231,10 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 /* Nov 25: light hero. Ezekiel docked bottom-right; page color rises from the bottom and fades into the roof video. */
 .hero{background:var(--bg)!important;color:var(--tx)!important}
 .hero::before{display:none!important}
-.hero #hv{inset:0 0 auto 0!important;height:68%!important;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 38%,rgba(0,0,0,.55) 62%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 38%,rgba(0,0,0,.55) 62%,transparent 100%)}@media(min-width:701px){.hero #hv{height:72%!important}}
+.hero #hv{inset:0 0 auto 0!important;width:100%!important;height:auto!important;aspect-ratio:16/9;object-fit:cover;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 45%,rgba(0,0,0,.5) 72%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 45%,rgba(0,0,0,.5) 72%,transparent 100%)}
+.hero .top b{display:inline-block;background:#2E5A43;color:#fff;text-shadow:none;padding:6px 12px;border-radius:999px;font-size:14px;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+@media(max-width:700px){.hero{align-items:flex-end!important}.hero .in{padding:0 0 22px!important}.hero .lead{max-width:54%;font-size:17px;margin-bottom:18px}.hero .k{max-width:100%}.hero h1{font-size:40px!important;line-height:1.04!important;margin-bottom:14px!important}.hero .ez{height:min(50%,560px)}
+.hero .ez .ez-p{left:auto!important;right:6px;bottom:12px;background:#fff;color:#111;font-size:12px;padding:8px 12px}.hero .hdr-n{max-width:52%}}
 .hero .w{z-index:3}.hero .top{z-index:4}
 .hero .top b{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
 .hero .k{background:none!important;backdrop-filter:none!important;padding:0!important;color:var(--act)!important;text-shadow:none!important}
@@ -250,12 +253,19 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 .hero .lead{max-width:62%}.hero .hdr-n{max-width:60%}
 @media(min-width:701px){.hero{align-items:flex-end!important}.hero .ez{height:min(78%,700px)}.hero .lead,.hero .hdr-n{max-width:none}.hero .in{padding-bottom:70px!important}.hero #pgPhone,.hero .phone{display:none!important}}
 .who{grid-template-columns:1fr!important}
+
+@media(max-width:700px){.hero .lead{max-width:54%!important}.hero .ez{height:min(50%,560px)!important}}
+/* docked Ezekiel: walks down out of the hero and parks in the lower right while they scroll */
+.hero .ez.dock{position:fixed!important;right:6px;bottom:0;top:auto;height:min(34vh,300px)!important;z-index:90;animation:ezWalk .6s cubic-bezier(.2,.9,.25,1) both}
+@keyframes ezWalk{from{opacity:0;transform:translateY(-60px) scale(1.15)}to{opacity:1;transform:none}}
+.hero .ez.dock .ez-p{display:none!important}
+.hero .ez .ez-x{display:none}.hero .ez.dock .ez-x{display:block;position:absolute;top:2px;right:2px;width:26px;height:26px;border:0;border-radius:50%;background:rgba(17,17,17,.75);color:#fff;font:700 15px/26px Inter,sans-serif;cursor:pointer;z-index:4}
+.hero .ez.dock #ezt{width:62%;max-width:150px;left:auto;right:100%;top:0}
 </style>
 </head>
 <body>
 <section class="hero">
   <video id="hv" autoplay muted loop playsinline poster="/assets/bg/bg-roof-table.jpg"><source src="/assets/bg/bg-roof-table.mp4" type="video/mp4"></video>
-  <script>(function(){if(!matchMedia('(max-width:700px)').matches)return;var v=document.getElementById('hv');v.poster='/assets/bg/hero-portrait.jpg';v.querySelector('source').src='/assets/bg/hero-portrait.mp4';v.style.objectPosition='center top';v.load();v.play&&v.play().catch(function(){})})()</script>
     <div class="ez" id="ez"><div class="ez-m"><img src="/assets/ezekiel-black.webp" alt="Ezekiel Guichard" width="540" height="873"></div><button type="button" class="ez-p" id="ezP" hidden>&#128264; Tap to hear why I built this</button><span>Ezekiel Guichard<small>Former Florida public adjuster</small></span></div>
   <div class="top"><div class="w"><b>Florida 3-20 licensees only</b></div></div>
   <div class="w hg"><div class="in">
@@ -662,5 +672,14 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  var w=setInterval(function(){var v=document.getElementById('ezV');if(!v)return;clearInterval(w);['play','playing','seeked','timeupdate','volumechange'].forEach(function(e){v.addEventListener(e,kick)});v.addEventListener('pause',function(){draw(-1)})},500);
  if(/[?&]ezt=1/.test(location.search))window.__eztDraw=draw;
 })();</script>
+<script>/* Nov 25: on phones, keep the headline above Ezekiel's head: grow the gap under the headline until it clears him (content is bottom-anchored, so the headline rises). */
+(function(){var h=document.getElementById('hh'),ez=document.getElementById('ez');if(!h||!ez)return;
+ function fit(){if(!matchMedia('(max-width:700px)').matches){h.style.marginBottom='';return}h.style.removeProperty('margin-bottom');var e=ez.getBoundingClientRect(),r=h.getBoundingClientRect();var over=r.bottom-(e.top+e.height*0.02)+10;if(over>0)h.style.setProperty('margin-bottom',(14+over)+'px','important')}
+ addEventListener('load',fit);addEventListener('resize',fit);setTimeout(fit,300);setTimeout(fit,1500)})();</script>
+<script>/* Nov 25: when they scroll past the hero, Ezekiel walks down and docks in the lower right; scroll back up and he returns. The x parks him for the visit. */
+(function(){var ez=document.getElementById('ez'),hero=document.querySelector('.hero');if(!ez||!hero||!('IntersectionObserver' in window))return;var off=false;
+ var x=document.createElement('button');x.type='button';x.className='ez-x';x.setAttribute('aria-label','Close');x.innerHTML='&times;';ez.appendChild(x);
+ x.addEventListener('click',function(e){e.stopPropagation();off=true;ez.classList.remove('dock');var v=document.getElementById('ezV');if(v&&!v.muted){v.muted=true;v.loop=true}});
+ new IntersectionObserver(function(es){es.forEach(function(en){var past=!en.isIntersecting&&en.boundingClientRect.top<0;if(past&&!off)ez.classList.add('dock');else if(!past)ez.classList.remove('dock')})},{threshold:0,rootMargin:'0px 0px -55% 0px'}).observe(hero.querySelector('.in')||hero)})();</script>
 </body>
 </html>
