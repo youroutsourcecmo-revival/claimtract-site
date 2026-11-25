@@ -127,7 +127,7 @@ var ICON={
 var S=[
  {k:'web',h:'Your 13-page website',p:'Your name, your photo, your license, 13 pages deep. How do you look when a homeowner checks you out tonight?',t:'What she sees at 11 p.m.',l:"She's checking you out right now. What does she find?",run:s1},
  {k:'find',h:'Your claims become answers',p:'Nobody Googles "public adjuster." They Google their denied claim. What if your story is what they find?',t:'Nobody types your title',l:"They don't search for you. They search for what you fix.",run:s2},
- {k:'app',h:'The app that makes it stupidly simple',p:'Snap your claim, approve the story, and it\'s live. Could getting found really take five minutes a claim?',t:'Five minutes a claim',l:'One claim in, ten pages out. You just approve.',run:s3},
+ {k:'app',h:'The app that makes it stupidly simple',p:'Snap your claim, approve the story, and it\'s live. Could getting found really take five minutes a claim?',t:'Five minutes a claim',l:'One claim in, ten or more pages out. You just approve.',run:s3},
  {k:'night',h:'It answers while you sleep',p:'Your website talks to homeowners at 3 a.m. and tells you who\'s reading. How many calls slipped away last month?',t:'3:07 a.m.',l:"You slept. Your website didn't. Who's on your list this morning?",run:s4}];
 
 /* replace the old four cards */
