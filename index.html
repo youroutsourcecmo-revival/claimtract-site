@@ -382,7 +382,7 @@ function t(ev){try{window.__ctT&&window.__ctT(ev+'_v'+i)}catch(_){}}setTimeout(f
 document.querySelectorAll('.hero [data-cta],.hero .hv2').forEach(function(a){a.addEventListener('click',function(){t(a.classList.contains('hv2')?'hero_demo':'hero_cta')})});
 var dr=document.getElementById('hdr'),db=dr.querySelector('.hdr-b'),dp=dr.querySelector('.hdr-p');db.addEventListener('click',function(){var o=dp.hidden;dp.hidden=!o;db.setAttribute('aria-expanded',String(o));dr.classList.toggle('open',o);if(o){t('hero_drawer');setTimeout(function(){var r=dp.getBoundingClientRect();if(r.bottom>innerHeight-12)scrollBy({top:r.bottom-innerHeight+24,behavior:'smooth'})},60)}});
 if(matchMedia('(prefers-reduced-motion: reduce)').matches||q.has('hv'))return;
-var bar=document.createElement('div');bar.className='hvt';bar.innerHTML='<i></i>';hero.appendChild(bar);var fill=bar.firstChild,D=9000,el=0,last=performance.now(),held=false;
+var bar=document.createElement('div');bar.className='hvt';bar.innerHTML='<i></i>';hero.appendChild(bar);var fill=bar.firstChild,D=16000,el=0,last=performance.now(),held=false;
 hero.addEventListener('pointerdown',function(){held=true});addEventListener('pointerup',function(){held=false});addEventListener('pointercancel',function(){held=false});
 (function tick(now){var dt=now-last;last=now;var paused=held||!dp.hidden||document.hidden||hero.getBoundingClientRect().bottom<0;if(!paused){el+=dt;if(el>=D){el=0;i=(i+1)%V.length;h.classList.add('hvf');l.classList.add('hvf');setTimeout(function(){show(i);h.classList.remove('hvf');l.classList.remove('hvf')},220);t('hero_view')}}fill.style.width=(el/D*100)+'%';requestAnimationFrame(tick)})(last);
 })();</script>
