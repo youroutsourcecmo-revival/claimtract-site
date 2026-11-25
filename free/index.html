@@ -288,11 +288,11 @@ body.ct-ezdock .hero>.ez-p{display:none}
 
 /* YouTube-style play button over Ezekiel; the CTA drawer stays on top of everything */
 .hero .in>.hdr{z-index:20!important}
-.hero>.ez-p{right:auto!important;top:0;left:0;width:68px;height:48px;padding:0!important;border-radius:14px!important;background:#F5A524!important;color:transparent!important;font-size:0!important;box-shadow:0 8px 22px rgba(0,0,0,.3)!important;transition:transform .15s,opacity .2s;z-index:8}
-.hero>.ez-p::before{content:"";position:absolute;left:27px;top:14px;border-style:solid;border-width:10px 0 10px 17px;border-color:transparent transparent transparent #15171C}
+.hero>.ez-p{right:auto!important;top:0;left:0;width:46px;height:32px;padding:0!important;border-radius:10px!important;background:#F5A524!important;color:transparent!important;font-size:0!important;box-shadow:0 8px 22px rgba(0,0,0,.3)!important;transition:transform .15s,opacity .2s;z-index:8}
+.hero>.ez-p::before{content:"";position:absolute;left:18px;top:9px;border-style:solid;border-width:7px 0 7px 12px;border-color:transparent transparent transparent #15171C}
 .hero>.ez-p:hover{transform:scale(1.06)}
-.hero>.ez-p.on{width:40px;height:40px;border-radius:50%!important;background:rgba(17,17,17,.78)!important}
-.hero>.ez-p.on::before{left:13px;top:12px;width:4px;height:16px;border:0;background:#fff;box-shadow:10px 0 0 #fff}
+.hero>.ez-p.on{width:32px;height:32px;border-radius:50%!important;background:rgba(17,17,17,.78)!important}
+.hero>.ez-p.on::before{left:10px;top:9px;width:3px;height:14px;border:0;background:#fff;box-shadow:10px 0 0 #fff}
 
 /* the arsenal button hands off to its two buttons */
 .hero .hdr.open .hdr-b{display:none!important}.hero .hdr.open .hdr-p{margin-top:0;animation:hdrIn .3s ease both}@keyframes hdrIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
@@ -721,7 +721,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <script>(function(){var b=document.getElementById('ezP'),h=document.querySelector('.hero'),ez=document.getElementById('ez');if(!b||!h||!ez)return;h.appendChild(b);try{new MutationObserver(function(){document.body.classList.toggle('ct-ezdock',ez.classList.contains('dock'))}).observe(ez,{attributes:true,attributeFilter:['class']})}catch(e){}})();</script>
 <script>/* place the play button on his chest; swap to a pause/mute look while he talks */
 (function(){var b=document.getElementById('ezP'),ez=document.getElementById('ez'),h=document.querySelector('.hero');if(!b||!ez||!h)return;b.setAttribute('aria-label','Play Ezekiel\'s video with sound');
- function place(){if(ez.classList.contains('dock'))return;var e=ez.getBoundingClientRect(),hr=h.getBoundingClientRect();var w=b.offsetWidth||68,ht=b.offsetHeight||48;var x=e.left-hr.left+e.width*.6-w/2,y=e.top-hr.top+e.height*(innerWidth<=700?.6:.3)-ht/2;x=Math.min(Math.max(8,x),hr.width-w-8);var cta=document.querySelector('.hero .hdr');if(cta){var c=cta.getBoundingClientRect(),cy=c.top-hr.top,cb=c.bottom-hr.top;if(y+ht>cy-8&&y<cb+8){y=(cy-ht-12>e.top-hr.top+e.height*.18)?cy-ht-12:cb+12}}b.style.transform='none';b.style.left=x+'px';b.style.top=y+'px'}
+ function place(){if(ez.classList.contains('dock'))return;var e=ez.getBoundingClientRect(),hr=h.getBoundingClientRect();var w=b.offsetWidth||46,ht=b.offsetHeight||32;var x=e.left-hr.left+e.width*.6-w/2,y=e.top-hr.top+e.height*(innerWidth<=700?.6:.3)-ht/2;x=Math.min(Math.max(8,x),hr.width-w-8);var cta=document.querySelector('.hero .hdr');if(cta){var c=cta.getBoundingClientRect(),cy=c.top-hr.top,cb=c.bottom-hr.top;if(y+ht>cy-8&&y<cb+8){y=(cy-ht-12>e.top-hr.top+e.height*.18)?cy-ht-12:cb+12}}b.style.transform='none';b.style.left=x+'px';b.style.top=y+'px'}
  function state(){b.classList.toggle('on',/mute/i.test(b.textContent)&&!/hear/i.test(b.textContent));place()}
  try{new MutationObserver(state).observe(b,{childList:true,characterData:true,subtree:true})}catch(e){}
  addEventListener('resize',place);addEventListener('load',place);setTimeout(place,400);setTimeout(place,1500);state()})();</script>
