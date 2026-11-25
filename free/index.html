@@ -469,7 +469,7 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
         
         <label class="cx-r"><div class="cx-h"><span>Your average fee per signed claim</span><b id="cv-fee"></b></div><input type="range" id="c-fee" min="1500" max="15000" step="250" value="4000"><small>Use your own history, not an industry average.</small></label>
         <div class="cx-r"><div class="cx-h"><span>Look ahead</span></div><div class="cx-ch" id="cx-m" role="radiogroup" aria-label="Months"><button type="button" data-m="3">3 months</button><button type="button" data-m="6">6 months</button><button type="button" data-m="12" class="on">12 months</button></div></div>
-        <div class="cx-r"><div class="cx-h"><span>Your plan</span></div><div class="cx-ch" id="cx-p" role="radiogroup" aria-label="Plan"><button type="button" data-p="99" class="on">Founder $99</button><button type="button" data-p="299">$299</button><button type="button" data-p="499">Pro $499</button></div></div>
+        
       </div>
       <div class="cx-out" aria-live="polite">
         <div class="cx-k"><small>Potential content pages</small><b id="co-pages"></b><p id="co-pages-n"></p></div>
@@ -821,20 +821,20 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  var de=document.documentElement;document.addEventListener('playing',function(e){if(e.target&&e.target.id==='ezV')de.classList.add('ezplay')},true);
  kick();addEventListener('load',kick);setTimeout(kick,800);setTimeout(kick,2500);setInterval(function(){if(!document.hidden)kick()},4000);['touchend','pointerup','click','scroll'].forEach(function(e){addEventListener(e,kick,{passive:true})});document.addEventListener('visibilitychange',function(){if(!document.hidden)kick()})})();</script>
 <script>/* Nov 25 (v2): business-building calculator. Pages = files x 12 (working estimate). Visitors = pages x 5 (illustration from the reference site). Cost = plan over the period. Nothing else is projected. */
-(function(){var $=function(i){return document.getElementById(i)};if(!$('calc'))return;var plan=99,M=12;
+(function(){var $=function(i){return document.getElementById(i)};if(!$('calc'))return;var M=12;
  function v(i){return parseFloat($('c-'+i).value)}function money(n){return '$'+Math.round(n).toLocaleString('en-US')}function num(n){return Math.round(n).toLocaleString('en-US')}
  function run(){var P=v('past'),F=v('files'),fee=v('fee');
   $('cv-past').textContent=P;$('cv-files').textContent=F;$('cv-fee').textContent=money(fee);
-  var pages=(P+F*M)*12,views=pages*5,cost=plan===99?1+99*(M-1):plan*M;
+  var pages=(P+F*M)*12,views=pages*5,cost=1+99*(M-1);
   $('co-pages').textContent=num(pages);
   $('co-pages-n').textContent=num(P*12)+' from your existing files, plus '+num(F*12*M)+' from new files over '+M+' months. Working estimate: about 12 pages per file, after your review.';
   $('co-views').textContent='~'+num(views);
   $('co-cost').textContent=money(cost);
-  $('co-cost-n').textContent=(plan===99?'Founder seat: $1 for 14 days, then $99 a month, over '+M+' months.':(plan===299?'$299':'Pro: $499')+' a month, over '+M+' months.')+' For scale: one signed claim at your '+money(fee)+' fee equals '+(Math.floor(fee/plan*10)/10)+' months of this plan.';
+  $('co-cost-n').textContent='Founder seat: $1 for 14 days, then $99 a month, over '+M+' months. For scale: one signed claim at your '+money(fee)+' fee equals '+(Math.floor(fee/99*10)/10)+' months of the founder seat.';
   $('cb-pages').textContent=num(pages);$('cb-views').textContent='~'+num(views);$('cb-cost').textContent=money(cost)}
  ['past','files','fee'].forEach(function(i){$('c-'+i).addEventListener('input',run)});
  function chips(id,fn){var g=$(id);g.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){g.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});fn(b);run()})})}
- chips('cx-m',function(b){M=+b.dataset.m});chips('cx-p',function(b){plan=+b.dataset.p});run();
+ chips('cx-m',function(b){M=+b.dataset.m});run();
  var told=false;document.querySelectorAll('#calc input,#calc .cx-ch button').forEach(function(i){i.addEventListener('change',tk);i.addEventListener('click',tk)});function tk(){if(told)return;told=true;try{window.__ctT&&window.__ctT('calc_used')}catch(_){}}
  var bar=$('cxbar'),inp=document.querySelector('#calc .cx-in'),out=document.querySelector('#calc .cx-out');function chk(){if(!bar)return;var a=inp.getBoundingClientRect(),o=out.getBoundingClientRect();bar.classList.toggle('on',innerWidth<=820&&a.top<innerHeight-80&&a.bottom>60&&(o.top>innerHeight||o.bottom<0))}addEventListener('scroll',chk,{passive:true});addEventListener('resize',chk);chk()})();</script>
 <script>/* Nov 25: (1) on phones, Ezekiel's head lines up with the headline and his shoes reach the bottom of the first screen; (2) invisible tap targets over him for every button behind him; (3) play button re-placed after. */
