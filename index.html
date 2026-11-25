@@ -314,7 +314,11 @@ html.saf.ezplay:not(.ezk) .hero .ez .ez-m video{filter:brightness(1.055)!importa
 /* Nov 25: possibility calculator */
 .calc{padding:10px 0 46px}.calc-l{color:var(--mu);max-width:760px;margin:0 0 22px}
 .cg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:18px;align-items:start}
-@media(max-width:820px){.cg{grid-template-columns:1fr}}
+@media(max-width:820px){.cg{grid-template-columns:1fr}.cg .co{order:-1}}
+/* phones: slim strip pinned at the top while the sliders are on screen and the numbers have scrolled away */
+.cpin{position:fixed;left:10px;right:10px;top:8px;z-index:60;display:flex;justify-content:space-between;align-items:center;gap:12px;background:#15171C;color:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 8px 24px rgba(0,0,0,.22);font:600 12.5px/1.25 Inter,sans-serif;transform:translateY(-140%);transition:transform .25s ease;pointer-events:none}
+.cpin.on{transform:none}.cpin b{display:block;font:700 19px/1.1 'JetBrains Mono',ui-monospace,monospace;color:#F5A524;margin-top:2px}.cpin div:last-child{text-align:right}
+@media(min-width:821px){.cpin{display:none}}
 .cs,.co{background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:18px}
 .sl{display:block;margin:0 0 16px}.sl>span{display:flex;justify-content:space-between;gap:10px;font:700 14px Inter,sans-serif}.sl b{font:800 14px 'JetBrains Mono',monospace;color:var(--act);white-space:nowrap}
 .sl input{width:100%;margin:8px 0 2px;accent-color:#F5A524}.sl small{display:block;font-size:12px;color:var(--mu);line-height:1.4}
@@ -450,6 +454,7 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
     <p class="k">An estimate, not a promise</p>
     <h2>What could your old files bring in?</h2>
     <p class="calc-l">Move the sliders. The math runs on Ezekiel's own numbers: 590 pages that drew about 100 real visitors a day, and door tickets that booked 2 appointments out of every 50. Your city and your work will be different. But how many claims are sitting in your files right now?</p>
+    <div class="cpin" id="cpin" aria-hidden="true"><div>Signed claims a month<b id="cp-signed"></b></div><div><span id="cp-l">Fees in month 12</span><b id="cp-fees"></b></div></div>
     <div class="cg">
       <div class="cs">
         <label class="sl"><span>Claim files you document a month<b id="cv-files"></b></span><input type="range" id="c-files" min="0" max="20" step="1" value="4"><small>Old files count. Each one becomes about 12 pages a homeowner can find.</small></label>
@@ -827,6 +832,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   $('co-pages').textContent=num(last.pages);$('co-views').textContent=num(last.views);$('co-appts').textContent=num(last.appts);$('co-signed').textContent=num(last.signed);
   $('co-bigl').textContent='Fees in month '+M;$('co-fees').textContent=money(last.fees);
   $('co-tot').textContent='About '+money(cumF)+' over '+M+' months, against '+money(cumC)+' for your plan.'+(pay?' It pays for itself in month '+pay+'.':' Move a slider to see when it pays for itself.');
+  if($('cpin')){$('cp-signed').textContent=num(last.signed);$('cp-l').textContent='Fees in month '+M;$('cp-fees').textContent=money(last.fees)}
   draw(rows)}
  function draw(rows){var c=$('c-chart'),dpr=window.devicePixelRatio||1,w=c.clientWidth||600,h=c.clientHeight||190;c.width=w*dpr;c.height=h*dpr;var x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,w,h);
   var max=Math.max.apply(null,rows.map(function(r){return r.signed}).concat([1]));var top=Math.ceil(max*1.15),pl=28,pb=18,ch=h-pb-6,bw=(w-pl)/rows.length;
@@ -839,7 +845,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  document.querySelectorAll('.plan button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.plan button').forEach(function(o){o.classList.toggle('on',o===b)});plan=+b.dataset.p;run()})});
  var dr=$('cdr'),db=dr.querySelector('.cdr-b'),dp=dr.querySelector('.cdr-p');db.addEventListener('click',function(){var o=dp.hidden;dp.hidden=!o;db.setAttribute('aria-expanded',String(o));dr.classList.toggle('open',o);try{window.__ctT&&window.__ctT(o?'calc_drawer':'calc_drawer_close')}catch(_){}});
  var told=false;document.querySelectorAll('#calc input').forEach(function(i){i.addEventListener('change',function(){if(told)return;told=true;try{window.__ctT&&window.__ctT('calc_used')}catch(_){}})});
- addEventListener('resize',run);run()})();</script>
+ addEventListener('resize',run);run();
+ var pin=$('cpin'),cs=document.querySelector('#calc .cs'),kp=document.querySelector('#calc .co');function pinChk(){if(!pin||!cs||!kp)return;var a=cs.getBoundingClientRect(),k=kp.getBoundingClientRect();pin.classList.toggle('on',innerWidth<=820&&k.bottom<70&&a.top<innerHeight&&a.bottom>90)}addEventListener('scroll',pinChk,{passive:true});addEventListener('resize',pinChk);pinChk()})();</script>
 <script>/* Nov 25: (1) on phones, Ezekiel's head lines up with the headline and his shoes reach the bottom of the first screen; (2) invisible tap targets over him for every button behind him; (3) play button re-placed after. */
 (function(){var h=document.querySelector('.hero'),ez=document.getElementById('ez'),hh=document.getElementById('hh');if(!h||!ez||!hh)return;var proxies=[];
  function size(){if(ez.classList.contains('dock')){['top','height','width'].forEach(function(k){ez.style.removeProperty(k)});return}if(innerWidth>700){['top','height','width'].forEach(function(k){ez.style.removeProperty(k)});return}
