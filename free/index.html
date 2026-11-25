@@ -639,13 +639,15 @@ if(Q.get('c')&&/^[A-Za-z0-9_-]{6,40}$/.test(Q.get('c'))){fetch('/api/pages/lead/
  try{T('lead_link_open',{c:Q.get('c')})}catch(_){}}).catch(function(){})}
 var pp=document.getElementById('pgPhone');function goPage(){var a=document.querySelector('.hero [data-cta]');if(a){try{window.__ctT&&window.__ctT('free_phone_click')}catch(_){}location.href=a.href}}pp.onclick=goPage;pp.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();goPage()}};
 
-(function(){var box=document.getElementById('ez'),btn=document.getElementById('ezP');if(!box)return;var saf=/^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent),vt=document.createElement('video'),wm=!saf&&vt.canPlayType('video/webm; codecs="vp9, opus"');var SRC=wm?'/assets/ezekiel-intro.webm':'/assets/ezekiel-intro.mp4',TY=wm?'video/webm':'video/mp4';
- fetch(SRC,{method:'HEAD'}).then(function(r){if(!r.ok)return;var m=box.querySelector('.ez-m');m.innerHTML='<video id="ezV" muted autoplay loop playsinline webkit-playsinline preload="auto" poster="/assets/ezekiel-black.webp"><source src="'+SRC+'" type="'+TY+'"></video>';
+(function(){var box=document.getElementById('ez'),btn=document.getElementById('ezP');if(!box)return;var saf=/^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent),vt=document.createElement('video'),wm=!saf&&vt.canPlayType('video/webm; codecs="vp9, opus"');var SRC=wm?'/assets/ezekiel-intro.webm':'/assets/ezekiel-intro.mp4',LOOP=wm?'/assets/ezekiel-loop.webm':'/assets/ezekiel-loop.mp4';
+ /* Nov 25: the silent hero loop is an 8-second clip (~0.2 MB); the 5-minute talk (16 MB) loads only when someone taps play */
+ (function(){var m=box.querySelector('.ez-m');m.innerHTML='<video id="ezV" muted autoplay loop playsinline webkit-playsinline preload="auto" poster="/assets/ezekiel-black.webp" src="'+LOOP+'"></video>';
   var v=document.getElementById('ezV');btn.hidden=false;
   try{new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else if(v.muted)v.pause()})},{threshold:.3}).observe(v)}catch(e){}
-  function talk(){if(v.muted){v.muted=false;v.loop=false;v.currentTime=0;var p=v.play();if(p&&p.catch)p.catch(function(){});btn.innerHTML='&#128263; Mute';try{window.__ctT&&window.__ctT('free_ez_play')}catch(_){}}else{v.muted=true;v.loop=true;btn.innerHTML='&#128264; Tap to hear why I built this'}}
+  function toLoop(){v.muted=true;v.loop=true;if(v.getAttribute('src')!==LOOP){v.src=LOOP}var p=v.play();if(p&&p.catch)p.catch(function(){})}
+  function talk(){if(v.muted){v.muted=false;v.loop=false;if(v.getAttribute('src')!==SRC){v.src=SRC}else{v.currentTime=0}var p=v.play();if(p&&p.catch)p.catch(function(){});btn.innerHTML='&#128263; Mute';try{window.__ctT&&window.__ctT('free_ez_play')}catch(_){}}else{toLoop();btn.innerHTML='&#128264; Tap to hear why I built this'}}
   btn.onclick=talk;m.onclick=talk;m.style.cursor='pointer';
-  v.addEventListener('ended',function(){v.muted=true;v.loop=true;v.play();btn.innerHTML='&#128264; Hear it again'})}).catch(function(){})})();
+  v.addEventListener('ended',function(){toLoop();btn.innerHTML='&#128264; Hear it again'})})()})();
 function back(){return Q.get('back')==='1'||flag()}
 function setLinks(){var b=back();document.querySelectorAll('[data-cta]').forEach(function(a){a.href=b?'/free/build/'+(PS?'?'+PS:''):'/free/build/?view=preview'+(PS?'&'+PS:'');if(a.classList.contains('hb'))a.innerHTML='<b>'+(b?'Build my free website':'See your free website')+'</b><small>Built from your license</small>';else a.innerHTML=b?'Build my free website &rarr;':'See my free website &rarr;';a.onclick=function(){T(b?'free_build_click':'free_sample_click')}});
  document.querySelectorAll('[data-again]').forEach(function(a){a.hidden=!b;a.href='/free/build/?view=preview'+(PS?'&'+PS:'')});
@@ -793,7 +795,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <script>/* Nov 25: when they scroll past the hero, Ezekiel walks down and docks in the lower right; scroll back up and he returns. The x parks him for the visit. */
 (function(){var ez=document.getElementById('ez'),hero=document.querySelector('.hero');if(!ez||!hero||!('IntersectionObserver' in window))return;var off=false;
  var x=document.createElement('button');x.type='button';x.className='ez-x';x.setAttribute('aria-label','Close');x.innerHTML='&times;';ez.appendChild(x);
- x.addEventListener('click',function(e){e.stopPropagation();off=true;ez.classList.remove('dock');var v=document.getElementById('ezV');if(v&&!v.muted){v.muted=true;v.loop=true}});
+ x.addEventListener('click',function(e){e.stopPropagation();off=true;ez.classList.remove('dock');var v=document.getElementById('ezV');if(v&&!v.muted){var pb=document.getElementById('ezP');if(pb){pb.click()}else{v.muted=true;v.loop=true}}});
  new IntersectionObserver(function(es){es.forEach(function(en){var past=!en.isIntersecting&&en.boundingClientRect.top<0;if(past&&!off)ez.classList.add('dock');else if(!past)ez.classList.remove('dock')})},{threshold:0,rootMargin:'0px 0px -55% 0px'}).observe(hero.querySelector('.in')||hero)})();</script>
 <script>/* Nov 25: explainer switch hidden in the hero; elsewhere it hides while scrolling and returns when they stop */
 (function(){var b=document.body,hero=document.querySelector('.hero'),t=null;if(!hero)return;
