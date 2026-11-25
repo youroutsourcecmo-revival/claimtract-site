@@ -227,12 +227,35 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 #ezt .kb{background:#D1D4DA;padding:3px 2px 5px}#ezt .kb div{display:flex;justify-content:center;gap:1.5px;margin-top:2px}
 #ezt .kb span{flex:0 0 8.6%;height:11px;border-radius:2px;background:#fff;font:600 5.5px/11px Arial;text-align:center;color:#222;box-shadow:0 1px 0 #999;transition:background .08s,transform .08s}
 #ezt .kb span.p{background:#9AA0A6;transform:translateY(1px)}#ezt .kb .sp{flex-basis:46%}
+
+/* Nov 25: light hero. Ezekiel docked bottom-right; page color rises from the bottom and fades into the roof video. */
+.hero{background:var(--bg)!important;color:var(--tx)!important}
+.hero::before{background:linear-gradient(0deg,var(--bg) 0%,var(--bg) 46%,color-mix(in srgb,var(--bg) 80%,transparent) 60%,color-mix(in srgb,var(--bg) 0%,transparent) 88%)!important}
+.hero .w{z-index:3}.hero .top{z-index:4}
+.hero .top b{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.hero .k{background:none!important;backdrop-filter:none!important;padding:0!important;color:var(--act)!important;text-shadow:none!important}
+.hero h1{color:var(--tx)}.hero h1 em{color:#A85F00}body.dark .hero h1 em{color:#F5A524}
+.hero .lead{color:#3A3D44}body.dark .hero .lead{color:var(--tx)}
+.hero .hdr-b{box-shadow:0 8px 22px rgba(168,95,0,.25)}
+.hero .hb{background:#15171C;border-color:#15171C}.hero .hb:first-child{background:#fff;border-color:var(--ln);box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.hero .hdr-n{color:var(--mu)}
+.hero .hvt{background:rgba(0,0,0,.08)}
+.hero .ez{position:absolute;right:0;bottom:0;z-index:2;height:min(56%,620px);aspect-ratio:540/874;width:auto;max-width:none;margin:0;justify-self:auto}
+.hero .ez .ez-m{height:100%}.hero .ez .ez-m img,.hero .ez .ez-m video{height:100%;width:100%;object-fit:contain;object-position:right bottom;filter:none}
+.hero .ez>span{display:none}
+.hero .ez .ez-p{position:absolute;right:auto;left:calc(16px - 100vw + 100%);bottom:18px;margin:0;white-space:nowrap;z-index:3;box-shadow:0 6px 16px rgba(0,0,0,.18)}@media(min-width:701px){.hero .ez .ez-p{left:auto;right:84%;bottom:30%}}
+.hero .k,.hero h1{text-shadow:0 0 10px var(--bg),0 0 2px var(--bg)!important}.hero .hdr-n{max-width:55%}
+.hero .ez .ez-m img,.hero .ez .ez-m video{-webkit-mask-image:linear-gradient(to bottom,#000 92%,transparent);mask-image:linear-gradient(to bottom,#000 92%,transparent)}
+.hero .lead{max-width:62%}.hero .hdr-n{max-width:60%}
+@media(min-width:701px){.hero{align-items:flex-end!important}.hero .ez{height:min(78%,700px)}.hero .lead,.hero .hdr-n{max-width:none}.hero .in{padding-bottom:70px!important}.hero #pgPhone,.hero .phone{display:none!important}}
+.who{grid-template-columns:1fr!important}
 </style>
 </head>
 <body>
 <section class="hero">
   <video id="hv" autoplay muted loop playsinline poster="/assets/bg/bg-roof-table.jpg"><source src="/assets/bg/bg-roof-table.mp4" type="video/mp4"></video>
   <script>(function(){if(!matchMedia('(max-width:700px)').matches)return;var v=document.getElementById('hv');v.poster='/assets/bg/hero-portrait.jpg';v.querySelector('source').src='/assets/bg/hero-portrait.mp4';v.style.objectPosition='center top';v.load();v.play&&v.play().catch(function(){})})()</script>
+    <div class="ez" id="ez"><div class="ez-m"><img src="/assets/ezekiel-black.webp" alt="Ezekiel Guichard" width="540" height="873"></div><button type="button" class="ez-p" id="ezP" hidden>&#128264; Tap to hear why I built this</button><span>Ezekiel Guichard<small>Former Florida public adjuster</small></span></div>
   <div class="top"><div class="w"><b>Florida 3-20 licensees only</b></div></div>
   <div class="w hg"><div class="in">
     <p class="k">Built by a 17-year public adjuster, for public adjusters.</p>
@@ -345,7 +368,6 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
       <p>I spent 17 years as a public adjuster in Florida, fighting for homeowners against big insurance companies. Before that, I spent five years with a Florida roofing contractor handling insurance claims. At my busiest, I was writing 30 to 50 houses a month. I know the work, the pressure, and what it takes to keep moving from one claim to the next. Wouldn't you rather have something built by somebody who has actually done the work?</p>
       <p>I've also been building automated business systems since 1988. I'm out of the adjusting industry now, but I haven't forgotten what it was like to build a business in it. Here's the plain truth about why I'm doing this: I wrote the books on getting found, so I built software that gets public adjusters found, and this free website is where it starts. Would you like to see what I put together?</p>
     </div>
-    <div class="ez" id="ez"><div class="ez-m"><img src="/assets/ezekiel-black.webp" alt="Ezekiel Guichard" width="540" height="873" loading="lazy"></div><button type="button" class="ez-p" id="ezP" hidden>&#128264; Tap to hear why I built this</button><span>Ezekiel Guichard<small>Former Florida public adjuster</small></span></div>
   </section>
 
   <section class="bkx">
@@ -623,7 +645,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   '<div class="r" data-r="3"><small>plumbing.example</small><b>Call a plumber 24/7</b></div>'+
   '<div class="tag" data-r="tn">No public adjuster on page one</div></div>'+
   '<div class="kb">'+rows.map(function(r){return '<div>'+r.split('').map(function(c){return '<span data-k="'+c+'">'+c+'</span>'}).join('')+'</div>'}).join('')+'<div><span class="sp" data-k=" ">space</span><span class="rt" data-k="enter">return</span></div></div></div></div>';
- box.style.position='relative';box.appendChild(el);
+ box.appendChild(el);
  var qt=el.querySelector('.qt'),R=function(k){return el.querySelector('[data-r="'+k+'"]')},last='',nm=null;
  function name(){if(nm)return nm;var n=document.getElementById('wsN');var s=n&&n.textContent.trim();nm=s&&s.length<40?s:'You';return nm}
  function press(ch){var k=el.querySelector('[data-k="'+ch.toLowerCase()+'"]');if(!k)return;k.classList.add('p');setTimeout(function(){k.classList.remove('p')},110)}
