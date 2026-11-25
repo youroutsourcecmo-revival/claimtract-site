@@ -66,6 +66,9 @@ var CSS=`
 .s2-me{position:absolute;left:0;right:0;top:240px;padding:10px;border-radius:12px;background:#FFF8E8;border:1.5px solid #F5A524;display:flex;gap:9px;align-items:flex-start;opacity:0;transition:top .9s cubic-bezier(.2,.8,.2,1),opacity .4s,box-shadow .4s}
 .s2-me.in{opacity:1}.s2-r.shift .s2-row{transform:translateY(152px)}.s2-me.up{top:-6px;box-shadow:0 10px 28px rgba(245,165,36,.4)}
 .s2-me b{display:block;font:800 12.5px/1.3 Inter,sans-serif;color:#1a3fa8}.s2-me small{display:block;font:600 10.5px Inter;color:#188038;margin-top:2px}.s2-me em{display:block;font:500 10.5px/1.35 Inter;color:#55585F;font-style:normal;margin-top:3px}
+.s2-kb{position:absolute;left:0;right:0;bottom:0;background:#D1D4DA;padding:6px 3px 10px;transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:3}.s2-kb.in{transform:none}
+.s2-kb div{display:flex;justify-content:center;gap:3px;margin-top:5px}.s2-kb b{flex:0 0 8.6%;height:26px;border-radius:4px;background:#fff;box-shadow:0 1px 0 #8E9096;font:500 11px/26px Inter,sans-serif;color:#111;text-align:center;transition:background .08s,transform .08s}
+.s2-kb b.w{flex:0 0 13%;background:#ADB3BC;font-size:9px}.s2-kb b.sp{flex:0 0 50%;font-size:9px;color:#555}.s2-kb b.on{background:#9AA0A8;transform:translateY(-2px) scale(1.12)}
 .s2-me .av{flex:none;width:36px;height:36px;border-radius:50%;background:url(/assets/cedric-headshot.jpg) center 20%/cover;border:2px solid #F5A524}
 .tap{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:rgba(245,165,36,.45);transform:scale(0);pointer-events:none}.tap.go{animation:tap .7s ease-out forwards}
 @keyframes tap{0%{transform:scale(.2);opacity:1}100%{transform:scale(1.6);opacity:0}}
@@ -171,13 +174,14 @@ function s1(){var bg=el('<div class="s1-k"></div>');stage.appendChild(bg);var sc
  return 300+13*420+1500}
 
 /* 2: the search they actually type */
-function s2(){var scr=phone('<div class="s2"><div class="s2-q"><svg viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><span class="tx"></span><span class="cur"></span></div><p class="s2-e">Nobody types this.</p><div class="s2-r"></div></div>');
+function s2(){var scr=phone('<div class="s2"><div class="s2-q"><svg viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><span class="tx"></span><span class="cur"></span></div><p class="s2-e">Nobody types this.</p><div class="s2-r"></div><div class="s2-kb"><div>'+'qwertyuiop'.split('').map(function(c){return '<b data-k="'+c+'">'+c+'</b>'}).join('')+'</div><div>'+'asdfghjkl'.split('').map(function(c){return '<b data-k="'+c+'">'+c+'</b>'}).join('')+'</div><div><b class="w">&#8679;</b>'+'zxcvbnm'.split('').map(function(c){return '<b data-k="'+c+'">'+c+'</b>'}).join('')+'<b class="w">&#9003;</b></div><div><b class="w">123</b><b class="sp" data-k=" ">space</b><b class="w" data-k="go">go</b></div></div></div>');
  var tx=scr.querySelector('.tx'),e=scr.querySelector('.s2-e'),r=scr.querySelector('.s2-r');
- function type(s,at,cb){for(var i=0;i<=s.length;i++)(function(i){T(function(){tx.textContent=s.slice(0,i)},at+i*55)})(i);T(cb,at+s.length*55+250)}
+ var kb=scr.querySelector('.s2-kb');function key(c){var k=kb.querySelector('[data-k="'+c+'"]');if(!k)return;k.classList.add('on');T(function(){k.classList.remove('on')},110)}
+ function type(s,at,cb){T(function(){kb.classList.add('in')},Math.max(0,at-250));for(var i=0;i<=s.length;i++)(function(i){T(function(){tx.textContent=s.slice(0,i);if(i)key(s.charAt(i-1))},at+i*55)})(i);T(function(){var g=kb.querySelector('[data-k=go]');g.classList.add('on');T(function(){g.classList.remove('on');kb.classList.remove('in')},150);cb()},at+s.length*55+250)}
  var a='public adjuster near me',b='insurance denied my roof claim orlando';
  type(a,300,function(){tx.classList.add('x');e.classList.add('in');
   T(function(){tx.classList.remove('x');tx.textContent='';e.classList.remove('in');
-   type(b,0,function(){var rows=[['Roof claim denied? 5 things to check','insurer-guide.example','2'],['Florida roof claim rules explained','state-info.example',''],['Why roof claims get denied','homeblog.example','']];
+   type(b,250,function(){var rows=[['Roof claim denied? 5 things to check','insurer-guide.example','2'],['Florida roof claim rules explained','state-info.example',''],['Why roof claims get denied','homeblog.example','']];
     rows.forEach(function(x,i){T(function(){var d=el('<div class="s2-row"><u>'+x[0]+'</u><s>'+x[1]+'</s><i></i></div>');r.appendChild(d);requestAnimationFrame(function(){d.classList.add('in')})},i*220)});
     T(function(){var me=el('<div class="s2-me"><span class="av"></span><div><b>Why your roof claim was denied, and what to do next</b><small>claimtract.app/cedric-moore</small><em>Cedric Moore, public adjuster in Orlando</em></div></div>');r.appendChild(me);requestAnimationFrame(function(){me.classList.add('in');T(function(){me.classList.add('up');r.classList.add('shift')},350)})},900);
     T(function(){var t=el('<span class="tap"></span>');t.style.left='60%';t.style.top='120px';scr.appendChild(t);requestAnimationFrame(function(){t.classList.add('go')})},2500);
