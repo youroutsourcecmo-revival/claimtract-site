@@ -305,6 +305,12 @@ html.saf .hero .ez .ez-m video,html.saf .hero .ez .ez-m img{filter:brightness(1.
 
 /* Nov 25: CTA sits behind Ezekiel */
 .hero .in>.hdr{z-index:2!important}
+
+/* play = bare gold triangle; pause = bare gold bars (no box) */
+.hero>.ez-p,.hero>.ez-p.on{background:transparent!important;box-shadow:none!important;border-radius:0!important;width:40px!important;height:40px!important;filter:drop-shadow(0 2px 6px rgba(0,0,0,.45))}
+.hero>.ez-p::before{left:11px!important;top:6px!important;border-width:14px 0 14px 24px!important;border-color:transparent transparent transparent #F5A524!important;width:0!important;height:0!important;background:none!important;box-shadow:none!important}
+.hero>.ez-p.on::before{left:11px!important;top:9px!important;width:6px!important;height:22px!important;border:0!important;background:#F5A524!important;box-shadow:12px 0 0 #F5A524!important}
+.hero>.ez-p:hover{transform:scale(1.1)}
 </style>
 </head>
 <body>
@@ -729,7 +735,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <script>(function(){var b=document.getElementById('ezP'),h=document.querySelector('.hero'),ez=document.getElementById('ez');if(!b||!h||!ez)return;h.appendChild(b);try{new MutationObserver(function(){document.body.classList.toggle('ct-ezdock',ez.classList.contains('dock'))}).observe(ez,{attributes:true,attributeFilter:['class']})}catch(e){}})();</script>
 <script>/* place the play button on his chest; swap to a pause/mute look while he talks */
 (function(){var b=document.getElementById('ezP'),ez=document.getElementById('ez'),h=document.querySelector('.hero');if(!b||!ez||!h)return;b.setAttribute('aria-label','Play Ezekiel\'s video with sound');
- function place(){if(ez.classList.contains('dock'))return;var e=ez.getBoundingClientRect(),hr=h.getBoundingClientRect();var w=b.offsetWidth||46,ht=b.offsetHeight||32;var x=e.left-hr.left+e.width*.6-w/2,y=e.top-hr.top+e.height*(innerWidth<=700?.6:.3)-ht/2;x=Math.min(Math.max(8,x),hr.width-w-8);var cta=document.querySelector('.hero .hdr');if(cta){var c=cta.getBoundingClientRect(),cy=c.top-hr.top,cb=c.bottom-hr.top;if(y+ht>cy-8&&y<cb+8){y=(cy-ht-12>e.top-hr.top+e.height*.18)?cy-ht-12:cb+12}}b.style.transform='none';b.style.left=x+'px';b.style.top=y+'px'}
+ function place(){if(ez.classList.contains('dock'))return;var e=ez.getBoundingClientRect(),hr=h.getBoundingClientRect();var w=b.offsetWidth||46,ht=b.offsetHeight||32;var x=e.left-hr.left+e.width*.6-w/2,y=e.top-hr.top+e.height*.27-ht/2;x=Math.min(Math.max(8,x),hr.width-w-8);b.style.transform='none';b.style.left=x+'px';b.style.top=y+'px'}
  function state(){b.classList.toggle('on',/mute/i.test(b.textContent)&&!/hear/i.test(b.textContent));place()}
  try{new MutationObserver(state).observe(b,{childList:true,characterData:true,subtree:true})}catch(e){}
  addEventListener('resize',place);addEventListener('load',place);setTimeout(place,400);setTimeout(place,1500);state()})();</script>
