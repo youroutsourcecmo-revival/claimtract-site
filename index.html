@@ -230,7 +230,8 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 
 /* Nov 25: light hero. Ezekiel docked bottom-right; page color rises from the bottom and fades into the roof video. */
 .hero{background:var(--bg)!important;color:var(--tx)!important}
-.hero::before{background:linear-gradient(0deg,var(--bg) 0%,var(--bg) 46%,color-mix(in srgb,var(--bg) 80%,transparent) 60%,color-mix(in srgb,var(--bg) 0%,transparent) 88%)!important}
+.hero::before{display:none!important}
+.hero #hv{inset:0 0 auto 0!important;height:68%!important;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 38%,rgba(0,0,0,.55) 62%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 38%,rgba(0,0,0,.55) 62%,transparent 100%)}@media(min-width:701px){.hero #hv{height:72%!important}}
 .hero .w{z-index:3}.hero .top{z-index:4}
 .hero .top b{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
 .hero .k{background:none!important;backdrop-filter:none!important;padding:0!important;color:var(--act)!important;text-shadow:none!important}
