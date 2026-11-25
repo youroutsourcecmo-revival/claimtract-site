@@ -324,6 +324,9 @@ html.saf .hero .ez .ez-m video,html.saf .hero .ez .ez-m img{filter:brightness(1.
 .ch canvas{display:block;width:100%;height:190px}.chl{display:flex;flex-wrap:wrap;gap:10px;font-size:11.5px;font-weight:600;color:var(--mu);margin-bottom:6px}.chl i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}.chx{display:block;font-size:11.5px;color:var(--mu);margin-top:4px}
 .cdr{margin-top:16px;background:var(--card);border:1px solid var(--ln);border-radius:16px}.cdr-b{width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border:0;background:none;color:var(--tx);font:800 15px Inter,sans-serif;cursor:pointer}.cdr-b i{font-style:normal;transition:transform .25s}.cdr.open .cdr-b i{transform:rotate(180deg)}.cdr-p{padding:0 18px 16px}.cdr-p>p{font-size:13px;color:var(--mu);margin:0 0 14px}.cdr-n{font-size:12px!important;border-top:1px solid var(--ln);padding-top:12px}
 .calc-c{margin:22px 0 0;font:700 17px/1.5 Inter,sans-serif;max-width:760px}.calc-c .btn{margin-left:4px}
+
+/* clear tap targets that sit over Ezekiel so buttons behind him still work */
+.ctp{position:absolute;z-index:7;background:transparent;border:0;padding:0;margin:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
 </style>
 </head>
 <body>
@@ -825,5 +828,20 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  var dr=$('cdr'),db=dr.querySelector('.cdr-b'),dp=dr.querySelector('.cdr-p');db.addEventListener('click',function(){var o=dp.hidden;dp.hidden=!o;db.setAttribute('aria-expanded',String(o));dr.classList.toggle('open',o);try{window.__ctT&&window.__ctT(o?'calc_drawer':'calc_drawer_close')}catch(_){}});
  var told=false;document.querySelectorAll('#calc input').forEach(function(i){i.addEventListener('change',function(){if(told)return;told=true;try{window.__ctT&&window.__ctT('calc_used')}catch(_){}})});
  addEventListener('resize',run);run()})();</script>
+<script>/* Nov 25: (1) on phones, Ezekiel's head lines up with the headline and his shoes reach the bottom of the first screen; (2) invisible tap targets over him for every button behind him; (3) play button re-placed after. */
+(function(){var h=document.querySelector('.hero'),ez=document.getElementById('ez'),hh=document.getElementById('hh');if(!h||!ez||!hh)return;var proxies=[];
+ function size(){if(ez.classList.contains('dock'))return;if(innerWidth>700){['top','height','width'].forEach(function(k){ez.style.removeProperty(k)});return}
+  var hr=h.getBoundingClientRect(),r=hh.getBoundingClientRect(),top=(r.top-hr.top)+r.height*.38,vh=window.innerHeight,ht=Math.max(vh*.5,vh-top+(h.getBoundingClientRect().top+scrollY>0?0:0));
+  ht=Math.min(ht,vh*.78);ez.style.setProperty('top',top+'px','important');ez.style.setProperty('height',ht+'px','important');ez.style.setProperty('width',(ht*.618)+'px','important')}
+ function targets(){return [].slice.call(h.querySelectorAll('.hdr-b,.hdr-p .hb')).filter(function(b){return b.offsetParent&&getComputedStyle(b).display!=='none'})}
+ function cover(){proxies.forEach(function(p){p.remove()});proxies=[];if(ez.classList.contains('dock'))return;var hr=h.getBoundingClientRect(),er=ez.getBoundingClientRect();
+  targets().forEach(function(b){var r=b.getBoundingClientRect();if(r.right<er.left||r.bottom<er.top||r.top>er.bottom)return;var p=document.createElement('button');p.type='button';p.className='ctp';p.setAttribute('aria-hidden','true');p.tabIndex=-1;
+   p.style.left=(r.left-hr.left)+'px';p.style.top=(r.top-hr.top)+'px';p.style.width=r.width+'px';p.style.height=r.height+'px';p.addEventListener('click',function(e){e.preventDefault();b.click()});h.appendChild(p);proxies.push(p)})}
+ function all(){size();requestAnimationFrame(function(){cover();window.dispatchEvent(new Event('resize'))})}
+ var busy=false;function soon(){if(busy)return;busy=true;setTimeout(function(){busy=false;size();cover()},60)}
+ addEventListener('load',all);setTimeout(all,300);setTimeout(all,1500);addEventListener('orientationchange',function(){setTimeout(all,300)});
+ addEventListener('resize',soon);
+ try{new MutationObserver(soon).observe(h.querySelector('.in'),{subtree:true,childList:true,attributes:true,attributeFilter:['class','hidden','style']})}catch(e){}
+ try{new MutationObserver(function(){cover()}).observe(ez,{attributes:true,attributeFilter:['class']})}catch(e){}})();</script>
 </body>
 </html>
