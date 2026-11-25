@@ -265,7 +265,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 /* Nov 25 (2): Ezekiel is the show. Bigger, in front of the text; only the drawer button sits above him. */
 .hero .w{z-index:auto!important;perspective:none!important}.hero .in>*{position:relative;z-index:2}.hero .in>.hdr{z-index:6}
 .hero .ez{z-index:4!important;height:min(66%,720px)!important}
-@media(min-width:701px){.hero .ez{height:min(88svh,820px)!important;width:calc(min(88svh,820px) * .618)!important}}
+@media(min-width:701px){.hero .ez{top:calc(100svh - min(88svh,820px))!important;bottom:auto!important;height:min(88svh,820px)!important;width:calc(min(88svh,820px) * .618)!important}}
 .hero .lead,.hero .hdr-n{max-width:none!important}
 @media(max-width:700px){.hero .lead{max-width:none!important}.hero h1{margin-bottom:10px!important}}
 .hero .ez:not(.dock) .ez-p{left:auto!important;right:12%!important;bottom:calc(100% + 6px)!important;top:auto!important}
@@ -276,7 +276,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 #ezt{display:none!important}
 #ctxt{transition:opacity .25s,transform .25s}body.ct-inhero #ctxt,body.ct-scrolling #ctxt{opacity:0!important;pointer-events:none!important}
 @media(max-width:700px){.hero{align-items:flex-start!important}.hero .in{padding:calc(56.25vw * .78) 0 24px!important}
- .hero .ez{top:auto!important;bottom:0!important;height:min(64svh,600px)!important;width:calc(min(64svh,600px) * .618)!important;right:-9%!important}}
+ .hero .ez{top:calc(100svh - min(64svh,600px))!important;bottom:auto!important;height:min(64svh,600px)!important;width:calc(min(64svh,600px) * .618)!important;right:-9%!important}}
 
 /* iPhone/Safari plays the MP4 (no transparency): multiply drops the white box so the paper and text show around him */
 html.saf .hero .ez{mix-blend-mode:darken}
@@ -721,7 +721,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <script>(function(){var b=document.getElementById('ezP'),h=document.querySelector('.hero'),ez=document.getElementById('ez');if(!b||!h||!ez)return;h.appendChild(b);try{new MutationObserver(function(){document.body.classList.toggle('ct-ezdock',ez.classList.contains('dock'))}).observe(ez,{attributes:true,attributeFilter:['class']})}catch(e){}})();</script>
 <script>/* place the play button on his chest; swap to a pause/mute look while he talks */
 (function(){var b=document.getElementById('ezP'),ez=document.getElementById('ez'),h=document.querySelector('.hero');if(!b||!ez||!h)return;b.setAttribute('aria-label','Play Ezekiel\'s video with sound');
- function place(){if(ez.classList.contains('dock'))return;var e=ez.getBoundingClientRect(),hr=h.getBoundingClientRect();var w=b.offsetWidth||68,ht=b.offsetHeight||48;var x=e.left-hr.left+e.width*.6-w/2,y=e.top-hr.top+e.height*(innerWidth<=700?.6:.3)-ht/2;x=Math.min(Math.max(8,x),hr.width-w-8);b.style.transform='none';b.style.left=x+'px';b.style.top=y+'px'}
+ function place(){if(ez.classList.contains('dock'))return;var e=ez.getBoundingClientRect(),hr=h.getBoundingClientRect();var w=b.offsetWidth||68,ht=b.offsetHeight||48;var x=e.left-hr.left+e.width*.6-w/2,y=e.top-hr.top+e.height*(innerWidth<=700?.6:.3)-ht/2;x=Math.min(Math.max(8,x),hr.width-w-8);var cta=document.querySelector('.hero .hdr');if(cta){var c=cta.getBoundingClientRect(),cy=c.top-hr.top,cb=c.bottom-hr.top;if(y+ht>cy-8&&y<cb+8){y=(cy-ht-12>e.top-hr.top+e.height*.18)?cy-ht-12:cb+12}}b.style.transform='none';b.style.left=x+'px';b.style.top=y+'px'}
  function state(){b.classList.toggle('on',/mute/i.test(b.textContent)&&!/hear/i.test(b.textContent));place()}
  try{new MutationObserver(state).observe(b,{childList:true,characterData:true,subtree:true})}catch(e){}
  addEventListener('resize',place);addEventListener('load',place);setTimeout(place,400);setTimeout(place,1500);state()})();</script>
