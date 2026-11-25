@@ -52,6 +52,6 @@ function doc(D,slug,O){O=O||{};var CT=root.CTPage&&root.CTPage.CT;if(!CT)throw n
   '<meta name="robots" content="'+(O.index?'index,follow':'noindex,follow')+'"><link rel="canonical" href="'+url+'"><link rel="icon" href="/favicon.ico">'+
   '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/ct-page.css?v=1124b"><link rel="stylesheet" href="/assets/ct-answer.css">'+(O.head||'')+'</head><body>'+(O.top||'')+
   '<div class="pv '+esc(S.tpl||'paper')+' ans">'+top+hero+trust+art+faq+rel+share+foot+'</div>'+
-  '<script src="/assets/ct-footer.js" defer></script><script src="/assets/ct-hero.js" defer></script><script src="/assets/ct-home.js?v=1125g" data-slug="'+esc(ps)+'" data-first="'+esc(fn)+'" data-name="'+esc(name)+'" data-phone="'+esc(d)+'" defer></script>'+(O.body||'')+'</body></html>'}
+  '<script src="/assets/ct-footer.js" defer></script><script src="/assets/ct-hero.js" defer></script><script src="/assets/ct-home.js?v=1126a" data-slug="'+esc(ps)+'" data-first="'+esc(fn)+'" data-name="'+esc(name)+'" data-phone="'+esc(d)+'" defer></script>'+(O.body||'')+'</body></html>'}
 root.CTAnswer={doc:doc,slugs:function(){return root.CTPage.CT.articles.map(function(a){return a.slug})}};
 })(typeof window!=='undefined'?window:globalThis);
