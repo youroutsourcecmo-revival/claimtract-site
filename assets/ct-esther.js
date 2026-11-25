@@ -31,7 +31,7 @@ function seen(k){try{return localStorage.getItem('ct_es_'+k)==='1'}catch(e){retu
 function mark(k){try{localStorage.setItem('ct_es_'+k,'1')}catch(e){}}
 window.CTEsther={
  init:function(map){IDS={};CTA={};for(var k in (map||{})){var m=map[k];if(m&&typeof m==='object'){IDS[k]=m.id;if(m.cta)CTA[k]=m.cta}else IDS[k]=m}for(var j in IDS)if(IDS[j])resolve(IDS[j])},
- play:function(k,force){try{if(localStorage.getItem('ct_exp_off')==='1')return}catch(e){}var id=IDS[k];if(!id)return;mark(k);want=true;cta(k);var c=CLIPS[id];if(c)playClip(c);else resolve(id,function(r){if(r&&want)playClip(r)})},
+ play:function(k,force){try{if(localStorage.getItem('ct_exp_off')==='1'||localStorage.getItem('ct_xp')==='0')return}catch(e){}var id=IDS[k];if(!id)return;mark(k);want=true;cta(k);var c=CLIPS[id];if(c)playClip(c);else resolve(id,function(r){if(r&&want)playClip(r)})},
  stop:stop,
  /* turning explainers off: she says how to bring her back, once per tap */
  bye:function(){var id=OFF_ID;if(!id)return;want=true;var c=CLIPS[id];if(c)playClip(c);else resolve(id,function(r){if(r&&want)playClip(r)})}
@@ -39,8 +39,11 @@ window.CTEsther={
 })();
 
 /* Explainers on/off: a tab stuck to the right edge, always in view */
-(function(){function off(){try{return localStorage.getItem('ct_exp_off')==='1'}catch(e){return false}}
+(function(){function off(){try{return localStorage.getItem('ct_exp_off')==='1'||localStorage.getItem('ct_xp')==='0'}catch(e){return false}}
 function mk(){if(document.getElementById('ctxt'))return;var st=document.createElement('style');st.textContent='#ctxt{position:fixed;right:0;top:20%;z-index:100001;writing-mode:vertical-rl;transform:rotate(180deg);display:flex;align-items:center;gap:8px;padding:14px 9px;border:0;border-radius:0 12px 12px 0;background:#14161A;color:#fff;font:700 13px Inter,system-ui,sans-serif;letter-spacing:.02em;cursor:pointer;box-shadow:-4px 6px 18px rgba(0,0,0,.25)}#ctxt i{font-style:normal;display:inline-block;width:18px;height:32px;border-radius:99px;background:#555;position:relative;transition:background .2s}#ctxt i::after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .2s}#ctxt[aria-pressed=true] i{background:#F5A524}#ctxt[aria-pressed=true] i::after{transform:translateY(14px)}#ctxt:focus-visible{outline:3px solid #F5A524}@media(max-width:600px){#ctxt{padding:10px 7px;font-size:12px}}';document.head.appendChild(st);
  var b=document.createElement('button');b.id='ctxt';b.type='button';function set(){var on=!off();b.setAttribute('aria-pressed',String(on));b.innerHTML='<i></i><span>Explainer avatars '+(on?'on':'off')+'</span>';b.title=on?'Tap to turn the video explainers off':'Tap to turn the video explainers on'}set();
- b.onclick=function(){var on=!off();try{localStorage.setItem('ct_exp_off',on?'1':'0')}catch(e){}if(on&&window.CTEsther){CTEsther.stop();CTEsther.bye()}set()};document.body.appendChild(b)}
+ b.onclick=function(){var on=!off();try{localStorage.setItem('ct_exp_off',on?'1':'0');localStorage.setItem('ct_xp',on?'0':'1')}catch(e){}if(on&&window.CTEsther){CTEsther.stop();CTEsther.bye()}set()};document.body.appendChild(b);
+ addEventListener('storage',function(e){if(e.key==='ct_exp_off'||e.key==='ct_xp'){set();if(off()&&window.CTEsther)CTEsther.stop()}})}
 if(document.body)mk();else document.addEventListener('DOMContentLoaded',mk)})();
+
+(function(){if(!window.__ctOne){var sc=document.createElement('script');sc.src='/assets/ct-one.js?v=1';document.head.appendChild(sc)}addEventListener('ct-hush',function(){if(window.CTEsther)CTEsther.stop()})})();

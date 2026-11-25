@@ -1,7 +1,7 @@
 /* ClaimTract homeowner tools for adjuster pages.
    Claim binder (saved on the homeowner's phone; shared only when they tap Send), 3 a.m. mode,
    read it to me, search this page, print a handout, save to home screen, and homeowner events.
-   Include: <script src="/assets/ct-home.js?v=1125f" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
+   Include: <script src="/assets/ct-home.js?v=1125g" data-slug="cedric-moore" data-first="Cedric" data-name="Cedric Moore" data-phone="4075550142" data-sample="1" defer></script> */
 (function(){
 var S=document.currentScript||document.querySelector('script[src*="ct-home.js"]');if(!S)return;
 var D=S.dataset,SLUG=D.slug||location.pathname.split('/')[1]||'',FIRST=D.first||'your adjuster',NAME=D.name||FIRST,PH=(D.phone||'').replace(/\D/g,'').slice(-10),SAMPLE=D.sample==='1';
@@ -271,3 +271,5 @@ function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(
  window.CTHome={tools:function(){var o=$('.cth-sec');if(o)o.remove();tools()},binder:openBinder,read:readAloud,search:openSearch,print:printHandout,home:saveHome,late:lateBanner}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
+
+(function(){if(!window.__ctOne){var sc=document.createElement('script');sc.src='/assets/ct-one.js?v=1';document.head.appendChild(sc)}})();
