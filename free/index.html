@@ -555,7 +555,7 @@ if(Q.get('c')&&/^[A-Za-z0-9_-]{6,40}$/.test(Q.get('c'))){fetch('/api/pages/lead/
 var pp=document.getElementById('pgPhone');function goPage(){var a=document.querySelector('.hero [data-cta]');if(a){try{window.__ctT&&window.__ctT('free_phone_click')}catch(_){}location.href=a.href}}pp.onclick=goPage;pp.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();goPage()}};
 
 (function(){var box=document.getElementById('ez'),btn=document.getElementById('ezP');if(!box)return;var saf=/^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent),vt=document.createElement('video'),wm=!saf&&vt.canPlayType('video/webm; codecs="vp9, opus"');var SRC=wm?'/assets/ezekiel-intro.webm':'/assets/ezekiel-intro.mp4',TY=wm?'video/webm':'video/mp4';
- fetch(SRC,{method:'HEAD'}).then(function(r){if(!r.ok)return;var m=box.querySelector('.ez-m');m.innerHTML='<video id="ezV" muted loop playsinline preload="metadata" poster="/assets/ezekiel-black.webp"><source src="'+SRC+'" type="'+TY+'"></video>';
+ fetch(SRC,{method:'HEAD'}).then(function(r){if(!r.ok)return;var m=box.querySelector('.ez-m');m.innerHTML='<video id="ezV" muted autoplay loop playsinline webkit-playsinline preload="auto" poster="/assets/ezekiel-black.webp"><source src="'+SRC+'" type="'+TY+'"></video>';
   var v=document.getElementById('ezV');btn.hidden=false;
   try{new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else if(v.muted)v.pause()})},{threshold:.3}).observe(v)}catch(e){}
   function talk(){if(v.muted){v.muted=false;v.loop=false;v.currentTime=0;var p=v.play();if(p&&p.catch)p.catch(function(){});btn.innerHTML='&#128263; Mute';try{window.__ctT&&window.__ctT('free_ez_play')}catch(_){}}else{v.muted=true;v.loop=true;btn.innerHTML='&#128264; Tap to hear why I built this'}}
@@ -721,5 +721,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  function state(){b.classList.toggle('on',/mute/i.test(b.textContent)&&!/hear/i.test(b.textContent));place()}
  try{new MutationObserver(state).observe(b,{childList:true,characterData:true,subtree:true})}catch(e){}
  addEventListener('resize',place);addEventListener('load',place);setTimeout(place,400);setTimeout(place,1500);state()})();</script>
+<script>/* keep both hero videos looping silently: iPhones sometimes refuse autoplay until the first touch or scroll */
+(function(){function kick(){['hv','ezV'].forEach(function(id){var v=document.getElementById(id);if(!v)return;if(id==='hv'||v.muted){v.muted=true;v.defaultMuted=true;v.loop=true;v.setAttribute('playsinline','');if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}}})}
+ kick();addEventListener('load',kick);setTimeout(kick,800);setTimeout(kick,2500);['touchstart','scroll','click'].forEach(function(e){addEventListener(e,kick,{passive:true,once:true})});document.addEventListener('visibilitychange',function(){if(!document.hidden)kick()})})();</script>
 </body>
 </html>
