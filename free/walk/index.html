@@ -77,6 +77,8 @@ html,body{height:100%;background:#0B0D10;color:#E9ECF1;font:15px Inter,system-ui
 #fv2{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;display:none;z-index:1}
 #chips{display:flex;flex-direction:column;gap:9px;margin-top:12px;align-items:stretch}#chips .go{display:block}#chips .gh{background:transparent;border:1px solid #4A4F58;color:#fff;font-weight:700}
 #pin{position:absolute;top:calc(env(safe-area-inset-top) + 14px);left:50%;transform:translateX(-50%);white-space:nowrap;z-index:45;display:none;border:0;border-radius:999px;background:#F5A524;color:#111;font:800 12px Inter,system-ui;padding:8px 12px;text-decoration:none}
+html.emb #x,html.emb #pin,html.emb #buy,html.emb #full{display:none!important}
+#embEnd{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 20px);z-index:48;display:none;flex-direction:column;gap:10px;text-align:center}#embEnd .go{display:block;width:100%;text-decoration:none;font-size:17px}#embEnd small{display:block;font-size:12px;font-weight:600;opacity:.8;margin-top:2px}#embEnd .gh{background:rgba(10,12,16,.62);border:1px solid rgba(255,255,255,.35);color:#fff}#embEnd p{margin:0;padding:12px 14px;border-radius:14px;background:rgba(10,12,16,.86);color:#fff;font:600 14px/1.45 Inter,system-ui}
 #full{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 22px);z-index:27;display:none;padding:16px;border-radius:14px;background:rgba(10,12,16,.86);color:#fff;text-align:center;font:600 14px/1.45 Inter,system-ui}#full b{display:block;font-size:17px;color:#F5A524;margin-bottom:4px}
 #tease .tz-in{margin:0 18px 40px;padding:16px 18px;border-radius:18px;background:rgba(10,12,16,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;text-align:center;font-family:Inter,system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 #tease b{display:block;font:800 21px/1.2 Inter,system-ui,sans-serif}#tease span{display:block;margin-top:5px;font-size:14px;color:#E6E8EC}
@@ -189,7 +191,8 @@ S.push(function(n){var b=['One claim becomes about a dozen answer pages','You ap
  H('<div class="lbl">WHAT YOU GET</div><div id="bn" style="margin-top:6px"></div>');
  play('sw-s11.mp4',function(){b.forEach(function(t,i){at(3+i*5.4,function(){q('#bn').insertAdjacentHTML('beforeend','<div class="ben"><b style="color:#F5A524">✓</b><span>'+t+'</span></div>');var e=q('#bn').lastChild;setTimeout(function(){on(e)},30)})})},n)});
 var FL='/assets/video/founders-lab.mp4';
-function sb(){if(SEATS&&SEATS.open===false){$('buy').style.display='none';$('full').style.display='block';lg('full_shown');return}$('buy').style.display='block';lg('buy_shown')}
+function sb(){if(/[?&]embed=1/.test(location.search)){var full=SEATS&&SEATS.open===false,e=$('embEnd');if(!e){e=document.createElement('div');e.id='embEnd';e.innerHTML=(full?'<p>The Founders Lab is full. The live app is still open to look around.</p>':'<a class="go" id="embBuy" href="'+$('buy').href+'" target="_top">Sign up for $1<small>14 days, then $99 a month as a founder</small></a>')+'<button type="button" class="go gh" id="embApp">See the live app</button>';document.getElementById('app').appendChild(e);var eb=$('embBuy');if(eb)eb.onclick=function(){lg('emb_buy')};$('embApp').onclick=function(){lg('emb_app');try{window.parent.postMessage({ct:'walk_app'},'*')}catch(_){}}}e.style.display='flex';lg('emb_end');return}
+ if(SEATS&&SEATS.open===false){$('buy').style.display='none';$('full').style.display='block';lg('full_shown');return}$('buy').style.display='block';lg('buy_shown')}
 function founders(){if(stopped)return;var v=$('fv'),w=$('fv2'),fin=$('fin');cv.style.opacity=0;stage.innerHTML='';fin.style.display='block';v.pause();v.style.display='none';w.style.display='block';w.muted=muted;lg('founders_start');
  var ok=false;w.onended=function(){done();sb()};w.onerror=function(){if(ok)return;done();sb()};w.onplaying=function(){ok=true};w.src=FL;w.play().catch(function(){if(!ok){w.muted=true;muted=true;w.play().catch(function(){done();sb()})}});if(DONE)sb()}
 function finale(){if(stopped)return;cv.style.opacity=0;var f=$('fin'),v=$('fv');f.style.display='block';v.muted=muted;v.currentTime=33.8;v.play().catch(function(){});
@@ -201,9 +204,10 @@ $('go').onclick=function(){var st0=$('start');if(st0)st0.remove();var tz=$('teas
  var cut=function(){if(h.currentTime>=33.6){h.removeEventListener('timeupdate',cut);h.pause();$('sheet').classList.add('gone');setTimeout(function(){run(0)},500)}};h.addEventListener('timeupdate',cut);
  [sv,idle].forEach(function(v){v.load()})};
 /* Nov 24: inside the app, Sophia's full-body parts loop silently under a light scrim until the adjuster taps; then the show starts from the top with sound */
-if(/[?&]app=1/.test(location.search)){try{var st1=$('start');if(st1)st1.style.display='none';var h0=$('hero'),fv0=$('fv');h0.muted=true;h0.loop=true;h0.currentTime=0;h0.play().catch(function(){});
+var EMB=/[?&]embed=1/.test(location.search);if(EMB)document.documentElement.classList.add('emb');
+if(/[?&]app=1/.test(location.search)||EMB){try{var st1=$('start');if(st1)st1.style.display='none';var h0=$('hero'),fv0=$('fv');h0.muted=true;h0.loop=true;h0.currentTime=0;h0.play().catch(function(){});
  var tz=document.createElement('div');tz.id='tease';tz.setAttribute('role','button');tz.setAttribute('aria-label','Start the show');
- tz.innerHTML='<div class="tz-in"><b>See what you get when you upgrade</b><span>A 7-minute show from Sophia</span><i>&#9654; Tap anywhere to start</i></div>';
+ tz.innerHTML=EMB?'<div class="tz-in"><b>See how ClaimTract works for you</b><span>A 7-minute show from Sophia</span><i>&#9654; Tap to start</i></div>':'<div class="tz-in"><b>See what you get when you upgrade</b><span>A 7-minute show from Sophia</span><i>&#9654; Tap anywhere to start</i></div>';
  $('app').appendChild(tz);lg('tease_shown');
  tz.addEventListener('click',function(){lg('tease_tap');h0.loop=false;h0.pause();muted=false;h0.muted=false;try{$('mute').innerHTML='&#128266;'}catch(_){}$('go').onclick()})}catch(_){try{$('go').onclick()}catch(__){}}}
 /* resume / skip */

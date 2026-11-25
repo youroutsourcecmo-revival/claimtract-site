@@ -103,7 +103,10 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 .hg{display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:center}
 .sp{background:#0B0C0F;border:2px solid #2a2d33;border-radius:34px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);width:300px;justify-self:end;margin:70px 0 50px}
 .sp-top{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid #22252b;font-size:13px}.sp-top i{width:8px;height:8px;border-radius:50%;background:#2DBE60}.sp-top span{margin-left:auto;font:600 10px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#F5A524;text-transform:uppercase}
-.sp-v{position:relative;aspect-ratio:9/13;background:#000}.sp-v video{position:absolute;z-index:1;cursor:pointer;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.sp-v{position:relative;aspect-ratio:9/13;background:#000}
+/* taps pass through the avatar in the hero (play button and CTA proxies are separate elements) */
+.hero .ez:not(.dock),.hero .ez:not(.dock) *{pointer-events:none!important}
+.sp-w{overflow:hidden}.sp-w .sp-po{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s}.sp-w.ld .sp-po{opacity:0;pointer-events:none}.sp-w iframe{position:absolute;left:0;top:0;width:390px;height:563px;border:0;transform-origin:0 0;background:transparent}.sp-v video{position:absolute;z-index:1;cursor:pointer;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
 .snd{position:absolute;z-index:3;left:50%;bottom:14px;transform:translateX(-50%) translateZ(2px);border:0;border-radius:99px;background:rgba(0,0,0,.65);color:#fff;font:700 13px Inter,sans-serif;padding:10px 16px;cursor:pointer;white-space:nowrap;backdrop-filter:blur(6px)}
 .sp-c{padding:16px;text-align:center}.sp-c p{margin:0 0 10px;font-size:13.5px;line-height:1.5;color:#d9dce2}.sp-c a{color:#F5A524;font:800 15px Inter,sans-serif;text-decoration:none}
 @media(max-width:900px){.hg{grid-template-columns:1fr}.sp{justify-self:center;margin:0 0 40px;width:280px}.hero{align-items:flex-start}}
@@ -379,8 +382,7 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
   </div>
   <div class="sp sp-hero" id="spHero" hidden aria-label="Sophia from ClaimTract">
     <div class="sp-top"><i></i><b>Sophia</b><span>ClaimTract</span></div>
-    <div class="sp-v"><video id="sv2" muted loop playsinline preload="none" poster="/assets/7102df40772f1ed99a0c3d6c47072c85.jpg"><source src="/assets/sophia-full.mp4" type="video/mp4"></video>
-      <button type="button" id="snd2" class="snd">&#128264; Tap to hear Sophia</button></div>
+    <div class="sp-v sp-w"><img class="sp-po" src="/assets/7102df40772f1ed99a0c3d6c47072c85.jpg" alt=""><iframe id="spW" title="Sophia's 7-minute show" data-src="/free/walk/?embed=1" allow="autoplay; fullscreen" tabindex="0"></iframe></div>
     <div class="sp-c"><a href="/engine.html" target="_blank" rel="noopener">See how Sophia works for you &rarr;</a></div>
   </div>
   <div class="phone ws" id="pgPhone" role="link" tabindex="0" aria-label="See my website"><span class="ws-tap">Tap to see yours &rarr;</span><div class="ws-s">
@@ -446,7 +448,7 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
       <button type="button" class="agc" data-tool="appt"><i>&#128172;</i><h3>Appointment text</h3><p>Pick a time. The reminder writes itself.</p><span class="try">Tap to try &rarr;</span></button>
       <button type="button" class="agc" data-demo="video"><i>&#9654;</i><h3>Your video</h3><p>Paste a YouTube link. They meet you first.</p><span class="try">Tap to try &rarr;</span></button>
     </div>
-    <p class="grow"><b>30+ tools. Free as long as you want.</b><span>Upgrade, and your digital footprint grows on its own.</span></p>
+    <p class="grow"><b>30+ tools. Free as long as you want.</b><span>Upgrade, and your digital footprint grows exponentially on its own.</span></p>
     
   </section>
 
@@ -618,8 +620,11 @@ var hv=document.getElementById('hv');
 
 
 function wire(v,b){b.onclick=function(){if(v.muted){v.muted=false;v.loop=false;v.currentTime=0;var p=v.play();if(p&&p.catch)p.catch(function(){});b.innerHTML='&#128263; Mute'}else{v.muted=true;b.innerHTML='&#128264; Tap to hear Sophia'}};v.addEventListener('ended',function(){v.muted=true;v.loop=true;v.play();b.innerHTML='&#128264; Tap to hear Sophia again'})}
-var sv2=document.getElementById('sv2');wire(sv2,document.getElementById('snd2'));sv2.addEventListener('click',function(){document.getElementById('snd2').click()});
-function seen(on){document.getElementById('spHero').hidden=!on;document.getElementById('pgPhone').hidden=on;if(on){var p=sv2.play();if(p&&p.catch)p.catch(function(){})}else{sv2.pause()}
+/* Nov 25: the hero phone runs the whole /free/walk show; at the end, Sign up for $1 or See the live app (jumps to #demo) */
+var spW=document.getElementById('spW');function spFit(){if(!spW)return;var b=spW.parentNode;var k=b.clientWidth/390;spW.style.transform='scale('+k+')';}
+function spLoad(){if(!spW||spW.src)return;spW.src=spW.getAttribute('data-src');spW.onload=function(){spW.parentNode.classList.add('ld')}}
+addEventListener('resize',spFit);addEventListener('message',function(e){if(e.origin!==location.origin||!e.data)return;if(e.data.ct==='walk_app'){var d=document.getElementById('demo');if(d)d.scrollIntoView({behavior:'smooth',block:'start'})}});
+function seen(on){document.getElementById('spHero').hidden=!on;document.getElementById('pgPhone').hidden=on;if(on){spFit();if(document.readyState==='complete')setTimeout(spLoad,300);else addEventListener('load',function(){setTimeout(spLoad,300)})}
  }
 function flag(){try{return sessionStorage.getItem('ct_seen_sample')==='1'}catch(e){return false}}
 document.querySelectorAll('[data-sample]').forEach(function(a){a.addEventListener('click',function(){try{sessionStorage.setItem('ct_seen_sample','1')}catch(e){}})});
