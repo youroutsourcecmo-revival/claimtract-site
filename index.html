@@ -327,6 +327,12 @@ html.saf .hero .ez .ez-m video,html.saf .hero .ez .ez-m img{filter:brightness(1.
 
 /* clear tap targets that sit over Ezekiel so buttons behind him still work */
 .ctp{position:absolute;z-index:7;background:transparent;border:0;padding:0;margin:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+
+/* iPhone: real cut-out via a canvas key (removes the MP4's light background); darken blend only as fallback */
+html.saf.ezk .hero .ez{mix-blend-mode:normal!important}
+html.saf.ezk .hero .ez .ez-m video{opacity:0!important;filter:none!important}
+.ez-m canvas.ezc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 92%,transparent);mask-image:linear-gradient(to bottom,#000 92%,transparent)}
+.hero .ez .ez-m{position:relative}
 </style>
 </head>
 <body>
@@ -830,7 +836,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  addEventListener('resize',run);run()})();</script>
 <script>/* Nov 25: (1) on phones, Ezekiel's head lines up with the headline and his shoes reach the bottom of the first screen; (2) invisible tap targets over him for every button behind him; (3) play button re-placed after. */
 (function(){var h=document.querySelector('.hero'),ez=document.getElementById('ez'),hh=document.getElementById('hh');if(!h||!ez||!hh)return;var proxies=[];
- function size(){if(ez.classList.contains('dock'))return;if(innerWidth>700){['top','height','width'].forEach(function(k){ez.style.removeProperty(k)});return}
+ function size(){if(ez.classList.contains('dock')){['top','height','width'].forEach(function(k){ez.style.removeProperty(k)});return}if(innerWidth>700){['top','height','width'].forEach(function(k){ez.style.removeProperty(k)});return}
   var hr=h.getBoundingClientRect(),r=hh.getBoundingClientRect(),top=(r.top-hr.top)+r.height*.38,vh=window.innerHeight,ht=Math.max(vh*.5,vh-top+(h.getBoundingClientRect().top+scrollY>0?0:0));
   ht=Math.min(ht,vh*.78);ez.style.setProperty('top',top+'px','important');ez.style.setProperty('height',ht+'px','important');ez.style.setProperty('width',(ht*.618)+'px','important')}
  function targets(){return [].slice.call(h.querySelectorAll('.hdr-b,.hdr-p .hb')).filter(function(b){return b.offsetParent&&getComputedStyle(b).display!=='none'})}
@@ -842,6 +848,22 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  addEventListener('load',all);setTimeout(all,300);setTimeout(all,1500);addEventListener('orientationchange',function(){setTimeout(all,300)});
  addEventListener('resize',soon);
  try{new MutationObserver(soon).observe(h.querySelector('.in'),{subtree:true,childList:true,attributes:true,attributeFilter:['class','hidden','style']})}catch(e){}
- try{new MutationObserver(function(){cover()}).observe(ez,{attributes:true,attributeFilter:['class']})}catch(e){}})();</script>
+ try{new MutationObserver(function(){size();cover()}).observe(ez,{attributes:true,attributeFilter:['class']})}catch(e){}})();</script>
+<script>/* iPhone plays the MP4, which has a light background baked in. Key it out on the phone's GPU so Ezekiel is a clean cut-out over any content. */
+(function(){if(!document.documentElement.classList.contains('saf'))return;var tries=0;
+ function setup(){var v=document.getElementById('ezV');if(!v){if(++tries<40)setTimeout(setup,250);return}var m=v.parentNode;if(m.querySelector('canvas.ezc'))return;
+  var c=document.createElement('canvas');c.className='ezc';var gl=c.getContext('webgl',{premultipliedAlpha:false,alpha:true});if(!gl)return;m.appendChild(c);
+  var vs='attribute vec2 p;varying vec2 t;void main(){t=vec2((p.x+1.)/2.,1.-(p.y+1.)/2.);gl_Position=vec4(p,0,1);}';
+  var fs='precision mediump float;varying vec2 t;uniform sampler2D s;void main(){vec4 c=texture2D(s,t);float d=distance(c.rgb,vec3(.953,.953,.941));float a=smoothstep(.035,.12,d);gl_FragColor=vec4(c.rgb,a);}';
+  function sh(ty,src){var o=gl.createShader(ty);gl.shaderSource(o,src);gl.compileShader(o);return o}
+  var pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){c.remove();return}gl.useProgram(pr);
+  var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);var loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  var tx=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tx);[gl.TEXTURE_WRAP_S,gl.TEXTURE_WRAP_T].forEach(function(w){gl.texParameteri(gl.TEXTURE_2D,w,gl.CLAMP_TO_EDGE)});gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+  var ok=false;
+  function fit(){var w=m.clientWidth,h=m.clientHeight,dpr=Math.min(2,window.devicePixelRatio||1);var vw=v.videoWidth||540,vh=v.videoHeight||874;var s=Math.min(w/vw,h/vh),dw=vw*s,dh=vh*s;
+   c.style.width=dw+'px';c.style.height=dh+'px';c.style.left=(w-dw)+'px';c.style.top=(h-dh)+'px';var W=Math.round(dw*dpr),H=Math.round(dh*dpr);if(c.width!==W||c.height!==H){c.width=W;c.height=H;gl.viewport(0,0,W,H)}}
+  function draw(){requestAnimationFrame(draw);if(v.readyState<2)return;try{fit();gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,v);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);if(!ok){ok=true;document.documentElement.classList.add('ezk')}}catch(e){if(!ok){c.remove()}}}
+  draw()}
+ setup()})();</script>
 </body>
 </html>
