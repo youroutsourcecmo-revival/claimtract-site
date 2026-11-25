@@ -5,13 +5,19 @@ var CSS=`
 .shw{padding:46px 0 10px}
 .shw-g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .shw-c{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;background:var(--card,#fff);border:1px solid var(--ln,#E1E1DC);border-radius:18px;padding:20px 18px;transition:transform .2s,box-shadow .2s,border-color .2s}
-.shw-c:hover,.shw-c:focus-visible{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.08);border-color:#F0D49A}
+.shw-c{position:relative;overflow:hidden;animation:shwBob 6s ease-in-out infinite}.shw-c:nth-child(2){animation-delay:1.5s}.shw-c:nth-child(3){animation-delay:3s}.shw-c:nth-child(4){animation-delay:4.5s}
+.shw-c:before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(245,165,36,.18),transparent);transform:skewX(-18deg);animation:shwGlint 6s ease-in-out infinite;animation-delay:inherit;pointer-events:none}
+@keyframes shwBob{0%,80%,100%{transform:none;box-shadow:none}88%{transform:translateY(-5px);box-shadow:0 14px 30px rgba(245,165,36,.18);border-color:#F0D49A}}
+@keyframes shwGlint{0%,78%{left:-60%}92%,100%{left:130%}}
+.shw-c:hover,.shw-c:focus-visible{animation:none;transform:translateY(-5px) scale(1.02);box-shadow:0 18px 36px rgba(0,0,0,.12);border-color:#F5A524}
+.shw-c:hover .shw-w i,.shw-c:focus-visible .shw-w i{transform:scale(1.25)}
 .shw-i{width:44px;height:44px;border-radius:13px;background:#FFF3DC;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
 .shw-i svg{width:24px;height:24px}
 .shw-c h3{margin:0 0 6px;font:800 18px/1.2 Inter,sans-serif;color:var(--tx,#111)}
 .shw-c p{margin:0 0 14px;font-size:14.5px;line-height:1.5;color:var(--mu,#55585F);flex:1}
 .shw-w{display:inline-flex;align-items:center;gap:7px;font:800 13px Inter,sans-serif;color:#8F5400}
-.shw-w i{width:22px;height:22px;border-radius:50%;background:#F5A524;display:inline-flex;align-items:center;justify-content:center;font-style:normal;color:#111;font-size:9px;padding-left:2px}
+.shw-w i{position:relative;width:26px;height:26px;border-radius:50%;background:#F5A524;display:inline-flex;align-items:center;justify-content:center;font-style:normal;color:#111;font-size:10px;padding-left:2px;transition:transform .2s}.shw-w i:after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid #F5A524;animation:shwPing 1.8s ease-out infinite}@keyframes shwPing{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.6);opacity:0}}
+.shw-c:hover .shw-i{background:#F5A524}.shw-i{transition:background .2s}
 .shw-n{margin:14px 0 0;text-align:center;font-size:13px;color:var(--mu,#55585F)}
 @media(max-width:900px){.shw-g{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.shw-g{gap:10px}.shw-c{padding:14px 13px}.shw-c h3{font-size:15.5px}.shw-c p{font-size:13px;margin-bottom:10px}.shw-i{width:36px;height:36px;margin-bottom:10px}.shw-i svg{width:20px;height:20px}}
@@ -127,7 +133,7 @@ var S=[
 /* replace the old four cards */
 var old=document.querySelector('section.pts');if(!old)return;
 var sec=document.createElement('section');sec.className='shw';sec.setAttribute('aria-label','What you get');
-sec.innerHTML='<div class="shw-g">'+S.map(function(x,i){return '<button type="button" class="shw-c" data-i="'+i+'"><span class="shw-i">'+ICON[x.k]+'</span><h3>'+x.h+'</h3><p>'+x.p+'</p><span class="shw-w"><i>&#9654;</i>Watch it</span></button>'}).join('')+'</div><p class="shw-n">Sample shown: Cedric Moore is not a real adjuster. Nothing goes live until you approve it.</p>';
+sec.innerHTML='<div class="shw-g">'+S.map(function(x,i){return '<button type="button" class="shw-c" data-i="'+i+'"><span class="shw-i">'+ICON[x.k]+'</span><h3>'+x.h+'</h3><p>'+x.p+'</p><span class="shw-w"><i>&#9654;</i>Watch it &middot; 9 sec</span></button>'}).join('')+'</div>';
 old.parentNode.replaceChild(sec,old);
 
 var m=document.createElement('div');m.className='shm';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');
