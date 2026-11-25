@@ -277,9 +277,18 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 #ctxt{transition:opacity .25s,transform .25s}body.ct-inhero #ctxt,body.ct-scrolling #ctxt{opacity:0!important;pointer-events:none!important}
 @media(max-width:700px){.hero{align-items:flex-start!important}.hero .in{padding:calc(56.25vw * .78) 0 24px!important}
  .hero .ez{top:calc(56.25vw * .62)!important;bottom:auto!important;height:min(64svh,600px)!important;width:calc(min(64svh,600px) * .618)!important;right:-9%!important}}
+
+/* iPhone/Safari plays the MP4 (no transparency): multiply drops the white box so the paper and text show around him */
+html.saf .hero .ez{mix-blend-mode:darken}
+@media(max-width:700px){.hero .ez:not(.dock) .ez-p{right:46px!important;font-size:12.5px!important;padding:8px 12px!important}}
+
+.hero>.ez-p{position:absolute;z-index:7;right:16px;top:calc(56.25vw * .62 - 46px);margin:0;background:#fff;color:#111;box-shadow:0 6px 16px rgba(0,0,0,.18);font-size:12.5px;padding:8px 13px}
+@media(min-width:701px){.hero>.ez-p{right:4%;top:calc(12svh - 46px)}}
+body.ct-ezdock .hero>.ez-p{display:none}
 </style>
 </head>
 <body>
+<script>(function(){if(/^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent))document.documentElement.classList.add('saf')})();</script>
 <section class="hero">
   <video id="hv" autoplay muted loop playsinline poster="/assets/bg/bg-roof-table.jpg"><source src="/assets/bg/bg-roof-table.mp4" type="video/mp4"></video>
     <div class="ez" id="ez"><div class="ez-m"><img src="/assets/ezekiel-black.webp" alt="Ezekiel Guichard" width="540" height="873"></div><button type="button" class="ez-p" id="ezP" hidden>&#128264; Tap to hear why I built this</button><span>Ezekiel Guichard<small>Former Florida public adjuster</small></span></div>
@@ -697,5 +706,6 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 (function(){var b=document.body,hero=document.querySelector('.hero'),t=null;if(!hero)return;
  try{new IntersectionObserver(function(es){b.classList.toggle('ct-inhero',es[0].isIntersecting)},{threshold:0.15}).observe(hero)}catch(e){}
  addEventListener('scroll',function(){b.classList.add('ct-scrolling');clearTimeout(t);t=setTimeout(function(){b.classList.remove('ct-scrolling')},650)},{passive:true})})();</script>
+<script>(function(){var b=document.getElementById('ezP'),h=document.querySelector('.hero'),ez=document.getElementById('ez');if(!b||!h||!ez)return;h.appendChild(b);try{new MutationObserver(function(){document.body.classList.toggle('ct-ezdock',ez.classList.contains('dock'))}).observe(ez,{attributes:true,attributeFilter:['class']})}catch(e){}})();</script>
 </body>
 </html>
