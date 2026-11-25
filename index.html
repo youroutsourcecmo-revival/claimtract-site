@@ -297,6 +297,11 @@ body.ct-ezdock .hero>.ez-p{display:none}
 /* the arsenal button hands off to its two buttons */
 .hero .hdr.open .hdr-b{display:none!important}.hero .hdr.open .hdr-p{margin-top:0;animation:hdrIn .3s ease both}@keyframes hdrIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .hero .hdr-p .ghost{grid-column:1/-1;color:var(--tx)!important;text-align:center;font-size:14px;font-weight:700;text-decoration:underline}
+
+/* docked Ezekiel sits on the bottom edge of the screen */
+.hero .ez.dock{top:auto!important;bottom:0!important;right:6px!important;height:min(34svh,300px)!important;width:calc(min(34svh,300px) * .618)!important}
+/* iPhone MP4: lift the off-white background to pure white so the darken blend makes it vanish on white cards too */
+html.saf .hero .ez .ez-m video,html.saf .hero .ez .ez-m img{filter:brightness(1.055)!important}
 </style>
 </head>
 <body>
