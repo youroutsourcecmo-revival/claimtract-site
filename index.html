@@ -468,12 +468,12 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
         <label class="cx-r"><div class="cx-h"><span>New claim files a month</span><b id="cv-files"></b></div><input type="range" id="c-files" min="0" max="20" step="1" value="4"></label>
         
         <label class="cx-r"><div class="cx-h"><span>Your average fee per signed claim</span><b id="cv-fee"></b></div><input type="range" id="c-fee" min="1500" max="15000" step="250" value="4000"><small>Use your own history, not an industry average.</small></label>
-        <div class="cx-r"><div class="cx-h"><span>Look ahead</span></div><div class="cx-ch" id="cx-m" role="radiogroup" aria-label="Months"><button type="button" data-m="3">3 months</button><button type="button" data-m="6">6 months</button><button type="button" data-m="12" class="on">12 months</button></div></div>
+        <label class="cx-r"><div class="cx-h"><span>Look ahead</span><b id="cv-m"></b></div><input type="range" id="c-m" min="1" max="24" step="1" value="12"></label>
         
       </div>
       <div class="cx-out" aria-live="polite">
         <div class="cx-k"><small>Potential content pages</small><b id="co-pages"></b><p id="co-pages-n"></p></div>
-        <div class="cx-k ill"><small>Potential monthly visitors &middot; illustration only</small><b id="co-views"></b><p>If each page drew about 5 visits a month, like the reference website below. Unverified for public adjusting. Google decides who ranks.</p></div>
+        <div class="cx-k ill"><small>Potential monthly visitors &middot; illustration only</small><b id="co-views"></b><p>Counts only pages at least 2 months old, since Google takes time to find new pages. If each drew about 5 visits a month, like the reference website below. Unverified for public adjusting. Google decides who ranks.</p></div>
         <div class="cx-k"><small>Your investment</small><b id="co-cost"></b><p id="co-cost-n"></p></div>
       </div>
     </div>
@@ -823,18 +823,18 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <script>/* Nov 25 (v2): business-building calculator. Pages = files x 12 (working estimate). Visitors = pages x 5 (illustration from the reference site). Cost = plan over the period. Nothing else is projected. */
 (function(){var $=function(i){return document.getElementById(i)};if(!$('calc'))return;var M=12;
  function v(i){return parseFloat($('c-'+i).value)}function money(n){return '$'+Math.round(n).toLocaleString('en-US')}function num(n){return Math.round(n).toLocaleString('en-US')}
- function run(){var P=v('past'),F=v('files'),fee=v('fee');
+ function run(){var P=v('past'),F=v('files'),fee=v('fee');M=v('m');$('cv-m').textContent=M+(M==1?' month':' months');
   $('cv-past').textContent=P;$('cv-files').textContent=F;$('cv-fee').textContent=money(fee);
-  var pages=(P+F*M)*12,views=pages*5,cost=1+99*(M-1);
+  var PP=10,LAG=2,pages=(P+F*M)*PP,ripe=M>LAG?(P+F*(M-LAG))*PP:0,views=ripe*5,cost=1+99*M;
   $('co-pages').textContent=num(pages);
-  $('co-pages-n').textContent=num(P*12)+' from your existing files, plus '+num(F*12*M)+' from new files over '+M+' months. Working estimate: about 12 pages per file, after your review.';
+  $('co-pages-n').textContent=num(P*PP)+' from your existing files, plus '+num(F*PP*M)+' from new files over '+M+(M==1?' month':' months')+'. Working estimate: about 10 pages per claim (one pillar article plus about nine shorter ones), after your review.';
   $('co-views').textContent='~'+num(views);
   $('co-cost').textContent=money(cost);
-  $('co-cost-n').textContent='Founder seat: $1 for 14 days, then $99 a month, over '+M+' months. For scale: one signed claim at your '+money(fee)+' fee equals '+(Math.floor(fee/99*10)/10)+' months of the founder seat.';
+  $('co-cost-n').textContent='Founder seat: $1 for 14 days, then $99 a month, over '+M+(M==1?' month':' months')+'. For scale: one signed claim at your '+money(fee)+' fee equals '+(Math.floor(fee/99*10)/10)+' months of the founder seat.';
   $('cb-pages').textContent=num(pages);$('cb-views').textContent='~'+num(views);$('cb-cost').textContent=money(cost)}
- ['past','files','fee'].forEach(function(i){$('c-'+i).addEventListener('input',run)});
+ ['past','files','fee','m'].forEach(function(i){$('c-'+i).addEventListener('input',run)});
  function chips(id,fn){var g=$(id);g.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){g.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});fn(b);run()})})}
- chips('cx-m',function(b){M=+b.dataset.m});run();
+ run();
  var told=false;document.querySelectorAll('#calc input,#calc .cx-ch button').forEach(function(i){i.addEventListener('change',tk);i.addEventListener('click',tk)});function tk(){if(told)return;told=true;try{window.__ctT&&window.__ctT('calc_used')}catch(_){}}
  var bar=$('cxbar'),inp=document.querySelector('#calc .cx-in'),out=document.querySelector('#calc .cx-out');function chk(){if(!bar)return;var a=inp.getBoundingClientRect(),o=out.getBoundingClientRect();bar.classList.toggle('on',innerWidth<=820&&a.top<innerHeight-80&&a.bottom>60&&(o.top>innerHeight||o.bottom<0))}addEventListener('scroll',chk,{passive:true});addEventListener('resize',chk);chk()})();</script>
 <script>/* Nov 25: (1) on phones, Ezekiel's head lines up with the headline and his shoes reach the bottom of the first screen; (2) invisible tap targets over him for every button behind him; (3) play button re-placed after. */
