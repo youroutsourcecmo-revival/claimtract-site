@@ -279,7 +279,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
  .hero .ez{top:calc(100svh - min(64svh,600px))!important;bottom:auto!important;height:min(64svh,600px)!important;width:calc(min(64svh,600px) * .618)!important;right:-9%!important}}
 
 /* iPhone/Safari plays the MP4 (no transparency): multiply drops the white box so the paper and text show around him */
-html.saf .hero .ez{mix-blend-mode:darken}
+html.saf.ezplay:not(.ezk) .hero .ez{mix-blend-mode:darken}
 @media(max-width:700px){.hero .ez:not(.dock) .ez-p{right:46px!important;font-size:12.5px!important;padding:8px 12px!important}}
 
 .hero>.ez-p{position:absolute;z-index:7;right:16px;top:calc(56.25vw * .62 - 46px);margin:0;background:#fff;color:#111;box-shadow:0 6px 16px rgba(0,0,0,.18);font-size:12.5px;padding:8px 13px}
@@ -301,7 +301,7 @@ body.ct-ezdock .hero>.ez-p{display:none}
 /* docked Ezekiel sits on the bottom edge of the screen */
 .hero .ez.dock{top:auto!important;bottom:0!important;right:6px!important;height:min(34svh,300px)!important;width:calc(min(34svh,300px) * .618)!important}
 /* iPhone MP4: lift the off-white background to pure white so the darken blend makes it vanish on white cards too */
-html.saf .hero .ez .ez-m video,html.saf .hero .ez .ez-m img{filter:brightness(1.055)!important}
+html.saf.ezplay:not(.ezk) .hero .ez .ez-m video{filter:brightness(1.055)!important}
 
 /* Nov 25: CTA sits behind Ezekiel */
 .hero .in>.hdr{z-index:2!important}
@@ -808,7 +808,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  addEventListener('resize',place);addEventListener('load',place);setTimeout(place,400);setTimeout(place,1500);state()})();</script>
 <script>/* keep both hero videos looping silently: iPhones sometimes refuse autoplay until the first touch or scroll */
 (function(){function kick(){['hv','ezV'].forEach(function(id){var v=document.getElementById(id);if(!v)return;if(id==='hv'||v.muted){v.muted=true;v.defaultMuted=true;v.loop=true;v.setAttribute('playsinline','');if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}}})}
- kick();addEventListener('load',kick);setTimeout(kick,800);setTimeout(kick,2500);['touchstart','scroll','click'].forEach(function(e){addEventListener(e,kick,{passive:true,once:true})});document.addEventListener('visibilitychange',function(){if(!document.hidden)kick()})})();</script>
+ var de=document.documentElement;document.addEventListener('playing',function(e){if(e.target&&e.target.id==='ezV')de.classList.add('ezplay')},true);
+ kick();addEventListener('load',kick);setTimeout(kick,800);setTimeout(kick,2500);setInterval(function(){if(!document.hidden)kick()},4000);['touchend','pointerup','click','scroll'].forEach(function(e){addEventListener(e,kick,{passive:true})});document.addEventListener('visibilitychange',function(){if(!document.hidden)kick()})})();</script>
 <script>/* Nov 25: possibility calculator. Three ways in (Google pages, door tickets, shares) plus the ripple from follow-up shares. Estimates only. */
 (function(){var $=function(i){return document.getElementById(i)};if(!$('calc'))return;var plan=99;
  var ids=['files','doors','shares','close','fee','months'],aids=['vpp','ramp','rr','book','door','sh','rip'];
