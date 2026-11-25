@@ -27,6 +27,7 @@ h1 em{font-style:normal;color:var(--ac)}
 .lead{font-size:19px;color:rgba(255,255,255,.9);margin:0 0 26px}
 .cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
 .ghost{color:#fff;font-weight:700;text-decoration:none;border-bottom:2px solid var(--ac);padding:4px 0}
+.hdr{margin-top:20px;max-width:640px}.hdr-b{width:100%;min-height:56px;display:flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:14px;background:#F5A524;color:#111;font:800 17px/1.2 Inter,sans-serif;cursor:pointer;box-shadow:0 8px 26px rgba(245,165,36,.35);padding:10px 16px}.hdr-b i{font-style:normal;transition:transform .25s}.hdr.open .hdr-b i{transform:rotate(180deg)}.hdr-p{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.hdr-p[hidden]{display:none}.hero .hb,.hero .hb:hover{text-decoration:none}.hb b,.hb small{text-decoration:none}.hb{min-height:96px;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:12px;border-radius:14px;background:rgba(10,12,16,.72);border:1.5px solid rgba(245,165,36,.8);color:#fff;text-decoration:none;text-align:center}.hb b{font:800 15.5px/1.2 Inter,sans-serif}.hb small{font-size:12px;color:#F5A524;font-weight:700}.hb:first-child{background:#fff;color:#111;border-color:#fff}.hb:first-child small{color:#9a6408}.hdr-n{margin:10px 2px 0;font-size:13px;color:rgba(255,255,255,.75)}.hvt{position:absolute;left:0;right:0;top:0;height:1px;z-index:4;background:rgba(255,255,255,.12)}.hvt i{display:block;height:100%;width:0;background:#F5A524}#hh,#lead{transition:opacity .2s}#hh.hvf,#lead.hvf{opacity:0}
 .trust{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.trust span{font:600 13px Inter,sans-serif;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:6px 12px}
 @media(max-width:700px){.hero{min-height:720px;align-items:flex-end}.hero::before{background:linear-gradient(0deg,rgba(10,12,16,.94) 0%,rgba(10,12,16,.72) 50%,rgba(10,12,16,.15) 85%)}.hero .in{padding:110px 0 40px}}
 .txt{margin:56px auto 0;position:relative;z-index:4;max-width:1040px;padding:0 22px}
@@ -206,33 +207,35 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 <section class="hero">
   <video id="hv" autoplay muted loop playsinline poster="/assets/bg/bg-roof-table.jpg"><source src="/assets/bg/bg-roof-table.mp4" type="video/mp4"></video>
   <script>(function(){if(!matchMedia('(max-width:700px)').matches)return;var v=document.getElementById('hv');v.poster='/assets/bg/hero-portrait.jpg';v.querySelector('source').src='/assets/bg/hero-portrait.mp4';v.style.objectPosition='center top';v.load();v.play&&v.play().catch(function(){})})()</script>
-  <div class="top"><div class="w"><b>Free website for public adjusters</b><span>Florida</span></div></div>
+  <div class="top"><div class="w"><b>Florida 3-20 licensees only</b></div></div>
   <div class="w hg"><div class="in">
     <p class="k">Built by a 17-year public adjuster, for public adjusters.</p>
     <h1 id="hh">You lost the claim <em>before you knocked.</em></h1>
-    <div class="offer2" aria-label="What you get free">
-      <div class="o2"><b>FREE</b><span><strong>Your public adjuster website</strong><small>Built from your license. Live tonight.</small></span></div>
-      <div class="o2"><b>FREE</b><span><strong>30+ tools to win clients</strong><small>So you stop waiting on contractor referrals.</small></span></div>
-    </div>
-    <p class="lead" id="lead">Your license already built your free website. 30+ tools. One phone. Want to see what homeowners will find?</p>
-    <div class="cta"><a class="btn" data-cta href="/free/build/?view=preview">See my free website &rarr;</a><a class="ghost hv2" href="#demo">Tap through the tools &darr;</a><a class="ghost" data-again href="/free/build/?view=preview" hidden>See my website again</a></div>
-    <div class="trust"><span>No credit card</span><span>Nothing goes live until you approve it</span></div>
+    <p class="lead" id="lead">Your license already built your free website, plus a marketing arsenal on your phone. Want to see what homeowners will find?</p>
+    <div class="hdr" id="hdr"><button type="button" class="hdr-b" aria-expanded="false" aria-controls="hdrp">See your free public adjuster&rsquo;s arsenal <i aria-hidden="true">&#9662;</i></button>
+      <div class="hdr-p" id="hdrp" hidden><a class="hb" data-cta href="/free/build/?view=preview"><b>See your free website</b><small>Built from your license</small></a><a class="hb hv2" href="#demo"><b>See your free marketing arsenal</b><small>30+ ways to win clients</small></a><a class="ghost" data-again href="/free/build/?view=preview" hidden>See my website again</a></div>
+      <p class="hdr-n">Free. Nothing goes live until you approve it.</p></div>
   <script>(function(){var V=[
-["You lost the claim","before you knocked.","Your license already built your free website. 30+ tools. One phone. Want to see what homeowners will find?","Lost the claim","before you knocked.","Free website. 30+ tools. One phone. Want to see it?"],
-["You're good at claims.","You're invisible online.","Your license already built your free website, plus 30+ tools in one phone. Want to see what homeowners will find?","Good at claims.","Invisible online.","Free website. 30+ tools. One phone. Want to see it?"],
-["Your whole business is","one roofer's phone number.","Own your lead flow: a free website and 30+ tools that put you in front of homeowners yourself. Want to see it?","One roofer is","your whole pipeline.","Your own free website. 30+ tools. Want to see it?"],
-["The homeowner googled you.","Found nothing.","Your license already built your free website. 30+ tools. One phone. Want to see what they'll find now?","They googled you.","Nothing came up.","Free website. 30+ tools. One phone. Want to see it?"],
-["Your license already","built your website.","Your name, license number and service area are already on it, plus 30+ tools in one phone. Want to see it?","Your license built","your website.","Free. Plus 30+ tools in one phone. Want to see it?"],
-["You knocked first.","His website won.","The homeowner checked you both. Your license already built your free website, plus 30+ tools in one phone. Want to see it?","You knocked first.","His website won.","Free website. 30+ tools. One phone. Want to see it?"],
-["The carrier's adjuster looks official.","You look like a guy with a clipboard.","Show them your license and who you work for, on your own free website, plus 30+ tools in one phone. Want to see it?","Carrier looks official.","You look like a clipboard.","Free website. 30+ tools. One phone. Want to see it?"],
-["Great talk on the porch.","Then total radio silence.","Leave your free website behind, and get an alert the moment they save your contact. 30+ tools in one phone. Want to see it?","Great porch talk.","Then radio silence.","Free website, plus alerts when they save you. Want to see it?"]
-],i=-1;try{i=+localStorage.getItem('ct_hv')}catch(e){}if(!(i>=0&&i<V.length)){i=Math.floor(Math.random()*V.length);try{localStorage.setItem('ct_hv',i)}catch(e){}}
-var q=new URLSearchParams(location.search);if(q.has('hv'))i=Math.min(V.length-1,Math.max(0,+q.get('hv')||0));
-var v=V[i],m=matchMedia('(max-width:700px)').matches,h=document.getElementById('hh'),l=document.getElementById('lead');
-h.innerHTML='';h.appendChild(document.createTextNode((m?v[3]:v[0])+' '));var e=document.createElement('em');e.textContent=m?v[4]:v[1];h.appendChild(e);
-if(!q.get('fn'))l.textContent=m?v[5]:v[2];document.documentElement.setAttribute('data-hv',i);
+["You lost the claim","before you knocked.","Your license already built your free website, plus a marketing arsenal on your phone. Want to see what homeowners will find?","Lost the claim","before you knocked.","A free website, plus a marketing arsenal on your phone. Want to see it?"],
+["You're good at claims.","You're invisible online.","Your license already built your free website, plus a marketing arsenal on your phone. Want to see what homeowners will find?","Good at claims.","Invisible online.","A free website, plus a marketing arsenal on your phone. Want to see it?"],
+["Your whole business is","one roofer's phone number.","Own your lead flow: a free website and a marketing arsenal that puts you in front of homeowners yourself. Want to see it?","One roofer is","your whole pipeline.","Your own free website and marketing arsenal. Want to see it?"],
+["The homeowner googled you.","Found nothing.","Your license already built your free website, plus a marketing arsenal on your phone. Want to see what they'll find now?","They googled you.","Nothing came up.","A free website, plus a marketing arsenal on your phone. Want to see it?"],
+["Your license already","built your website.","Your name, license number and service area are already on it, plus a marketing arsenal on your phone. Want to see it?","Your license built","your website.","Free. Plus a marketing arsenal on your phone. Want to see it?"],
+["You knocked first.","His website won.","The homeowner checked you both. Your license already built your free website, plus a marketing arsenal on your phone. Want to see it?","You knocked first.","His website won.","A free website, plus a marketing arsenal on your phone. Want to see it?"],
+["The carrier's adjuster looks official.","You look like a guy with a clipboard.","Show them your license and who you work for, on your own free website, plus a marketing arsenal on your phone. Want to see it?","Carrier looks official.","You look like a clipboard.","A free website, plus a marketing arsenal on your phone. Want to see it?"],
+["Great talk on the porch.","Then total radio silence.","Leave your free website behind, and get an alert the moment they save your contact. A marketing arsenal on your phone. Want to see it?","Great porch talk.","Then radio silence.","Free website, plus alerts when they save you. Want to see it?"]
+],i=0;var q=new URLSearchParams(location.search);if(q.has('hv'))i=Math.min(V.length-1,Math.max(0,+q.get('hv')||0));
+var m=matchMedia('(max-width:700px)').matches,h=document.getElementById('hh'),l=document.getElementById('lead'),fn=q.get('fn'),hero=document.querySelector('.hero');
+function show(k){var v=V[k];h.innerHTML='';h.appendChild(document.createTextNode((m?v[3]:v[0])+' '));var e=document.createElement('em');e.textContent=m?v[4]:v[1];h.appendChild(e);if(!fn)l.textContent=m?v[5]:v[2];document.documentElement.setAttribute('data-hv',k)}
+var mh=0,ml=0;for(var k=0;k<V.length;k++){show(k);mh=Math.max(mh,h.offsetHeight);ml=Math.max(ml,l.offsetHeight)}h.style.minHeight=mh+'px';if(!fn)l.style.minHeight=ml+'px';show(i);
 function t(ev){try{window.__ctT&&window.__ctT(ev+'_v'+i)}catch(_){}}setTimeout(function(){t('hero_view')},800);
-document.querySelectorAll('.hero [data-cta],.hero .hv2').forEach(function(a){a.addEventListener('click',function(){t(a.classList.contains('hv2')?'hero_demo':'hero_cta')})});})();</script>
+document.querySelectorAll('.hero [data-cta],.hero .hv2').forEach(function(a){a.addEventListener('click',function(){t(a.classList.contains('hv2')?'hero_demo':'hero_cta')})});
+var dr=document.getElementById('hdr'),db=dr.querySelector('.hdr-b'),dp=dr.querySelector('.hdr-p');db.addEventListener('click',function(){var o=dp.hidden;dp.hidden=!o;db.setAttribute('aria-expanded',String(o));dr.classList.toggle('open',o);if(o)t('hero_drawer')});
+if(matchMedia('(prefers-reduced-motion: reduce)').matches||q.has('hv'))return;
+var bar=document.createElement('div');bar.className='hvt';bar.innerHTML='<i></i>';hero.appendChild(bar);var fill=bar.firstChild,D=9000,el=0,last=performance.now(),held=false;
+hero.addEventListener('pointerdown',function(){held=true});addEventListener('pointerup',function(){held=false});addEventListener('pointercancel',function(){held=false});
+(function tick(now){var dt=now-last;last=now;var paused=held||!dp.hidden||document.hidden||hero.getBoundingClientRect().bottom<0;if(!paused){el+=dt;if(el>=D){el=0;i=(i+1)%V.length;h.classList.add('hvf');l.classList.add('hvf');setTimeout(function(){show(i);h.classList.remove('hvf');l.classList.remove('hvf')},220);t('hero_view')}}fill.style.width=(el/D*100)+'%';requestAnimationFrame(tick)})(last);
+})();</script>
   </div>
   <div class="sp sp-hero" id="spHero" hidden aria-label="Sophia from ClaimTract">
     <div class="sp-top"><i></i><b>Sophia</b><span>ClaimTract</span></div>
@@ -467,7 +470,7 @@ var pp=document.getElementById('pgPhone');function goPage(){var a=document.query
   btn.onclick=talk;m.onclick=talk;m.style.cursor='pointer';
   v.addEventListener('ended',function(){v.muted=true;v.loop=true;v.play();btn.innerHTML='&#128264; Hear it again'})}).catch(function(){})})();
 function back(){return Q.get('back')==='1'||flag()}
-function setLinks(){var b=back();document.querySelectorAll('[data-cta]').forEach(function(a){a.href=b?'/free/build/'+(PS?'?'+PS:''):'/free/build/?view=preview'+(PS?'&'+PS:'');a.innerHTML=b?'Build my free website &rarr;':'See my free website &rarr;';a.onclick=function(){T(b?'free_build_click':'free_sample_click')}});
+function setLinks(){var b=back();document.querySelectorAll('[data-cta]').forEach(function(a){a.href=b?'/free/build/'+(PS?'?'+PS:''):'/free/build/?view=preview'+(PS?'&'+PS:'');if(a.classList.contains('hb'))a.innerHTML='<b>'+(b?'Build my free website':'See your free website')+'</b><small>Built from your license</small>';else a.innerHTML=b?'Build my free website &rarr;':'See my free website &rarr;';a.onclick=function(){T(b?'free_build_click':'free_sample_click')}});
  document.querySelectorAll('[data-again]').forEach(function(a){a.hidden=!b;a.href='/free/build/?view=preview'+(PS?'&'+PS:'')});
  document.getElementById('pitch').hidden=!b;document.getElementById('skip').hidden=b;document.querySelector('[data-skip]').href='/free/build/'+(PS?'?'+PS:'');}
 var _seen=seen;seen=function(on){_seen(on);setLinks()};
