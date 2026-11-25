@@ -457,7 +457,8 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
     <div class="cpin" id="cpin" aria-hidden="true"><div>Signed claims a month<b id="cp-signed"></b></div><div><span id="cp-l">Fees in month 12</span><b id="cp-fees"></b></div></div>
     <div class="cg">
       <div class="cs">
-        <label class="sl"><span>Claim files you document a month<b id="cv-files"></b></span><input type="range" id="c-files" min="0" max="20" step="1" value="4"><small>Old files count. Each one becomes about 12 pages a homeowner can find.</small></label>
+        <label class="sl"><span>Past claim files you load on day one<b id="cv-past"></b></span><input type="range" id="c-past" min="0" max="200" step="5" value="25"><small>Your closed files. Each one becomes about 12 pages a homeowner can find.</small></label>
+        <label class="sl"><span>New claim files a month<b id="cv-files"></b></span><input type="range" id="c-files" min="0" max="20" step="1" value="4"><small>Every new file you document adds about 12 more pages.</small></label>
         <label class="sl"><span>Door-ticket packs a week<b id="cv-doors"></b></span><input type="range" id="c-doors" min="0" max="10" step="1" value="1"><small>Packs of 50, with your QR code and video.</small></label>
         <label class="sl"><span>Shares you send a month<b id="cv-shares"></b></span><input type="range" id="c-shares" min="0" max="100" step="5" value="20"><small>Your card, videos and share buttons after every lead and appointment.</small></label>
         <label class="sl"><span>Out of 10 inspections, you sign<b id="cv-close"></b></span><input type="range" id="c-close" min="1" max="10" step="1" value="5"><small>Ezekiel signed 9 out of 10. Be honest with yourself here.</small></label>
@@ -819,16 +820,16 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  kick();addEventListener('load',kick);setTimeout(kick,800);setTimeout(kick,2500);setInterval(function(){if(!document.hidden)kick()},4000);['touchend','pointerup','click','scroll'].forEach(function(e){addEventListener(e,kick,{passive:true})});document.addEventListener('visibilitychange',function(){if(!document.hidden)kick()})})();</script>
 <script>/* Nov 25: possibility calculator. Three ways in (Google pages, door tickets, shares) plus the ripple from follow-up shares. Estimates only. */
 (function(){var $=function(i){return document.getElementById(i)};if(!$('calc'))return;var plan=99;
- var ids=['files','doors','shares','close','fee','months'],aids=['vpp','ramp','rr','book','door','sh','rip'];
+ var ids=['past','files','doors','shares','close','fee','months'],aids=['vpp','ramp','rr','book','door','sh','rip'];
  function v(i){return parseFloat($('c-'+i).value)}function a(i){return parseFloat($('a-'+i).value)}
  function money(n){return '$'+Math.round(n).toLocaleString('en-US')}function num(n){return n>=100?Math.round(n).toLocaleString('en-US'):(Math.round(n*10)/10).toString()}
- function run(){var F=v('files'),D=v('doors'),S=v('shares'),C=v('close')/10,fee=v('fee'),M=v('months'),VPP=a('vpp'),R=a('ramp'),RR=a('rr')/1000,BK=a('book')/10,DR=a('door')/50,SH=a('sh')/100,RIP=a('rip')/10;
-  $('cv-files').textContent=F;$('cv-doors').textContent=D+(D==1?' pack':' packs')+' ('+(D*50)+')';$('cv-shares').textContent=S;$('cv-close').textContent=v('close')+' of 10';$('cv-fee').textContent=money(fee);$('cv-months').textContent=M+' months';
+ function run(){var P=v('past'),F=v('files'),D=v('doors'),S=v('shares'),C=v('close')/10,fee=v('fee'),M=v('months'),VPP=a('vpp'),R=a('ramp'),RR=a('rr')/1000,BK=a('book')/10,DR=a('door')/50,SH=a('sh')/100,RIP=a('rip')/10;
+  $('cv-past').textContent=P;$('cv-files').textContent=F;$('cv-doors').textContent=D+(D==1?' pack':' packs')+' ('+(D*50)+')';$('cv-shares').textContent=S;$('cv-close').textContent=v('close')+' of 10';$('cv-fee').textContent=money(fee);$('cv-months').textContent=M+' months';
   $('av-vpp').textContent=VPP;$('av-ramp').textContent=R;$('av-rr').textContent=a('rr');$('av-book').textContent=a('book');$('av-door').textContent=a('door');$('av-sh').textContent=a('sh');$('av-rip').textContent=a('rip');
   var rows=[],cumF=0,cumC=0,pay=0,last=null,mult=RIP<1?1/(1-RIP)-1:0;
-  for(var m=1;m<=M;m++){var views=0;for(var k=1;k<=m;k++){views+=F*12*VPP*Math.min(1,(m-k+1)/R)}
+  for(var m=1;m<=M;m++){var views=P*12*VPP*Math.min(1,m/R);for(var k=1;k<=m;k++){views+=F*12*VPP*Math.min(1,(m-k+1)/R)}
    var gA=views*RR*BK,dA=D*50*4.33*DR,sA=S*SH*BK,rA=(gA+dA+sA)*mult,appts=gA+dA+sA+rA;
-   var r={m:m,pages:F*12*m,views:views,appts:appts,g:gA*C,d:dA*C,s:sA*C,r:rA*C};r.signed=r.g+r.d+r.s+r.r;r.fees=r.signed*fee;cumF+=r.fees;cumC+=plan;if(!pay&&cumF>=cumC&&r.fees>0)pay=m;rows.push(r);last=r}
+   var r={m:m,pages:(P+F*m)*12,views:views,appts:appts,g:gA*C,d:dA*C,s:sA*C,r:rA*C};r.signed=r.g+r.d+r.s+r.r;r.fees=r.signed*fee;cumF+=r.fees;cumC+=plan;if(!pay&&cumF>=cumC&&r.fees>0)pay=m;rows.push(r);last=r}
   $('co-pages').textContent=num(last.pages);$('co-views').textContent=num(last.views);$('co-appts').textContent=num(last.appts);$('co-signed').textContent=num(last.signed);
   $('co-bigl').textContent='Fees in month '+M;$('co-fees').textContent=money(last.fees);
   $('co-tot').textContent='About '+money(cumF)+' over '+M+' months, against '+money(cumC)+' for your plan.'+(pay?' It pays for itself in month '+pay+'.':' Move a slider to see when it pays for itself.');
