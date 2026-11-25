@@ -220,7 +220,9 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 #ezt .rs{flex:1;padding:6px 7px 0;overflow:hidden}
 #ezt .r{margin-bottom:6px;opacity:0;transform:translateY(5px);transition:opacity .3s,transform .3s}#ezt .r.on{opacity:1;transform:none}
 #ezt .r small{display:block;font:500 6px Arial;color:#5F6368}#ezt .r b{display:block;font:500 8.5px/1.2 Arial;color:#1A0DAB}
-#ezt .r.you{background:#FFF6E0;border:1px solid #F5A524;border-radius:6px;padding:4px 5px}#ezt .r.you b{color:#111;font-weight:800}
+#ezt .r.you b{font-size:9.5px;color:#1A0DAB;margin:2px 0 1px}#ezt .yh{display:flex;gap:4px;align-items:center}#ezt .av{flex:none;width:13px;height:13px;border-radius:50%;background:#1B1C1F;color:#F5A524;font:800 5px/13px Inter;text-align:center;font-style:normal}#ezt .r.you small{font-size:5.6px;line-height:1.3;color:#202124}#ezt .r.you u{text-decoration:none;color:#4D5156}#ezt .r.you .nm{color:#202124}#ezt .ds{color:#4D5156!important}#ezt .ds u{color:#70757A!important}
+#ezt .arw{display:none;align-items:flex-start;gap:2px;margin:-2px 0 6px 18%}#ezt .arw.on{display:flex;animation:eztw .65s cubic-bezier(.2,1.3,.3,1) .25s both}@keyframes eztw{from{opacity:0;transform:translate(40px,14px) rotate(14deg)}to{opacity:1;transform:none}}#ezt .arw svg{width:30px;height:22px;flex:none}#ezt .arw strong{font:800 8.5px/1.1 Inter,sans-serif;color:#B00000;padding-top:9px}
+#ezt .kb .rt{flex-basis:22%;background:#AEB3BC}#ezt .kb .rt.p{background:#1A73E8;color:#fff}
 #ezt .tag{display:none;margin:2px 0 6px;font:800 7px Inter;color:#C5221F;text-align:center}#ezt .tag.on{display:block}#ezt .tag.y{color:#8A5A00}
 #ezt .kb{background:#D1D4DA;padding:3px 2px 5px}#ezt .kb div{display:flex;justify-content:center;gap:1.5px;margin-top:2px}
 #ezt .kb span{flex:0 0 8.6%;height:11px;border-radius:2px;background:#fff;font:600 5.5px/11px Arial;text-align:center;color:#222;box-shadow:0 1px 0 #999;transition:background .08s,transform .08s}
@@ -614,13 +616,13 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  var el=document.createElement('div');el.id='ezt';el.setAttribute('aria-hidden','true');
  var rows=['qwertyuiop','asdfghjkl','zxcvbnm'];
  el.innerHTML='<div class="dots"><i style="width:9px;height:9px;right:-34%;top:2%"></i><i style="width:6px;height:6px;right:-22%;top:10%"></i><i style="width:13px;height:13px;right:-48%;top:-6%"></i></div><div class="ph"><div class="sc"><div class="sb"><span>9:41</span><span>100%</span></div><div class="g"><b>G</b><b>o</b><b>o</b><b>g</b><b>l</b><b>e</b></div><div class="q"><span class="qt"></span><i></i></div><div class="rs">'+
-  '<div class="r you" data-r="y"><small>Licensed Public Adjuster</small><b class="yn">Water through the ceiling tonight? Do this first</b></div>'+
-  '<div class="tag y" data-r="ty">That\'s you, showing up.</div>'+
+  '<div class="r you" data-r="y"><div class="yh"><em class="av">YN</em><small><u class="nm">You</u>, Licensed Public Adjuster<br><u class="ur">yourname.claimtract.app › ceiling-leak</u></small></div><b>Water Coming Through the Ceiling? What to Do Tonight</b><small class="ds"><u>Nov 25, 2026 — </u>Turn off the water, photograph everything, then call before you sign anything.</small></div>'+
+  '<div class="arw" data-r="ty"><svg viewBox="0 0 60 44" aria-hidden="true"><path d="M56 40 C50 18 34 8 10 9" fill="none" stroke="#C5221F" stroke-width="3.2" stroke-linecap="round"/><path d="M17 2 L8 9 L17 16" fill="none" stroke="#C5221F" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg><strong>You start<br>showing up.</strong></div>'+
   '<div class="r" data-r="1"><small>homefix.example</small><b>Ceiling leaking? 7 things to do right now</b></div>'+
   '<div class="r" data-r="2"><small>forum.example</small><b>Water dripping from ceiling, who do I call??</b></div>'+
   '<div class="r" data-r="3"><small>plumbing.example</small><b>Call a plumber 24/7</b></div>'+
   '<div class="tag" data-r="tn">No public adjuster on page one</div></div>'+
-  '<div class="kb">'+rows.map(function(r){return '<div>'+r.split('').map(function(c){return '<span data-k="'+c+'">'+c+'</span>'}).join('')+'</div>'}).join('')+'<div><span class="sp" data-k=" ">space</span></div></div></div></div>';
+  '<div class="kb">'+rows.map(function(r){return '<div>'+r.split('').map(function(c){return '<span data-k="'+c+'">'+c+'</span>'}).join('')+'</div>'}).join('')+'<div><span class="sp" data-k=" ">space</span><span class="rt" data-k="enter">return</span></div></div></div></div>';
  box.style.position='relative';box.appendChild(el);
  var qt=el.querySelector('.qt'),R=function(k){return el.querySelector('[data-r="'+k+'"]')},last='',nm=null;
  function name(){if(nm)return nm;var n=document.getElementById('wsN');var s=n&&n.textContent.trim();nm=s&&s.length<40?s:'You';return nm}
@@ -631,7 +633,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   if(q!==last){var plain=q.replace(/<[^>]+>/g,''),pl=last.replace(/<[^>]+>/g,'');if(plain.length>pl.length)press(plain.charAt(plain.length-1));qt.innerHTML=q;last=q}
   var res=t>=78.3,you=t>=84.4;el.querySelector('.kb').style.display=res?'none':'';R('1').classList.toggle('on',res);R('2').classList.toggle('on',res);R('3').classList.toggle('on',res);
   R('tn').classList.toggle('on',res&&!you&&t>=80.1);var y=R('y');y.style.display=you?'':'none';y.classList.toggle('on',you);R('ty').classList.toggle('on',you);
-  if(you){var sm=y.querySelector('small');sm.textContent=name()+' · Licensed Public Adjuster'}}
+  var ent=t>=77.7&&t<78.2;var ek=el.querySelector('[data-k="enter"]');if(ek)ek.classList.toggle('p',ent);if(you){var n=name();y.querySelector('.nm').textContent=n;var ini=n.split(/\s+/).map(function(w){return w.charAt(0)}).join('').slice(0,2).toUpperCase();y.querySelector('.av').textContent=ini||'YN';y.querySelector('.ur').textContent=(n==='You'?'yourname':n.toLowerCase().replace(/[^a-z]+/g,''))+'.claimtract.app › ceiling-leak'}}
  var raf=0;function loop(){raf=0;var v=document.getElementById('ezV');if(!v)return;if(v.muted||v.paused){draw(-1);return}draw(v.currentTime);raf=requestAnimationFrame(loop)}
  function kick(){if(!raf)raf=requestAnimationFrame(loop)}
  var w=setInterval(function(){var v=document.getElementById('ezV');if(!v)return;clearInterval(w);['play','playing','seeked','timeupdate','volumechange'].forEach(function(e){v.addEventListener(e,kick)});v.addEventListener('pause',function(){draw(-1)})},500);
