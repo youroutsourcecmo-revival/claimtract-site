@@ -261,6 +261,22 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 .hero .ez.dock .ez-p{display:none!important}
 .hero .ez .ez-x{display:none}.hero .ez.dock .ez-x{display:block;position:absolute;top:2px;right:2px;width:26px;height:26px;border:0;border-radius:50%;background:rgba(17,17,17,.75);color:#fff;font:700 15px/26px Inter,sans-serif;cursor:pointer;z-index:4}
 .hero .ez.dock #ezt{width:62%;max-width:150px;left:auto;right:100%;top:0}
+
+/* Nov 25 (2): Ezekiel is the show. Bigger, in front of the text; only the drawer button sits above him. */
+.hero .w{z-index:auto!important;perspective:none!important}.hero .in>*{position:relative;z-index:2}.hero .in>.hdr{z-index:6}
+.hero .ez{z-index:4!important;height:min(66%,720px)!important}
+@media(min-width:701px){.hero .ez{height:min(88svh,820px)!important;width:calc(min(88svh,820px) * .618)!important}}
+.hero .lead,.hero .hdr-n{max-width:none!important}
+@media(max-width:700px){.hero .lead{max-width:none!important}.hero h1{margin-bottom:10px!important}}
+.hero .ez:not(.dock) .ez-p{left:auto!important;right:12%!important;bottom:calc(100% + 6px)!important;top:auto!important}
+
+/* Nov 25 (3) */
+.hero .top b{background:none!important;box-shadow:none!important;padding:0!important;color:#1F5C3A!important;font-weight:900;text-shadow:0 0 6px rgba(255,255,255,.95),0 0 2px #fff,0 0 14px rgba(255,255,255,.8)!important}
+.hero .hdr-n{display:none!important}
+#ezt{display:none!important}
+#ctxt{transition:opacity .25s,transform .25s}body.ct-inhero #ctxt,body.ct-scrolling #ctxt{opacity:0!important;pointer-events:none!important}
+@media(max-width:700px){.hero{align-items:flex-start!important}.hero .in{padding:calc(56.25vw * .78) 0 24px!important}
+ .hero .ez{top:calc(56.25vw * .62)!important;bottom:auto!important;height:min(64svh,600px)!important;width:calc(min(64svh,600px) * .618)!important;right:-9%!important}}
 </style>
 </head>
 <body>
@@ -672,14 +688,14 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  var w=setInterval(function(){var v=document.getElementById('ezV');if(!v)return;clearInterval(w);['play','playing','seeked','timeupdate','volumechange'].forEach(function(e){v.addEventListener(e,kick)});v.addEventListener('pause',function(){draw(-1)})},500);
  if(/[?&]ezt=1/.test(location.search))window.__eztDraw=draw;
 })();</script>
-<script>/* Nov 25: on phones, keep the headline above Ezekiel's head: grow the gap under the headline until it clears him (content is bottom-anchored, so the headline rises). */
-(function(){var h=document.getElementById('hh'),ez=document.getElementById('ez');if(!h||!ez)return;
- function fit(){if(!matchMedia('(max-width:700px)').matches){h.style.marginBottom='';return}h.style.removeProperty('margin-bottom');var e=ez.getBoundingClientRect(),r=h.getBoundingClientRect();var over=r.bottom-(e.top+e.height*0.02)+10;if(over>0)h.style.setProperty('margin-bottom',(14+over)+'px','important')}
- addEventListener('load',fit);addEventListener('resize',fit);setTimeout(fit,300);setTimeout(fit,1500)})();</script>
 <script>/* Nov 25: when they scroll past the hero, Ezekiel walks down and docks in the lower right; scroll back up and he returns. The x parks him for the visit. */
 (function(){var ez=document.getElementById('ez'),hero=document.querySelector('.hero');if(!ez||!hero||!('IntersectionObserver' in window))return;var off=false;
  var x=document.createElement('button');x.type='button';x.className='ez-x';x.setAttribute('aria-label','Close');x.innerHTML='&times;';ez.appendChild(x);
  x.addEventListener('click',function(e){e.stopPropagation();off=true;ez.classList.remove('dock');var v=document.getElementById('ezV');if(v&&!v.muted){v.muted=true;v.loop=true}});
  new IntersectionObserver(function(es){es.forEach(function(en){var past=!en.isIntersecting&&en.boundingClientRect.top<0;if(past&&!off)ez.classList.add('dock');else if(!past)ez.classList.remove('dock')})},{threshold:0,rootMargin:'0px 0px -55% 0px'}).observe(hero.querySelector('.in')||hero)})();</script>
+<script>/* Nov 25: explainer switch hidden in the hero; elsewhere it hides while scrolling and returns when they stop */
+(function(){var b=document.body,hero=document.querySelector('.hero'),t=null;if(!hero)return;
+ try{new IntersectionObserver(function(es){b.classList.toggle('ct-inhero',es[0].isIntersecting)},{threshold:0.15}).observe(hero)}catch(e){}
+ addEventListener('scroll',function(){b.classList.add('ct-scrolling');clearTimeout(t);t=setTimeout(function(){b.classList.remove('ct-scrolling')},650)},{passive:true})})();</script>
 </body>
 </html>
