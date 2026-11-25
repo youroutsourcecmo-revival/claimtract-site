@@ -276,7 +276,7 @@ footer{border-top:1px solid var(--ln);padding:20px 0 30px;font-size:13px;color:v
 #ezt{display:none!important}
 #ctxt{transition:opacity .25s,transform .25s}body.ct-inhero #ctxt,body.ct-scrolling #ctxt{opacity:0!important;pointer-events:none!important}
 @media(max-width:700px){.hero{align-items:flex-start!important}.hero .in{padding:calc(56.25vw * .78) 0 24px!important}
- .hero .ez{top:calc(56.25vw * .62)!important;bottom:auto!important;height:min(64svh,600px)!important;width:calc(min(64svh,600px) * .618)!important;right:-9%!important}}
+ .hero .ez{top:auto!important;bottom:0!important;height:min(64svh,600px)!important;width:calc(min(64svh,600px) * .618)!important;right:-9%!important}}
 
 /* iPhone/Safari plays the MP4 (no transparency): multiply drops the white box so the paper and text show around him */
 html.saf .hero .ez{mix-blend-mode:darken}
@@ -285,6 +285,14 @@ html.saf .hero .ez{mix-blend-mode:darken}
 .hero>.ez-p{position:absolute;z-index:7;right:16px;top:calc(56.25vw * .62 - 46px);margin:0;background:#fff;color:#111;box-shadow:0 6px 16px rgba(0,0,0,.18);font-size:12.5px;padding:8px 13px}
 @media(min-width:701px){.hero>.ez-p{right:4%;top:calc(12svh - 46px)}}
 body.ct-ezdock .hero>.ez-p{display:none}
+
+/* YouTube-style play button over Ezekiel; the CTA drawer stays on top of everything */
+.hero .in>.hdr{z-index:20!important}
+.hero>.ez-p{right:auto!important;top:0;left:0;width:68px;height:48px;padding:0!important;border-radius:14px!important;background:#FF0033!important;color:transparent!important;font-size:0!important;box-shadow:0 8px 22px rgba(0,0,0,.3)!important;transition:transform .15s,opacity .2s;z-index:8}
+.hero>.ez-p::before{content:"";position:absolute;left:27px;top:14px;border-style:solid;border-width:10px 0 10px 17px;border-color:transparent transparent transparent #fff}
+.hero>.ez-p:hover{transform:scale(1.06)}
+.hero>.ez-p.on{width:40px;height:40px;border-radius:50%!important;background:rgba(17,17,17,.78)!important}
+.hero>.ez-p.on::before{left:13px;top:12px;width:4px;height:16px;border:0;background:#fff;box-shadow:10px 0 0 #fff}
 </style>
 </head>
 <body>
@@ -707,5 +715,11 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  try{new IntersectionObserver(function(es){b.classList.toggle('ct-inhero',es[0].isIntersecting)},{threshold:0.15}).observe(hero)}catch(e){}
  addEventListener('scroll',function(){b.classList.add('ct-scrolling');clearTimeout(t);t=setTimeout(function(){b.classList.remove('ct-scrolling')},650)},{passive:true})})();</script>
 <script>(function(){var b=document.getElementById('ezP'),h=document.querySelector('.hero'),ez=document.getElementById('ez');if(!b||!h||!ez)return;h.appendChild(b);try{new MutationObserver(function(){document.body.classList.toggle('ct-ezdock',ez.classList.contains('dock'))}).observe(ez,{attributes:true,attributeFilter:['class']})}catch(e){}})();</script>
+<script>/* place the play button on his chest; swap to a pause/mute look while he talks */
+(function(){var b=document.getElementById('ezP'),ez=document.getElementById('ez'),h=document.querySelector('.hero');if(!b||!ez||!h)return;b.setAttribute('aria-label','Play Ezekiel\'s video with sound');
+ function place(){if(ez.classList.contains('dock'))return;var e=ez.getBoundingClientRect(),hr=h.getBoundingClientRect();var w=b.offsetWidth||68,ht=b.offsetHeight||48;var x=e.left-hr.left+e.width*.6-w/2,y=e.top-hr.top+e.height*(innerWidth<=700?.6:.3)-ht/2;x=Math.min(Math.max(8,x),hr.width-w-8);b.style.transform='none';b.style.left=x+'px';b.style.top=y+'px'}
+ function state(){b.classList.toggle('on',/mute/i.test(b.textContent)&&!/hear/i.test(b.textContent));place()}
+ try{new MutationObserver(state).observe(b,{childList:true,characterData:true,subtree:true})}catch(e){}
+ addEventListener('resize',place);addEventListener('load',place);setTimeout(place,400);setTimeout(place,1500);state()})();</script>
 </body>
 </html>
