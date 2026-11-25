@@ -131,20 +131,23 @@ sec.innerHTML='<div class="shw-g">'+S.map(function(x,i){return '<button type="bu
 old.parentNode.replaceChild(sec,old);
 
 var m=document.createElement('div');m.className='shm';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');
-m.innerHTML='<div class="shm-b"><div class="shm-t"><div><small id="shmK"></small><b id="shmT"></b></div><button type="button" class="shm-x" aria-label="Close">&#10005;</button></div><div class="shm-s" id="shmS"></div><p class="shm-l" id="shmL"></p><div class="shm-a"><button type="button" class="rp">&#8635; Replay</button><a class="cta" data-cta href="'+CTA+'">See my free website</a><button type="button" class="nv" aria-label="Next">Next &#8250;</button></div><div class="shm-d" id="shmD"></div></div>';
+m.innerHTML='<div class="shm-b"><div class="shm-t"><div><small id="shmK"></small><b id="shmT"></b></div><div style="display:flex;gap:6px"><button type="button" class="shm-x shm-m" aria-label="Sound on or off"></button><button type="button" class="shm-x" aria-label="Close">&#10005;</button></div></div><div class="shm-s" id="shmS"></div><p class="shm-l" id="shmL"></p><div class="shm-a"><button type="button" class="rp">&#8635; Replay</button><a class="cta" data-cta href="'+CTA+'">See my free website</a><button type="button" class="nv" aria-label="Next">Next &#8250;</button></div><div class="shm-d" id="shmD"></div></div>';
 document.body.appendChild(m);
-var stage=m.querySelector('#shmS'),cur=0,timers=[],tsx=null;
+var stage=m.querySelector('#shmS'),cur=0,timers=[],tsx=null,vo=null,mute=false;try{mute=localStorage.getItem('ct_show_mute')==='1'}catch(_){}
 function T(f,ms){timers.push(setTimeout(f,ms))}
-function clear(){timers.forEach(clearTimeout);timers=[];stage.innerHTML=''}
+function clear(){timers.forEach(clearTimeout);timers=[];stage.innerHTML='';if(vo){try{vo.pause()}catch(_){}vo=null}}
 function el(h){var d=document.createElement('div');d.innerHTML=h.trim();return d.firstChild}
 function open(i){cur=i;m.classList.add('on');document.documentElement.style.overflow='hidden';play();try{window.__ctT&&window.__ctT('show_'+S[i].k)}catch(_){}}
 function close(){clear();m.classList.remove('on');document.documentElement.style.overflow=''}
 function play(){clear();var x=S[cur];m.querySelector('#shmK').textContent=(cur+1)+' of 4 · '+x.h;m.querySelector('#shmT').textContent=x.t;var L=m.querySelector('#shmL');L.textContent='';L.classList.remove('in');
  m.querySelector('#shmD').innerHTML=S.map(function(_,k){return '<i class="'+(k===cur?'on':'')+'"></i>'}).join('');
  m.querySelector('.nv').innerHTML=cur<3?'Next &#8250;':'Start over';
+ /* Ezekiel's voiceover (rendered on the box). Silent if the file isn't there yet. */
+ vo=new Audio('/assets/vo/show-'+(cur+1)+'.mp3');vo.muted=mute;vo.preload='auto';var p=vo.play();if(p&&p.catch)p.catch(function(){});
  var end=x.run(stage);T(function(){L.textContent=x.l},end||8500)}
 sec.addEventListener('click',function(e){var c=e.target.closest('.shw-c');if(c)open(+c.dataset.i)});
-m.querySelector('.shm-x').onclick=close;m.addEventListener('click',function(e){if(e.target===m)close()});
+var mb=m.querySelector('.shm-m');function mlab(){mb.innerHTML=mute?'&#128263;':'&#128266;'}mlab();mb.onclick=function(){mute=!mute;try{localStorage.setItem('ct_show_mute',mute?'1':'0')}catch(_){}if(vo)vo.muted=mute;mlab()};
+m.querySelector('.shm-x:not(.shm-m)').onclick=close;m.addEventListener('click',function(e){if(e.target===m)close()});
 m.querySelector('.rp').onclick=play;m.querySelector('.nv').onclick=function(){cur=(cur+1)%4;play()};
 addEventListener('keydown',function(e){if(!m.classList.contains('on'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight'){cur=(cur+1)%4;play()}if(e.key==='ArrowLeft'){cur=(cur+3)%4;play()}});
 stage.addEventListener('touchstart',function(e){tsx=e.touches[0].clientX},{passive:true});
