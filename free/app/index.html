@@ -980,7 +980,7 @@ document.getElementById('arR').onclick=function(){if(notes>0){rst.value='See my 
 document.getElementById('rsx').onclick=function(){rs.classList.remove('on')};
 rsg.onclick=function(){if(!rsCheck())return;rs.classList.remove('on');art.classList.remove('on');toast('Sent back to the writer','You\'ll get the new version to approve.')};
 document.getElementById('arO').onclick=function(){art.classList.remove('on');toast('Approved','It goes live on your website and is ready to post.')};
-var spl=document.getElementById('spl'),sv=document.getElementById('splv'),AC=null,shown=false,greeted=false;
+var spl=document.getElementById('spl'),sv=document.getElementById('splv'),AC=null,shown=false,greeted=false,TAPHOLD=/[?&]tap=/.test(location.search);if(TAPHOLD){spl.style.zIndex='500';spl.style.setProperty('bottom','0','important')} /* home-page phone: hold on the logo until tapped (Ezekiel 11/27) */
 function chime(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();if(AC.state!=='running')return false;
  var t=AC.currentTime+.05,out=AC.createDynamicsCompressor();out.connect(AC.destination);var m=AC.createGain();m.gain.value=.55;m.connect(out);
  var len=AC.sampleRate*2,nb=AC.createBuffer(1,len,AC.sampleRate),d=nb.getChannelData(0);for(var i=0;i<len;i++)d[i]=Math.random()*2-1;
@@ -989,9 +989,9 @@ function chime(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)
  var b=AC.createOscillator(),bg=AC.createGain();b.type='sine';b.frequency.setValueAtTime(70,t+1.75);b.frequency.exponentialRampToValueAtTime(38,t+3.2);bg.gain.setValueAtTime(0,t+1.74);bg.gain.linearRampToValueAtTime(.7,t+1.78);bg.gain.exponentialRampToValueAtTime(.001,t+3.4);b.connect(bg);bg.connect(m);b.start(t+1.7);b.stop(t+3.5);
  [[880,.18],[1318.5,.13],[1760,.1],[2637,.06]].forEach(function(f,k){var o=AC.createOscillator(),g=AC.createGain();o.type=k?'sine':'triangle';o.frequency.value=f[0];o.detune.value=(k%2?4:-4);var st=t+1.8+k*.035;g.gain.setValueAtTime(0,st);g.gain.linearRampToValueAtTime(f[1],st+.02);g.gain.exponentialRampToValueAtTime(.0008,st+2.6);o.connect(g);g.connect(m);o.start(st);o.stop(st+2.7)});
  return true}catch(e){return false}}
-function greet(){if(greeted)return;greeted=true;setTimeout(function(){toast('Mary opened your website','Reading now · earliest you can reach out: 8:00 AM')},900)}
-function playSplash(withSound){spl.classList.remove('off','tap');try{sv.currentTime=0}catch(e){}var p=sv.play();if(p&&p.catch)p.catch(function(){end()});var ok=chime();if(!ok&&!withSound)spl.classList.add('tap');clearTimeout(spl._t);spl._t=setTimeout(end,3400)}
-function end(){spl.classList.add('off');greet()}
+function greet(){if(greeted||TAPHOLD)return;greeted=true;setTimeout(function(){toast('Mary opened your website','Reading now · earliest you can reach out: 8:00 AM')},900)}
+function playSplash(withSound){spl.classList.remove('off','tap');try{sv.currentTime=0}catch(e){}var p=sv.play();if(p&&p.catch)p.catch(function(){end()});if(TAPHOLD)return;var ok=chime();if(!ok&&!withSound)spl.classList.add('tap');clearTimeout(spl._t);spl._t=setTimeout(end,3400)}
+function end(){if(TAPHOLD&&!window.__ctTapped)return;spl.classList.add('off');greet()}window.ctSplashEnd=end;
 sv.addEventListener('ended',function(){setTimeout(end,250)});
 spl.addEventListener('click',function(){if(spl.classList.contains('tap')){spl.classList.remove('tap');playSplash(true)}else end()});
 app.addEventListener('click',function(e){if(e.target.closest('.hd img'))openQm()});
@@ -1711,5 +1711,5 @@ boot();
  var tm=null;document.addEventListener('scroll',function(){b.classList.add('hid');clearTimeout(tm);tm=setTimeout(function(){b.classList.remove('hid')},700)},true);
  setInterval(paint,1500)})();</script>
 <style>.xpr{width:100%;display:flex;align-items:center;gap:10px;border:1px solid rgba(127,127,127,.25);border-radius:12px;background:transparent;color:inherit;font:600 13px Inter,system-ui,sans-serif;padding:11px 12px;margin:0 0 10px;cursor:pointer;text-align:left}.xpr i{flex:none;width:34px;height:20px;border-radius:99px;background:#555;position:relative;transition:background .2s}.xpr i::after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}.xpr.on i{background:#F5A524}.xpr.on i::after{transform:translateX(14px)}.xpr b{font-weight:800}</style><!-- CT-XP-FAB -->
-<script src="/assets/ct-genie.js?v=8" defer></script><!-- CT-GENIE -->
+<script src="/assets/ct-genie.js?v=11" defer></script><!-- CT-GENIE -->
 </body></html>
