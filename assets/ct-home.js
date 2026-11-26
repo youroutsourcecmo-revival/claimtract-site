@@ -279,4 +279,4 @@ function init(){var st=el('style');st.textContent=CSS;document.head.appendChild(
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 
-(function(){if(!window.__ctOne){var sc=document.createElement('script');sc.src='/assets/ct-one.js?v=1';document.head.appendChild(sc)}})();
+(function(){if(!window.__ctOne){var sc=document.createElement('script');sc.src='/assets/ct-one.js?v=2';document.head.appendChild(sc)}})();
