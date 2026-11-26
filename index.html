@@ -390,6 +390,7 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
 (function tick(now){var dt=now-last;last=now;var paused=held||!dp.hidden||document.hidden||hero.getBoundingClientRect().bottom<0;if(!paused){el+=dt;if(el>=D){el=0;i=(i+1)%V.length;h.classList.add('hvf');l.classList.add('hvf');setTimeout(function(){show(i);h.classList.remove('hvf');l.classList.remove('hvf')},220);t('hero_view')}}fill.style.width=(el/D*100)+'%';requestAnimationFrame(tick)})(last);
 })();</script>
   </div>
+<!-- CT-NOPHONE --><style>/* Nov 26: hero phone removed; Ezekiel stands where the phone was. Delete this block to restore. */#spHero,#pgPhone{display:none!important}@media (min-width:1100px){.hero #ez.ez{right:clamp(0px,calc(50vw - 600px),380px)!important}}</style>
   <div class="sp sp-hero" id="spHero" hidden aria-label="Sophia from ClaimTract">
     <div class="sp-top"><i></i><b>Sophia</b><span>ClaimTract</span></div>
     <div class="sp-v sp-w"><img class="sp-po" src="/assets/7102df40772f1ed99a0c3d6c47072c85.jpg" alt=""><iframe id="spW" title="Sophia's 7-minute show" data-src="/free/walk/?embed=1" allow="autoplay; fullscreen" tabindex="0"></iframe></div>
