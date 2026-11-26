@@ -1,6 +1,6 @@
-/* ClaimTract landing tracking → POST https://claimtract.app/t  (no secrets here) */
+/* ClaimTract landing tracking → POST /t on the same domain  (no secrets here) */
 (function () {
-  var U = 'https://claimtract.app/t', K = 'ct_lead', lead = {};
+  var U = location.origin + '/t', K = 'ct_lead', lead = {};
   try { lead = JSON.parse(localStorage.getItem(K) || '{}') || {}; } catch (e) { lead = {}; }
   try {
     var q = new URLSearchParams(location.search), got = false;
