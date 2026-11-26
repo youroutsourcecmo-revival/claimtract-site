@@ -46,6 +46,7 @@ function start(){prep();hook();
  var spl=document.getElementById('spl');
  if(spl&&!spl.classList.contains('off')){var mo=new MutationObserver(function(){if(spl.classList.contains('off')){mo.disconnect();setTimeout(intro,450)}});mo.observe(spl,{attributes:true,attributeFilter:['class']})}
  else setTimeout(intro,600)}
+window.ctGenieBack=function(done){prep();if(busy||!still||!still.complete||!still.naturalWidth||document.getElementById('sgx')){done();return}busy=true;var o=mk();genie(o,still,0);done();pour(o,still,false,800,function(){o.d.remove();busy=false;pulse()})};
 window.ctGenieReplay=function(){try{localStorage.removeItem(K)}catch(e){}intro()};
 start();
 })();

@@ -1694,7 +1694,7 @@ function ctQrCards(D){var q=null;try{q=qrcode(0,'M');q.addData(D.url);q.make()}c
    Explainers OFF: her normal screen. ===== */
 (function(){var _tab=tab;
  function closeWalk(){var f=document.getElementById('wlk');if(f)f.remove();stack=[];render('home')}
- window.addEventListener('message',function(e){if(e&&e.data&&e.data.ct==='walk_close')closeWalk()});document.addEventListener('click',function(e){if(document.getElementById('wlk')&&e.target.closest('[data-tab]')){var f=document.getElementById('wlk');if(f)f.remove()}},true);
+ window.addEventListener('message',function(e){if(e&&e.data&&e.data.ct==='walk_close')closeWalk()});document.addEventListener('click',function(e){if(document.getElementById('wlk')&&e.target.closest('[data-tab]')){if(e.target.closest('[data-tab="sophia"]')){e.preventDefault();e.stopImmediatePropagation();try{track('walk_putaway',{})}catch(_){}if(typeof window.ctGenieBack==='function')window.ctGenieBack(closeWalk);else closeWalk();return}var f=document.getElementById('wlk');if(f)f.remove()}},true);
  tab=function(n){if(n==='sophia'&&plan==='free'&&!document.getElementById('wlk')){var host=document.getElementById('app')||document.body,f=document.createElement('iframe');f.id='wlk';f.src='/free/walk/?app=1'+(window.__uid?'&uid='+encodeURIComponent(window.__uid):'')+'&t='+Date.now();f.allow='autoplay; fullscreen';f.title='Sophia walkthrough';var _vs=document.querySelectorAll('.view'),_v=_vs[_vs.length-1],nv=(_v&&_v.querySelector('.nav'))||document.querySelector('.nav'),ar=host.getBoundingClientRect(),nb=nv?Math.round(nv.getBoundingClientRect().height):52;if(!nb||nb<40)nb=52;f.setAttribute('style','position:absolute;left:0;right:0;top:0;bottom:'+nb+'px;width:100%;height:calc(100% - '+nb+'px);border:0;z-index:95;background:#000');host.appendChild(f);if(typeof track==='function')try{track('walk_open',{})}catch(_){};return}
   return _tab.apply(this,arguments)};
  /* Nov 25: every upgrade button opens Sophia (the walkthrough), never a second checkout */
@@ -1716,5 +1716,5 @@ boot();
  var tm=null;document.addEventListener('scroll',function(){b.classList.add('hid');clearTimeout(tm);tm=setTimeout(function(){b.classList.remove('hid')},700)},true);
  setInterval(paint,1500)})();</script>
 <style>.xpr{width:100%;display:flex;align-items:center;gap:10px;border:1px solid rgba(127,127,127,.25);border-radius:12px;background:transparent;color:inherit;font:600 13px Inter,system-ui,sans-serif;padding:11px 12px;margin:0 0 10px;cursor:pointer;text-align:left}.xpr i{flex:none;width:34px;height:20px;border-radius:99px;background:#555;position:relative;transition:background .2s}.xpr i::after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}.xpr.on i{background:#F5A524}.xpr.on i::after{transform:translateX(14px)}.xpr b{font-weight:800}</style><!-- CT-XP-FAB -->
-<script src="/assets/ct-genie.js?v=11" defer></script><!-- CT-GENIE -->
+<script src="/assets/ct-genie.js?v=12" defer></script><!-- CT-GENIE -->
 </body></html>
