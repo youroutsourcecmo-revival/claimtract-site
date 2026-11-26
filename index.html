@@ -949,7 +949,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   function draw(){requestAnimationFrame(draw);if(v.readyState<2)return;try{fit();gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,v);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);if(!ok){ok=true;document.documentElement.classList.add('ezk')}}catch(e){if(!ok){c.remove()}}}
   draw()}
  setup()})();</script>
-<script src="/assets/ct-show.js?v=1126e" defer></script>
+<script src="/assets/ct-show.js?v=1126f" defer></script>
 <script src="/assets/ct-how.js?v=1126a" defer></script>
 <!-- CT-IPADEZ --><script>/* Nov 26: on iPad the WebGL cut-out of Ezekiel's loop shows as a dark box. iPad gets the clean transparent still instead; when he talks (sound on), the plain video shows. Delete this block to undo. */
 (function(){var ua=navigator.userAgent,ipad=/iPad/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);if(!ipad)return;

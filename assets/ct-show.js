@@ -2,6 +2,41 @@
    Nov 25, 2026. Sample names only (Cedric, Mary). No brand logos. */
 (function(){
 var CSS=`
+
+/* Nov 26: realistic iPhone lock screen + incoming call */
+.lk{position:absolute;inset:0;z-index:9;color:#fff;opacity:0;transition:opacity .4s;overflow:hidden;font-family:-apple-system,"SF Pro Display",Inter,sans-serif}
+.lk.in{opacity:1}
+.lk .lbg{position:absolute;inset:0;background:#1a2230 url(/assets/30dac66bb359e77f634a857fa481e839.jpg) center 40%/cover;filter:brightness(.55) saturate(.9)}
+.lk .ld{position:relative;margin-top:44px;text-align:center;font:600 11px -apple-system,Inter,sans-serif;color:rgba(255,255,255,.9)}
+.lk .lt{position:relative;text-align:center;font:200 54px/1 -apple-system,"SF Pro Display",Inter,sans-serif;letter-spacing:-.02em;margin-top:2px}
+.lk .ln{position:absolute;left:8px;right:8px;bottom:58px;display:flex;flex-direction:column;gap:5px}
+.lk .nt{display:flex;gap:7px;align-items:flex-start;padding:7px 8px;border-radius:14px;background:rgba(40,40,46,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);opacity:0;transform:translateY(14px);transition:all .4s cubic-bezier(.2,.8,.2,1)}
+.lk .nt.in{opacity:1;transform:none}
+.lk .nt i{flex:none;width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font:800 11px Inter,sans-serif;font-style:normal;color:#fff;margin-top:1px}
+.lk .nt .nb{flex:1;min-width:0}
+.lk .nt .nh{display:flex;justify-content:space-between;font:600 9.5px/1.25 -apple-system,Inter,sans-serif}
+.lk .nt .nh em{font-style:normal;font-weight:400;color:rgba(255,255,255,.6);font-size:8.5px}
+.lk .nt .nm{display:block;font:400 9.5px/1.3 -apple-system,Inter,sans-serif;color:rgba(255,255,255,.88);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lk .lf{position:absolute;bottom:14px;left:50%;width:84px;height:3px;margin-left:-42px;border-radius:2px;background:rgba(255,255,255,.85)}
+.ic{position:absolute;inset:0;z-index:11;color:#fff;opacity:0;transform:scale(1.04);transition:opacity .35s,transform .35s;overflow:hidden;font-family:-apple-system,"SF Pro Display",Inter,sans-serif}
+.ic.in{opacity:1;transform:none}
+.ic .ibg{position:absolute;inset:-20px;background:#1c1c1e url(/assets/30dac66bb359e77f634a857fa481e839.jpg) center 40%/cover;filter:blur(18px) brightness(.38)}
+.ic .iw{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:52px 14px 22px;text-align:center}
+.ic .in1{font:400 23px/1.15 -apple-system,"SF Pro Display",Inter,sans-serif;letter-spacing:-.01em}
+.ic .in2{margin-top:3px;font:400 11.5px -apple-system,Inter,sans-serif;color:rgba(255,255,255,.72)}
+.ic .icid{margin-top:9px;max-width:100%;padding:5px 9px;border-radius:9px;background:rgba(255,255,255,.12);font:500 9.5px/1.35 -apple-system,Inter,sans-serif;color:rgba(255,255,255,.92)}
+.ic .icid b{color:#F5A524;font-weight:700}
+.ic .isp{flex:1}
+.ic .ism{width:100%;display:flex;justify-content:space-around;margin-bottom:22px}
+.ic .ism span{display:flex;flex-direction:column;align-items:center;gap:4px;font:400 9.5px -apple-system,Inter,sans-serif;color:rgba(255,255,255,.85)}
+.ic .ism svg{width:18px;height:18px}
+.ic .ibt{width:100%;display:flex;justify-content:space-around}
+.ic .ibt span{display:flex;flex-direction:column;align-items:center;gap:6px;font:400 10.5px -apple-system,Inter,sans-serif}
+.ic .ibt i{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.ic .ibt i svg{width:24px;height:24px;fill:#fff}
+.ic .idc{background:#FF3B30}.ic .idc svg{transform:rotate(135deg)}
+.ic .iac{background:#34C759;animation:iacp 1.4s ease-out infinite}
+@keyframes iacp{0%{box-shadow:0 0 0 0 rgba(52,199,89,.6)}70%{box-shadow:0 0 0 14px rgba(52,199,89,0)}100%{box-shadow:0 0 0 0 rgba(52,199,89,0)}}
 .shw{padding:46px 0 10px}
 .shw-g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .shw-c{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;background:var(--card,#fff);border:1px solid var(--ln,#E1E1DC);border-radius:18px;padding:20px 18px;transition:transform .2s,box-shadow .2s,border-color .2s}
@@ -215,9 +250,12 @@ function s2(o){o=o||{};var scr=phone('<div class="s2"><div class="s2-q"><svg vie
  var kb=scr.querySelector('.s2-kb');function key(c){var k=kb.querySelector('[data-k="'+c+'"]');if(!k)return;k.classList.add('on');T(function(){k.classList.remove('on')},110)}
  function type(s,at,cb){T(function(){kb.classList.add('in')},Math.max(0,at-250));for(var i=0;i<=s.length;i++)(function(i){T(function(){tx.textContent=s.slice(0,i);if(i)key(s.charAt(i-1))},at+i*55)})(i);T(function(){var g=kb.querySelector('[data-k=go]');g.classList.add('on');T(function(){g.classList.remove('on');kb.classList.remove('in')},150);cb()},at+s.length*55+250)}
  var a='public adjuster near me',b='insurance denied my roof claim orlando';
- function callFn(){var N=[['#34C759','&#128172;','MESSAGES','Dave Russo','Gave your number to my neighbor Linda. Her roof got hit bad in the storm.'],['#0866FF','f','MESSENGER','Tanya Brooks','Saw your post about roof denials. Can you look at mine this week?'],['linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)','&#9678;','INSTAGRAM','kevin.m_fl','Is the inspection free? Our roof claim just got denied too.']];
-     var g=el('<div class="call"><div class="cbg"></div><div class="cin"><span class="c1">Incoming call&hellip;</span><b class="cn">Maria Alvarez</b><span class="c2">Orlando, FL &middot; mobile</span><span class="cp">Found you on: Roof claim denied article</span><div class="nts">'+N.map(function(n){return '<div class="nt"><i style="background:'+n[0]+'">'+n[1]+'</i><span class="nb"><span class="nl"><span>'+n[2]+'</span><span>now</span></span><span class="nn">'+n[3]+'</span><span class="nm">'+n[4]+'</span></span></div>'}).join('')+'</div><div class="cbt"><span><i class="dec">&#10005;</i>Decline</span><span><i class="acc">&#128222;</i>Accept</span></div></div></div>');
-     scr.appendChild(g);requestAnimationFrame(function(){g.classList.add('in')});[].forEach.call(g.querySelectorAll('.nt'),function(n,i){T(function(){n.classList.add('in')},700+i*450)})}
+ function callFn(){var N=[['#34C759','&#128172;','Messages','Dave Russo','Gave your number to my neighbor Linda. Her roof got hit bad in the storm.','2m ago'],['#0866FF','f','Messenger','Tanya Brooks','Saw your post about roof denials. Can you look at mine this week?','1m ago'],['linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)','&#9678;','Instagram','kevin.m_fl','Is the inspection free? Our roof claim just got denied too.','now']];
+     var lk=el('<div class="lk"><div class="lbg"></div><div class="ld">Thursday, November 26</div><div class="lt">9:41</div><div class="ln"></div><div class="lf"></div></div>');scr.appendChild(lk);requestAnimationFrame(function(){lk.classList.add('in')});
+     var ln=lk.querySelector('.ln');N.forEach(function(n,i){T(function(){var d=el('<div class="nt"><i style="background:'+n[0]+'">'+n[1]+'</i><span class="nb"><span class="nh"><span>'+n[3]+'</span><em>'+n[5]+'</em></span><span class="nm">'+n[4]+'</span></span></div>');ln.insertBefore(d,ln.firstChild);requestAnimationFrame(function(){d.classList.add('in')})},350+i*450)});
+     var PH='<svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>';
+     T(function(){var g=el('<div class="ic"><div class="ibg"></div><div class="iw"><div class="in1">(407) 555-0182</div><div class="in2">Orlando, FL</div><div class="icid"><b>ClaimTract</b> &middot; Maria Alvarez<br>Found you on: Roof claim denied</div><div class="isp"></div><div class="ism"><span><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="13" r="7"/><path d="M12 9.5V13l2.2 1.6M5 4.5 2.8 6.5M19 4.5l2.2 2"/></svg>Remind Me</span><span><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M4 5h16v11H9l-5 4z" stroke-linejoin="round"/></svg>Message</span></div><div class="ibt"><span><i class="idc">'+PH+'</i>Decline</span><span><i class="iac">'+PH+'</i>Accept</span></div></div></div>');
+       scr.appendChild(g);requestAnimationFrame(function(){g.classList.add('in')})},2100)}
  function results(){var rows=[['Insurer Guide','insurer-guide.example › claims','Roof claim denied? 5 things to check first','<em>Mar 3, 2026 —</em> Before you appeal, check your policy for these five common exclusions...','IG'],['State Info','state-info.example › insurance','Florida roof claim rules explained','Florida law gives you options after a denial. Learn the deadlines and how...','SI'],['Home Blog','homeblog.example › roofing','Why roof claims get denied','Wear and tear, late reporting and missing photos top the list of reasons...','HB']];
     function res(x,cls,fv){return '<div class="'+cls+'"><div class="gs"><span class="fv">'+fv+'</span><span><b>'+x[0]+'</b><small>'+x[1]+'</small></span></div><u>'+x[2]+'</u><p>'+x[3]+'</p></div>'}
     rows.forEach(function(x,i){T(function(){var d=el(res(x,'s2-row',x[4]));r.appendChild(d);requestAnimationFrame(function(){d.classList.add('in')})},i*220)});
@@ -225,7 +263,7 @@ function s2(o){o=o||{};var scr=phone('<div class="s2"><div class="s2-q"><svg vie
     T(function(){var a=el('<div class="s2-ar"><span>You start<br>showing up.</span><img src="/assets/d7fe886506a61321a8f0efcc5da696fb.png" alt=""></div>');r.appendChild(a);requestAnimationFrame(function(){a.classList.add('in')})},1700);
     T(function(){var t=el('<span class="tap"></span>');t.style.left='45%';t.style.top='122px';scr.appendChild(t);requestAnimationFrame(function(){t.classList.add('go')})},2700);
     if(!o.find)T(callFn,3100)}
- if(o.call){callFn();return 4600}
+ if(o.call){callFn();return 5600}
  if(o.find){type(b,300,results);return 300+b.length*55+250+3200}
  type(a,300,function(){tx.classList.add('x');e.classList.add('in');
   T(function(){tx.classList.remove('x');tx.textContent='';e.classList.remove('in');
