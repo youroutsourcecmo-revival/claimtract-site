@@ -365,7 +365,7 @@ html.saf.ezk .hero .ez .ez-m video{opacity:0!important;filter:none!important}
     <p class="k" id="hk">Built for public adjusters who want control of their own business</p>
     <h1 id="hh">Stop waiting for somebody else <em>to send you business.</em></h1>
     <p class="lead" id="lead">You shouldn't have to depend on roofers, plumbers, referrals, or knocking on doors to find your next client. ClaimTract gives you your own 13-page website and more than 30 tools to build a system that helps homeowners discover you directly.</p>
-    <!-- CT-BADGE (Nov 26) --><img class="ctb" src="/assets/ct-badge.webp" width="640" height="636" alt="Free forever: 13-page website, 33-tool companion app, no credit card. Florida 3-20 adjusters only."><style>.ctb{display:block;width:170px;height:auto;margin:4px 0 14px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.25))}@media(max-width:700px){.ctb{width:120px;margin:2px 0 12px}}</style>
+    <!-- CT-BADGE (Nov 26) --><img class="ctb" src="/assets/ct-badge.webp" width="640" height="636" alt="Free forever: 13-page website, 33-tool companion app, no credit card. Florida 3-20 adjusters only."><style>.ctb{display:block;width:170px;height:auto;margin:4px 0 14px;filter:drop-shadow(0 10px 16px rgba(0,0,0,.3));transform:perspective(700px) rotateY(-16deg) rotateX(6deg);animation:ctbT 7s ease-in-out infinite;transform-origin:50% 60%}@keyframes ctbT{0%,100%{transform:perspective(700px) rotateY(-16deg) rotateX(6deg)}50%{transform:perspective(700px) rotateY(16deg) rotateX(4deg) translateY(-4px)}}@media(prefers-reduced-motion:reduce){.ctb{animation:none}}@media(max-width:700px){.ctb{width:120px;margin:2px 0 12px}}</style>
     <div class="hdr" id="hdr"><button type="button" class="hdr-b" aria-expanded="false" aria-controls="hdrp">Show me how <i aria-hidden="true">&#9662;</i></button>
       <div class="hdr-p" id="hdrp" hidden><a class="hb" data-cta href="/free/build/?view=preview"><b>See My Free 13-Page Website</b><small>Your own professional home on the internet.</small></a><a class="hb hv2" href="#demo"><b>Discover My 30+ Business-Building Tools</b><small>See how to build your own source of incoming business.</small></a><a class="ghost" data-again href="/free/build/?view=preview" hidden>See my website again</a></div>
       <p class="hdr-n">Free. Nothing goes live until you approve it.</p></div>
@@ -468,6 +468,7 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
       <div class="cs4-c"><div class="cs4-i">&#128222;</div><b>STEP 4</b><h3>Your phone rings</h3><p>She taps call. Or she leaves her question while you're up on a roof, and ClaimTract follows up for you.</p><q>How many calls like that are you missing right now?</q></div>
     </div>
     <a class="btn" data-cta href="/free/build/?view=preview">See the page she'd find &rarr;</a>
+    <button type="button" class="cs4-hw" data-how>&#9654; See how it works</button><!-- CT-HOW -->
   </section>
 
   <section class="why">
@@ -944,6 +945,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   function draw(){requestAnimationFrame(draw);if(v.readyState<2)return;try{fit();gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,v);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);if(!ok){ok=true;document.documentElement.classList.add('ezk')}}catch(e){if(!ok){c.remove()}}}
   draw()}
  setup()})();</script>
-<script src="/assets/ct-show.js?v=1126d" defer></script>
+<script src="/assets/ct-show.js?v=1126e" defer></script>
+<script src="/assets/ct-how.js?v=1126a" defer></script>
 </body>
 </html>
