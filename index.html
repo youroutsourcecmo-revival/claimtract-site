@@ -357,6 +357,13 @@ html.saf.ezk .hero .ez .ez-m video{opacity:0!important;filter:none!important}
 @media(max-width:700px){#hh,#lead{min-height:0!important}.hero .ez:not(.dock){right:-3%!important}}
 </style>
 <!-- CT-IPADEZ-HEAD --><script>(function(){var u=navigator.userAgent;if(/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)){document.documentElement.classList.add('ipad');var st=document.createElement('style');st.textContent='html.ipad .hero .ez{mix-blend-mode:normal!important;isolation:auto!important;filter:none!important}html.ipad .hero .ez .ez-m canvas.ezc{display:none!important}html.ipad .hero .ez .ez-m video{opacity:0!important;filter:none!important}html.ipad .hero .ez .ez-m{position:relative;background:url(/assets/ezekiel-black.webp) right bottom/contain no-repeat}html.ipad .hero .ez.pk .ez-m{background:none}html.ipad .hero .ez .ez-m canvas.pkc{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:right bottom;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 92%,transparent);mask-image:linear-gradient(to bottom,#000 92%,transparent)}';document.head.appendChild(st)}})();</script>
+<style>/* CT-TAP: red swoop crosses the phone chrome until the visitor taps (Ezekiel 11/26) */
+.bapp-ph .tts{position:absolute;right:-118px;top:-30px;width:190px;z-index:3;pointer-events:none;transition:opacity .35s}
+.bapp-ph .tts b{display:block;color:#E11D2E;font:900 22px/1 system-ui,sans-serif;letter-spacing:.04em;transform:rotate(-6deg);margin:0 0 -6px 56px;white-space:nowrap}
+.bapp-ph .tts svg{width:150px;height:auto;display:block}
+.mphone.go .tts{opacity:0}
+@media (max-width:900px){.mphone{padding-top:96px!important}.bapp-ph .tts{right:-24px;top:-84px;width:170px}.bapp-ph .tts b{font-size:19px;margin-left:30px}.bapp-ph .tts svg{width:120px}}
+</style><!-- CT-TAP -->
 </head>
 <body>
 <script>(function(){if(/^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent))document.documentElement.classList.add('saf')})();</script>
@@ -566,7 +573,7 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
     <div class="cx-bar" id="cxbar" aria-hidden="true"><div><b id="cb-pages"></b>pages</div><div><b id="cb-cl"></b>claims/mo*</div><div><b id="cb-cost"></b>your cost</div></div>
   </section>
 
-  <section class="mission mphone" id="demo"><div class="bapp-ph" aria-label="The ClaimTract app on a phone"><iframe src="/free/app/?demo=1" title="Sample ClaimTract app, Cedric Moore" loading="lazy"></iframe><script>(function(){var f=document.currentScript.previousElementSibling;if(f&&f.tagName==="IFRAME")f.setAttribute("src","/free/app/?demo=1&t="+Date.now())})()</script></div><div><p class="k">The whole point</p><h2>Become the answer Google is hunting for. Build real authority. <em>Make your phone ring without begging.</em></h2><p>Your free website is step one. Why not take it tonight?</p><a class="btn" data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></section>
+  <section class="mission mphone" id="demo"><div class="bapp-ph" aria-label="The ClaimTract app on a phone"><div class="tts" aria-hidden="true"><b>TAP TO START</b><svg viewBox="0 0 200 170" fill="none"><path d="M150 18C118 30 70 46 58 92c-6 22 0 40 14 58" stroke="#E11D2E" stroke-width="13" stroke-linecap="round"/><path d="M40 128l32 26 22-36" stroke="#E11D2E" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></svg></div><iframe src="/free/app/?demo=1&tap=1" title="Sample ClaimTract app, Cedric Moore" loading="lazy"></iframe><script>(function(){var f=document.currentScript.previousElementSibling;if(f&&f.tagName==="IFRAME")f.setAttribute("src","/free/app/?demo=1&tap=1&t="+Date.now())})()</script></div><div><p class="k">The whole point</p><h2>Become the answer Google is hunting for. Build real authority. <em>Make your phone ring without begging.</em></h2><p>Your free website is step one. Why not take it tonight?</p><a class="btn" data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></section>
 
   <section class="who">
     <div class="who-t">
@@ -723,7 +730,7 @@ try{if(fn){var ln2=(Q.get('ln')||'').replace(/[<>&"]/g,''),ct=(Q.get('city')||''
 applyP(Q);
 if(Q.get('c')&&/^[A-Za-z0-9_-]{6,40}$/.test(Q.get('c'))){fetch('/api/pages/lead/'+encodeURIComponent(Q.get('c'))).then(function(r){return r.ok?r.json():null}).then(function(d){if(!d||!d.ok)return;window.__lead=d;
  var M={fn:d.first,ln:d.last,lic:d.license,city:d.city,st:d.state||'FL'};applyP({get:function(k){return M[k]||''}});
- var fr=document.querySelector('.mphone iframe');if(fr){var u='/free/app/?demo=1&c='+encodeURIComponent(d.code||Q.get('c'));if((fr.getAttribute('src')||'').indexOf(u)!==0)fr.setAttribute('src',u+'&t='+Date.now())}
+ var fr=document.querySelector('.mphone iframe');if(fr){var u='/free/app/?demo=1&tap=1&c='+encodeURIComponent(d.code||Q.get('c'));if((fr.getAttribute('src')||'').indexOf(u)!==0)fr.setAttribute('src',u+'&t='+Date.now())}
  try{T('lead_link_open',{c:Q.get('c')})}catch(_){}}).catch(function(){})}
 var pp=document.getElementById('pgPhone');function goPage(){var a=document.querySelector('.hero [data-cta]');if(a){try{window.__ctT&&window.__ctT('free_phone_click')}catch(_){}location.href=a.href}}pp.onclick=goPage;pp.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();goPage()}};
 
@@ -834,7 +841,7 @@ var PXID={1:"XnyfdjPBSk2v",2:"9WZktchLUbR5",3:"PPVWenSuQc4z",4:"mr5gZ6crXpcR",5:
 var D={1:'C:top',2:'C:trust',3:'C:hero',4:'C:about',5:'C:article',6:'C:answers',7:'P:pick',8:'C:top',9:'P:pages',10:'P:share',11:'P:qr',12:'P:card',13:'P:book',14:'P:meet',15:'P:mail',16:'P:earn',17:'P:letters',18:'P:hours',19:'P:home',20:'P:edit',21:'C:tools',22:'C:tools',23:'C:tools',24:'C:contact',25:'C:tools',26:'F:assistant',27:'P:livechat',28:'P:asst',29:'P:found',30:'P:found',31:'P:insights',32:'P:activity'};
 function reveal(li){if(li&&!li.offsetParent){var h=li.previousElementSibling;while(h&&!h.classList.contains('gh'))h=h.previousElementSibling;if(h)h.click()}}
 function backTo(n){CTExplain.back('Back to pricing',null,function(){var li=document.getElementById('px'+n);reveal(li);setTimeout(function(){if(li)li.scrollIntoView({behavior:'smooth',block:'center'})},60)})}
-function phone(n,scr){var ph=document.querySelector('.mphone');if(ph)ph.scrollIntoView({behavior:'smooth',block:'center'});var fr=ph&&ph.querySelector('iframe');if(fr&&fr.getAttribute('loading')==='lazy')fr.removeAttribute('loading');var t0=Date.now();
+function phone(n,scr){var ph=document.querySelector('.mphone');try{ph.querySelector('iframe').contentWindow.postMessage({ct:'start'},'*')}catch(e){}if(ph)ph.classList.add('go');if(ph)ph.scrollIntoView({behavior:'smooth',block:'center'});var fr=ph&&ph.querySelector('iframe');if(fr&&fr.getAttribute('loading')==='lazy')fr.removeAttribute('loading');var t0=Date.now();
  (function tryIt(){var w=fr&&fr.contentWindow,ct=w&&w.__ct;if(!ct||!w.document.querySelector('.view')){if(Date.now()-t0<15000)return setTimeout(tryIt,300);return}
   try{if(scr==='home'||scr==='activity'){ct.tab(scr)}else if(scr==='pick'||scr==='pages'){ct.tab('home');setTimeout(function(){var b=w.document.querySelector('[data-act=pages]');if(b)b.click()},350)}else{ct.tab('home');setTimeout(function(){ct.go(scr)},300)}}catch(e){}})();backTo(n)}
 function dest(n){var d=D[n].split(':');if(n===16&&BOOK_EZEKIEL){window.open(BOOK_EZEKIEL,'_blank');return}
@@ -965,5 +972,6 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   v.addEventListener('loadeddata',function(){try{draw()}catch(e){}});
  })();
 })();</script>
+<script>addEventListener('message',function(e){if(e.data&&e.data.ct==='started'){var m=document.querySelector('.mphone');if(m)m.classList.add('go')}});</script><!-- CT-TAP-JS -->
 </body>
 </html>

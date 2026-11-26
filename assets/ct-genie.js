@@ -37,7 +37,12 @@ function hook(){document.addEventListener('click',function(e){var t=e.target.clo
  if(!t||pass||busy||!t.classList.contains('nup')||document.getElementById('wlk')||!still||!still.complete||!still.naturalWidth)return;
  e.preventDefault();e.stopImmediatePropagation();busy=true;var o=mk();
  pour(o,still,true,650,function(){busy=false;pass=true;try{t.click()}finally{pass=false}var w=document.getElementById('wlk'),dn=false,rm=function(){if(dn)return;dn=true;setTimeout(function(){o.d.remove()},250)};if(w)w.addEventListener('load',function(){setTimeout(rm,500)});setTimeout(rm,2500)})},true)}
+function tapWait(){var c=document.createElement('div');c.id='tapgo';c.style.cssText='position:absolute;inset:0;z-index:96;cursor:pointer;background:transparent';app.appendChild(c);
+ function go(){if(!c.parentNode)return;c.remove();try{parent.postMessage({ct:'started'},'*')}catch(e){}intro()}
+ c.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();go()});
+ addEventListener('message',function(e){if(e.data&&e.data.ct==='start')go()})}
 function start(){prep();hook();
+ if(Q.has('tap')){tapWait();return} /* home-page phone: nothing plays until tapped (Ezekiel 11/26) */
  var spl=document.getElementById('spl');
  if(spl&&!spl.classList.contains('off')){var mo=new MutationObserver(function(){if(spl.classList.contains('off')){mo.disconnect();setTimeout(intro,450)}});mo.observe(spl,{attributes:true,attributeFilter:['class']})}
  else setTimeout(intro,600)}
