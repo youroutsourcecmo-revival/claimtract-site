@@ -1,0 +1,5 @@
+<!doctype html><meta name=viewport content="width=device-width,initial-scale=1"><title>Device check</title>
+<body style="font:20px/1.5 system-ui;padding:24px;background:#111;color:#fff">
+<h2>Device check</h2><p id=o>…</p>
+<script>var u=navigator.userAgent,ip=/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1);
+document.getElementById('o').innerHTML='iPad detected: <b>'+(ip?'YES':'NO')+'</b><br>Touch points: '+navigator.maxTouchPoints+'<br>Screen: '+screen.width+'x'+screen.height+'<br><small style="color:#aaa">'+u.replace(/</g,'&lt;')+'</small>';</script>
