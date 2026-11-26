@@ -27,8 +27,8 @@ function intro(){if(busy||seen()||document.getElementById('sgx'))return;var tb=t
  var bar=document.createElement('div');bar.className='gb';bar.innerHTML='<button data-g="snd" style="display:none">Tap for sound</button><button data-g="skip">Skip</button>';o.d.appendChild(bar);
  var raf=null,gone=false;function draw(){if(gone)return;var H=o.c.height,Hv=H-navH()*o.k,g=full(o,v,Hv);o.x.clearRect(0,0,o.c.width,H);if(v.videoWidth)o.x.drawImage(v,g.sx,g.sy,g.cw,g.ch,0,0,o.c.width,Hv);raf=requestAnimationFrame(draw)}
  function out(){if(gone)return;gone=true;cancelAnimationFrame(raf);mark();bar.remove();try{v.pause()}catch(e){}pour(o,v,false,1000,function(){o.d.remove();busy=false;pulse()})}
- bar.addEventListener('click',function(e){var b=e.target.closest('[data-g]');if(!b)return;e.stopPropagation();if(b.dataset.g==='snd'){v.muted=false;b.style.display='none'}else out()});
- v.addEventListener('ended',out);v.addEventListener('playing',function(){if(!raf)draw()});
+ bar.addEventListener('click',function(e){var b=e.target.closest('[data-g]');if(!b)return;e.stopPropagation();if(b.dataset.g==='snd'){v.muted=false;b.style.display='none'}else{lg('video_skip');out()}});
+ function lg(n){try{window.ctLog&&window.ctLog(n,{what:'sophia-tools intro',val:Math.round(v.currentTime)})}catch(e){}}v.addEventListener('playing',function(){lg('video_play')},{once:true});v.addEventListener('ended',function(){lg('video_end')});v.addEventListener('ended',out);v.addEventListener('playing',function(){if(!raf)draw()});
  v.muted=false;var pr=v.play();if(pr&&pr.catch)pr.catch(function(){v.muted=true;bar.querySelector('[data-g=snd]').style.display='';v.play().catch(out)})}
 /* reverse: pour Sophia out of the tab, then open the walk */
 var still=null;function prep(){if(still)return;still=new Image();still.src='/assets/sophia-back.jpg'}
@@ -37,7 +37,7 @@ function hook(){document.addEventListener('click',function(e){var t=e.target.clo
  if(!t||pass||busy||!t.classList.contains('nup')||document.getElementById('wlk')||!still||!still.complete||!still.naturalWidth)return;
  e.preventDefault();e.stopImmediatePropagation();busy=true;var o=mk();
  pour(o,still,true,650,function(){busy=false;pass=true;try{t.click()}finally{pass=false}var w=document.getElementById('wlk'),dn=false,rm=function(){if(dn)return;dn=true;setTimeout(function(){o.d.remove()},250)};if(w)w.addEventListener('load',function(){setTimeout(rm,500)});setTimeout(rm,2500)})},true)}
-function tapWait(){var c=document.createElement('div');c.id='tapgo';c.style.cssText='position:absolute;inset:0;z-index:96;cursor:pointer;background:transparent';app.appendChild(c);
+function tapWait(){var c=document.createElement('div');c.id='tapgo';c.style.cssText='position:absolute;inset:0;z-index:96;cursor:pointer;background:transparent';c.setAttribute('data-track','Tap to start (phone)');app.appendChild(c);
  function go(){if(!c.parentNode)return;c.remove();try{parent.postMessage({ct:'started'},'*')}catch(e){}intro()}
  c.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();go()});
  addEventListener('message',function(e){if(e.data&&e.data.ct==='start')go()})}
