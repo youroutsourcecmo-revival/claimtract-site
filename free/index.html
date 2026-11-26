@@ -356,6 +356,7 @@ html.saf.ezk .hero .ez .ez-m video{opacity:0!important;filter:none!important}
 /* Nov 25: phones: close the headline/subhead gap (no reserved height for longer rotating headlines); Ezekiel less cut off on the right */
 @media(max-width:700px){#hh,#lead{min-height:0!important}.hero .ez:not(.dock){right:-3%!important}}
 </style>
+<!-- CT-IPADEZ-HEAD --><script>(function(){var u=navigator.userAgent;if(/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)){document.documentElement.classList.add('ipad');var st=document.createElement('style');st.textContent='html.ipad .hero .ez .ez-m canvas.ezc{display:none!important}html.ipad .hero .ez:not(.talk) .ez-m video{display:none!important}html.ipad .hero .ez .ez-m{background:url(/assets/ezekiel-black.webp) right bottom/contain no-repeat!important}html.ipad .hero .ez.talk .ez-m{background:none!important}html.ipad .hero .ez.talk .ez-m video{opacity:1!important}';document.head.appendChild(st)}})();</script>
 </head>
 <body>
 <script>(function(){if(/^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent))document.documentElement.classList.add('saf')})();</script>
@@ -934,7 +935,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  try{new MutationObserver(soon).observe(h.querySelector('.in'),{subtree:true,childList:true,attributes:true,attributeFilter:['class','hidden','style']})}catch(e){}
  try{new MutationObserver(function(){size();cover()}).observe(ez,{attributes:true,attributeFilter:['class']})}catch(e){}})();</script>
 <script>/* iPhone plays the MP4, which has a light background baked in. Key it out on the phone's GPU so Ezekiel is a clean cut-out over any content. */
-(function(){if(!document.documentElement.classList.contains('saf'))return;var tries=0;
+(function(){if(!document.documentElement.classList.contains('saf'))return;if(/iPad/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1))return;var tries=0;
  function setup(){var v=document.getElementById('ezV');if(!v){if(++tries<40)setTimeout(setup,250);return}var m=v.parentNode;if(m.querySelector('canvas.ezc'))return;
   var c=document.createElement('canvas');c.className='ezc';var gl=c.getContext('webgl',{premultipliedAlpha:true,alpha:true});if(!gl)return;m.appendChild(c);
   var vs='attribute vec2 p;varying vec2 t;void main(){t=vec2((p.x+1.)/2.,1.-(p.y+1.)/2.);gl_Position=vec4(p,0,1);}';
