@@ -356,7 +356,7 @@ html.saf.ezk .hero .ez .ez-m video{opacity:0!important;filter:none!important}
 /* Nov 25: phones: close the headline/subhead gap (no reserved height for longer rotating headlines); Ezekiel less cut off on the right */
 @media(max-width:700px){#hh,#lead{min-height:0!important}.hero .ez:not(.dock){right:-3%!important}}
 </style>
-<!-- CT-IPADEZ-HEAD --><script>(function(){var u=navigator.userAgent;if(/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)){document.documentElement.classList.add('ipad');var st=document.createElement('style');st.textContent='html.ipad .hero .ez{mix-blend-mode:normal!important;isolation:auto!important;filter:none!important}html.ipad .hero .ez .ez-m video{filter:none!important}html.ipad .hero .ez .ez-m canvas.ezc{display:none!important}html.ipad .hero .ez:not(.talk) .ez-m video{display:none!important}html.ipad .hero .ez .ez-m{background:url(/assets/ezekiel-black.webp) right bottom/contain no-repeat!important}html.ipad .hero .ez.talk .ez-m{background:none!important}html.ipad .hero .ez.talk .ez-m video{opacity:1!important}';document.head.appendChild(st)}})();</script>
+<!-- CT-IPADEZ-HEAD --><script>(function(){var u=navigator.userAgent;if(/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)){document.documentElement.classList.add('ipad');var st=document.createElement('style');st.textContent='html.ipad .hero .ez{mix-blend-mode:normal!important;isolation:auto!important;filter:none!important}html.ipad .hero .ez .ez-m canvas.ezc{display:none!important}html.ipad .hero .ez .ez-m video{opacity:0!important;filter:none!important}html.ipad .hero .ez .ez-m{position:relative;background:url(/assets/ezekiel-black.webp) right bottom/contain no-repeat}html.ipad .hero .ez.pk .ez-m{background:none}html.ipad .hero .ez .ez-m canvas.pkc{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:right bottom;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 92%,transparent);mask-image:linear-gradient(to bottom,#000 92%,transparent)}';document.head.appendChild(st)}})();</script>
 </head>
 <body>
 <script>(function(){if(/^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent))document.documentElement.classList.add('saf')})();</script>
@@ -952,12 +952,18 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  setup()})();</script>
 <script src="/assets/ct-show.js?v=1126f" defer></script>
 <script src="/assets/ct-how.js?v=1126a" defer></script>
-<!-- CT-IPADEZ --><script>/* Nov 26: on iPad the WebGL cut-out of Ezekiel's loop shows as a dark box. iPad gets the clean transparent still instead; when he talks (sound on), the plain video shows. Delete this block to undo. */
-(function(){var ua=navigator.userAgent,ipad=/iPad/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);if(!ipad)return;
- var st=document.createElement('style');st.textContent='.hero .ez .ez-m canvas.ezc{display:none!important}.hero .ez .ez-m img.ezi{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:right bottom;pointer-events:none}.hero .ez.talk .ez-m img.ezi{display:none}.hero .ez:not(.talk) .ez-m video{display:none!important}.hero .ez.talk .ez-m video{opacity:1!important}.hero .ez,.hero .ez .ez-m{background:transparent!important}';document.head.appendChild(st);
- var n=0;(function go(){var ez=document.getElementById('ez'),m=ez&&ez.querySelector('.ez-m'),v=document.getElementById('ezV');if(!v){if(++n<40)setTimeout(go,250);return}
-  if(!m.querySelector('img.ezi')){var i=new Image();i.className='ezi';i.alt='';i.src='/assets/ezekiel-black.webp';m.style.position='relative';m.appendChild(i)}
-  function upd(){ez.classList.toggle('talk',!v.muted&&!v.paused)}['play','pause','volumechange','ended'].forEach(function(e){v.addEventListener(e,upd)});setInterval(upd,1000)})();
+<!-- CT-IPADEZ --><script>/* Nov 26: iPad can't key Ezekiel's video, and its hidden layer is navy. Use "packed" MP4s (picture on top, outline mask below), drawn on a 2D canvas, the same way blogscoreboard.com does it. Delete this block and CT-IPADEZ-HEAD to undo. */
+(function(){if(!document.documentElement.classList.contains('ipad'))return;
+ var MAP={'/assets/ezekiel-loop.mp4':'/assets/ezekiel-loop-packed.mp4','/assets/ezekiel-intro.mp4':'/assets/ezekiel-intro-packed.mp4'};
+ var n=0;(function go(){var ez=document.getElementById('ez'),m=ez&&ez.querySelector('.ez-m'),v=document.getElementById('ezV');if(!v){if(++n<60)setTimeout(go,250);return}
+  function swap(){var s=v.getAttribute('src')||'';var k=s.split('?')[0];if(MAP[k]){var t=v.currentTime,pl=!v.paused;v.setAttribute('src',MAP[k]);if(pl){var p=v.play();if(p&&p.catch)p.catch(function(){})}}}
+  swap();new MutationObserver(swap).observe(v,{attributes:true,attributeFilter:['src']});
+  var c=document.createElement('canvas');c.className='pkc';m.appendChild(c);var x=c.getContext('2d'),o=document.createElement('canvas'),ox=o.getContext('2d',{willReadFrequently:true});
+  function draw(){var W=v.videoWidth,H=v.videoHeight>>1;if(!W||!H||(v.getAttribute('src')||'').indexOf('packed')<0)return;var sc=Math.min(1,480/W),w=Math.round(W*sc),h=Math.round(H*sc);
+   if(c.width!==w||c.height!==h){c.width=w;c.height=h;o.width=w;o.height=h*2}ox.drawImage(v,0,0,w,h*2);var a=ox.getImageData(0,0,w,h),b=ox.getImageData(0,h,w,h),p=a.data,q=b.data;for(var i=0;i<p.length;i+=4)p[i+3]=q[i];x.putImageData(a,0,0);ez.classList.add('pk')}
+  (function loop(){try{if(!v.paused&&!v.ended)draw()}catch(e){}requestAnimationFrame(loop)})();
+  v.addEventListener('loadeddata',function(){try{draw()}catch(e){}});
+ })();
 })();</script>
 </body>
 </html>
