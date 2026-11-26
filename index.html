@@ -431,6 +431,44 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
     <div class="pt"><div class="n">4</div><h3>Private until you say go</h3><p>Nothing goes live until you approve it. Want to see your preview?</p></div>
   </section>
 
+  <!-- CT-STORY (Nov 26): four-step story + old way vs new way. Self-contained; delete this block to remove. -->
+  <style>
+  .cs4{padding:16px 0 46px}.cs4 h2,.ovn h2{text-align:center;max-width:760px;margin:6px auto 10px}.cs4 .k,.ovn .k{text-align:center}
+  .cs4-sub{text-align:center;color:var(--mu);max-width:640px;margin:0 auto 26px}
+  .cs4-g{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}
+  .cs4-c{background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:22px 20px;position:relative}
+  .cs4-i{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:rgba(201,162,39,.14);margin-bottom:12px}
+  .cs4-c b{font:800 12px 'JetBrains Mono',monospace;color:var(--act);letter-spacing:.08em}
+  .cs4-c h3{margin:6px 0 8px;font-size:19px}.cs4-c p{margin:0 0 10px;color:var(--mu);font-size:15px}
+  .cs4-c q{display:block;font-weight:700;color:var(--tx);font-size:15px;quotes:none}
+  .cs4-c:not(:last-child)::after{content:"\203A";position:absolute;right:-12px;top:42px;font-size:26px;color:var(--act);font-weight:800}
+  .cs4 .btn{display:table;margin:24px auto 0}
+  .ovn{padding:10px 0 50px}
+  .ovn-g{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:900px;margin:18px auto 0}
+  .ovn-c{border-radius:18px;padding:22px 22px 18px;border:1px solid var(--ln)}
+  .ovn-o{background:var(--card);filter:grayscale(1);opacity:.82}
+  .ovn-n{background:var(--card);border-color:var(--act);box-shadow:0 10px 34px rgba(201,162,39,.18)}
+  .ovn-c h3{margin:0 0 12px;font-size:18px}.ovn-o h3{color:var(--mu)}
+  .ovn-c ul{list-style:none;margin:0;padding:0}.ovn-c li{padding:9px 0 9px 28px;border-top:1px solid var(--ln);position:relative;font-size:15px}
+  .ovn-o li::before{content:"\2715";position:absolute;left:4px;color:#b55}.ovn-n li::before{content:"\2713";position:absolute;left:4px;color:#2a9d5c;font-weight:800}
+  .ovn-l{text-align:center;font:800 20px Inter,sans-serif;margin:26px auto 6px;max-width:700px}
+  .ovn-q{text-align:center;color:var(--mu);margin:0 auto}.ovn .btn{display:table;margin:18px auto 0}
+  @media(max-width:860px){.cs4-g{grid-template-columns:1fr 1fr}.cs4-c:nth-child(2)::after{display:none}}
+  @media(max-width:560px){.cs4-g,.ovn-g{grid-template-columns:1fr}.cs4-c::after{display:none}}
+  </style>
+  <section class="cs4" id="story">
+    <p class="k">How a homeowner finds you</p>
+    <h2>Four steps from her worst night to your phone.</h2>
+    <p class="cs4-sub">This is what your homeowner goes through. Every step is a chance for her to find you, or someone else.</p>
+    <div class="cs4-g">
+      <div class="cs4-c"><div class="cs4-i">&#128167;</div><b>STEP 1</b><h3>She panics</h3><p>Water through the ceiling at 11 at night. She grabs her phone.</p><q>Who does she call first?</q></div>
+      <div class="cs4-c"><div class="cs4-i">&#128269;</div><b>STEP 2</b><h3>She Googles her pain</h3><p>Not "public adjuster." She types "insurance denied my roof" or "water coming through my ceiling."</p><q>Whose name comes up?</q></div>
+      <div class="cs4-c"><div class="cs4-i">&#128100;</div><b>STEP 3</b><h3>She finds you</h3><p>Your page answers her exact question. She sees your face, your video and your License Verified badge.</p><q>Who would she trust, you or a stranger with no page?</q></div>
+      <div class="cs4-c"><div class="cs4-i">&#128222;</div><b>STEP 4</b><h3>Your phone rings</h3><p>She taps call. Or she leaves her question while you're up on a roof, and ClaimTract follows up for you.</p><q>How many calls like that are you missing right now?</q></div>
+    </div>
+    <a class="btn" data-cta href="/free/build/?view=preview">See the page she'd find &rarr;</a>
+  </section>
+
   <section class="why">
     <p class="k">Why this is free</p>
     <h2>You shouldn't have to beg for somebody else's business.</h2>
@@ -439,6 +477,31 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
     <p>Most adjusters get one half-baked lead every few months, and when it's the only lead you've got, you end up bending over backwards for it. My goal is the opposite: adjusters with enough homeowners finding them that they can pick the claims they want, turn down the ones they don't, and walk in with their chest out. A page of your own is where that starts. Wouldn't it feel good to be the one choosing?</p>
     <p>The catch? There isn't one. No price, no countdown. What do you lose by looking?</p>
     <a class="btn" data-cta href="/free/build/?view=preview">See my website &rarr;</a>
+  </section>
+
+  <!-- CT-OVN (Nov 26): old way vs new way. Uses CSS from the CT-STORY block. Delete to remove. -->
+  <section class="ovn" id="oldnew">
+    <p class="k">Same adjuster. Two ways to work.</p>
+    <h2>The old way waits. The ClaimTract way gets found.</h2>
+    <div class="ovn-g">
+      <div class="ovn-c ovn-o"><h3>The old way</h3><ul>
+        <li>A business card and a handshake</li>
+        <li>Knocking doors and hoping someone's home</li>
+        <li>A Facebook page with three likes</li>
+        <li>A directory listing with no reviews</li>
+        <li>Waiting on roofers and plumbers for scraps</li>
+        <li>Your phone only rings when you call someone</li></ul></div>
+      <div class="ovn-c ovn-n"><h3>The ClaimTract way</h3><ul>
+        <li>A 13-page website that answers what homeowners search</li>
+        <li>A video card that introduces you before you knock</li>
+        <li>A License Verified badge that links to your state record</li>
+        <li>QR codes on your door tickets that play your video</li>
+        <li>Leads that land in your pipeline while you sleep</li>
+        <li>Homeowners call you, and you pick the claims you want</li></ul></div>
+    </div>
+    <p class="ovn-l">Same adjuster. Same skills. One of them gets found.</p>
+    <p class="ovn-q">Which one are you right now?</p>
+    <a class="btn" data-cta href="/free/build/?view=preview">Show me the new way &rarr;</a>
   </section>
 
   <section class="app">
@@ -598,6 +661,12 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
     <div class="dq"><button type="button">Can I take it down if I change my mind?</button><div class="da"><div>Yes. Nothing goes live until you approve it, and if you ever want it taken down after that, tell us and it comes down, no questions asked. You're never locked into a contract. Knowing you hold the off switch, why not take a look at your preview?<br><a data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></div></div>
     <div class="dq"><button type="button">Do you sell my information?</button><div class="da"><div>Never. I will never sell, rent or hand over an adjuster's information to anyone. It's used only inside the company to run and improve the service. Wouldn't you rather deal with a former adjuster who respects your privacy than another lead broker?<br><a data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></div></div>
     <div class="dq"><button type="button">What happens after I approve my website?</button><div class="da"><div>Your website goes live, so you can text the link, show the QR code, or send homeowners there before an appointment. You can use it on your phone like an app right away, with no surprise bill later. Ready to see what your website looks like before you decide?<br><a data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></div></div>
+    <!-- CT-FAQ+ (Nov 26): added questions. Delete these lines to remove. -->
+    <div class="dq"><button type="button">Will this get me in trouble with DFS?</button><div class="da"><div>ClaimTract never contacts a homeowner in your name. It's your own website, and every word on it is yours to approve before it goes live, the same as any site an adjuster builds for themselves. You know your rules better than anyone, and you stay in control of what your page says. Wouldn't you rather look at it and judge for yourself?<br><a data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">Do I have to write anything?</button><div class="da"><div>No. Your website comes already written, with your name and license details filled in. Add a photo and a few lines in your own words if you want it to sound more like you, but it works without them. How long would it take you to read through a page that's already done?<br><a data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">I already have a website. Why would I need this?</button><div class="da"><div>Most adjuster websites are a brochure: who you are and a phone number. Homeowners don't search for that. They search for their problem, like a denied roof or a ceiling stain, and your ClaimTract pages are built to answer those questions. Keep your site and link the two together. Wouldn't you want a page that shows up when she's searching her pain?<br><a data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">How is this different from Angi or a lead service?</button><div class="da"><div>Lead services sell the same homeowner to several people and charge you for each one. ClaimTract doesn't sell leads at all. Homeowners find your page, see your name, and call you directly, and nobody else gets that call. Which would you rather have, a lead you share or a homeowner who chose you?<br><a data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></div></div>
+    <div class="dq"><button type="button">Who owns the leads my page brings in?</button><div class="da"><div>You do. Every call, text and question goes straight to you and into your own Back office. We don't resell them, share them or route them to anyone else. If a homeowner picked you, shouldn't she reach you and only you?<br><a data-cta href="/free/build/?view=preview">See my website &rarr;</a></div></div></div>
     <button class="closeall" type="button" id="ca">&uarr; Close questions</button>
   </section>
 
