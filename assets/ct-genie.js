@@ -38,7 +38,7 @@ function hook(){document.addEventListener('click',function(e){var t=e.target.clo
  e.preventDefault();e.stopImmediatePropagation();busy=true;var o=mk();
  pour(o,still,true,650,function(){busy=false;pass=true;try{t.click()}finally{pass=false}var w=document.getElementById('wlk'),dn=false,rm=function(){if(dn)return;dn=true;setTimeout(function(){o.d.remove()},250)};if(w)w.addEventListener('load',function(){setTimeout(rm,500)});setTimeout(rm,2500)})},true)}
 function tapWait(){var c=document.createElement('div');c.id='tapgo';c.style.cssText='position:absolute;inset:0;z-index:510;cursor:pointer;background:transparent';c.setAttribute('data-track','Tap to start (phone)');app.appendChild(c);
- function go(){if(!c.parentNode)return;c.remove();try{parent.postMessage({ct:'started'},'*')}catch(e){}window.__ctTapped=1;var sp=document.getElementById('spl');if(sp&&!sp.classList.contains('off')&&typeof window.ctSplashEnd==='function'){window.ctSplashEnd();setTimeout(intro,500)}else intro()}
+ function go(){if(!c.parentNode)return;c.remove();try{parent.postMessage({ct:'started'},'*')}catch(e){}window.__ctTapped=1;var sp=document.getElementById('spl');if(sp&&!sp.classList.contains('off')&&typeof window.ctSplashTap==='function'){window.ctSplashTap(intro)}else if(sp&&!sp.classList.contains('off')&&typeof window.ctSplashEnd==='function'){window.ctSplashEnd();setTimeout(intro,500)}else intro()}
  c.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();go()});
  addEventListener('message',function(e){if(e.data&&e.data.ct==='start')go()})}
 function start(){prep();hook();

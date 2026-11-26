@@ -365,7 +365,7 @@ html.saf.ezk .hero .ez .ez-m video{opacity:0!important;filter:none!important}
 @media (max-width:900px){.mphone{padding-top:96px!important}.bapp-ph .tts{left:auto;right:-24px;top:-84px;width:170px;height:auto}.bapp-ph .tts b{position:static;display:block;font-size:20px;margin-left:30px;transform:rotate(-6deg)}.bapp-ph .tts .tw{display:none}.bapp-ph .tts .tm{display:block;width:120px;height:auto;transform:rotate(112deg);margin:16px 0 0 20px}}
 </style><!-- CT-TAP -->
 <script src="/assets/ct-tap.js?v=3" defer></script><!-- CT-TAP-LOG --><script src="/assets/ct-pixels.js?v=2" defer></script><!-- CT-PIXELS -->
-</head>
+<style id="ct-realphone">.bapp-ph iframe{position:absolute;left:11px;top:11px;width:390px!important;height:840px;max-width:none;transform-origin:0 0;border-radius:50px!important}</style></head>
 <body>
 <script>(function(){if(/^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent))document.documentElement.classList.add('saf')})();</script>
 <section class="hero">
@@ -974,5 +974,5 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
  })();
 })();</script>
 <script>addEventListener('message',function(e){if(e.data&&e.data.ct==='started'){var m=document.querySelector('.mphone');if(m)m.classList.add('go')}});</script><!-- CT-TAP-JS -->
-</body>
+<script>/* the demo phone renders the app at a real phone width (390px) and shrinks the whole device, like a mockup (Ezekiel 11/27) */(function(){function fit(){document.querySelectorAll('.bapp-ph').forEach(function(ph){var f=ph.querySelector('iframe');if(!f)return;var w=ph.clientWidth-22,h=ph.clientHeight-22;if(w<50)return;var s=w/390;f.style.height=Math.round(h/s)+'px';f.style.transform='scale('+s+')'})}fit();addEventListener('resize',fit);addEventListener('load',fit);if(window.ResizeObserver)document.querySelectorAll('.bapp-ph').forEach(function(ph){new ResizeObserver(fit).observe(ph)})})()</script></body>
 </html>
