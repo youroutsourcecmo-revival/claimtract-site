@@ -1,11 +1,11 @@
-/* CT-GENIE: after the logo splash, Sophia's tools video plays once per adjuster, then pours (Mac Genie) into the
+/* CT-GENIE: after the logo splash, Sophia's welcome + tools video plays on every visit, then pours (Mac Genie) into the
    Sophia tab. Tapping Sophia pours her back out of the tab before the walk opens. */
 (function(){
-var SRC='/assets/sophia-tools.mp4',Q=new URLSearchParams(location.search),
+var SRC='/assets/sophia-tools.mp4?v=2',Q=new URLSearchParams(location.search),
  ID=Q.get('id')||Q.get('uid')||Q.get('c')||'anon',K='ct_sx_tools_'+ID,app=document.getElementById('app');
 if(!app)return;
 var st=document.createElement('style');st.textContent='#sgx{position:absolute;inset:0;z-index:94;pointer-events:none}#sgx canvas{position:absolute;inset:0;width:100%;height:100%}#sgx .gb{position:absolute;right:10px;top:34px;display:flex;gap:6px;pointer-events:auto}#sgx .gb button{border:0;border-radius:99px;background:rgba(11,31,58,.82);color:#fff;font:700 10px Inter;padding:6px 11px;cursor:pointer}[data-tab=sophia].gpul svg,[data-tab=sophia].gpul i:first-child{animation:gpul .45s 2}@keyframes gpul{50%{transform:scale(1.55)}}';document.head.appendChild(st);
-function seen(){try{return localStorage.getItem(K)==='1'}catch(e){return false}}
+function seen(){return false} /* plays every visit (Ezekiel 11/26) */
 function mark(){try{localStorage.setItem(K,'1')}catch(e){}}
 function tabEl(){var a=document.querySelectorAll('[data-tab="sophia"]'),b=null;for(var i=0;i<a.length;i++){var r=a[i].getBoundingClientRect();if(r.width>0&&r.height>0)b=a[i]}return b}
 function navH(){var t=tabEl(),n=t&&t.closest('.nav'),A=app.getBoundingClientRect();return n?Math.max(40,A.bottom-n.getBoundingClientRect().top):58}
