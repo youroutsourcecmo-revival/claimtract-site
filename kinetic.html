@@ -2,5 +2,5 @@
 <body style="margin:0;background:#000;color:#fff;font:16px system-ui">
 <video id=v controls playsinline autoplay style="width:100%;max-height:80vh;background:#000"></video>
 <div id=b style="display:flex;flex-wrap:wrap;gap:8px;padding:12px"></div>
-<script>var F=['847255_mx_013','847274_mx_014','847276_mx_015','847278_mx_016','847280_mx_017','847282_mx_018','847284_mx_019'],B='https://avatar-maker.s3.amazonaws.com/files/e0a11a35b8a37815cca3bbbf26dd9819/data/videos/',v=document.getElementById('v'),b=document.getElementById('b');
+<script>var F=['mx_013','mx_014','mx_015','mx_016','mx_017','mx_018','mx_019'],B='/assets/mx/',v=document.getElementById('v'),b=document.getElementById('b');
 F.forEach(function(f,i){var x=document.createElement('button');x.textContent='Video '+(i+1);x.style.cssText='padding:10px 14px;border:0;border-radius:10px;background:#F5A524;color:#111;font:700 15px system-ui';x.onclick=function(){v.src=B+f+'.mp4';v.play()};b.appendChild(x)});v.src=B+F[0]+'.mp4';</script>
