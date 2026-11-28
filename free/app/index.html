@@ -498,7 +498,7 @@ function alertRow(a,i){var k=a[a.length-1];if(String(a[5]).indexOf('a_')===0)a=a
 
 
 var V={
-home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedric</b><span class="smp">SAMPLE</span></div><span class="hdr"><button class="alx" data-alex="home" aria-label="Ask Alex, your chief of staff"><img src="/assets/toon/alex-head.jpg" alt=""></button><img src="/assets/ct-shield.png" alt="ClaimTract"></span></div><div class="scr">'+dueCards()+
+home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedric</b><span class="smp">SAMPLE</span></div><span class="hdr"><button class="alx" data-alex="home" aria-label="Ask Esther, your chief of staff"><img src="/assets/toon/esther-head.jpg" alt=""></button><img src="/assets/ct-shield.png" alt="ClaimTract"></span></div><div class="scr">'+dueCards()+
  '<div class="card" style="padding:10px 12px;margin-bottom:8px"><div class="avl '+(avail||sched.on?'on':'')+'" style="padding:0;margin:0"><span class="d"></span><div><b>'+(avail?'Available now':sched.on?'Taking calls '+sched.from+' to '+sched.to:'Not taking calls')+'</b><small>'+(avail?'Your website shows a green "taking calls" badge':sched.on?'Badge turns on by itself during these hours':'Badge hidden on your website')+'</small></div></div>'+
  '<div class="seg" style="margin:9px 0 0"><span class="'+(!avail&&!sched.on?'on':'')+'" data-act="am" data-m="off">Off</span><span class="'+(avail?'on':'')+'" data-act="am" data-m="now">Now</span><span class="'+(sched.on&&!avail?'on':'')+'" data-act="am" data-m="sched">Scheduled</span></div></div>'+
  '<div class="card avl on" data-go="livechat" style="cursor:pointer"><span class="ic" style="margin:0;width:28px;height:28px;background:#122119;color:#5BD48A">'+I('msg',14)+'</span><div><b>Live chat</b><small>2 homeowners on your website right now</small></div>'+CH+'</div>'+
@@ -1824,6 +1824,6 @@ boot();
  var tm=null;document.addEventListener('scroll',function(){b.classList.add('hid');clearTimeout(tm);tm=setTimeout(function(){b.classList.remove('hid')},700)},true);
  setInterval(paint,1500)})();</script>
 <style>.xpr{width:100%;display:flex;align-items:center;gap:10px;border:1px solid rgba(127,127,127,.25);border-radius:12px;background:transparent;color:inherit;font:600 13px Inter,system-ui,sans-serif;padding:11px 12px;margin:0 0 10px;cursor:pointer;text-align:left}.xpr i{flex:none;width:34px;height:20px;border-radius:99px;background:#555;position:relative;transition:background .2s}.xpr i::after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}.xpr.on i{background:#F5A524}.xpr.on i::after{transform:translateX(14px)}.xpr b{font-weight:800}</style><!-- CT-XP-FAB -->
-<script src="/assets/ct-alex.js?v=14" defer></script>
+<script src="/assets/ct-alex.js?v=15" defer></script>
 <script src="/assets/ct-genie.js?v=13" defer></script><!-- CT-GENIE -->
 </body></html>
