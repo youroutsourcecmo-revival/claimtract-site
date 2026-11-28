@@ -65,7 +65,7 @@ var CAT=[
 ];
 function catRows(L){var g='';return L.map(function(c){var h=(c[0]!==g?'<div class="ctal-ch">'+esc(c[0])+'</div>':'');g=c[0];return h+'<button type="button" class="ctal-r" data-algo="'+c[1]+'"><b>'+esc(c[2])+'</b><small>'+esc(c[3])+'</small></button>'}).join('')}
 function catFind(q){q=q.toLowerCase().trim();if(!q)return [];var w=q.split(/\s+/);return CAT.filter(function(c){var t=(c[2]+' '+c[3]+' '+c[4]).toLowerCase();return w.every(function(x){return t.indexOf(x)>=0})}).sort(function(a,b){var sc=function(c){var t=c[2].toLowerCase(),d=c[3].toLowerCase(),n=0;w.forEach(function(x){if(t.indexOf(x)>=0)n+=3;if(d.indexOf(x)>=0)n+=2});return n};return sc(b)-sc(a)}).slice(0,5)}
-function catShow(){var m=box&&box.querySelector('.ctal-m');if(!m)return;var d=document.createElement('div');d.className='ctal-b ctal-cat';d.innerHTML='<div class="ctal-ct">Everything in ClaimTract. Tap to jump there.</div>'+catRows(CAT);m.appendChild(d);m.scrollTop=m.scrollHeight}
+function catShow(){var m=box&&box.querySelector('.ctal-m');if(!m)return;var d=document.createElement('div');d.className='ctal-b ctal-cat';d.innerHTML='<div class="ctal-ct">Everything in ClaimTract. Tap to jump there.</div>'+catRows(CAT);m.appendChild(d);m.scrollTop=Math.max(0,d.offsetTop-m.offsetTop-60)}
 
 var DEF=null;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();DEF=e});
 function standalone(){try{return window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(e){return false}}
@@ -73,16 +73,16 @@ function hsHow(){if(DEF){DEF.prompt();DEF.userChoice.then(function(r){if(r&&r.ou
  var ios=/iphone|ipad|ipod/i.test(navigator.userAgent);bub(ios?'On your iPhone: tap the Share button at the bottom of Safari (the square with the arrow), scroll down, tap Add to Home Screen, then Add. Then open me from your home screen and allow notifications.':'Tap the three dots at the top right of Chrome, then Add to Home screen (or Install app). Then open me from your home screen and allow notifications.','tip')}
 function css(){if(document.getElementById('ctal-css'))return;var s=document.createElement('style');s.id='ctal-css';s.textContent=
 '.ctal{position:fixed;inset:0;z-index:2147483500;background:rgba(0,0,0,.35);display:flex;align-items:flex-end;justify-content:center}'+
-'.ctal-s{width:100%;max-width:520px;height:min(86vh,680px);background:#EFEAE2;border-radius:16px 16px 0 0;display:flex;flex-direction:column;overflow:hidden;font-family:Inter,system-ui,sans-serif;color:#111}.ctal-s *{color:inherit}.ctal-go{color:#111!important}.ctal-f button{color:#fff!important}.ctal-h small{color:#777!important}'+
+'.ctal-s{width:100%;max-width:min(520px,100vw);height:min(86vh,680px);background:#EFEAE2;border-radius:16px 16px 0 0;display:flex;flex-direction:column;overflow:hidden;font-family:Inter,system-ui,sans-serif;color:#111}.ctal-s *{color:inherit}.ctal-go{color:#111!important}.ctal-f button{color:#fff!important}.ctal-h small{color:#777!important}'+
 '.ctal-h{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-bottom:1px solid #e5e5e5}'+
 '.ctal-h img{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:50% 40%}.ctal-h b{display:block;font-size:14px}.ctal-h small{display:block;font-size:11px;color:#777}'+
 '.ctal-x{margin-left:auto;width:30px;height:30px;border:0;border-radius:50%;background:#f0f0f0;font-size:16px;cursor:pointer}'+
-'.ctal-m{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:6px}'+
+'.ctal-m{flex:1;overflow-y:auto;overflow-x:hidden;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0}.ctal-m>*{flex-shrink:0}'+
 '.ctal-b{max-width:84%;padding:7px 10px;border-radius:10px;font-size:13.5px;line-height:1.4;background:#fff;align-self:flex-start;box-shadow:0 1px 1px rgba(0,0,0,.06)}'+
 '.ctal-b.me{background:#D9FDD3;align-self:flex-end}.ctal-b.tip{background:#FFF6D6}'+
 '.ctal-go{display:inline-block;margin-top:6px;height:28px;padding:0 12px;border:0;border-radius:14px;background:#F5A524;color:#111;font:700 12.5px Inter,system-ui;cursor:pointer}'+
 '.ctal-f{display:flex;gap:6px;padding:8px;background:#F0F0F0;padding-bottom:calc(8px + env(safe-area-inset-bottom))}'+
-'.ctal-f input{flex:1;min-width:0;height:38px;border:0;border-radius:19px;padding:0 14px;font:500 14px Inter,system-ui;background:#fff}'+
+'.ctal-f input{flex:1;min-width:0;height:38px;border:0;border-radius:19px;padding:0 14px;font:500 16px Inter,system-ui;background:#fff}'+
 '.ctal-f button{width:38px;height:38px;border:0;border-radius:50%;background:#111;color:#fff;font-size:16px;cursor:pointer}'+
 '.ctal-q[hidden]{display:none!important}.ctal-q{display:flex;flex-wrap:wrap;gap:6px;padding:0 10px 8px}.ctal-q button{height:28px;padding:0 10px;border:1px solid #d5d5d5;border-radius:14px;background:#fff;font:600 12px Inter,system-ui;cursor:pointer}';
 s.textContent+='.ctal-cat{max-width:94%;padding:4px 0!important;overflow:hidden}.ctal-ct{padding:6px 10px 4px;font-size:12.5px;color:#555!important}.ctal-ch{padding:8px 10px 2px;font:700 10.5px Inter,system-ui;letter-spacing:.06em;text-transform:uppercase;color:#b08417!important}.ctal-r{display:block;width:100%;text-align:left;border:0;border-top:1px solid #f0f0f0;background:none;padding:7px 10px;cursor:pointer;font-family:inherit;border-radius:0}.ctal-r b{display:block;font-size:13.5px}.ctal-r small{display:block;font-size:12px;color:#666!important;line-height:1.3;font-weight:500}.ctal-sg{background:#fff;border-top:1px solid #e5e5e5;max-height:40vh;overflow-y:auto}.ctal-sg[hidden]{display:none!important}';
