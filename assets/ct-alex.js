@@ -92,7 +92,7 @@ function answer(q,from){if(busy)return;busy=true;var qq=box&&box.querySelector('
   else{bub('Good question'+cn()+'. I don\'t have that one yet, so I\'ve passed it to the team. I\'ll come back to you right here with the answer.','');
    try{if(s.R&&s.ME)C().api('POST','/api/app/alex/unknown',{q:q.slice(0,500),screen:from||''})}catch(e){}ev('alex_unknown',{q:q.slice(0,200),screen:from||''})}
   save()};
- if(/^(show me )?(everything|all|menu|list)$/i.test(q.trim())){busy=false;if(typing)typing.remove();catShow();save();return}
+ if(/^(show me )?(everything|all|menu|list)$|what can i (say|ask|do)|what do you (do|know)|help$/i.test(q.trim().replace(/[?!.]/g,''))){busy=false;if(typing)typing.remove();catShow();save();return}
  var sm=small(q);if(sm){setTimeout(function(){busy=false;if(typing)typing.remove();bub(sm,'');save()},350);return}
  var loc=function(){var m=local(q);done(m?{answer:m.a,go:m.go,how:m.h,src:'map'}:null)};
  if(s.R&&s.ME&&C().api){var t=setTimeout(function(){t=0;loc()},9000);
@@ -105,13 +105,13 @@ function open(from){css();if(box)return;box=document.createElement('div');box.cl
  var L=null;try{L=JSON.parse(localStorage.getItem(K_LOG)||'null')}catch(e){}
  if(L&&L.length)L.forEach(function(x){var d=bub(x[1],'');d.className=x[0]});
  var seen=false;try{seen=localStorage.getItem(K_INTRO)==='1'}catch(e){}
- if(!seen){bub('Hi'+(first()?' '+first():'')+', I\'m Alex, your chief of staff. Inside your back office, I\'m the chief of staff you didn\'t know you needed.','');bub('I know where everything is, what it does and how I\'d use it if I were you. Ask me anything. If I don\'t know, I\'ll find out and come back to you.','');bub('Here\'s everything in your back office. If you forget where something is, just start typing it.','');catShow();box.__cat=1;try{localStorage.setItem(K_INTRO,'1')}catch(e){}ev('alex_intro',{})}
- else if(!L||!L.length)bub('What can I help you find'+cn()+'?','');
- var Q=['Show me everything','How do door tickets work?','What do I get with Pro?','How do I unlock sharing?','Who watched my cards?'];
+ if(!seen){bub('Hi'+(first()?' '+first():'')+', I\'m Alex, your chief of staff. Inside your back office, I\'m the chief of staff you didn\'t know you needed.','');bub('I know where everything is, what it does and how I\'d use it if I were you. If I don\'t know something, I\'ll find out and come back to you.','');bub('Not sure what to ask? Just type "what can I say" and I\'ll show you everything in your back office.','');try{localStorage.setItem(K_INTRO,'1')}catch(e){}ev('alex_intro',{})}
+ else if(!L||!L.length)bub('What can I help you find'+cn()+'? Type "what can I say" to see everything.','');
+ var Q=['What can I say?'];
  if(box.__cat)box.querySelector('.ctal-q').hidden=true;box.querySelector('.ctal-q').innerHTML=Q.map(function(x){return '<button type="button">'+esc(x)+'</button>'}).join('');
  box.addEventListener('click',function(e){if(e.target===box||e.target.closest('.ctal-x')){close();return}
   var g=e.target.closest('[data-algo]');if(g){var k=g.dataset.algo;close();try{if(k==='introgate'&&window.ctIntroGate)window.ctIntroGate(function(){});else if(k==='cardvideos'&&window.ctCardVideos)window.ctCardVideos();else C().go(k)}catch(x){}ev('alex_go',{to:k});return}
-  var q=e.target.closest('.ctal-q button');if(q){if(/everything/i.test(q.textContent)){catShow();return}answer(q.textContent,from)}});
+  var q=e.target.closest('.ctal-q button');if(q){if(/everything|what can i say/i.test(q.textContent)){bub(q.textContent,'me');catShow();save();return}answer(q.textContent,from)}});
  box.querySelector('.ctal-f input').addEventListener('input',function(){var sg=box.querySelector('.ctal-sg'),L=catFind(this.value);if(!L.length){sg.hidden=true;sg.innerHTML='';return}sg.innerHTML=catRows(L);sg.hidden=false});
  box.querySelector('form').addEventListener('submit',function(e){e.preventDefault();var i=box.querySelector('input'),v=i.value.trim();if(!v)return;i.value='';var sg=box.querySelector('.ctal-sg');sg.hidden=true;answer(v,from)});
  try{var S2=st();if(S2.R&&S2.ME)C().api('GET','/api/app/alex/inbox').then(function(j){if(j&&j.ok&&j.items&&box)j.items.forEach(function(it){bub('Following up on your question about '+(it.topic||'that')+': '+it.answer,'',it.go||null)});if(j&&j.items&&j.items.length)save()}).catch(function(){})}catch(e){}
