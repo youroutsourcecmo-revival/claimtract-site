@@ -41,7 +41,7 @@ function css(){if(document.getElementById('ctal-css'))return;var s=document.crea
 '.ctal{position:fixed;inset:0;z-index:2147483500;background:rgba(0,0,0,.35);display:flex;align-items:flex-end;justify-content:center}'+
 '.ctal-s{width:100%;max-width:520px;height:min(86vh,680px);background:#EFEAE2;border-radius:16px 16px 0 0;display:flex;flex-direction:column;overflow:hidden;font-family:Inter,system-ui,sans-serif;color:#111}.ctal-s *{color:inherit}.ctal-go{color:#111!important}.ctal-f button{color:#fff!important}.ctal-h small{color:#777!important}'+
 '.ctal-h{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-bottom:1px solid #e5e5e5}'+
-'.ctal-h img{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:30% 20%}.ctal-h b{display:block;font-size:14px}.ctal-h small{display:block;font-size:11px;color:#777}'+
+'.ctal-h img{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:50% 40%}.ctal-h b{display:block;font-size:14px}.ctal-h small{display:block;font-size:11px;color:#777}'+
 '.ctal-x{margin-left:auto;width:30px;height:30px;border:0;border-radius:50%;background:#f0f0f0;font-size:16px;cursor:pointer}'+
 '.ctal-m{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:6px}'+
 '.ctal-b{max-width:84%;padding:7px 10px;border-radius:10px;font-size:13.5px;line-height:1.4;background:#fff;align-self:flex-start;box-shadow:0 1px 1px rgba(0,0,0,.06)}'+
@@ -70,7 +70,7 @@ function answer(q,from){if(busy)return;busy=true;var qq=box&&box.querySelector('
  else setTimeout(loc,450)}
 
 function open(from){css();if(box)return;box=document.createElement('div');box.className='ctal';
- box.innerHTML='<div class="ctal-s" role="dialog" aria-label="Ask Alex"><div class="ctal-h"><img src="/assets/toon/alex-welcome.jpg" alt=""><div><b>Alex</b><small>Your chief of staff</small></div><button class="ctal-x" aria-label="Close">&times;</button></div><div class="ctal-m"></div><div class="ctal-q"></div><form class="ctal-f"><input placeholder="Ask Alex anything" maxlength="300" enterkeyhint="send"><button aria-label="Send">&#10148;</button></form></div>';
+ box.innerHTML='<div class="ctal-s" role="dialog" aria-label="Ask Alex"><div class="ctal-h"><img src="/assets/toon/alex-head.jpg" alt=""><div><b>Alex</b><small>Your chief of staff</small></div><button class="ctal-x" aria-label="Close">&times;</button></div><div class="ctal-m"></div><div class="ctal-q"></div><form class="ctal-f"><input placeholder="Ask Alex anything" maxlength="300" enterkeyhint="send"><button aria-label="Send">&#10148;</button></form></div>';
  document.body.appendChild(box);
  var L=null;try{L=JSON.parse(localStorage.getItem(K_LOG)||'null')}catch(e){}
  if(L&&L.length)L.forEach(function(x){var d=bub(x[1],'');d.className=x[0]});
