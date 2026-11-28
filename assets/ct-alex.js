@@ -49,6 +49,7 @@ var CAT=[
  ['Get found','qr','Your QR code','Put your website on signs, trucks and tickets','qr code sign truck'],
  ['Get the call','doors','Door tickets','The door knocks for you at dawn','door ticket hanger batch print'],
  ['Get the call','share','Text a homeowner','Know the second she opens your message','text message share send card running late thanks'],
+ ['Get the call','cardvideos','Your message videos','A video of you on every card: running late, thanks for meeting, reminder, checking in, referral. Scripts included.','video videos card running late thanks reminder checking referral script record link paste'],
  ['Get the call','livechat','Live chat','Homeowners ask questions on your website any time','chat live nathan'],
  ['Get the call','handout','Printed handout','One page with your QR to leave on the kitchen table','print handout'],
  ['Win the visit','prep','Prep page','Homeowners show up with the right papers','prep booking appointment papers'],
@@ -62,7 +63,7 @@ var CAT=[
  ['Grow','plans','\u{1F451} ClaimTract Pro','Your assistant picks up while you’re on a roof','pro upgrade plans crown trial']
 ];
 function catRows(L){var g='';return L.map(function(c){var h=(c[0]!==g?'<div class="ctal-ch">'+esc(c[0])+'</div>':'');g=c[0];return h+'<button type="button" class="ctal-r" data-algo="'+c[1]+'"><b>'+esc(c[2])+'</b><small>'+esc(c[3])+'</small></button>'}).join('')}
-function catFind(q){q=q.toLowerCase().trim();if(!q)return [];var w=q.split(/\s+/);return CAT.filter(function(c){var t=(c[2]+' '+c[3]+' '+c[4]).toLowerCase();return w.every(function(x){return t.indexOf(x)>=0})}).sort(function(a,b){var A=a[2].toLowerCase().indexOf(w[0])>=0?0:1,B=b[2].toLowerCase().indexOf(w[0])>=0?0:1;return A-B}).slice(0,5)}
+function catFind(q){q=q.toLowerCase().trim();if(!q)return [];var w=q.split(/\s+/);return CAT.filter(function(c){var t=(c[2]+' '+c[3]+' '+c[4]).toLowerCase();return w.every(function(x){return t.indexOf(x)>=0})}).sort(function(a,b){var sc=function(c){var t=c[2].toLowerCase(),d=c[3].toLowerCase(),n=0;w.forEach(function(x){if(t.indexOf(x)>=0)n+=3;if(d.indexOf(x)>=0)n+=2});return n};return sc(b)-sc(a)}).slice(0,5)}
 function catShow(){var m=box&&box.querySelector('.ctal-m');if(!m)return;var d=document.createElement('div');d.className='ctal-b ctal-cat';d.innerHTML='<div class="ctal-ct">Everything in ClaimTract. Tap to jump there.</div>'+catRows(CAT);m.appendChild(d);m.scrollTop=m.scrollHeight}
 function css(){if(document.getElementById('ctal-css'))return;var s=document.createElement('style');s.id='ctal-css';s.textContent=
 '.ctal{position:fixed;inset:0;z-index:2147483500;background:rgba(0,0,0,.35);display:flex;align-items:flex-end;justify-content:center}'+
@@ -109,7 +110,7 @@ function open(from){css();if(box)return;box=document.createElement('div');box.cl
  var Q=['Show me everything','How do door tickets work?','What do I get with Pro?','How do I unlock sharing?','Who watched my cards?'];
  if(box.__cat)box.querySelector('.ctal-q').hidden=true;box.querySelector('.ctal-q').innerHTML=Q.map(function(x){return '<button type="button">'+esc(x)+'</button>'}).join('');
  box.addEventListener('click',function(e){if(e.target===box||e.target.closest('.ctal-x')){close();return}
-  var g=e.target.closest('[data-algo]');if(g){var k=g.dataset.algo;close();try{if(k==='introgate'&&window.ctIntroGate)window.ctIntroGate(function(){});else C().go(k)}catch(x){}ev('alex_go',{to:k});return}
+  var g=e.target.closest('[data-algo]');if(g){var k=g.dataset.algo;close();try{if(k==='introgate'&&window.ctIntroGate)window.ctIntroGate(function(){});else if(k==='cardvideos'&&window.ctCardVideos)window.ctCardVideos();else C().go(k)}catch(x){}ev('alex_go',{to:k});return}
   var q=e.target.closest('.ctal-q button');if(q){if(/everything/i.test(q.textContent)){catShow();return}answer(q.textContent,from)}});
  box.querySelector('.ctal-f input').addEventListener('input',function(){var sg=box.querySelector('.ctal-sg'),L=catFind(this.value);if(!L.length){sg.hidden=true;sg.innerHTML='';return}sg.innerHTML=catRows(L);sg.hidden=false});
  box.querySelector('form').addEventListener('submit',function(e){e.preventDefault();var i=box.querySelector('input'),v=i.value.trim();if(!v)return;i.value='';var sg=box.querySelector('.ctal-sg');sg.hidden=true;answer(v,from)});
