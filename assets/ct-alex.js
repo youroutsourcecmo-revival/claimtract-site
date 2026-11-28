@@ -19,7 +19,7 @@ var MAP=[
  {k:'referral referrals earn money 25 commission made with claimtract',go:'earn',a:'Your referrals screen shows adjusters who signed up through you. You earn $25 a month for each paying one.',h:''},
  {k:'website page site mypage my page link url',go:'mypage',a:'Your website is the page homeowners land on from your cards, tickets and QR code. It has your video, your answers and your Call and Text buttons.',h:'Share it in every text. A homeowner who reads you for a minute already trusts you before you pick up.'},
  {k:'edit change photo headshot name bio license number update profile',go:'edit',a:'You change your name, photo and details under Edit, from your Page tab.',h:'Use a clear, friendly headshot. It sits on every card a homeowner sees.'},
- {k:'video videos youtube record intro welcome unlock sharing',go:'mypage',a:'Your own video is what unlocks sharing. Read the script, record it in your own words, upload it to YouTube as unlisted, and paste the link. Homeowners see your face before they meet you.',h:'Keep it under a minute and look at the lens. Sincere beats polished.'},
+ {k:'video videos youtube record intro welcome unlock sharing script link paste',go:'introgate',a:'Your own video is what unlocks sharing. Read the script, record it in your own words, upload it to YouTube as unlisted, and paste the link. The script and the paste box are right here. Homeowners see your face before they meet you.',h:'Keep it under a minute and look at the lens. Sincere beats polished.'},
  {k:'live chat chat nathan bubble website chat',go:'livechat',a:'Live chat is the bubble on your website. Homeowners can ask questions there any time.',h:''},
  {k:'claim upload claims article articles write posts facebook instagram google',go:'crm',a:'Upload a claim and Sophia turns it into an article on your website, plus Facebook, Instagram and Google posts, with private details taken out.',h:'Start with your best claim story. Every one becomes a page a homeowner nearby can find on Google.'},
  {k:'pipeline crm leads lead contacts homeowners list follow up',go:'crm',a:'Your pipeline holds every homeowner who reached out, with where they came from.',h:'Work it top to bottom every morning before you get on a roof.'},
@@ -44,6 +44,8 @@ var CAT=[
  ['Get found','articles','Your answer pages','Your answers show up when neighbors search Google','articles answers google seo posts'],
  ['Get found','crm','Turn a claim into content','Sophia writes the article and the Facebook, Instagram and Google posts','upload claim sophia write facebook instagram'],
  ['Get found','snap','Snap and post','Take a photo and post it to Facebook or Instagram your way','snap photo post facebook instagram'],
+ ['Get found','introgate','Your intro video: script and link','Read the script, record it, paste your YouTube link here. It unlocks sharing.','video script record youtube link paste intro unlock sharing'],
+ ['Get found','video','Your videos','The videos on your website, and which one is featured','videos featured youtube'],
  ['Get found','qr','Your QR code','Put your website on signs, trucks and tickets','qr code sign truck'],
  ['Get the call','doors','Door tickets','The door knocks for you at dawn','door ticket hanger batch print'],
  ['Get the call','share','Text a homeowner','Know the second she opens your message','text message share send card running late thanks'],
@@ -107,7 +109,7 @@ function open(from){css();if(box)return;box=document.createElement('div');box.cl
  var Q=['Show me everything','How do door tickets work?','What do I get with Pro?','How do I unlock sharing?','Who watched my cards?'];
  if(box.__cat)box.querySelector('.ctal-q').hidden=true;box.querySelector('.ctal-q').innerHTML=Q.map(function(x){return '<button type="button">'+esc(x)+'</button>'}).join('');
  box.addEventListener('click',function(e){if(e.target===box||e.target.closest('.ctal-x')){close();return}
-  var g=e.target.closest('[data-algo]');if(g){var k=g.dataset.algo;close();try{C().go(k)}catch(x){}ev('alex_go',{to:k});return}
+  var g=e.target.closest('[data-algo]');if(g){var k=g.dataset.algo;close();try{if(k==='introgate'&&window.ctIntroGate)window.ctIntroGate(function(){});else C().go(k)}catch(x){}ev('alex_go',{to:k});return}
   var q=e.target.closest('.ctal-q button');if(q){if(/everything/i.test(q.textContent)){catShow();return}answer(q.textContent,from)}});
  box.querySelector('.ctal-f input').addEventListener('input',function(){var sg=box.querySelector('.ctal-sg'),L=catFind(this.value);if(!L.length){sg.hidden=true;sg.innerHTML='';return}sg.innerHTML=catRows(L);sg.hidden=false});
  box.querySelector('form').addEventListener('submit',function(e){e.preventDefault();var i=box.querySelector('input'),v=i.value.trim();if(!v)return;i.value='';var sg=box.querySelector('.ctal-sg');sg.hidden=true;answer(v,from)});
