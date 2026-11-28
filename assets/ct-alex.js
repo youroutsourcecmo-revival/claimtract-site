@@ -107,7 +107,7 @@ function answer(q,from){if(busy)return;busy=true;var qq=box&&box.querySelector('
  else setTimeout(loc,450)}
 
 function open(from){css();if(box)return;box=document.createElement('div');box.className='ctal';
- box.innerHTML='<div class="ctal-s" role="dialog" aria-label="Ask Alex"><div class="ctal-h"><img src="/assets/toon/alex-head.jpg" alt=""><div><b>Alex</b><small>Your chief of staff</small></div><button class="ctal-x" aria-label="Close">&times;</button></div><div class="ctal-m"></div><div class="ctal-q"></div><div class="ctal-sg" hidden></div><form class="ctal-f"><input placeholder="Ask Alex anything" maxlength="300" enterkeyhint="send"><button aria-label="Send">&#10148;</button></form></div>';
+ box.innerHTML='<div class="ctal-s" role="dialog" aria-label="Ask Alex"><div class="ctal-h"><img src="/assets/toon/alex-head.jpg" alt=""><div><b>Alex</b><small>Your chief of staff</small></div><button class="ctal-x" aria-label="Close">&times;</button></div><div class="ctal-m"></div><div class="ctal-q"></div><div class="ctal-sg" hidden></div><form class="ctal-f"><input placeholder="Ask Alex about the ClaimTract app" maxlength="300" enterkeyhint="send"><button aria-label="Send">&#10148;</button></form></div>';
  document.body.appendChild(box);
  var L=null;try{L=JSON.parse(localStorage.getItem(K_LOG)||'null')}catch(e){}
  if(L&&L.length)L.forEach(function(x){var d=bub(x[1],'');d.className=x[0]});
