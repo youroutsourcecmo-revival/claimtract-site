@@ -1653,7 +1653,7 @@ function ctQrCards(D){var q=null;try{q=qrcode(0,'M');q.addData(D.url);q.make()}c
   host.appendChild(o);requestAnimationFrame(function(){requestAnimationFrame(function(){o.classList.add('in')})});
   o.querySelector('.tkx').addEventListener('click',function(e){e.stopPropagation();close()});o.querySelector('.tksk').addEventListener('click',function(e){e.stopPropagation();try{vv&&vv.pause()}catch(_){}try{av&&av.pause()}catch(_){}ended.v=ended.a=1;maybeEnd();try{window.ctLog&&window.ctLog('video_skip',{what:'door ticket lesson'})}catch(_){}});
   o.querySelector('.tkhb').addEventListener('click',function(){setTimeout(close,50)});
-  /* tap the big code: open the real page a homeowner lands on after scanning (one kinetic video per visit) (Ezekiel 11/27) */
+  /* tap the big code: open the real page a homeowner lands on after scanning (the cartoon plays) (Ezekiel 11/27) */
   var kvb=o.querySelector('.tkv');
   o.querySelector('.tkq').addEventListener('click',function(e){if(!o.classList.contains('done'))return;e.stopPropagation();var f=kvb.querySelector('iframe');if(f)f.remove();f=document.createElement('iframe');f.title='What the homeowner sees';f.allow='autoplay';f.src=tkUrl().split('?')[0].replace(/^https?:\/\/[^\/]+/,location.origin)+'?s=ticket&embed=1';o.classList.add('kin');f.style.cssText='position:absolute;left:0;right:0;bottom:0;top:calc(30px + env(safe-area-inset-top));width:100%;height:calc(100% - 30px - env(safe-area-inset-top));border:0;background:#fff';kvb.appendChild(f);o.classList.add('kin');try{window.ctLog&&window.ctLog('scan_preview',{what:'door ticket'})}catch(_){}});
   o.querySelector('.tkvx').addEventListener('click',function(e){e.stopPropagation();var f=kvb.querySelector('iframe');if(f)f.remove();o.classList.remove('kin')});
