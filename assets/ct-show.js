@@ -211,7 +211,7 @@ sec.innerHTML='<div class="shw-g">'+S.map(function(x,i){return '<button type="bu
 old.parentNode.replaceChild(sec,old);
 
 var m=document.createElement('div');m.className='shm';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');
-m.innerHTML='<div class="shm-b"><div class="shm-t"><div><small id="shmK"></small><b id="shmT"></b></div><div style="display:flex;gap:6px"><button type="button" class="shm-x shm-m" aria-label="Sound on or off"></button><button type="button" class="shm-x" aria-label="Close">&#10005;</button></div></div><div class="shm-s" id="shmS"></div><p class="shm-l" id="shmL"></p><div class="shm-a"><button type="button" class="rp">&#8635; Replay</button><a class="cta" data-cta href="'+CTA+'">See my free website</a><button type="button" class="nv" aria-label="Next">Next &#8250;</button></div><div class="shm-d" id="shmD"></div></div>';
+m.innerHTML='<div class="shm-b"><div class="shm-t"><div><small id="shmK"></small><b id="shmT"></b></div><div style="display:flex;gap:6px"><button type="button" class="shm-x shm-m" aria-label="Sound on or off"></button><button type="button" class="shm-x" aria-label="Close">&#10005;</button></div></div><div class="shm-s" id="shmS"></div><p class="shm-l" id="shmL"></p><div class="shm-a"><button type="button" class="rp">&#8635; Replay</button><a class="cta" data-cta href="'+CTA+'">See my freemium website</a><button type="button" class="nv" aria-label="Next">Next &#8250;</button></div><div class="shm-d" id="shmD"></div></div>';
 document.body.appendChild(m);
 var stage0=m.querySelector('#shmS'),stage=stage0,cur=0,timers=[],tsx=null,vo=null,mute=false;try{mute=localStorage.getItem('ct_show_mute')==='1'}catch(_){}
 function T(f,ms){timers.push(setTimeout(f,ms))}
