@@ -12,13 +12,13 @@
       document.head.appendChild(cs);
     }
     var R = [
-      [/When you're ready for more, 40 Florida adjusters can join the Founders Lab: everything we build, \$99 a month for life\./, "When you're ready for more, ClaimTract Pro is $299 a month."],
+      [/When you're ready for more, 40 Florida adjusters can join the Founders Lab: everything we build, \$99 a month for life\./, "When you're ready for more, try ClaimTract Pro 14 days for $1, then $299 a month."],
       [/Included while Florida Founder spots last/, 'Included with ClaimTract Pro'],
       [/included in your founder seat/, 'included with ClaimTract Pro'],
       [/Once the 40 Founders Lab seats are taken, these are the prices for everyone else\./, 'ClaimTract Pro pricing.']
     ];
     var set = function (id, v) { var e = document.getElementById(id); if (e && e.textContent !== v) e.textContent = v; };
-    if (document.getElementById('co-cost') && /99/.test(document.getElementById('co-cost').textContent)) { set('co-cost', '$299 a month'); set('co-cost-n', 'ClaimTract Pro. Start with 14 days for $1.'); }
+    if (document.getElementById('co-cost') && /99/.test(document.getElementById('co-cost').textContent)) { set('co-cost', '$1 for 14 days'); set('co-cost-n', 'Then ClaimTract Pro is $299 a month.'); }
     if (document.getElementById('cb-cost') && /99/.test(document.getElementById('cb-cost').textContent) && !/299/.test(document.getElementById('cb-cost').textContent)) set('cb-cost', '$299/mo');
     var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null), n;
     while ((n = w.nextNode())) { R.forEach(function (r) { if (r[0].test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(r[0], r[1]); }); }
