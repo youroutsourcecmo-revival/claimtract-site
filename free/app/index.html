@@ -820,7 +820,7 @@ var XP_OFF='v433KGLpv7xc';
 function xpsSeen(){try{return JSON.parse(localStorage.getItem('ct_xps')||'{}')}catch(e){return {}}}
 function xpsMark(k){var o=xpsSeen();o[k]=1;try{localStorage.setItem('ct_xps',JSON.stringify(o))}catch(e){}}
 function xpsPlay(id){if(!id||typeof hbExplain!=='function')return;try{if(typeof hbStop==='function')hbStop();if(typeof hbResolve==='function')hbResolve(id);hbWant=true;hbExplain(id)}catch(_){}}
-function xpsGreet(name){if(name==='home'&&/[?&]tap=/.test(location.search))return;var id=XPS[name]||(XPS_HB.indexOf(name)>=0&&typeof HB_IDS!=='undefined'?HB_IDS[name]:null);if(!id)return;var fresh=(typeof isNewF==='function'&&isNewF(name));if(!tog.xp)return;xpsMark(name);if(fresh&&typeof markSeen==='function')markSeen(name);setTimeout(function(){xpsPlay(id)},450)}
+function xpsGreet(name){if(name==='home'&&/[?&]tap=/.test(location.search))return;var id=XPS[name]||(XPS_HB.indexOf(name)>=0&&typeof HB_IDS!=='undefined'?HB_IDS[name]:null);if(!id)return;var fresh=(typeof isNewF==='function'&&isNewF(name));if(!tog.xp)return;/* once per visit: no replay after a reload in the same session (Ezekiel 11/28) */var SS={};try{SS=JSON.parse(sessionStorage.getItem('ct_xps_s')||'{}')}catch(e){}if(SS[name]&&!fresh)return;SS[name]=1;try{sessionStorage.setItem('ct_xps_s',JSON.stringify(SS))}catch(e){}xpsMark(name);if(fresh&&typeof markSeen==='function')markSeen(name);setTimeout(function(){xpsPlay(id)},450)}
 /* Global nav: every screen keeps the bottom navigation */
 (function(){
  var st=document.createElement('style');
@@ -1045,7 +1045,7 @@ function chime(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)
  return true}catch(e){return false}}
 function greet(){if(greeted||TAPHOLD)return;greeted=true;setTimeout(function(){toast('Mary opened your website','Reading now · earliest you can reach out: 8:00 AM')},900)}
 function playSplash(withSound){spl.classList.remove('off','tap');try{sv.currentTime=0}catch(e){}var p=sv.play();if(p&&p.catch)p.catch(function(){end()});if(TAPHOLD)return;var ok=chime();if(!ok&&!withSound){spl.classList.add('tap');window.__ctHold=1;spl.style.zIndex='500';spl.style.setProperty('bottom','0','important');return} /* sound blocked until a touch: hold on the logo, the tap plays sound + animation (Ezekiel 11/27) */clearTimeout(spl._t);spl._t=setTimeout(end,3400)}
-function end(){if((TAPHOLD||window.__ctHold)&&!window.__ctTapped)return;spl.classList.add('off');greet()}window.ctSplashEnd=end;
+function end(){if((TAPHOLD||window.__ctHold)&&!window.__ctTapped)return;spl.classList.add('off');try{sessionStorage.setItem('ct_spl_done','1')}catch(e){}greet()}window.ctSplashEnd=end;
 /* tap on the held logo: play the logo sound effect + animation, then hand off (Ezekiel 11/27) */
 window.ctSplashTap=function(cb){var fin=function(){window.__ctTapped=1;end();if(cb)setTimeout(cb,450)};try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();var go=function(){chime()};if(AC.state==='running')go();else AC.resume().then(go,function(){})}catch(e){}try{sv.currentTime=0;var pp=sv.play();if(pp&&pp.catch)pp.catch(function(){})}catch(e){}clearTimeout(spl._t);spl._t=setTimeout(fin,3400)};
 sv.addEventListener('ended',function(){setTimeout(end,250)});
@@ -1058,7 +1058,7 @@ function qmDraw(){if(qmMode==='video'&&window.ctIntroOk&&!window.ctIntroOk()){do
  document.getElementById('qmt').textContent=t;document.querySelectorAll('#qm .seg2 b').forEach(function(b){b.classList.toggle('on',b.dataset.m===m)})}
 function openQm(){qmMode='video';qmDraw();document.getElementById('qm').classList.add('on')}
 document.getElementById('qm').addEventListener('click',function(e){if(e.target.closest('[data-igate]')){document.getElementById('qm').classList.remove('on');if(window.ctIntroGate)window.ctIntroGate(function(){openQm()});return}var b=e.target.closest('[data-m]');if(b){qmMode=b.dataset.m;qmDraw();return}if(e.target.id==='qm'||e.target.closest('#qmx'))document.getElementById('qm').classList.remove('on')});
-/* skip the logo when coming from the sign-in screen's sample link (Ezekiel 11/28) */var SKIPSPL=false;try{SKIPSPL=sessionStorage.getItem('ct_skip_spl')==='1';sessionStorage.removeItem('ct_skip_spl')}catch(e){}
+/* skip the logo when coming from the sign-in screen's sample link (Ezekiel 11/28) */var SKIPSPL=false;try{SKIPSPL=sessionStorage.getItem('ct_skip_spl')==='1'||(/[?&]demo=1/.test(location.search)&&sessionStorage.getItem('ct_spl_done')==='1');sessionStorage.removeItem('ct_skip_spl')}catch(e){}
 if(SKIPSPL){shown=true;spl.classList.add('off');window.__ctTapped=1;greet()}else try{new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting&&!shown){shown=true;playSplash(false)}})},{threshold:.5}).observe(app)}catch(e){shown=true;playSplash(false)}
 /* ===== REAL MODE (Z13): real adjuster data from the ClaimTract API. Demo only with ?demo=1 or inside an iframe (the /free phone). ===== */
 var QS=new URLSearchParams(location.search),DEMO=QS.has('demo')||(function(){try{return window.top!==window.self}catch(e){return true}})(),R=!DEMO,ME=null,ART=null,ALR=null,FIELD=null,STRIPE_CT='https://buy.stripe.com/fZuaEQ5bU38Y7Yh5Q75EY00';
