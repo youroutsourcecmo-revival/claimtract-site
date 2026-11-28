@@ -768,10 +768,10 @@ window.ctIntroOk=ctIntroOk;window.ctIntroGate=ctIntroGate;
   var host=document.getElementById('app')||document.body;host.appendChild(m);var fw=m.querySelector('.fw'),fr=m.querySelector('.fr');(function fit(){var w=fw.clientWidth||390,k=Math.min(1,w/390);fr.style.transform='scale('+k+')';fr.style.height=(430/k)+'px';if(m.isConnected)requestAnimationFrame(function(){if(fw.clientWidth!==w)fit()})})();addEventListener('resize',function(){var w=fw.clientWidth||390,k=Math.min(1,w/390);fr.style.transform='scale('+k+')';fr.style.height=(430/k)+'px'});var ta=m.querySelector('textarea'),nm=m.querySelector('.nm');ta.value=clean(msg);if(fr0){var up=function(){try{track('upgrade_tap',{badge:'card_words'})}catch(_){}done(false);var g=document.createElement('span');g.dataset.go='plans';(document.getElementById('app')||document.body).appendChild(g);g.click();g.remove()};ta.addEventListener('click',up);m.querySelector('.lk').addEventListener('click',up)}
   var tm=null;function upd(){fr.src=hosted(d,k,ta.value,nm.value.trim())+'&pv=1'}upd();[ta,nm].forEach(function(x){x.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(upd,700)})});
   function done(v){m.remove();res(v)}m.querySelector('.go').onclick=function(){done({t:ta.value.trim()||clean(msg),to:nm.value.trim()})};m.querySelector('.no').onclick=function(){done(false)}})}
- async function go(k){var d=info(),r=await preview(d,k,text(k,d));if(!r)return;var link=hosted(d,k,r.t,r.to),body=r.t+'\n\n'+link;
+ async function go(k){var d=info(),r=await preview(d,k,text(k,d));if(!r)return;if(!ctIntroOk()){await new Promise(function(res){ctIntroGate(res)});if(!ctIntroOk())return}var link=hosted(d,k,r.t,r.to),body=r.t+'\n\n'+link;
   try{if(navigator.share){await navigator.share({text:body,title:d.name});return}}catch(e){if(e&&e.name==='AbortError')return}
   location.href='sms:?&body='+encodeURIComponent(body)}
- app.addEventListener('click',function(e){var t=e.target.closest('[data-shr]');if(!t)return;e.preventDefault();e.stopPropagation();if(!ctIntroOk()){var kk=t.dataset.shr;return ctIntroGate(function(){go(kk)})}go(t.dataset.shr)},true);
+ app.addEventListener('click',function(e){var t=e.target.closest('[data-shr]');if(!t)return;e.preventDefault();e.stopPropagation();go(t.dataset.shr)},true);
 })();
 app.addEventListener('click',function(e){if(e.target.closest('[data-calup]'))toast('Added to Google Calendar','Free plan: your Google Calendar. Pro: the Claim Engine books it and sends the reminders for you.')});
 
