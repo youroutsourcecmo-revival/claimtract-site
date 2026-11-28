@@ -5,7 +5,7 @@
   "start_url": "/free/app/",
   "scope": "/free/app/",
   "display": "standalone",
-  "background_color": "#0F1115",
+  "background_color": "#FFFFFF",
   "theme_color": "#0F1115",
   "icons": [
     {"src": "/assets/app-192.png", "sizes": "192x192", "type": "image/png"},
