@@ -266,7 +266,7 @@ function openWatch(mode){var old=$('.cth-wp');if(old)old.remove();var yt=ytFind(
   fetch('/api/pages/'+encodeURIComponent(SLUG)+'/inquiry',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,phone:ph,best_time:t,topics:tags,story:d,source:'watch',visitor_id:vid()})}).then(function(r){done(r.ok)}).catch(function(){done(false)});ev('watch_lead',{topics:tags.join('|')})}}
 function ub64(t){try{t=t.replace(/-/g,'+').replace(/_/g,'/');while(t.length%4)t+='=';return decodeURIComponent(escape(atob(t)))}catch(e){return ''}}
 function openMsg(){var q=new URLSearchParams(location.search),t=ub64(q.get('t')||''),to=(q.get('to')||'').slice(0,30),first=FIRST==='your adjuster'?'your adjuster':FIRST;if(!t)return;
- var share=location.origin+location.pathname+'?watch=video'+(to?'&via='+encodeURIComponent(to):''),sb='I thought of you. This is '+NAME+', the public adjuster who helped me. Worth 60 seconds: '+share;
+ var share=location.origin+location.pathname+'?watch=video&s=share'+(to?'&via='+encodeURIComponent(to):'') /* pass-along from a message card: cartoon first (11/28) */,sb='I thought of you. This is '+NAME+', the public adjuster who helped me. Worth 60 seconds: '+share;
  var m=el('div','cth cth-wp cth-mg','<div class="cth-wi"><button class="cth-mx" aria-label="Close">&times;</button>'+
   '<div class="cth-wh"><span style="background-image:url('+esc(headUrl())+')"></span><div><b>'+esc(NAME)+', Public Adjuster</b></div></div>'+lvBadge()+
   '<div class="cth-mm">'+(to?'<b>'+esc(to)+',</b>':'')+'<p>'+esc(t).replace(/\n+/g,'</p><p>')+'</p><em>&mdash; '+esc(first)+'</em></div>'+
