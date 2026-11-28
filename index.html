@@ -34,8 +34,8 @@ h1 em{font-style:normal;color:var(--ac)}
 .txt{margin:56px auto 0;position:relative;z-index:4;max-width:1040px;padding:0 22px}
 .txt .box{background:var(--card);border:1px solid var(--ln);border-radius:20px;padding:22px 24px;box-shadow:0 16px 40px rgba(0,0,0,.12);display:grid;grid-template-columns:1fr 1.4fr;gap:20px;align-items:center}
 .txt h3{margin:0 0 4px;font-size:20px}.txt p{margin:0;color:var(--mu);font-size:15px}
-.txt form{display:grid;grid-template-columns:1fr 1fr auto;gap:8px}
-.txt input[type=text],.txt input[type=tel]{width:100%;padding:13px 14px;border:1px solid var(--ln);border-radius:12px;background:var(--bg);color:var(--tx);font:600 15px Inter,sans-serif}
+.txt form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.txt input[type=text],.txt input[type=tel],.txt input[type=email]{width:100%;padding:13px 14px;border:1px solid var(--ln);border-radius:12px;background:var(--bg);color:var(--tx);font:600 15px Inter,sans-serif}
 .txt .btn{padding:13px 18px;font-size:15px;box-shadow:none}
 .txt label.c{grid-column:1/-1;display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--mu);line-height:1.45;margin-top:4px}.txt label.c input{margin-top:2px;flex:none;accent-color:var(--ac)}
 .txt .msg{grid-column:1/-1;font:700 13px Inter,sans-serif;color:var(--act)}
@@ -427,9 +427,10 @@ hero.addEventListener('pointerdown',function(){held=true});addEventListener('poi
   <form id="tf" onsubmit="return false">
     <input type="text" id="tn" placeholder="First name" autocomplete="given-name">
     <input type="tel" id="tp" placeholder="Mobile number" autocomplete="tel">
+    <input type="email" id="te" placeholder="Email" autocomplete="email">
     <button class="btn" type="submit">Text me the link</button>
     <label class="tr" for="tt"><span>What do you do?</span><select id="tt" style="flex:1;min-width:200px;padding:11px 12px;border:1px solid var(--ln);border-radius:12px;background:var(--bg);color:var(--tx);font:600 15px Inter,sans-serif"><option>Public adjuster</option><option>Roofer</option><option>Water mitigation</option><option>HVAC</option><option>General contractor</option><option>Other</option></select></label>
-    <label class="c"><input type="checkbox" id="tc"><span>Yes, text me this link, tips for using my website, and offers from ClaimTract. Texts may be sent with automated technology, including AI-assisted messaging. Consent is not required to build your website. Message frequency varies. Message and data rates may apply. Reply STOP to cancel, HELP for help. <a href="/privacy/" target="_blank">Privacy</a> &middot; <a href="/terms/" target="_blank">Terms</a></span></label>
+    <label class="c"><input type="checkbox" id="tc"><span>Yes, text and email me this link, tips for using my website, and offers from ClaimTract. Texts may be sent with automated technology, including AI-assisted messaging. Consent is not required to build your website. Message frequency varies. Message and data rates may apply. Reply STOP to cancel, HELP for help. Every email has an unsubscribe link. <a href="/privacy/" target="_blank">Privacy</a> &middot; <a href="/terms/" target="_blank">Terms</a></span></label>
     <div class="msg" id="tm"></div>
   </form>
 </div>
@@ -750,14 +751,15 @@ function setLinks(){var b=back();document.querySelectorAll('[data-cta]').forEach
  document.getElementById('pitch').hidden=!b;document.getElementById('skip').hidden=b;document.querySelector('[data-skip]').href='/free/build/'+(PS?'?'+PS:'');}
 var _seen=seen;seen=function(on){_seen(on);setLinks()};
 var TR='Public adjuster';document.getElementById('tt').onchange=function(){TR=this.value};
-document.getElementById('tf').onsubmit=function(){var m=document.getElementById('tm'),n=document.getElementById('tn').value.trim(),ph=document.getElementById('tp').value.trim(),d=ph.replace(/\D/g,'');
+document.getElementById('tf').onsubmit=function(){var m=document.getElementById('tm'),n=document.getElementById('tn').value.trim(),ph=document.getElementById('tp').value.trim(),d=ph.replace(/\D/g,'');var em=(document.getElementById('te').value||'').trim();
  if(d.length===11&&d[0]==='1')d=d.slice(1);
  if(!n||d.length!==10){m.textContent='Put in your first name and a 10-digit mobile number.';return false}
+ if(em&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){m.textContent='Check that email address.';return false}
  if(!document.getElementById('tc').checked){m.textContent='Tick the box so I can text you the link.';return false}
  var pa=TR==='Public adjuster',L=new URLSearchParams(PS);L.set('fn',n.slice(0,40));L.set('ph',d);
- var p=new URLSearchParams();p.set('firstName',n);p.set('phone','+1'+d);p.set('type',TR);p.set('source',pa?'free-referral':'free-waitlist');if(Q.get('ref'))p.set('referred_by',Q.get('ref').slice(0,80));p.set('channel','text');
- p.set('consent_time',new Date().toISOString());p.set('clicked','no');p.set('consent_version','2026-11-19-lander-v2');p.set('consent_text',document.getElementById('tc').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);p.set('link','https://claimtract.app/free/?'+L.toString());if(Q.get('lid'))p.set('call_id',Q.get('lid'));try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(x){}
- var nm=n.replace(/[<>&"]/g,'');m.textContent='Sending...';var o={};p.forEach(function(v,k){o[k]=v});o.phone={value:o.phone};
+ var p=new URLSearchParams();p.set('firstName',n);p.set('phone','+1'+d);p.set('type',TR);p.set('source',pa?'free-referral':'free-waitlist');if(Q.get('ref'))p.set('referred_by',Q.get('ref').slice(0,80));p.set('channel',em?'text+email':'text');
+ p.set('consent_time',new Date().toISOString());p.set('clicked','no');p.set('consent_version','2026-11-28-lander-v3');p.set('consent_text',document.getElementById('tc').nextElementSibling.textContent);p.set('consent_url',location.href);p.set('consent_ua',navigator.userAgent);p.set('link','https://claimtract.app/free/?'+L.toString());if(Q.get('lid'))p.set('call_id',Q.get('lid'));try{p.set('timezone',Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(x){}
+ var nm=n.replace(/[<>&"]/g,'');m.textContent='Sending...';var o={};p.forEach(function(v,k){o[k]=v});o.phone={value:o.phone};if(em)o.email={value:em.slice(0,120)};
  var U=pa?'https://app.closegpt.ai/api/input/pwz4bp/contact?public_key=U8TAwoV6451Fd2DpK6we':'https://app.closegpt.ai/api/input/o7opj4/contact?public_key=JgaRlDoYccKYBOLYrEXV';
  fetch(U,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(o)}).then(function(r){return r.json()}).then(function(j){if(!j||!(j.success||j.succeed))throw 0;T('free_lander_text',TR);document.querySelector('.txt .box').innerHTML=pa?'<div><h3>Got it, '+nm+'.</h3><p>I&#39;ll text the link to your phone. You can also keep going right here.</p></div>':'<div><h3>You&#39;re on the list, '+nm+'.</h3><p>A free website built for your trade is next. I&#39;ll text you the day it&#39;s ready.</p></div>'}).catch(function(){T('free_lander_text_fail',TR);m.textContent='That didn’t go through. Check the number and try again.'});return false};
 (function(){if(!Q.get('ph'))return;var t=document.querySelector('.txt'),mob=matchMedia('(max-width:820px)').matches||/Mobi|Android|iPhone/i.test(navigator.userAgent);if(mob){t.hidden=true;return}
