@@ -30,6 +30,7 @@ var MAP=[
  {k:'binder claim binder homeowner log calls checklist',go:null,a:'The claim binder is on your website. Homeowners log calls, list damage and follow the checklist, and save it to their phone from your thank-you card.',h:'On Pro, the binder updates them for you, so you are not stuck on a 25-minute call with a lonely homeowner.'},
  {k:'license verified badge verification',go:'license',a:'The License verified badge on your cards links to your state record, so homeowners can check you in one tap.',h:''},
  {k:'esther explainer explainers turn off on avatars',go:null,a:'Esther is the explainer. She tells you what each screen is the first time you open it. The tab on the right edge turns explainers off and on.',h:''},
+ {k:'home screen install app notifications notification shoulder icon',go:null,a:'Add me to your home screen and allow notifications. Then, when a card is ready to send, I tap you on the shoulder. Type "show me how" any time.',h:''},
  {k:'who are you alex chief staff assistant',go:null,a:'I\'m Alex, your chief of staff. I know where everything in your back office is, what it does and how I\'d use it. Ask me anything.',h:''}
 ];
 function local(q){var w=String(q).toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(function(x){return x.length>2&&!/^(the|and|you|your|can|how|what|where|who|does|did|for|with|this|that|are|get|got|have|has|my|me|about|do|is|it|its|i)$/.test(x)}),best=null,bs=0;
@@ -65,6 +66,11 @@ var CAT=[
 function catRows(L){var g='';return L.map(function(c){var h=(c[0]!==g?'<div class="ctal-ch">'+esc(c[0])+'</div>':'');g=c[0];return h+'<button type="button" class="ctal-r" data-algo="'+c[1]+'"><b>'+esc(c[2])+'</b><small>'+esc(c[3])+'</small></button>'}).join('')}
 function catFind(q){q=q.toLowerCase().trim();if(!q)return [];var w=q.split(/\s+/);return CAT.filter(function(c){var t=(c[2]+' '+c[3]+' '+c[4]).toLowerCase();return w.every(function(x){return t.indexOf(x)>=0})}).sort(function(a,b){var sc=function(c){var t=c[2].toLowerCase(),d=c[3].toLowerCase(),n=0;w.forEach(function(x){if(t.indexOf(x)>=0)n+=3;if(d.indexOf(x)>=0)n+=2});return n};return sc(b)-sc(a)}).slice(0,5)}
 function catShow(){var m=box&&box.querySelector('.ctal-m');if(!m)return;var d=document.createElement('div');d.className='ctal-b ctal-cat';d.innerHTML='<div class="ctal-ct">Everything in ClaimTract. Tap to jump there.</div>'+catRows(CAT);m.appendChild(d);m.scrollTop=m.scrollHeight}
+
+var DEF=null;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();DEF=e});
+function standalone(){try{return window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(e){return false}}
+function hsHow(){if(DEF){DEF.prompt();DEF.userChoice.then(function(r){if(r&&r.outcome==='accepted')bub('Done. I\'ll tap you on the shoulder when a card is ready.','')});DEF=null;return}
+ var ios=/iphone|ipad|ipod/i.test(navigator.userAgent);bub(ios?'On your iPhone: tap the Share button at the bottom of Safari (the square with the arrow), scroll down, tap Add to Home Screen, then Add. Then open me from your home screen and allow notifications.':'Tap the three dots at the top right of Chrome, then Add to Home screen (or Install app). Then open me from your home screen and allow notifications.','tip')}
 function css(){if(document.getElementById('ctal-css'))return;var s=document.createElement('style');s.id='ctal-css';s.textContent=
 '.ctal{position:fixed;inset:0;z-index:2147483500;background:rgba(0,0,0,.35);display:flex;align-items:flex-end;justify-content:center}'+
 '.ctal-s{width:100%;max-width:520px;height:min(86vh,680px);background:#EFEAE2;border-radius:16px 16px 0 0;display:flex;flex-direction:column;overflow:hidden;font-family:Inter,system-ui,sans-serif;color:#111}.ctal-s *{color:inherit}.ctal-go{color:#111!important}.ctal-f button{color:#fff!important}.ctal-h small{color:#777!important}'+
@@ -83,7 +89,7 @@ s.textContent+='.ctal-cat{max-width:94%;padding:4px 0!important;overflow:hidden}
 document.head.appendChild(s)}
 
 function bub(t,cls,go){var m=box&&box.querySelector('.ctal-m');if(!m)return;var d=document.createElement('div');d.className='ctal-b'+(cls?' '+cls:'');d.innerHTML=esc(t)+(go?'<br><button class="ctal-go" data-algo="'+esc(go)+'">Take me there &rsaquo;</button>':'');m.appendChild(d);m.scrollTop=m.scrollHeight;return d}
-function save(){try{var L=[].map.call(box.querySelectorAll('.ctal-b:not(.ctal-cat)'),function(b){return [b.className,b.textContent.replace('Take me there ›','').trim()]}).slice(-30);localStorage.setItem(K_LOG,JSON.stringify(L))}catch(e){}}
+function save(){try{var L=[].map.call(box.querySelectorAll('.ctal-b:not(.ctal-cat)'),function(b){return [b.className,b.textContent.replace('Take me there ›','').replace('Show me how ›','').trim()]}).slice(-30);localStorage.setItem(K_LOG,JSON.stringify(L))}catch(e){}}
 function ev(n,f){try{var s=st();if(s.R&&s.ME)C().api('POST','/api/app/events',Object.assign({name:n},f||{}))}catch(e){}}
 
 function small(q){var t=q.toLowerCase().replace(/[^a-z ]/g,'').trim();if(/^(hi|hello|hey|yo|good (morning|afternoon|evening)|hi alex|hey alex|hello alex)$/.test(t))return 'Hi'+cn()+'. What can I help you find? Door tickets, your cards, your website, Pro: ask me anything.';if(/^(thanks|thank you|thx|ok|okay|cool|great|got it)( alex)?$/.test(t))return 'Anytime'+cn()+'. I\'m right here when you need me.';return null}
@@ -93,6 +99,7 @@ function answer(q,from){if(busy)return;busy=true;var qq=box&&box.querySelector('
    try{if(s.R&&s.ME)C().api('POST','/api/app/alex/unknown',{q:q.slice(0,500),screen:from||''})}catch(e){}ev('alex_unknown',{q:q.slice(0,200),screen:from||''})}
   save()};
  if(/^(show me )?(everything|all|menu|list)$|what can i (say|ask|do)|what do you (do|know)|help$/i.test(q.trim().replace(/[?!.]/g,''))){busy=false;if(typing)typing.remove();catShow();save();return}
+ if(/^show me how$|add (you|alex|it) to (my )?home ?screen|how do i (install|add)/i.test(q.trim().replace(/[?!.]/g,''))){busy=false;if(typing)typing.remove();hsHow();save();return}
  var sm=small(q);if(sm){setTimeout(function(){busy=false;if(typing)typing.remove();bub(sm,'');save()},350);return}
  var loc=function(){var m=local(q);done(m?{answer:m.a,go:m.go,how:m.h,src:'map'}:null)};
  if(s.R&&s.ME&&C().api){var t=setTimeout(function(){t=0;loc()},9000);
@@ -105,11 +112,12 @@ function open(from){css();if(box)return;box=document.createElement('div');box.cl
  var L=null;try{L=JSON.parse(localStorage.getItem(K_LOG)||'null')}catch(e){}
  if(L&&L.length)L.forEach(function(x){var d=bub(x[1],'');d.className=x[0]});
  var seen=false;try{seen=localStorage.getItem(K_INTRO)==='1'}catch(e){}
- if(!seen){bub('Hi'+(first()?' '+first():'')+', I\'m Alex, your chief of staff. Inside your back office, I\'m the chief of staff you didn\'t know you needed.','');bub('I know where everything is, what it does and how I\'d use it if I were you. If I don\'t know something, I\'ll find out and come back to you.','');bub('Not sure what to ask? Just type "what can I say" and I\'ll show you everything in your back office.','');try{localStorage.setItem(K_INTRO,'1')}catch(e){}ev('alex_intro',{})}
+ if(!seen){bub('Hi'+(first()?' '+first():'')+', I\'m Alex, your chief of staff. Inside your back office, I\'m the chief of staff you didn\'t know you needed.','');bub('I know where everything is, what it does and how I\'d use it if I were you. If I don\'t know something, I\'ll find out and come back to you.','');bub('Not sure what to ask? Just type "what can I say" and I\'ll show you everything in your back office.','');if(!standalone()){var hb=bub('One more thing: add me to your home screen. That way, when a card is ready to send, I can tap you on the shoulder.','');hb.insertAdjacentHTML('beforeend','<br><button class="ctal-go" data-alhs>Show me how &rsaquo;</button>')}try{localStorage.setItem(K_INTRO,'1')}catch(e){}ev('alex_intro',{})}
  else if(!L||!L.length)bub('What can I help you find'+cn()+'? Type "what can I say" to see everything.','');
  var Q=['What can I say?'];
  if(box.__cat)box.querySelector('.ctal-q').hidden=true;box.querySelector('.ctal-q').innerHTML=Q.map(function(x){return '<button type="button">'+esc(x)+'</button>'}).join('');
  box.addEventListener('click',function(e){if(e.target===box||e.target.closest('.ctal-x')){close();return}
+  if(e.target.closest('[data-alhs]')){hsHow();ev('alex_homescreen',{});return}
   var g=e.target.closest('[data-algo]');if(g){var k=g.dataset.algo;close();try{if(k==='introgate'&&window.ctIntroGate)window.ctIntroGate(function(){});else if(k==='cardvideos'&&window.ctCardVideos)window.ctCardVideos();else C().go(k)}catch(x){}ev('alex_go',{to:k});return}
   var q=e.target.closest('.ctal-q button');if(q){if(/everything|what can i say/i.test(q.textContent)){bub(q.textContent,'me');catShow();save();return}answer(q.textContent,from)}});
  box.querySelector('.ctal-f input').addEventListener('input',function(){var sg=box.querySelector('.ctal-sg'),L=catFind(this.value);if(!L.length){sg.hidden=true;sg.innerHTML='';return}sg.innerHTML=catRows(L);sg.hidden=false});
