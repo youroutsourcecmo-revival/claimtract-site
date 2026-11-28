@@ -735,6 +735,15 @@ function tab(n){if(n==='sophia'&&plan==='free'){openSx();return}if(typeof closeS
  },true);
 })();
 
+
+/* Sharing stays off until the adjuster's own welcome video is in: every card ends by introducing him (Ezekiel 11/28) */
+function ctIntroOk(){try{if(typeof R==='undefined'||!R||!ME)return true;return !!(ME.profile&&ME.profile.video_url)}catch(e){return true}}
+function ctIntroGate(){var o=document.getElementById('igate');if(o)o.remove();o=document.createElement('div');o.id='igate';
+ o.innerHTML='<style>#igate{position:absolute;inset:0;z-index:420;background:rgba(10,11,13,.86);display:flex;align-items:flex-end}#igate .b{width:100%;background:#16181c;color:#fff;border-radius:20px 20px 0 0;padding:18px 16px calc(16px + env(safe-area-inset-bottom));font-family:Inter,system-ui,sans-serif}#igate h3{margin:0 0 6px;font-size:17px}#igate p{margin:0 0 10px;color:#C9CDD3;font-size:13.5px;line-height:1.45}#igate ol{margin:0 0 12px 18px;padding:0;color:#E6E8EB;font-size:13.5px;line-height:1.6}#igate .r{display:flex;gap:8px}#igate button{flex:1;min-height:44px;border:0;border-radius:12px;font:800 14px Inter,sans-serif;cursor:pointer}#igate .y{background:#F5A524;color:#111}#igate .n{background:#2a2d33;color:#fff}</style>'+
+  '<div class="b"><h3>First, your welcome video</h3><p>Every card you send ends with the homeowner meeting you. Sharing turns on the moment your video is in.</p><ol><li>Record 60 to 75 seconds on your phone: who you are, where you work, and your promise to the homeowner.</li><li>Upload it to YouTube. Unlisted is fine.</li><li>Paste the link in Your videos.</li></ol><div class="r"><button class="n" type="button">Not now</button><button class="y" type="button">Add my video</button></div></div>';
+ (document.getElementById('app')||document.body).appendChild(o);try{track('intro_gate',{})}catch(_){}
+ o.addEventListener('click',function(e){if(e.target.closest('.y')){o.remove();try{go(V.video?'video':'mypage')}catch(_){}}else if(e.target.closest('.n')||e.target===o)o.remove()})}
+window.ctIntroOk=ctIntroOk;window.ctIntroGate=ctIntroGate;
 /* Ready-made texts: open the phone's share sheet with the message and a contact card image (Nov 24) */
 (function(){
  function info(){var real=(typeof R!=='undefined'&&R&&typeof ME!=='undefined'&&ME);
@@ -757,7 +766,7 @@ function tab(n){if(n==='sophia'&&plan==='free'){openSx();return}if(typeof closeS
  async function go(k){var d=info(),r=await preview(d,k,text(k,d));if(!r)return;var link=hosted(d,k,r.t,r.to),body=r.t+'\n\n'+link;
   try{if(navigator.share){await navigator.share({text:body,title:d.name});return}}catch(e){if(e&&e.name==='AbortError')return}
   location.href='sms:?&body='+encodeURIComponent(body)}
- app.addEventListener('click',function(e){var t=e.target.closest('[data-shr]');if(!t)return;e.preventDefault();e.stopPropagation();go(t.dataset.shr)},true);
+ app.addEventListener('click',function(e){var t=e.target.closest('[data-shr]');if(!t)return;e.preventDefault();e.stopPropagation();if(!ctIntroOk())return ctIntroGate();go(t.dataset.shr)},true);
 })();
 app.addEventListener('click',function(e){if(e.target.closest('[data-calup]'))toast('Added to Google Calendar','Free plan: your Google Calendar. Pro: the Claim Engine books it and sends the reminders for you.')});
 
@@ -1001,11 +1010,11 @@ spl.addEventListener('click',function(){if(spl.classList.contains('tap')){spl.cl
 app.addEventListener('click',function(e){if(e.target.closest('.hd img'))openQm()});
 var qmMode='video';
 function qmBase(){var u='';try{if(typeof pageUrl==='function')u=pageUrl()||''}catch(e){}return u||(location.origin+'/cedric-moore/')}
-function qmDraw(){var m=qmMode,el=document.getElementById('qmq'),t={video:'Scan to watch my video',card:'Scan to get my contact card',page:'Scan to see my website'}[m];
+function qmDraw(){if(qmMode==='video'&&window.ctIntroOk&&!window.ctIntroOk()){document.getElementById('qmq').innerHTML='<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:10px;font:600 13px/1.4 Inter,sans-serif;color:#555">Your video card turns on once your welcome video is in.<button type="button" data-igate="1" style="border:0;border-radius:10px;background:#F5A524;color:#111;font:800 13px Inter,sans-serif;padding:9px 14px;cursor:pointer">Add my video</button></div>';document.getElementById('qmt').textContent='Contact card and website work now';document.querySelectorAll('#qm .seg2 b').forEach(function(b){b.classList.toggle('on',b.dataset.m==='video')});return}var m=qmMode,el=document.getElementById('qmq'),t={video:'Scan to watch my video',card:'Scan to get my contact card',page:'Scan to see my website'}[m];
  if(typeof qrcode==='function'){try{var q=qrcode(0,'M');q.addData(qmBase().split('?')[0]+(m==='video'?'?watch=video&s=shield':m==='card'?'?watch=card&s=shield':''));q.make();el.innerHTML=q.createSvgTag({cellSize:4,margin:2,scalable:true})}catch(e){el.innerHTML=qrSvg(41)}}else el.innerHTML=qrSvg(m==='card'?23:7);
  document.getElementById('qmt').textContent=t;document.querySelectorAll('#qm .seg2 b').forEach(function(b){b.classList.toggle('on',b.dataset.m===m)})}
 function openQm(){qmMode='video';qmDraw();document.getElementById('qm').classList.add('on')}
-document.getElementById('qm').addEventListener('click',function(e){var b=e.target.closest('[data-m]');if(b){qmMode=b.dataset.m;qmDraw();return}if(e.target.id==='qm'||e.target.closest('#qmx'))document.getElementById('qm').classList.remove('on')});
+document.getElementById('qm').addEventListener('click',function(e){if(e.target.closest('[data-igate]')){document.getElementById('qm').classList.remove('on');if(window.ctIntroGate)window.ctIntroGate();return}var b=e.target.closest('[data-m]');if(b){qmMode=b.dataset.m;qmDraw();return}if(e.target.id==='qm'||e.target.closest('#qmx'))document.getElementById('qm').classList.remove('on')});
 try{new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting&&!shown){shown=true;playSplash(false)}})},{threshold:.5}).observe(app)}catch(e){shown=true;playSplash(false)}
 /* ===== REAL MODE (Z13): real adjuster data from the ClaimTract API. Demo only with ?demo=1 or inside an iframe (the /free phone). ===== */
 var QS=new URLSearchParams(location.search),DEMO=QS.has('demo')||(function(){try{return window.top!==window.self}catch(e){return true}})(),R=!DEMO,ME=null,ART=null,ALR=null,FIELD=null,STRIPE_CT='https://buy.stripe.com/fZuaEQ5bU38Y7Yh5Q75EY00';
