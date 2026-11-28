@@ -475,7 +475,7 @@ function qrSvg(seed){var n=25,c=7,s='',r=seed||7;function rnd(){r=(r*9301+49297)
  return '<svg viewBox="0 0 25 25" width="172" height="172">'+s+fin(0,0)+fin(18,0)+fin(0,18)+'<rect x="10" y="10" width="5" height="5" rx="1.4" fill="#F5A524"/><path d="M12.5 10.9l1.6.6v1.1c0 .9-.7 1.5-1.6 1.7-.9-.2-1.6-.8-1.6-1.7v-1.1z" fill="#111"/></svg>'}
 
 var NAV=[['home','home','Home'],['activity','bell','Activity'],['share','share','Share'],['tools','grid','Page'],['sophia','spark','Sophia']];
-function nav(on){return '<div class="nav">'+NAV.map(function(n){var up=n[0]==='sophia'&&plan==='free',sl=window.__seatsLeft;return '<span data-tab="'+n[0]+'" class="'+(n[0]===on?'on':'')+(up?' nup':'')+'">'+I(n[1],18)+n[2]+(up?'<em>Upgrade</em>':'')+(n[0]==='activity'&&unread?'<i class="bd">'+unread+'</i>':'')+(up&&sl!=null&&sl>0?'<i class="bd sb" aria-label="'+sl+' founder seats left">'+sl+'</i>':'')+'</span>'}).join('')+'</div>'}
+function nav(on){return '<div class="nav">'+NAV.map(function(n){var up=n[0]==='sophia'&&plan==='free',sl=window.__seatsLeft;return '<span data-tab="'+n[0]+'" class="'+(n[0]===on?'on':'')+(up?' nup':'')+'">'+I(n[1],18)+n[2]+(up?'<em>&#128081;</em>':'')+(n[0]==='activity'&&unread?'<i class="bd">'+unread+'</i>':'')+(up&&sl!=null&&sl>0?'<i class="bd sb" aria-label="'+sl+' founder seats left">'+sl+'</i>':'')+'</span>'}).join('')+'</div>'}
 function top(t){return '<div class="top"><button class="bk" data-back>'+I('back',16)+'</button><h1>'+t+'</h1></div>'}
 
 var ALERTS=[
@@ -507,7 +507,7 @@ home:function(){return '<div class="hd"><div><small>Good evening</small><b>Cedri
  '</div>'+nav('home')},
 activity:function(){unread=0;return '<div class="top"><h1 style="padding-left:4px">Activity</h1><span class="chip">'+I('bell',12)+'Alerts on</span></div><div class="scr"><div class="card">'+ALERTS.map(function(a,i){return alertRow(a,i)}).join('')+'</div>'+
  '<div class="note gold">'+I('clock',14)+'<span>Florida contact hours are built in. Late-night alerts tell you the earliest time you can reach out.</span></div>'+
- '<div class="note">'+I('shield',14)+'<span>Free: you see that someone looked. Upgrade: you see who, from every link you share by name.</span></div></div>'+nav('activity')},
+ '<div class="note">'+I('shield',14)+'<span>Free: you see that someone looked. &#128081; Pro: you see who, from every link you share by name.</span></div></div>'+nav('activity')},
 share:function(){return '<div class="top"><h1 style="padding-left:4px">Share my website</h1></div><div class="scr">'+
  
  '<div class="lnk">'+I('shield',14)+'<em>claimtract.app/cedric-moore</em><button class="cpb" data-dcopy="https://claimtract.app/cedric-moore/">Copy</button></div>'+
@@ -790,7 +790,7 @@ g_facebook:['Facebook posts','Short posts made from your articles, ready for Fac
 g_instagram:['Instagram posts','The same story, sized for Instagram. Homeowners scroll past an ad, but they stop for a real claim lesson.'],
 g_google:['Google updates','Posts for your free Google profile. Fresh updates help you show up on the map when someone nearby searches for help.'],
 sophia:['Sophia','Your assistant on the paid plan. She turns your old claim files into articles and posts with your name on them, while you work.'],
-a_open:['Someone opened your website','You see the moment a homeowner opens the page you sent. Upgrade and you see who it was, so you know exactly who to call.'],
+a_open:['Someone opened your website','You see the moment a homeowner opens the page you sent. &#128081; On Pro you see who it was, so you know exactly who to call.'],
 a_saved:['Someone saved your contact','A homeowner saved you in their phone. When the storm hits or the letter comes, you are the name they find.'],
 a_carrier:['Email from the carrier','Forward carrier emails here and important ones show up as alerts. No more digging through your inbox for a supplement request.'],
 a_roofer:['Someone is looking at ClaimTract','Someone clicked the Made with ClaimTract link on your website. Chat with them or invite them to a video call. If they sign up and pay, you earn $25 a month.'],
@@ -851,7 +851,7 @@ function openSx(){sxPlace();sx.classList.add('on');sxv.muted=false;sxv.loop=fals
 function closeSx(){sx.classList.remove('on');sxv.pause()}
 function sxSound(){if(sxv.muted){sxv.muted=false;sxv.loop=false;try{sxv.currentTime=0}catch(e){}var p=sxv.play();if(p&&p.catch)p.catch(function(){});sxs.innerHTML='&#128263; Mute'}else{sxv.muted=true;sxs.innerHTML='&#128264; Tap to hear Sophia'}}
 sxs.onclick=sxSound;sxv.onclick=sxSound;
-document.addEventListener('click',function(e){if(plan!=='free')return;var u=e.target.closest&&e.target.closest('.up,.pill');if(!u||!/upgrade/i.test(u.textContent))return;e.preventDefault();e.stopPropagation();openSx()},true);
+document.addEventListener('click',function(e){if(plan!=='free')return;var u=e.target.closest&&e.target.closest('.up,.pill');if(!u||!/upgrade|PRO|\u{1F451}/iu.test(u.textContent))return;e.preventDefault();e.stopPropagation();openSx()},true);
 sxv.addEventListener('ended',function(){sxv.muted=true;sxv.loop=true;sxv.play();sxs.innerHTML='&#128264; Hear it again'});
 document.getElementById('sxx').onclick=closeSx;document.getElementById('sxn').onclick=closeSx;
 document.getElementById('sxu').onclick=function(){closeSx();go('plans')};
@@ -889,10 +889,10 @@ app.addEventListener('click',function(e){
 
 var ALI=0,AL_GO={a_carrier:'mail',a_roofer:'earn',a_booked:'book',a_binder:'t_binder'};
 var AL_D={
-a_open:{src:[['Source','The text you sent Mary from Share'],['Link','claimtract.app/l/k4m2 · made for Mary'],['Opened','9:42 PM on her iPhone'],['Reading now','Who works for you, and who doesn\'t']],why:'She opened it within an hour of your visit. People who open that fast are deciding.',acts:[['art:-1','See what she\'s reading'],['sched','Text Mary at 8:00 AM'],['go:share','Share with someone else']],up:'Free shows that someone opened your website. Upgrade shows it was Mary, from the link you made for her.'},
+a_open:{src:[['Source','The text you sent Mary from Share'],['Link','claimtract.app/l/k4m2 · made for Mary'],['Opened','9:42 PM on her iPhone'],['Reading now','Who works for you, and who doesn\'t']],why:'She opened it within an hour of your visit. People who open that fast are deciding.',acts:[['art:-1','See what she\'s reading'],['sched','Text Mary at 8:00 AM'],['go:share','Share with someone else']],up:'Free shows that someone opened your website. &#128081; Pro shows it was Mary, from the link you made for her.'},
 a_saved:{src:[['Source','Your water damage answer page'],['Page','Water through the ceiling: what to do first'],['When','9:31 PM tonight']],why:'Saving your contact means they expect to need you. When the carrier calls them, your name is in their phone.',acts:[['art:0','Open that page'],['go:share','Share it with another homeowner']]},
 a_scan:{src:[['Source','QR code on your door hanger'],['Where','Ponte Vedra'],['When','6:05 PM'],['Then','Read for 40 seconds, tapped Call']],why:'Your door hangers in Ponte Vedra are working. That street is worth another round.',acts:[['go:qr','See your QR codes'],['go:handout','Print more door hangers']]},
-a_read:{src:[['Source','The text you sent Mary from Share'],['Page','Who works for you, and who doesn\'t'],['Time on page','1 minute 48 seconds'],['When','Yesterday, 4:15 PM']],why:'A minute or more means she\'s thinking about her claim, not just glancing.',acts:[['art:-1','Read what she read'],['sched','Text Mary at 8:00 AM']],up:'Upgrade to see which homeowner read it and for how long.'}
+a_read:{src:[['Source','The text you sent Mary from Share'],['Page','Who works for you, and who doesn\'t'],['Time on page','1 minute 48 seconds'],['When','Yesterday, 4:15 PM']],why:'A minute or more means she\'s thinking about her claim, not just glancing.',acts:[['art:-1','Read what she read'],['sched','Text Mary at 8:00 AM']],up:'&#128081; Pro shows which homeowner read it and for how long.'}
 };
 V.alert=function(){var a=ALERTS[ALI]||ALERTS[0],k=a[a.length-1],d=AL_D[k]||{src:[],acts:[]};
  return top(a[1])+'<div class="scr"><div class="card" style="padding:12px 14px"><div style="display:flex;gap:10px;align-items:center">'+ic(a[0]).replace('class="ic"','class="ic" style="margin:0;flex:none"')+'<div><b style="font-size:14px;display:block">'+a[1]+'</b><small style="color:var(--mu)">'+a[3].trim()+'</small></div></div>'+
