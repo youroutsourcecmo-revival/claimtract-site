@@ -1001,8 +1001,8 @@ spl.addEventListener('click',function(){if(spl.classList.contains('tap')){spl.cl
 app.addEventListener('click',function(e){if(e.target.closest('.hd img'))openQm()});
 var qmMode='video';
 function qmBase(){var u='';try{if(typeof pageUrl==='function')u=pageUrl()||''}catch(e){}return u||(location.origin+'/cedric-moore/')}
-function qmDraw(){var m=qmMode,el=document.getElementById('qmq'),t={video:'Scan to watch my video',card:'Scan to save my contact',page:'Scan to see my website'}[m];
- if(m==='video'&&typeof qrcode==='function'){try{var q=qrcode(0,'M');q.addData(qmBase().split('?')[0]+'?watch=video&s=shield');q.make();el.innerHTML=q.createSvgTag({cellSize:4,margin:2,scalable:true})}catch(e){el.innerHTML=qrSvg(41)}}else el.innerHTML=qrSvg(m==='card'?23:7);
+function qmDraw(){var m=qmMode,el=document.getElementById('qmq'),t={video:'Scan to watch my video',card:'Scan to get my contact card',page:'Scan to see my website'}[m];
+ if(typeof qrcode==='function'){try{var q=qrcode(0,'M');q.addData(qmBase().split('?')[0]+(m==='video'?'?watch=video&s=shield':m==='card'?'?watch=card&s=shield':''));q.make();el.innerHTML=q.createSvgTag({cellSize:4,margin:2,scalable:true})}catch(e){el.innerHTML=qrSvg(41)}}else el.innerHTML=qrSvg(m==='card'?23:7);
  document.getElementById('qmt').textContent=t;document.querySelectorAll('#qm .seg2 b').forEach(function(b){b.classList.toggle('on',b.dataset.m===m)})}
 function openQm(){qmMode='video';qmDraw();document.getElementById('qm').classList.add('on')}
 document.getElementById('qm').addEventListener('click',function(e){var b=e.target.closest('[data-m]');if(b){qmMode=b.dataset.m;qmDraw();return}if(e.target.id==='qm'||e.target.closest('#qmx'))document.getElementById('qm').classList.remove('on')});
