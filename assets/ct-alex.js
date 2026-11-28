@@ -57,18 +57,20 @@ function bub(t,cls,go){var m=box&&box.querySelector('.ctal-m');if(!m)return;var 
 function save(){try{var L=[].map.call(box.querySelectorAll('.ctal-b'),function(b){return [b.className,b.textContent.replace('Take me there ›','').trim()]}).slice(-30);localStorage.setItem(K_LOG,JSON.stringify(L))}catch(e){}}
 function ev(n,f){try{var s=st();if(s.R&&s.ME)C().api('POST','/api/app/events',Object.assign({name:n},f||{}))}catch(e){}}
 
+function small(q){var t=q.toLowerCase().replace(/[^a-z ]/g,'').trim();if(/^(hi|hello|hey|yo|good (morning|afternoon|evening)|hi alex|hey alex|hello alex)$/.test(t))return 'Hi'+cn()+'. What can I help you find? Door tickets, your cards, your website, Pro: ask me anything.';if(/^(thanks|thank you|thx|ok|okay|cool|great|got it)( alex)?$/.test(t))return 'Anytime'+cn()+'. I\'m right here when you need me.';return null}
 function answer(q,from){if(busy)return;busy=true;var qq=box&&box.querySelector('.ctal-q');if(qq)qq.hidden=true;bub(q,'me');var typing=bub('Alex is typing…','');var s=st(),done=function(r){busy=false;if(typing)typing.remove();
   if(r&&r.answer){bub(r.answer,'',r.go||null);if(r.how)bub(r.how,'tip');ev('alex_answer',{q:q.slice(0,200),src:r.src||'map'})}
   else{bub('Good question'+cn()+'. I don\'t have that one yet, so I\'ve passed it to the team. I\'ll come back to you right here with the answer.','');
    try{if(s.R&&s.ME)C().api('POST','/api/app/alex/unknown',{q:q.slice(0,500),screen:from||''})}catch(e){}ev('alex_unknown',{q:q.slice(0,200),screen:from||''})}
   save()};
+ var sm=small(q);if(sm){setTimeout(function(){busy=false;if(typing)typing.remove();bub(sm,'');save()},350);return}
  var loc=function(){var m=local(q);done(m?{answer:m.a,go:m.go,how:m.h,src:'map'}:null)};
  if(s.R&&s.ME&&C().api){var t=setTimeout(function(){t=0;loc()},9000);
   C().api('POST','/api/app/alex',{q:q.slice(0,500),screen:from||'',plan:s.plan}).then(function(j){if(!t)return;clearTimeout(t);if(j&&j.ok&&j.answer)done({answer:j.answer,go:j.go,how:j.how,src:'ai'});else if(j&&j.ok&&j.unknown)done(null);else loc()}).catch(function(){if(t){clearTimeout(t);loc()}})}
  else setTimeout(loc,450)}
 
 function open(from){css();if(box)return;box=document.createElement('div');box.className='ctal';
- box.innerHTML='<div class="ctal-s" role="dialog" aria-label="Ask Alex"><div class="ctal-h"><img src="/assets/toon/alex-welcome.jpg" alt=""><div><b>Alex</b><small>Your chief of staff</small></div><button class="ctal-x" aria-label="Close">&times;</button></div><div class="ctal-m"></div><div class="ctal-q"></div><form class="ctal-f"><input placeholder="Ask Alex anything about your back office" maxlength="300" enterkeyhint="send"><button aria-label="Send">&#10148;</button></form></div>';
+ box.innerHTML='<div class="ctal-s" role="dialog" aria-label="Ask Alex"><div class="ctal-h"><img src="/assets/toon/alex-welcome.jpg" alt=""><div><b>Alex</b><small>Your chief of staff</small></div><button class="ctal-x" aria-label="Close">&times;</button></div><div class="ctal-m"></div><div class="ctal-q"></div><form class="ctal-f"><input placeholder="Ask Alex anything" maxlength="300" enterkeyhint="send"><button aria-label="Send">&#10148;</button></form></div>';
  document.body.appendChild(box);
  var L=null;try{L=JSON.parse(localStorage.getItem(K_LOG)||'null')}catch(e){}
  if(L&&L.length)L.forEach(function(x){var d=bub(x[1],'');d.className=x[0]});

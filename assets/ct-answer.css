@@ -3,7 +3,7 @@
 .smp~.pv.ans .hero2.ans-hero{min-height:max(420px,calc(100svh - 270px))}
 .pv.ans .hero2 h1{font-size:clamp(30px,5vw,50px);line-height:1.08;max-width:780px}
 .pv .ans-crumb{position:relative;z-index:2;margin:0 0 10px;font:600 13px Inter,sans-serif;color:rgba(255,255,255,.8)}
-.pv .ans-crumb a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.pv .ans-crumb a{display:inline-block;padding:5px 0;color:#fff;text-decoration:underline;text-underline-offset:3px}
 .pv .ans-lb{position:relative;z-index:2;margin:0 0 10px;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--p-ac)}
 .pv .sec.ans-trs{padding-top:36px}
 .pv .sec.ans-art{padding-left:max(22px,calc((100% - 760px)/2));padding-right:max(22px,calc((100% - 760px)/2))}
